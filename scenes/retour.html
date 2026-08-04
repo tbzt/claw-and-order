@@ -1,0 +1,120 @@
+<!--
+  Tableau 4 — LE RETOUR. Le pont du voilier, entre McNeil et Tacoma, 5 h.
+
+  On est À BORD, pas sur la jetée : la caméra est sur le pont, le mât monte
+  hors cadre, et le bastingage barre le premier plan. C'est le seul tableau
+  du jeu où le décor bouge sous les pieds.
+
+  C'est aussi le point d'encaissement de six chaînes plantées ailleurs
+  (voir TRAME.md § 5). Rien ici n'est un obstacle nouveau : tout ce qui
+  arrive, quelqu'un l'a déclenché deux tableaux plus tôt.
+
+  Élévation frontale, grille unique 320 x 180.
+  Repères : ciel 0→68, mer 68→130, pont 130→180. Pieds à 162.
+-->
+<div class="tableau tableau--retour">
+
+  <div class="bande ciel"></div>
+  <div class="pluie"></div>
+  <div class="bande mer" data-hotspot="eau"></div>
+  <!-- Cinq rangs de crêtes : du plus lointain (court, serré, lent) au
+       plus proche (long, espacé, rapide), et à contre-sens l'un de
+       l'autre. C'est ce qui distingue une mer d'un tapis roulant. -->
+  <div class="houle houle--a"></div>
+  <div class="houle houle--b"></div>
+  <div class="houle houle--c"></div>
+  <div class="houle houle--d"></div>
+  <div class="houle houle--e"></div>
+
+  <!-- La masse de McNeil s'éloigne à gauche ; les lumières de Tacoma
+       montent à droite. On sait d'où l'on vient et où l'on va. -->
+  <div class="mcneil" data-hotspot="mcneil"></div>
+  <div class="rive"></div>
+  <div class="lueur-tacoma" data-hotspot="tacoma"></div>
+
+  <!-- Le goulet : deux pointes de terre qui se referment. C'est là que
+       ça se joue, et ça se voit depuis le début du tableau. -->
+  <div class="goulet goulet--g"></div>
+  <div class="goulet goulet--d"></div>
+
+  <div class="bande pont"></div>
+  <div class="pont-planches"></div>
+
+  <div class="mat" data-hotspot="mat"></div>
+  <div class="bome"></div>
+  <div class="hauban hauban--g"></div>
+  <div class="hauban hauban--d"></div>
+
+  <div class="rouf" data-hotspot="ecoutille"></div>
+  <div class="rouf-toit"></div>
+  <div class="hublot"></div>
+
+  <div class="barre" data-hotspot="barre"></div>
+  <div class="vhf" data-hotspot="vhf"></div>
+  <!-- Le coffret de bord porte les interrupteurs. Les deux feux sont
+       trop petits pour être des cibles à eux seuls (9 px d'art carrés) :
+       c'est le coffret qu'on clique, et ce sont les feux qu'on voit
+       s'éteindre. -->
+  <div class="coffret" data-hotspot="feux"></div>
+  <div class="feu-nav feu-nav--babord"></div>
+  <div class="feu-nav feu-nav--tribord"></div>
+
+  <!-- LESTER. Son sprite existe depuis le début du projet et n'avait
+       jamais été à l'écran. Il est assis contre le rouf : le toit lui
+       coupe les jambes, ce qui règle la pose et raconte la posture. -->
+  <div class="ombre ombre--lester"></div>
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--hercules"></div>
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+
+  <!-- L’esprit mentor de Trash. Enveloppe + sprite : le trajet est
+       sur l’une, les trois images sur l’autre. -->
+  <div class="raton"><div class="sprite--raton"></div></div>
+  <!-- La vedette de la Star. Elle n'existe QUE si l'ordre de transfert a
+       été réécrit au greffe : `trace-matricielle` se paie ici, et c'est
+       le seul endroit du jeu où un décor apparaît à cause d'un choix. -->
+  <div class="vedette" data-hotspot="vedette"></div>
+  <div class="projecteur"></div>
+
+  <!-- Le bastingage, au premier plan, devant tout le monde. -->
+  <div class="bastingage" data-hotspot="bastingage"></div>
+  <div class="filiere filiere--haute"></div>
+
+  <!-- ── Astral ──────────────────────────────────────────────────
+       L'eau n'a pas de mémoire, sauf ce qui s'y accroche. -->
+  <div class="calque calque--astral">
+    <div class="aura aura--lester"></div>
+    <div class="esprit-coque" data-hotspot="esprit"></div>
+    <div class="aura aura--goulet" data-hotspot="froid"></div>
+  </div>
+
+  <!-- ── Tactique ────────────────────────────────────────────────
+       Un bateau est un défilé qui avance. Drakk n'aime pas ça. -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <div class="menace menace--goulet" data-hotspot="ligne-de-tir"></div>
+    <div class="cote cote--goulet">GOULET — 400 M</div>
+    <div class="couvert couvert--rouf"></div>
+    <div class="cote cote--couvert">SEUL COUVERT</div>
+    <div class="jeton jeton--hostile j-perchoir" data-hotspot="tireur"></div>
+    <div class="jeton j-lester"></div>
+  </div>
+
+  <!-- ── RA ──────────────────────────────────────────────────────
+       Le large est le seul endroit propre du jeu : presque pas de
+       réclame, et donc rien pour se cacher dedans. -->
+  <div class="calque calque--ra">
+    <div class="ora ora--transpondeur" data-hotspot="transpondeur">VOILIER · W. WILSON · ÉMET</div>
+    <div class="ora ora--balise">CHENAL 12 · BALISE 7</div>
+    <div class="ora ora--meteo">VENT SO 12 NDS · PLUIE</div>
+    <div class="ora ora--star" data-hotspot="canal">LONE STAR · CANAL DE SERVICE</div>
+  </div>
+</div>

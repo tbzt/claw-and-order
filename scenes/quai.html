@@ -1,0 +1,104 @@
+<!--
+  Tableau 2 — Sunnyside Beach Park, Tacoma, ~minuit.
+  Nuit, eau, jetée. Aplats CSS pour le ciel, l'eau et les planches ;
+  pixel art pour le voilier, le pêcheur, le lampadaire.
+  Même grille que le tableau 1 : 320 x 180.
+-->
+<div class="tableau tableau--quai">
+
+  <div class="bande ciel"></div>
+  <div class="etoiles"></div>
+  <div class="rive"></div>
+  <div class="bande eau" data-hotspot="eau"></div>
+  <div class="reflets"></div>
+  <!-- Les traînées de sodium des lampadaires, tordues par le clapot.
+       Un aplat sombre ne se lit pas comme de l'eau ; un reflet qui
+       se déforme, si. -->
+  <div class="lueur lueur--a"></div>
+  <div class="lueur lueur--b"></div>
+  <div class="lueur lueur--c"></div>
+  <div class="bande jetee" data-hotspot="jetee"></div>
+  <div class="planches"></div>
+
+  <div class="bateau-fond bf1"></div>
+  <div class="bateau-fond bf2"></div>
+  <div class="bateau-fond bf3"></div>
+
+  <div class="sprite--prop-voilier voilier" data-hotspot="voilier"></div>
+  <div class="zone cabine" data-hotspot="cabine"></div>
+  <div class="corps" data-hotspot="corps"></div>
+  <div class="trappe" data-hotspot="trappe"></div>
+  <div class="zone moteur" data-hotspot="moteur"></div>
+  <!-- Les quatre postes de l'appareillage, d'avant en arrière -->
+  <div class="poste poste--vigie"     data-hotspot="vigie"></div>
+  <div class="poste poste--aussieres" data-hotspot="aussieres"></div>
+  <div class="poste poste--radio"     data-hotspot="radio"></div>
+  <div class="poste poste--barre"     data-hotspot="barre"></div>
+  <div class="amarres" data-hotspot="amarres"></div>
+  <div class="sillage"></div>
+
+  <div class="lampadaire"></div>
+  <div class="halo-quai"></div>
+  <div class="ombre ombre--pecheur"></div>
+  <div class="sprite--prop-pecheur pecheur" data-hotspot="pecheur"></div>
+
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--hercules"></div>
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+
+  <!-- L’esprit mentor de Trash. Enveloppe + sprite : le trajet est
+       sur l’une, les trois images sur l’autre. -->
+  <div class="raton"><div class="sprite--raton"></div></div>
+  <!-- ── Astral : ce que Trash lit, et personne d'autre ──────────────
+       La piste de Toralf. Elle va du parking au bateau ET elle revient —
+       c'est ça qui compte : il n'a pas couru. Donc il a décidé de partir,
+       pas été chassé. Donc il pensait avoir fini, et il avait tort. -->
+  <div class="calque calque--astral">
+    <div class="trace trace--aller"></div>
+    <div class="trace trace--retour"></div>
+    <div class="empreinte e1"></div><div class="empreinte e2"></div>
+    <div class="empreinte e3"></div><div class="empreinte e4"></div>
+    <div class="tache" data-hotspot="trace"></div>
+    <div class="ondine" data-hotspot="esprit-eau"></div>
+    <div class="aura aura--pecheur"></div>
+  </div>
+
+  <!-- ── Tactique : le défilé, et le perchoir ─────────────────────
+       La jetée est un goulet : une seule planche, aucun flanc. Et
+       au-dessus du parking, l'endroit d'où un archer aurait tout vu.
+       Toralf est sniper : Drakk trouve son poste sans savoir pourquoi. -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <div class="defile" data-hotspot="defile"></div>
+    <div class="cote cote--defile">DÉFILÉ — AUCUN FLANC</div>
+    <div class="perchoir" data-hotspot="perchoir"></div>
+    <div class="cote cote--perchoir">PERCHOIR</div>
+    <div class="menace menace--tir"></div>
+    <div class="jeton j-pecheur"></div>
+    <div class="issue issue--parking"></div>
+    <div class="cote cote--parking">RETRAITE — 40 PAS</div>
+  </div>
+
+  <!-- ── RA : ce que White_Rabbit lit ────────────────────────────────
+       Le port est saturé de balises que personne ne filtre. Deux ORA
+       comptent dans le tas : le défaut d'allumage du voilier, qui pointe
+       le compartiment moteur, et le commlink du pêcheur, éteint EXPRÈS. -->
+  <div class="calque calque--ra">
+    <div class="ora ora--balise bl1"></div><div class="ora ora--balise bl2"></div>
+    <div class="ora ora--balise bl3"></div><div class="ora ora--balise bl4"></div>
+    <div class="ora ora--immat" data-hotspot="immat"></div>
+    <div class="ora ora--defaut" data-hotspot="defaut"></div>
+    <div class="ora ora--muet" data-hotspot="commlink-eteint"></div>
+    <div class="ora ora--epave" data-hotspot="commlink-noye"></div>
+  </div>
+
+  <div class="pluie pluie--loin"></div>
+  <div class="pluie pluie--pres"></div>
+  <div class="nuit"></div>
+</div>

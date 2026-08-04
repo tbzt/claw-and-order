@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOX — prototype</title>
+  <link rel="stylesheet" href="css/engine.css">
+  <link rel="stylesheet" href="css/sprites.css">
+  <link rel="stylesheet" href="css/scene-bar.css">
+  <link rel="stylesheet" href="css/scene-quai.css">
+  <link rel="stylesheet" href="css/scene-greffe.css">
+  <link rel="stylesheet" href="css/scene-retour.css">
+  <link rel="stylesheet" href="css/scene-planque.css">
+</head>
+<body>
+
+  <!-- Pixelisation. Recette classique : on sème un point tous les N px,
+       on n'échantillonne la source qu'à ces points, puis on dilate
+       chaque point en un bloc de N px. -->
+  <svg class="filtres" aria-hidden="true" focusable="false">
+    <filter id="pixel-3" x="0" y="0" width="100%" height="100%">
+      <feFlood x="1" y="1" width="1" height="1" flood-color="#000"/>
+      <feComposite width="3" height="3"/>
+      <feTile result="grille"/>
+      <feComposite in="SourceGraphic" in2="grille" operator="in"/>
+      <feMorphology operator="dilate" radius="1.5"/>
+    </filter>
+    <filter id="pixel-4" x="0" y="0" width="100%" height="100%">
+      <feFlood x="2" y="2" width="1" height="1" flood-color="#000"/>
+      <feComposite width="4" height="4"/>
+      <feTile result="grille"/>
+      <feComposite in="SourceGraphic" in2="grille" operator="in"/>
+      <feMorphology operator="dilate" radius="2"/>
+    </filter>
+    <filter id="pixel-6" x="0" y="0" width="100%" height="100%">
+      <feFlood x="3" y="3" width="1" height="1" flood-color="#000"/>
+      <feComposite width="6" height="6"/>
+      <feTile result="grille"/>
+      <feComposite in="SourceGraphic" in2="grille" operator="in"/>
+      <feMorphology operator="dilate" radius="3"/>
+    </filter>
+  </svg>
+
+  <div class="jeu">
+
+    <div class="stage" id="stage" data-astral="off">
+      <div class="decor" id="decor"><!-- scène injectée --></div>
+
+      <!-- Dans un point & click, on voit qui parle. Trois portraits
+           48x48 étaient dessinés depuis le début du projet, générés dans
+           sprites.css, et affichés nulle part. Ils le sont maintenant —
+           pour les PNJ. Les runners, eux, sont déjà désignés dans le
+           décor par leur liseré de couleur : deux signaux pour la même
+           information, ce serait un de trop. -->
+      <div class="portrait" id="portrait" hidden>
+        <div class="portrait__image" id="portraitImage"></div>
+        <p class="portrait__nom" id="portraitNom"></p>
+      </div>
+
+      <p class="bulle bulle--pnj" id="bullePnj" hidden></p>
+      <p class="bulle bulle--recit" id="bulleRecit" hidden></p>
+
+      <div class="etiquette" id="etiquette" hidden></div>
+      <div class="curseur" id="curseur" hidden></div>
+
+      <div class="choix" id="choix" hidden></div>
+
+      <!-- Le carnet de recoupement. On y pose deux fiches l'une sur
+           l'autre ; si la paire est prévue, elle en produit une
+           troisième. Règle 12 : ça ouvre la parole, jamais une porte. -->
+      <!-- Le journal. Tout ce qui a été dit, dans l'ordre, relisible.
+           Une réplique qu'on n'a pas eu le temps de lire n'est plus
+           perdue — et dans un jeu où lire EST le jeu, c'était la gêne
+           la plus visible du prototype. -->
+      <div class="journal" id="journal" hidden>
+        <p class="journal__titre">Ce qui a été dit</p>
+        <div class="journal__liste" id="journalListe"></div>
+      </div>
+
+      <div class="carnet" id="carnet" hidden>
+        <p class="carnet__titre">Carnet de recoupement</p>
+        <div class="carnet__grille" id="carnetGrille"></div>
+        <p class="carnet__aide" id="carnetAide">Pose une fiche sur une autre.</p>
+      </div>
+
+      <div class="rideau" id="rideau" hidden>
+        <p class="rideau__titre">FIN DU PROTOTYPE</p>
+        <p class="rideau__ligne" id="rideauLigne"></p>
+        <p class="rideau__bilan" id="rideauBilan"></p>
+        <button class="rideau__reprise" id="reprise">Rejouer</button>
+      </div>
+    </div>
+
+    <div class="hud">
+      <div class="verbes" id="verbes" role="group" aria-label="Actions">
+        <button class="verbe est-actif" data-verbe="regarder">Regarder</button>
+        <button class="verbe" data-verbe="utiliser">Utiliser</button>
+        <button class="verbe" data-verbe="parler">Parler</button>
+      </div>
+
+      <button class="bouton-allure" id="boutonAllure" title="Cadence du texte (A)">
+        <span class="bouton-allure__jauge" id="allureJauge"></span>
+        <span id="allureNom">NORMAL</span>
+      </button>
+
+      <button class="bouton-carnet" id="boutonJournal" aria-pressed="false">Journal</button>
+
+      <button class="bouton-carnet" id="boutonCarnet" aria-pressed="false">
+        Carnet <span class="bouton-carnet__compte" id="carnetCompte">0</span>
+      </button>
+
+      <div class="inventaire" id="inventaire" aria-label="Inventaire"></div>
+
+      <div class="equipe" id="equipe" role="group" aria-label="L’équipe">
+        <button class="runner est-actif" data-runner="hercules" data-vue="physique">Hercules</button>
+        <button class="runner" data-runner="trash"    data-vue="astrale">Trash</button>
+        <button class="runner" data-runner="rabbit"   data-vue="ra">White_Rabbit</button>
+        <button class="runner" data-runner="drakk"    data-vue="tactique">Drakk</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

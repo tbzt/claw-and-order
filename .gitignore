@@ -1,0 +1,13 @@
+# L'atelier : documents de conception, bancs d'essai, cartes ASCII et
+# outillage. Rien de tout ça n'est nécessaire pour faire tourner le jeu,
+# donc rien de tout ça n'est publié. Le dossier garde son propre dépôt,
+# indépendant de celui-ci — un .git imbriqué dans un dossier ignoré ne
+# gêne personne.
+atelier/
+
+# Réglages locaux de l'agent
+.claude/
+
+# Python
+__pycache__/
+*.pyc

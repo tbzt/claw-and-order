@@ -1,0 +1,70 @@
+<!--
+  Tableau 3 — McNeil, le greffe. ~4 h du matin.
+  Le scénario : « Là-bas, ils devront présenter le mandat de transfert
+  pour extraire la cible. » Le conflit est dans le registre : le transfert
+  y est inscrit à 08:00, par la navette. Celle où Lester doit mourir.
+  Élévation frontale, grille 320 x 180.
+-->
+<div class="tableau tableau--greffe">
+
+  <div class="bande plafond"></div>
+  <div class="bande mur"></div>
+  <div class="bande plinthe"></div>
+  <div class="bande sol"></div>
+
+  <div class="neon neon--a"></div>
+  <div class="neon neon--b"></div>
+  <div class="halo halo--a"></div>
+  <div class="halo halo--b"></div>
+
+  <div class="sprite--prop-horloge horloge" data-hotspot="horloge"></div>
+  <div class="affiche af1"></div><div class="affiche af2"></div>
+  <div class="camera" data-hotspot="camera"></div>
+
+  <div class="sprite--prop-gardien gardien" data-hotspot="gardien"></div>
+  <div class="guichet"></div>
+  <div class="hygiaphone" data-hotspot="hygiaphone"></div>
+  <div class="ombre ombre--registre"></div>
+  <div class="registre" data-hotspot="registre"></div>
+
+  <div class="sas" data-hotspot="sas"></div>
+  <div class="sas-vitre"></div>
+  <div class="banc" data-hotspot="banc"></div>
+
+  <div class="ombre ombre--drakk"></div><div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--trash"></div><div class="ombre ombre--hercules"></div>
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+
+  <!-- L’esprit mentor de Trash. Enveloppe + sprite : le trajet est
+       sur l’une, les trois images sur l’autre. -->
+  <div class="raton"><div class="sprite--raton"></div></div>
+  <div class="zone zone--salle" data-hotspot="salle"></div>
+
+  <!-- Astral : pourquoi il refuse -->
+  <div class="calque calque--astral">
+    <div class="aura aura--gardien" data-hotspot="aura-gardien"></div>
+    <div class="aura aura--sas"></div>
+  </div>
+
+  <!-- RA : le registre, et l'ordre qu'on pourrait réécrire -->
+  <div class="calque calque--ra">
+    <div class="ora ora--registre" data-hotspot="ordre"></div>
+    <div class="ora ora--cam"></div>
+    <div class="ora ora--porte"></div>
+    <div class="ora ora--pub"></div>
+  </div>
+
+  <!-- Tactique : il est seul, et la relève arrive -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <div class="jeton j-gardien"></div>
+    <div class="issue issue--sas"></div>
+    <div class="cote cote--sas">SAS — VERROU DOUBLE</div>
+    <div class="menace menace--cam" data-hotspot="angle-mort"></div>
+    <div class="cote cote--seul">UN SEUL DÉFENSEUR</div>
+  </div>
+</div>

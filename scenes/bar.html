@@ -1,0 +1,187 @@
+<!--
+  Tableau 1 — Le Claw & Order, 23 h. « La parole est à la défense ».
+  Décor au texte : bar à flics-à-louer méta-friendly, clients éparpillés
+  aux fléchettes dont certains en uniforme doré, barman troll qui nettoie
+  son comptoir, photos usées des collègues tombés au-dessus, et McCarthy
+  attablé seul à l'écart — DERRIÈRE sa table, la table lui coupe les jambes.
+  Élévation frontale, grille unique 320 x 180.
+-->
+<div class="tableau tableau--bar">
+
+  <div class="bande plafond"></div>
+  <div class="bande mur"></div>
+  <div class="bande lambris"></div>
+  <div class="bande sol"></div>
+
+  <!-- au mur -->
+  <div class="sprite--prop-cible cible" data-hotspot="flechettes"></div>
+  <div class="sprite--prop-horloge horloge" data-hotspot="horloge"></div>
+  <div class="affiche affiche--a"></div>
+  <div class="affiche affiche--b"></div>
+  <div class="affiche affiche--c"></div>
+
+  <!-- Les suspensions. Le tableau avait DEUX flaques de lumière et
+       aucune source : deux halos qui venaient de nulle part. La lampe
+       était dessinée depuis longtemps (art/prop-lampe.txt), générée
+       dans sprites.css, et posée dans aucun décor.
+       Celle de gauche tombe sur la table de McCarthy — c'est elle qui
+       autorise à faire de lui le point le plus clair de la scène. -->
+  <div class="sprite--prop-lampe lampe lampe--a"></div>
+  <div class="sprite--prop-lampe lampe lampe--b"></div>
+
+  <!-- profondeur : deux tables du fond, presque noires -->
+  <div class="table-fond tf1"></div>
+  <div class="sprite--prop-attable attable a1"></div>
+  <div class="table-fond tf2"></div>
+  <div class="sprite--prop-attable attable a2"></div>
+  <div class="fond-salle"></div>
+
+  <div class="etagere"></div>
+  <div class="halo halo--a"></div>
+  <div class="halo halo--b"></div>
+
+  <div class="sprite--prop-porte porte" data-hotspot="porte"></div>
+  <div class="sprite--prop-plaque photos" data-hotspot="photos"></div>
+  <div class="sprite--prop-bouteilles bouteilles" data-hotspot="bouteilles"></div>
+  <div class="ombre ombre--bouteilles"></div>
+
+  <!-- Le coin fléchettes. DEUX sprites différents : le tableau servait
+       deux fois le même, à quatre pixels l'un de l'autre. L'un vise et
+       ne lance pas, l'autre a déjà cessé de regarder la cible. -->
+  <div class="ombre ombre--c1"></div><div class="ombre ombre--c2"></div>
+  <div class="sprite--prop-client client c1"></div>
+  <div class="sprite--prop-client-b client c2"></div>
+
+  <!-- McCarthy derrière sa table -->
+  <div class="ombre ombre--mccarthy"></div>
+  <div class="sprite--mccarthy p-mccarthy" data-hotspot="mccarthy"></div>
+  <div class="table-mccarthy"></div>
+  <div class="sprite--prop-tasses tasses" data-hotspot="tasses"></div>
+  <div class="creditube" data-hotspot="creditube"></div>
+
+  <!-- le comptoir et son barman -->
+  <div class="sprite--prop-barman barman" data-hotspot="barman"></div>
+  <div class="comptoir-plateau"></div>
+  <div class="comptoir" data-hotspot="comptoir"></div>
+  <div class="ombre ombre--verres"></div>
+  <div class="sprite--prop-verres verres" data-hotspot="verres"></div>
+  <div class="ombre ombre--t1"></div><div class="ombre ombre--t2"></div>
+  <div class="sprite--prop-tabouret tabouret t1"></div>
+  <div class="sprite--prop-tabouret tabouret t2"></div>
+
+  <!-- Le seuil de la rue est un élément de SOL : il passe derrière
+       l'équipe, qui a les pieds dessus. Les jambages, eux, restent
+       devant tout le monde — voir plus bas. -->
+  <div class="seuil" data-hotspot="sortie"></div>
+
+  <!-- L'équipe, au premier plan, en groupe. Éclairée par en dessous
+       par la rue, dos à la porte : ils viennent d'entrer. -->
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--hercules"></div>
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+
+  <!-- L’esprit mentor de Trash. Enveloppe + sprite : le trajet est
+       sur l’une, les trois images sur l’autre. -->
+  <div class="raton"><div class="sprite--raton"></div></div>
+  <!-- ── L'ENTRÉE DE LA RUE, AU PREMIER PLAN ──────────────────────
+       C'est par là qu'on est venus, et c'est par là qu'on repart.
+       La sortie était une bande TRANSPARENTE de 320 x 14 : le seul
+       hotspot du tableau qui fasse avancer le jeu, et il n'était pas
+       dessiné — contre la règle 2.
+
+       Elle est maintenant un seuil visible : le plancher plus sombre,
+       la flaque que la pluie laisse entrer, et la fente de sodium sous
+       les battants, juste hors cadre en bas. Les deux jambages
+       encadrent la scène et lui donnent le PREMIER PLAN qui lui
+       manquait — une élévation frontale sans rien devant se lit comme
+       une séance d'identification. -->
+  <div class="jambage jambage--g"></div>
+  <div class="jambage jambage--d"></div>
+
+  <div class="zone zone--salle" data-hotspot="salle"></div>
+
+  <!-- ── Ce que Trash voit, et lui seul ────────────────────────────
+       Des auras. Celle de McCarthy est effilochée : il tient debout
+       par habitude. Celle du barman est compacte — il a vu pire. -->
+  <div class="calque calque--astral">
+    <!-- Pas de cible : une aura n'est pas une chose séparée de son
+         porteur. Élargie pour l'envelopper vraiment, elle recouvrait
+         McCarthy ET ses tasses, et les rendait incliquables en vue
+         astrale. C'est Trash qui la lit, sur McCarthy. -->
+    <div class="aura aura--mccarthy"></div>
+    <div class="aura aura--barman"></div>
+    <div class="aura aura--c1"></div>
+    <div class="aura aura--c2"></div>
+    <div class="ward-porte" data-hotspot="ward"></div>
+  </div>
+
+  <!-- ── Ce que Drakk voit, et lui seul ───────────────────────────
+       Une carte de bataille. Il compte les issues, marque les hostiles,
+       repère le couvert. Le vocabulaire est faux, la lecture est juste :
+       une seule vraie sortie, et deux types entre elle et vous. -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <!-- Le marqueur d'issue ne porte PAS de cible : la porte de la rue
+         est déjà une cible du décor, et une chose du monde n'a droit
+         qu'à un seul hotspot. Poser les deux l'un sur l'autre revenait
+         à ce que la lentille de Drakk retire la sortie au lieu de la
+         désigner. Sa lecture tactique est sur `sortie`, dans sa voix. -->
+    <div class="issue issue--rue"></div>
+    <div class="cote cote--rue">ÉCHAPPATOIRE — 12 PAS</div>
+    <div class="issue issue--fond"></div>
+    <div class="cote cote--fond">CUL-DE-SAC</div>
+    <div class="jeton jeton--hostile j1"></div>
+    <div class="jeton jeton--hostile j2"></div>
+    <div class="jeton jeton--hostile j3"></div>
+    <div class="jeton j-mcc"></div>
+    <div class="menace menace--flechettes" data-hotspot="ligne-de-tir"></div>
+    <div class="couvert couvert--comptoir"></div>
+    <div class="cote cote--couvert">COUVERT</div>
+  </div>
+
+  <!-- ── Ce que White_Rabbit voit, et lui seul ────────────────────
+       La RA est BRUYANTE (règle 7) : le nœud public du bar, les prix
+       qui flottent, et de la réclame que personne ne filtre. Trouver
+       l'ORA utile dans le bruit, c'est du legwork. -->
+  <div class="calque calque--ra">
+    <!-- RÈGLE 7 : la RA est BRUYANTE, et ce bruit EST du contenu. Le
+         Sixième Monde noie ses habitants sous la réclame ; sans filtre,
+         la vision est illisible, et trouver l'ORA utile là-dedans est du
+         legwork, pas de la décoration.
+         Ce calque comptait huit éléments dont six rectangles vides — la
+         lentille dont la règle exige qu'elle soit la plus chargée était
+         la moins fournie des trois. Les deux ORA qui comptent (le nœud
+         du bar, le commlink de McCarthy) sont maintenant NOYÉES dedans,
+         et rien ne les distingue de la réclame au premier coup d'œil.
+         C'est le but. -->
+    <div class="ora ora--noeud" data-hotspot="noeud">CLAW &amp; ORDER · NŒUD PUBLIC</div>
+    <div class="ora ora--commlink" data-hotspot="commlink-mccarthy">CL-772 · ACTIF</div>
+
+    <div class="ora ora--pub p1">2 POUR 1 JUSQU'À 2 H</div>
+    <div class="ora ora--pub p2">CRÉDIT 4,9 % — SANS SIN</div>
+    <div class="ora ora--pub p3">SOYCAF PRO</div>
+    <div class="ora ora--pub p4">CHIRURGIE ESTHÉTIQUE · DEVIS GRATUIT</div>
+    <div class="ora ora--pub p5">STUFFER SHACK · 400 M</div>
+    <div class="ora ora--pub p6">LIVRAISON 12 MIN</div>
+    <div class="ora ora--pub p7">-30 %</div>
+    <div class="ora ora--pub p8">NUYEN EXPRESS</div>
+    <div class="ora ora--pub p9">ASSURANCE DÉCÈS · TARIF MÉTA</div>
+    <div class="ora ora--pub p10">RECRUTE</div>
+    <div class="ora ora--pub p11">GARANTIE 6 MOIS</div>
+    <div class="ora ora--pub p12">DOC WAGON · ESSAI 30 J</div>
+
+    <div class="ora ora--prix x1">7 ¥</div>
+    <div class="ora ora--prix x2">12 ¥</div>
+    <div class="ora ora--prix x3">4 ¥</div>
+
+    <div class="ora ora--badge b1">LS-4471</div>
+    <div class="ora ora--badge b2">LS-2208</div>
+    <div class="ora ora--badge b3">LS-9013</div>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+<!--
+  Tableau 5 — LA PLANQUE. Une laverie automatique de Tacoma, 6 h → 8 h.
+
+  Le tableau calme du jeu, et celui où Lester parle. Après quatre décors
+  sombres — bar brun, port bleu nuit, greffe vert administration, détroit
+  noir — celui-ci est BLANC. Néons, faïence, plastique. C'est le premier
+  endroit de la nuit où l'on voit clairement les visages, et c'est
+  exactement le problème : une pièce éclairée avec une baie vitrée sur la
+  rue est une planque épouvantable. Personne ne le dit ; tout le monde le
+  voit.
+
+  Les tambours qui tournent donnent le seul mouvement régulier de la
+  scène, et le seul bruit. C'est ce qui rend le silence des gens audible.
+
+  Élévation frontale, grille unique 320 x 180.
+  Repères : plafond 0→20, mur 20→120, plinthe 120→132, sol 132→180.
+  Pieds à 158.
+-->
+<div class="tableau tableau--planque">
+
+  <div class="bande plafond"></div>
+  <div class="neon neon--a"></div>
+  <div class="neon neon--b"></div>
+  <div class="neon neon--c" data-hotspot="neon"></div>
+
+  <div class="bande mur"></div>
+  <div class="carrelage"></div>
+  <div class="bande plinthe"></div>
+  <div class="bande sol"></div>
+  <div class="sol-joints"></div>
+
+  <!-- La baie vitrée sur la rue. Il pleut encore, et le jour ne se lève
+       pas avant sept heures et demie. -->
+  <div class="baie" data-hotspot="rue"></div>
+  <div class="baie-pluie"></div>
+  <div class="baie-cadre"></div>
+  <div class="enseigne" data-hotspot="enseigne"></div>
+
+  <!-- Le mur de machines. Quatre laveuses, deux séchoirs, et un tambour
+       qui tourne dans chacune. -->
+  <div class="machines" data-hotspot="machines"></div>
+  <div class="machine m1"><div class="tambour"></div></div>
+  <div class="machine m2"><div class="tambour"></div></div>
+  <div class="machine m3"><div class="tambour"></div></div>
+  <div class="machine m4"><div class="tambour"></div></div>
+  <div class="secheur s1"><div class="tambour tambour--sec"></div></div>
+  <div class="secheur s2"><div class="tambour tambour--sec"></div></div>
+
+  <div class="distributeur" data-hotspot="distributeur"></div>
+  <div class="horloge-murale" data-hotspot="horloge"></div>
+  <div class="affichette" data-hotspot="affichette"></div>
+
+  <div class="table-pliante" data-hotspot="table"></div>
+  <!-- La cible est sur la chaise LIBRE : celle du bout est occupée
+       par Lester, qui la recouvre entièrement. -->
+  <div class="chaise ch1"></div>
+  <div class="chaise ch2" data-hotspot="chaises"></div>
+  <div class="chaise ch3"></div>
+
+  <!-- LESTER. Assis, la chaise trop basse pour lui, et il ne s'appuie
+       pas au dossier. C'est ici qu'il décide de parler ou pas. -->
+  <div class="ombre ombre--lester"></div>
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--hercules"></div>
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+
+  <!-- L’esprit mentor de Trash. Enveloppe + sprite : le trajet est
+       sur l’une, les trois images sur l’autre. -->
+  <div class="raton"><div class="sprite--raton"></div></div>
+  <div class="porte-laverie" data-hotspot="porte"></div>
+
+  <!-- ── Astral ──────────────────────────────────────────────────
+       Un endroit sans mémoire : personne n'a jamais rien vécu ici. -->
+  <div class="calque calque--astral">
+    <!-- Pas de cible : une aura n'est pas une chose séparée de son
+         porteur. C'est Trash qui la lit, sur Lester. -->
+    <div class="aura aura--lester"></div>
+    <div class="aura aura--vide"></div>
+    <div class="trace-porte" data-hotspot="passage"></div>
+  </div>
+
+  <!-- ── Tactique ────────────────────────────────────────────────
+       Une pièce éclairée, une baie vitrée, une seule porte. Drakk n'a
+       pas besoin de faire de phrase. -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <!-- Pas de cible non plus : la vitrine EST la rue, et la rue est
+         déjà une cible du décor. Drakk la lit là-bas, dans sa voix. -->
+    <div class="menace menace--baie"></div>
+    <div class="cote cote--baie">EXPOSÉ — RUE</div>
+    <div class="issue issue--porte"></div>
+    <div class="cote cote--porte">UNIQUE ISSUE</div>
+    <div class="couvert couvert--machines"></div>
+    <div class="cote cote--couvert">COUVERT — MACHINES</div>
+    <div class="jeton j-lester"></div>
+  </div>
+
+  <!-- ── RA ──────────────────────────────────────────────────────
+       Une laverie automatique de quartier : peu d'ORA, mais toutes
+       bavardes. Et une caméra qui n'aurait pas dû être là. -->
+  <div class="calque calque--ra">
+    <div class="ora ora--laverie" data-hotspot="reseau">LAV’O’MATIC · 24 H · PAIEMENT SANS CONTACT</div>
+    <div class="ora ora--cycle">CYCLE 3 · 41 MIN RESTANTES</div>
+    <div class="ora ora--pub">SÉCHAGE 2 ¥ / 6 MIN</div>
+    <div class="ora ora--camera" data-hotspot="camera">CAM-04 · FLUX SORTANT</div>
+  </div>
+</div>

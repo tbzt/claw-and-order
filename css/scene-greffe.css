@@ -1,0 +1,128 @@
+/* ── TABLEAU 3 — LE GREFFE DE McNEIL ─────────────────────────────────
+   Grille 320 x 180. Un lieu administratif à 4 h du matin : néons trop
+   blancs, murs vert institution, et personne. Tout le contraire du bar. */
+
+.tableau--greffe {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 320);
+  image-rendering: pixelated;
+  background: #1b2420;
+}
+.tableau--greffe > * { position: absolute; }
+.tableau--greffe .bande { left: 0; width: 100%; }
+
+.tableau--greffe .plafond { top: 0; height: calc(20 * var(--u)); background: #232e29; }
+.tableau--greffe .mur {
+  top: calc(20 * var(--u)); height: calc(100 * var(--u));
+  background: linear-gradient(#3d4f45 0 calc(58 * var(--u)), #55685c calc(58 * var(--u)));
+}
+.tableau--greffe .plinthe { top: calc(120 * var(--u)); height: calc(6 * var(--u)); background: #222c26; }
+.tableau--greffe .sol {
+  top: calc(126 * var(--u)); height: calc(54 * var(--u));
+  background: repeating-linear-gradient(90deg, #4a4f4a 0 calc(20 * var(--u)), #3f443f calc(20 * var(--u)) calc(40 * var(--u)));
+}
+
+/* Deux tubes néon, dont un qui ne va pas bien. */
+.tableau--greffe .neon { top: calc(10 * var(--u)); height: calc(3 * var(--u)); background: #eaf6ee; }
+.tableau--greffe .neon--a { left: calc(40 * var(--u));  width: calc(72 * var(--u)); }
+.tableau--greffe .neon--b { left: calc(200 * var(--u)); width: calc(72 * var(--u));
+  animation: greso 5.4s steps(1) infinite; }
+@keyframes greso { 0%,86%,100% { opacity: 1 } 88% { opacity: .25 } 90% { opacity: 1 } 92% { opacity: .4 } }
+.tableau--greffe .halo { mix-blend-mode: screen; pointer-events: none;
+  top: calc(8 * var(--u)); height: calc(80 * var(--u)); width: calc(112 * var(--u));
+  background: radial-gradient(closest-side, rgba(220,245,230,.16), transparent 72%); }
+.tableau--greffe .halo--a { left: calc(20 * var(--u)); }
+.tableau--greffe .halo--b { left: calc(180 * var(--u)); }
+
+.tableau--greffe .horloge { left: calc(148 * var(--u)); top: calc(28 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--greffe .affiche { background: #cfd6c8; box-shadow: 0 0 0 calc(1 * var(--u)) #1a221c; }
+.tableau--greffe .af1 { left: calc(28 * var(--u)); top: calc(34 * var(--u)); width: calc(18 * var(--u)); height: calc(24 * var(--u)); }
+.tableau--greffe .af2 { left: calc(52 * var(--u)); top: calc(40 * var(--u)); width: calc(16 * var(--u)); height: calc(18 * var(--u)); }
+.tableau--greffe .camera { left: calc(292 * var(--u)); top: calc(26 * var(--u)); width: calc(12 * var(--u)); height: calc(8 * var(--u));
+  background: #1e2622; box-shadow: 0 0 0 calc(1 * var(--u)) #10150f; }
+
+/* Le guichet : un comptoir bas, une vitre, un hygiaphone. */
+.tableau--greffe .gardien { left: calc(196 * var(--u)); top: calc(64 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--greffe .guichet { left: calc(170 * var(--u)); top: calc(90 * var(--u));
+  width: calc(120 * var(--u)); height: calc(36 * var(--u));
+  background: linear-gradient(#6b5f46 0 calc(5 * var(--u)), #3f382a calc(5 * var(--u))); }
+.tableau--greffe .hygiaphone { left: calc(202 * var(--u)); top: calc(74 * var(--u));
+  width: calc(18 * var(--u)); height: calc(16 * var(--u));
+  background: rgba(190,220,205,.22); box-shadow: 0 0 0 calc(1 * var(--u)) #1a221c; }
+.tableau--greffe .registre { left: calc(238 * var(--u)); top: calc(84 * var(--u));
+  width: calc(30 * var(--u)); height: calc(8 * var(--u));
+  background: #cfd6c8; box-shadow: 0 0 0 calc(1 * var(--u)) #1a221c; }
+.tableau--greffe .ombre--registre { left: calc(238 * var(--u)); top: calc(92 * var(--u)); width: calc(30 * var(--u)); }
+
+/* Le sas : deux battants blindés, verrouillés, avec une vitre étroite. */
+.tableau--greffe .sas { left: calc(28 * var(--u)); top: calc(56 * var(--u));
+  width: calc(48 * var(--u)); height: calc(70 * var(--u));
+  background: linear-gradient(90deg, #2e3833, #3d4a42 48%, #2a332e 52%, #384540);
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) #1a221c; }
+.tableau--greffe .sas-vitre { left: calc(44 * var(--u)); top: calc(70 * var(--u));
+  width: calc(16 * var(--u)); height: calc(10 * var(--u));
+  background: rgba(190,220,205,.18); box-shadow: 0 0 0 calc(1 * var(--u)) #10150f; }
+.tableau--greffe .banc { left: calc(96 * var(--u)); top: calc(108 * var(--u));
+  width: calc(46 * var(--u)); height: calc(6 * var(--u));
+  background: #5c4a32; box-shadow: 0 0 0 calc(1 * var(--u)) #1a1208; }
+
+.tableau--greffe .ombre { background: rgba(6,10,8,.45); height: calc(2 * var(--u)); }
+.tableau--greffe .ombre--drakk    { left: calc(88 * var(--u));  top: calc(154 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--greffe .ombre--rabbit   { left: calc(136 * var(--u)); top: calc(154 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--greffe .ombre--trash    { left: calc(174 * var(--u)); top: calc(154 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--greffe .ombre--hercules { left: calc(212 * var(--u)); top: calc(154 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--greffe .p-drakk    { width: calc(46 * var(--u)); left: calc(86 * var(--u));  top: calc(100 * var(--u)); }
+.tableau--greffe .p-rabbit   { width: calc(34 * var(--u)); left: calc(134 * var(--u)); top: calc(108 * var(--u)); }
+.tableau--greffe .p-trash    { width: calc(34 * var(--u)); left: calc(172 * var(--u)); top: calc(106 * var(--u)); }
+.tableau--greffe .p-hercules { width: calc(32 * var(--u)); left: calc(210 * var(--u)); top: calc(114 * var(--u)); }
+.tableau--greffe .zone { background: transparent; }
+.tableau--greffe .zone--salle { left: 0; top: calc(20 * var(--u)); width: 100%; height: calc(14 * var(--u)); }
+
+/* ── Calques ───────────────────────────────────────────────────────── */
+.tableau--greffe .aura { mix-blend-mode: screen; border-radius: 50%; filter: blur(calc(2 * var(--u)));
+  animation: aura-bat 5.6s ease-in-out infinite; }
+.tableau--greffe .aura--gardien { left: calc(192 * var(--u)); top: calc(48 * var(--u));
+  width: calc(38 * var(--u)); height: calc(22 * var(--u));
+  background: radial-gradient(closest-side, rgba(255,220,110,.34), transparent 68%); }
+.tableau--greffe .aura--sas { left: calc(24 * var(--u)); top: calc(50 * var(--u));
+  width: calc(56 * var(--u)); height: calc(40 * var(--u));
+  background: radial-gradient(closest-side, rgba(90,110,140,.24), transparent 70%); }
+@keyframes aura-bat { 0%,100% { opacity: .8 } 50% { opacity: 1 } }
+
+.tableau--greffe .ora { border: calc(1 * var(--u)) solid rgba(90,200,255,.72);
+  background: rgba(20,60,90,.4); box-shadow: 0 0 calc(3 * var(--u)) rgba(90,200,255,.35);
+  animation: ora-flotte 5s ease-in-out infinite; }
+.tableau--greffe .ora--registre { left: calc(236 * var(--u)); top: calc(66 * var(--u));
+  width: calc(36 * var(--u)); height: calc(14 * var(--u));
+  border-color: rgba(255,196,90,.9); background: rgba(90,60,10,.5);
+  box-shadow: 0 0 calc(5 * var(--u)) rgba(255,196,90,.5); }
+.tableau--greffe .ora--cam { left: calc(286 * var(--u)); top: calc(14 * var(--u)); width: calc(22 * var(--u)); height: calc(9 * var(--u)); }
+.tableau--greffe .ora--porte { left: calc(30 * var(--u));  top: calc(44 * var(--u)); width: calc(26 * var(--u)); height: calc(9 * var(--u)); }
+.tableau--greffe .ora--pub   { left: calc(108 * var(--u)); top: calc(38 * var(--u)); width: calc(30 * var(--u)); height: calc(11 * var(--u)); }
+@keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
+
+.tableau--greffe .jeton { border: calc(1 * var(--u)) solid rgba(201,160,58,.85); border-radius: 50%;
+  background: rgba(201,160,58,.1); width: calc(30 * var(--u)); height: calc(9 * var(--u));
+  animation: aura-bat 3.4s ease-in-out infinite; }
+.tableau--greffe .j-gardien { left: calc(195 * var(--u)); top: calc(86 * var(--u)); }
+.tableau--greffe .issue--sas { left: calc(28 * var(--u)); top: calc(56 * var(--u));
+  width: calc(48 * var(--u)); height: calc(70 * var(--u));
+  border: calc(1 * var(--u)) dotted rgba(255,120,90,.75); background: rgba(90,30,20,.16); }
+.tableau--greffe .cote { font-family: var(--mono); font-size: calc(5 * var(--u));
+  color: rgba(201,160,58,.9); letter-spacing: .08em; white-space: nowrap; }
+.tableau--greffe .cote--sas  { left: calc(22 * var(--u)); top: calc(48 * var(--u)); }
+.tableau--greffe .cote--seul { left: calc(186 * var(--u)); top: calc(96 * var(--u)); }
+.tableau--greffe .menace--cam { left: calc(240 * var(--u)); top: calc(34 * var(--u));
+  width: calc(58 * var(--u)); height: calc(10 * var(--u));
+  background: linear-gradient(270deg, rgba(255,80,80,.28), transparent);
+  animation: aura-bat 2.6s ease-in-out infinite; }
+
+/* Le sas déverrouillé : la vitre s'éclaire, le verrou passe au vert. */
+.stage[data-etat~="sas-ouvert"] .tableau--greffe .sas-vitre {
+  background: rgba(230,255,240,.5); box-shadow: 0 0 0 calc(1 * var(--u)) #3bff9d; }
+.stage[data-etat~="sas-ouvert"] .tableau--greffe .sas {
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) #2f6b4a; }
+
+/* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
+   ombre sont dans engine.css ; ici, seulement son point de départ. */
+.tableau--greffe .raton { left: calc(152 * var(--u)); top: calc(140 * var(--u)); }

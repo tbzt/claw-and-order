@@ -1,0 +1,427 @@
+/* ── TABLEAU 4 — LE RETOUR ────────────────────────────────────────────
+   Grille unique : 320 x 180 pixels d'art. --u vaut un pixel d'art.
+   Repères : ciel 0→68, mer 68→130, pont 130→180. Pieds à 162.
+
+   On est À BORD. Le mât sort du cadre par le haut, le bastingage barre le
+   premier plan : c'est le tableau qui a le plus de profondeur du jeu, et
+   il l'obtient gratuitement — un bateau a naturellement un devant, un
+   milieu et un fond.
+
+   Tout est cloisonné sous .tableau--retour. Deux décors qui nomment tous
+   les deux .mer ou .mat se marchent dessus selon l'ordre de chargement.
+                                                                        */
+
+.tableau--retour {
+  position: absolute;
+  inset: 0;
+  --u: calc(100cqw / 320);
+  image-rendering: pixelated;
+  background: #05070e;
+}
+.tableau--retour > * { position: absolute; }
+.tableau--retour .bande { left: 0; width: 100%; }
+
+/* ── Le ciel, la mer, le pont ──────────────────────────────────────── */
+
+.tableau--retour .ciel {
+  top: 0; height: calc(68 * var(--u));
+  background: linear-gradient(180deg, #131a2c 0 calc(28 * var(--u)), #1c2440 calc(28 * var(--u)), #27324f);
+}
+
+/* La pluie : des bandes obliques très fines, en mouvement lent. À cette
+   résolution une goutte est un pixel — c'est le DÉPLACEMENT qui la fait
+   lire, pas la forme. */
+.tableau--retour .pluie {
+  left: 0; top: 0; width: 100%; height: calc(130 * var(--u));
+  background: repeating-linear-gradient(74deg,
+    rgba(170,200,235,.16) 0 1px, transparent 1px calc(7 * var(--u)));
+  animation: retour-pluie 1.1s linear infinite;
+  pointer-events: none;
+}
+@keyframes retour-pluie { to { background-position: calc(-7 * var(--u)) calc(24 * var(--u)); } }
+
+.tableau--retour .mer {
+  top: calc(68 * var(--u)); height: calc(62 * var(--u));
+  background:
+    /* la ligne d'horizon, nette : c'est elle qui sépare les deux noirs */
+    linear-gradient(180deg, rgba(150,186,230,.34) 0 1px, transparent 1px),
+    linear-gradient(180deg, #2b3a58 0 calc(6 * var(--u)), #1a2740 calc(6 * var(--u)), #141e33);
+}
+
+/* ── LES VAGUES ──────────────────────────────────────────────────────
+   Cinq rangs de crêtes, du plus lointain au plus proche. Trois choses
+   font qu'on lit « mer » et pas « rayures qui bougent » :
+
+   1. La PERSPECTIVE. Les crêtes du fond sont courtes et serrées, celles
+      du premier plan longues et espacées. C'est le seul indice de
+      profondeur dont dispose une élévation frontale.
+   2. La VITESSE. Un rang lointain glisse lentement, un rang proche file.
+      Même distance parcourue à l'écran, temps différent.
+   3. Le CONTRE-SENS. Deux rangs vont à gauche, trois à droite : sans ça
+      l'œil voit un tapis roulant et plus une étendue d'eau.
+
+   Chaque crête a un liseré clair au-dessus et une ombre en dessous —
+   deux bandes d'un pixel, jamais de flou : une vague floue à côté de
+   pixels nets trahit le mélange. */
+.tableau--retour .houle {
+  left: calc(-20 * var(--u)); width: calc(360 * var(--u));
+  pointer-events: none;
+}
+.tableau--retour .houle--a,
+.tableau--retour .houle--b,
+.tableau--retour .houle--c,
+.tableau--retour .houle--d,
+.tableau--retour .houle--e {
+  position: absolute;
+  left: calc(-20 * var(--u)); width: calc(360 * var(--u));
+  pointer-events: none;
+}
+/* le fond : court, serré, lent */
+.tableau--retour .houle--a {
+  top: calc(76 * var(--u)); height: calc(1 * var(--u));
+  background: repeating-linear-gradient(90deg,
+    rgba(150,186,230,.22) 0 calc(4 * var(--u)), transparent calc(4 * var(--u)) calc(13 * var(--u)));
+  animation: retour-houle 17s linear infinite;
+}
+.tableau--retour .houle--b {
+  top: calc(86 * var(--u)); height: calc(1 * var(--u));
+  background: repeating-linear-gradient(90deg,
+    rgba(140,176,220,.24) 0 calc(6 * var(--u)), transparent calc(6 * var(--u)) calc(21 * var(--u)));
+  animation: retour-houle 12s linear infinite reverse;
+}
+.tableau--retour .houle--c {
+  top: calc(98 * var(--u)); height: calc(2 * var(--u));
+  background:
+    linear-gradient(180deg, rgba(160,196,240,.26) 0 1px, rgba(6,10,18,.34) 1px),
+    repeating-linear-gradient(90deg, #000 0 calc(9 * var(--u)), transparent calc(9 * var(--u)) calc(31 * var(--u)));
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(9 * var(--u)), transparent calc(9 * var(--u)) calc(31 * var(--u)));
+          mask: repeating-linear-gradient(90deg, #000 0 calc(9 * var(--u)), transparent calc(9 * var(--u)) calc(31 * var(--u)));
+  animation: retour-houle 8s linear infinite;
+}
+.tableau--retour .houle--d {
+  top: calc(112 * var(--u)); height: calc(2 * var(--u));
+  background: linear-gradient(180deg, rgba(170,206,248,.30) 0 1px, rgba(6,10,18,.4) 1px);
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(13 * var(--u)), transparent calc(13 * var(--u)) calc(44 * var(--u)));
+          mask: repeating-linear-gradient(90deg, #000 0 calc(13 * var(--u)), transparent calc(13 * var(--u)) calc(44 * var(--u)));
+  animation: retour-houle 5.5s linear infinite reverse;
+}
+/* le premier plan : long, espacé, rapide */
+.tableau--retour .houle--e {
+  top: calc(124 * var(--u)); height: calc(3 * var(--u));
+  background: linear-gradient(180deg, rgba(180,214,255,.34) 0 1px, rgba(6,10,18,.46) 1px);
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(19 * var(--u)), transparent calc(19 * var(--u)) calc(62 * var(--u)));
+          mask: repeating-linear-gradient(90deg, #000 0 calc(19 * var(--u)), transparent calc(19 * var(--u)) calc(62 * var(--u)));
+  animation: retour-houle 3.6s linear infinite;
+}
+@keyframes retour-houle { to { transform: translateX(calc(-62 * var(--u))); } }
+
+/* Le roulis. On ne bouge PAS les personnages — ils portent déjà chacun
+   leur propre animation, et une seconde la remplacerait. On fait rouler
+   le gréement, qui est ce qu'on regarderait sur un vrai bateau. */
+.tableau--retour .mat,
+.tableau--retour .bome,
+.tableau--retour .hauban {
+  transform-origin: 50% 100%;
+  animation: retour-roulis 7.4s ease-in-out infinite;
+}
+.tableau--retour .hauban--g { animation-name: retour-roulis-g; }
+.tableau--retour .hauban--d { animation-name: retour-roulis-d; }
+@keyframes retour-roulis   { 0%,100% { transform: rotate(-.7deg) } 50% { transform: rotate(.7deg) } }
+@keyframes retour-roulis-g { 0%,100% { transform: skewX(11deg) rotate(-.7deg) } 50% { transform: skewX(11deg) rotate(.7deg) } }
+@keyframes retour-roulis-d { 0%,100% { transform: skewX(-11deg) rotate(-.7deg) } 50% { transform: skewX(-11deg) rotate(.7deg) } }
+
+/* ── D'où l'on vient, où l'on va ───────────────────────────────────── */
+
+/* McNeil s'éloigne : un mur posé sur l'eau, sans une lumière. */
+.tableau--retour .mcneil {
+  left: 0; top: calc(52 * var(--u));
+  width: calc(74 * var(--u)); height: calc(18 * var(--u));
+  background: linear-gradient(180deg, #0a0f1a, #060a12);
+  clip-path: polygon(0 40%, 18% 22%, 46% 14%, 78% 20%, 100% 34%, 100% 100%, 0 100%);
+}
+.tableau--retour .rive {
+  left: calc(58 * var(--u)); top: calc(62 * var(--u));
+  width: calc(120 * var(--u)); height: calc(8 * var(--u));
+  background: #070b13;
+  clip-path: polygon(0 60%, 22% 30%, 55% 46%, 84% 24%, 100% 52%, 100% 100%, 0 100%);
+}
+/* Tacoma monte à droite : c'est la seule chaleur du tableau. */
+.tableau--retour .lueur-tacoma {
+  right: 0; top: calc(46 * var(--u));
+  width: calc(96 * var(--u)); height: calc(26 * var(--u));
+  background:
+    radial-gradient(closest-side at 70% 100%, rgba(255,168,92,.20), transparent 76%),
+    linear-gradient(180deg, transparent 0 calc(14 * var(--u)), #090d16 calc(14 * var(--u)));
+}
+
+/* Le goulet. Deux pointes de terre qui se referment sur le chenal : le
+   verrou du tableau est visible depuis la première seconde. */
+.tableau--retour .goulet {
+  top: calc(60 * var(--u)); height: calc(12 * var(--u));
+  width: calc(46 * var(--u));
+  background: #060a11;
+}
+.tableau--retour .goulet--g { left: calc(84 * var(--u));  clip-path: polygon(0 100%, 40% 18%, 100% 62%, 100% 100%); }
+.tableau--retour .goulet--d { right: calc(84 * var(--u)); clip-path: polygon(0 62%, 60% 18%, 100% 100%, 0 100%); }
+
+/* ── Le pont ───────────────────────────────────────────────────────── */
+
+.tableau--retour .pont {
+  top: calc(130 * var(--u)); height: calc(50 * var(--u));
+  background: linear-gradient(180deg, #3a2f26 0 calc(3 * var(--u)), #2c231c calc(3 * var(--u)), #221a15);
+}
+.tableau--retour .pont-planches {
+  left: 0; top: calc(133 * var(--u)); width: 100%; height: calc(47 * var(--u));
+  background: repeating-linear-gradient(90deg,
+    rgba(0,0,0,.34) 0 1px, transparent 1px calc(11 * var(--u)));
+  pointer-events: none;
+}
+
+.tableau--retour .mat {
+  left: calc(154 * var(--u)); top: 0;
+  width: calc(6 * var(--u)); height: calc(146 * var(--u));
+  background: linear-gradient(90deg, #2e2620 0 calc(2 * var(--u)), #4a3d31 calc(2 * var(--u)) calc(4 * var(--u)), #3a2f26 calc(4 * var(--u)));
+}
+.tableau--retour .bome {
+  left: calc(104 * var(--u)); top: calc(96 * var(--u));
+  width: calc(108 * var(--u)); height: calc(5 * var(--u));
+  background: linear-gradient(180deg, #4a3d31 0 calc(2 * var(--u)), #3a2f26 calc(2 * var(--u)));
+}
+.tableau--retour .hauban {
+  top: calc(20 * var(--u)); width: calc(1 * var(--u)); height: calc(118 * var(--u));
+  background: rgba(170,186,206,.30);
+}
+.tableau--retour .hauban--g { left: calc(96 * var(--u));  transform: skewX(11deg); }
+.tableau--retour .hauban--d { left: calc(218 * var(--u)); transform: skewX(-11deg); }
+
+/* Le rouf : la cabine où Wilson est mort. On ne l'a pas nettoyée. */
+.tableau--retour .rouf {
+  left: calc(196 * var(--u)); top: calc(122 * var(--u));
+  width: calc(78 * var(--u)); height: calc(40 * var(--u));
+  background: linear-gradient(180deg, #3a2e23, #2b2219);
+  box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08;
+}
+.tableau--retour .rouf-toit {
+  left: calc(192 * var(--u)); top: calc(118 * var(--u));
+  width: calc(86 * var(--u)); height: calc(5 * var(--u));
+  background: #4d3f31;
+  box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08;
+}
+.tableau--retour .hublot {
+  left: calc(232 * var(--u)); top: calc(130 * var(--u));
+  width: calc(14 * var(--u)); height: calc(9 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255,178,87,.42), rgba(60,40,20,.6));
+  box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08;
+}
+
+.tableau--retour .barre {
+  left: calc(282 * var(--u)); top: calc(136 * var(--u));
+  width: calc(32 * var(--u)); height: calc(12 * var(--u));
+  background: linear-gradient(90deg, #4a3d31, #3a2e23);
+  box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08;
+}
+.tableau--retour .vhf {
+  left: calc(202 * var(--u)); top: calc(124 * var(--u));
+  width: calc(18 * var(--u)); height: calc(14 * var(--u));
+  background: #1b2230;
+  box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08,
+              inset 0 calc(2 * var(--u)) 0 rgba(90,200,255,.35);
+}
+
+/* Les feux de navigation. Ce sont eux qu'on éteint pour disparaître :
+   ils doivent donc se voir avant qu'on y pense. */
+/* Le coffret de bord : interrupteurs des feux, et l'odeur de gasoil. */
+.tableau--retour .coffret {
+  left: calc(258 * var(--u)); top: calc(140 * var(--u));
+  width: calc(18 * var(--u)); height: calc(14 * var(--u));
+  background: linear-gradient(180deg, #2a2f3c 0 calc(3 * var(--u)), #171b25 calc(3 * var(--u)));
+  box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08,
+              inset 0 calc(5 * var(--u)) 0 calc(-3 * var(--u)) rgba(216,50,63,.7),
+              inset 0 calc(9 * var(--u)) 0 calc(-7 * var(--u)) rgba(63,196,111,.7);
+}
+.stage[data-etat~="feux-eteints"] .tableau--retour .coffret {
+  box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08;
+}
+
+.tableau--retour .feu-nav {
+  top: calc(136 * var(--u));
+  width: calc(3 * var(--u)); height: calc(3 * var(--u));
+  border-radius: 50%;
+}
+.tableau--retour .feu-nav--babord  { left: calc(12 * var(--u));  background: #d8323f; box-shadow: 0 0 calc(5 * var(--u)) rgba(216,50,63,.8); }
+.tableau--retour .feu-nav--tribord { right: calc(12 * var(--u)); background: #3fc46f; box-shadow: 0 0 calc(5 * var(--u)) rgba(63,196,111,.8); }
+/* Éteints : le bateau devient une tache noire sur de l'eau noire. */
+.stage[data-etat~="feux-eteints"] .tableau--retour .feu-nav { background: #2a2a30; box-shadow: none; }
+
+/* ── Le bastingage, au premier plan ────────────────────────────────── */
+
+.tableau--retour .bastingage {
+  left: 0; top: calc(166 * var(--u)); width: 100%; height: calc(14 * var(--u));
+  background: linear-gradient(180deg, #4d3f31 0 calc(2 * var(--u)), #2b2219 calc(2 * var(--u)));
+}
+.tableau--retour .filiere--haute {
+  left: 0; top: calc(158 * var(--u)); width: 100%; height: calc(1 * var(--u));
+  background: rgba(170,186,206,.34);
+  pointer-events: none;
+}
+
+/* ── Les gens ──────────────────────────────────────────────────────── */
+
+.tableau--retour .ombre { background: rgba(6,8,14,.55); height: calc(2 * var(--u)); }
+.tableau--retour .ombre--lester   { left: calc(210 * var(--u)); top: calc(160 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--retour .ombre--drakk    { left: calc(38 * var(--u));  top: calc(164 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--retour .ombre--trash    { left: calc(88 * var(--u));  top: calc(161 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--retour .ombre--rabbit   { left: calc(124 * var(--u)); top: calc(166 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--retour .ombre--hercules { left: calc(152 * var(--u)); top: calc(168 * var(--u)); width: calc(16 * var(--u)); }
+
+/* Lester est ASSIS contre le rouf : le toit lui coupe les jambes, comme
+   la table coupe celles de McCarthy au tableau 1. Il a vingt ans et il
+   en paraît seize ; il n'occupe pas la place d'un homme debout. */
+.tableau--retour .p-lester    { width: calc(32 * var(--u)); left: calc(208 * var(--u)); top: calc(126 * var(--u)); }
+
+.tableau--retour .p-drakk     { width: calc(46 * var(--u)); left: calc(36 * var(--u));  top: calc(108 * var(--u)); }
+.tableau--retour .p-trash     { width: calc(34 * var(--u)); left: calc(86 * var(--u));  top: calc(111 * var(--u)); }
+.tableau--retour .p-rabbit    { width: calc(24 * var(--u)); left: calc(122 * var(--u)); top: calc(125 * var(--u)); }
+.tableau--retour .p-hercules  { width: calc(20 * var(--u)); left: calc(150 * var(--u)); top: calc(139 * var(--u)); }
+
+/* ── La vedette de la Star ─────────────────────────────────────────────
+   ELLE N'EXISTE QUE SI L'ORDRE A ÉTÉ RÉÉCRIT AU GREFFE.
+   `trace-matricielle` était posé depuis le tableau 3 et ne coûtait rien.
+   C'est le seul endroit du jeu où un élément de décor APPARAÎT à cause
+   d'un choix — et c'est précisément ce que la règle 19 autorise : elle
+   ajoute une menace, elle ne ferme aucune route. */
+/* Le gyrophare et le sillage. Sans eux, une vedette de nuit est un
+   rectangle sombre sur du sombre — et c'est le seul élément du décor
+   qui existe à cause d'un choix : il doit se voir. */
+.tableau--retour .vedette::before {
+  content: ""; position: absolute;
+  left: 38%; top: calc(-3 * var(--u));
+  width: calc(4 * var(--u)); height: calc(3 * var(--u));
+  background: #6ad0ff;
+  box-shadow: 0 0 calc(7 * var(--u)) rgba(106,208,255,.95);
+  animation: retour-gyro 1.5s steps(2, jump-none) infinite;
+}
+@keyframes retour-gyro { 0%,49% { opacity: 1 } 50%,100% { opacity: .12 } }
+.tableau--retour .vedette::after {
+  content: ""; position: absolute;
+  left: -70%; bottom: 0;
+  width: 70%; height: calc(3 * var(--u));
+  background: linear-gradient(90deg, transparent, rgba(170,200,230,.34));
+}
+
+.tableau--retour .vedette,
+.tableau--retour .projecteur { opacity: 0; transition: opacity 1.4s ease; pointer-events: none; }
+.stage[data-etat~="vedette"] .tableau--retour .vedette { opacity: 1; pointer-events: auto; }
+.stage[data-etat~="vedette"] .tableau--retour .projecteur { opacity: 1; }
+
+.tableau--retour .vedette {
+  left: calc(24 * var(--u)); top: calc(74 * var(--u));
+  width: calc(38 * var(--u)); height: calc(12 * var(--u));
+  background: linear-gradient(180deg, #46586e 0 calc(4 * var(--u)), #24303f calc(4 * var(--u)), #141c28);
+  clip-path: polygon(6% 0, 74% 0, 100% 44%, 92% 100%, 8% 100%, 0 44%);
+  box-shadow: 0 0 calc(6 * var(--u)) rgba(90,200,255,.5);
+  animation: retour-vedette 5.2s ease-in-out infinite;
+}
+@keyframes retour-vedette { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-1 * var(--u))) } }
+
+.tableau--retour .projecteur {
+  left: calc(40 * var(--u)); top: calc(76 * var(--u));
+  width: calc(120 * var(--u)); height: calc(64 * var(--u));
+  background: linear-gradient(102deg, rgba(220,238,255,.24), transparent 62%);
+  clip-path: polygon(0 0, 100% 58%, 100% 100%, 0 26%);
+  mix-blend-mode: screen;
+  animation: retour-faisceau 7s ease-in-out infinite;
+}
+@keyframes retour-faisceau { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
+
+/* ── Calque astral ─────────────────────────────────────────────────── */
+
+.tableau--retour .aura { mix-blend-mode: screen; border-radius: 50%; filter: blur(calc(2 * var(--u))); }
+.tableau--retour .aura--lester {
+  left: calc(202 * var(--u)); top: calc(120 * var(--u));
+  width: calc(44 * var(--u)); height: calc(48 * var(--u));
+  background: radial-gradient(closest-side, rgba(120,170,255,.26), transparent 70%);
+  animation: aura-bat 4.4s ease-in-out infinite;
+}
+/* Le froid du goulet : ce n'est pas une aura, c'est une absence. */
+.tableau--retour .aura--goulet {
+  left: calc(112 * var(--u)); top: calc(56 * var(--u));
+  width: calc(96 * var(--u)); height: calc(28 * var(--u));
+  background: radial-gradient(closest-side, rgba(140,90,200,.20), transparent 72%);
+  animation: aura-bat 6.8s ease-in-out infinite;
+}
+/* Elle est encore sous la coque. `esprit-eau`, posé au quai, se voit ici. */
+.tableau--retour .esprit-coque { opacity: 0; transition: opacity 1s ease; }
+.stage[data-etat~="esprit"] .tableau--retour .esprit-coque { opacity: 1; }
+.tableau--retour .esprit-coque {
+  left: calc(60 * var(--u)); top: calc(150 * var(--u));
+  width: calc(200 * var(--u)); height: calc(10 * var(--u));
+  background: linear-gradient(90deg, transparent, rgba(124,242,196,.30) 30%, rgba(124,242,196,.34) 66%, transparent);
+  filter: blur(calc(2 * var(--u)));
+  animation: aura-bat 3.8s ease-in-out infinite;
+}
+
+/* ── Calque tactique ───────────────────────────────────────────────── */
+
+.tableau--retour .menace--goulet {
+  left: calc(96 * var(--u)); top: calc(62 * var(--u));
+  width: calc(128 * var(--u)); height: calc(10 * var(--u));
+}
+.tableau--retour .cote--goulet { left: calc(100 * var(--u)); top: calc(52 * var(--u)); }
+.tableau--retour .couvert--rouf {
+  left: calc(192 * var(--u)); top: calc(114 * var(--u));
+  width: calc(86 * var(--u)); height: calc(8 * var(--u));
+  border: calc(1 * var(--u)) solid rgba(90,240,160,.7);
+  background: linear-gradient(180deg, rgba(30,90,60,.25), transparent);
+}
+.tableau--retour .cote--couvert { left: calc(196 * var(--u)); top: calc(106 * var(--u)); }
+/* Là où Drakk se mettrait, donc là où l'autre s'est mis. `sait-perchoir`. */
+.tableau--retour .j-perchoir {
+  left: calc(136 * var(--u)); top: calc(60 * var(--u));
+  width: calc(26 * var(--u)); height: calc(9 * var(--u));
+}
+.tableau--retour .j-lester {
+  left: calc(210 * var(--u)); top: calc(158 * var(--u));
+  width: calc(26 * var(--u)); height: calc(9 * var(--u));
+}
+
+/* ── Calque RA ─────────────────────────────────────────────────────────
+   Le large est le seul endroit PROPRE du jeu : quatre ORA, pas vingt.
+   Au bar, le bruit était le contenu ; ici, c'est le silence — il n'y a
+   rien pour se cacher dedans, et le transpondeur crie tout seul. */
+.tableau--retour .ora {
+  border: calc(1 * var(--u)) solid rgba(90,200,255,.7);
+  background: rgba(16,44,68,.55);
+  font-family: var(--mono);
+  font-size: calc(4 * var(--u));
+  line-height: calc(6 * var(--u));
+  white-space: nowrap; overflow: hidden;
+  padding: 0 calc(1 * var(--u));
+  color: rgba(150,214,255,.85);
+  height: calc(8 * var(--u));
+}
+.tableau--retour .ora--transpondeur {
+  left: calc(150 * var(--u)); top: calc(78 * var(--u)); width: calc(112 * var(--u));
+  border-color: rgba(255,196,90,.9); background: rgba(74,52,12,.6); color: rgba(255,214,140,.9);
+  animation: ora-flotte 4.6s ease-in-out infinite;
+}
+.stage[data-etat~="muet"] .tableau--retour .ora--transpondeur {
+  border-color: rgba(120,130,150,.6); background: rgba(28,32,42,.6); color: rgba(140,150,170,.7);
+  animation: none;
+}
+.tableau--retour .ora--balise { left: calc(28 * var(--u)); top: calc(94 * var(--u)); width: calc(74 * var(--u)); animation: ora-flotte 6.1s ease-in-out infinite; }
+.tableau--retour .ora--meteo  { left: calc(30 * var(--u)); top: calc(38 * var(--u)); width: calc(96 * var(--u)); animation: ora-flotte 7.4s ease-in-out infinite reverse; }
+.tableau--retour .ora--star {
+  left: calc(20 * var(--u)); top: calc(64 * var(--u)); width: calc(96 * var(--u));
+  border-color: rgba(255,120,90,.85); background: rgba(74,24,16,.55); color: rgba(255,178,150,.9);
+  opacity: 0; transition: opacity 1s ease;
+}
+.stage[data-etat~="vedette"] .tableau--retour .ora--star { opacity: 1; }
+
+@keyframes aura-bat { 0%,100% { opacity: .82 } 50% { opacity: 1 } }
+@keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
+
+/* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
+   ombre sont dans engine.css ; ici, seulement son point de départ. */
+.tableau--retour .raton { left: calc(66 * var(--u)); top: calc(145 * var(--u)); }
