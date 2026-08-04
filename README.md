@@ -1,9 +1,13 @@
-# NOX
+# Claw & Order
 
 Un point & click à l'ancienne, en CSS et pixel art, dans l'univers de
-Shadowrun. Cinq tableaux enchaînés — un bar, un quai, un greffe, un retour,
-une planque — quatre runners, et une enquête à mener en regardant, en
-utilisant et en parlant.
+Shadowrun.
+
+Une nuit, de 23 h à l'aube. Cinq tableaux enchaînés — un bar, un quai, un
+greffe, un retour, une planque — quatre runners, et un dossier à monter avant
+que le tribunal n'ouvre. Ça se joue en regardant, en utilisant et en parlant.
+
+Le titre est celui du bar où tout commence.
 
 **Aucune image.** Tout ce qui s'affiche est du CSS : les décors, les sprites,
 les portraits, les animations. Les personnages sont écrits à la main dans des
