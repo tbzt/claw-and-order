@@ -1,0 +1,104 @@
+# Contribuer
+
+## La règle qui décide de tout : où va ce fichier ?
+
+Ce dépôt contient **uniquement ce qui est nécessaire pour que la page
+tourne.** Rien d'autre. Devant tout nouveau fichier, une seule question :
+
+> *Si je le retire, est-ce que le jeu cesse de fonctionner dans un navigateur ?*
+
+**Oui → ici.** Non → à l'atelier.
+
+| Ça va **ici** | Ça va à l'**atelier** |
+|---|---|
+| un tableau, ses données, son markup | un document de conception |
+| une feuille de style chargée par `index.html` | un banc d'essai, une planche de comparaison |
+| un module importé par la chaîne d'`index.html` | un script qui *génère* quelque chose |
+| `ARCHITECTURE.md`, ce fichier | une carte ASCII de sprite |
+
+L'atelier est un dossier `atelier/` à la racine, **ignoré par git ici** et qui
+porte son propre dépôt. Le montage a l'air curieux, il est délibéré : les deux
+arborescences restent côte à côte sur le disque — l'outillage continue d'écrire
+dans `css/` sans rien savoir de la frontière — mais une seule des deux est
+publiée.
+
+Un fichier qui ne sert qu'à *vérifier* quelque chose (une page qui met
+`index.html` dans une iframe pour le sonder) est un banc d'essai. Il va à
+l'atelier, même s'il est minuscule, même s'il est temporaire.
+
+## Lancer
+
+Le jeu charge ses décors par `fetch` : il lui faut un serveur.
+
+```bash
+python3 -m http.server --directory . 8607
+```
+
+Puis <http://localhost:8607/>.
+
+> Si tu viens de modifier un module et que le comportement n'a pas bougé,
+> change de port avant de conclure quoi que ce soit. Les modules ES se mettent
+> en cache agressivement, et on mesure alors l'ancien code.
+
+## Régénérer les sprites
+
+`css/sprites.css` est généré. Il ne se modifie **jamais** à la main — la
+prochaine régénération écraserait la retouche sans prévenir.
+
+```bash
+python3 atelier/outils/sprite.py
+```
+
+Le script lit `atelier/art/*.txt` et écrit `css/sprites.css`. Sans l'atelier,
+la feuille reste utilisable telle qu'elle est versionnée, mais n'est plus
+régénérable.
+
+## Ajouter une cible
+
+Une cible, c'est deux choses qui doivent coïncider : un `data-hotspot` dans le
+markup du décor, et une clé du même nom dans les `hotspots` du module.
+
+```html
+<div class="chose" data-hotspot="horloge"></div>
+```
+
+```js
+horloge: {
+  nom: 'Une horloge murale',
+  regarder: () => 'Elle retarde de vingt minutes. Personne ne l’a signalé.',
+  utiliser: ({ qui }) => ({ tous: '…', flags: ['vu:horloge'] }),
+},
+```
+
+Quatre conventions, non négociables, chacune payée par un bug réel :
+
+**`flags`, `objets`, `retire`, `visuels` vont DANS la réaction**, jamais à côté
+de `regarder`/`utiliser`/`parler`. Le moteur contrôle ce point au chargement et
+crie dans la console si on se trompe.
+
+**Une chose du monde, une seule cible.** Deux `data-hotspot` pour un même objet
+— l'un pour son aura, l'autre pour lui-même — produisent une cible que le
+joueur ne peut pas atteindre de façon fiable.
+
+**Jamais de règle `animation` sur `.pj`.** Chaque sprite en porte déjà une, son
+attente. Une seconde déclaration écrase les précédentes d'un coup.
+
+**Ne pas faire dépendre un état visuel d'une transition sur une classe qu'on
+retire.** Si la page ne composite pas, la transition reste coincée à mi-course.
+
+## Ajouter un tableau
+
+1. `js/data/montableau.js` — exporte `{ markup, ouverture, hotspots }`
+2. `scenes/montableau.html` — le markup, sans `<html>` ni `<body>`
+3. `css/scene-montableau.css` — et son `<link>` dans `index.html`
+4. une ligne dans `js/data/scenes.js`
+
+## Vérifier
+
+Le projet a une règle qui a trouvé à peu près tous ses bugs :
+
+> **On n'annonce jamais un chiffre sans l'avoir calculé.**
+
+Une console sans erreur ne prouve pas qu'un tableau est jouable. Ce qui le
+prouve, c'est de parcourir la grille verbe × cible × runner et de compter les
+trous. L'outillage de mesure vit à l'atelier.

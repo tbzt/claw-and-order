@@ -37,6 +37,11 @@ Puis <http://localhost:8607/>.
 hors de ce dépôt, avec le reste de l'atelier (documents de conception, bancs
 d'essai, outillage).
 
+- [ARCHITECTURE.md](ARCHITECTURE.md) — comment les pièces se parlent : le
+  chargement, la résolution verbe × cible × runner, l'état, les lentilles.
+- [CONTRIBUTING.md](CONTRIBUTING.md) — où va quel fichier, comment lancer,
+  comment régénérer les sprites, et les conventions qui ne se discutent pas.
+
 ## Droits
 
 Projet amateur, non officiel et non commercial.
