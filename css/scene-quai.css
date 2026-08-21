@@ -72,25 +72,12 @@
 .tableau--quai .bf2 { left: calc(197 * var(--u)); top: calc(68 * var(--u));  width: calc(30 * var(--u)); }
 .tableau--quai .bf3 { left: calc(222 * var(--u)); top: calc(75 * var(--u));  width: calc(34 * var(--u)); }
 
+/* Le voilier : un sprite entier, une seule cible depuis la vue large.
+   Ses neuf cibles de détail (cabine, corps, trappe, moteur, les quatre
+   postes, amarres) ont déménagé dans la vue rapprochée, à l'échelle ×2
+   du même sprite — voir scene-quai-voilier.css (chantier 25). Une chose
+   du monde, une seule cible. */
 .tableau--quai .voilier { left: calc(16 * var(--u)); top: calc(48 * var(--u)); width: calc(86 * var(--u)); }
-.tableau--quai .zone { background: transparent; }
-.tableau--quai .cabine { left: calc(30 * var(--u)); top: calc(78 * var(--u)); width: calc(14 * var(--u)); height: calc(10 * var(--u)); }
-/* La zone du moteur commençait à 101 et la trappe court de 99 à 104 :
-   trois pixels d'art de recouvrement, et comme la zone est posée après,
-   c'est elle qui prenait les clics. Il ne restait que la première rangée
-   de la trappe — 16 % de sa surface, sous le seuil de 25 % que
-   `outils/audit.js` refuse. Une chose du monde, une seule cible. */
-.tableau--quai .moteur { left: calc(46 * var(--u)); top: calc(80 * var(--u)); width: calc(16 * var(--u)); height: calc(8 * var(--u)); }
-.tableau--quai .amarres { left: calc(61 * var(--u)); top: calc(89 * var(--u)); width: calc(16 * var(--u)); height: calc(7 * var(--u));
-           background: #3a2f22; box-shadow: 0 0 0 calc(1 * var(--u)) #14100c; }
-
-/* Le corps n'existe qu'une fois l'écoutille ouverte : c'est le décor qui
-   porte la condition, pas le moteur. */
-.tableau--quai .corps { display: none; left: calc(30 * var(--u)); top: calc(80 * var(--u));
-         width: calc(14 * var(--u)); height: calc(7 * var(--u)); background: #4a1418; }
-.stage[data-etat~="cabine-ouverte"] .tableau--quai .corps { display: block; }
-.stage[data-etat~="cabine-ouverte"] .tableau--quai .cabine { display: none; }
-.stage[data-etat~="moteur-ok"] .tableau--quai .moteur { box-shadow: 0 0 0 calc(1 * var(--u)) #3bff9d; }
 
 .tableau--quai .lampadaire { left: calc(202 * var(--u)); top: calc(60 * var(--u)); width: calc(3 * var(--u)); height: calc(48 * var(--u));
               background: #1a1a20; box-shadow: 0 calc(-4 * var(--u)) 0 calc(2 * var(--u)) #ffd79a; }
@@ -289,68 +276,13 @@
 }
 @keyframes pleut { to { transform: translate3d(-7cqw, 34cqh, 0); } }
 
-/* La trappe du compartiment moteur : fermée elle est un rectangle mat,
-   ouverte elle laisse voir le noir du compartiment. */
-.tableau--quai .trappe { left: calc(46 * var(--u)); top: calc(75 * var(--u));
-  width: calc(16 * var(--u)); height: calc(5 * var(--u));
-  background: #2f3742; box-shadow: 0 0 0 calc(1 * var(--u)) #10141a; }
-.stage[data-etat~="trappe-ouverte"] .tableau--quai .trappe {
-  background: #07090c; box-shadow: 0 0 0 calc(1 * var(--u)) #3a4450; }
-
-/* ── Les quatre postes ───────────────────────────────────────────────
-   D'avant en arrière sur le pont : vigie à l'étrave, aussières au
-   milieu, VHF au rouf, barre à la poupe. Chacun s'allume de la couleur
-   de son runner quand il est tenu — quatre voyants, et le bateau part
-   quand ils sont tous les quatre allumés. */
-.tableau--quai .poste {
-  top: calc(68 * var(--u)); height: calc(8 * var(--u));
-  background: #2c3540; box-shadow: 0 0 0 calc(1 * var(--u)) #12161c;
-}
-.tableau--quai .poste--vigie     { left: calc(22 * var(--u)); width: calc(12 * var(--u)); --teinte: #4ac47a; }
-.tableau--quai .poste--aussieres { left: calc(35 * var(--u)); width: calc(10 * var(--u)); --teinte: #c9a03a; }
-.tableau--quai .poste--radio     { left: calc(46 * var(--u)); width: calc(8 * var(--u));  --teinte: #3e5f9c; }
-.tableau--quai .poste--barre     { left: calc(54 * var(--u)); width: calc(10 * var(--u)); --teinte: #f27a2a; }
-
-.stage[data-etat~="poste-vigie"]     .tableau--quai .poste--vigie,
-.stage[data-etat~="poste-aussieres"] .tableau--quai .poste--aussieres,
-.stage[data-etat~="poste-radio"]     .tableau--quai .poste--radio,
-.stage[data-etat~="poste-barre"]     .tableau--quai .poste--barre {
-  background: color-mix(in srgb, var(--teinte) 35%, #101820);
-  box-shadow: 0 0 0 calc(1 * var(--u)) var(--teinte),
-              0 0 calc(4 * var(--u)) color-mix(in srgb, var(--teinte) 60%, transparent);
-  animation: poste-pret 1.9s ease-in-out infinite;
-}
-@keyframes poste-pret { 0%,100% { filter: brightness(1) } 50% { filter: brightness(1.35) } }
-
-/* ── L'appareillage ──────────────────────────────────────────────────
-   Le bateau s'écarte du ponton, prend de la vitesse et sort du cadre
-   par la gauche, pendant que le sillage s'ouvre derrière lui. */
-.tableau--quai .sillage {
-  left: calc(59 * var(--u)); top: calc(88 * var(--u));
-  width: calc(4 * var(--u)); height: calc(3 * var(--u));
-  background: rgba(200,225,240,.35); opacity: 0;
-}
-.stage[data-etat~="appareillage"] .tableau--quai .voilier {
-  animation: appareille 4.2s cubic-bezier(.45,0,.7,1) forwards;
-}
-.stage[data-etat~="appareillage"] .tableau--quai .poste,
-.stage[data-etat~="appareillage"] .tableau--quai .amarres,
-.stage[data-etat~="appareillage"] .tableau--quai .trappe {
-  animation: appareille 4.2s cubic-bezier(.45,0,.7,1) forwards;
-}
-.stage[data-etat~="appareillage"] .tableau--quai .sillage {
-  animation: sillage 4.2s ease-out forwards;
-}
-@keyframes appareille {
-  0%   { transform: translate(0, 0) }
-  18%  { transform: translate(calc(-3 * var(--u)), 0) }
-  100% { transform: translate(calc(-120 * var(--u)), calc(-6 * var(--u))) scale(.72) }
-}
-@keyframes sillage {
-  0%   { opacity: 0; width: calc(4 * var(--u)) }
-  25%  { opacity: .6 }
-  100% { opacity: 0; width: calc(120 * var(--u)); transform: translateX(calc(-116 * var(--u))) }
-}
+/* La trappe, les quatre postes, les amarres et le sillage de
+   l'appareillage vivaient ici. Les trois premiers ont déménagé dans la
+   vue rapprochée (chantier 25) avec leurs cibles ; le sillage n'avait
+   de sens que pour l'appareillage, qui part maintenant de là-bas —
+   directement vers `greffe`, sans repasser par cette vue large. Rien
+   ne pose plus jamais `appareillage` : ce tableau n'a donc plus rien
+   à en faire. */
 
 /* L'esprit de l'eau : une longueur pâle sous l'étrave, visible en astral
    seulement, et seulement une fois appelée. Elle ondule à contretemps

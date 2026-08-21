@@ -1,0 +1,183 @@
+/* ── TABLEAU 2 BIS — LE VOILIER, DE PRÈS ────────────────────────────
+   Même grille 256 x 144 que les cinq tableaux (chantier 8). Le sprite
+   du voilier passe de 86 à 172 u : à cette taille, `--u` vaut un pixel
+   dessiné (chantier 7) — c'est ce qui rend cette vue gratuite. Les
+   coordonnées ci-dessous sont celles de `scene-quai.css`, prises
+   relatives à l'ancre du voilier (16, 48) puis doublées.           */
+
+.tableau--quai-voilier {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #070912;
+}
+.tableau--quai-voilier > * { position: absolute; }
+
+.tableau--quai-voilier .ciel {
+  left: 0; top: 0; width: 100%; height: calc(30 * var(--u));
+  background: linear-gradient(#070912, #10182c 70%, #1b2740);
+}
+.tableau--quai-voilier .etoiles {
+  left: 0; top: 0; width: 100%; height: calc(26 * var(--u));
+  background:
+    radial-gradient(circle at 18% 30%, #cfd6e2 0 calc(.5 * var(--u)), transparent 0),
+    radial-gradient(circle at 46% 14%, #9fb0c8 0 calc(.5 * var(--u)), transparent 0),
+    radial-gradient(circle at 74% 34%, #cfd6e2 0 calc(.5 * var(--u)), transparent 0),
+    radial-gradient(circle at 90% 12%, #8fa0b8 0 calc(.5 * var(--u)), transparent 0);
+}
+
+/* Le voilier lui-même : même classe qu'en vue large, doublé. */
+.tableau--quai-voilier .voilier {
+  left: calc(42 * var(--u)); top: calc(30 * var(--u)); width: calc(172 * var(--u));
+}
+
+.tableau--quai-voilier .zone { background: transparent; }
+
+/* L'écoutille, et ce qu'elle cache une fois ouverte — même bascule
+   d'affichage qu'en vue large (`cabine-ouverte`), coordonnées ×2.
+   `cabine` reste transparente : le sprite dessine déjà le panneau à
+   cet endroit, un aplat par-dessus l'aurait juste recouvert. */
+.tableau--quai-voilier .cabine { left: calc(70 * var(--u)); top: calc(90 * var(--u)); width: calc(28 * var(--u)); height: calc(20 * var(--u)); }
+
+/* Le corps, révélé : une forme qui se pose comme un corps, pas un
+   rectangle plein — un halo qui s'évase depuis un centre, plus sombre
+   au bord qu'au milieu, comme une flaque vue de dessus. */
+.tableau--quai-voilier .corps {
+  display: none; left: calc(70 * var(--u)); top: calc(94 * var(--u));
+  width: calc(28 * var(--u)); height: calc(14 * var(--u));
+  border-radius: 45%;
+  background: radial-gradient(62% 88% at 50% 48%, #6b2126 0%, #4a1418 55%, #2c0c0f 85%, transparent 100%);
+  box-shadow: 0 0 calc(3 * var(--u)) rgba(90, 20, 24, .55);
+}
+.stage[data-etat~="cabine-ouverte"] .tableau--quai-voilier .corps { display: block; }
+.stage[data-etat~="cabine-ouverte"] .tableau--quai-voilier .cabine { display: none; }
+
+/* La trappe du compartiment moteur : un panneau de tôle rivé, pas un
+   aplat — un dégradé pour le bombé, une ligne de rivets pour la
+   jointure. Ouverte, le noir du compartiment et un liséré qui reste. */
+.tableau--quai-voilier .trappe {
+  left: calc(102 * var(--u)); top: calc(84 * var(--u));
+  width: calc(32 * var(--u)); height: calc(10 * var(--u));
+  background: linear-gradient(180deg, #3c4753 0%, #2f3742 55%, #232a33 100%);
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(255,255,255,.12),
+              inset 0 calc(-1 * var(--u)) 0 rgba(0,0,0,.4),
+              0 0 0 calc(1 * var(--u)) #10141a;
+}
+.tableau--quai-voilier .trappe::after {
+  content: ""; position: absolute; left: calc(3 * var(--u)); right: calc(3 * var(--u)); top: 50%;
+  height: calc(1 * var(--u)); transform: translateY(-50%);
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,.5) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(4 * var(--u)));
+}
+.stage[data-etat~="trappe-ouverte"] .tableau--quai-voilier .trappe {
+  background: #07090c; box-shadow: 0 0 0 calc(1 * var(--u)) #3a4450;
+}
+
+.tableau--quai-voilier .moteur { left: calc(102 * var(--u)); top: calc(94 * var(--u)); width: calc(32 * var(--u)); height: calc(16 * var(--u)); }
+.stage[data-etat~="moteur-ok"] .tableau--quai-voilier .moteur { box-shadow: 0 0 0 calc(1 * var(--u)) #3bff9d; }
+
+/* Le verrou de ponton : une platine, et deux taquets — la forme qui
+   dit « on amarre ici », pas un bloc marron. */
+.tableau--quai-voilier .amarres {
+  left: calc(132 * var(--u)); top: calc(112 * var(--u));
+  width: calc(32 * var(--u)); height: calc(14 * var(--u));
+  background: linear-gradient(180deg, #4c3f2d 0%, #3a2f22 60%, #241d16 100%);
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(255,255,255,.08), 0 0 0 calc(1 * var(--u)) #14100c;
+}
+.tableau--quai-voilier .amarres::before,
+.tableau--quai-voilier .amarres::after {
+  content: ""; position: absolute; top: calc(3 * var(--u));
+  width: calc(6 * var(--u)); height: calc(6 * var(--u)); border-radius: 40%;
+  background: radial-gradient(circle at 35% 30%, #7a6642, #2a2216 75%);
+}
+.tableau--quai-voilier .amarres::before { left: calc(6 * var(--u)); }
+.tableau--quai-voilier .amarres::after { right: calc(6 * var(--u)); }
+
+/* ── Les quatre postes ───────────────────────────────────────────────
+   Même disposition qu'en vue large — vigie, aussières, radio, barre,
+   d'avant en arrière — mais quatre FORMES distinctes plutôt que quatre
+   blocs identiques : un pupitre pour la vigie, un rouleau pour les
+   aussières, un boîtier à antenne pour la radio, une roue pour la
+   barre. Le voyant par runner (`--teinte`) reste un liséré qui
+   s'ajoute par-dessus, pas une teinte qui efface la forme. */
+.tableau--quai-voilier .poste {
+  top: calc(70 * var(--u)); height: calc(16 * var(--u));
+  box-shadow: 0 0 0 calc(1 * var(--u)) #12161c;
+}
+.tableau--quai-voilier .poste--vigie {
+  left: calc(54 * var(--u)); width: calc(24 * var(--u)); --teinte: #4ac47a;
+  border-radius: 45% 45% 12% 12% / 65% 65% 15% 15%;
+  background: linear-gradient(180deg, #3a4652 0%, #26303b 65%, #1a222b 100%);
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(255,255,255,.12), 0 0 0 calc(1 * var(--u)) #12161c;
+}
+.tableau--quai-voilier .poste--aussieres {
+  left: calc(80 * var(--u)); width: calc(20 * var(--u)); --teinte: #c9a03a;
+  background:
+    repeating-radial-gradient(circle at 50% 55%, #7a6642 0 calc(1.3 * var(--u)), #4b3d26 calc(1.3 * var(--u)) calc(2.6 * var(--u))),
+    #2c3540;
+}
+.tableau--quai-voilier .poste--radio {
+  left: calc(102 * var(--u)); width: calc(16 * var(--u)); --teinte: #3e5f9c;
+  background: linear-gradient(180deg, #3a4a5c 0%, #24303e 100%);
+}
+.tableau--quai-voilier .poste--radio::before {
+  content: ""; position: absolute; left: 50%; top: calc(-4 * var(--u));
+  width: calc(1 * var(--u)); height: calc(5 * var(--u));
+  background: #6b7d94; transform: translateX(-50%);
+}
+.tableau--quai-voilier .poste--radio::after {
+  content: ""; position: absolute; left: 50%; top: calc(4 * var(--u));
+  width: calc(3 * var(--u)); height: calc(3 * var(--u)); border-radius: 50%;
+  background: #1a2129; box-shadow: inset 0 0 0 calc(.5 * var(--u)) rgba(150,180,210,.5);
+  transform: translateX(-50%);
+}
+.tableau--quai-voilier .poste--barre {
+  left: calc(118 * var(--u)); width: calc(20 * var(--u)); --teinte: #f27a2a;
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(from 0deg, #7a6238 0deg 18deg, #4a3826 18deg 36deg),
+    #2c3540;
+}
+
+.stage[data-etat~="poste-vigie"]     .tableau--quai-voilier .poste--vigie,
+.stage[data-etat~="poste-aussieres"] .tableau--quai-voilier .poste--aussieres,
+.stage[data-etat~="poste-radio"]     .tableau--quai-voilier .poste--radio,
+.stage[data-etat~="poste-barre"]     .tableau--quai-voilier .poste--barre {
+  box-shadow: 0 0 0 calc(1.5 * var(--u)) var(--teinte),
+              0 0 calc(4 * var(--u)) color-mix(in srgb, var(--teinte) 60%, transparent);
+  animation: voilier-poste-pret 1.9s ease-in-out infinite;
+}
+@keyframes voilier-poste-pret { 0%,100% { filter: brightness(1) } 50% { filter: brightness(1.35) } }
+
+/* ── Le retour, dessiné (règle 2) ─────────────────────────────────────
+   Le ponton en contrebas, éclairé par en dessous comme le seuil du
+   bar : c'est la même lecture — la lumière qui vient d'en bas dit
+   « c'est la sortie ». */
+.tableau--quai-voilier .ponton {
+  left: 0; top: calc(124 * var(--u)); width: 100%; height: calc(20 * var(--u));
+  background: repeating-linear-gradient(180deg, #241d18 0 calc(7 * var(--u)), #1a1410 calc(7 * var(--u)) calc(8 * var(--u)));
+}
+.tableau--quai-voilier .seuil-ponton {
+  left: 0; top: calc(124 * var(--u)); width: 100%; height: calc(8 * var(--u));
+  background:
+    linear-gradient(0deg, rgba(255,168,92,.32) 0 calc(1 * var(--u)), transparent calc(1 * var(--u))),
+    radial-gradient(160% 140% at 50% 130%, rgba(255,168,92,.16), transparent 70%);
+}
+
+/* La pluie continue de tomber, ici comme au quai : c'est le même ciel. */
+.tableau--quai-voilier .pluie { position: absolute; inset: -30% -15%; pointer-events: none; }
+.tableau--quai-voilier .pluie--loin {
+  background: repeating-linear-gradient(101deg, transparent 0 9px,
+    rgba(150,180,220,.13) 9px 10px, transparent 10px 26px);
+  opacity: .5; animation: pleut 1.15s linear infinite;
+}
+.tableau--quai-voilier .pluie--pres {
+  background: repeating-linear-gradient(99deg, transparent 0 28px,
+    rgba(200,225,255,.22) 28px 30px, transparent 30px 72px);
+  opacity: .38; animation: pleut .66s linear infinite;
+}
+@keyframes pleut { to { transform: translate3d(-7cqw, 34cqh, 0); } }
+
+.tableau--quai-voilier .nuit {
+  inset: 0; pointer-events: none; mix-blend-mode: multiply;
+  background: linear-gradient(#5a6f9c, #2e3f66); opacity: .34;
+}

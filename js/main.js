@@ -128,6 +128,7 @@ const estAuRepos = () => !occupe && !dialogue && rideau.hidden
 const NOMS_LIEUX = {
   bar: 'Le Claw & Order',
   quai: 'Le Sunnyside Beach Park',
+  'quai-voilier': 'Le voilier, de près',
   greffe: 'Le greffe de nuit',
   retour: 'Le détroit',
   planque: 'La laverie',

@@ -1,0 +1,37 @@
+<!--
+  Tableau 2 bis — Le voilier, de près.
+  Vue rapprochée (chantier 25) : même sprite que dans `quai.html`, à
+  l'échelle ×2 — 172 u au lieu de 86, exactement le grain d'un sprite
+  normal (le doublement du chantier 7 avait déjà posé les pixels).
+  Neuf cibles y vivent, migrées telles quelles depuis `quai.js` ; le
+  texte ne bouge pas, seules les coordonnées doublent.
+-->
+<div class="tableau tableau--quai-voilier">
+
+  <div class="ciel"></div>
+  <div class="etoiles"></div>
+
+  <div class="sprite--prop-voilier voilier"></div>
+
+  <div class="zone cabine" data-hotspot="cabine"></div>
+  <div class="corps" data-hotspot="corps"></div>
+  <div class="trappe" data-hotspot="trappe"></div>
+  <div class="zone moteur" data-hotspot="moteur"></div>
+
+  <!-- Les quatre postes de l'appareillage, dans le même ordre qu'en
+       vue large : vigie, aussières, radio, barre. -->
+  <div class="poste poste--vigie"     data-hotspot="vigie"></div>
+  <div class="poste poste--aussieres" data-hotspot="aussieres"></div>
+  <div class="poste poste--radio"     data-hotspot="radio"></div>
+  <div class="poste poste--barre"     data-hotspot="barre"></div>
+  <div class="amarres" data-hotspot="amarres"></div>
+
+  <div class="pluie pluie--loin"></div>
+  <div class="pluie pluie--pres"></div>
+
+  <!-- Le retour, dessiné (règle 2) : le ponton, en contrebas. -->
+  <div class="ponton"></div>
+  <div class="seuil-ponton" data-hotspot="reculer"></div>
+
+  <div class="nuit"></div>
+</div>
