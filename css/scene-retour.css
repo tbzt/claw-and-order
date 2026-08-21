@@ -315,6 +315,13 @@
 .tableau--retour .projecteur { opacity: 0; transition: opacity 1.4s ease; pointer-events: none; }
 .stage[data-etat~="vedette"] .tableau--retour .vedette { opacity: 1; pointer-events: auto; }
 .stage[data-etat~="vedette"] .tableau--retour .projecteur { opacity: 1; }
+/* `vedette-partie` était déjà posé (contrat réglé, ou l'esprit de l'eau)
+   mais rien ne le montrait : la vedette restait à l'écran, contredisant
+   un texte qui disait « elle rentre dans la pluie ». Elle s'efface
+   maintenant pour de vrai — c'est le seul signal fiable, plus fiable
+   que le texte qu'on a pu manquer. */
+.stage[data-etat~="vedette-partie"] .tableau--retour .vedette,
+.stage[data-etat~="vedette-partie"] .tableau--retour .projecteur { opacity: 0; pointer-events: none; }
 
 .tableau--retour .vedette {
   left: calc(19 * var(--u)); top: calc(46 * var(--u));

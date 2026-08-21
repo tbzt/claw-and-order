@@ -53,11 +53,19 @@ export const greffe = {
         tous: 'Une vitre épaisse, une grille de laiton, et un plateau tournant en dessous pour passer les papiers.',
         drakk: '« Un guichet de forteresse. On parle au gardien, on ne le touche pas. »',
       },
-      utiliser: ({ a }) => a('parle:gardien')
-        ? 'Vous avez déjà parlé. Il attend de voir ce que vous allez faire.'
-        : { tous: 'Tu te penches vers la grille. Le gardien lève les yeux de son écran.',
-            dialogue: 'gardien' },
-      parler: { texte: [], dialogue: 'gardien' },
+      /* Une fois `sas-ouvert`, il n'a plus rien à négocier : revenir au
+         guichet ne doit plus rouvrir le dialogue (§ boucle constatée en
+         playtest le 2026-08-21 — le joueur y retournait faute d'un
+         signal clair que la porte, elle, était déjà ouverte). */
+      utiliser: ({ a }) => a('sas-ouvert')
+        ? 'Il ne lève plus les yeux. Il a déjà fait son geste.'
+        : a('parle:gardien')
+          ? 'Vous avez déjà parlé. Il attend de voir ce que vous allez faire.'
+          : { tous: 'Tu te penches vers la grille. Le gardien lève les yeux de son écran.',
+              dialogue: 'gardien' },
+      parler: ({ a }) => a('sas-ouvert')
+        ? 'Il ne lève plus les yeux. Il a déjà fait son geste.'
+        : { texte: [], dialogue: 'gardien' },
     },
 
     gardien: {
@@ -68,8 +76,34 @@ export const greffe = {
         hercules: '« Il ne nous déteste pas. Il ne veut simplement pas d’ennuis. Ce n’est pas la même serrure. »',
         drakk: '« Un seul défenseur, et une porte double derrière lui. Le rapport de force n’est pas où on croit : c’est lui qui tient le pont. »',
       },
-      parler: { texte: [], dialogue: 'gardien' },
+      parler: ({ a }) => a('sas-ouvert')
+        ? 'Il ne lève plus les yeux. Il a déjà fait son geste.'
+        : { texte: [], dialogue: 'gardien' },
       utiliser: 'Il y a huit centimètres de vitre. Et ce serait une très mauvaise idée.',
+    },
+
+    /* ══ LESTER ═══════════════════════════════════════════════════════
+       Avant : le sas ouvert menait droit à `va: 'retour'`, et son
+       arrivée n'était qu'une ligne de texte au milieu de la sortie —
+       jamais un corps à l'écran. Il entre maintenant EN DEUX TEMPS
+       (même geste qu'au voilier, chantier 25) : la porte s'ouvre et il
+       apparaît, puis un second clic sur `sas` fait vraiment partir. */
+    lester: {
+      nom: 'Lester',
+      regarder: {
+        tous: ['Il sort du sas en clignant des yeux — la lumière du couloir est la première chose vive qu’il voit depuis longtemps.',
+               'Combinaison de détention, deux tailles trop grande. Il compte les quatre visages devant lui, un par un.'],
+        hercules: '« Vingt ans. Et il compte les gens avant de compter les issues. J’aurais fait pareil. »',
+        trash: '« Son aura est petite, serrée sur elle-même. Elle vient de comprendre qu’elle a le droit d’occuper un peu plus de place. »',
+        rabbit: '« Aucun SIN. Officiellement, il n’existe pas. On vient de faire sortir quelqu’un qui n’existe pas. »',
+        drakk: '« Un otage qu’on libère ne remercie jamais tout de suite. Il vérifie d’abord qu’on n’en a pas besoin d’un autre. »',
+      },
+      parler: ({ a }) => a('parle:lester-greffe')
+        ? '« … » Il n’a plus rien à ajouter, pas ici.'
+        : { tous: 'Personne ne sait par où commencer, alors Hercules commence par le plus simple.',
+            hercules: '« On te sort d’ici. On t’explique en marchant. »',
+            flags: ['parle:lester-greffe'] },
+      utiliser: 'On ne le prend pas par le bras. Il vous suit, à son rythme.',
     },
 
     registre: {
@@ -91,14 +125,18 @@ export const greffe = {
         drakk: '« Verrou double. Il ne cède ni à l’épaule ni au levier. Celui-là s’ouvre par la parole ou pas du tout. »',
         rabbit: '« Commandé depuis le poste, pas depuis le réseau. Je ne peux pas l’ouvrir d’ici. »',
       },
-      utiliser: ({ a }) => a('sas-ouvert')
-        ? { tous: ['Le sas s’ouvre en deux temps, avec le bruit d’un frigo qu’on débranche.',
-                   'On vous amène Lester quatre minutes plus tard. Il a l’air d’avoir vingt ans, et d’en avoir seize.',
-                   'Il ne demande pas qui vous êtes. Il regarde la porte derrière vous.',
-                   'Le voilier est au ponton, la pluie n’a pas cessé, et Tacoma est de l’autre côté du détroit.'],
-            minutes: 35, va: 'retour' }
-        : { tous: 'Verrouillé. Il s’ouvre depuis le poste, et le poste ne veut pas.',
-            drakk: '« Inutile de pousser. J’ai déjà poussé. »' },
+      utiliser: ({ a }) => {
+        if (!a('sas-ouvert'))
+          return { tous: 'Verrouillé. Il s’ouvre depuis le poste, et le poste ne veut pas.',
+                   drakk: '« Inutile de pousser. J’ai déjà poussé. »' }
+        if (!a('lester-arrive'))
+          return { tous: ['Le sas s’ouvre en deux temps, avec le bruit d’un frigo qu’on débranche.',
+                          'On vous amène Lester. Il a l’air d’avoir vingt ans, et d’en avoir seize.',
+                          'Il ne demande pas qui vous êtes. Il regarde la porte derrière vous, celle par laquelle on repart.'],
+                   flags: ['lester-arrive'], visuels: ['lester-arrive'] }
+        return { tous: 'Le voilier est au ponton, la pluie n’a pas cessé, et Tacoma est de l’autre côté du détroit.',
+                 minutes: 35, va: 'retour' }
+      },
     },
 
     banc: {
@@ -120,11 +158,17 @@ export const greffe = {
 
     horloge: {
       nom: 'L’horloge',
-      regarder: {
-        tous: '4 h 12. Cinq heures quarante-huit avant l’audience.',
-        trash: '« J’ai mal au bras. Ne me demandez pas de recommencer. »',
+      /* L'heure d'arrivée dépend de la route prise au voilier (§ D13,
+         26 min avec l'esprit de l'eau contre 40 sans) — déjà reflété
+         dans `ouverture`, ici recalculé pour rester d'accord avec elle.
+         La ligne de Trash ne vaut, elle, que s'il s'est épuisé pour ça. */
+      regarder: ({ a }) => ({
+        tous: a('esprit-eau')
+          ? '3 h 46. Six heures quatorze avant l’audience.'
+          : '4 h 12. Cinq heures quarante-huit avant l’audience.',
+        trash: a('trash-epuise') ? '« J’ai mal au bras. Ne me demandez pas de recommencer. »' : undefined,
         hercules: '« Et une heure de bateau au retour. On a moins de marge que ça n’en a l’air. »',
-      },
+      }),
     },
 
     /* ── Astral ─────────────────────────────────────────────────── */
@@ -209,7 +253,7 @@ export const greffe = {
         {
           id: 'mandat',
           titre: '(Présenter le mandat de transfert.)',
-          quand: ({ tient }) => tient('mandat'),
+          quand: ({ a, tient }) => tient('mandat') && !a('sas-ouvert'),
           flags: ['mandat-presente'],
           texte: ['Il fait tourner le plateau, prend le feuillet, le lit deux fois.',
                   '« Il est bon. Signé McCarthy, brigade criminelle. »',
@@ -219,14 +263,14 @@ export const greffe = {
         {
           id: 'urgence',
           titre: '« Il ne doit pas monter dans cette navette. »',
-          quand: ({ a }) => a('mandat-presente'),
+          quand: ({ a }) => a('mandat-presente') && !a('sas-ouvert'),
           texte: ['« Je sais pas ce que vous racontez et je veux pas le savoir. »',
                   '« Moi j’ai un registre. Le registre dit huit heures. »'],
         },
         {
           id: 'couverture',
           titre: '« Un ordre signé vous couvre. La navette, non. » (Hercules)',
-          quand: ({ a, qui }) => qui === 'hercules' && a('mandat-presente')
+          quand: ({ a, qui }) => qui === 'hercules' && a('mandat-presente') && !a('sas-ouvert')
                                  && (a('sait-peur-gardien') || a('sait-gardien-seul')),
           flags: ['sas-ouvert'],
           visuels: ['sas-ouvert'],
@@ -239,15 +283,26 @@ export const greffe = {
         {
           id: 'menacer',
           titre: '« Ouvrez cette porte. » (Drakk)',
-          quand: ({ a, qui }) => qui === 'drakk' && a('mandat-presente'),
+          quand: ({ a, qui }) => qui === 'drakk' && a('mandat-presente') && !a('sas-ouvert'),
           texte: ['Drakk se penche vers la grille. La vitre fait huit centimètres.',
                   '« Ouvrez ce pont-levis, gardien. »',
                   '« … C’est ça. Et je préviens la relève, aussi. »',
                   'Ça n’a pas marché. Ça n’a rien cassé non plus, ce qui est déjà beaucoup.'],
         },
+        /* Le signal qui manquait : une fois `sas-ouvert`, c'est la SEULE
+           option qui reste, et elle dit où aller — au lieu de laisser
+           mandat/urgence tourner en boucle sans plus rien à offrir. */
+        {
+          id: 'ouvert',
+          titre: '(Y aller.)',
+          quand: ({ a }) => a('sas-ouvert'),
+          fin: true,
+          texte: ['Il ne lève plus les yeux. Le sas, derrière vous, est déjà en train de s’ouvrir.'],
+        },
         {
           id: 'partir',
           titre: '(Se taire une seconde.)',
+          quand: ({ a }) => !a('sas-ouvert'),
           fin: true,
           texte: ['Il retourne à son écran.'],
         },

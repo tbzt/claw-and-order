@@ -94,14 +94,19 @@ export const bar = {
 
     horloge: {
       nom: 'L’horloge',
-      regarder: {
-        tous: ['Vingt-trois heures passées. Elle avance de quatre minutes et personne ne l’a jamais réglée.',
-               'Onze heures avant l’audience. Tu viens de faire le calcul sans le vouloir, et tu le referas toute la nuit.'],
-        hercules: '« Onze heures. J’ai connu des délais plus courts. Jamais pour moins cher. »',
-        trash: '« C’est le temps qu’il reste au gamin. Dit comme ça, ça ne fait pas beaucoup. »',
-        rabbit: '« Quatre minutes d’avance sur la grille, et jamais resynchronisée. Personne ici n’a envie d’être à l’heure. »',
-        drakk: '« Le sablier tourne. Il tourne toujours. »',
-      },
+      /* Le compte à rebours de l'audience (et « le gamin » chez Trash)
+         n'a de sens qu'une fois le boulot connu — sinon on lit le calcul
+         d'une échéance dont on n'a pas encore entendu parler. */
+      regarder: ({ a }) => a('sait-le-job')
+        ? { tous: ['Vingt-trois heures passées. Elle avance de quatre minutes et personne ne l’a jamais réglée.',
+                   'Onze heures avant l’audience. Tu viens de faire le calcul sans le vouloir, et tu le referas toute la nuit.'],
+            hercules: '« Onze heures. J’ai connu des délais plus courts. Jamais pour moins cher. »',
+            trash: '« C’est le temps qu’il reste au gamin. Dit comme ça, ça ne fait pas beaucoup. »',
+            rabbit: '« Quatre minutes d’avance sur la grille, et jamais resynchronisée. Personne ici n’a envie d’être à l’heure. »',
+            drakk: '« Le sablier tourne. Il tourne toujours. »' }
+        : { tous: 'Vingt-trois heures passées. Elle avance de quatre minutes et personne ne l’a jamais réglée.',
+            rabbit: '« Quatre minutes d’avance sur la grille, et jamais resynchronisée. Personne ici n’a envie d’être à l’heure. »',
+            drakk: '« Le sablier tourne. Il tourne toujours. »' },
       utiliser: 'La régler ne ferait pas gagner une minute.',
     },
 
@@ -182,12 +187,16 @@ export const bar = {
 
     comptoir: {
       nom: 'Le comptoir',
-      regarder: {
+      /* La ligne d'Hercules citait « le dossier du gamin » sans condition —
+         lisible avant même d'avoir appris qu'il y a un gamin, ou un dossier. */
+      regarder: ({ a }) => ({
         tous: 'Zinc rayé, verni par quarante ans de coudes. On y a gravé des matricules, et quelqu’un en a barré plusieurs.',
-        hercules: '« Quarante ans de coudes. Il y a plus d’histoire là-dessus que dans le dossier du gamin. »',
+        hercules: a('sait-gamin')
+          ? '« Quarante ans de coudes. Il y a plus d’histoire là-dessus que dans le dossier du gamin. »'
+          : '« Quarante ans de coudes. Ce zinc a vu passer plus de vérités que n’importe quel interrogatoire. »',
         rabbit: '« Des matricules gravés, et des matricules barrés. Personne n’a jamais pensé à effacer. Ici, on n’efface pas : on raye. »',
         drakk: '« La table du maître des lieux. On n’y pose pas les coudes sans y avoir été invité. »',
-      },
+      }),
       utiliser: 'Tu n’es pas venu boire.',
     },
 
@@ -368,13 +377,14 @@ export const bar = {
           id: 'gamin',
           titre: '« Quel gamin ? »',
           quand: ({ a }) => a('sait-le-job'),
+          flags: ['sait-gamin'],
           texte: ['« Lester. Vingt ans. Ork. Ramassé dans une descente à Redmond. »',
                   '« On l’accuse du meurtre de Teresa Banks. Une elfe du Tír. Le genre de nom qui fait bouger des gens. »'],
         },
         {
           id: 'dossier',
           titre: '« Et il l’a tuée ? »',
-          quand: ({ a }) => a('sait-le-job'),
+          quand: ({ a }) => a('sait-gamin'),
           flags: ['sait-dossier-vide'],
           fiches: ['dossier-vide', 'elfe-autopsie'],
           texte: ['« L’autopsie dit que le dernier à l’avoir touchée était un elfe. On n’a pas une trace de lui sur elle. »',
@@ -397,7 +407,7 @@ export const bar = {
         {
           id: 'teresa',
           titre: '« Et elle ? Teresa Banks. »',
-          quand: ({ a }) => a('sait-le-job'),
+          quand: ({ a }) => a('sait-gamin'),
           flags: ['sait-teresa'],
           fiches: ['teresa'],
           texte: ['Il lève les yeux. C’est la première fois depuis que vous êtes assis.',
@@ -456,7 +466,7 @@ export const bar = {
         {
           id: 'tir',
           titre: '« La victime était du Tír. » (Trash)',
-          quand: ({ a, qui }) => qui === 'trash' && a('sait-le-job'),
+          quand: ({ a, qui }) => qui === 'trash' && a('sait-gamin'),
           texte: ['Le vieil ork le regarde autrement. « Vous connaissez ? »',
                   '« Alors vous savez ce que ça veut dire, une famille de là-bas qui veut que ça se taise. »',
                   '« Moi je l’ai appris en trois jours. Ça m’a suffi. »'],
@@ -466,7 +476,7 @@ export const bar = {
         {
           id: 'ork',
           titre: '« Le gamin est ork. C’est ça, le dossier. » (White_Rabbit)',
-          quand: ({ qui }) => qui === 'rabbit',
+          quand: ({ a, qui }) => qui === 'rabbit' && a('sait-dossier-vide'),
           texte: ['« … »',
                   '« Trente-quatre ans que je porte cette étoile. J’ai signé des rapports que je ne relis pas. »',
                   '« Celui-là, je le relis. C’est pour ça que vous êtes là. »'],

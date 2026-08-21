@@ -204,7 +204,7 @@ const TABLEAUX = {
     trash: {
       vu: ['Un elfe, trois épaisseurs de fringues dépareillées, une écharpe rayée qui pend jusqu’à la ceinture.',
            'Il regarde McCarthy comme s’il évaluait un adulte, pas un client. C’est une habitude de famille dont il ne s’est jamais débarrassé.'],
-      dit: ({ a }) => a('sait-le-job')
+      dit: ({ a }) => a('sait-famille')
         ? '« Une fille du Tír, morte à Redmond, et sa famille qui veut que ça se taise. Je connais la chanson par cœur. »'
         : '« Il a peur, ce vieux. Ce n’est pas nous qui lui faisons peur. »',
     },
@@ -218,9 +218,17 @@ const TABLEAUX = {
   },
 
   retour: {
+    /* Le bras trempé ne se voit que si l'esprit de l'eau a été appelé
+       au voilier (`trash-epuise`, quai-voilier.js) — un chemin
+       optionnel. Sans condition, la ligne se lisait même quand la
+       scène n'avait jamais eu lieu. */
     trash: {
-      vu: 'Il a le bras gauche encore trempé jusqu’au coude, et il ne le frotte pas.',
-      hercules: '« Il a payé quelque chose dans cette eau. Il ne dira pas quoi. »',
+      vu: ({ a }) => a('trash-epuise')
+        ? 'Il a le bras gauche encore trempé jusqu’au coude, et il ne le frotte pas.'
+        : 'Il regarde l’eau du détroit comme s’il s’attendait à ce qu’elle réponde.',
+      hercules: ({ a }) => a('trash-epuise')
+        ? '« Il a payé quelque chose dans cette eau. Il ne dira pas quoi. »'
+        : '« Il n’a pas dit un mot depuis McNeil. Ça ne lui ressemble pas. »',
     },
     drakk: {
       drakk: '« La Mer de Cendre était plus large. Et il n’y avait personne dessus. »',
@@ -252,11 +260,17 @@ export function equipiers(tableau) {
 
       regarder: (ctx) => {
         const { qui } = ctx
+        /* `vu` et la ligne par runner peuvent dépendre de l'état — un
+           tableau revisité (règle 19) peut avoir gagné un drapeau que
+           la description ne connaissait pas encore. Même traitement
+           que `dit` plus bas. */
+        const vu = typeof ici.vu === 'function' ? ici.vu(ctx) : ici.vu
+        const extra = typeof ici[qui] === 'function' ? ici[qui](ctx) : ici[qui]
         /* Se regarder soi-même n'est pas se décrire : c'est s'avouer. */
-        if (qui === id) return { tous: ici.vu ?? [], [qui]: SOI[id] }
+        if (qui === id) return { tous: vu ?? [], [qui]: SOI[id] }
         return {
-          tous: ici.vu ?? [],
-          [qui]: [REGARDS[id][qui], ...(ici[qui] ? [ici[qui]] : [])],
+          tous: vu ?? [],
+          [qui]: [REGARDS[id][qui], ...(extra ? [extra] : [])],
         }
       },
 

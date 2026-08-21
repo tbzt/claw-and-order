@@ -73,12 +73,16 @@ export const quai = {
       objets: {
         /* Rappel de la bouteille achetée au bar. Sans lui, un objet qui
            paie deux tableaux plus tard se lit comme un bug, pas comme
-           une récompense. */
-        bouteille: {
-          tous: 'Pas maintenant. Il y a un mort dans la cabine et quarante minutes de traversée devant.',
+           une récompense. Le mort dans la cabine n'est révélé qu'après
+           l'avoir vu à bord (`corps-vu`, posé dans quai-voilier.js) —
+           avant ça, la ligne ne doit rien en dire. */
+        bouteille: ({ a }) => ({
+          tous: a('corps-vu')
+            ? 'Pas maintenant. Il y a un mort dans la cabine et quarante minutes de traversée devant.'
+            : 'Pas maintenant. Vous êtes venus pour embarquer, pas pour trinquer.',
           drakk: '« Je la garde. Elle a un usage et ce n’est pas celui-ci. »',
           hercules: '« On boira à l’arrivée. On boit toujours à l’arrivée, c’est pour ça qu’on arrive. »',
-        },
+        }),
       },
       /* Neuf cibles avaient partagé ce sprite de 86 u — un tiers du
          cadre, et cinq d'entre elles sans un pixel de marge sous le

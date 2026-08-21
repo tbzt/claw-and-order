@@ -550,21 +550,36 @@ export const retour = {
         {
           id: 'nom',
           titre: '« Sunnyside quatre-deux. On rentre au chantier. » (Hercules)',
-          quand: ({ qui }) => qui === 'hercules',
+          quand: ({ qui, a }) => qui === 'hercules' && !a('vedette-tiede') && !a('vedette-reglee'),
           flags: ['vedette-tiede'],
           texte: ['« Reçu. Vous naviguez au nom de Wilson, W. »',
-                  '« Wilson est enregistré seul à bord. Vous êtes cinq sur le pont. »'],
+                  '« Wilson est enregistré seul à bord. Vous êtes cinq sur le pont. »',
+                  '« … Restez sur le 16. »',
+                  'Le projecteur ne s’éteint pas, mais il cesse de suivre. La barre attend, devant.'],
         },
         {
           id: 'contrat',
           titre: '(Présenter le contrat de prestation.)',
-          quand: ({ tient }) => tient('contrat'),
+          quand: ({ tient, a }) => tient('contrat') && !a('vedette-tiede') && !a('vedette-reglee'),
           texte: ['Le projecteur s’attarde sur le feuillet.',
-                  '« Prestation de sécurité indépendante, contresignée brigade criminelle. »'],
+                  '« Prestation de sécurité indépendante, contresignée brigade criminelle. »',
+                  '« … » Le projecteur reste où il est. Ce n’est pas un refus. Ce n’est pas non plus un oui.'],
+        },
+        /* Le signal qui manquait : `nom` posait déjà `vedette-tiede`,
+           suffisant pour débloquer `barre`, mais rien ne le disait — le
+           joueur revenait discuter une deuxième fois sans savoir que
+           c'était déjà réglé (playtest le 2026-08-21). */
+        {
+          id: 'reglee',
+          titre: '(Rien à ajouter.)',
+          quand: ({ a }) => (a('vedette-tiede') || a('vedette-reglee')) && !a('goulet-passe'),
+          fin: true,
+          texte: ['Elle n’a plus de raison de s’attarder. La barre attend, devant.'],
         },
         {
           id: 'couper',
           titre: '(Ne pas répondre.)',
+          quand: ({ a }) => !a('vedette-tiede') && !a('vedette-reglee'),
           fin: true,
           texte: ['Personne ne décroche. Le projecteur reste où il est.',
                   'Ça ne les décourage pas. Ça ne les presse pas non plus.'],

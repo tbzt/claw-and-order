@@ -71,6 +71,16 @@
 .tableau--greffe .ombre--trash    { left: calc(112 * var(--u)); top: calc(140 * var(--u)); width: calc(30 * var(--u)); }
 .tableau--greffe .ombre--rabbit   { left: calc(144 * var(--u)); top: calc(140 * var(--u)); width: calc(20 * var(--u)); }
 .tableau--greffe .ombre--hercules { left: calc(170 * var(--u)); top: calc(140 * var(--u)); width: calc(16 * var(--u)); }
+
+/* Lester : caché tant qu'il n'est pas sorti du sas, dans l'embrasure
+   même de la porte — même sprite qu'au tableau suivant (retour), même
+   largeur, pour que ce soit visiblement le même garçon. */
+.tableau--greffe .p-lester {
+  display: none; width: calc(32 * var(--u)); left: calc(34 * var(--u)); top: calc(106 * var(--u));
+}
+.tableau--greffe .ombre--lester { display: none; left: calc(30 * var(--u)); top: calc(140 * var(--u)); width: calc(28 * var(--u)); }
+.stage[data-etat~="lester-arrive"] .tableau--greffe .p-lester,
+.stage[data-etat~="lester-arrive"] .tableau--greffe .ombre--lester { display: block; }
 /* L'ÉCHELLE EST CELLE DU CANON, ET ELLE NE SE NÉGOCIE PAS PAR TABLEAU.
    23,7 px par mètre, McCarthy ork 1,90 m = 45 px pour ancre :
      Drakk troll 2,50 m → 46 × 56    White_Rabbit humain 1,75 m → 24 × 41
