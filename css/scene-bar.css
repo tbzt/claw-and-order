@@ -1,5 +1,8 @@
 /* ── TABLEAU 1 — LE BAR À FLICS ──────────────────────────────────────
-   Grille unique : 320 x 180 pixels d'art (la résolution de Monkey Island).
+   Grille unique : 256 x 144 pixels d'art — recadrée depuis 320 x 180
+   (chantier 8, PLAN_CADRE_ET_DEFINITION.md). Les personnages n'ont pas
+   changé de taille en unités d'art ; c'est le cadre qui s'est resserré
+   de 20 % sur chaque axe, donc chaque unité vaut 25 % d'écran de plus.
    --u vaut un pixel d'art. TOUT se positionne en multiples de --u, les
    aplats CSS comme les sprites : sans ça un bord d'aplat tombe entre deux
    pixels, s'adoucit, et l'œil voit que décor et personnages ne viennent
@@ -10,40 +13,39 @@
 .tableau--bar {
   position: absolute;
   inset: 0;
-  --u: calc(100cqw / 320);
+  --u: calc(100cqw / 256);
   image-rendering: pixelated;
   background: #14101a;
 }
 .tableau--bar > * { position: absolute; }
 .tableau--bar .bande { left: 0; width: 100%; }
 
-.tableau--bar .plafond { top: 0; height: calc(22 * var(--u)); background: #14101a; }
 .tableau--bar .mur {
-  top: calc(22 * var(--u)); height: calc(96 * var(--u));
+  top: calc(0 * var(--u)); height: calc(96 * var(--u));
   background: repeating-linear-gradient(90deg,
     #3a2a24 0 calc(14 * var(--u)), #33251f calc(14 * var(--u)) calc(15 * var(--u)));
 }
 .tableau--bar .lambris {
-  top: calc(118 * var(--u)); height: calc(22 * var(--u));
+  top: calc(96 * var(--u)); height: calc(22 * var(--u));
   background: linear-gradient(#241a16 0 calc(3 * var(--u)), #2e211b calc(3 * var(--u)));
 }
 .tableau--bar .sol {
-  top: calc(140 * var(--u)); height: calc(40 * var(--u));
+  top: calc(118 * var(--u)); height: calc(40 * var(--u));
   background: repeating-linear-gradient(90deg,
     #241d24 0 calc(16 * var(--u)), #2b2229 calc(16 * var(--u)) calc(32 * var(--u)));
 }
 
 .tableau--bar .etagere {
-  left: calc(186 * var(--u)); top: calc(64 * var(--u));
-  width: calc(120 * var(--u)); height: calc(3 * var(--u)); background: #1a1210;
+  left: calc(151 * var(--u)); top: calc(42 * var(--u));
+  width: calc(95 * var(--u)); height: calc(3 * var(--u)); background: #1a1210;
 }
 .tableau--bar .comptoir-plateau {
-  left: calc(176 * var(--u)); top: calc(110 * var(--u));
-  width: calc(144 * var(--u)); height: calc(6 * var(--u)); background: #6b4a2c;
+  left: calc(143 * var(--u)); top: calc(88 * var(--u));
+  width: calc(103 * var(--u)); height: calc(6 * var(--u)); background: #6b4a2c;
 }
 .tableau--bar .comptoir {
-  left: calc(180 * var(--u)); top: calc(116 * var(--u));
-  width: calc(140 * var(--u)); height: calc(38 * var(--u));
+  left: calc(147 * var(--u)); top: calc(94 * var(--u));
+  width: calc(99 * var(--u)); height: calc(38 * var(--u));
   background: linear-gradient(#3d2a1c, #2a1c13);
 }
 
@@ -57,67 +59,67 @@
    lui. C'est lui le sujet de la scène ; c'est lui qui doit être dans la
    flaque de lumière. */
 .tableau--bar .halo--a {
-  left: 0; top: calc(58 * var(--u));
+  left: 0; top: calc(36 * var(--u));
   width: calc(68 * var(--u)); height: calc(130 * var(--u));
   background: radial-gradient(closest-side, rgba(255,206,132,.34), transparent 74%);
 }
 .tableau--bar .halo--b {
-  left: calc(190 * var(--u)); top: calc(16 * var(--u));
+  left: calc(155 * var(--u)); top: calc(-6 * var(--u));
   background: radial-gradient(closest-side, rgba(255,200,120,.17), transparent 72%);
 }
 
 /* ── Placement ──────────────────────────────────────────────────────
-   Repères du tableau : mur 22→118, lambris 118→140, sol 140→180.
-   Tout ce qui pose au sol a sa base à y=155. Tout ce qui est au mur
-   reste entre 22 et 118 — SAUF la porte, qui doit descendre jusqu'au
-   sol (140) sinon elle flotte. C'était le cas.
+   Repères du tableau : mur 0→96, lambris 96→118, sol 118→158 (dont
+   144→158 hors cadre, sous le bas du plateau). Tout ce qui pose au sol
+   a sa base à y≈133. Tout ce qui est au mur reste entre 0 et 96 — SAUF
+   la porte, qui doit descendre jusqu'au sol (118) sinon elle flotte.
    Coin fléchettes à gauche, McCarthy à l'écart tout à gauche, la porte
    au fond, l'équipe devant le comptoir.                              */
 
 /* — au mur — */
-.tableau--bar .cible { left: calc(76 * var(--u));  top: calc(56 * var(--u)); width: calc(22 * var(--u)); }
-.tableau--bar .horloge { left: calc(42 * var(--u));  top: calc(30 * var(--u)); width: calc(18 * var(--u)); }
-.tableau--bar .photos { left: calc(214 * var(--u)); top: calc(76 * var(--u)); width: calc(22 * var(--u)); }
+.tableau--bar .cible { left: calc(62 * var(--u));  top: calc(34 * var(--u)); width: calc(22 * var(--u)); }
+.tableau--bar .horloge { left: calc(35 * var(--u));  top: calc(8 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--bar .photos { left: calc(173 * var(--u)); top: calc(54 * var(--u)); width: calc(22 * var(--u)); }
 .tableau--bar .affiche { background: #45403a; box-shadow: 0 0 0 calc(1 * var(--u)) #1a1210; }
-.tableau--bar .affiche--a { left: calc(156 * var(--u)); top: calc(46 * var(--u)); width: calc(16 * var(--u)); height: calc(22 * var(--u)); }
-.tableau--bar .affiche--b { left: calc(178 * var(--u)); top: calc(52 * var(--u)); width: calc(16 * var(--u)); height: calc(14 * var(--u)); background: #3e433c; }
-.tableau--bar .affiche--c { left: calc(110 * var(--u)); top: calc(44 * var(--u)); width: calc(14 * var(--u)); height: calc(20 * var(--u)); background: #443f3a; }
+.tableau--bar .affiche--a { left: calc(127 * var(--u)); top: calc(24 * var(--u)); width: calc(16 * var(--u)); height: calc(22 * var(--u)); }
+.tableau--bar .affiche--b { left: calc(145 * var(--u)); top: calc(30 * var(--u)); width: calc(16 * var(--u)); height: calc(14 * var(--u)); background: #3e433c; }
+.tableau--bar .affiche--c { left: calc(90 * var(--u)); top: calc(22 * var(--u)); width: calc(14 * var(--u)); height: calc(20 * var(--u)); background: #443f3a; }
 
-/* La porte descend au sol : 84 → 140. */
-.tableau--bar .porte { left: calc(124 * var(--u)); top: calc(84 * var(--u)); width: calc(26 * var(--u)); }
+/* La porte descend au sol : 62 → 118. */
+.tableau--bar .porte { left: calc(101 * var(--u)); top: calc(62 * var(--u)); width: calc(26 * var(--u)); }
 
 /* — le comptoir — */
-.tableau--bar .bouteilles { left: calc(202 * var(--u)); top: calc(42 * var(--u)); width: calc(88 * var(--u)); }
-.tableau--bar .verres { left: calc(250 * var(--u)); top: calc(98 * var(--u)); width: calc(34 * var(--u)); }
-.tableau--bar .barman { left: calc(288 * var(--u)); top: calc(84 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--bar .bouteilles { left: calc(154 * var(--u)); top: calc(20 * var(--u)); width: calc(88 * var(--u)); }
+.tableau--bar .verres { left: calc(201 * var(--u)); top: calc(76 * var(--u)); width: calc(34 * var(--u)); }
+.tableau--bar .barman { left: calc(212 * var(--u)); top: calc(62 * var(--u)); width: calc(30 * var(--u)); }
 .tableau--bar .tabouret { width: calc(18 * var(--u)); }
-.tableau--bar .t1 { left: calc(186 * var(--u)); top: calc(116 * var(--u)); }
-.tableau--bar .t2 { left: calc(216 * var(--u)); top: calc(116 * var(--u)); }
+.tableau--bar .t1 { left: calc(151 * var(--u)); top: calc(94 * var(--u)); }
+.tableau--bar .t2 { left: calc(175 * var(--u)); top: calc(94 * var(--u)); }
 
 /* — le coin fléchettes : les joueurs sont À CÔTÉ de la cible, pas dessous — */
 .tableau--bar .client { width: calc(22 * var(--u)); }
-.tableau--bar .c1 { left: calc(70 * var(--u));  top: calc(127 * var(--u)); }
-.tableau--bar .c2 { left: calc(98 * var(--u));  top: calc(127 * var(--u)); }
+.tableau--bar .c1 { left: calc(57 * var(--u));  top: calc(105 * var(--u)); }
+.tableau--bar .c2 { left: calc(80 * var(--u));  top: calc(105 * var(--u)); }
 
 /* — McCarthy, à l'écart, tout à gauche — */
 .tableau--bar .table-mccarthy {
-  left: calc(4 * var(--u)); top: calc(130 * var(--u));
+  left: calc(4 * var(--u)); top: calc(108 * var(--u));
   width: calc(58 * var(--u)); height: calc(24 * var(--u));
   background: linear-gradient(#4a3323 0 calc(4 * var(--u)), #2e2016 calc(4 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #14100c;
 }
-.tableau--bar .tasses { left: calc(12 * var(--u)); top: calc(120 * var(--u)); width: calc(26 * var(--u)); }
+.tableau--bar .tasses { left: calc(10 * var(--u)); top: calc(98 * var(--u)); width: calc(26 * var(--u)); }
 
 /* Son créditube personnel, déjà sorti, à côté de son coude. Il paie de
    sa poche : c'est écrit dans son dialogue, et maintenant ça se voit. */
 .tableau--bar .creditube {
-  left: calc(42 * var(--u)); top: calc(127 * var(--u));
+  left: calc(35 * var(--u)); top: calc(105 * var(--u));
   width: calc(14 * var(--u)); height: calc(4 * var(--u));
   background: linear-gradient(180deg, #4a5266 0 calc(1 * var(--u)), #2a303f calc(1 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #14100c,
               inset calc(-3 * var(--u)) 0 0 rgba(255,178,87,.75);
 }
-.tableau--bar .p-mccarthy { width: calc(32 * var(--u)); left: calc(16 * var(--u)); top: calc(110 * var(--u)); }
+.tableau--bar .p-mccarthy { width: calc(32 * var(--u)); left: calc(14 * var(--u)); top: calc(88 * var(--u)); }
 
 /* — l'équipe, devant le comptoir, groupée — */
 /* ── L'ÉQUIPE ────────────────────────────────────────────────────────
@@ -129,54 +131,54 @@
 
    Ils forment maintenant un groupe, au PREMIER PLAN, pieds sur le
    seuil que la rue éclaire par en dessous. Quatre lignes de pieds
-   légèrement différentes (160 / 157 / 162 / 164) : c'est peu, et ça
+   légèrement différentes (138 / 135 / 140 / 142) : c'est peu, et ça
    suffit à casser l'alignement en rang d'oignons.
 
    Tailles au canon (23,7 px par mètre, McCarthy ork = 45) :
      Drakk troll 2,50 m → 56    White_Rabbit HUMAIN 1,75 m → 41
      Trash elfe  1,90 m → 50    Hercules     nain   1,20 m → 29
    Raton laveur n'est plus sur sa planche : c'est un sprite à part. */
-.tableau--bar .p-drakk    { width: calc(46 * var(--u)); left: calc(150 * var(--u)); top: calc(104 * var(--u)); }
-.tableau--bar .p-trash    { width: calc(34 * var(--u)); left: calc(196 * var(--u)); top: calc(107 * var(--u)); }
-.tableau--bar .p-rabbit   { width: calc(24 * var(--u)); left: calc(232 * var(--u)); top: calc(121 * var(--u)); }
-.tableau--bar .p-hercules { width: calc(20 * var(--u)); left: calc(262 * var(--u)); top: calc(135 * var(--u)); }
+.tableau--bar .p-drakk    { width: calc(46 * var(--u)); left: calc(122 * var(--u)); top: calc(82 * var(--u)); }
+.tableau--bar .p-trash    { width: calc(34 * var(--u)); left: calc(160 * var(--u)); top: calc(85 * var(--u)); }
+.tableau--bar .p-rabbit   { width: calc(24 * var(--u)); left: calc(187 * var(--u)); top: calc(99 * var(--u)); }
+.tableau--bar .p-hercules { width: calc(20 * var(--u)); left: calc(211 * var(--u)); top: calc(113 * var(--u)); }
 
 /* — profondeur — */
 .tableau--bar .fond-salle {
-  left: 0; top: calc(118 * var(--u)); width: 100%; height: calc(22 * var(--u));
+  left: 0; top: calc(96 * var(--u)); width: 100%; height: calc(22 * var(--u));
   background: linear-gradient(90deg, rgba(6,4,10,.55), rgba(6,4,10,.2) 60%, transparent);
   pointer-events: none;
 }
 .tableau--bar .attable { width: calc(22 * var(--u)); }
-.tableau--bar .a1 { left: calc(150 * var(--u)); top: calc(122 * var(--u)); }
-.tableau--bar .a2 { left: calc(184 * var(--u)); top: calc(120 * var(--u)); }
+.tableau--bar .a1 { left: calc(122 * var(--u)); top: calc(100 * var(--u)); }
+.tableau--bar .a2 { left: calc(150 * var(--u)); top: calc(98 * var(--u)); }
 .tableau--bar .table-fond { background: #1d1510; box-shadow: 0 0 0 calc(1 * var(--u)) #100b08; height: calc(10 * var(--u)); }
-.tableau--bar .tf1 { left: calc(144 * var(--u)); top: calc(133 * var(--u)); width: calc(34 * var(--u)); }
-.tableau--bar .tf2 { left: calc(178 * var(--u)); top: calc(131 * var(--u)); width: calc(34 * var(--u)); }
+.tableau--bar .tf1 { left: calc(117 * var(--u)); top: calc(111 * var(--u)); width: calc(34 * var(--u)); }
+.tableau--bar .tf2 { left: calc(145 * var(--u)); top: calc(109 * var(--u)); width: calc(34 * var(--u)); }
 
 /* — ombres de contact : base au sol (155) ou sur la surface porteuse — */
 .tableau--bar .ombre { background: rgba(8,6,10,.5); height: calc(2 * var(--u)); }
-.tableau--bar .ombre--c1 { left: calc(72 * var(--u));  top: calc(153 * var(--u)); width: calc(18 * var(--u)); }
-.tableau--bar .ombre--c2 { left: calc(100 * var(--u)); top: calc(153 * var(--u)); width: calc(18 * var(--u)); }
-.tableau--bar .ombre--mccarthy { left: calc(18 * var(--u));  top: calc(153 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--bar .ombre--c1 { left: calc(59 * var(--u));  top: calc(131 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--bar .ombre--c2 { left: calc(82 * var(--u)); top: calc(131 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--bar .ombre--mccarthy { left: calc(15 * var(--u));  top: calc(131 * var(--u)); width: calc(28 * var(--u)); }
 /* Chaque ombre suit sa propre ligne de pieds : c'est elle qui rend la
    profondeur crédible quand les bases diffèrent. */
-.tableau--bar .ombre--drakk    { left: calc(152 * var(--u)); top: calc(158 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--bar .ombre--trash    { left: calc(198 * var(--u)); top: calc(155 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--bar .ombre--rabbit   { left: calc(234 * var(--u)); top: calc(160 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--bar .ombre--hercules { left: calc(264 * var(--u)); top: calc(162 * var(--u)); width: calc(16 * var(--u)); }
-.tableau--bar .ombre--t1 { left: calc(188 * var(--u)); top: calc(144 * var(--u)); width: calc(14 * var(--u)); }
-.tableau--bar .ombre--t2 { left: calc(218 * var(--u)); top: calc(144 * var(--u)); width: calc(14 * var(--u)); }
-.tableau--bar .ombre--verres { left: calc(250 * var(--u)); top: calc(109 * var(--u)); width: calc(34 * var(--u)); height: calc(1 * var(--u)); }
-.tableau--bar .ombre--bouteilles { left: calc(202 * var(--u)); top: calc(63 * var(--u)); width: calc(88 * var(--u)); height: calc(1 * var(--u)); }
+.tableau--bar .ombre--drakk    { left: calc(124 * var(--u)); top: calc(136 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--bar .ombre--trash    { left: calc(161 * var(--u)); top: calc(133 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--bar .ombre--rabbit   { left: calc(189 * var(--u)); top: calc(138 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--bar .ombre--hercules { left: calc(212 * var(--u)); top: calc(140 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--bar .ombre--t1 { left: calc(153 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--bar .ombre--t2 { left: calc(176 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--bar .ombre--verres { left: calc(201 * var(--u)); top: calc(87 * var(--u)); width: calc(34 * var(--u)); height: calc(1 * var(--u)); }
+.tableau--bar .ombre--bouteilles { left: calc(154 * var(--u)); top: calc(41 * var(--u)); width: calc(88 * var(--u)); height: calc(1 * var(--u)); }
 
 /* Les suspensions. Le tableau avait deux flaques de lumière et AUCUNE
    source : la lampe était dessinée depuis longtemps et posée nulle part.
    Celle de gauche tombe sur la table de McCarthy — c'est elle qui rend
    légitime d'en faire le point le plus clair de la scène. */
-.tableau--bar .lampe { width: calc(16 * var(--u)); top: calc(18 * var(--u)); }
-.tableau--bar .lampe--a { left: calc(30 * var(--u)); }
-.tableau--bar .lampe--b { left: calc(226 * var(--u)); }
+.tableau--bar .lampe { width: calc(16 * var(--u)); top: calc(-4 * var(--u)); }
+.tableau--bar .lampe--a { left: calc(25 * var(--u)); }
+.tableau--bar .lampe--b { left: calc(183 * var(--u)); }
 
 /* Les lampes ne sont pas neuves : le halo bat très légèrement. */
 .tableau--bar .halo--a { animation: bat-lampe 5.3s ease-in-out infinite; }
@@ -184,7 +186,7 @@
 @keyframes bat-lampe { 0%,100% { opacity: 1 } 45% { opacity: .82 } 47% { opacity: 1 } 52% { opacity: .9 } }
 
 .tableau--bar .zone { background: transparent; }
-.tableau--bar .zone--salle { left: 0; top: calc(22 * var(--u)); width: 100%; height: calc(16 * var(--u)); }
+.tableau--bar .zone--salle { left: 0; top: calc(0 * var(--u)); width: 100%; height: calc(16 * var(--u)); }
 
 /* ── Calque astral : les auras ───────────────────────────────────── */
 .tableau--bar .aura { mix-blend-mode: screen; border-radius: 50%; filter: blur(calc(2 * var(--u))); }
@@ -192,7 +194,7 @@
    pixel de recouvrement. Une aura qui ne touche pas son porteur est
    une bulle de bande dessinée. */
 .tableau--bar .aura--mccarthy {
-  left: calc(6 * var(--u)); top: calc(104 * var(--u));
+  left: calc(6 * var(--u)); top: calc(82 * var(--u));
   width: calc(52 * var(--u)); height: calc(56 * var(--u));
   /* effilochée : deux teintes qui ne se recouvrent pas tout à fait */
   background: radial-gradient(closest-side, rgba(255,170,90,.32), transparent 70%),
@@ -200,18 +202,18 @@
   animation: aura-bat 5.2s ease-in-out infinite;
 }
 .tableau--bar .aura--barman {
-  left: calc(280 * var(--u)); top: calc(76 * var(--u));
+  left: calc(206 * var(--u)); top: calc(54 * var(--u));
   width: calc(46 * var(--u)); height: calc(44 * var(--u));
   background: radial-gradient(closest-side, rgba(90,220,160,.3), transparent 68%);
   animation: aura-bat 7.4s ease-in-out infinite;
 }
 .tableau--bar .aura--c1, .tableau--bar .aura--c2 {
-  top: calc(120 * var(--u)); width: calc(34 * var(--u)); height: calc(44 * var(--u));
+  top: calc(98 * var(--u)); width: calc(34 * var(--u)); height: calc(44 * var(--u));
   background: radial-gradient(closest-side, rgba(120,170,255,.24), transparent 66%);
   animation: aura-bat 6.1s ease-in-out infinite;
 }
-.tableau--bar .aura--c1 { left: calc(64 * var(--u)); }
-.tableau--bar .aura--c2 { left: calc(92 * var(--u)); animation-delay: 1.4s; }
+.tableau--bar .aura--c1 { left: calc(53 * var(--u)); }
+.tableau--bar .aura--c2 { left: calc(75 * var(--u)); animation-delay: 1.4s; }
 @keyframes aura-bat { 0%,100% { opacity: .82 } 50% { opacity: 1 } }
 
 /* Une barrière d'occasion sur la porte du fond. Dans un bar à flics,
@@ -229,7 +231,7 @@
    découpe le centre, et il découpe aussi le test de clic : la porte reste
    atteignable dessous. */
 .tableau--bar .ward-porte {
-  left: calc(116 * var(--u)); top: calc(76 * var(--u));
+  left: calc(95 * var(--u)); top: calc(54 * var(--u));
   width: calc(42 * var(--u)); height: calc(72 * var(--u));
   background: repeating-linear-gradient(45deg,
     rgba(124,242,196,.34) 0 calc(2 * var(--u)), transparent calc(2 * var(--u)) calc(5 * var(--u)));
@@ -268,45 +270,45 @@
   color: rgba(255,214,140,.9);
 }
 .tableau--bar .ora--noeud {
-  left: calc(214 * var(--u)); top: calc(26 * var(--u));
-  width: calc(84 * var(--u)); height: calc(8 * var(--u));
+  left: calc(172 * var(--u)); top: calc(4 * var(--u));
+  width: calc(83 * var(--u)); height: calc(8 * var(--u));
   animation: ora-flotte 4.6s ease-in-out infinite;
 }
 .tableau--bar .ora--commlink {
-  left: calc(44 * var(--u)); top: calc(118 * var(--u));
+  left: calc(36 * var(--u)); top: calc(96 * var(--u));
   width: calc(38 * var(--u)); height: calc(8 * var(--u));
   animation: ora-flotte 5.1s ease-in-out infinite;
 }
 
 /* La réclame. Personne ne filtre rien dans ce bar. */
 .tableau--bar .ora--pub { height: calc(8 * var(--u)); }
-.tableau--bar .p1  { left: calc(8 * var(--u));   top: calc(30 * var(--u));  width: calc(66 * var(--u)); animation: ora-flotte 5.8s ease-in-out infinite; }
-.tableau--bar .p2  { left: calc(84 * var(--u));  top: calc(24 * var(--u));  width: calc(88 * var(--u)); animation: ora-flotte 7.2s ease-in-out infinite reverse; }
-.tableau--bar .p3  { left: calc(180 * var(--u)); top: calc(38 * var(--u));  width: calc(46 * var(--u)); animation: ora-flotte 6.3s ease-in-out infinite; }
-.tableau--bar .p4  { left: calc(96 * var(--u));  top: calc(48 * var(--u));  width: calc(112 * var(--u)); animation: ora-flotte 8.1s ease-in-out infinite; }
-.tableau--bar .p5  { left: calc(20 * var(--u));  top: calc(56 * var(--u));  width: calc(70 * var(--u)); animation: ora-flotte 6.9s ease-in-out infinite reverse; }
-.tableau--bar .p6  { left: calc(232 * var(--u)); top: calc(56 * var(--u));  width: calc(58 * var(--u)); animation: ora-flotte 5.2s ease-in-out infinite; }
-.tableau--bar .p7  { left: calc(160 * var(--u)); top: calc(66 * var(--u));  width: calc(20 * var(--u)); animation: ora-flotte 4.4s ease-in-out infinite reverse; }
-.tableau--bar .p8  { left: calc(190 * var(--u)); top: calc(74 * var(--u));  width: calc(56 * var(--u)); animation: ora-flotte 7.7s ease-in-out infinite; }
-.tableau--bar .p9  { left: calc(40 * var(--u));  top: calc(72 * var(--u));  width: calc(102 * var(--u)); animation: ora-flotte 6.1s ease-in-out infinite; }
-.tableau--bar .p10 { left: calc(252 * var(--u)); top: calc(66 * var(--u));  width: calc(30 * var(--u)); animation: ora-flotte 5.5s ease-in-out infinite reverse; }
-.tableau--bar .p11 { left: calc(112 * var(--u)); top: calc(88 * var(--u));  width: calc(58 * var(--u)); animation: ora-flotte 8.4s ease-in-out infinite; }
-.tableau--bar .p12 { left: calc(178 * var(--u)); top: calc(96 * var(--u));  width: calc(84 * var(--u)); animation: ora-flotte 6.6s ease-in-out infinite reverse; }
+.tableau--bar .p1  { left: calc(7 * var(--u));   top: calc(8 * var(--u));  width: calc(66 * var(--u)); animation: ora-flotte 5.8s ease-in-out infinite; }
+.tableau--bar .p2  { left: calc(69 * var(--u));  top: calc(2 * var(--u));  width: calc(88 * var(--u)); animation: ora-flotte 7.2s ease-in-out infinite reverse; }
+.tableau--bar .p3  { left: calc(147 * var(--u)); top: calc(16 * var(--u));  width: calc(46 * var(--u)); animation: ora-flotte 6.3s ease-in-out infinite; }
+.tableau--bar .p4  { left: calc(79 * var(--u));  top: calc(26 * var(--u));  width: calc(112 * var(--u)); animation: ora-flotte 8.1s ease-in-out infinite; }
+.tableau--bar .p5  { left: calc(17 * var(--u));  top: calc(34 * var(--u));  width: calc(70 * var(--u)); animation: ora-flotte 6.9s ease-in-out infinite reverse; }
+.tableau--bar .p6  { left: calc(187 * var(--u)); top: calc(34 * var(--u));  width: calc(58 * var(--u)); animation: ora-flotte 5.2s ease-in-out infinite; }
+.tableau--bar .p7  { left: calc(130 * var(--u)); top: calc(44 * var(--u));  width: calc(20 * var(--u)); animation: ora-flotte 4.4s ease-in-out infinite reverse; }
+.tableau--bar .p8  { left: calc(155 * var(--u)); top: calc(52 * var(--u));  width: calc(56 * var(--u)); animation: ora-flotte 7.7s ease-in-out infinite; }
+.tableau--bar .p9  { left: calc(33 * var(--u));  top: calc(50 * var(--u));  width: calc(102 * var(--u)); animation: ora-flotte 6.1s ease-in-out infinite; }
+.tableau--bar .p10 { left: calc(203 * var(--u)); top: calc(44 * var(--u));  width: calc(30 * var(--u)); animation: ora-flotte 5.5s ease-in-out infinite reverse; }
+.tableau--bar .p11 { left: calc(91 * var(--u)); top: calc(66 * var(--u));  width: calc(58 * var(--u)); animation: ora-flotte 8.4s ease-in-out infinite; }
+.tableau--bar .p12 { left: calc(145 * var(--u)); top: calc(74 * var(--u));  width: calc(84 * var(--u)); animation: ora-flotte 6.6s ease-in-out infinite reverse; }
 
 /* Les prix flottent au-dessus de ce qui est à vendre. */
 .tableau--bar .ora--prix { height: calc(7 * var(--u)); font-size: calc(3 * var(--u)); line-height: calc(5 * var(--u)); }
-.tableau--bar .x1 { left: calc(208 * var(--u)); top: calc(86 * var(--u)); width: calc(16 * var(--u)); }
-.tableau--bar .x2 { left: calc(238 * var(--u)); top: calc(84 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--bar .x3 { left: calc(268 * var(--u)); top: calc(88 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--bar .x1 { left: calc(169 * var(--u)); top: calc(64 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--bar .x2 { left: calc(192 * var(--u)); top: calc(62 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--bar .x3 { left: calc(215 * var(--u)); top: calc(66 * var(--u)); width: calc(16 * var(--u)); }
 
 /* Les matricules des flics en service. Eux non plus ne filtrent rien. */
 .tableau--bar .ora--badge {
   height: calc(7 * var(--u)); font-size: calc(3 * var(--u)); line-height: calc(5 * var(--u));
   border-color: rgba(255,196,90,.55); background: rgba(58,44,14,.5); color: rgba(255,206,132,.7);
 }
-.tableau--bar .b1 { left: calc(66 * var(--u));  top: calc(118 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--bar .b2 { left: calc(96 * var(--u));  top: calc(112 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--bar .b3 { left: calc(286 * var(--u)); top: calc(74 * var(--u));  width: calc(28 * var(--u)); }
+.tableau--bar .b1 { left: calc(54 * var(--u));  top: calc(96 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--bar .b2 { left: calc(79 * var(--u));  top: calc(90 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--bar .b3 { left: calc(212 * var(--u)); top: calc(48 * var(--u));  width: calc(28 * var(--u)); }
 
 @keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
 
@@ -319,7 +321,7 @@
    juste hors cadre, en bas. La lumière vient donc du BAS ici, contre
    les deux halos de plafond : c'est ce qui dit « dehors ». */
 .tableau--bar .seuil {
-  left: 0; top: calc(156 * var(--u)); width: 100%; height: calc(24 * var(--u));
+  left: 0; top: calc(134 * var(--u)); width: 100%; height: calc(24 * var(--u));
   background:
     linear-gradient(0deg, rgba(255,168,92,.42) 0 calc(1 * var(--u)), transparent calc(1 * var(--u))),
     radial-gradient(115% 95% at 50% 122%, rgba(255,168,92,.20), transparent 64%),
@@ -331,7 +333,7 @@
    aligne tout le monde sur une seule ligne de pieds, et le tableau se lit
    comme une séance d'identification. */
 .tableau--bar .jambage {
-  top: calc(112 * var(--u)); height: calc(68 * var(--u)); width: calc(10 * var(--u));
+  top: calc(90 * var(--u)); height: calc(68 * var(--u)); width: calc(10 * var(--u));
   background: linear-gradient(90deg, #0c0912, #161120);
 }
 .tableau--bar .jambage--g { left: 0; box-shadow: inset calc(-1 * var(--u)) 0 0 rgba(255,168,92,.13); }
@@ -339,7 +341,7 @@
 
 /* Le commlink de McCarthy : posé sur sa table, il diffuse encore. */
 .tableau--bar .ora--commlink {
-  left: calc(48 * var(--u)); top: calc(118 * var(--u));
+  left: calc(40 * var(--u)); top: calc(96 * var(--u));
   width: calc(24 * var(--u)); height: calc(12 * var(--u));
   border-color: rgba(255,196,90,.85); background: rgba(80,60,15,.5);
   box-shadow: 0 0 calc(4 * var(--u)) rgba(255,196,90,.45);
@@ -351,31 +353,31 @@
    sortir. Elle montrait l'échappatoire en bas à gauche, et le jeu
    acceptait le clic sur une bande invisible ailleurs : deux vérités
    différentes sur l'emplacement de la porte. */
-.tableau--bar .issue--rue { left: 0; top: calc(156 * var(--u)); width: 100%; height: calc(24 * var(--u)); }
-.tableau--bar .cote--rue { left: calc(6 * var(--u));  top: calc(148 * var(--u)); }
-.tableau--bar .issue--fond { left: calc(124 * var(--u)); top: calc(84 * var(--u)); width: calc(26 * var(--u)); height: calc(56 * var(--u));
+.tableau--bar .issue--rue { left: 0; top: calc(134 * var(--u)); width: 100%; height: calc(24 * var(--u)); }
+.tableau--bar .cote--rue { left: calc(6 * var(--u));  top: calc(126 * var(--u)); }
+.tableau--bar .issue--fond { left: calc(101 * var(--u)); top: calc(62 * var(--u)); width: calc(26 * var(--u)); height: calc(56 * var(--u));
                              border-style: dotted; border-color: rgba(255,120,90,.7); background: rgba(90,30,20,.18); }
-.tableau--bar .cote--fond { left: calc(120 * var(--u)); top: calc(74 * var(--u)); }
+.tableau--bar .cote--fond { left: calc(98 * var(--u)); top: calc(52 * var(--u)); }
 .tableau--bar .jeton { width: calc(26 * var(--u)); height: calc(9 * var(--u)); }
-.tableau--bar .j1 { left: calc(68 * var(--u));  top: calc(151 * var(--u)); }
-.tableau--bar .j2 { left: calc(96 * var(--u));  top: calc(151 * var(--u)); animation-delay: .7s; }
-.tableau--bar .j3 { left: calc(286 * var(--u)); top: calc(106 * var(--u)); animation-delay: 1.4s; }
-.tableau--bar .j-mcc { left: calc(14 * var(--u)); top: calc(151 * var(--u)); animation-delay: 2.1s; }
+.tableau--bar .j1 { left: calc(56 * var(--u));  top: calc(129 * var(--u)); }
+.tableau--bar .j2 { left: calc(79 * var(--u));  top: calc(129 * var(--u)); animation-delay: .7s; }
+.tableau--bar .j3 { left: calc(214 * var(--u)); top: calc(84 * var(--u)); animation-delay: 1.4s; }
+.tableau--bar .j-mcc { left: calc(12 * var(--u)); top: calc(129 * var(--u)); animation-delay: 2.1s; }
 /* La ligne entre les joueurs de fléchettes et la porte de la rue : ils
    sont dessus depuis que vous êtes entrés. Ce n'est probablement rien. */
 .tableau--bar .menace--flechettes {
-  left: calc(58 * var(--u)); top: calc(140 * var(--u));
+  left: calc(48 * var(--u)); top: calc(118 * var(--u));
   width: calc(64 * var(--u)); height: calc(9 * var(--u));
   transform: none;
 }
 .tableau--bar .couvert--comptoir {
-  position: absolute; left: calc(176 * var(--u)); top: calc(108 * var(--u));
-  width: calc(144 * var(--u)); height: calc(8 * var(--u));
+  position: absolute; left: calc(143 * var(--u)); top: calc(86 * var(--u));
+  width: calc(103 * var(--u)); height: calc(8 * var(--u));
   border-top: calc(1 * var(--u)) solid rgba(90,240,160,.7);
   background: linear-gradient(rgba(30,90,60,.25), transparent);
 }
-.tableau--bar .cote--couvert { left: calc(180 * var(--u)); top: calc(100 * var(--u)); }
+.tableau--bar .cote--couvert { left: calc(147 * var(--u)); top: calc(78 * var(--u)); }
 
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
-.tableau--bar .raton { left: calc(176 * var(--u)); top: calc(141 * var(--u)); }
+.tableau--bar .raton { left: calc(143 * var(--u)); top: calc(119 * var(--u)); }

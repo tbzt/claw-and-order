@@ -1,8 +1,8 @@
 /* ── TABLEAU 5 — LA PLANQUE ───────────────────────────────────────────
    Une laverie automatique de Tacoma, 6 h → 8 h.
-   Grille : 320 x 180 pixels d'art. --u = un pixel d'art.
-   Repères : plafond 0→20, mur 20→120, plinthe 120→132, sol 132→180.
-   Pieds à 158.
+   Grille : 256 x 144 pixels d'art (chantier 8 : recadrée depuis
+   320 x 180). --u = un pixel d'art.
+   Repères : mur 0→100, plinthe 100→112, sol 112→144. Pieds à 138.
 
    CE TABLEAU EST BLANC, et c'est sa raison d'être. Les quatre précédents
    sont sombres — bar brun, port bleu nuit, greffe vert, détroit noir.
@@ -20,7 +20,7 @@
 .tableau--planque {
   position: absolute;
   inset: 0;
-  --u: calc(100cqw / 320);
+  --u: calc(100cqw / 256);
   image-rendering: pixelated;
   background: #0d1114;
 }
@@ -29,33 +29,29 @@
 
 /* ── La pièce ──────────────────────────────────────────────────────── */
 
-.tableau--planque .plafond {
-  top: 0; height: calc(20 * var(--u));
-  background: linear-gradient(180deg, #1a2024 0 calc(14 * var(--u)), #10151a calc(14 * var(--u)));
-}
 .tableau--planque .mur {
-  top: calc(20 * var(--u)); height: calc(100 * var(--u));
+  top: calc(0 * var(--u)); height: calc(100 * var(--u));
   background: linear-gradient(180deg, #d6dcd8 0 calc(6 * var(--u)), #b9c2bd calc(6 * var(--u)), #97a29d);
 }
 /* La faïence : des joints tous les 16 px, et rien d'autre. Un mur de
    laverie n'a pas de texture, il a une grille. */
 .tableau--planque .carrelage {
-  left: 0; top: calc(20 * var(--u)); width: 100%; height: calc(100 * var(--u));
+  left: 0; top: calc(0 * var(--u)); width: 100%; height: calc(100 * var(--u));
   background:
     repeating-linear-gradient(90deg, rgba(90,104,100,.34) 0 1px, transparent 1px calc(16 * var(--u))),
     repeating-linear-gradient(180deg, rgba(90,104,100,.34) 0 1px, transparent 1px calc(16 * var(--u)));
   pointer-events: none;
 }
 .tableau--planque .plinthe {
-  top: calc(120 * var(--u)); height: calc(12 * var(--u));
+  top: calc(100 * var(--u)); height: calc(12 * var(--u));
   background: linear-gradient(180deg, #5e6b66 0 calc(2 * var(--u)), #414d49 calc(2 * var(--u)));
 }
 .tableau--planque .sol {
-  top: calc(132 * var(--u)); height: calc(48 * var(--u));
+  top: calc(112 * var(--u)); height: calc(48 * var(--u));
   background: linear-gradient(180deg, #8e948f, #767d79);
 }
 .tableau--planque .sol-joints {
-  left: 0; top: calc(132 * var(--u)); width: 100%; height: calc(48 * var(--u));
+  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(48 * var(--u));
   background:
     repeating-linear-gradient(90deg, rgba(60,68,64,.30) 0 1px, transparent 1px calc(20 * var(--u))),
     repeating-linear-gradient(180deg, rgba(60,68,64,.24) 0 1px, transparent 1px calc(12 * var(--u)));
@@ -67,14 +63,14 @@
    seul défaut visible de la pièce, et il porte une cible : à six heures
    du matin, un tube qui bat est ce qu'on finit par regarder. */
 .tableau--planque .neon {
-  top: calc(8 * var(--u)); height: calc(4 * var(--u));
+  top: calc(2 * var(--u)); height: calc(4 * var(--u));
   background: linear-gradient(180deg, #f4fbff 0 calc(2 * var(--u)), #cfe4ee calc(2 * var(--u)));
   box-shadow: 0 calc(3 * var(--u)) calc(14 * var(--u)) rgba(214,240,255,.34);
 }
-.tableau--planque .neon--a { left: calc(24 * var(--u));  width: calc(64 * var(--u)); }
-.tableau--planque .neon--b { left: calc(128 * var(--u)); width: calc(64 * var(--u)); }
+.tableau--planque .neon--a { left: calc(19 * var(--u));  width: calc(64 * var(--u)); }
+.tableau--planque .neon--b { left: calc(102 * var(--u)); width: calc(64 * var(--u)); }
 .tableau--planque .neon--c {
-  left: calc(232 * var(--u)); width: calc(64 * var(--u));
+  left: calc(186 * var(--u)); width: calc(64 * var(--u));
   animation: planque-neon 4.7s steps(1, jump-none) infinite;
 }
 @keyframes planque-neon {
@@ -87,12 +83,12 @@
    pas avant sept heures et demie. C'est la seule chose sombre du
    tableau, et c'est par elle qu'on peut être vu. */
 .tableau--planque .baie {
-  left: calc(6 * var(--u)); top: calc(30 * var(--u));
+  left: calc(5 * var(--u)); top: calc(10 * var(--u));
   width: calc(84 * var(--u)); height: calc(82 * var(--u));
   background: linear-gradient(180deg, #0b1220 0 calc(46 * var(--u)), #131c2a calc(46 * var(--u)));
 }
 .tableau--planque .baie-pluie {
-  left: calc(6 * var(--u)); top: calc(30 * var(--u));
+  left: calc(5 * var(--u)); top: calc(10 * var(--u));
   width: calc(84 * var(--u)); height: calc(82 * var(--u));
   background: repeating-linear-gradient(80deg,
     rgba(170,200,235,.13) 0 1px, transparent 1px calc(9 * var(--u)));
@@ -101,7 +97,7 @@
 }
 @keyframes planque-pluie { to { background-position: calc(-9 * var(--u)) calc(28 * var(--u)); } }
 .tableau--planque .baie-cadre {
-  left: calc(4 * var(--u)); top: calc(28 * var(--u));
+  left: calc(3 * var(--u)); top: calc(8 * var(--u));
   width: calc(88 * var(--u)); height: calc(86 * var(--u));
   box-shadow: inset 0 0 0 calc(2 * var(--u)) #4a5450,
               inset calc(42 * var(--u)) 0 0 calc(-41 * var(--u)) #4a5450;
@@ -109,7 +105,7 @@
 }
 /* L'enseigne de la laverie, vue de l'intérieur : à l'envers, et rouge. */
 .tableau--planque .enseigne {
-  left: calc(14 * var(--u)); top: calc(38 * var(--u));
+  left: calc(11 * var(--u)); top: calc(18 * var(--u));
   width: calc(68 * var(--u)); height: calc(10 * var(--u));
   background: linear-gradient(90deg, rgba(216,50,63,.55), rgba(216,50,63,.20));
   box-shadow: 0 0 calc(10 * var(--u)) rgba(216,50,63,.34);
@@ -122,23 +118,23 @@
    différentes : c'est le seul mouvement régulier de la scène, et le seul
    bruit. C'est lui qui rend le silence des gens audible. */
 .tableau--planque .machines {
-  left: calc(104 * var(--u)); top: calc(56 * var(--u));
-  width: calc(212 * var(--u)); height: calc(64 * var(--u));
+  left: calc(82 * var(--u)); top: calc(36 * var(--u));
+  width: calc(174 * var(--u)); height: calc(64 * var(--u));
   background: transparent;
 }
 .tableau--planque .machine,
 .tableau--planque .secheur {
-  top: calc(60 * var(--u));
+  top: calc(40 * var(--u));
   width: calc(32 * var(--u)); height: calc(56 * var(--u));
   background: linear-gradient(180deg, #e8eeea 0 calc(8 * var(--u)), #ccd4cf calc(8 * var(--u)), #aab3ae);
   box-shadow: 0 0 0 calc(1 * var(--u)) #5e6b66;
 }
-.tableau--planque .m1 { left: calc(108 * var(--u)); }
-.tableau--planque .m2 { left: calc(144 * var(--u)); }
-.tableau--planque .m3 { left: calc(180 * var(--u)); }
-.tableau--planque .m4 { left: calc(216 * var(--u)); }
-.tableau--planque .s1 { left: calc(252 * var(--u)); background: linear-gradient(180deg, #dfe6e1 0 calc(8 * var(--u)), #b9c2bd calc(8 * var(--u)), #98a19c); }
-.tableau--planque .s2 { left: calc(288 * var(--u)); background: linear-gradient(180deg, #dfe6e1 0 calc(8 * var(--u)), #b9c2bd calc(8 * var(--u)), #98a19c); }
+.tableau--planque .m1 { left: calc(86 * var(--u)); }
+.tableau--planque .m2 { left: calc(115 * var(--u)); }
+.tableau--planque .m3 { left: calc(144 * var(--u)); }
+.tableau--planque .m4 { left: calc(173 * var(--u)); }
+.tableau--planque .s1 { left: calc(202 * var(--u)); background: linear-gradient(180deg, #dfe6e1 0 calc(8 * var(--u)), #b9c2bd calc(8 * var(--u)), #98a19c); }
+.tableau--planque .s2 { left: calc(230 * var(--u)); background: linear-gradient(180deg, #dfe6e1 0 calc(8 * var(--u)), #b9c2bd calc(8 * var(--u)), #98a19c); }
 
 /* Le hublot. Le linge dedans est un secteur clair qui tourne : à cette
    résolution, une rotation lisible tient en un quart de disque. */
@@ -166,21 +162,21 @@
 /* ── Le reste du mobilier ──────────────────────────────────────────── */
 
 .tableau--planque .distributeur {
-  left: calc(96 * var(--u)); top: calc(44 * var(--u));
+  left: calc(77 * var(--u)); top: calc(24 * var(--u));
   width: calc(18 * var(--u)); height: calc(72 * var(--u));
   background: linear-gradient(180deg, #2f3a44 0 calc(10 * var(--u)), #1e262e calc(10 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #10161b,
               inset 0 calc(16 * var(--u)) 0 calc(-10 * var(--u)) rgba(90,200,255,.35);
 }
 .tableau--planque .horloge-murale {
-  left: calc(196 * var(--u)); top: calc(28 * var(--u));
+  left: calc(157 * var(--u)); top: calc(8 * var(--u));
   width: calc(18 * var(--u)); height: calc(18 * var(--u));
   border-radius: 50%;
   background: #eef3ef;
   box-shadow: 0 0 0 calc(2 * var(--u)) #4a5450;
 }
 .tableau--planque .affichette {
-  left: calc(228 * var(--u)); top: calc(30 * var(--u));
+  left: calc(182 * var(--u)); top: calc(10 * var(--u));
   width: calc(20 * var(--u)); height: calc(14 * var(--u));
   background: #cfd6c9;
   box-shadow: 0 0 0 calc(1 * var(--u)) #5e6b66;
@@ -189,23 +185,23 @@
 /* Déplacée à droite, sous les séchoirs : à sa place d'origine elle
    passait entièrement derrière l'équipe et devenait incliquable. */
 .tableau--planque .table-pliante {
-  left: calc(220 * var(--u)); top: calc(130 * var(--u));
+  left: calc(176 * var(--u)); top: calc(110 * var(--u));
   width: calc(72 * var(--u)); height: calc(14 * var(--u));
   background: linear-gradient(180deg, #dfe6e1 0 calc(3 * var(--u)), #9aa39e calc(3 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #4a5450;
 }
 .tableau--planque .chaise {
-  top: calc(138 * var(--u));
+  top: calc(118 * var(--u));
   width: calc(16 * var(--u)); height: calc(22 * var(--u));
   background: linear-gradient(180deg, #d8622f 0 calc(8 * var(--u)), #a94a22 calc(8 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #4a2a16;
 }
-.tableau--planque .ch1 { left: calc(24 * var(--u)); }
-.tableau--planque .ch2 { left: calc(48 * var(--u)); }
-.tableau--planque .ch3 { left: calc(210 * var(--u)); top: calc(146 * var(--u)); }
+.tableau--planque .ch1 { left: calc(19 * var(--u)); }
+.tableau--planque .ch2 { left: calc(38 * var(--u)); }
+.tableau--planque .ch3 { left: calc(168 * var(--u)); top: calc(126 * var(--u)); }
 
 .tableau--planque .porte-laverie {
-  right: calc(2 * var(--u)); top: calc(56 * var(--u));
+  right: calc(2 * var(--u)); top: calc(36 * var(--u));
   width: calc(20 * var(--u)); height: calc(76 * var(--u));
   background: linear-gradient(180deg, #1b2430 0 calc(52 * var(--u)), #38424a calc(52 * var(--u)));
   box-shadow: 0 0 0 calc(2 * var(--u)) #4a5450;
@@ -214,22 +210,22 @@
 /* ── Les gens ──────────────────────────────────────────────────────── */
 
 .tableau--planque .ombre { background: rgba(40,48,46,.42); height: calc(2 * var(--u)); }
-.tableau--planque .ombre--lester   { left: calc(26 * var(--u));  top: calc(156 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--planque .ombre--drakk    { left: calc(72 * var(--u));  top: calc(158 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--planque .ombre--trash    { left: calc(122 * var(--u)); top: calc(155 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--planque .ombre--rabbit   { left: calc(158 * var(--u)); top: calc(160 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--planque .ombre--hercules { left: calc(188 * var(--u)); top: calc(162 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--planque .ombre--lester   { left: calc(21 * var(--u));  top: calc(136 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--planque .ombre--drakk    { left: calc(58 * var(--u));  top: calc(138 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--planque .ombre--trash    { left: calc(98 * var(--u)); top: calc(135 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--planque .ombre--rabbit   { left: calc(126 * var(--u)); top: calc(140 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--planque .ombre--hercules { left: calc(150 * var(--u)); top: calc(142 * var(--u)); width: calc(16 * var(--u)); }
 
 /* Lester est ASSIS sur une chaise trop basse pour lui : la chaise lui
    coupe les jambes, comme la table coupe celles de McCarthy et le rouf
    celles de son moi du tableau 4. C'est la troisième fois que le décor
    sert d'assise, et c'est chaque fois moins cher qu'un sprite assis. */
-.tableau--planque .p-lester   { width: calc(32 * var(--u)); left: calc(24 * var(--u)); top: calc(122 * var(--u)); }
+.tableau--planque .p-lester   { width: calc(32 * var(--u)); left: calc(19 * var(--u)); top: calc(102 * var(--u)); }
 
-.tableau--planque .p-drakk    { width: calc(46 * var(--u)); left: calc(70 * var(--u));  top: calc(102 * var(--u)); }
-.tableau--planque .p-trash    { width: calc(34 * var(--u)); left: calc(120 * var(--u)); top: calc(105 * var(--u)); }
-.tableau--planque .p-rabbit   { width: calc(24 * var(--u)); left: calc(156 * var(--u)); top: calc(119 * var(--u)); }
-.tableau--planque .p-hercules { width: calc(20 * var(--u)); left: calc(186 * var(--u)); top: calc(133 * var(--u)); }
+.tableau--planque .p-drakk    { width: calc(46 * var(--u)); left: calc(56 * var(--u));  top: calc(82 * var(--u)); }
+.tableau--planque .p-trash    { width: calc(34 * var(--u)); left: calc(96 * var(--u)); top: calc(85 * var(--u)); }
+.tableau--planque .p-rabbit   { width: calc(24 * var(--u)); left: calc(125 * var(--u)); top: calc(99 * var(--u)); }
+.tableau--planque .p-hercules { width: calc(20 * var(--u)); left: calc(149 * var(--u)); top: calc(113 * var(--u)); }
 
 /* ── Calque astral ─────────────────────────────────────────────────────
    Une laverie ouverte 24 h est un lieu sans mémoire : des milliers de
@@ -237,18 +233,18 @@
    c'est ce vide qui fait ressortir la seule chose qui s'y passe. */
 .tableau--planque .aura { mix-blend-mode: screen; border-radius: 50%; filter: blur(calc(2 * var(--u))); }
 .tableau--planque .aura--lester {
-  left: calc(18 * var(--u)); top: calc(116 * var(--u));
+  left: calc(14 * var(--u)); top: calc(96 * var(--u));
   width: calc(44 * var(--u)); height: calc(48 * var(--u));
   background: radial-gradient(closest-side, rgba(255,196,120,.30), transparent 70%);
   animation: aura-bat 4.2s ease-in-out infinite;
 }
 .tableau--planque .aura--vide {
-  left: calc(96 * var(--u)); top: calc(40 * var(--u));
+  left: calc(77 * var(--u)); top: calc(20 * var(--u));
   width: calc(200 * var(--u)); height: calc(96 * var(--u));
   background: radial-gradient(closest-side, rgba(90,110,130,.10), transparent 76%);
 }
 .tableau--planque .trace-porte {
-  left: calc(292 * var(--u)); top: calc(120 * var(--u));
+  left: calc(230 * var(--u)); top: calc(100 * var(--u));
   width: calc(26 * var(--u)); height: calc(40 * var(--u));
   background: linear-gradient(180deg, rgba(140,90,200,.24), transparent 70%);
   filter: blur(calc(2 * var(--u)));
@@ -261,27 +257,27 @@
    la rue est déjà cliquable dessous, et une lentille ajoute — elle ne
    retire jamais. */
 .tableau--planque .menace--baie {
-  left: calc(2 * var(--u)); top: calc(26 * var(--u));
+  left: calc(2 * var(--u)); top: calc(6 * var(--u));
   width: calc(92 * var(--u)); height: calc(90 * var(--u));
   background: linear-gradient(180deg, rgba(255,80,80,.20), transparent 70%);
   pointer-events: none;
 }
-.tableau--planque .cote--baie { left: calc(6 * var(--u)); top: calc(18 * var(--u)); }
+.tableau--planque .cote--baie { left: calc(5 * var(--u)); top: calc(1 * var(--u)); }
 .tableau--planque .issue--porte {
-  right: calc(0 * var(--u)); top: calc(54 * var(--u));
+  right: calc(0 * var(--u)); top: calc(34 * var(--u));
   width: calc(24 * var(--u)); height: calc(80 * var(--u));
   border: calc(1 * var(--u)) dashed rgba(90,240,160,.9);
   background: rgba(20,80,50,.2);
 }
-.tableau--planque .cote--porte { right: calc(4 * var(--u)); top: calc(46 * var(--u)); }
+.tableau--planque .cote--porte { right: calc(3 * var(--u)); top: calc(26 * var(--u)); }
 .tableau--planque .couvert--machines {
-  left: calc(104 * var(--u)); top: calc(52 * var(--u));
-  width: calc(212 * var(--u)); height: calc(8 * var(--u));
+  left: calc(82 * var(--u)); top: calc(32 * var(--u));
+  width: calc(174 * var(--u)); height: calc(8 * var(--u));
   border: calc(1 * var(--u)) solid rgba(90,240,160,.7);
   background: linear-gradient(180deg, rgba(30,90,60,.25), transparent);
 }
-.tableau--planque .cote--couvert { left: calc(108 * var(--u)); top: calc(44 * var(--u)); }
-.tableau--planque .j-lester { left: calc(26 * var(--u)); top: calc(154 * var(--u)); width: calc(26 * var(--u)); height: calc(9 * var(--u)); }
+.tableau--planque .cote--couvert { left: calc(86 * var(--u)); top: calc(24 * var(--u)); }
+.tableau--planque .j-lester { left: calc(21 * var(--u)); top: calc(134 * var(--u)); width: calc(26 * var(--u)); height: calc(9 * var(--u)); }
 
 /* ── Calque RA ─────────────────────────────────────────────────────── */
 
@@ -296,13 +292,13 @@
   color: rgba(150,214,255,.9);
   height: calc(8 * var(--u));
 }
-.tableau--planque .ora--laverie { left: calc(96 * var(--u));  top: calc(26 * var(--u)); width: calc(150 * var(--u)); animation: ora-flotte 5.4s ease-in-out infinite; }
-.tableau--planque .ora--cycle   { left: calc(112 * var(--u)); top: calc(40 * var(--u)); width: calc(104 * var(--u)); animation: ora-flotte 6.8s ease-in-out infinite reverse; }
-.tableau--planque .ora--pub     { left: calc(246 * var(--u)); top: calc(44 * var(--u)); width: calc(70 * var(--u)); animation: ora-flotte 7.6s ease-in-out infinite; }
+.tableau--planque .ora--laverie { left: calc(77 * var(--u));  top: calc(6 * var(--u)); width: calc(150 * var(--u)); animation: ora-flotte 5.4s ease-in-out infinite; }
+.tableau--planque .ora--cycle   { left: calc(90 * var(--u)); top: calc(20 * var(--u)); width: calc(104 * var(--u)); animation: ora-flotte 6.8s ease-in-out infinite reverse; }
+.tableau--planque .ora--pub     { left: calc(184 * var(--u)); top: calc(24 * var(--u)); width: calc(70 * var(--u)); animation: ora-flotte 7.6s ease-in-out infinite; }
 /* Celle-ci ne devrait pas être là. Une laverie de quartier n'a pas de
    flux sortant. */
 .tableau--planque .ora--camera {
-  left: calc(212 * var(--u)); top: calc(14 * var(--u)); width: calc(94 * var(--u));
+  left: calc(160 * var(--u)); top: calc(2 * var(--u)); width: calc(94 * var(--u));
   border-color: rgba(255,120,90,.9); background: rgba(74,24,16,.6); color: rgba(255,178,150,.95);
   animation: planque-alerte 2.2s ease-in-out infinite;
 }
@@ -313,4 +309,4 @@
 
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
-.tableau--planque .raton { left: calc(100 * var(--u)); top: calc(139 * var(--u)); }
+.tableau--planque .raton { left: calc(80 * var(--u)); top: calc(119 * var(--u)); }

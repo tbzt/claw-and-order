@@ -1,6 +1,7 @@
 /* ── TABLEAU 4 — LE RETOUR ────────────────────────────────────────────
-   Grille unique : 320 x 180 pixels d'art. --u vaut un pixel d'art.
-   Repères : ciel 0→68, mer 68→130, pont 130→180. Pieds à 162.
+   Grille unique : 256 x 144 pixels d'art (chantier 8 : recadrée depuis
+   320 x 180). --u vaut un pixel d'art.
+   Repères : ciel 0→40, mer 40→102, pont 102→144. Pieds 132→140.
 
    On est À BORD. Le mât sort du cadre par le haut, le bastingage barre le
    premier plan : c'est le tableau qui a le plus de profondeur du jeu, et
@@ -14,7 +15,7 @@
 .tableau--retour {
   position: absolute;
   inset: 0;
-  --u: calc(100cqw / 320);
+  --u: calc(100cqw / 256);
   image-rendering: pixelated;
   background: #05070e;
 }
@@ -41,7 +42,7 @@
 @keyframes retour-pluie { to { background-position: calc(-7 * var(--u)) calc(24 * var(--u)); } }
 
 .tableau--retour .mer {
-  top: calc(68 * var(--u)); height: calc(62 * var(--u));
+  top: calc(40 * var(--u)); height: calc(62 * var(--u));
   background:
     /* la ligne d'horizon, nette : c'est elle qui sépare les deux noirs */
     linear-gradient(180deg, rgba(150,186,230,.34) 0 1px, transparent 1px),
@@ -64,7 +65,7 @@
    deux bandes d'un pixel, jamais de flou : une vague floue à côté de
    pixels nets trahit le mélange. */
 .tableau--retour .houle {
-  left: calc(-20 * var(--u)); width: calc(360 * var(--u));
+  left: calc(-16 * var(--u)); width: calc(360 * var(--u));
   pointer-events: none;
 }
 .tableau--retour .houle--a,
@@ -73,24 +74,24 @@
 .tableau--retour .houle--d,
 .tableau--retour .houle--e {
   position: absolute;
-  left: calc(-20 * var(--u)); width: calc(360 * var(--u));
+  left: calc(-16 * var(--u)); width: calc(360 * var(--u));
   pointer-events: none;
 }
 /* le fond : court, serré, lent */
 .tableau--retour .houle--a {
-  top: calc(76 * var(--u)); height: calc(1 * var(--u));
+  top: calc(48 * var(--u)); height: calc(1 * var(--u));
   background: repeating-linear-gradient(90deg,
     rgba(150,186,230,.22) 0 calc(4 * var(--u)), transparent calc(4 * var(--u)) calc(13 * var(--u)));
   animation: retour-houle 17s linear infinite;
 }
 .tableau--retour .houle--b {
-  top: calc(86 * var(--u)); height: calc(1 * var(--u));
+  top: calc(58 * var(--u)); height: calc(1 * var(--u));
   background: repeating-linear-gradient(90deg,
     rgba(140,176,220,.24) 0 calc(6 * var(--u)), transparent calc(6 * var(--u)) calc(21 * var(--u)));
   animation: retour-houle 12s linear infinite reverse;
 }
 .tableau--retour .houle--c {
-  top: calc(98 * var(--u)); height: calc(2 * var(--u));
+  top: calc(70 * var(--u)); height: calc(2 * var(--u));
   background:
     linear-gradient(180deg, rgba(160,196,240,.26) 0 1px, rgba(6,10,18,.34) 1px),
     repeating-linear-gradient(90deg, #000 0 calc(9 * var(--u)), transparent calc(9 * var(--u)) calc(31 * var(--u)));
@@ -99,7 +100,7 @@
   animation: retour-houle 8s linear infinite;
 }
 .tableau--retour .houle--d {
-  top: calc(112 * var(--u)); height: calc(2 * var(--u));
+  top: calc(84 * var(--u)); height: calc(2 * var(--u));
   background: linear-gradient(180deg, rgba(170,206,248,.30) 0 1px, rgba(6,10,18,.4) 1px);
   -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(13 * var(--u)), transparent calc(13 * var(--u)) calc(44 * var(--u)));
           mask: repeating-linear-gradient(90deg, #000 0 calc(13 * var(--u)), transparent calc(13 * var(--u)) calc(44 * var(--u)));
@@ -107,7 +108,7 @@
 }
 /* le premier plan : long, espacé, rapide */
 .tableau--retour .houle--e {
-  top: calc(124 * var(--u)); height: calc(3 * var(--u));
+  top: calc(96 * var(--u)); height: calc(3 * var(--u));
   background: linear-gradient(180deg, rgba(180,214,255,.34) 0 1px, rgba(6,10,18,.46) 1px);
   -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(19 * var(--u)), transparent calc(19 * var(--u)) calc(62 * var(--u)));
           mask: repeating-linear-gradient(90deg, #000 0 calc(19 * var(--u)), transparent calc(19 * var(--u)) calc(62 * var(--u)));
@@ -134,20 +135,20 @@
 
 /* McNeil s'éloigne : un mur posé sur l'eau, sans une lumière. */
 .tableau--retour .mcneil {
-  left: 0; top: calc(52 * var(--u));
+  left: 0; top: calc(24 * var(--u));
   width: calc(74 * var(--u)); height: calc(18 * var(--u));
   background: linear-gradient(180deg, #0a0f1a, #060a12);
   clip-path: polygon(0 40%, 18% 22%, 46% 14%, 78% 20%, 100% 34%, 100% 100%, 0 100%);
 }
 .tableau--retour .rive {
-  left: calc(58 * var(--u)); top: calc(62 * var(--u));
+  left: calc(46 * var(--u)); top: calc(34 * var(--u));
   width: calc(120 * var(--u)); height: calc(8 * var(--u));
   background: #070b13;
   clip-path: polygon(0 60%, 22% 30%, 55% 46%, 84% 24%, 100% 52%, 100% 100%, 0 100%);
 }
 /* Tacoma monte à droite : c'est la seule chaleur du tableau. */
 .tableau--retour .lueur-tacoma {
-  right: 0; top: calc(46 * var(--u));
+  right: 0; top: calc(18 * var(--u));
   width: calc(96 * var(--u)); height: calc(26 * var(--u));
   background:
     radial-gradient(closest-side at 70% 100%, rgba(255,168,92,.20), transparent 76%),
@@ -157,58 +158,58 @@
 /* Le goulet. Deux pointes de terre qui se referment sur le chenal : le
    verrou du tableau est visible depuis la première seconde. */
 .tableau--retour .goulet {
-  top: calc(60 * var(--u)); height: calc(12 * var(--u));
+  top: calc(32 * var(--u)); height: calc(12 * var(--u));
   width: calc(46 * var(--u));
   background: #060a11;
 }
-.tableau--retour .goulet--g { left: calc(84 * var(--u));  clip-path: polygon(0 100%, 40% 18%, 100% 62%, 100% 100%); }
-.tableau--retour .goulet--d { right: calc(84 * var(--u)); clip-path: polygon(0 62%, 60% 18%, 100% 100%, 0 100%); }
+.tableau--retour .goulet--g { left: calc(67 * var(--u));  clip-path: polygon(0 100%, 40% 18%, 100% 62%, 100% 100%); }
+.tableau--retour .goulet--d { right: calc(67 * var(--u)); clip-path: polygon(0 62%, 60% 18%, 100% 100%, 0 100%); }
 
 /* ── Le pont ───────────────────────────────────────────────────────── */
 
 .tableau--retour .pont {
-  top: calc(130 * var(--u)); height: calc(50 * var(--u));
+  top: calc(102 * var(--u)); height: calc(50 * var(--u));
   background: linear-gradient(180deg, #3a2f26 0 calc(3 * var(--u)), #2c231c calc(3 * var(--u)), #221a15);
 }
 .tableau--retour .pont-planches {
-  left: 0; top: calc(133 * var(--u)); width: 100%; height: calc(47 * var(--u));
+  left: 0; top: calc(105 * var(--u)); width: 100%; height: calc(47 * var(--u));
   background: repeating-linear-gradient(90deg,
     rgba(0,0,0,.34) 0 1px, transparent 1px calc(11 * var(--u)));
   pointer-events: none;
 }
 
 .tableau--retour .mat {
-  left: calc(154 * var(--u)); top: 0;
+  left: calc(123 * var(--u)); top: 0;
   width: calc(6 * var(--u)); height: calc(146 * var(--u));
   background: linear-gradient(90deg, #2e2620 0 calc(2 * var(--u)), #4a3d31 calc(2 * var(--u)) calc(4 * var(--u)), #3a2f26 calc(4 * var(--u)));
 }
 .tableau--retour .bome {
-  left: calc(104 * var(--u)); top: calc(96 * var(--u));
+  left: calc(83 * var(--u)); top: calc(68 * var(--u));
   width: calc(108 * var(--u)); height: calc(5 * var(--u));
   background: linear-gradient(180deg, #4a3d31 0 calc(2 * var(--u)), #3a2f26 calc(2 * var(--u)));
 }
 .tableau--retour .hauban {
-  top: calc(20 * var(--u)); width: calc(1 * var(--u)); height: calc(118 * var(--u));
+  top: calc(-8 * var(--u)); width: calc(1 * var(--u)); height: calc(118 * var(--u));
   background: rgba(170,186,206,.30);
 }
-.tableau--retour .hauban--g { left: calc(96 * var(--u));  transform: skewX(11deg); }
-.tableau--retour .hauban--d { left: calc(218 * var(--u)); transform: skewX(-11deg); }
+.tableau--retour .hauban--g { left: calc(77 * var(--u));  transform: skewX(11deg); }
+.tableau--retour .hauban--d { left: calc(174 * var(--u)); transform: skewX(-11deg); }
 
 /* Le rouf : la cabine où Wilson est mort. On ne l'a pas nettoyée. */
 .tableau--retour .rouf {
-  left: calc(196 * var(--u)); top: calc(122 * var(--u));
+  left: calc(157 * var(--u)); top: calc(94 * var(--u));
   width: calc(78 * var(--u)); height: calc(40 * var(--u));
   background: linear-gradient(180deg, #3a2e23, #2b2219);
   box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08;
 }
 .tableau--retour .rouf-toit {
-  left: calc(192 * var(--u)); top: calc(118 * var(--u));
+  left: calc(154 * var(--u)); top: calc(90 * var(--u));
   width: calc(86 * var(--u)); height: calc(5 * var(--u));
   background: #4d3f31;
   box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08;
 }
 .tableau--retour .hublot {
-  left: calc(232 * var(--u)); top: calc(130 * var(--u));
+  left: calc(186 * var(--u)); top: calc(102 * var(--u));
   width: calc(14 * var(--u)); height: calc(9 * var(--u));
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(255,178,87,.42), rgba(60,40,20,.6));
@@ -216,13 +217,13 @@
 }
 
 .tableau--retour .barre {
-  left: calc(282 * var(--u)); top: calc(136 * var(--u));
+  left: calc(224 * var(--u)); top: calc(108 * var(--u));
   width: calc(32 * var(--u)); height: calc(12 * var(--u));
   background: linear-gradient(90deg, #4a3d31, #3a2e23);
   box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08;
 }
 .tableau--retour .vhf {
-  left: calc(202 * var(--u)); top: calc(124 * var(--u));
+  left: calc(162 * var(--u)); top: calc(96 * var(--u));
   width: calc(18 * var(--u)); height: calc(14 * var(--u));
   background: #1b2230;
   box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08,
@@ -233,7 +234,7 @@
    ils doivent donc se voir avant qu'on y pense. */
 /* Le coffret de bord : interrupteurs des feux, et l'odeur de gasoil. */
 .tableau--retour .coffret {
-  left: calc(258 * var(--u)); top: calc(140 * var(--u));
+  left: calc(206 * var(--u)); top: calc(112 * var(--u));
   width: calc(18 * var(--u)); height: calc(14 * var(--u));
   background: linear-gradient(180deg, #2a2f3c 0 calc(3 * var(--u)), #171b25 calc(3 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08,
@@ -245,23 +246,23 @@
 }
 
 .tableau--retour .feu-nav {
-  top: calc(136 * var(--u));
+  top: calc(108 * var(--u));
   width: calc(3 * var(--u)); height: calc(3 * var(--u));
   border-radius: 50%;
 }
-.tableau--retour .feu-nav--babord  { left: calc(12 * var(--u));  background: #d8323f; box-shadow: 0 0 calc(5 * var(--u)) rgba(216,50,63,.8); }
-.tableau--retour .feu-nav--tribord { right: calc(12 * var(--u)); background: #3fc46f; box-shadow: 0 0 calc(5 * var(--u)) rgba(63,196,111,.8); }
+.tableau--retour .feu-nav--babord  { left: calc(10 * var(--u));  background: #d8323f; box-shadow: 0 0 calc(5 * var(--u)) rgba(216,50,63,.8); }
+.tableau--retour .feu-nav--tribord { right: calc(10 * var(--u)); background: #3fc46f; box-shadow: 0 0 calc(5 * var(--u)) rgba(63,196,111,.8); }
 /* Éteints : le bateau devient une tache noire sur de l'eau noire. */
 .stage[data-etat~="feux-eteints"] .tableau--retour .feu-nav { background: #2a2a30; box-shadow: none; }
 
 /* ── Le bastingage, au premier plan ────────────────────────────────── */
 
 .tableau--retour .bastingage {
-  left: 0; top: calc(166 * var(--u)); width: 100%; height: calc(14 * var(--u));
+  left: 0; top: calc(138 * var(--u)); width: 100%; height: calc(14 * var(--u));
   background: linear-gradient(180deg, #4d3f31 0 calc(2 * var(--u)), #2b2219 calc(2 * var(--u)));
 }
 .tableau--retour .filiere--haute {
-  left: 0; top: calc(158 * var(--u)); width: 100%; height: calc(1 * var(--u));
+  left: 0; top: calc(130 * var(--u)); width: 100%; height: calc(1 * var(--u));
   background: rgba(170,186,206,.34);
   pointer-events: none;
 }
@@ -269,21 +270,21 @@
 /* ── Les gens ──────────────────────────────────────────────────────── */
 
 .tableau--retour .ombre { background: rgba(6,8,14,.55); height: calc(2 * var(--u)); }
-.tableau--retour .ombre--lester   { left: calc(210 * var(--u)); top: calc(160 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--retour .ombre--drakk    { left: calc(38 * var(--u));  top: calc(164 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--retour .ombre--trash    { left: calc(88 * var(--u));  top: calc(161 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--retour .ombre--rabbit   { left: calc(124 * var(--u)); top: calc(166 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--retour .ombre--hercules { left: calc(152 * var(--u)); top: calc(168 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--retour .ombre--lester   { left: calc(168 * var(--u)); top: calc(132 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--retour .ombre--drakk    { left: calc(30 * var(--u));  top: calc(136 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--retour .ombre--trash    { left: calc(70 * var(--u));  top: calc(133 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--retour .ombre--rabbit   { left: calc(99 * var(--u)); top: calc(138 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--retour .ombre--hercules { left: calc(122 * var(--u)); top: calc(140 * var(--u)); width: calc(16 * var(--u)); }
 
 /* Lester est ASSIS contre le rouf : le toit lui coupe les jambes, comme
    la table coupe celles de McCarthy au tableau 1. Il a vingt ans et il
    en paraît seize ; il n'occupe pas la place d'un homme debout. */
-.tableau--retour .p-lester    { width: calc(32 * var(--u)); left: calc(208 * var(--u)); top: calc(126 * var(--u)); }
+.tableau--retour .p-lester    { width: calc(32 * var(--u)); left: calc(166 * var(--u)); top: calc(98 * var(--u)); }
 
-.tableau--retour .p-drakk     { width: calc(46 * var(--u)); left: calc(36 * var(--u));  top: calc(108 * var(--u)); }
-.tableau--retour .p-trash     { width: calc(34 * var(--u)); left: calc(86 * var(--u));  top: calc(111 * var(--u)); }
-.tableau--retour .p-rabbit    { width: calc(24 * var(--u)); left: calc(122 * var(--u)); top: calc(125 * var(--u)); }
-.tableau--retour .p-hercules  { width: calc(20 * var(--u)); left: calc(150 * var(--u)); top: calc(139 * var(--u)); }
+.tableau--retour .p-drakk     { width: calc(46 * var(--u)); left: calc(29 * var(--u));  top: calc(80 * var(--u)); }
+.tableau--retour .p-trash     { width: calc(34 * var(--u)); left: calc(69 * var(--u));  top: calc(83 * var(--u)); }
+.tableau--retour .p-rabbit    { width: calc(24 * var(--u)); left: calc(98 * var(--u)); top: calc(97 * var(--u)); }
+.tableau--retour .p-hercules  { width: calc(20 * var(--u)); left: calc(120 * var(--u)); top: calc(111 * var(--u)); }
 
 /* ── La vedette de la Star ─────────────────────────────────────────────
    ELLE N'EXISTE QUE SI L'ORDRE A ÉTÉ RÉÉCRIT AU GREFFE.
@@ -296,7 +297,7 @@
    qui existe à cause d'un choix : il doit se voir. */
 .tableau--retour .vedette::before {
   content: ""; position: absolute;
-  left: 38%; top: calc(-3 * var(--u));
+  left: 38%; top: calc(-31 * var(--u));
   width: calc(4 * var(--u)); height: calc(3 * var(--u));
   background: #6ad0ff;
   box-shadow: 0 0 calc(7 * var(--u)) rgba(106,208,255,.95);
@@ -316,7 +317,7 @@
 .stage[data-etat~="vedette"] .tableau--retour .projecteur { opacity: 1; }
 
 .tableau--retour .vedette {
-  left: calc(24 * var(--u)); top: calc(74 * var(--u));
+  left: calc(19 * var(--u)); top: calc(46 * var(--u));
   width: calc(38 * var(--u)); height: calc(12 * var(--u));
   background: linear-gradient(180deg, #46586e 0 calc(4 * var(--u)), #24303f calc(4 * var(--u)), #141c28);
   clip-path: polygon(6% 0, 74% 0, 100% 44%, 92% 100%, 8% 100%, 0 44%);
@@ -326,7 +327,7 @@
 @keyframes retour-vedette { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-1 * var(--u))) } }
 
 .tableau--retour .projecteur {
-  left: calc(40 * var(--u)); top: calc(76 * var(--u));
+  left: calc(32 * var(--u)); top: calc(48 * var(--u));
   width: calc(120 * var(--u)); height: calc(64 * var(--u));
   background: linear-gradient(102deg, rgba(220,238,255,.24), transparent 62%);
   clip-path: polygon(0 0, 100% 58%, 100% 100%, 0 26%);
@@ -339,14 +340,14 @@
 
 .tableau--retour .aura { mix-blend-mode: screen; border-radius: 50%; filter: blur(calc(2 * var(--u))); }
 .tableau--retour .aura--lester {
-  left: calc(202 * var(--u)); top: calc(120 * var(--u));
+  left: calc(162 * var(--u)); top: calc(92 * var(--u));
   width: calc(44 * var(--u)); height: calc(48 * var(--u));
   background: radial-gradient(closest-side, rgba(120,170,255,.26), transparent 70%);
   animation: aura-bat 4.4s ease-in-out infinite;
 }
 /* Le froid du goulet : ce n'est pas une aura, c'est une absence. */
 .tableau--retour .aura--goulet {
-  left: calc(112 * var(--u)); top: calc(56 * var(--u));
+  left: calc(90 * var(--u)); top: calc(28 * var(--u));
   width: calc(96 * var(--u)); height: calc(28 * var(--u));
   background: radial-gradient(closest-side, rgba(140,90,200,.20), transparent 72%);
   animation: aura-bat 6.8s ease-in-out infinite;
@@ -355,7 +356,7 @@
 .tableau--retour .esprit-coque { opacity: 0; transition: opacity 1s ease; }
 .stage[data-etat~="esprit"] .tableau--retour .esprit-coque { opacity: 1; }
 .tableau--retour .esprit-coque {
-  left: calc(60 * var(--u)); top: calc(150 * var(--u));
+  left: calc(48 * var(--u)); top: calc(122 * var(--u));
   width: calc(200 * var(--u)); height: calc(10 * var(--u));
   background: linear-gradient(90deg, transparent, rgba(124,242,196,.30) 30%, rgba(124,242,196,.34) 66%, transparent);
   filter: blur(calc(2 * var(--u)));
@@ -365,24 +366,24 @@
 /* ── Calque tactique ───────────────────────────────────────────────── */
 
 .tableau--retour .menace--goulet {
-  left: calc(96 * var(--u)); top: calc(62 * var(--u));
+  left: calc(77 * var(--u)); top: calc(34 * var(--u));
   width: calc(128 * var(--u)); height: calc(10 * var(--u));
 }
-.tableau--retour .cote--goulet { left: calc(100 * var(--u)); top: calc(52 * var(--u)); }
+.tableau--retour .cote--goulet { left: calc(80 * var(--u)); top: calc(24 * var(--u)); }
 .tableau--retour .couvert--rouf {
-  left: calc(192 * var(--u)); top: calc(114 * var(--u));
+  left: calc(154 * var(--u)); top: calc(86 * var(--u));
   width: calc(86 * var(--u)); height: calc(8 * var(--u));
   border: calc(1 * var(--u)) solid rgba(90,240,160,.7);
   background: linear-gradient(180deg, rgba(30,90,60,.25), transparent);
 }
-.tableau--retour .cote--couvert { left: calc(196 * var(--u)); top: calc(106 * var(--u)); }
+.tableau--retour .cote--couvert { left: calc(157 * var(--u)); top: calc(78 * var(--u)); }
 /* Là où Drakk se mettrait, donc là où l'autre s'est mis. `sait-perchoir`. */
 .tableau--retour .j-perchoir {
-  left: calc(136 * var(--u)); top: calc(60 * var(--u));
+  left: calc(109 * var(--u)); top: calc(32 * var(--u));
   width: calc(26 * var(--u)); height: calc(9 * var(--u));
 }
 .tableau--retour .j-lester {
-  left: calc(210 * var(--u)); top: calc(158 * var(--u));
+  left: calc(168 * var(--u)); top: calc(130 * var(--u));
   width: calc(26 * var(--u)); height: calc(9 * var(--u));
 }
 
@@ -402,7 +403,7 @@
   height: calc(8 * var(--u));
 }
 .tableau--retour .ora--transpondeur {
-  left: calc(150 * var(--u)); top: calc(78 * var(--u)); width: calc(112 * var(--u));
+  left: calc(120 * var(--u)); top: calc(50 * var(--u)); width: calc(112 * var(--u));
   border-color: rgba(255,196,90,.9); background: rgba(74,52,12,.6); color: rgba(255,214,140,.9);
   animation: ora-flotte 4.6s ease-in-out infinite;
 }
@@ -410,10 +411,10 @@
   border-color: rgba(120,130,150,.6); background: rgba(28,32,42,.6); color: rgba(140,150,170,.7);
   animation: none;
 }
-.tableau--retour .ora--balise { left: calc(28 * var(--u)); top: calc(94 * var(--u)); width: calc(74 * var(--u)); animation: ora-flotte 6.1s ease-in-out infinite; }
-.tableau--retour .ora--meteo  { left: calc(30 * var(--u)); top: calc(38 * var(--u)); width: calc(96 * var(--u)); animation: ora-flotte 7.4s ease-in-out infinite reverse; }
+.tableau--retour .ora--balise { left: calc(22 * var(--u)); top: calc(66 * var(--u)); width: calc(74 * var(--u)); animation: ora-flotte 6.1s ease-in-out infinite; }
+.tableau--retour .ora--meteo  { left: calc(24 * var(--u)); top: calc(10 * var(--u)); width: calc(96 * var(--u)); animation: ora-flotte 7.4s ease-in-out infinite reverse; }
 .tableau--retour .ora--star {
-  left: calc(20 * var(--u)); top: calc(64 * var(--u)); width: calc(96 * var(--u));
+  left: calc(16 * var(--u)); top: calc(36 * var(--u)); width: calc(96 * var(--u));
   border-color: rgba(255,120,90,.85); background: rgba(74,24,16,.55); color: rgba(255,178,150,.9);
   opacity: 0; transition: opacity 1s ease;
 }
@@ -424,4 +425,4 @@
 
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
-.tableau--retour .raton { left: calc(66 * var(--u)); top: calc(145 * var(--u)); }
+.tableau--retour .raton { left: calc(53 * var(--u)); top: calc(117 * var(--u)); }

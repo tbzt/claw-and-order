@@ -593,8 +593,10 @@ const ENTREE = 1150
 const FILE = [['p-drakk', 0], ['p-trash', 130], ['p-rabbit', 260], ['p-hercules', 390]]
 
 function faitEntrerLEquipe() {
-  /* 30 pixels d'art sous leur place : ils montent depuis le seuil. */
-  const bas = (stage.getBoundingClientRect().width / 320) * 30
+  /* 30 pixels d'art sous leur place : ils montent depuis le seuil.
+     Grille 256 (chantier 8) : cette valeur doit suivre --u dans les
+     feuilles de scène, sinon l'entrée glisse sur la mauvaise distance. */
+  const bas = (stage.getBoundingClientRect().width / 256) * 30
 
   for (const [classe, delai] of FILE) {
     const el = decor.querySelector('.' + classe)
