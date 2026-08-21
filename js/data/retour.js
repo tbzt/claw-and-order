@@ -35,12 +35,25 @@ import { equipiers } from './equipiers.js'
 export const retour = {
   markup: 'scenes/retour.html',
 
-  ouverture: ({ a }) => [
+  /* SENS DU DANGER (Hercules, `signature: 'sens-du-danger'`, equipe.js).
+     Un adepte le ressent SANS détail — la fiche insiste sur ce point, et
+     c'est ce qui en fait un beat d'ambiance et pas un indice : il ne
+     pointe ni Toralf, ni le perchoir, ni rien. `retour` est le seul
+     tableau du jeu bâti entier autour d'une menace encore cachée à
+     l'entrée (voir l'en-tête du fichier) ; c'est pour ça qu'il porte le
+     premier branchement de `signature`, et pas les quatre autres décors.
+     Gardé par `goulet-passe` : une fois le danger encaissé, le pressentir
+     encore serait un mensonge du moteur. */
+  ouverture: ({ a, qui }) => [
     'Le voilier a repris la mer avec un passager de plus. McNeil s’efface derrière la pluie.',
     a('esprit-eau')
       ? 'La coque ne tape pas. Elle glisse, et personne à bord n’a envie de demander pourquoi.'
       : 'La coque tape à contretemps. Il pleut depuis McNeil et ça ne s’arrêtera pas avant Tacoma.',
     'Lester est assis contre le rouf, dos à la cabine où Wilson est mort. Personne ne le lui a dit.',
+    ...(qui === 'hercules' && !a('goulet-passe') ? [
+      'Hercules se tait au milieu d’une phrase qu’il n’avait pas commencée.',
+      ['hercules', '« Quelque chose ne va pas, droit devant. Je ne sais pas quoi. Je préfère ne pas le savoir avant que ce soit fini. »'],
+    ] : []),
     a('trace-matricielle')
       ? 'OBJECTIF — franchir le goulet et rejoindre Tacoma. Un projecteur vient de s’allumer derrière vous.'
       : 'OBJECTIF — franchir le goulet et rejoindre Tacoma. Quatre cents mètres où l’on ne peut pas manœuvrer.',
