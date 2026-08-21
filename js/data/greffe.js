@@ -96,7 +96,7 @@ export const greffe = {
                    'On vous amène Lester quatre minutes plus tard. Il a l’air d’avoir vingt ans, et d’en avoir seize.',
                    'Il ne demande pas qui vous êtes. Il regarde la porte derrière vous.',
                    'Le voilier est au ponton, la pluie n’a pas cessé, et Tacoma est de l’autre côté du détroit.'],
-            va: 'retour' }
+            minutes: 35, va: 'retour' }
         : { tous: 'Verrouillé. Il s’ouvre depuis le poste, et le poste ne veut pas.',
             drakk: '« Inutile de pousser. J’ai déjà poussé. »' },
     },

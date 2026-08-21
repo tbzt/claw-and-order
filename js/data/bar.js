@@ -152,7 +152,7 @@ export const bar = {
       utiliser: ({ a }) => a('embauche')
         ? { tous: ['Vous sortez. La pluie a repris.',
                    'Tacoma est à quarante minutes, et le Sunnyside Beach Park est au bout.'],
-            va: 'quai' }
+            minutes: 35, va: 'quai' }
         : { tous: 'Pas sans avoir parlé au vieil ork. C’est pour lui que vous êtes venus.',
             hercules: '« On ne quitte pas un rendez-vous avant d’avoir vu la couleur de l’argent. »' },
     },

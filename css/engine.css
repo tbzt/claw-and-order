@@ -798,6 +798,18 @@ body {
   white-space: nowrap;
   transition: color .14s, border-color .14s, background .14s;
 }
+/* L'horloge de la nuit. Un chiffre, pas une jauge — c'est le chiffre qui
+   fait peur (§3 du plan carte). Ni bouton ni alerte : elle ne fait que
+   dire, en mono, ce que le joueur vient de payer. */
+.hud-heure {
+  font-family: var(--mono);
+  font-size: clamp(.64rem, 1.1cqw, .78rem);
+  letter-spacing: .08em;
+  color: var(--ardoise);
+  padding: .5rem clamp(.3rem, .6cqw, .5rem);
+  white-space: nowrap;
+}
+
 .bouton-carnet:hover { color: var(--craie); }
 .bouton-carnet[aria-pressed="true"] {
   color: var(--ambre);

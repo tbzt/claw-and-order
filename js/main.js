@@ -2,7 +2,7 @@
    Ce fichier ne connaît aucun contenu — il ne sait que faire tourner
    une scène qu'on lui donne. */
 
-import { etat, a, pose, donne, retire, marque, classe, contexte } from './state.js'
+import { etat, a, pose, donne, retire, marque, classe, contexte, avance, formateHeure } from './state.js'
 import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
 import { resous, nomDe, enLignes } from './interact.js'
@@ -242,6 +242,7 @@ function joue(idCible) {
   if (reaction.objets) donne(...reaction.objets)
   if (reaction.retire) retire(...reaction.retire)
   if (reaction.visuels) marque(...reaction.visuels)
+  if (reaction.minutes) avance(reaction.minutes)
   const fichesNeuves = reaction.fiches ? classe(...reaction.fiches) : false
 
   rafraichit()
@@ -531,6 +532,7 @@ function rafraichit() {
     bouton.classList.toggle('est-actif', bouton.dataset.runner === etat.actif)
 
   rendInventaire()
+  $('hudHeure').textContent = formateHeure()
   $('carnetCompte').textContent = String(etat.fiches.size)
   peintProgres()
   if (!carnet.hidden) rendCarnet()

@@ -20,6 +20,11 @@ export const etat = {
      bon. `allure` change la cadence, `journal` garde tout. */
   allure: 1,
   journal: [],
+  /* L'horloge de la nuit. Un registre de décisions, pas un chronomètre
+     (règle D3) : elle n'avance qu'aux réactions qui déclarent `minutes`,
+     jamais au clic ni au temps réel. Départ 23:00, en minutes depuis
+     minuit. */
+  heure: 23 * 60,
 }
 
 export const a = (flag) => etat.flags.has(flag)
@@ -40,6 +45,18 @@ export function retire(...objets) {
 
 export function marque(...visuels) {
   for (const v of visuels) etat.visuels.add(v)
+}
+
+export function avance(minutes) {
+  etat.heure += minutes
+}
+
+/* `23:41`, jamais autre chose : pas de barre, pas de jauge — un chiffre. */
+export function formateHeure() {
+  const total = ((etat.heure % 1440) + 1440) % 1440
+  const h = String(Math.floor(total / 60)).padStart(2, '0')
+  const m = String(total % 60).padStart(2, '0')
+  return `${h}:${m}`
 }
 
 /* Une fiche se mérite : toutes les répliques n'en déposent pas. Rendre

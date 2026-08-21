@@ -373,13 +373,13 @@ export const quai = {
                      'Une vedette de la Star croise à trois cents mètres et ne voit rien — il n’y a rien à voir.',
                      'Vingt-six minutes. McNeil sort de la nuit comme un mur qu’on aurait posé sur l’eau.'],
               trash: '« Ne la regardez pas trop. »',
-              visuels: ['appareillage'], va: 'greffe' }
+              visuels: ['appareillage'], minutes: 26, va: 'greffe' }
           : { tous: [...commun,
                      'Quarante minutes de clapot noir. À mi-parcours, une vedette de la Star appelle sur le 16.',
                      'Hercules répond qu’il ramène le bateau de son oncle au chantier. La vedette souhaite bon courage et s’éloigne.',
                      'La masse de McNeil sort de la nuit comme un mur qu’on aurait posé sur l’eau.'],
               drakk: '« Belle manœuvre, compagnons. »',
-              visuels: ['appareillage'], va: 'greffe' }
+              visuels: ['appareillage'], minutes: 40, va: 'greffe' }
       },
       objets: {
         passe: 'Il faut d’abord que tout le monde soit à son poste.',

@@ -150,7 +150,7 @@ export const retour = {
                    trash: '« Il n’a pas visé le bateau. Il a visé la place où le gamin était assis. »',
                    flags: ['goulet-passe', 'toralf-manque'],
                    fiches: ['toralf-vise-lester'],
-                   va: 'planque' }
+                   minutes: 10, va: 'planque' }
 
         return { tous: [...commun,
                         'Un claquement sec, et Lester tombe en avant sans un bruit.',
@@ -161,7 +161,7 @@ export const retour = {
                  drakk: '« J’ai vu le poste. Je n’ai pas donné l’ordre. C’est pire que de ne pas voir. »',
                  flags: ['goulet-passe', 'lester-blesse'],
                  fiches: ['toralf-vise-lester'],
-                 va: 'planque' }
+                 minutes: 10, va: 'planque' }
       },
     },
 
