@@ -458,6 +458,10 @@ export const quai = {
         trash: ['« Un esprit de l’eau. Elle est venue seule, et elle n’a pas fixé de prix. »',
                 '« Ça se paie toujours. Simplement, on ne sait pas encore avec quoi. »'],
       },
+      utiliser: {
+        tous: 'On ne touche pas à ce qui nage sous une coque qu’on a déjà remerciée.',
+        trash: '« Elle est là. Ça suffit. On ne demande pas deux fois la même nuit. »',
+      },
     },
 
     /* ── Tactique ───────────────────────────────────────────────── */
@@ -468,6 +472,10 @@ export const quai = {
         drakk: ['« Un défilé. Une seule planche, aucun flanc, et l’eau des deux côtés. »',
                 '« Si on nous coince ici, on ne manœuvre pas. On tient, ou on tombe. »',
                 '« Je préfère les défilés quand c’est moi qui les tiens. »'],
+      },
+      utiliser: {
+        tous: 'On ne s’arrête pas sur un défilé. On le traverse, et vite.',
+        drakk: '« Je marche en dernier. Si quelque chose vient de la jetée, je le vois avant vous. »',
       },
     },
 
@@ -532,6 +540,16 @@ export const quai = {
         rabbit: ['« Wilson, W. Propriétaire depuis onze ans, aucune infraction déclarée. »',
                  '« Et dans son profil public, en nom d’usage : “l’Amiral”. Il l’a écrit lui-même. »'],
       },
+      utiliser: ({ a, qui }) => {
+        if (a('vu-immat')) return 'Toujours la même fiche. Il n’y a rien de plus à en tirer.'
+        if (qui !== 'rabbit')
+          return { tous: 'Il faudrait un deck pour aller au-delà de ce qui flotte.',
+                   hercules: '« Laissons-la à celle qui sait lire ça. »' }
+        return { tous: ['White_Rabbit interroge le registre au-delà de ce qu’il affiche.',
+                        'Rien. Onze ans de propriété sans un seul incident, pas même une amende de mouillage.'],
+                 rabbit: '« Un homme sans dossier, ça n’existe pas. Ça veut dire que le sien a été nettoyé, ou qu’il n’a jamais rien fait qui mérite d’être noté. Je ne sais pas laquelle des deux m’inquiète le plus. »',
+                 flags: ['vu-immat'] }
+      },
     },
 
     'commlink-eteint': {
@@ -540,6 +558,10 @@ export const quai = {
         tous: 'Au bout de la jetée, une icône barrée. Quelqu’un a coupé son commlink.',
         rabbit: ['« Éteint à la main, pas déchargé. À cette heure-ci, dans ce port, c’est un choix. »',
                  '« Il ne veut pas qu’on sache qu’il était là. Donc il était là. »'],
+      },
+      utiliser: {
+        tous: 'Éteint, ça ne se pirate pas. Il n’y a rien à attraper.',
+        rabbit: '« Je peux réveiller une machine qui dort. Pas une qu’on a éteinte à la main. Celui qui a fait ça savait ce qu’il faisait. »',
       },
     },
 

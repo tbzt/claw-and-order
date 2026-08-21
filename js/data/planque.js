@@ -258,6 +258,10 @@ export const planque = {
         trash: ['« Des milliers de passages, tous pareils, tous pressés. »',
                 '« Personne n’a jamais rien vécu ici. C’est peut-être exactement ce qu’il nous faut. »'],
       },
+      utiliser: {
+        tous: 'Une usure ne se gratte pas. Elle raconte, elle ne s’efface pas.',
+        trash: '« Rien à en tirer de plus. C’est un sol qu’on a beaucoup foulé, pas un sol qui a un secret. »',
+      },
     },
 
     /* ── RA ─────────────────────────────────────────────────────────── */
@@ -267,6 +271,16 @@ export const planque = {
         tous: 'Une icône bleue au-dessus des machines : LAV’O’MATIC — 24 H — PAIEMENT SANS CONTACT.',
         rabbit: ['« Nœud de commerce, mis à jour en 2078, jamais depuis. »',
                  '« Il enregistre les paiements et il les envoie une fois par jour. Personne ne les lit. »'],
+      },
+      utiliser: ({ a, qui }) => {
+        if (a('vu-reseau-laverie')) return 'Toujours le même nœud. Il n’a rien de plus à donner.'
+        if (qui !== 'rabbit')
+          return { tous: 'Il faudrait un deck, et une raison d’y entrer.',
+                   hercules: '« Laisse-la faire. C’est son rayon. »' }
+        return { tous: ['White_Rabbit se glisse dans le nœud de paiement, par acquit de conscience.',
+                        'Des lessives, des pièces, un abonnement résilié en mars. Rien qui ressemble à un problème.'],
+                 rabbit: '« Ce nœud-là dit la vérité : cet endroit ne cache rien. C’est même reposant. »',
+                 flags: ['vu-reseau-laverie'] }
       },
     },
 

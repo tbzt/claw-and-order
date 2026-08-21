@@ -147,6 +147,10 @@ export const greffe = {
                     '« Pas de nous : de son propre règlement. Il a quelque chose à perdre et il ne veut pas le perdre cette nuit. »',
                     '« Ne le menacez pas. Couvrez-le. »'],
             flags: ['sait-peur-gardien'] },
+      utiliser: {
+        tous: 'On ne touche pas une aura. On la lit, et on agit avec ce qu’elle dit.',
+        trash: '« Elle ne se force pas. Elle se croit. »',
+      },
     },
 
     /* ── RA ─────────────────────────────────────────────────────── */
@@ -183,6 +187,10 @@ export const greffe = {
                 '« Pas de second garde, pas de relève avant l’aube. S’il appelle du renfort, il attend vingt minutes comme nous. »',
                 '« Ce qui veut dire qu’il ne veut pas appeler. Il veut que ça se passe bien. »'],
         flags: ['sait-gardien-seul'],
+      },
+      utiliser: {
+        tous: 'Un angle mort ne se force pas, il se garde en tête.',
+        drakk: '« Je le tiens. Si quelqu’un doit s’approcher sans qu’il sursaute, c’est par là. »',
       },
     },
 

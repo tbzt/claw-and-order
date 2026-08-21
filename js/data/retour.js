@@ -327,6 +327,10 @@ export const retour = {
                 '« Il n’y a qu’UN couvert à bord, et c’est le rouf. »',
                 '« Le gamin est assis contre. Pas derrière. Ce n’est pas la même chose. »'],
       },
+      utiliser: {
+        tous: 'La ligne ne se déplace pas d’ici. Le seul geste qui compte, c’est de sortir du dessin.',
+        drakk: '« Le rouf. C’est là qu’on va, pas ici. »',
+      },
     },
 
     /* ══ LE ROUF — le seul couvert, et une porte qu'on n'ouvre pas ════ */
@@ -377,6 +381,10 @@ export const retour = {
                          '« C’est plus que ce que je demandais et beaucoup moins que ce que je voulais. »'],
                  flags: ['esprit-demande', 'vedette-reglee'], visuels: ['vedette-partie'] }
       },
+      utiliser: {
+        tous: 'On ne pose pas la main sur ce qui vous cache. Pas avant Tacoma.',
+        trash: '« On lui parle. On ne la touche pas. »',
+      },
     },
 
     froid: {
@@ -387,6 +395,10 @@ export const retour = {
                 '« J’ai vu ça une fois sur le pont du passeur. C’est la même absence. »',
                 '« Ce n’est pas un monstre. C’est un homme qui a arrêté d’en être un pendant qu’il travaille. »'],
         flags: ['sait-ou'],
+      },
+      utiliser: {
+        tous: 'Un creux ne se touche pas. Il se contourne.',
+        trash: '« Je ne vais pas là-haut lui demander ce qu’il ressent. La réponse est déjà dans la question. »',
       },
     },
 

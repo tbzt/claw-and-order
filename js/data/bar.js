@@ -232,6 +232,10 @@ export const bar = {
                 '« Un bon maître de jeu ne place jamais deux hostiles sur la ligne de retraite par hasard. Mais la vie n’est pas un bon maître de jeu. »'],
         flags: ['sait-ligne'],
       },
+      utiliser: {
+        tous: 'Personne ne bouge encore. Pas ici, pas devant trente étoiles.',
+        drakk: '« Je change juste qui marche devant. Ça suffit, pour l’instant. »',
+      },
     },
 
     'commlink-mccarthy': {
