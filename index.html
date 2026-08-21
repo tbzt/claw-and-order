@@ -78,7 +78,11 @@
       </div>
 
       <div class="carnet" id="carnet" hidden>
-        <p class="carnet__titre">Carnet de recoupement</p>
+        <p class="carnet__titre">Carnet de recoupement
+          <!-- Combien de recoupements existent, et combien sont faits.
+               C'est la seule chose qui dise au joueur qu'il en reste. -->
+          <span class="carnet__progres" id="carnetProgres"></span>
+        </p>
         <div class="carnet__grille" id="carnetGrille"></div>
         <p class="carnet__aide" id="carnetAide">Pose une fiche sur une autre.</p>
       </div>
@@ -106,7 +110,10 @@
       <button class="bouton-carnet" id="boutonJournal" aria-pressed="false">Journal</button>
 
       <button class="bouton-carnet" id="boutonCarnet" aria-pressed="false">
-        Carnet <span class="bouton-carnet__compte" id="carnetCompte">0</span>
+        Carnet
+        <span class="bouton-carnet__compte" id="carnetCompte" title="Fiches au carnet">0</span>
+        <span class="bouton-carnet__compte est-deduction" id="carnetRecoupements"
+              title="Recoupements trouvés">0/0</span>
       </button>
 
       <div class="inventaire" id="inventaire" aria-label="Inventaire"></div>

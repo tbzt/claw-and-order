@@ -113,6 +113,7 @@ async function charge(idScene, muet = false) {
 
 async function demarre() {
   brancheHud()
+  verifieCarnet()
   /* La jauge d'allure part de son vrai état : sans ça elle reste vide
      jusqu'au premier clic, et le joueur croit le réglage cassé. */
   peintAllure()
@@ -367,6 +368,32 @@ function chercheDeduction(a, b) {
                                 !etat.fiches.has(d.donne.id))
 }
 
+/* La même paire, mais déjà résolue. Sans ça, refrotter deux fiches dont
+   on a DÉJÀ tiré la conclusion tombait sur un refus au hasard — le
+   moteur répondait « ces deux-là ne se regardent pas » à propos de deux
+   fiches qui venaient justement de se regarder. Petite trahison, mais
+   trahison : le joueur a raison, et on lui dit qu'il a tort. */
+function dejaFaite(a, b) {
+  return deductions.find((d) => d.paire.includes(a) && d.paire.includes(b) &&
+                                etat.fiches.has(d.donne.id))
+}
+
+/* Combien de recoupements existent, combien sont faits. C'est la seule
+   chose qui dise au joueur qu'il en reste. */
+const recoupementsFaits = () =>
+  deductions.filter((d) => etat.fiches.has(d.donne.id)).length
+
+function peintProgres() {
+  const faits = recoupementsFaits()
+  const total = deductions.length
+  const p = $('carnetProgres')
+  p.textContent = faits
+    ? `${faits} recoupement${faits > 1 ? 's' : ''} sur ${total}`
+    : `${total} recoupements à trouver`
+  p.classList.toggle('est-complet', faits === total)
+  $('carnetRecoupements').textContent = `${faits}/${total}`
+}
+
 function frotte(idA, idB) {
   const trouvee = chercheDeduction(idA, idB)
   etat.ficheActive = null
@@ -382,10 +409,14 @@ function frotte(idA, idB) {
   }
 
   /* Une paire proche mérite mieux qu'un refus au hasard : le joueur
-     n'a pas tort, il n'a pas encore assez. */
+     n'a pas tort, il n'a pas encore assez. Et une paire DÉJÀ résolue
+     mérite mieux encore : on lui rappelle ce qu'elle a donné. */
+  const revue = dejaFaite(idA, idB)
   const cle = [idA, idB].sort().join('|')
   const aide = $('carnetAide')
-  aide.textContent = presque[cle] ?? pioche(refusCarnet[etat.actif] ?? refusCarnet.hercules)
+  aide.textContent = revue
+    ? `C’est de là que vient « ${fiches[revue.donne.id].titre} ». Elle est déjà au carnet.`
+    : presque[cle] ?? pioche(refusCarnet[etat.actif] ?? refusCarnet.hercules)
   aide.classList.remove('est-refus'); void aide.offsetWidth
   aide.classList.add('est-refus')
   rendCarnet()
@@ -403,6 +434,7 @@ function resousTexte(bloc) {
 const pioche = (liste) => liste[Math.floor(Math.random() * liste.length)]
 
 function rendCarnet() {
+  peintProgres()
   const grille = $('carnetGrille')
   grille.replaceChildren()
   for (const id of etat.fiches) {
@@ -500,6 +532,7 @@ function rafraichit() {
 
   rendInventaire()
   $('carnetCompte').textContent = String(etat.fiches.size)
+  peintProgres()
   if (!carnet.hidden) rendCarnet()
   if (!journal.hidden) rendJournal()
   curseur.dataset.verbe = etat.verbe
@@ -583,6 +616,29 @@ function verifieScene() {
   for (const [nom, h] of Object.entries(scene.hotspots ?? {}))
     for (const cle of ['flags', 'objets', 'visuels', 'retire', 'fiches'])
       if (cle in h) console.error(`[${scene.markup}] ${nom} : « ${cle} » doit être DANS regarder/utiliser/parler, pas à côté.`)
+}
+
+/* Garde-fou du carnet. Une clé de `presque` se construit en TRIANT les
+   deux identifiants : `[a, b].sort().join('|')`. Une clé écrite dans le
+   mauvais ordre, ou sur une fiche qui n'existe pas, ne se déclenche
+   jamais — et rien ne le dit. Le joueur reçoit un refus générique là où
+   on avait écrit une réponse, et personne ne s'en aperçoit.
+
+   Même esprit que `verifieScene()` : on crie au chargement. */
+function verifieCarnet() {
+  const connues = new Set([...Object.keys(fiches), ...deductions.map((d) => d.donne.id)])
+  for (const cle of Object.keys(presque)) {
+    const ids = cle.split('|')
+    if (ids.length !== 2)
+      console.error(`[carnet] « ${cle} » : une clé de presque, c'est deux identifiants séparés par |.`)
+    else if (ids.join('|') !== [...ids].sort().join('|'))
+      console.error(`[carnet] « ${cle} » : à trier — ${[...ids].sort().join('|')}.`)
+    for (const id of ids)
+      if (!connues.has(id)) console.error(`[carnet] « ${cle} » : fiche inconnue — ${id}.`)
+  }
+  for (const d of deductions)
+    if (presque[[...d.paire].sort().join('|')])
+      console.error(`[carnet] ${d.donne.id} : cette paire a DÉJÀ une déduction, le presque ne sortira qu'après.`)
 }
 
 function brancheDecor() {

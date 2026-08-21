@@ -804,6 +804,9 @@ body {
   border-color: color-mix(in srgb, var(--ambre) 45%, transparent);
   background: color-mix(in srgb, var(--ambre) 9%, transparent);
 }
+/* Deux nombres, pas un : ce qu'on a, et ce qu'on a TROUVÉ. Une fiche
+   se ramasse, un recoupement se mérite — les compter ensemble effacerait
+   la différence, et c'est toute la différence. */
 .bouton-carnet__compte {
   margin-left: .45rem;
   padding: .05rem .32rem;
@@ -811,6 +814,12 @@ body {
   background: #1b2030;
   color: var(--ardoise);
 }
+.bouton-carnet__compte.est-deduction {
+  margin-left: .22rem;
+  background: color-mix(in srgb, var(--cyan) 16%, #12161f);
+  color: color-mix(in srgb, var(--cyan) 82%, var(--craie));
+}
+
 /* Une fiche neuve se signale, une fois. Elle se mérite, elle mérite
    qu'on le dise. */
 .bouton-carnet.a-du-neuf {
@@ -837,12 +846,31 @@ body {
 .carnet[hidden] { display: none; }
 
 .carnet__titre {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2cqw;
   font-family: var(--mono);
   font-size: 1.7cqw;
   letter-spacing: .26em;
   text-transform: uppercase;
   color: var(--ambre);
 }
+
+/* LE COMPTEUR. Avec quinze fiches il y a cent cinq paires possibles ;
+   une poignée dit quelque chose. Un joueur qui essaie au hasard tombe
+   une dizaine de fois sur un refus avant de trouver, et il en conclut
+   que le carnet ne sert à rien — il a statistiquement raison de le
+   conclure. Ce compteur est la seule chose qui lui dise qu'il en reste,
+   et donc la seule qui le fasse continuer. */
+.carnet__progres {
+  font-size: 1.15cqw;
+  letter-spacing: .14em;
+  color: color-mix(in srgb, var(--cyan) 78%, var(--ardoise));
+  text-transform: none;
+  white-space: nowrap;
+}
+.carnet__progres.est-complet { color: var(--ambre); }
 
 .carnet__grille {
   flex: 1;

@@ -194,16 +194,76 @@ export const refus = {
   ],
 }
 
-/* Les paires PROCHES — celles où le joueur a une bonne raison d'essayer.
-   Elles méritent mieux qu'un refus au hasard : c'est là qu'on lui dit
-   qu'il n'a pas tort, seulement pas encore assez. */
+/* ── LES PAIRES PROCHES ───────────────────────────────────────────────
+   Celles où le joueur a une bonne raison d'essayer : deux fiches qui
+   partagent une source, un nom propre, ou une heure. Elles méritent
+   mieux qu'un refus au hasard — c'est là qu'on lui dit qu'il n'a pas
+   tort, seulement pas encore assez.
+
+   L'ARITHMÉTIQUE, parce qu'elle décide de tout ici. Avec quinze fiches,
+   il y a 105 paires possibles. Avec quatre déductions et quatre paires
+   proches, huit d'entre elles disaient quelque chose — 7,6 %. Un joueur
+   qui essaie au hasard tombait donc treize fois sur un refus générique
+   avant de trouver, et il en concluait que le carnet ne sert à rien.
+   Il avait statistiquement raison de le conclure.
+
+   Elles sont dix-sept. Le taux passe à 20 % : une paire sur cinq
+   répond. C'est le seuil à partir duquel on continue d'essayer.
+
+   Un `presque` coûte une phrase ; une déduction coûte une fiche neuve,
+   cinq voix et un drapeau. À budget d'écriture égal, c'est ici que
+   l'argent rend le plus.
+
+   LA CLÉ SE TRIE : `[a, b].sort().join('|')`. Une clé dans le mauvais
+   ordre ne se déclenche jamais et rien ne le dit — `verifieCarnet()`
+   dans main.js crie au chargement si l'une d'elles est mal écrite. */
 export const presque = {
+
+  /* ── Ce que McCarthy a dit, frotté contre lui-même ───────────────── */
   'dossier-vide|elfe-autopsie':
     'Les deux disent la même chose : ce n’est pas lui. Ça ne dit toujours pas qui.',
+  'dossier-vide|teresa':
+    'Un dossier qui ne dit rien d’elle, et une fille dont personne n’a parlé depuis trois jours. Deux silences côte à côte ne font pas encore une bouche.',
+  'elfe-autopsie|navette-huit-heures':
+    'Un elfe l’a étranglée, et c’est un ork qu’on met dans la navette de huit heures. Ces deux-là ne se recoupent pas : l’un remplace l’autre.',
+  /* Elle s'écrivait `teresa|elfe-autopsie` — dans le désordre. La clé se
+     construit en TRIANT, donc celle-ci n'a jamais rien déclenché : le
+     joueur recevait un refus au hasard là où on lui avait écrit une
+     réponse. C'est exactement le bug que `verifieCarnet()` guette. */
+  'elfe-autopsie|teresa':
+    'Un elfe, et une elfe morte. Il manque le nom, et le nom ne viendra pas d’ici.',
   'famille-tir|teresa':
     'La famille et la fille, oui. Mais une famille qui étouffe, ce n’est pas encore une main sur une gorge.',
+  'elfe-autopsie|famille-tir':
+    'Un elfe a tué, une famille d’elfes veut le silence. C’est la même communauté — ce n’est pas encore la même main.',
+  'famille-tir|navette-huit-heures':
+    'Le Tír efface, la navette transporte. Entre les deux, il manque quelqu’un qui décroche un téléphone.',
+
+  /* ── Le quai, le goulet, et ce qu’on y a laissé ──────────────────── */
   'grand-blond|travail-inacheve':
     'Le même homme, la même nuit, le même bateau. Deux fiches pour un seul fait : ça ne se recoupe pas, ça se répète.',
-  'teresa|elfe-autopsie':
-    'Un elfe, et une elfe morte. Il manque le nom, et le nom ne viendra pas d’ici.',
+  'grand-blond|teresa':
+    'Une tête de plus que tout le monde, ça se remarque. Personne ne l’a remarqué près d’elle — il était sur un bateau, pas dans sa chambre.',
+  'toralf-vise-lester|travail-inacheve':
+    'Deux travaux laissés en plan sur le même gamin. Ça dit qu’on s’y est repris à deux fois. Ça ne dit pas qui compte les fois.',
+
+  /* ── Le greffe, et l’heure qui ne colle pas ──────────────────────── */
+  'dossier-vide|registre-anterieur':
+    'Un dossier qui ne dit rien, un registre qui dit tout. Deux papiers, deux services, et pas une signature commune.',
+  'registre-anterieur|toralf-vise-lester':
+    'La ligne était écrite avant, et le tireur était déjà en place. Deux préparatifs — rien qui prouve qu’ils sortent du même bureau.',
+
+  /* ── Lester, et ce qui lui arrive ────────────────────────────────── */
+  'lester-temoigne|navette-huit-heures':
+    'Il a décidé de parler ; quelqu’un avait décidé qu’il n’arriverait pas. Les deux tiennent debout séparément. Ensemble, il manque le nom de celui qui a décidé en second.',
+  'lester-temoigne|toralf-vise-lester':
+    'On lui a tiré dessus à minuit, il a dit oui à cinq heures. Ce n’est pas un lien : c’est une nuit.',
+  'guilde|lester-temoigne':
+    'La bouteille, et sa décision. Oui. Mais ça ne se déduit pas — c’est ce qui s’est passé, et ça n’a besoin d’aucune preuve.',
+
+  /* ── Ce qu’on a déjà déduit, frotté contre le reste ──────────────── */
+  'deux-mains|teresa':
+    'Deux paires de mains, et une seule morte pour l’instant. La seconde paire n’a pas fini sa nuit.',
+  'deux-mains|famille-tir':
+    'Une main de colère, une main de tarif. Reste à savoir qui paie la seconde en couvrant la première — et personne ne l’a encore dit à voix haute.',
 }
