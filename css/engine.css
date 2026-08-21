@@ -634,6 +634,26 @@ body {
   animation-timing-function: steps(var(--repos-crans), jump-none);
 }
 
+/* ── IL PARLE ────────────────────────────────────────────────────────
+   Un PNJ a un portrait, et le portrait s'anime pendant qu'il parle. Les
+   runners n'ont pas de portrait — c'est délibéré, ils sont déjà désignés
+   dans le décor par leur liseré. Mais du coup, au moment précis où l'un
+   d'eux prenait la parole, il était le seul élément du cadre strictement
+   immobile : rien ne reliait la voix au corps.
+
+   Les DEUX DERNIÈRES images de chaque planche sont sa pose de parole —
+   le buste d'un pixel plus bas, les pieds immobiles. `sprite.py` les
+   sort de la boucle normale et pose les trois variables ci-dessous.
+
+   Mêmes TROIS LONGHANDS que l'attente, pour la même raison : un
+   raccourci `animation` sur `.pj` écraserait tout le reste. Le sélecteur
+   passe devant celui du runner actif, qui parle aussi. */
+.stage .decor .pj.parle {
+  animation-name: var(--parle-nom, var(--repos-nom));
+  animation-duration: var(--parle-duree, var(--repos-duree));
+  animation-timing-function: steps(var(--parle-crans, var(--repos-crans)), jump-none);
+}
+
 /* ── RATON LAVEUR ────────────────────────────────────────────────────
    L'esprit mentor de Trash était une orbe violette peinte sur SA planche,
    au-dessus de son épaule. Une planche ne peut pas quitter le cadre du

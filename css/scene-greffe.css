@@ -68,13 +68,30 @@
 
 .tableau--greffe .ombre { background: rgba(6,10,8,.45); height: calc(2 * var(--u)); }
 .tableau--greffe .ombre--drakk    { left: calc(88 * var(--u));  top: calc(154 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--greffe .ombre--rabbit   { left: calc(136 * var(--u)); top: calc(154 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--greffe .ombre--trash    { left: calc(174 * var(--u)); top: calc(154 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--greffe .ombre--hercules { left: calc(212 * var(--u)); top: calc(154 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--greffe .p-drakk    { width: calc(46 * var(--u)); left: calc(86 * var(--u));  top: calc(100 * var(--u)); }
-.tableau--greffe .p-rabbit   { width: calc(34 * var(--u)); left: calc(134 * var(--u)); top: calc(108 * var(--u)); }
-.tableau--greffe .p-trash    { width: calc(34 * var(--u)); left: calc(172 * var(--u)); top: calc(106 * var(--u)); }
-.tableau--greffe .p-hercules { width: calc(32 * var(--u)); left: calc(210 * var(--u)); top: calc(114 * var(--u)); }
+.tableau--greffe .ombre--trash    { left: calc(140 * var(--u)); top: calc(154 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--greffe .ombre--rabbit   { left: calc(180 * var(--u)); top: calc(154 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--greffe .ombre--hercules { left: calc(212 * var(--u)); top: calc(154 * var(--u)); width: calc(16 * var(--u)); }
+/* L'ÉCHELLE EST CELLE DU CANON, ET ELLE NE SE NÉGOCIE PAS PAR TABLEAU.
+   23,7 px par mètre, McCarthy ork 1,90 m = 45 px pour ancre :
+     Drakk troll 2,50 m → 46 × 56    White_Rabbit humain 1,75 m → 24 × 41
+     Trash elfe  1,90 m → 34 × 50    Hercules     nain   1,20 m → 20 × 29
+
+   Ce tableau posait White_Rabbit à 34 u et Hercules à 32 u — soit ×1,417
+   et ×1,6. Deux dégâts pour le prix d'un : le nain devenait plus grand que
+   l'humain, et un facteur non entier casse la grille de pixels (certains
+   pixels d'art font une unité, d'autres deux), ce que tout le projet
+   cherche justement à éviter.
+
+   RÈGLE : un sprite ne s'affiche qu'à sa taille NATIVE, ou à un multiple
+   ENTIER de celle-ci. Jamais entre les deux.
+
+   Les `top` en découlent : un sprite grandit vers le bas depuis son `top`,
+   donc changer la largeur déplace les pieds. Ils retombent tous sur la
+   ligne d'ombres, à 154. */
+.tableau--greffe .p-drakk    { width: calc(46 * var(--u)); left: calc(86 * var(--u));  top: calc(98 * var(--u));  }
+.tableau--greffe .p-trash    { width: calc(34 * var(--u)); left: calc(138 * var(--u)); top: calc(104 * var(--u)); }
+.tableau--greffe .p-rabbit   { width: calc(24 * var(--u)); left: calc(178 * var(--u)); top: calc(113 * var(--u)); }
+.tableau--greffe .p-hercules { width: calc(20 * var(--u)); left: calc(210 * var(--u)); top: calc(125 * var(--u)); }
 .tableau--greffe .zone { background: transparent; }
 .tableau--greffe .zone--salle { left: 0; top: calc(20 * var(--u)); width: 100%; height: calc(14 * var(--u)); }
 
@@ -89,16 +106,27 @@
   background: radial-gradient(closest-side, rgba(90,110,140,.24), transparent 70%); }
 @keyframes aura-bat { 0%,100% { opacity: .8 } 50% { opacity: 1 } }
 
+/* Même typographie qu'au bar et au quai : la RA se lit pareil partout,
+   sinon ce n'est plus une lentille. Ici il y a peu de spam — un greffe
+   de nuit n'est pas un port — et c'est ce qui rend la fiche ambrée
+   d'autant plus visible. */
 .tableau--greffe .ora { border: calc(1 * var(--u)) solid rgba(90,200,255,.72);
-  background: rgba(20,60,90,.4); box-shadow: 0 0 calc(3 * var(--u)) rgba(90,200,255,.35);
-  animation: ora-flotte 5s ease-in-out infinite; }
-.tableau--greffe .ora--registre { left: calc(236 * var(--u)); top: calc(66 * var(--u));
-  width: calc(36 * var(--u)); height: calc(14 * var(--u));
-  border-color: rgba(255,196,90,.9); background: rgba(90,60,10,.5);
+  background: rgba(20,60,90,.52); box-shadow: 0 0 calc(3 * var(--u)) rgba(90,200,255,.35);
+  animation: ora-flotte 5s ease-in-out infinite;
+  font-family: var(--mono); font-size: calc(4 * var(--u)); line-height: calc(6 * var(--u));
+  letter-spacing: .02em; white-space: nowrap; overflow: hidden;
+  padding: 0 calc(1 * var(--u)); color: rgba(150,214,255,.85); }
+/* LA fiche qui compte. Ambrée, comme les deux du bar : c'est la seule
+   différence, et il faut lire pour la trouver. Deux lignes, parce que
+   l'horodatage non signé est ce qu'on vient chercher. */
+.tableau--greffe .ora--registre { left: calc(230 * var(--u)); top: calc(62 * var(--u));
+  width: calc(76 * var(--u)); height: calc(14 * var(--u));
+  border-color: rgba(255,196,90,.9); background: rgba(90,60,10,.62);
+  color: rgba(255,214,140,.92);
   box-shadow: 0 0 calc(5 * var(--u)) rgba(255,196,90,.5); }
-.tableau--greffe .ora--cam { left: calc(286 * var(--u)); top: calc(14 * var(--u)); width: calc(22 * var(--u)); height: calc(9 * var(--u)); }
-.tableau--greffe .ora--porte { left: calc(30 * var(--u));  top: calc(44 * var(--u)); width: calc(26 * var(--u)); height: calc(9 * var(--u)); }
-.tableau--greffe .ora--pub   { left: calc(108 * var(--u)); top: calc(38 * var(--u)); width: calc(30 * var(--u)); height: calc(11 * var(--u)); }
+.tableau--greffe .ora--cam { left: calc(222 * var(--u)); top: calc(14 * var(--u)); width: calc(86 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--greffe .ora--porte { left: calc(12 * var(--u));  top: calc(44 * var(--u)); width: calc(92 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--greffe .ora--pub   { left: calc(30 * var(--u)); top: calc(26 * var(--u)); width: calc(128 * var(--u)); height: calc(8 * var(--u)); }
 @keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
 
 .tableau--greffe .jeton { border: calc(1 * var(--u)) solid rgba(201,160,58,.85); border-radius: 50%;

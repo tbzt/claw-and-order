@@ -103,14 +103,31 @@
 .tableau--quai .ombre { background: rgba(4,3,8,.55); height: calc(2 * var(--u)); }
 .tableau--quai .ombre--pecheur { left: calc(272 * var(--u)); top: calc(147 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--quai .ombre--drakk { left: calc(90 * var(--u)); top: calc(163 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--quai .ombre--rabbit { left: calc(140 * var(--u)); top: calc(163 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--quai .ombre--trash { left: calc(178 * var(--u)); top: calc(163 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--quai .ombre--hercules { left: calc(214 * var(--u)); top: calc(163 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--quai .ombre--trash { left: calc(142 * var(--u)); top: calc(163 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--quai .ombre--rabbit { left: calc(182 * var(--u)); top: calc(163 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--quai .ombre--hercules { left: calc(214 * var(--u)); top: calc(163 * var(--u)); width: calc(16 * var(--u)); }
 
-.tableau--quai .p-drakk { width: calc(46 * var(--u)); left: calc(88 * var(--u)); top: calc(109 * var(--u)); }
-.tableau--quai .p-rabbit { width: calc(34 * var(--u)); left: calc(138 * var(--u)); top: calc(117 * var(--u)); }
-.tableau--quai .p-trash { width: calc(34 * var(--u)); left: calc(176 * var(--u)); top: calc(115 * var(--u)); }
-.tableau--quai .p-hercules { width: calc(32 * var(--u)); left: calc(212 * var(--u)); top: calc(123 * var(--u)); }
+/* L'ÉCHELLE EST CELLE DU CANON, ET ELLE NE SE NÉGOCIE PAS PAR TABLEAU.
+   23,7 px par mètre, McCarthy ork 1,90 m = 45 px pour ancre :
+     Drakk troll 2,50 m → 46 × 56    White_Rabbit humain 1,75 m → 24 × 41
+     Trash elfe  1,90 m → 34 × 50    Hercules     nain   1,20 m → 20 × 29
+
+   Ce tableau posait White_Rabbit à 34 u et Hercules à 32 u — soit ×1,417
+   et ×1,6. Deux dégâts pour le prix d'un : le nain devenait plus grand que
+   l'humain, et un facteur non entier casse la grille de pixels (certains
+   pixels d'art font une unité, d'autres deux), ce que tout le projet
+   cherche justement à éviter.
+
+   RÈGLE : un sprite ne s'affiche qu'à sa taille NATIVE, ou à un multiple
+   ENTIER de celle-ci. Jamais entre les deux.
+
+   Les `top` en découlent : un sprite grandit vers le bas depuis son `top`,
+   donc changer la largeur déplace les pieds. Ils retombent tous sur la
+   ligne d'ombres, à 163. */
+.tableau--quai .p-drakk    { width: calc(46 * var(--u)); left: calc(88 * var(--u));  top: calc(107 * var(--u)); }
+.tableau--quai .p-trash    { width: calc(34 * var(--u)); left: calc(140 * var(--u)); top: calc(113 * var(--u)); }
+.tableau--quai .p-rabbit   { width: calc(24 * var(--u)); left: calc(180 * var(--u)); top: calc(122 * var(--u)); }
+.tableau--quai .p-hercules { width: calc(20 * var(--u)); left: calc(212 * var(--u)); top: calc(134 * var(--u)); }
 
 /* Bleu de nuit sur tout le tableau : c'est ce qui fait « minuit » plus
    sûrement que n'importe quel choix de couleur objet par objet. */
@@ -157,49 +174,69 @@
 @keyframes aura-bat { 0%,100% { opacity: .8 } 50% { opacity: 1 } }
 
 /* ── Calque RA ─────────────────────────────────────────────────────── */
+/* La typographie des étiquettes est celle du bar, au pixel près : même
+   mono, même corps, même interligne. Une RA qui ne se lit pas de la même
+   façon d'un tableau à l'autre n'est pas une lentille, c'est un décor. */
 .tableau--quai .ora {
   border: calc(1 * var(--u)) solid rgba(90,200,255,.7);
-  background: rgba(20,60,90,.38);
+  background: rgba(20,60,90,.5);
   box-shadow: 0 0 calc(3 * var(--u)) rgba(90,200,255,.35);
   animation: ora-flotte 5.4s ease-in-out infinite;
+  font-family: var(--mono);
+  font-size: calc(4 * var(--u));
+  line-height: calc(6 * var(--u));
+  letter-spacing: .02em;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 calc(1 * var(--u));
+  color: rgba(150,214,255,.85);
 }
-.tableau--quai .ora--balise { width: calc(12 * var(--u)); height: calc(7 * var(--u)); }
-.tableau--quai .bl1 { left: calc(206 * var(--u)); top: calc(86 * var(--u)); }
-.tableau--quai .bl2 { left: calc(252 * var(--u)); top: calc(82 * var(--u)); animation-delay: .8s; }
-.tableau--quai .bl3 { left: calc(292 * var(--u)); top: calc(89 * var(--u)); animation-delay: 1.6s; }
-.tableau--quai .bl4 { left: calc(174 * var(--u)); top: calc(92 * var(--u)); animation-delay: 2.4s; }
+/* Le spam du port. Il occupe le haut du cadre, qui n'a rien d'autre à
+   montrer, et il dit ce que l'ouverture annonce : un ponton privé et
+   trois offres de crédit. */
+.tableau--quai .ora--balise { height: calc(8 * var(--u)); }
+.tableau--quai .bl1 { left: calc(196 * var(--u)); top: calc(84 * var(--u)); width: calc(78 * var(--u)); }
+.tableau--quai .bl2 { left: calc(114 * var(--u)); top: calc(24 * var(--u)); width: calc(96 * var(--u)); animation-delay: .8s; }
+.tableau--quai .bl3 { left: calc(226 * var(--u)); top: calc(40 * var(--u)); width: calc(66 * var(--u)); animation-delay: 1.6s; }
+.tableau--quai .bl4 { left: calc(20 * var(--u));  top: calc(38 * var(--u)); width: calc(88 * var(--u)); animation-delay: 2.4s; }
 
 /* L'immatriculation : « Wilson, W. » — et « l'Amiral » dans son profil. */
 .tableau--quai .ora--immat {
   left: calc(24 * var(--u)); top: calc(60 * var(--u));
-  width: calc(44 * var(--u)); height: calc(11 * var(--u));
+  width: calc(94 * var(--u)); height: calc(8 * var(--u));
 }
 /* LE défaut d'allumage : il flotte pile au-dessus du compartiment moteur
    (x 58→74). L'ORA ne décore pas, il DÉSIGNE. */
 .tableau--quai .ora--defaut {
-  left: calc(56 * var(--u)); top: calc(76 * var(--u));
-  width: calc(20 * var(--u)); height: calc(12 * var(--u));
+  left: calc(56 * var(--u)); top: calc(74 * var(--u));
+  width: calc(48 * var(--u)); height: calc(8 * var(--u));
+  color: rgba(255,190,180,.95);
   border-color: rgba(255,90,90,.95); background: rgba(90,20,20,.55);
   box-shadow: 0 0 calc(5 * var(--u)) rgba(255,90,90,.6);
   animation: alerte 1.5s steps(2) infinite;
 }
 @keyframes alerte { 0%,100% { opacity: 1 } 50% { opacity: .45 } }
 /* Le commlink du pêcheur : éteint, et volontairement. */
+/* Barré ET nommé : le losange dit « coupé », le texte dit lequel. */
 .tableau--quai .ora--muet {
-  left: calc(272 * var(--u)); top: calc(114 * var(--u));
-  width: calc(16 * var(--u)); height: calc(10 * var(--u));
-  border-color: rgba(150,160,180,.75); background: rgba(30,34,42,.6); box-shadow: none;
+  left: calc(250 * var(--u)); top: calc(112 * var(--u));
+  width: calc(38 * var(--u)); height: calc(8 * var(--u));
+  padding-left: calc(9 * var(--u));
+  color: rgba(190,200,215,.85);
+  border-color: rgba(150,160,180,.75); background: rgba(30,34,42,.7); box-shadow: none;
   animation: none;
 }
 .tableau--quai .ora--muet::after {
-  content: ""; position: absolute; inset: calc(2 * var(--u));
+  content: ""; position: absolute; inset: calc(2 * var(--u)) auto calc(2 * var(--u)) calc(1 * var(--u));
+  width: calc(5 * var(--u));
   background: linear-gradient(45deg, transparent 44%, rgba(200,210,225,.85) 44% 56%, transparent 56%);
 }
 /* Le commlink de Wilson, au fond de l'eau : dernière position connue. */
 .tableau--quai .ora--epave {
-  left: calc(120 * var(--u)); top: calc(102 * var(--u));
-  width: calc(14 * var(--u)); height: calc(9 * var(--u));
-  border-color: rgba(90,200,255,.4); background: rgba(20,60,90,.22);
+  left: calc(120 * var(--u)); top: calc(98 * var(--u));
+  width: calc(66 * var(--u)); height: calc(8 * var(--u));
+  color: rgba(140,190,215,.7);
+  border-color: rgba(90,200,255,.4); background: rgba(20,60,90,.35);
   box-shadow: none; animation: aura-bat 3.2s ease-in-out infinite;
 }
 @keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }

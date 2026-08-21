@@ -56,6 +56,22 @@ function montrePortrait(qui) {
    avant une couleur, donc un nom avant une teinte. */
 const nomDuLocuteur = (qui) => equipe[qui]?.nom ?? VISAGES[qui] ?? ''
 
+/* IL PARLE, ET ÇA SE VOIT.
+   Le portrait d'un PNJ s'anime pendant qu'il parle. Les runners n'en ont
+   pas, et il leur manquait donc la seule chose que le portrait apportait :
+   qu'on VOIE qui parle. Chaque planche de runner porte deux images de
+   parole en bout ; `.parle` les joue (voir `.pj.parle` dans engine.css).
+
+   Un seul à la fois : celui qui vient de se taire retrouve son attente. */
+function faitParler(qui) {
+  seTait()
+  if (equipe[qui]) decor.querySelector(`.p-${qui}`)?.classList.add('parle')
+}
+
+function seTait() {
+  for (const el of decor.querySelectorAll('.pj.parle')) el.classList.remove('parle')
+}
+
 
 let file = []
 let quiParle = 'recit'
@@ -167,6 +183,7 @@ function suivante() {
   quiParle = ligne.qui
   journalise(ligne.qui, ligne.texte)
   montrePortrait(ligne.qui)
+  faitParler(ligne.qui)
 
   /* DEUX REGISTRES, DEUX PLACES. En bas, votre côté : le récit et les
      quatre voix de l'équipe — c'est la position de lecture installée
@@ -211,6 +228,7 @@ function cacheBulles() {
   bulleRecit.hidden = true
   bullePnj.hidden = true
   portrait.classList.remove('parle')   /* il se tait : il cligne à nouveau */
+  seTait()                             /* et le runner reprend son attente */
 }
 
 /* ── Interactions ────────────────────────────────────────── */

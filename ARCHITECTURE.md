@@ -117,6 +117,6 @@ Ces cartes et leur compilateur vivent **hors de ce dépôt** — voir plus bas.
 Ce dépôt ne contient que ce qui est nécessaire pour que la page tourne.
 
 Tout le reste — documents de conception, bancs d'essai, cartes ASCII,
-outillage Python — vit dans un `atelier/`, ignoré par git ici et versionné
-séparément. C'est la règle qui décide de tout ajout : voir
-[CONTRIBUTING.md](CONTRIBUTING.md).
+outillage Python — vit dans un **atelier hors dépôt**, versionné séparément,
+posé à côté de celui-ci sur le disque. C'est la règle qui décide de tout
+ajout : voir [CONTRIBUTING.md](CONTRIBUTING.md).

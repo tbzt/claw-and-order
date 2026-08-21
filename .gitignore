@@ -1,8 +1,10 @@
-# L'atelier : documents de conception, bancs d'essai, cartes ASCII et
-# outillage. Rien de tout ça n'est nécessaire pour faire tourner le jeu,
-# donc rien de tout ça n'est publié. Le dossier garde son propre dépôt,
-# indépendant de celui-ci — un .git imbriqué dans un dossier ignoré ne
-# gêne personne.
+# L'atelier — documents de conception, bancs d'essai, cartes ASCII et
+# outillage — vit DEHORS, dans `../claw-and-order-atelier/`. Rien de tout
+# ça n'est nécessaire pour faire tourner le jeu, donc rien de tout ça
+# n'est publié.
+#
+# Cette ligne reste comme garde-fou : si un atelier réapparaît un jour
+# ici, il ne sera pas publié par accident.
 atelier/
 
 # Réglages locaux de l'agent

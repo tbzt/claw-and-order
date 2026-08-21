@@ -16,11 +16,17 @@ tourne.** Rien d'autre. Devant tout nouveau fichier, une seule question :
 | un module importé par la chaîne d'`index.html` | un script qui *génère* quelque chose |
 | `ARCHITECTURE.md`, ce fichier | une carte ASCII de sprite |
 
-L'atelier est un dossier `atelier/` à la racine, **ignoré par git ici** et qui
-porte son propre dépôt. Le montage a l'air curieux, il est délibéré : les deux
-arborescences restent côte à côte sur le disque — l'outillage continue d'écrire
-dans `css/` sans rien savoir de la frontière — mais une seule des deux est
-publiée.
+L'atelier est **hors de ce dépôt** : un dossier voisin,
+`../claw-and-order-atelier/`, qui porte le sien. Les deux arborescences
+restent côte à côte sur le disque — l'outillage sait donc écrire dans `css/`
+sans qu'on ait à le lui dire — mais une seule des deux est publiée, et
+l'autre ne peut pas s'y glisser par accident.
+
+Si tu le ranges ailleurs, l'outillage suit :
+
+```bash
+CLAW_JEU=/chemin/vers/claw-and-order python3 outils/sprite.py
+```
 
 Un fichier qui ne sert qu'à *vérifier* quelque chose (une page qui met
 `index.html` dans une iframe pour le sonder) est un banc d'essai. Il va à
@@ -46,12 +52,22 @@ Puis <http://localhost:8607/>.
 prochaine régénération écraserait la retouche sans prévenir.
 
 ```bash
-python3 atelier/outils/sprite.py
+python3 ../claw-and-order-atelier/outils/sprite.py
 ```
 
-Le script lit `atelier/art/*.txt` et écrit `css/sprites.css`. Sans l'atelier,
-la feuille reste utilisable telle qu'elle est versionnée, mais n'est plus
-régénérable.
+Le script lit `art/*.txt` de l'atelier et écrit `css/sprites.css`. Sans
+l'atelier, la feuille reste utilisable telle qu'elle est versionnée, mais
+n'est plus régénérable.
+
+Un contrôle existe et il vaut la peine d'être lancé avant tout commit qui
+touche à `sprites.css` :
+
+```bash
+python3 ../claw-and-order-atelier/outils/verifie.py
+```
+
+Il recompile les cartes et compare le résultat à l'octet près. Tant qu'il
+passe, la source et l'artefact ne peuvent pas avoir divergé.
 
 ## Ajouter une cible
 
