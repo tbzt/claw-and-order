@@ -285,6 +285,57 @@ body {
 }
 .rideau__reprise:hover { border-color: var(--cyan); color: var(--cyan); }
 
+/* ── La reprise automatique, au démarrage ─────────────────────────── */
+.reprise-auto {
+  position: absolute;
+  inset: 0;
+  z-index: 72;
+  display: grid;
+  place-content: center;
+  gap: 1.4cqh;
+  text-align: center;
+  background: color-mix(in srgb, var(--nuit) 92%, transparent);
+  animation: rideau-tombe .5s ease-out;
+}
+.reprise-auto[hidden] { display: none; }
+
+.reprise-auto__titre {
+  font-family: var(--mono);
+  font-size: 2.6cqw;
+  letter-spacing: .3em;
+  color: var(--ambre);
+}
+.reprise-auto__lieu {
+  font-family: var(--mono);
+  font-size: 1.6cqw;
+  color: var(--ardoise);
+  font-style: italic;
+}
+.reprise-auto__boutons {
+  display: flex;
+  gap: 1cqw;
+  justify-content: center;
+  margin-top: 1cqh;
+}
+.reprise-auto__bouton {
+  font-family: var(--mono);
+  font-size: 1.5cqw;
+  letter-spacing: .1em;
+  padding: .9cqh 2cqw;
+  color: var(--nuit);
+  background: var(--ambre);
+  border: 1px solid var(--ambre);
+  cursor: none;
+  transition: opacity .15s;
+}
+.reprise-auto__bouton:hover { opacity: .85; }
+.reprise-auto__bouton--fantome {
+  color: var(--craie);
+  background: transparent;
+  border-color: #2b3145;
+}
+.reprise-auto__bouton--fantome:hover { border-color: var(--cyan); color: var(--cyan); opacity: 1; }
+
 /* ── HUD ─────────────────────────────────────────────────── */
 
 /* LE HUD NE DÉBORDE JAMAIS.

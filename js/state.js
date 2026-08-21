@@ -25,6 +25,9 @@ export const etat = {
      jamais au clic ni au temps réel. Départ 23:00, en minutes depuis
      minuit. */
   heure: 23 * 60,
+  /* Le tableau courant. `null` avant le premier `charge()` — c'est ce qui
+     dit à `sauvegarde()` qu'il n'y a encore rien à écrire. */
+  lieu: null,
 }
 
 export const a = (flag) => etat.flags.has(flag)
@@ -51,9 +54,11 @@ export function avance(minutes) {
   etat.heure += minutes
 }
 
-/* `23:41`, jamais autre chose : pas de barre, pas de jauge — un chiffre. */
-export function formateHeure() {
-  const total = ((etat.heure % 1440) + 1440) % 1440
+/* `23:41`, jamais autre chose : pas de barre, pas de jauge — un chiffre.
+   Prend `etat.heure` par défaut ; accepte un autre total de minutes pour
+   formater l'heure D'UNE SAUVEGARDE sans la charger. */
+export function formateHeure(minutes = etat.heure) {
+  const total = ((minutes % 1440) + 1440) % 1440
   const h = String(Math.floor(total / 60)).padStart(2, '0')
   const m = String(total % 60).padStart(2, '0')
   return `${h}:${m}`
@@ -72,3 +77,73 @@ export const sait = (fiche) => etat.fiches.has(fiche)
 /* Le contexte transmis aux règles de la scène : elles n'ont pas besoin
    d'en savoir plus, et elles ne peuvent rien casser avec ça. */
 export const contexte = () => ({ a, tient, sait, astral: etat.astral, qui: etat.actif })
+
+/* ── SAUVEGARDE ──────────────────────────────────────────────────────
+   Une seule automatique, en local. On ne sauvegarde qu'au repos — c'est
+   à l'appelant de le garantir, pas à ce module. Trois `Set` à convertir,
+   et c'est tout le travail de sérialisation.
+
+   `version` n'est pas du zèle : `etat` gagnera `visites` avec la carte,
+   et une sauvegarde d'une version inconnue doit se refuser poliment
+   plutôt que se réparer à moitié. */
+const SAUVEGARDE_CLE = 'claw-and-order:sauvegarde'
+const SAUVEGARDE_VERSION = 1
+
+export function sauvegarde() {
+  if (!etat.lieu) return
+  const donnees = {
+    version: SAUVEGARDE_VERSION,
+    quand: new Date().toISOString(),
+    ou: etat.lieu,
+    heure: etat.heure,
+    etat: {
+      lieu: etat.lieu,
+      verbe: etat.verbe,
+      actif: etat.actif,
+      inventaire: etat.inventaire,
+      flags: [...etat.flags],
+      visuels: [...etat.visuels],
+      fiches: [...etat.fiches],
+      allure: etat.allure,
+      journal: etat.journal,
+      heure: etat.heure,
+    },
+  }
+  /* `localStorage` peut refuser (navigation privée, quota) : tant pis,
+     on continue sans bloquer le jeu pour une sauvegarde manquée. */
+  try { localStorage.setItem(SAUVEGARDE_CLE, JSON.stringify(donnees)) } catch {}
+}
+
+export function sauvegardeLisible() {
+  try {
+    const brut = localStorage.getItem(SAUVEGARDE_CLE)
+    if (!brut) return null
+    const donnees = JSON.parse(brut)
+    return donnees?.version === SAUVEGARDE_VERSION ? donnees : null
+  } catch {
+    return null
+  }
+}
+
+export function effaceSauvegarde() {
+  try { localStorage.removeItem(SAUVEGARDE_CLE) } catch {}
+}
+
+/* Remet `etat` depuis une sauvegarde lisible. Ne touche ni `objetActif`
+   ni `ficheActive` (transitoires, § 6 du plan) ni `astral` (dérivé de
+   `actif` — à l'appelant de le recalculer, il connaît `VUES`). */
+export function restaure(donnees) {
+  const d = donnees.etat
+  etat.lieu = d.lieu
+  etat.verbe = d.verbe
+  etat.actif = d.actif
+  etat.objetActif = null
+  etat.inventaire = d.inventaire
+  etat.flags = new Set(d.flags)
+  etat.visuels = new Set(d.visuels)
+  etat.fiches = new Set(d.fiches)
+  etat.ficheActive = null
+  etat.allure = d.allure
+  etat.journal = d.journal
+  etat.heure = d.heure
+}

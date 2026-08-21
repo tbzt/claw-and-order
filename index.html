@@ -93,6 +93,18 @@
         <p class="rideau__bilan" id="rideauBilan"></p>
         <button class="rideau__reprise" id="reprise">Rejouer</button>
       </div>
+
+      <!-- Une automatique lisible se PROPOSE au démarrage, elle ne se
+           charge pas d'office : rouvrir l'onglet pour recommencer ne
+           doit pas rejeter le joueur au milieu de la nuit d'hier. -->
+      <div class="reprise-auto" id="repriseAuto" hidden>
+        <p class="reprise-auto__titre">UNE NUIT EST EN COURS</p>
+        <p class="reprise-auto__lieu" id="repriseAutoLieu"></p>
+        <div class="reprise-auto__boutons">
+          <button class="reprise-auto__bouton" id="repriseAutoContinuer">Reprendre</button>
+          <button class="reprise-auto__bouton reprise-auto__bouton--fantome" id="repriseAutoNouveau">Nouvelle nuit</button>
+        </div>
+      </div>
     </div>
 
     <div class="hud">

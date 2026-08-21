@@ -2,7 +2,8 @@
    Ce fichier ne connaît aucun contenu — il ne sait que faire tourner
    une scène qu'on lui donne. */
 
-import { etat, a, pose, donne, retire, marque, classe, contexte, avance, formateHeure } from './state.js'
+import { etat, a, pose, donne, retire, marque, classe, contexte, avance, formateHeure,
+         sauvegarde, sauvegardeLisible, effaceSauvegarde, restaure } from './state.js'
 import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
 import { resous, nomDe, enLignes } from './interact.js'
@@ -23,6 +24,7 @@ const rideau = $('rideau')
 const carnet = $('carnet')
 const portrait = $('portrait')
 const journal = $('journal')
+const repriseAuto = $('repriseAuto')
 
 /* Qui a un visage. Un PNJ sans portrait parle quand même : la bulle
    suffit, et on ne dessine pas un visage pour une voix de radio. */
@@ -91,6 +93,7 @@ let scene = scenes[depart]
 
 async function charge(idScene, muet = false) {
   scene = scenes[idScene]
+  etat.lieu = idScene
   clearTimeout(minuteur)
   dialogue = null
   survolee = null
@@ -102,13 +105,63 @@ async function charge(idScene, muet = false) {
      retire jamais rien — règle 19. */
   if (scene.entree) marque(...scene.entree(contexte()))
   entre(idScene)                 /* le son suit le tableau */
-  faitEntrerLEquipe()
+  /* `muet` sert aussi à une reprise de sauvegarde : l'équipe est déjà
+     là, elle n'a pas à réapparaître par le bas du cadre. */
+  if (!muet) faitEntrerLEquipe()
   verifieScene()
   brancheDecor()
   rafraichit()
   /* Une ouverture peut être une fonction : un tableau doit pouvoir
      s'ouvrir différemment selon ce qu'on a fait au précédent. */
   if (!muet) dis(typeof scene.ouverture === 'function' ? scene.ouverture(contexte()) : scene.ouverture)
+}
+
+/* ── SAUVEGARDE AUTOMATIQUE ──────────────────────────────────────────
+   « On ne sauvegarde qu'au repos » (§2 du plan) : `occupe === false &&
+   dialogue === null`. On y ajoute le rideau, pour ne pas figer la
+   partie sur l'instant précis où elle se termine. Placé dans
+   `rafraichit()`, ce garde-fou couvre à lui seul les trois points de
+   repos du plan — entrée dans un tableau, fin d'un dialogue, et tout
+   le reste — sans qu'aucun site d'appel n'ait à y penser. */
+const estAuRepos = () => !occupe && !dialogue && rideau.hidden
+
+const NOMS_LIEUX = {
+  bar: 'Le Claw & Order',
+  quai: 'Le Sunnyside Beach Park',
+  greffe: 'Le greffe de nuit',
+  retour: 'Le détroit',
+  planque: 'La laverie',
+}
+
+/* Au démarrage, une automatique lisible se PROPOSE, elle ne se charge
+   pas d'office (§4) : rouvrir l'onglet pour recommencer une nuit ne
+   doit pas rejeter le joueur au milieu de celle d'hier. */
+function proposeReprise(donnees) {
+  $('repriseAutoLieu').textContent =
+    `${NOMS_LIEUX[donnees.ou] ?? donnees.ou} — ${formateHeure(donnees.heure)}`
+  repriseAuto.hidden = false
+
+  $('repriseAutoContinuer').addEventListener('click', async () => {
+    const lieu = donnees.etat.lieu
+    const visuels = donnees.etat.visuels
+    restaure(donnees)
+    etat.astral = VUES[etat.actif] === 'astrale'
+    repriseAuto.hidden = true
+    /* `charge()` vide et reconstruit `visuels` depuis `entree()` — ce qui
+       oublie tout ce qu'une action EN COURS de scène y avait ajouté
+       (les postes tenus au quai, par exemple). On écrase donc après
+       coup avec l'instantané sauvegardé, qui les contient déjà. */
+    await charge(lieu, true)
+    etat.visuels = new Set(visuels)
+    peintAllure()
+    rafraichit()
+  }, { once: true })
+
+  $('repriseAutoNouveau').addEventListener('click', () => {
+    effaceSauvegarde()
+    repriseAuto.hidden = true
+    charge(depart)
+  }, { once: true })
 }
 
 async function demarre() {
@@ -120,6 +173,9 @@ async function demarre() {
   /* Les navigateurs refusent le son avant un geste : on l'arme et
      il s'ouvrira au premier clic. */
   eveille(depart)
+
+  const sauvegardee = sauvegardeLisible()
+  if (sauvegardee) return proposeReprise(sauvegardee)
   await charge(depart)
 }
 
@@ -540,6 +596,8 @@ function rafraichit() {
   curseur.dataset.verbe = etat.verbe
   curseur.classList.toggle('porte-objet', Boolean(etat.objetActif))
   ecritEtiquette()
+
+  if (estAuRepos()) sauvegarde()
 }
 
 function rendInventaire() {
@@ -701,7 +759,13 @@ function brancheHud() {
 
   for (const bouton of document.querySelectorAll('.runner'))
     bouton.addEventListener('click', () => selectionne(bouton.dataset.runner))
-  $('reprise').addEventListener('click', () => location.reload())
+  /* « Rejouer » repartait d'un `location.reload()` qui rechargeait tout
+     droit dans l'automatique qu'on venait de vivre. Il efface d'abord
+     cette automatique — repartir à neuf redevient possible. */
+  $('reprise').addEventListener('click', () => {
+    effaceSauvegarde()
+    location.reload()
+  })
   $('boutonCarnet').addEventListener('click', basculeCarnet)
   $('boutonJournal').addEventListener('click', basculeJournal)
   $('boutonAllure').addEventListener('click', changeAllure)
