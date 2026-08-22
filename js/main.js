@@ -99,8 +99,15 @@ let ficheAppelActive = null
 let scene = scenes[depart]
 
 async function charge(idScene, muet = false) {
+  /* `depuis`/`visites` (chantier 13) ne bougent que sur une VRAIE
+     transition. `muet` sert aussi à la reprise d'une sauvegarde : à ce
+     moment-là, `restaure()` vient de les poser depuis l'instantané, et
+     `etat.lieu` vaut déjà la valeur restaurée — les recalculer ici les
+     écraserait avec du vide. */
+  if (!muet) etat.depuis = etat.lieu
   scene = scenes[idScene]
   etat.lieu = idScene
+  if (!muet) etat.visites[idScene] = (etat.visites[idScene] ?? 0) + 1
   clearTimeout(minuteur)
   dialogue = null
   survolee = null
@@ -119,8 +126,12 @@ async function charge(idScene, muet = false) {
   brancheDecor()
   rafraichit()
   /* Une ouverture peut être une fonction : un tableau doit pouvoir
-     s'ouvrir différemment selon ce qu'on a fait au précédent. */
-  if (!muet) dis(typeof scene.ouverture === 'function' ? scene.ouverture(contexte()) : scene.ouverture)
+     s'ouvrir différemment selon ce qu'on a fait au précédent — et
+     depuis le chantier 13, selon combien de fois on l'a déjà vu
+     (`etat.visites[idScene]`, toujours ≥ 1 ici). */
+  if (!muet) dis(typeof scene.ouverture === 'function'
+    ? scene.ouverture(contexte(), etat.visites[idScene])
+    : scene.ouverture)
 }
 
 /* ── SAUVEGARDE AUTOMATIQUE ──────────────────────────────────────────
@@ -141,6 +152,7 @@ const NOMS_LIEUX = {
   planque: 'La laverie',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
+  carte: 'La carte',
 }
 
 /* Au démarrage, une automatique lisible se PROPOSE, elle ne se charge
@@ -177,6 +189,7 @@ function proposeReprise(donnees) {
 
 async function demarre() {
   brancheHud()
+  brancheStage()
   verifieCarnet()
   verifieReseau()
   verifieBarre()
@@ -835,7 +848,7 @@ function ecritEtiquette() {
     curseur.classList.remove('est-sur-cible')
     return
   }
-  const nom = nomDe(scene, survolee)
+  const nom = nomDe(scene, survolee, contexte())
   etiquette.innerHTML = etat.objetActif
     ? `<em>${objets[etat.objetActif].nom}</em> sur ${nom}`
     : `${etat.verbe} · ${nom}`
@@ -989,12 +1002,43 @@ function reconstruitFiches() {
     if (appel.donne && etat.fiches.has(appel.id) && !fiches[appel.id]) fiches[appel.id] = appel.donne
 }
 
+/* Rebranché à chaque `charge()` : `decor.innerHTML` vient d'être
+   remplacé, donc chaque cible est un élément NEUF qui n'a jamais eu de
+   listener. Rien ici ne touche à `#stage` lui-même — voir
+   `brancheStage()`, plus bas, pour la raison précise. */
 function brancheDecor() {
   for (const cible of decor.querySelectorAll('[data-hotspot]')) {
     cible.addEventListener('pointerenter', () => { survolee = cible.dataset.hotspot; ecritEtiquette() })
     cible.addEventListener('pointerleave', () => { survolee = null; ecritEtiquette() })
   }
+}
 
+/* BUG TROUVÉ EN VÉRIFIANT LE CHANTIER 13, PAS CAUSÉ PAR LUI : ces
+   quatre écouteurs vivaient dans `brancheDecor()`, rebranchés à CHAQUE
+   `charge()` — mais `#stage`, contrairement à `#decor`, n'est jamais
+   recréé : son `innerHTML` n'est jamais vidé, lui. Chaque tableau
+   chargé empilait donc un écouteur de plus sur le même élément, sans
+   qu'aucun ne soit jamais retiré. Un clic après N tableaux chargés
+   déclenchait `joue()` N fois d'affilée.
+
+   Invisible depuis le début du projet parce que presque tous les
+   effets de bord sont idempotents sous répétition — `pose()`, `classe()`
+   et `marque()` posent dans des `Set`, `donne()` vérifie déjà la
+   présence avant d'ajouter. Le seul qui ne l'est PAS, c'est
+   `avance(minutes)` : il ADDITIONNE à chaque appel. Tant qu'aucun
+   tableau revisitable ne portait de coût en minutes sur une cible, la
+   duplication ne coûtait qu'une ligne de texte répétée — remarquée,
+   sans doute, jamais assez pour qu'on cherche plus loin. La carte
+   (chantier 13) est la première mécanique du jeu où REVENIR sur un
+   tableau déjà chargé est le geste normal, ET où un clic coûte des
+   minutes : elle a rendu visible ce que le reste du jeu cachait déjà.
+
+   Trouvé en rejouant bar → carte → quai → carte → bar : la seconde
+   fois qu'un nœud de la carte se cliquait, l'horloge avançait de plus
+   que le coût affiché.
+
+   Branché UNE SEULE FOIS, depuis `demarre()` — jamais depuis `charge()`. */
+function brancheStage() {
   stage.addEventListener('pointermove', (e) => {
     const boite = stage.getBoundingClientRect()
     const x = e.clientX - boite.left

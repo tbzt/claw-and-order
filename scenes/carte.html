@@ -1,0 +1,72 @@
+<!--
+  Tableau-charnière — LA CARTE (chantier 13). Le plan de Drakk : le
+  métroplexe de Seattle.
+
+  LA GÉOGRAPHIE EST CELLE DU LIVRE, pas une approximation à vue : les
+  douze districts d'Anarchy v2 p. 281 ont été extraits de la page par
+  segmentation couleur (croissance de régions depuis un germe par
+  district), puis vectorisés et simplifiés — le détroit, la presqu'île
+  de Downtown, la pointe de Tacoma, les îles d'Outremer sont les vraies
+  formes de la carte. Seul le RENDU est au jeu : aplats ambrés,
+  quadrillage doré, numéros et légende comme sur la page.
+
+  Deux nœuds cliquables pour l'instant, et ce sont les deux numéros
+  vifs : 6 (Downtown, le bar) et 10 (Tacoma, le quai). Les dix autres
+  districts sont dessinés, numérotés, éteints. Grille 256 x 144.
+-->
+<div class="tableau tableau--carte">
+
+  <div class="fond-carte"></div>
+
+  <div class="plan">
+    <svg class="plan__svg" viewBox="0 0 160 244" preserveAspectRatio="none" aria-hidden="true">
+      <path class="eau" d="M51.0 92.0 L53.0 105.0 L58.0 111.0 L57.0 117.0 L63.0 129.0 L63.0 140.0 L48.0 146.0 L47.0 150.0 L52.0 151.0 L50.0 156.0 L46.0 156.0 L45.0 152.0 L40.0 152.0 L38.0 148.0 L35.0 148.0 L35.0 154.0 L32.0 157.0 L34.0 163.0 L30.0 163.0 L22.0 182.0 L18.0 183.0 L15.0 190.0 L8.0 194.0 L8.0 197.0 L1.0 199.0 L0.0 172.0 L3.0 176.0 L4.0 167.0 L8.0 166.0 L8.0 162.0 L4.0 158.0 L7.0 141.0 L18.0 134.0 L22.0 127.0 L24.0 141.0 L28.0 140.0 L30.0 142.0 L33.0 135.0 L31.0 129.0 L34.0 124.0 L34.0 114.0 L38.0 109.0 L38.0 106.0 L32.0 105.0 L32.0 102.0 L16.0 101.0 L16.0 103.0 L10.0 104.0 L11.0 101.0 L14.0 101.0 L13.0 95.0 L10.0 95.0 L10.0 76.0 L20.0 77.0 L24.0 82.0 L23.0 71.0 L16.0 63.0 L18.0 57.0 L25.0 66.0 L30.0 65.0 L31.0 57.0 L37.0 59.0 L43.0 57.0 L41.0 51.0 L38.0 50.0 L41.0 44.0 L38.0 42.0 L35.0 25.0 L26.0 23.0 L30.0 43.0 L27.0 44.0 L27.0 37.0 L24.0 36.0 L19.0 47.0 L16.0 45.0 L13.0 52.0 L9.0 54.0 L5.0 64.0 L5.0 74.0 L0.0 76.0 L0.0 61.0 L3.0 59.0 L4.0 46.0 L12.0 41.0 L12.0 32.0 L21.0 32.0 L17.0 22.0 L11.0 24.0 L14.0 12.0 L9.0 11.0 L7.0 0.0 L82.0 0.0 L76.0 2.0 L75.0 14.0 L65.0 16.0 L66.0 26.0 L64.0 30.0 L67.0 30.0 L67.0 32.0 L65.0 37.0 L61.0 36.0 L55.0 43.0 L56.0 50.0 L53.0 50.0 L53.0 54.0 L56.0 56.0 L56.0 67.0 L52.0 69.0 L50.0 80.0 L58.0 84.0 L61.0 89.0 L59.0 91.0 L53.0 89.0 L51.0 92.0 Z"/>
+      <path class="q q--everett" d="M84.0 3.0 L85.0 10.0 L89.0 10.0 L91.0 15.0 L94.0 16.0 L93.0 31.0 L87.0 29.0 L80.0 37.0 L70.0 37.0 L71.0 43.0 L57.0 43.0 L55.0 46.0 L57.0 40.0 L61.0 36.0 L65.0 37.0 L67.0 32.0 L67.0 30.0 L64.0 30.0 L66.0 26.0 L65.0 16.0 L76.0 13.0 L77.0 1.0 L84.0 0.0 L84.0 3.0 Z"/>
+      <path class="q q--snohomish" d="M71.0 56.0 L67.0 56.0 L65.0 52.0 L56.0 49.0 L56.0 44.0 L71.0 43.0 L70.0 37.0 L80.0 37.0 L87.0 29.0 L93.0 31.0 L94.0 16.0 L92.0 15.0 L97.0 16.0 L98.0 23.0 L103.0 25.0 L105.0 31.0 L110.0 35.0 L104.0 41.0 L100.0 41.0 L99.0 44.0 L89.0 48.0 L85.0 56.0 L71.0 56.0 Z"/>
+      <path class="q q--redmond" d="M112.0 102.0 L104.0 103.0 L101.0 95.0 L96.0 92.0 L98.0 81.0 L95.0 77.0 L93.0 77.0 L95.0 82.0 L90.0 81.0 L90.0 89.0 L86.0 89.0 L85.0 84.0 L88.0 83.0 L89.0 75.0 L85.0 75.0 L82.0 65.0 L82.0 56.0 L86.0 55.0 L89.0 48.0 L99.0 44.0 L100.0 41.0 L104.0 41.0 L110.0 34.0 L112.0 34.0 L111.0 49.0 L114.0 52.0 L114.0 55.0 L110.0 57.0 L110.0 67.0 L121.0 72.0 L120.0 89.0 L123.0 92.0 L123.0 97.0 L119.0 99.0 L118.0 104.0 L112.0 102.0 Z"/>
+      <path class="q q--bellevue" d="M97.0 81.0 L96.0 92.0 L101.0 95.0 L104.0 104.0 L99.0 103.0 L94.0 109.0 L83.0 108.0 L77.0 110.0 L77.0 107.0 L72.0 105.0 L72.0 103.0 L78.0 104.0 L77.0 94.0 L73.0 87.0 L69.0 87.0 L70.0 79.0 L68.0 77.0 L71.0 77.0 L74.0 73.0 L69.0 65.0 L70.0 56.0 L82.0 56.0 L83.0 72.0 L85.0 72.0 L85.0 75.0 L89.0 75.0 L88.0 83.0 L85.0 84.0 L86.0 89.0 L90.0 89.0 L90.0 81.0 L95.0 82.0 L93.0 77.0 L97.0 81.0 Z"/>
+      <path class="q q--council" d="M68.0 92.0 L69.0 87.0 L73.0 87.0 L77.0 94.0 L76.0 99.0 L72.0 99.0 L68.0 92.0 Z"/>
+      <path class="q q--downtown" d="M76.0 107.0 L78.0 111.0 L78.0 128.0 L74.0 131.0 L74.0 134.0 L70.0 134.0 L70.0 131.0 L61.0 128.0 L60.0 120.0 L57.0 117.0 L58.0 111.0 L54.0 108.0 L50.0 94.0 L53.0 89.0 L56.0 91.0 L61.0 89.0 L58.0 84.0 L50.0 80.0 L52.0 69.0 L56.0 67.0 L56.0 56.0 L54.0 56.0 L53.0 50.0 L59.0 49.0 L59.0 51.0 L63.0 51.0 L67.0 56.0 L70.0 56.0 L69.0 65.0 L74.0 73.0 L71.0 77.0 L68.0 77.0 L70.0 79.0 L68.0 93.0 L72.0 96.0 L72.0 99.0 L78.0 99.0 L78.0 104.0 L72.0 103.0 L76.0 107.0 Z"/>
+      <path class="q q--renton" d="M95.0 107.0 L99.0 103.0 L105.0 104.0 L105.0 115.0 L108.0 118.0 L114.0 118.0 L113.0 122.0 L104.0 126.0 L102.0 131.0 L92.0 136.0 L84.0 148.0 L73.0 149.0 L75.0 147.0 L74.0 131.0 L78.0 128.0 L77.0 110.0 L83.0 108.0 L94.0 109.0 L95.0 107.0 Z"/>
+      <path class="q q--auburn" d="M108.0 131.0 L106.0 132.0 L107.0 138.0 L112.0 134.0 L115.0 141.0 L122.0 143.0 L122.0 145.0 L118.0 145.0 L116.0 142.0 L110.0 142.0 L109.0 145.0 L110.0 154.0 L113.0 153.0 L115.0 147.0 L113.0 169.0 L118.0 171.0 L120.0 179.0 L118.0 179.0 L117.0 173.0 L114.0 177.0 L110.0 174.0 L102.0 179.0 L83.0 176.0 L80.0 170.0 L74.0 171.0 L72.0 150.0 L84.0 148.0 L92.0 136.0 L102.0 131.0 L104.0 126.0 L112.0 122.0 L112.0 129.0 L108.0 129.0 L108.0 131.0 Z"/>
+      <path class="q q--puyallup" d="M74.0 219.0 L71.0 219.0 L71.0 224.0 L69.0 224.0 L70.0 240.0 L64.0 241.0 L64.0 239.0 L61.0 239.0 L61.0 242.0 L58.0 242.0 L56.0 239.0 L54.0 241.0 L51.0 241.0 L50.0 238.0 L45.0 239.0 L46.0 234.0 L44.0 236.0 L40.0 235.0 L35.0 225.0 L31.0 225.0 L31.0 217.0 L36.0 206.0 L36.0 201.0 L30.0 199.0 L31.0 190.0 L44.0 187.0 L48.0 191.0 L48.0 195.0 L51.0 196.0 L48.0 185.0 L49.0 174.0 L53.0 174.0 L50.0 179.0 L68.0 179.0 L68.0 177.0 L59.0 178.0 L59.0 175.0 L62.0 175.0 L63.0 172.0 L69.0 174.0 L70.0 170.0 L80.0 170.0 L83.0 176.0 L102.0 178.0 L102.0 191.0 L98.0 192.0 L93.0 189.0 L92.0 191.0 L95.0 191.0 L93.0 198.0 L88.0 197.0 L92.0 204.0 L90.0 207.0 L84.0 207.0 L83.0 212.0 L77.0 213.0 L74.0 219.0 Z"/>
+      <path class="q q--tacoma" d="M72.0 150.0 L74.0 169.0 L70.0 170.0 L69.0 174.0 L63.0 172.0 L62.0 175.0 L59.0 175.0 L59.0 178.0 L68.0 177.0 L68.0 179.0 L50.0 179.0 L53.0 174.0 L49.0 174.0 L49.0 179.0 L41.0 177.0 L38.0 179.0 L38.0 183.0 L30.0 182.0 L27.0 189.0 L17.0 190.0 L17.0 185.0 L22.0 182.0 L23.0 176.0 L27.0 174.0 L30.0 163.0 L34.0 163.0 L32.0 157.0 L35.0 154.0 L35.0 148.0 L38.0 148.0 L40.0 152.0 L45.0 152.0 L46.0 156.0 L50.0 156.0 L52.0 151.0 L47.0 150.0 L48.0 146.0 L62.0 141.0 L63.0 130.0 L67.0 130.0 L70.0 131.0 L70.0 134.0 L74.0 134.0 L75.0 147.0 L72.0 150.0 Z"/>
+      <path class="q q--fortlewis" d="M41.0 177.0 L48.0 178.0 L49.0 194.0 L51.0 196.0 L48.0 195.0 L48.0 191.0 L44.0 187.0 L31.0 190.0 L30.0 199.0 L36.0 201.0 L35.0 210.0 L31.0 217.0 L32.0 210.0 L20.0 210.0 L16.0 206.0 L16.0 202.0 L23.0 202.0 L23.0 205.0 L28.0 203.0 L26.0 194.0 L16.0 193.0 L11.0 195.0 L11.0 192.0 L15.0 190.0 L16.0 186.0 L18.0 191.0 L27.0 189.0 L30.0 182.0 L38.0 183.0 L38.0 179.0 L41.0 177.0 Z"/>
+      <path class="q q--outremer" d="M39.0 143.0 L36.0 128.0 L38.0 126.0 L37.0 119.0 L46.0 119.0 L46.0 115.0 L41.0 114.0 L41.0 110.0 L44.0 109.0 L48.0 115.0 L48.0 125.0 L45.0 128.0 L46.0 132.0 L41.0 133.0 L39.0 143.0 Z"/>
+      <line class="route" x1="61.6" y1="88.5" x2="44.4" y2="153.7"/>
+    </svg>
+    <div class="grille-carte"></div>
+  </div>
+
+  <div class="jalon" style="left:calc(50.7 * var(--u)); top:calc(16.8 * var(--u))">1</div>
+  <div class="jalon" style="left:calc(54.7 * var(--u)); top:calc(26.5 * var(--u))">2</div>
+  <div class="jalon" style="left:calc(65.1 * var(--u)); top:calc(43.5 * var(--u))">3</div>
+  <div class="jalon" style="left:calc(54.1 * var(--u)); top:calc(51.7 * var(--u))">4</div>
+  <div class="jalon" style="left:calc(50.2 * var(--u)); top:calc(59.4 * var(--u))">5</div>
+  <div class="jalon jalon--vif" style="left:calc(42.3 * var(--u)); top:calc(53.3 * var(--u))" data-hotspot="bar">6</div>
+  <div class="jalon" style="left:calc(57.8 * var(--u)); top:calc(73.2 * var(--u))">7</div>
+  <div class="jalon" style="left:calc(61.4 * var(--u)); top:calc(90.8 * var(--u))">8</div>
+  <div class="jalon" style="left:calc(42.4 * var(--u)); top:calc(117.1 * var(--u))">9</div>
+  <div class="jalon jalon--vif" style="left:calc(32.7 * var(--u)); top:calc(89.7 * var(--u))" data-hotspot="quai">10</div>
+  <div class="jalon" style="left:calc(25.4 * var(--u)); top:calc(111.9 * var(--u))">11</div>
+  <div class="jalon" style="left:calc(31.0 * var(--u)); top:calc(77.0 * var(--u))">12</div>
+
+  <div class="legende">
+    <p class="legende__titre">Légende</p>
+    <ol class="legende__liste">
+    <li><b>1.</b> Everett</li>
+    <li><b>2.</b> Snohomish</li>
+    <li><b>3.</b> Redmond</li>
+    <li><b>4.</b> Bellevue</li>
+    <li><b>5.</b> Council Island</li>
+    <li class="est-vif"><b>6.</b> Downtown <span>— Le Claw &amp; Order</span></li>
+    <li><b>7.</b> Renton</li>
+    <li><b>8.</b> Auburn</li>
+    <li><b>9.</b> Puyallup</li>
+    <li class="est-vif"><b>10.</b> Tacoma <span>— Sunnyside Beach Park</span></li>
+    <li><b>11.</b> Fort Lewis</li>
+    <li><b>12.</b> Outremer</li>
+    </ol>
+  </div>
+
+</div>

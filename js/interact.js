@@ -120,6 +120,11 @@ export function resous(scene, idCible) {
   return normalise(dedouble(typeof regle === 'function' ? regle(ctx) : regle, etat.actif))
 }
 
-export function nomDe(scene, idCible) {
-  return scene.hotspots[idCible]?.nom ?? '?'
+/* `nom` est presque toujours une chaîne — sauf sur la carte (chantier
+   13), où l'étiquette d'un nœud porte le coût du trajet et doit donc
+   lire l'heure courante. Une fonction s'évalue avec le contexte ; tout
+   le reste du jeu continue d'écrire une chaîne, sans y penser. */
+export function nomDe(scene, idCible, ctx) {
+  const nom = scene.hotspots[idCible]?.nom
+  return (typeof nom === 'function' ? nom(ctx) : nom) ?? '?'
 }

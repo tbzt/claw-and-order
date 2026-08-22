@@ -19,12 +19,17 @@ import { equipiers } from './equipiers.js'
 export const bar = {
   markup: 'scenes/bar.html',
 
-  ouverture: [
-    'Le Claw & Order, Downtown, 23 h. Un vieux bar dans son jus — un bar à flics-à-louer, relativement méta-friendly, ce qui explique qu’on vous laisse entrer.',
-    'Quelques clients éparpillés jouent aux fléchettes. Certains portent encore l’uniforme doré. Les fléchettes s’arrêtent en même temps que les conversations.',
-    'Au nom de « McCarthy », le barman troll relève à peine les yeux de son comptoir et pointe le menton vers le fond, en grognant.',
-    'À l’écart, attablé seul, un vieil ork attend. Il est visiblement nerveux.',
-  ],
+  /* Chantier 13 : `visite` vient de `charge()`, 1 la première fois. Ce
+     texte plantait 23 h en dur — le rejouer tel quel à un retour depuis
+     la carte, à une heure qui n'est plus 23 h, contredirait l'horloge
+     affichée au HUD. Pas encore une « seconde fenêtre » (chantier 19) :
+     juste une ouverture qui ne ment plus sur l'heure. */
+  ouverture: (ctx, visite) => visite > 1
+    ? ['Vous repoussez la porte battante du Claw & Order. La salle n’a pas changé — l’heure, elle, a tourné.']
+    : ['Le Claw & Order, Downtown, 23 h. Un vieux bar dans son jus — un bar à flics-à-louer, relativement méta-friendly, ce qui explique qu’on vous laisse entrer.',
+       'Quelques clients éparpillés jouent aux fléchettes. Certains portent encore l’uniforme doré. Les fléchettes s’arrêtent en même temps que les conversations.',
+       'Au nom de « McCarthy », le barman troll relève à peine les yeux de son comptoir et pointe le menton vers le fond, en grognant.',
+       'À l’écart, attablé seul, un vieil ork attend. Il est visiblement nerveux.'],
 
   hotspots: {
 
@@ -166,6 +171,13 @@ export const bar = {
          le même geste que sortir sans le savoir : c'est la plus petite
          récompense possible pour une observation, et elle suffit à ce
          que regarder avec le bon runner cesse d'être décoratif. */
+      /* Chantier 13 : la porte ne paie plus le trajet elle-même et ne
+         présume plus la destination — elle ouvre sur LA CARTE
+         (`js/data/carte.js`), qui affiche le coût et le choix. Avant,
+         elle disait « Tacoma est à quarante minutes » tout en ne
+         prélevant que 35 sur l'horloge : un écart jamais visible à
+         l'écran, et qui l'est devenu le jour où le coût s'est affiché
+         ailleurs. Corrigé en même temps que le trajet a déménagé. */
       utiliser: ({ a }) => {
         if (!a('embauche'))
           return { tous: 'Pas sans avoir parlé au vieil ork. C’est pour lui que vous êtes venus.',
@@ -173,13 +185,11 @@ export const bar = {
         return a('sait-ligne')
           ? { tous: ['Drakk sort le premier, et il passe entre les joueurs de fléchettes et la porte.',
                      'Les deux en uniforme doré le regardent faire. Aucun des deux ne se lève.',
-                     'Vous sortez. La pluie a repris.',
-                     'Tacoma est à quarante minutes, et le Sunnyside Beach Park est au bout.'],
+                     'Vous sortez. La pluie a repris.'],
               drakk: '« On ne tourne pas le dos à une ligne qu’on a vue. On marche dessus. »',
-              minutes: 35, va: 'quai' }
-          : { tous: ['Vous sortez. La pluie a repris.',
-                     'Tacoma est à quarante minutes, et le Sunnyside Beach Park est au bout.'],
-              minutes: 35, va: 'quai' }
+              va: 'carte' }
+          : { tous: 'Vous sortez. La pluie a repris.',
+              va: 'carte' }
       },
     },
 

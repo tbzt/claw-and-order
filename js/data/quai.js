@@ -28,11 +28,16 @@ import { equipiers } from './equipiers.js'
 export const quai = {
   markup: 'scenes/quai.html',
 
-  ouverture: [
-    'Sunnyside Beach Park, Tacoma. Une cinquantaine de bateaux s’entassent le long de la jetée, tous éteints.',
-    'Tous sauf un : un voilier qui semble prêt à mettre, littéralement, les voiles. Personne sur le pont.',
-    'OBJECTIF — rejoindre l’île McNeil. Wilson devait vous y conduire. Wilson ne répond pas.',
-  ],
+  /* Chantier 13 : `visite` vient de `charge()`. Ce tableau se rechargeait
+     DÉJÀ plusieurs fois avant ce chantier — chaque aller-retour vers la
+     vue rapprochée du voilier (`reculer` dans quai-voilier.js) rejoue
+     `charge('quai')` — et personne ne l'avait remarqué : l'ouverture
+     entière repartait de zéro à chaque retour du pont. Corrigé au passage. */
+  ouverture: (ctx, visite) => visite > 1
+    ? ['Vous êtes de retour sur la jetée. Le voilier attend, exactement où vous l’avez laissé.']
+    : ['Sunnyside Beach Park, Tacoma. Une cinquantaine de bateaux s’entassent le long de la jetée, tous éteints.',
+       'Tous sauf un : un voilier qui semble prêt à mettre, littéralement, les voiles. Personne sur le pont.',
+       'OBJECTIF — rejoindre l’île McNeil. Wilson devait vous y conduire. Wilson ne répond pas.'],
 
   /* `esprit-eau` se demande maintenant depuis la vue rapprochée du
      voilier (chantier 25) — mais son visuel (l'ondine sous l'étrave,
@@ -293,6 +298,14 @@ export const quai = {
                'Personne, sauf le pêcheur.'],
         trash: '« Il est passé par là. La trace va du parking au bateau, et elle revient. Il n’a pas couru en revenant. »',
         drakk: '« Une seule route, et pas de sortie de flanc. Si on nous coince ici, on se bat sur cette planche. »',
+      },
+      /* La jetée EST le chemin du parking (Drakk le dit déjà en tactique :
+         « la trace va du parking au bateau »). Chantier 13 : c'est donc
+         elle qui porte la sortie vers LA CARTE — aucun décor neuf, la
+         même cible sert les deux usages, comme la porte au bar. */
+      utiliser: {
+        tous: 'Vous reprenez la jetée en sens inverse, vers le parking.',
+        va: 'carte',
       },
     },
   },

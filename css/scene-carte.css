@@ -1,0 +1,152 @@
+/* ── LA CARTE — chantier 13 ───────────────────────────────────────────
+   La GÉOGRAPHIE vient de la carte d'Anarchy v2 p. 281, extraite de la
+   page par segmentation (voir scenes/carte.html) : les contours SVG
+   sont les vraies formes des douze districts. Le RENDU, lui, est celui
+   du jeu — aplats ambrés, quadrillage doré, numéros et légende comme
+   sur la page du livre.
+
+   La page du livre est en PORTRAIT, le plateau est en 16:9. D'où la
+   mise en page : le plan à gauche (89 x 136 unités d'art), la légende
+   numérotée à droite — exactement ce que fait le livre avec son encart
+   « LÉGENDE », et ça règle du même coup les collisions d'étiquettes
+   qui rendaient les premières versions illisibles.
+   --u vaut un pixel d'art, comme les cinq autres scènes. */
+
+.tableau--carte {
+  position: absolute;
+  inset: 0;
+  --u: calc(100cqw / 256);
+  background: #0b0910;
+}
+.tableau--carte > * { position: absolute; }
+
+.tableau--carte .fond-carte {
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 45%, #16121a 0%, #0b0910 78%);
+}
+
+/* Le plan : la boîte qui porte le SVG, à gauche du cadre. */
+.tableau--carte .plan {
+  left: calc(8 * var(--u)); top: calc(4 * var(--u));
+  width: calc(89 * var(--u)); height: calc(136 * var(--u));
+}
+.tableau--carte .plan__svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Le détroit. La seule couleur froide de la scène : c'est elle qui
+   donne à la carte sa silhouette reconnaissable. */
+.tableau--carte .eau {
+  fill: #1e3350;
+  stroke: rgba(120,170,220,.35);
+  stroke-width: .5;
+}
+
+/* Les districts. Tous dans la même famille ambrée — ce sont des
+   nuances de valeur qui les séparent, pas des teintes différentes :
+   une carte, pas un camembert. */
+.tableau--carte .q {
+  fill: #2a2115;
+  stroke: rgba(201,160,58,.5);
+  stroke-width: .5;
+  vector-effect: non-scaling-stroke;
+}
+.tableau--carte .q--everett   { fill: #2f2517; }
+.tableau--carte .q--snohomish { fill: #261e14; }
+.tableau--carte .q--redmond   { fill: #332618; }
+.tableau--carte .q--bellevue  { fill: #2a2115; }
+.tableau--carte .q--council   { fill: #3a2c19; }
+.tableau--carte .q--renton    { fill: #251e13; }
+.tableau--carte .q--auburn    { fill: #2f2416; }
+.tableau--carte .q--puyallup  { fill: #281f14; }
+.tableau--carte .q--fortlewis { fill: #241d13; }
+.tableau--carte .q--outremer  { fill: #33281a; }
+
+/* Les deux districts vivants : plus clairs, liseré franc. Ce sont eux
+   qu'on peut atteindre ce soir. */
+.tableau--carte .q--downtown,
+.tableau--carte .q--tacoma {
+  fill: #4a3a1e;
+  stroke: rgba(255,196,90,.9);
+  stroke-width: .8;
+}
+
+/* Le trajet, en pointillés — un seul segment tant qu'il n'y a que deux
+   nœuds. Il se ravive au survol de l'un des deux jalons. */
+.tableau--carte .route {
+  stroke: rgba(201,160,58,.55);
+  stroke-width: 1.1;
+  stroke-dasharray: 3 3;
+  transition: stroke .18s ease-out;
+}
+.tableau--carte:has(.jalon--vif:hover) .route { stroke: rgba(255,214,140,.95); }
+
+/* Le quadrillage du plan de Drakk, par-dessus la carte. */
+.tableau--carte .grille-carte {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(201,160,58,.11) 0 1px, transparent 1px calc(8 * var(--u))),
+    repeating-linear-gradient(180deg, rgba(201,160,58,.11) 0 1px, transparent 1px calc(8 * var(--u)));
+}
+
+/* ── Les jalons ─────────────────────────────────────────────────────
+   Les petits carrés numérotés du livre. Les dix éteints ne portent
+   aucune cible ; les deux vifs SONT les cibles du tableau (6 = le bar,
+   10 = le quai), et font 9 x 9 unités d'art — au-dessus du seuil de
+   8 x 8 que le plan de mise en scène § 7 impose. */
+.tableau--carte .jalon {
+  width: calc(9 * var(--u)); height: calc(9 * var(--u));
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: calc(5 * var(--u));
+  line-height: 1;
+  border-radius: 1px;
+  background: rgba(70,56,26,.9);
+  color: rgba(201,160,58,.75);
+  box-shadow: 0 0 0 1px rgba(201,160,58,.35);
+  pointer-events: none;
+}
+.tableau--carte .jalon--vif {
+  background: var(--ambre, #ffb257);
+  color: #1a1206;
+  font-weight: 700;
+  box-shadow: 0 0 0 1px rgba(255,214,140,.9), 0 0 calc(3 * var(--u)) rgba(255,178,87,.45);
+  cursor: none;
+  pointer-events: auto;
+}
+
+/* ── La légende ─────────────────────────────────────────────────────
+   L'encart du livre, transposé : bandeau ambré, liste numérotée. Les
+   deux entrées vives portent le nom du LIEU, pas seulement du district
+   — c'est là que le joueur lit où il peut aller ce soir. */
+.tableau--carte .legende {
+  left: calc(106 * var(--u)); top: calc(16 * var(--u));
+  width: calc(142 * var(--u));
+}
+.tableau--carte .legende__titre {
+  margin: 0;
+  padding: calc(1.5 * var(--u)) calc(3 * var(--u));
+  background: var(--ambre, #ffb257);
+  color: #171004;
+  font-family: var(--mono);
+  font-size: calc(5.5 * var(--u));
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.tableau--carte .legende__liste {
+  margin: 0;
+  padding: calc(2.5 * var(--u)) calc(3 * var(--u));
+  list-style: none;
+  background: rgba(38,24,14,.92);
+  box-shadow: inset 0 0 0 1px rgba(201,160,58,.28);
+}
+.tableau--carte .legende__liste li {
+  font-family: var(--mono);
+  font-size: calc(4.6 * var(--u));
+  line-height: calc(7.4 * var(--u));
+  color: rgba(201,160,58,.6);
+  white-space: nowrap;
+}
+.tableau--carte .legende__liste b { display: inline-block; width: calc(9 * var(--u)); font-weight: 400; }
+.tableau--carte .legende__liste .est-vif { color: rgba(255,222,160,.95); }
+.tableau--carte .legende__liste .est-vif span { color: rgba(255,178,87,.8); }

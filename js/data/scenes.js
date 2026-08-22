@@ -8,6 +8,7 @@ import { retour } from './retour.js'
 import { planque } from './planque.js'
 import { tribunal } from './tribunal.js'
 import { tribunalSalle } from './tribunal-salle.js'
+import { carte } from './carte.js'
 
-export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, retour, planque, tribunal, 'tribunal-salle': tribunalSalle }
+export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, retour, planque, tribunal, 'tribunal-salle': tribunalSalle, carte }
 export const depart = 'bar'

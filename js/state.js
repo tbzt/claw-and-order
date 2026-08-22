@@ -41,6 +41,18 @@ export const etat = {
   /* Le tableau courant. `null` avant le premier `charge()` — c'est ce qui
      dit à `sauvegarde()` qu'il n'y a encore rien à écrire. */
   lieu: null,
+  /* D'où l'on vient — posé par `charge()` juste avant qu'il écrase `lieu`.
+     La carte (chantier 13) en a besoin : une fois DESSUS, `lieu === 'carte'`
+     et plus rien ne dit quel nœud est « ici ». Utile à toute scène qui
+     voudrait un jour distinguer d'où on arrive. */
+  depuis: null,
+  /* Combien de fois chaque tableau a été chargé. `{ bar: 2, quai: 1, … }` —
+     chantier 13. Sert à écrire une ouverture différente au second passage
+     sans construire tout de suite les « secondes fenêtres » (chantier 19,
+     bien plus gros) : un nœud qu'on retrouve identique à sa première
+     visite contredit L3 (« revenir doit changer quelque chose »), même
+     si ce n'est que le texte d'ouverture qui change pour l'instant. */
+  visites: {},
 }
 
 export const a = (flag) => etat.flags.has(flag)
@@ -99,17 +111,24 @@ export function ficheslues() {
 export const sait = (fiche) => etat.fiches.has(fiche)
 
 /* Le contexte transmis aux règles de la scène : elles n'ont pas besoin
-   d'en savoir plus, et elles ne peuvent rien casser avec ça. */
-export const contexte = () => ({ a, tient, sait, astral: etat.astral, qui: etat.actif })
+   d'en savoir plus, et elles ne peuvent rien casser avec ça.
+   `heure` et `depuis` sont arrivés avec la carte (chantier 13) : un lieu
+   qui se ferme la nuit (chantier 17) doit pouvoir lire l'heure, et un
+   nœud de la carte doit savoir d'où on l'atteint. */
+export const contexte = () => ({ a, tient, sait, astral: etat.astral, qui: etat.actif, heure: etat.heure, depuis: etat.depuis })
 
 /* ── SAUVEGARDE ──────────────────────────────────────────────────────
    Une seule automatique, en local. On ne sauvegarde qu'au repos — c'est
    à l'appelant de le garantir, pas à ce module. Trois `Set` à convertir,
    et c'est tout le travail de sérialisation.
 
-   `version` n'est pas du zèle : `etat` gagnera `visites` avec la carte,
-   et une sauvegarde d'une version inconnue doit se refuser poliment
-   plutôt que se réparer à moitié. */
+   `visites` et `depuis` (chantier 13) s'ajoutent SANS bump de version :
+   ce sont des champs de confort (l'ouverture d'un nœud revisité, savoir
+   d'où on arrive sur la carte), jamais lus pour une décision qui ne se
+   rattraperait pas. Une sauvegarde d'avant la carte les restaure à `{}`
+   / `null` sans rien perdre de plus grave — bumper la version aurait
+   rejeté la nuit en cours de l'utilisateur pour un gain qui ne le
+   justifie pas. */
 const SAUVEGARDE_CLE = 'claw-and-order:sauvegarde'
 const SAUVEGARDE_VERSION = 1
 
@@ -133,6 +152,8 @@ export function sauvegarde() {
       allure: etat.allure,
       journal: etat.journal,
       heure: etat.heure,
+      visites: etat.visites,
+      depuis: etat.depuis,
     },
   }
   /* `localStorage` peut refuser (navigation privée, quota) : tant pis,
@@ -176,4 +197,8 @@ export function restaure(donnees) {
   etat.allure = d.allure
   etat.journal = d.journal
   etat.heure = d.heure
+  /* `?? {}`/`?? null` : une sauvegarde d'avant le chantier 13 n'a ni
+     l'un ni l'autre, et ce n'est pas une raison de la refuser. */
+  etat.visites = d.visites ?? {}
+  etat.depuis = d.depuis ?? null
 }
