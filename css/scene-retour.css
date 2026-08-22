@@ -495,13 +495,23 @@
 
 /* ── La terre se referme ──────────────────────────────────────────── */
 .tableau--retour .goulet { transition: transform 2.6s cubic-bezier(.35,0,.25,1); }
+/* L'ARITHMÉTIQUE, parce qu'elle décide de tout ici.
+   Au repos : `goulet--g` occupe 67→113 u, `goulet--d` 143→189 u — un
+   chenal de 30 u. À l'échelle 1,22 depuis le bord intérieur, chaque
+   pointe garde ce bord en place ; c'est donc la translation seule qui
+   ferme, et le chenal vaut `30 − 2t`.
+   Mesuré au premier essai avec t = 17 u : les deux pointes se
+   CHEVAUCHENT de 4 u et le chenal se ferme pour de bon — un bateau qui
+   passe à travers de la terre. À t = 10 u il reste 10 u, le tiers de
+   l'ouverture : ça se referme franchement, et le mât (123→129 u) vient
+   se poser dans la passe. C'est le cadrage qu'on voulait. */
 .stage[data-etat~="goulet-serre"] .tableau--retour .goulet--g {
   transform-origin: 100% 100%;
-  transform: translateX(calc(17 * var(--u))) scale(1.22, 1.5);
+  transform: translateX(calc(10 * var(--u))) scale(1.22, 1.5);
 }
 .stage[data-etat~="goulet-serre"] .tableau--retour .goulet--d {
   transform-origin: 0 100%;
-  transform: translateX(calc(-17 * var(--u))) scale(1.22, 1.5);
+  transform: translateX(calc(-10 * var(--u))) scale(1.22, 1.5);
 }
 /* On en sort : la terre s'écarte, et Tacoma prend toute la place. */
 .stage[data-etat~="goulet-passe"] .tableau--retour .goulet--g { transform: translateX(calc(-40 * var(--u))) scale(1.1, 1.2); }

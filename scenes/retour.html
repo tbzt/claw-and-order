@@ -37,6 +37,16 @@
   <div class="goulet goulet--g"></div>
   <div class="goulet goulet--d"></div>
 
+  <!-- LA TRAVERSÉE DU GOULET.
+       Quatre éléments qui ne servent qu'à ces vingt secondes-là, et qui
+       n'apparaissent qu'au `data-etat` posé PAR LA LIGNE DE TEXTE qui
+       les dit (voir `suivante()` dans main.js). C'est ce qui change un
+       mur de récit en une scène qu'on regarde arriver.
+       `goulet-ombre` se referme, `lueur-tir` accroche la pluie puis
+       part, `impact` reste dans le rouf, `plaie` reste sur Lester. -->
+  <div class="goulet-ombre"></div>
+  <div class="lueur-tir"></div>
+
   <div class="bande pont"></div>
   <div class="pont-planches"></div>
 
@@ -48,6 +58,9 @@
   <div class="rouf" data-hotspot="ecoutille"></div>
   <div class="rouf-toit"></div>
   <div class="hublot"></div>
+  <!-- Le trou dans le rouf, à hauteur d'épaule. Il ne s'efface plus :
+       c'est la seule trace que la nuit laisse sur le bateau. -->
+  <div class="impact"></div>
 
   <div class="barre" data-hotspot="barre"></div>
   <div class="vhf" data-hotspot="vhf"></div>
@@ -64,6 +77,10 @@
        coupe les jambes, ce qui règle la pose et raconte la posture. -->
   <div class="ombre ombre--lester"></div>
   <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+  <!-- La manche ouverte du coude à l'épaule. Un calque POSÉ SUR le
+       sprite, jamais une animation sur `.pj` — chaque sprite porte déjà
+       la sienne, et une seconde déclaration écraserait son attente. -->
+  <div class="plaie"></div>
 
   <div class="ombre ombre--drakk"></div>
   <div class="ombre ombre--rabbit"></div>

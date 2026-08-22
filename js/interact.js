@@ -44,11 +44,21 @@ const estPaire = (v) =>
   Array.isArray(v) && v.length === 2 &&
   typeof v[0] === 'string' && LOCUTEURS.has(v[0]) && typeof v[1] === 'string'
 
+/* Une ligne écrite en toutes lettres. `qui` est facultatif — sans lui,
+   la ligne prend le locuteur par défaut du bloc, ce qui permet d'écrire
+   une ligne de RÉCIT qui porte autre chose que du texte :
+
+       { texte: 'Un claquement sec.', visuel: ['tir', 'impact-rouf'] }
+
+   `visuel` est marqué au moment où la ligne s'affiche, pas au moment où
+   la réaction est résolue. C'est toute la différence entre un décor qui
+   a déjà changé quand on lit la phrase, et un décor qui change AVEC
+   elle. Voir `suivante()` dans main.js. */
 const estLigne = (v) =>
-  v !== null && typeof v === 'object' && !Array.isArray(v) && 'qui' in v && 'texte' in v
+  v !== null && typeof v === 'object' && !Array.isArray(v) && 'texte' in v
 
 function uneLigne(v, parDefaut) {
-  if (estLigne(v)) return v
+  if (estLigne(v)) return 'qui' in v ? v : { ...v, qui: parDefaut }
   if (estPaire(v)) return { qui: v[0], texte: v[1] }
   return { qui: parDefaut, texte: v }
 }
