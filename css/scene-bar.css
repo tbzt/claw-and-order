@@ -320,13 +320,22 @@
    par les semelles, et la fente de sodium sous les battants — qui sont
    juste hors cadre, en bas. La lumière vient donc du BAS ici, contre
    les deux halos de plafond : c'est ce qui dit « dehors ». */
+/* Repéré en playtest le 22/08 : « on ne comprend pas bien où est la
+   sortie ». La lecture d'origine reposait sur un seul indice discret —
+   un filet de lumière au ras du sol — pendant que la vraie porte
+   dessinée du décor (`porte`, l'arrière-salle) attirait le regard sans
+   être la sortie. Le seuil respire maintenant, et sa ligne de lumière
+   est deux fois plus large et plus saturée : il doit se voir avant
+   qu'on le cherche. */
 .tableau--bar .seuil {
   left: 0; top: calc(134 * var(--u)); width: 100%; height: calc(24 * var(--u));
   background:
-    linear-gradient(0deg, rgba(255,168,92,.42) 0 calc(1 * var(--u)), transparent calc(1 * var(--u))),
-    radial-gradient(115% 95% at 50% 122%, rgba(255,168,92,.20), transparent 64%),
+    linear-gradient(0deg, rgba(255,178,110,.62) 0 calc(2 * var(--u)), transparent calc(2 * var(--u))),
+    radial-gradient(115% 95% at 50% 122%, rgba(255,168,92,.30), transparent 64%),
     linear-gradient(180deg, #1b1520 0 calc(2 * var(--u)), #130f18 calc(2 * var(--u)));
+  animation: bar-seuil-respire 4.4s ease-in-out infinite;
 }
+@keyframes bar-seuil-respire { 0%,100% { filter: brightness(1) } 50% { filter: brightness(1.22) } }
 
 /* Les jambages. Ils ne portent aucune cible : leur travail est de mettre
    quelque chose DEVANT la salle. Une élévation frontale sans premier plan
