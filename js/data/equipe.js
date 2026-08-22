@@ -79,10 +79,11 @@ export const equipe = {
         '« Laisse-moi finir, c’est la partie où je suis bon. »',
       ],
     },
-    /* Deux contacts de fiche : Elton Hutchinson (avocat, pas encore
-       branché — chantier 32) et Alicia Francetti, journaliste — branchée
-       au réseau (chantier 31). Une journaliste, dans un scénario où les
-       médias s'emparent de l'affaire : voir js/data/reseau.js. */
+    /* Deux contacts de fiche, les deux au réseau (js/data/reseau.js) :
+       Alicia Francetti, journaliste (chantier 31) — une journaliste,
+       dans un scénario où les médias s'emparent de l'affaire — et Elton
+       Hutchinson, avocat (chantier 32). Réseau 4 : il est le
+       personnage-réseau de l'équipe, et de loin. */
     signature: 'sens-du-danger',
   },
 
@@ -228,7 +229,10 @@ export const equipe = {
      Combats d'enfants à 12 ans. À 16, un antiquaire nain acculé lui met
      dans les mains un jeu de rôle précurseur de Dawn of Atlantis en lui
      promettant « une porte vers un au-delà infini ». Il ne l'a plus
-     jamais refermé.
+     jamais refermé. **C'est cet antiquaire, Herwick Strauber, qui est
+     son contact « la rue » au réseau** (chantier 32, js/data/reseau.js) —
+     la fiche ne le nommait pas, mais elle ne pouvait décrire personne
+     d'autre.
 
      Sa vie de solitaire le lasse : IL VOUDRAIT DES AMIS POUR FORMER UNE
      VRAIE GUILDE. Dans un jeu sur quatre runners qui doivent travailler
