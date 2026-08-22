@@ -21,7 +21,6 @@ export const bar = {
 
   ouverture: [
     'Le Claw & Order, Downtown, 23 h. Un vieux bar dans son jus — un bar à flics-à-louer, relativement méta-friendly, ce qui explique qu’on vous laisse entrer.',
-    'Derrière vous, la porte de la rue par laquelle vous êtes entrés. La pluie tape encore sur le seuil.',
     'Quelques clients éparpillés jouent aux fléchettes. Certains portent encore l’uniforme doré. Les fléchettes s’arrêtent en même temps que les conversations.',
     'Au nom de « McCarthy », le barman troll relève à peine les yeux de son comptoir et pointe le menton vers le fond, en grognant.',
     'À l’écart, attablé seul, un vieil ork attend. Il est visiblement nerveux.',
