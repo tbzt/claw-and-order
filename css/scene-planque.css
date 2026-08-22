@@ -304,6 +304,23 @@
 }
 @keyframes planque-alerte { 0%,100% { opacity: .7 } 50% { opacity: 1 } }
 
+/* AVEUGLÉE. Le texte annonçait « elle enverra la même image pendant
+   deux heures », et la fiche continuait de clignoter en rouge « FLUX
+   SORTANT » : le seul endroit où le joueur pouvait vérifier son
+   piratage lui disait le contraire. Elle passe au vert, cesse de
+   battre, et le dit — c'est `data-etat` qui réécrit le texte, la
+   réaction n'a pas à toucher au DOM. */
+.stage[data-etat~="camera-aveugle"] .tableau--planque .ora--camera {
+  border-color: rgba(90,240,160,.9); background: rgba(16,58,40,.6);
+  color: rgba(150,240,200,.95);
+  animation: none;
+  font-size: 0;                    /* on remplace le texte, pas on l'ajoute */
+}
+.stage[data-etat~="camera-aveugle"] .tableau--planque .ora--camera::before {
+  content: "CAM-04 · BOUCLE · 06:11";
+  font-size: calc(4 * var(--u));
+}
+
 @keyframes aura-bat { 0%,100% { opacity: .82 } 50% { opacity: 1 } }
 @keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
 

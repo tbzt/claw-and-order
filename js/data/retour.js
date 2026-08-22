@@ -50,6 +50,15 @@ export const retour = {
       ? 'La coque ne tape pas. Elle glisse, et personne à bord n’a envie de demander pourquoi.'
       : 'La coque tape à contretemps. Il pleut depuis McNeil et ça ne s’arrêtera pas avant Tacoma.',
     'Lester est assis contre le rouf, dos à la cabine où Wilson est mort. Personne ne le lui a dit.',
+    /* CE QU'ON A PAYÉ AU PÊCHEUR SE VOIT ICI. `sait-toralf` coûtait deux
+       mille au tableau 2 et ne changeait qu'une ligne d'Hercules sur une
+       cible de lentille tactique — autant dire rien, pour la plupart des
+       parties. La menace du tableau doit être NOMMÉE à l'entrée quand on
+       a payé pour la connaître : c'est la différence entre traverser un
+       détroit et traverser un détroit en sachant qui attend. */
+    ...(a('sait-toralf') && !a('goulet-passe') ? [
+      'Un grand type blond est reparti du port en marchant, comme s’il avait fini. Personne à bord n’a réussi à penser à autre chose depuis.',
+    ] : []),
     ...(qui === 'hercules' && !a('goulet-passe') ? [
       'Hercules se tait au milieu d’une phrase qu’il n’avait pas commencée.',
       ['hercules', '« Quelque chose ne va pas, droit devant. Je ne sais pas quoi. Je préfère ne pas le savoir avant que ce soit fini. »'],
@@ -65,6 +74,10 @@ export const retour = {
   entree: ({ a }) => [
     ...(a('trace-matricielle') ? ['vedette'] : []),
     ...(a('esprit-eau') ? ['esprit'] : []),
+    /* `visuels` est vidé à chaque `charge()` : sans ça, une reprise
+       après F5 remettrait l'équipe à découvert alors que le drapeau
+       dit qu'elle est à couvert. */
+    ...(a('abri') ? ['abri'] : []),
   ],
 
   vues: {
@@ -150,15 +163,43 @@ export const retour = {
                    rabbit: '« Tant qu’on émet, on est un point sur leur carte. »' }
 
         const abri = a('abri')
-        const commun = ['La barre à droite toute. Les deux pointes de terre se referment.',
-                        'Quatre cents mètres. Personne ne parle.']
+
+        /* ══ LA TRAVERSÉE SE REGARDE ═══════════════════════════════════
+           Le seul coup de feu de la nuit partait dans un mur de récit
+           qui se terminait par un changement de tableau : le joueur
+           lisait que Lester avait été touché, et il l'apprenait vraiment
+           plus tard, dans le carnet. Playtest du 2026-08-22.
+
+           Chaque ligne porte maintenant son `visuel`, marqué au moment
+           où elle s'affiche (voir `suivante()` dans main.js) : la terre
+           se referme sur la phrase qui la referme, la lueur accroche la
+           pluie sur la phrase qui la décrit, le trou apparaît dans le
+           rouf sur le claquement, et la manche rougit sur la ligne qui
+           le dit. Aucun texte n'a changé de sens ; il a changé de
+           rythme, et c'est tout ce qui manquait. */
+        const commun = [
+          { texte: 'La barre à droite toute. Les deux pointes de terre se referment.',
+            visuel: 'goulet-serre' },
+          'Quatre cents mètres. Personne ne parle.',
+          /* Le battement de peur. Il vient AVANT le coup, il ne désigne
+             personne, et il ne dit pas la même chose selon qu'on a lu le
+             perchoir ou pas — un joueur qui a cherché voit qu'il avait
+             raison de chercher. */
+          a('sait-ou')
+            ? { texte: 'Sur la pointe de gauche, à l’endroit exact que vous surveilliez, quelque chose accroche la pluie une demi-seconde.',
+                visuel: 'lueur-perchoir' }
+            : { texte: 'Sur la pointe de gauche, quelque chose accroche la pluie une demi-seconde. Personne n’a le temps de se demander quoi.',
+                visuel: 'lueur-perchoir' },
+        ]
 
         /* On passe TOUJOURS. Ce qui change, c'est ce qu'on emporte. */
         if (abri)
           return { tous: [...commun,
-                          'Un claquement sec sur le rouf, à hauteur d’épaule. Puis un deuxième, dans l’eau.',
+                          { texte: 'Un claquement sec sur le rouf, à hauteur d’épaule. Puis un deuxième, dans l’eau.',
+                            visuel: ['tir', 'impact-rouf'] },
                           'Personne n’était debout devant.',
-                          'Trois cents mètres plus loin, la terre s’écarte et le bruit s’arrête. Tacoma est devant.'],
+                          { texte: 'Trois cents mètres plus loin, la terre s’écarte et le bruit s’arrête. Tacoma est devant.',
+                            visuel: 'goulet-passe' }],
                    drakk: '« Deux tirs. Il n’en avait que deux à donner avant qu’on sorte de sa portée. Il le savait aussi. »',
                    trash: '« Il n’a pas visé le bateau. Il a visé la place où le gamin était assis. »',
                    flags: ['goulet-passe', 'toralf-manque'],
@@ -166,10 +207,13 @@ export const retour = {
                    minutes: 10, va: 'planque' }
 
         return { tous: [...commun,
-                        'Un claquement sec, et Lester tombe en avant sans un bruit.',
-                        'Il se relève seul. Sa manche est ouverte du coude à l’épaule et elle rougit vite.',
+                        { texte: 'Un claquement sec, et Lester tombe en avant sans un bruit.',
+                          visuel: 'tir' },
+                        { texte: 'Il se relève seul. Sa manche est ouverte du coude à l’épaule et elle rougit vite.',
+                          visuel: 'lester-touche' },
                         '« C’est rien », dit-il, ce qui est faux, et personne ne le corrige.',
-                        'Trois cents mètres plus loin, la terre s’écarte. Tacoma est devant.'],
+                        { texte: 'Trois cents mètres plus loin, la terre s’écarte. Tacoma est devant.',
+                          visuel: 'goulet-passe' }],
                  hercules: '« On aurait dû le mettre derrière quelque chose. C’est ma faute et je la retiens. »',
                  drakk: '« J’ai vu le poste. Je n’ai pas donné l’ordre. C’est pire que de ne pas voir. »',
                  flags: ['goulet-passe', 'lester-blesse'],
@@ -359,15 +403,40 @@ export const retour = {
       },
       utiliser: ({ a, qui }) => {
         if (a('abri')) return 'Tout le monde est du bon côté du rouf. On attend le goulet.'
-        if (qui !== 'drakk')
-          return { tous: 'Il faudrait faire bouger tout le monde, et vite, et sans discuter.',
-                   drakk: '« Laissez-moi placer la troupe. »',
-                   hercules: '« Drakk. C’est ton métier, ça, pas le mien. »' }
-        return { tous: ['Drakk prend Lester par le col sans un mot et le pose de l’autre côté du rouf.',
-                        'Puis il désigne le pont à chacun, dans l’ordre, et personne ne discute.',
-                        'On ne voit plus rien du goulet. C’est exactement l’idée.'],
-                 drakk: '« Le mur entre vous et la colline. Toujours. C’est la première chose qu’on apprend et la première qu’on oublie. »',
-                 flags: ['abri'] }
+        if (qui === 'drakk')
+          return { tous: ['Drakk prend Lester par le col sans un mot et le pose de l’autre côté du rouf.',
+                          'Puis il désigne le pont à chacun, dans l’ordre, et personne ne discute.',
+                          'On ne voit plus rien du goulet. C’est exactement l’idée.'],
+                   drakk: '« Le mur entre vous et la colline. Toujours. C’est la première chose qu’on apprend et la première qu’on oublie. »',
+                   flags: ['abri'], visuels: ['abri'] }
+
+        /* ══ SAVOIR OÙ SUFFIT ══════════════════════════════════════════
+           `sait-ou` était posé par DEUX lentilles — le perchoir lu par
+           Drakk, le creux violet lu par Trash — et relu par rien du tout
+           (audit du 2026-08-22, levier L4). Deux lentilles, six
+           répliques, aucune conséquence : un joueur qui avait identifié
+           le tireur franchissait le goulet exactement comme un joueur
+           qui n'avait rien vu.
+
+           Il paie ici, et c'est le bon endroit : quand quelqu'un a dit
+           d'où ça viendra, il n'y a plus besoin d'un sergent pour placer
+           la troupe — il suffit de savoir de quel côté du rouf se
+           mettre. Chercher protège Lester. C'est la seule chose que le
+           tableau avait à dire et il ne la disait pas. */
+        if (a('sait-ou'))
+          return { tous: ['Personne n’a d’ordre à donner : on sait d’où ça viendra, et ça suffit.',
+                          'Lester est déplacé de deux mètres, sans discussion, et le rouf se retrouve entre la colline et lui.',
+                          'Tout le monde se range du même côté que lui.'],
+                   hercules: '« Ce n’est pas du commandement. C’est de la géométrie. »',
+                   trash: '« Je n’aime pas savoir des choses pareilles. Je préfère quand même les savoir. »',
+                   rabbit: '« Une ligne de tir, c’est une droite. Il suffit de ne pas être dessus. »',
+                   flags: ['abri'], visuels: ['abri'] }
+
+        return { tous: 'Il faudrait faire bouger tout le monde, et vite, et sans discuter — et personne ne sait encore de quel côté.',
+                 drakk: '« Laissez-moi placer la troupe. »',
+                 hercules: '« Drakk. C’est ton métier, ça, pas le mien. »',
+                 trash: '« Dites-moi où regarder et je vous dirai ce qu’il y a. Dans cet ordre-là. »',
+                 rabbit: '« Je peux calculer un angle. Il me faut un point de départ. »' }
       },
     },
 

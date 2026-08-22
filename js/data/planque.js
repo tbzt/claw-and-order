@@ -28,12 +28,33 @@
    propos : on ne l'achète pas.
    ============================================================ */
 
-/* Les huit sources. Le moteur ne compte que les drapeaux `conf-*`. */
-const CONFIANCE = ['conf-job', 'conf-question', 'conf-silence',
-                   'conf-teresa', 'conf-guilde', 'conf-bras',
-                   'conf-mccarthy', 'conf-deduction']
+/* ══ LES SOURCES DE CONFIANCE, ET CE QU'ELLES PÈSENT ═══════════════════
+   Trois sujets sont ouverts à tout le monde sans rien avoir fait avant ;
+   les autres paient des chaînes plantées ailleurs dans la nuit. Le seuil
+   est de TROIS.
 
-const compte = (a) => CONFIANCE.filter((f) => a(f)).length - (a('conf-perdue') ? 2 : 0)
+   Mesuré le 2026-08-22, et c'était le trou : trois sources gratuites pour
+   un seuil de trois. Un joueur qui n'avait rien fait de la nuit — pas une
+   fiche, pas un recoupement, Lester blessé, la Star sur le dos — obtenait
+   la meilleure fin en trois clics de dialogue dans la dernière pièce, et
+   les cinq chaînes plantées ailleurs ne pouvaient rien ajouter à un
+   compteur déjà plein. Vérifié en jeu, pas déduit.
+
+   LE PLAFOND, ET RIEN D'AUTRE. Les gratuites comptent pour deux au
+   maximum : la décence ordinaire mène au bord, jamais de l'autre côté.
+   Il faut donc AU MOINS UNE chaîne — six existent, chacune ouverte par un
+   runner ou un geste différent, et deux d'entre elles (`conf-teresa`,
+   `conf-dossier`) sont atteignables dans n'importe quelle partie. Personne
+   ne peut se retrouver bloqué ; personne ne peut y arriver sans avoir
+   écouté au moins une fois. */
+const GRATUITES = ['conf-job', 'conf-question', 'conf-silence']
+const CHAINEES  = ['conf-teresa', 'conf-guilde', 'conf-bras',
+                   'conf-mccarthy', 'conf-deduction', 'conf-dossier']
+
+const compte = (a) =>
+  Math.min(GRATUITES.filter((f) => a(f)).length, 2) +
+  CHAINEES.filter((f) => a(f)).length -
+  (a('conf-perdue') ? 2 : 0)
 
 import { equipiers } from './equipiers.js'
 
@@ -48,6 +69,13 @@ export const planque = {
       ? 'Lester s’est assis le plus loin possible de la vitre. Il tient son bras et il ne s’appuie pas au dossier.'
       : 'Lester s’est assis le plus loin possible de la vitre. Il ne s’appuie pas au dossier.',
     'OBJECTIF — tenir jusqu’à l’audience. Il reste trois heures cinquante-cinq.',
+  ],
+
+  /* `visuels` est vidé à chaque `charge()` : ce qui a été acquis doit
+     se reposer à l'entrée, sinon une reprise après F5 rallume la
+     caméra qu'on a aveuglée. */
+  entree: ({ a }) => [
+    ...(a('camera-aveugle') ? ['camera-aveugle'] : []),
   ],
 
   vues: {
@@ -220,11 +248,48 @@ export const planque = {
 
     table: {
       nom: 'La table pliante',
-      regarder: {
-        tous: 'Une table à plier le linge, en formica, avec quarante ans de brûlures de cigarette.',
+      regarder: ({ a }) => ({
+        tous: a('dossier-lu')
+          ? ['Une table à plier le linge, en formica, avec quarante ans de brûlures de cigarette.',
+             'Le dossier est étalé dessus, en trois tas, et personne ne l’a refermé.']
+          : ['Une table à plier le linge, en formica, avec quarante ans de brûlures de cigarette.',
+             'Assez grande pour y étaler quelque chose.'],
         hercules: '« C’est là qu’on discutera, si on discute. Une table basse, c’est plus facile qu’un comptoir. »',
-      },
+      }),
       utiliser: 'Tu t’y appuies. Elle tient.',
+      objets: {
+        /* ══ LA LECTURE DU DOSSIER ═══════════════════════════════════
+           Le scénario source fait démarrer la contre-enquête ici, et
+           pas ailleurs : trois heures d'attente, un gamin, et une
+           chemise cartonnée que personne n'a relue depuis qu'on l'a
+           fermée. C'est le seul endroit du jeu où l'équipe a le temps.
+
+           Quatre lectures dans la même réaction, parce que c'est
+           exactement ce que le jeu prétend être : les mêmes pages ne
+           disent pas la même chose selon qui les tient. Trois fiches
+           en sortent, et aucune ne conclut — le dossier ouvre une
+           question, il ne la referme pas. Les recoupements qu'elles
+           permettent sont des `presque`, pas des déductions : la
+           réponse n'est pas dans ces pages, et c'est le sujet. */
+        dossier: ({ a }) => a('dossier-lu')
+          ? { tous: 'Vous l’avez lu. Trois fois, à quatre. Il ne dira rien de plus ici.',
+              rabbit: '« Ce qui manque dedans ne va pas apparaître parce qu’on rouvre la chemise. »' }
+          : {
+              tous: ['Hercules étale la chemise sur le formica et la partage en trois tas, par réflexe de bureaucrate.',
+                     'Pendant deux heures, personne ne dit grand-chose. Les machines tournent.',
+                     'Le dossier tient en trois faits, et les trois se regardent de travers.',
+                     'UN — le corps a été trouvé dans un taudis de Loveland, à deux rues de chez Lester.',
+                     'DEUX — l’accusation appelle ça une agression de rue. Ça règle la question du mobile en la supprimant.',
+                     'TROIS — son appartement à elle n’est nulle part dans ces pages. Ni photo, ni relevé, ni ligne.'],
+              hercules: '« Trente ans d’administration. Un dossier qui ne verse pas une adresse, ce n’est pas un dossier bâclé. C’est un dossier arbitré. »',
+              trash: '« Il y a un endroit dans cette histoire où quelqu’un est mort, et il n’est pas écrit ici. Ça me gêne physiquement. »',
+              rabbit: ['« Trois jours de procédure, zéro pièce matérielle sur le lieu du décès. »',
+                       '« Ce n’est pas un trou. Un trou, c’est rond. Celui-là a des bords droits. »'],
+              drakk: '« On a désigné un coupable, puis on a bâti la carte autour de lui. J’ai fait pire, comme maître de jeu. Jamais avec un vrai gamin. »',
+              flags: ['dossier-lu'],
+              fiches: ['corps-loveland', 'crime-crapuleux', 'appart-hors-dossier'],
+            },
+      },
     },
 
     chaises: {
@@ -306,7 +371,7 @@ export const planque = {
                         'La fiche clignote une fois. CAM-04 — FLUX SORTANT — 06:11.',
                         'Elle enverra la même image pendant deux heures. Un plafond, deux néons, personne.'],
                  rabbit: '« Ce n’est pas propre non plus. Mais je commence à comprendre que rien ne l’est. »',
-                 flags: ['camera-aveugle'] }
+                 flags: ['camera-aveugle'], visuels: ['camera-aveugle'] }
       },
     },
   },
@@ -400,6 +465,22 @@ export const planque = {
                   '« … Ouais. »',
                   '« C’est ce que le gardien m’a dit aussi, quand j’ai demandé pourquoi il fermait la porte. »',
                   '« C’est marrant, ce mot. Il sert à tout le monde. »'],
+        },
+        /* CE QUE LE DOSSIER OUVRE. Il ne dit pas où elle est morte —
+           mais il dit où on a mis son corps, et ça, Lester connaît :
+           c'est sa rue. Le seul témoin du dossier que personne n'a
+           interrogé sur le seul fait qu'il pouvait vérifier. */
+        {
+          id: 'loveland',
+          titre: '« Le taudis où on l’a trouvée. C’était ta rue. »',
+          quand: ({ a }) => a('dossier-lu') && !a('conf-dossier'),
+          flags: ['conf-dossier'],
+          fiches: ['lester-loveland'],
+          texte: ['« … Ouais. »',
+                  '« C’est un endroit où personne va. Y a rien dedans. Même nous on y allait pas. »',
+                  '« Ils m’ont demandé quinze fois où j’étais cette nuit-là. Ils m’ont jamais demandé si elle, elle avait une raison d’y être. »',
+                  'Il regarde la table, les trois tas, et il comprend en même temps que vous ce que ça veut dire.',
+                  '« Elle en avait pas. »'],
         },
         /* RÈGLE 12 en action : une déduction ouvre la PAROLE. Elle n'a
            ouvert aucune porte de tout le jeu, et elle ouvre celle-ci. */

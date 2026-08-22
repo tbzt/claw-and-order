@@ -279,6 +279,47 @@
 /* Lester est ASSIS contre le rouf : le toit lui coupe les jambes, comme
    la table coupe celles de McCarthy au tableau 1. Il a vingt ans et il
    en paraît seize ; il n'occupe pas la place d'un homme debout. */
+/* ── `abri` — DRAKK PLACE LA TROUPE ──────────────────────────────────
+   Le texte disait « on ne voit plus rien du goulet » et personne ne
+   bougeait d'un pixel : un état du monde changeait sans que l'écran le
+   dise, et le joueur ne pouvait pas vérifier qu'il avait agi (audit du
+   22/08 — 20 réactions sur 60 dans ce cas).
+
+   Le tireur est sur la pointe de GAUCHE et le rouf occupe 157→235 :
+   se mettre à couvert, c'est passer de l'autre côté. Chacun glisse
+   vers le rouf, et c'est le MOUVEMENT qui porte le signal — une
+   position finale seule se lirait comme un décor différent, pas comme
+   une conséquence. Les ombres suivent, sinon les pieds se décollent. */
+.tableau--retour .pj,
+.tableau--retour .p-lester,
+.tableau--retour .ombre { transition: translate .7s cubic-bezier(.3,.8,.4,1); }
+
+/* L'ORDRE DE PEINTURE SUIT LA PROFONDEUR, pas l'ordre du markup.
+   Cinq personnes derrière une cabine de 78 u SONT serrées — le
+   recouvrement est juste. Mais il ne se lisait pas comme de la
+   profondeur : Trash (top 83, donc plus loin) passait devant
+   White_Rabbit (top 97, plus près), et le tas ressemblait à un défaut
+   d'assemblage. Plus on est bas dans le cadre, plus on est près, donc
+   plus on est devant. Vrai en toute circonstance, pas seulement sous
+   `abri` — c'est pour ça que ça ne dépend d'aucun état. */
+.tableau--retour .p-drakk    { z-index: 1; }
+.tableau--retour .p-trash    { z-index: 2; }
+.tableau--retour .p-rabbit   { z-index: 3; }
+.tableau--retour .p-lester   { z-index: 4; }
+.tableau--retour .p-hercules { z-index: 5; }
+
+.stage[data-etat~="abri"] .tableau--retour .p-drakk,
+.stage[data-etat~="abri"] .tableau--retour .ombre--drakk    { translate: calc(126 * var(--u)) 0; }
+.stage[data-etat~="abri"] .tableau--retour .p-trash,
+.stage[data-etat~="abri"] .tableau--retour .ombre--trash    { translate: calc(104 * var(--u)) 0; }
+.stage[data-etat~="abri"] .tableau--retour .p-rabbit,
+.stage[data-etat~="abri"] .tableau--retour .ombre--rabbit   { translate: calc(88 * var(--u)) 0; }
+.stage[data-etat~="abri"] .tableau--retour .p-hercules,
+.stage[data-etat~="abri"] .tableau--retour .ombre--hercules { translate: calc(74 * var(--u)) 0; }
+/* Lester était déjà contre le rouf ; Drakk le pose DERRIÈRE. */
+.stage[data-etat~="abri"] .tableau--retour .p-lester,
+.stage[data-etat~="abri"] .tableau--retour .ombre--lester   { translate: calc(38 * var(--u)) 0; }
+
 .tableau--retour .p-lester    { width: calc(32 * var(--u)); left: calc(166 * var(--u)); top: calc(98 * var(--u)); }
 
 .tableau--retour .p-drakk     { width: calc(46 * var(--u)); left: calc(29 * var(--u));  top: calc(80 * var(--u)); }
@@ -433,3 +474,122 @@
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
 .tableau--retour .raton { left: calc(53 * var(--u)); top: calc(117 * var(--u)); }
+
+/* ══ LA TRAVERSÉE DU GOULET ═══════════════════════════════════════════
+   Le tableau écrivait le coup de feu dans un mur de récit qui se
+   terminait par un changement de tableau : le joueur lisait que Lester
+   avait été touché, et il l'apprenait vraiment plus tard, dans le
+   carnet. Playtest du 2026-08-22.
+
+   Chaque état ci-dessous est posé PAR LA LIGNE DE TEXTE qui le dit
+   (`visuel` sur une ligne, voir `suivante()` dans main.js) — donc la
+   terre se referme sur « les deux pointes se referment », la lueur
+   accroche la pluie sur la phrase qui la décrit, et le trou apparaît
+   dans le rouf sur le claquement.
+
+   Règle 19 : rien ne s'enlève. Un état transitoire — l'éclair — est un
+   état PERMANENT dont le rendu est une animation qui ne joue qu'une
+   fois. Ce qui doit rester (l'impact, la plaie) porte son opacité en
+   déclaration simple, et l'animation ne fait que son arrivée : sous
+   `prefers-reduced-motion`, la trace est là quand même. */
+
+/* ── La terre se referme ──────────────────────────────────────────── */
+.tableau--retour .goulet { transition: transform 2.6s cubic-bezier(.35,0,.25,1); }
+.stage[data-etat~="goulet-serre"] .tableau--retour .goulet--g {
+  transform-origin: 100% 100%;
+  transform: translateX(calc(17 * var(--u))) scale(1.22, 1.5);
+}
+.stage[data-etat~="goulet-serre"] .tableau--retour .goulet--d {
+  transform-origin: 0 100%;
+  transform: translateX(calc(-17 * var(--u))) scale(1.22, 1.5);
+}
+/* On en sort : la terre s'écarte, et Tacoma prend toute la place. */
+.stage[data-etat~="goulet-passe"] .tableau--retour .goulet--g { transform: translateX(calc(-40 * var(--u))) scale(1.1, 1.2); }
+.stage[data-etat~="goulet-passe"] .tableau--retour .goulet--d { transform: translateX(calc(40 * var(--u))) scale(1.1, 1.2); }
+.tableau--retour .lueur-tacoma { transition: opacity 2.6s ease, transform 2.6s ease; }
+.stage[data-etat~="goulet-passe"] .tableau--retour .lueur-tacoma { transform: scale(1.14); }
+
+/* Les quatre cents mètres où l'on ne peut pas manœuvrer : le cadre se
+   ferme par les bords, sans jamais cacher le pont — on doit continuer
+   de voir où sont assis les gens, c'est tout l'enjeu de la scène. */
+.tableau--retour .goulet-ombre {
+  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
+  pointer-events: none; opacity: 0;
+  transition: opacity 2.6s ease;
+  background:
+    linear-gradient(90deg, rgba(4,6,12,.86) 0, rgba(4,6,12,0) calc(56 * var(--u))),
+    linear-gradient(270deg, rgba(4,6,12,.86) 0, rgba(4,6,12,0) calc(56 * var(--u)));
+}
+.stage[data-etat~="goulet-serre"] .tableau--retour .goulet-ombre { opacity: 1; }
+.stage[data-etat~="goulet-passe"] .tableau--retour .goulet-ombre { opacity: 0; }
+
+/* ── La lueur, au perchoir ────────────────────────────────────────────
+   Sur la pointe de GAUCHE, au sommet du clip-path de `goulet--g` : le
+   même endroit exactement que le jeton hostile de la lentille tactique
+   et que le creux violet de l'astrale. Une chose du monde, un seul
+   endroit — même quand ce n'est pas une cible. */
+.tableau--retour .lueur-tir {
+  left: calc(84 * var(--u)); top: calc(33 * var(--u));
+  width: calc(3 * var(--u)); height: calc(3 * var(--u));
+  border-radius: 50%; pointer-events: none;
+  background: #fff6e0; opacity: 0;
+}
+/* Une demi-seconde d'optique qui accroche la pluie. Trois battements,
+   faibles : on n'est pas sûr de l'avoir vu, et c'est le but. */
+.stage[data-etat~="lueur-perchoir"] .tableau--retour .lueur-tir {
+  animation: retour-lueur 1.1s steps(1, end) 3 both;
+}
+@keyframes retour-lueur {
+  0%   { opacity: 0;   box-shadow: none }
+  6%   { opacity: .55; box-shadow: 0 0 calc(4 * var(--u)) rgba(255,246,224,.5) }
+  14%  { opacity: 0;   box-shadow: none }
+  100% { opacity: 0;   box-shadow: none }
+}
+/* Le départ du coup. Un seul éclair, franc, et le noir revient. */
+.stage[data-etat~="tir"] .tableau--retour .lueur-tir {
+  animation: retour-tir .42s ease-out 1 both;
+}
+@keyframes retour-tir {
+  0%   { opacity: 1; box-shadow: 0 0 calc(14 * var(--u)) calc(4 * var(--u)) rgba(255,246,224,.95) }
+  40%  { opacity: .6; box-shadow: 0 0 calc(6 * var(--u)) rgba(255,214,150,.5) }
+  100% { opacity: 0; box-shadow: none }
+}
+
+/* ── Ce qui reste ─────────────────────────────────────────────────────
+   L'impact et la plaie ne s'effacent pas. Leur opacité est déclarée à
+   part de leur animation d'arrivée : sous `prefers-reduced-motion`,
+   l'animation dure .01 ms et la trace est là quand même. */
+.tableau--retour .impact {
+  left: calc(205 * var(--u)); top: calc(103 * var(--u));
+  width: calc(4 * var(--u)); height: calc(4 * var(--u));
+  pointer-events: none; opacity: 0;
+  background: #0a0705;
+  box-shadow:
+    0 0 0 calc(1 * var(--u)) rgba(122,98,72,.85),
+    calc(3 * var(--u)) calc(2 * var(--u)) 0 calc(-1 * var(--u)) rgba(122,98,72,.6),
+    calc(-3 * var(--u)) calc(3 * var(--u)) 0 calc(-1 * var(--u)) rgba(122,98,72,.5);
+}
+.stage[data-etat~="impact-rouf"] .tableau--retour .impact {
+  opacity: 1; animation: retour-impact .34s ease-out 1 both;
+}
+@keyframes retour-impact {
+  0%   { transform: scale(2.4) }
+  100% { transform: scale(1) }
+}
+
+/* Lester est assis contre le rouf, épaule gauche vers le goulet.
+   La manche s'ouvre du coude à l'épaule — donc une bande, pas un point. */
+.tableau--retour .plaie {
+  left: calc(169 * var(--u)); top: calc(106 * var(--u));
+  width: calc(4 * var(--u)); height: calc(9 * var(--u));
+  pointer-events: none; opacity: 0;
+  background: linear-gradient(180deg, #8e1f22, #5c1214);
+  clip-path: polygon(0 0, 100% 12%, 74% 100%, 20% 88%);
+}
+.stage[data-etat~="lester-touche"] .tableau--retour .plaie {
+  opacity: 1; animation: retour-plaie 1.6s ease-out 1 both;
+}
+@keyframes retour-plaie {
+  0%   { transform: scaleY(.15); transform-origin: top }
+  100% { transform: scaleY(1);   transform-origin: top }
+}
