@@ -100,7 +100,9 @@
 .tableau--bar .barman { left: calc(212 * var(--u)); top: calc(62 * var(--u)); width: calc(30 * var(--u)); }
 .tableau--bar .tabouret { width: calc(18 * var(--u)); }
 .tableau--bar .t1 { left: calc(151 * var(--u)); top: calc(94 * var(--u)); }
-.tableau--bar .t2 { left: calc(175 * var(--u)); top: calc(94 * var(--u)); }
+/* Rapproché de Trash (R3, le décor sert d'appui) : à 175 il tombait dans
+   l'espace vide entre elle et White_Rabbit ; à 169 il touche sa hanche. */
+.tableau--bar .t2 { left: calc(169 * var(--u)); top: calc(94 * var(--u)); }
 
 /* — le coin fléchettes : les joueurs sont À CÔTÉ de la cible, pas dessous — */
 .tableau--bar .client { width: calc(22 * var(--u)); }
@@ -149,6 +151,34 @@
 .tableau--bar .p-rabbit   { width: calc(24 * var(--u)); left: calc(187 * var(--u)); top: calc(99 * var(--u)); }
 .tableau--bar .p-hercules { width: calc(20 * var(--u)); left: calc(211 * var(--u)); top: calc(113 * var(--u)); }
 
+/* ── Chantier 9 : casser le rang d'oignon ────────────────────────────
+   Les lignes de pieds variaient déjà (138/135/140/142) : ce qui restait
+   du rang d'oignon, c'était que les quatre soient plats au même plan de
+   lumière et tous tournés vers le joueur. Trois profondeurs (R1) :
+   Drakk (le plus reculé, 138) s'assombrit encore un peu au repos, son
+   ombre s'étire et se diffuse ; Hercules (le plus avancé, 142) reste net,
+   son ombre reste courte. Trash et White_Rabbit tiennent le milieu, sans
+   retouche — c'est déjà leur rôle. `--profondeur` (engine.css) module la
+   même mise en retrait qui s'applique à tout `.pj` au repos ; elle laisse
+   intact le liseré du runner actif, une couche à part. */
+.tableau--bar .p-drakk    { --profondeur: .82; }
+.tableau--bar .p-hercules { --profondeur: 1.18; }
+
+/* Personne ne fait face au joueur (R2) : les deux runners côté mur —
+   Drakk et Trash — se tournent vers le comptoir, comme le reste du
+   groupe qui vient de s'installer. Un `scaleX(-1)`, comme le plan le
+   demandait. */
+.tableau--bar .p-drakk,
+.tableau--bar .p-trash { transform: scaleX(-1); }
+/* Le runner actif s'avance et s'allume (engine.css, générique à tout
+   `.pj`) via un `transform: translateY(...)` qui écraserait ce flip —
+   une seule propriété `transform` ne peut porter qu'une valeur. Il faut
+   la reposer ici, flip compris, pour Drakk et Trash seulement. */
+.stage[data-actif="drakk"] .tableau--bar .p-drakk,
+.stage[data-actif="trash"] .tableau--bar .p-trash {
+  transform: scaleX(-1) translateY(calc(-2 * var(--u)));
+}
+
 /* — profondeur — */
 .tableau--bar .fond-salle {
   left: 0; top: calc(96 * var(--u)); width: 100%; height: calc(22 * var(--u));
@@ -169,12 +199,14 @@
 .tableau--bar .ombre--mccarthy { left: calc(15 * var(--u));  top: calc(131 * var(--u)); width: calc(28 * var(--u)); }
 /* Chaque ombre suit sa propre ligne de pieds : c'est elle qui rend la
    profondeur crédible quand les bases diffèrent. */
-.tableau--bar .ombre--drakk    { left: calc(124 * var(--u)); top: calc(136 * var(--u)); width: calc(42 * var(--u)); }
+/* Ombre longue et diffuse pour le plan du fond (R1) : elle s'étire et
+   se brouille au lieu de suivre exactement la silhouette. */
+.tableau--bar .ombre--drakk    { left: calc(114 * var(--u)); top: calc(136 * var(--u)); width: calc(58 * var(--u)); filter: blur(calc(1.5 * var(--u))); opacity: .75; }
 .tableau--bar .ombre--trash    { left: calc(161 * var(--u)); top: calc(133 * var(--u)); width: calc(30 * var(--u)); }
 .tableau--bar .ombre--rabbit   { left: calc(189 * var(--u)); top: calc(138 * var(--u)); width: calc(20 * var(--u)); }
 .tableau--bar .ombre--hercules { left: calc(212 * var(--u)); top: calc(140 * var(--u)); width: calc(16 * var(--u)); }
 .tableau--bar .ombre--t1 { left: calc(153 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
-.tableau--bar .ombre--t2 { left: calc(176 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--bar .ombre--t2 { left: calc(170 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
 .tableau--bar .ombre--verres { left: calc(201 * var(--u)); top: calc(87 * var(--u)); width: calc(34 * var(--u)); height: calc(1 * var(--u)); }
 .tableau--bar .ombre--bouteilles { left: calc(154 * var(--u)); top: calc(41 * var(--u)); width: calc(88 * var(--u)); height: calc(1 * var(--u)); }
 

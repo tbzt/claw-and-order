@@ -678,8 +678,13 @@ body {
 
 /* Par défaut, l'équipe est en retrait. */
 /* .58 effaçait complètement les runners au repos sur un décor de
-   nuit (tableau 4). .72 garde l'écart lisible sans les perdre. */
-.stage[data-actif] .pj { filter: brightness(.72) saturate(.7); }
+   nuit (tableau 4). .72 garde l'écart lisible sans les perdre.
+   `--profondeur` est le crochet du chantier 9 (rang d'oignon) : un
+   décor peut assombrir encore un runner du fond, ou rendre au repos
+   celui du premier plan — sans rien devoir au liseré du runner actif,
+   qui reste une couche à part. Valeur neutre 1 partout où rien ne la
+   pose : ce tableau n'existait avant que pour le bar. */
+.stage[data-actif] .pj { filter: brightness(calc(.72 * var(--profondeur, 1))) saturate(.7); }
 
 /* Celui qui agit s'avance et s'allume. Le drop-shadow épouse l'alpha du
    sprite, donc le liseré suit la silhouette et pas la boîte — c'est la
