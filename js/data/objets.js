@@ -7,6 +7,13 @@
 export const objets = {
   contrat:   { nom: 'Contrat de prestation', icone: 'contrat' },
   mandat:    { nom: 'Mandat de transfert',   icone: 'mandat' },
+  /* LE TROISIÈME FEUILLET. Le scénario source place l'amorce de la
+     contre-enquête exactement ici : c'est en ÉTUDIANT le dossier, pendant
+     les heures d'attente à la planque, que l'équipe voit que les faits ne
+     collent pas. Le jeu donnait le contrat et le mandat, et gardait le
+     seul des trois qui raconte quelque chose.
+     Voir PLAN_TRAME_ACTES_III_IV § 4. */
+  dossier:   { nom: 'Le dossier de Lester',  icone: 'dossier' },
   passe:     { nom: 'Passe des amarres',     icone: 'passe' },
   creditube: { nom: 'Créditube — 2 000 ¥',   icone: 'tube' },
   arme:      { nom: 'Arme de poing',         icone: 'arme' },

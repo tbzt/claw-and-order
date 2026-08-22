@@ -260,7 +260,12 @@ function suivante() {
      est une animation qui ne se joue qu'une fois. */
   if (ligne.visuel) {
     marque(...[].concat(ligne.visuel))
-    stage.dataset.etat = [...etat.visuels].join(' ')
+    /* `rafraichit()` et pas une écriture directe de `data-etat` : depuis
+       que les tableaux exposent `derive()`, l'étiquette n'est plus la
+       simple projection de `etat.visuels`, et la recopier à la main
+       effaçait la posture de Lester à chaque beat de la laverie.
+       Un seul endroit compose l'étiquette, et c'est celui-là. */
+    rafraichit()
   }
 
   derniereLigne = ligne.texte
@@ -1016,6 +1021,11 @@ const BILAN = [
   ['lester-temoigne',   'Lester a décidé de parler à la barre. Personne ne l’a acheté : on l’a écouté.'],
   ['conf-perdue',       'Vous lui avez proposé de l’argent. Il ne l’a pas pris, et il n’a pas oublié.'],
   ['camera-aveugle',    'Une caméra municipale a filmé un plafond pendant deux heures.'],
+  /* Neuf heures à la laverie. Le tir part toujours ; le bilan dit ce que
+     la pièce lui a donné à lire. */
+  ['laverie-manquee',   'Deux trous dans le carrelage d’une laverie, à un mètre de personne. La pièce était noire, chaude et aveugle.'],
+  ['lester-coupe',      'Lester a la joue ouverte par un éclat de baie vitrée. Il n’a pas crié.'],
+  ['lester-touche-laverie', 'On lui a tiré dessus une seconde fois, dans une pièce éclairée, et cette fois on ne l’avait rien fait pour l’empêcher.'],
 ]
 
 function tombeRideau() {

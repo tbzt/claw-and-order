@@ -77,10 +77,44 @@ export const fiches = {
     ou: 'Le pont du voilier, au retour',
   },
 
+  'chimera-nous-suit': {
+    titre: 'Ils savaient où on était',
+    texte: 'Une laverie choisie au hasard à six heures du matin, et un tir à travers la baie à huit heures quarante. Personne ne nous a suivis depuis Tacoma — quelqu’un nous a trouvés autrement.',
+    ou: 'La laverie, à huit heures quarante',
+  },
+
+  'lester-loveland': {
+    titre: 'Elle n’avait rien à faire là',
+    texte: 'Le taudis où on a trouvé le corps est dans la rue de Lester. C’est un endroit où personne ne va — il le sait, il y vivait. Personne ne lui a posé la question en trois jours.',
+    ou: 'Lester, à la planque',
+  },
+
   'lester-temoigne': {
     titre: 'Il a décidé de parler',
     texte: '« Je vais leur dire. Pas ce qu’ils veulent entendre — ce qui s’est passé. » Personne ne l’a acheté, personne ne l’a convaincu. On l’a écouté trois heures dans une laverie.',
     ou: 'La planque, à l’aube',
+  },
+
+  /* ── Ce qu'on lit dans le dossier, à la planque ───────────────────
+     Le scénario source place ici l'amorce de la contre-enquête : c'est
+     en ÉTUDIANT le dossier que l'équipe voit que les faits ne collent
+     pas. Ces trois fiches sont les trois trous du dossier, et chacune
+     pointe une des trois ancres de l'acte IV — sans qu'aucune ne le
+     dise, parce que ce n'est pas au dossier de le dire. */
+  'corps-loveland': {
+    titre: 'Le corps était à Loveland',
+    texte: 'Retrouvé dans un taudis, à deux rues de là où Lester dormait. Toute la géographie de l’accusation tient dans cette distance-là.',
+    ou: 'Le dossier, à la planque',
+  },
+  'crime-crapuleux': {
+    titre: 'Un crime sans mobile',
+    texte: 'L’accusation a décrété une agression de rue : elle aurait erré là par hasard. C’est commode — ça ne supprime pas le mobile, ça supprime la question du mobile.',
+    ou: 'Le dossier, à la planque',
+  },
+  'appart-hors-dossier': {
+    titre: 'Son appartement n’est pas au dossier',
+    texte: 'Pas une photo, pas un relevé, pas une ligne. Officiellement, ce n’est pas le lieu du crime — donc officiellement, il n’y a rien à y voir.',
+    ou: 'Le dossier, à la planque',
   },
 
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
@@ -260,6 +294,38 @@ export const presque = {
     'On lui a tiré dessus à minuit, il a dit oui à cinq heures. Ce n’est pas un lien : c’est une nuit.',
   'guilde|lester-temoigne':
     'La bouteille, et sa décision. Oui. Mais ça ne se déduit pas — c’est ce qui s’est passé, et ça n’a besoin d’aucune preuve.',
+
+  /* ── Le dossier, et les trous qu'on y voit ────────────────────────
+     LE CROCHET DE L'ACTE IV. La première de ces paires est la plus
+     importante du jeu : elle dit exactement ce qu'il faut aller faire,
+     et pourquoi ça ne se fera pas dans ces pages. Un `presque` était le
+     bon outil — une déduction aurait donné une réponse là où le joueur
+     doit rester avec une question. */
+  'appart-hors-dossier|corps-loveland':
+    'Un corps à Loveland, et un appartement que personne n’a versé au dossier. Il manque le trajet entre les deux, et il ne se trouvera pas dans ces pages.',
+  'corps-loveland|crime-crapuleux':
+    'On n’a pas cherché où elle est morte : on a trouvé où elle a été posée, et on a écrit le reste autour. Ça se sent. Ça ne se prouve pas d’ici.',
+  'crime-crapuleux|teresa':
+    'Une agression de rue sur une fille dont personne n’a parlé pendant trois jours. Les deux se tiennent chaud, et aucune des deux ne tient debout seule.',
+  'appart-hors-dossier|elfe-autopsie':
+    'Ils ont relevé assez pour dire qu’un elfe l’a touchée. Et ils n’ont pas versé l’endroit où ils l’ont relevé. Ce n’est pas une négligence, c’est une économie.',
+  'corps-loveland|dossier-vide':
+    'Le dossier ne dit rien de lui, sauf qu’il habitait à côté. C’est tout ce qu’il dit, et c’est tout ce qu’on a retenu contre lui.',
+  /* ── Ce que le tir de neuf heures rouvre ─────────────────────────── */
+  'chimera-nous-suit|toralf-vise-lester':
+    'Le goulet, puis la laverie. Le même homme, ou le même employeur — ça ne se décide pas avec deux tirs. Ça se décide en trouvant qui paie.',
+  'chimera-nous-suit|navette-huit-heures':
+    'La navette, le goulet, la laverie. Trois fois, et à chaque fois plus salement. Quelqu’un a de moins en moins le temps.',
+  'chimera-nous-suit|grand-blond':
+    'Un grand type blond au port, et un toit à deux kilomètres ce matin. Le même métier, sûrement. La même main, on n’en sait rien.',
+  'chimera-nous-suit|travail-inacheve':
+    'Il n’a pas fini au port, il n’a pas fini ici. C’est presque rassurant, et ce n’est pas une preuve.',
+  'corps-loveland|lester-loveland':
+    'Le dossier dit où était le corps ; Lester dit que personne n’y va jamais. Les deux disent la même chose sous deux angles — il manque encore celui qui l’y a portée.',
+  'crime-crapuleux|lester-loveland':
+    'On l’a dite en promenade dans une rue où personne ne se promène. Ça ne tient pas. Ça ne tombe pas non plus : il faudrait quelqu’un pour dire où elle était vraiment.',
+  'appart-hors-dossier|navette-huit-heures':
+    'On ne verse pas le lieu du crime, et on réserve la navette. Ce sont deux services différents, et ils vont exactement dans le même sens.',
 
   /* ── Ce qu’on a déjà déduit, frotté contre le reste ──────────────── */
   'deux-mains|teresa':
