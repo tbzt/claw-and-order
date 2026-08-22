@@ -50,6 +50,7 @@ export const quaiVoilier = {
     ...(a('poste-aussieres') ? ['poste-aussieres'] : []),
     ...(a('poste-radio') ? ['poste-radio'] : []),
     ...(a('poste-barre') ? ['poste-barre'] : []),
+    ...(a('esprit-eau') ? ['esprit-eau'] : []),
   ],
 
   hotspots: {

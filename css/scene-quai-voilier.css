@@ -33,6 +33,23 @@
 
 .tableau--quai-voilier .zone { background: transparent; }
 
+/* L'esprit de l'eau, sous l'étrave — même mécanisme qu'en vue large
+   (scene-quai.css), coordonnées ×2. */
+.tableau--quai-voilier .ondine {
+  display: none;
+  left: calc(52 * var(--u)); top: calc(114 * var(--u));
+  width: calc(92 * var(--u)); height: calc(12 * var(--u));
+  border-radius: 50%;
+  background: linear-gradient(90deg, transparent, rgba(150,235,255,.55), rgba(200,250,255,.7), transparent);
+  filter: blur(calc(1.5 * var(--u)));
+  animation: voilier-ondoie 3.8s ease-in-out infinite;
+}
+.stage[data-etat~="esprit-eau"] .tableau--quai-voilier .ondine { display: block; }
+@keyframes voilier-ondoie {
+  0%,100% { transform: translateX(0) scaleY(1); opacity: .7 }
+  50%     { transform: translateX(calc(4 * var(--u))) scaleY(1.5); opacity: 1 }
+}
+
 /* L'écoutille, et ce qu'elle cache une fois ouverte — même bascule
    d'affichage qu'en vue large (`cabine-ouverte`), coordonnées ×2.
    `cabine` reste transparente : le sprite dessine déjà le panneau à
