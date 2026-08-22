@@ -982,6 +982,61 @@ body {
 .carnet__aide.est-refus { color: var(--ambre); animation: bulle-entre .2s ease-out; }
 .carnet__vide { font-size: 1.3cqw; color: #4b5468; font-style: italic; }
 
+/* ── LE RÉSEAU ────────────────────────────────────────────────────────
+   Même geste que le carnet, transposé : une grille de fiches identique
+   (on y choisit ce qu'on pose), et une rangée de contacts en dessous
+   (on choisit à qui). Même panneau opaque, même raison — on LIT ici. */
+.reseau {
+  position: absolute;
+  inset: 0;
+  z-index: 65;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2cqh;
+  padding: 3cqh 4cqw;
+  background: #05060b;
+  animation: rideau-tombe .18s ease-out;
+}
+.reseau[hidden] { display: none; }
+
+.reseau__titre {
+  font-family: var(--mono);
+  font-size: 1.7cqw;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--ambre);
+}
+
+.reseau__contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1cqh 1.2cqw;
+}
+
+/* Un contact SAIT qui il connaît — c'est écrit sur sa fiche, ce n'est
+   pas une contrainte technique. Celui qui n'appartient pas au runner
+   actif reste cliquable (jamais un bouton mort), mais s'annonce déjà
+   hors de portée : le joueur apprend la règle sans avoir à la lire. */
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: .2cqh;
+  text-align: left;
+  padding: .9cqh 1.2cqw;
+  color: var(--craie);
+  background: #10131d;
+  border: 1px solid #2b3145;
+  border-left: .25cqw solid #3d4457;
+  border-radius: 2px;
+  cursor: none;
+  transition: border-color .14s, background .14s, opacity .14s;
+}
+.contact:hover { border-color: var(--ardoise); }
+.contact.est-indisponible { opacity: .5; }
+
+.contact__nom { font-family: var(--mono); font-size: 1.3cqw; letter-spacing: .04em; color: var(--craie); }
+.contact__titre { font-size: 1.05cqw; color: var(--ardoise); }
+
 /* Le bilan de fin : ce que la partie emporte avec elle. Une ligne par
    état encore actif — c'est le seul endroit où le joueur voit d'un coup
    que ses choix ont laissé des traces. */

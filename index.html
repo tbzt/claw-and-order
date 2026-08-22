@@ -88,6 +88,17 @@
         <p class="carnet__aide" id="carnetAide">Pose une fiche sur une autre.</p>
       </div>
 
+      <!-- Le réseau. Le geste du carnet, transposé : on pose une fiche
+           sur un contact au lieu d'une fiche sur une autre. Un contact
+           appartient à un runner — la grille se lit donc aussi comme
+           un rappel de qui appeler. -->
+      <div class="reseau" id="reseau" hidden>
+        <p class="reseau__titre">Le réseau</p>
+        <div class="carnet__grille" id="reseauGrille"></div>
+        <div class="reseau__contacts" id="reseauContacts"></div>
+        <p class="carnet__aide" id="reseauAide">Pose une fiche sur un contact.</p>
+      </div>
+
       <div class="rideau" id="rideau" hidden>
         <p class="rideau__titre">FIN DU PROTOTYPE</p>
         <p class="rideau__ligne" id="rideauLigne"></p>
@@ -130,6 +141,8 @@
         <span class="bouton-carnet__compte est-deduction" id="carnetRecoupements"
               title="Recoupements trouvés">0/0</span>
       </button>
+
+      <button class="bouton-carnet" id="boutonReseau" aria-pressed="false">Réseau</button>
 
       <div class="inventaire" id="inventaire" aria-label="Inventaire"></div>
 

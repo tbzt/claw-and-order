@@ -2,7 +2,7 @@
    Ce fichier ne connaît aucun contenu — il ne sait que faire tourner
    une scène qu'on lui donne. */
 
-import { etat, a, pose, donne, retire, marque, classe, contexte, avance, formateHeure,
+import { etat, a, pose, donne, retire, marque, classe, sait, contexte, avance, formateHeure,
          sauvegarde, sauvegardeLisible, effaceSauvegarde, restaure } from './state.js'
 import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
@@ -11,6 +11,7 @@ import { equipe } from './data/equipe.js'
 import { sujetsOuverts, estEpuise, retiens, entree } from './dialogue.js'
 import { eveille, entre } from './ambiance.js'
 import { fiches, deductions, refus as refusCarnet, presque } from './data/carnet.js'
+import { contacts, appels, refus as refusReseau } from './data/reseau.js'
 
 const $ = (id) => document.getElementById(id)
 const stage = $('stage')
@@ -22,6 +23,7 @@ const bullePnj = $('bullePnj')
 const boiteChoix = $('choix')
 const rideau = $('rideau')
 const carnet = $('carnet')
+const reseau = $('reseau')
 const portrait = $('portrait')
 const journal = $('journal')
 const repriseAuto = $('repriseAuto')
@@ -56,7 +58,7 @@ function montrePortrait(qui) {
    une deutéranopie. La couleur seule ne peut donc pas porter « qui
    parle ». C'est la règle de Kiro appliquée au texte : une silhouette
    avant une couleur, donc un nom avant une teinte. */
-const nomDuLocuteur = (qui) => equipe[qui]?.nom ?? VISAGES[qui] ?? ''
+const nomDuLocuteur = (qui) => equipe[qui]?.nom ?? VISAGES[qui] ?? contacts[qui]?.nom ?? ''
 
 /* IL PARLE, ET ÇA SE VOIT.
    Le portrait d'un PNJ s'anime pendant qu'il parle. Les runners n'en ont
@@ -83,6 +85,11 @@ let minuteur = 0
 let dialogue = null
 let survolee = null
 let derniereLigne = ''
+/* La fiche posée dans le réseau, en attente d'un contact. Distincte de
+   `etat.ficheActive` (le carnet) : les deux panneaux ne se ferment pas
+   l'un l'autre, et partager l'état aurait fait retomber une sélection
+   d'un panneau dans l'autre sans que rien ne le justifie. */
+let ficheAppelActive = null
 
 /* ── Chargement d'un tableau ─────────────────────────────────
    Le moteur ne connaît aucun décor : il en charge un par son nom, vide
@@ -146,6 +153,7 @@ function proposeReprise(donnees) {
     const lieu = donnees.etat.lieu
     const visuels = donnees.etat.visuels
     restaure(donnees)
+    reconstruitFiches()
     etat.astral = VUES[etat.actif] === 'astrale'
     repriseAuto.hidden = true
     /* `charge()` vide et reconstruit `visuels` depuis `entree()` — ce qui
@@ -168,6 +176,7 @@ function proposeReprise(donnees) {
 async function demarre() {
   brancheHud()
   verifieCarnet()
+  verifieReseau()
   /* La jauge d'allure part de son vrai état : sans ça elle reste vide
      jusqu'au premier clic, et le joueur croit le réglage cassé. */
   peintAllure()
@@ -491,31 +500,123 @@ function resousTexte(bloc) {
 
 const pioche = (liste) => liste[Math.floor(Math.random() * liste.length)]
 
+/* Le bouton d'une fiche, partagé entre le carnet et le réseau — même
+   carte, deux panneaux qui ne lui font pas dire la même chose. */
+function creeFicheBouton(id, active, onClick) {
+  const f = fiches[id]
+  const b = document.createElement('button')
+  b.className = 'fiche'
+  b.classList.toggle('est-active', active)
+  b.classList.toggle('est-deduction', f.ou === 'Recoupement')
+  b.innerHTML = `<span class="fiche__titre"></span><span class="fiche__texte"></span><span class="fiche__ou"></span>`
+  b.querySelector('.fiche__titre').textContent = f.titre
+  b.querySelector('.fiche__texte').textContent = f.texte
+  b.querySelector('.fiche__ou').textContent = f.ou
+  b.addEventListener('click', (e) => { e.stopPropagation(); onClick() })
+  return b
+}
+
 function rendCarnet() {
   peintProgres()
   const grille = $('carnetGrille')
   grille.replaceChildren()
   for (const id of etat.fiches) {
-    const f = fiches[id]
-    if (!f) continue
-    const b = document.createElement('button')
-    b.className = 'fiche'
-    b.classList.toggle('est-active', etat.ficheActive === id)
-    b.classList.toggle('est-deduction', f.ou === 'Recoupement')
-    b.innerHTML = `<span class="fiche__titre"></span><span class="fiche__texte"></span><span class="fiche__ou"></span>`
-    b.querySelector('.fiche__titre').textContent = f.titre
-    b.querySelector('.fiche__texte').textContent = f.texte
-    b.querySelector('.fiche__ou').textContent = f.ou
-    b.addEventListener('click', (e) => {
-      e.stopPropagation()
+    if (!fiches[id]) continue
+    grille.append(creeFicheBouton(id, etat.ficheActive === id, () => {
       if (!etat.ficheActive) { etat.ficheActive = id; return rendCarnet() }
       if (etat.ficheActive === id) { etat.ficheActive = null; return rendCarnet() }
       frotte(etat.ficheActive, id)
-    })
-    grille.append(b)
+    }))
   }
   if (!etat.fiches.size)
     grille.innerHTML = '<p class="carnet__vide">Rien encore. Une fiche se mérite.</p>'
+}
+
+/* ── LE RÉSEAU ────────────────────────────────────────────────────────
+   Le même geste, transposé : on pose une fiche, puis on clique un
+   contact au lieu d'une seconde fiche. Un contact appartient à UN
+   runner (§5 du plan) — appeler exige qu'il soit actif, et le bouton
+   le dit avant que le joueur ait à le découvrir en échouant. */
+
+function basculeReseau() {
+  const ouvert = reseau.hidden
+  reseau.hidden = !ouvert
+  ficheAppelActive = null
+  $('boutonReseau').setAttribute('aria-pressed', String(ouvert))
+  if (ouvert) rendReseau()
+  rafraichit()
+}
+
+function rendReseau() {
+  const grille = $('reseauGrille')
+  grille.replaceChildren()
+  for (const id of etat.fiches) {
+    if (!fiches[id]) continue
+    grille.append(creeFicheBouton(id, ficheAppelActive === id, () => {
+      ficheAppelActive = ficheAppelActive === id ? null : id
+      rendReseau()
+    }))
+  }
+  if (!etat.fiches.size)
+    grille.innerHTML = '<p class="carnet__vide">Rien encore. Une fiche se mérite.</p>'
+
+  const boutons = $('reseauContacts')
+  boutons.replaceChildren()
+  for (const [id, c] of Object.entries(contacts)) {
+    const b = document.createElement('button')
+    b.className = 'contact'
+    b.classList.toggle('est-indisponible', etat.actif !== c.runner)
+    b.innerHTML = `<span class="contact__nom"></span><span class="contact__titre"></span>`
+    b.querySelector('.contact__nom').textContent = c.nom
+    b.querySelector('.contact__titre').textContent = `${c.titre} — le contact de ${equipe[c.runner].nom}`
+    b.addEventListener('click', (e) => { e.stopPropagation(); appelle(id) })
+    boutons.append(b)
+  }
+}
+
+function appelle(idContact) {
+  const c = contacts[idContact]
+  const aide = $('reseauAide')
+
+  if (!ficheAppelActive) {
+    aide.textContent = 'Choisis d’abord une fiche à lui poser.'
+    aide.classList.remove('est-refus')
+    return
+  }
+  /* Le choix du runner compte hors du décor aussi : Alicia ne décroche
+     pas pour Drakk. Le dire ici enseigne la règle sans faire échouer
+     l'appel en silence. */
+  if (etat.actif !== c.runner) {
+    aide.textContent = `${c.nom} est le contact de ${equipe[c.runner].nom}. Bascule sur lui pour l’appeler.`
+    aide.classList.remove('est-refus')
+    return
+  }
+
+  const appel = appels[`${idContact}|${ficheAppelActive}`]
+  ficheAppelActive = null
+
+  if (!appel) {
+    avance(5)
+    aide.textContent = pioche(refusReseau[idContact])
+    aide.classList.remove('est-refus'); void aide.offsetWidth
+    aide.classList.add('est-refus')
+    rendReseau()
+    rafraichit()
+    return
+  }
+
+  avance(appel.minutes)
+  const dejaSu = sait(appel.id)
+  if (!fiches[appel.id] && appel.donne) fiches[appel.id] = { ...appel.donne }
+  const neuf = classe(appel.id)
+  if (neuf) signaleCarnet()
+
+  reseau.hidden = true
+  $('boutonReseau').setAttribute('aria-pressed', 'false')
+  rafraichit()
+  const lignes = enLignes(dejaSu ? appel.dejaLigne : appel.ligne, idContact)
+  const suite = appel.reaction ? enLignes(appel.reaction, c.runner) : []
+  return dis([...lignes, ...suite], idContact, () => rafraichit())
 }
 
 /* ── LE JOURNAL ──────────────────────────────────────────────────────
@@ -594,6 +695,7 @@ function rafraichit() {
   peintProgres()
   if (!carnet.hidden) rendCarnet()
   if (!journal.hidden) rendJournal()
+  if (!reseau.hidden) rendReseau()
   curseur.dataset.verbe = etat.verbe
   curseur.classList.toggle('porte-objet', Boolean(etat.objetActif))
   ecritEtiquette()
@@ -704,6 +806,46 @@ function verifieCarnet() {
       console.error(`[carnet] ${d.donne.id} : cette paire a DÉJÀ une déduction, le presque ne sortira qu'après.`)
 }
 
+/* Garde-fou du réseau, même esprit. Une clé d'appel mal orthographiée
+   ou un contact renvoyant vers une fiche fantôme se tairait sans rien
+   dire — exactement le bug que `verifieCarnet()` a trouvé une fois. */
+function verifieReseau() {
+  const ficheConnue = (id) => id in fiches || deductions.some((d) => d.donne.id === id)
+  for (const cle of Object.keys(appels)) {
+    const [idContact, idFiche] = cle.split('|')
+    if (!(idContact in contacts))
+      console.error(`[réseau] « ${cle} » : contact inconnu — ${idContact}.`)
+    if (!ficheConnue(idFiche))
+      console.error(`[réseau] « ${cle} » : fiche inconnue à poser — ${idFiche}.`)
+    const appel = appels[cle]
+    if (!ficheConnue(appel.id) && !appel.donne)
+      console.error(`[réseau] « ${cle} » : donne « ${appel.id} », qui n'existe nulle part et n'a pas de contenu.`)
+    if (!appel.ligne?.length)
+      console.error(`[réseau] « ${cle} » : aucune ligne — le contact décrocherait pour ne rien dire.`)
+    if (!appel.dejaLigne)
+      console.error(`[réseau] « ${cle} » : pas de « dejaLigne » — un rappel retomberait muet.`)
+  }
+  for (const idContact of Object.keys(contacts))
+    if (!refusReseau[idContact]?.length)
+      console.error(`[réseau] ${idContact} n'a aucune ligne de refus.`)
+}
+
+/* Bug trouvé en vérifiant le réseau dans le navigateur, pas causé par
+   lui : une déduction du carnet (`frotte()`) ou une fiche d'appel
+   (`appelle()`) s'injecte dans `fiches` — un DICTIONNAIRE, pas
+   sérialisé — au moment où elle est gagnée. Seul son identifiant vit
+   dans `etat.fiches`, qui LUI est sauvegardé. Une reprise (F5) restaure
+   donc l'identifiant sans son contenu, et `rendCarnet()`/`rendReseau()`
+   sautent silencieusement la fiche (`if (!fiches[id]) continue`) — un
+   trou qu'aucun message ne signale. On réinjecte depuis les deux
+   sources juste après `restaure()`. */
+function reconstruitFiches() {
+  for (const d of deductions)
+    if (etat.fiches.has(d.donne.id) && !fiches[d.donne.id]) fiches[d.donne.id] = d.donne
+  for (const appel of Object.values(appels))
+    if (appel.donne && etat.fiches.has(appel.id) && !fiches[appel.id]) fiches[appel.id] = appel.donne
+}
+
 function brancheDecor() {
   for (const cible of decor.querySelectorAll('[data-hotspot]')) {
     cible.addEventListener('pointerenter', () => { survolee = cible.dataset.hotspot; ecritEtiquette() })
@@ -722,7 +864,7 @@ function brancheDecor() {
   stage.addEventListener('pointerleave', () => { curseur.hidden = true; survolee = null; ecritEtiquette() })
 
   stage.addEventListener('click', (e) => {
-    if (!carnet.hidden || !journal.hidden) return
+    if (!carnet.hidden || !journal.hidden || !reseau.hidden) return
     if (occupe) return suivante()
     if (dialogue) return
     const cible = e.target.closest('[data-hotspot]')
@@ -769,6 +911,7 @@ function brancheHud() {
   })
   $('boutonCarnet').addEventListener('click', basculeCarnet)
   $('boutonJournal').addEventListener('click', basculeJournal)
+  $('boutonReseau').addEventListener('click', basculeReseau)
   $('boutonAllure').addEventListener('click', changeAllure)
 
   addEventListener('keydown', (e) => {
@@ -776,10 +919,12 @@ function brancheHud() {
       etat.objetActif = null
       if (!carnet.hidden) basculeCarnet()
       else if (!journal.hidden) basculeJournal()
+      else if (!reseau.hidden) basculeReseau()
       else rafraichit()
     }
     if (e.key === 'c' || e.key === 'C') basculeCarnet()
     if (e.key === 'j' || e.key === 'J') basculeJournal()
+    if (e.key === 'r' || e.key === 'R') basculeReseau()
     if (e.key === 'a' || e.key === 'A') changeAllure()
     if (e.key === '1') { etat.verbe = 'regarder'; etat.objetActif = null; rafraichit() }
     if (e.key === '2') { etat.verbe = 'utiliser'; etat.objetActif = null; rafraichit() }

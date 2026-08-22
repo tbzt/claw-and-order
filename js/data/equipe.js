@@ -79,9 +79,10 @@ export const equipe = {
         '« Laisse-moi finir, c’est la partie où je suis bon. »',
       ],
     },
-    /* Contacts de fiche, jamais utilisés : Elton Hutchinson (avocat),
-       Alicia Francetti (journaliste). Une journaliste, dans un scénario
-       où les médias s'emparent de l'affaire. */
+    /* Deux contacts de fiche : Elton Hutchinson (avocat, pas encore
+       branché — chantier 32) et Alicia Francetti, journaliste — branchée
+       au réseau (chantier 31). Une journaliste, dans un scénario où les
+       médias s'emparent de l'affaire : voir js/data/reseau.js. */
     signature: 'sens-du-danger',
   },
 
