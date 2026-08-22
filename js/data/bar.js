@@ -140,19 +140,24 @@ export const bar = {
       utiliser: 'Il n’est pas à toi, et il n’est pas encore à toi.',
     },
 
-    /* UNE CHOSE DU MONDE, UNE SEULE CIBLE. La ligne de retraite de Drakk
-       était un second hotspot posé exactement sur celui-ci : sa lentille
-       retirait la sortie au lieu de la désigner. Sa lecture tactique est
-       maintenant sa ligne à lui sur la porte, ce qui est précisément ce
-       que la règle 10 demande. */
-    sortie: {
+    /* LA PORTE — retour de playtest le 22/08 : deux portes dans le même
+       tableau, une abstraite (le seuil au sol, invisible tant qu'on ne
+       le cherche pas) et une dessinée (celle-ci, un vrai sprite de
+       porte) — mais c'était la mauvaise qui menait dehors. « La porte
+       du fond n'a pas d'enjeu en tant qu'impasse, fais-en une sortie » :
+       elle porte maintenant tout ce que `sortie` portait, et rien
+       d'autre. Une chose du monde, une seule cible, et cette fois la
+       cible visible est la bonne. `ward` (l'astral) et le seuil au sol
+       n'avaient de sens que pour l'ancienne impasse : retirés avec
+       elle plutôt que laissés à décrire une porte qui n'existe plus. */
+    porte: {
       nom: 'La porte de la rue',
       regarder: {
         tous: 'La porte battante par laquelle vous êtes entrés. Derrière, il pleut sur Downtown et il est bientôt minuit.',
+        rabbit: '« Pas de lecteur, pas de serrure connectée. Ça s’ouvre à la main, comme au siècle dernier. »',
         drakk: ['« Notre monture attend dehors. »',
                 '« Une seule issue franche. Douze pas. »',
-                '« Le fond est un cul-de-sac : qui s’y engage se fait prendre entre deux murs. »',
-                '« Retenez-le. Ça servira, ou ça ne servira pas, mais on ne le sait qu’après. »'],
+                '« Retenez-la. Ça servira, ou ça ne servira pas, mais on ne le sait qu’après. »'],
       },
       utiliser: ({ a }) => a('embauche')
         ? { tous: ['Vous sortez. La pluie a repris.',
@@ -160,18 +165,6 @@ export const bar = {
             minutes: 35, va: 'quai' }
         : { tous: 'Pas sans avoir parlé au vieil ork. C’est pour lui que vous êtes venus.',
             hercules: '« On ne quitte pas un rendez-vous avant d’avoir vu la couleur de l’argent. »' },
-    },
-
-    porte: {
-      nom: 'Porte du fond',
-      regarder: {
-        tous: 'Elle donne sur l’arrière-salle. Verre dépoli, éclairé de l’autre côté. Personne n’y entre pendant que tu regardes.',
-        rabbit: '« Pas de lecteur, pas de serrure connectée. Ça s’ouvre à la main. Donc ça ne s’ouvre pas pour moi. »',
-        drakk: '« Une seconde issue. Fermée, gardée, et nul ne s’en approche. »',
-      },
-      utiliser: ({ a }) => a('embauche')
-        ? 'Pas par là. Ta soirée commence dehors, sur un quai du Sunnyside Beach Park.'
-        : 'Tu n’as rien à faire là-dedans, et deux tables t’ont déjà remarqué.',
     },
 
     bouteilles: {
@@ -217,21 +210,11 @@ export const bar = {
        Elles sont dans le calque correspondant du décor : hors de la
        bonne vue, elles ne sont ni visibles ni cliquables. */
 
-    ward: {
-      nom: 'Quelque chose sur la porte du fond',
-      regarder: {
-        tous: 'Sur l’arrière-salle, une barrière. Du travail d’occasion, refait plusieurs fois par-dessus lui-même.',
-        trash: ['« Bon marché, et ancienne. Ils la font renouveler par quelqu’un qui passe. »',
-                '« Dans un bar à flics, l’arrière-salle est le seul endroit qui vaut la peine d’être gardé. Notez-le. »'],
-      },
-      utiliser: 'Tu n’as aucune raison de la toucher, et une très bonne de ne pas le faire.',
-    },
-
     /* ── Tactique : la lentille de Drakk ─────────────────────────
        Il ne voit ni aura ni donnée. Il voit une carte de bataille, et
        il la lit en vocabulaire d'auberge. Le cadre est faux, les
        conclusions sont bonnes — c'est ce qui le rend précieux.
-       (Sa lecture de l'issue est sur `sortie` : voir plus haut.) */
+       (Sa lecture de l'issue est sur `porte` : voir plus haut.) */
     'ligne-de-tir': {
       nom: 'Une ligne rouge',
       regarder: {

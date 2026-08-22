@@ -85,8 +85,14 @@
 .tableau--bar .affiche--b { left: calc(145 * var(--u)); top: calc(30 * var(--u)); width: calc(16 * var(--u)); height: calc(14 * var(--u)); background: #3e433c; }
 .tableau--bar .affiche--c { left: calc(90 * var(--u)); top: calc(22 * var(--u)); width: calc(14 * var(--u)); height: calc(20 * var(--u)); background: #443f3a; }
 
-/* La porte descend au sol : 62 → 118. */
-.tableau--bar .porte { left: calc(101 * var(--u)); top: calc(62 * var(--u)); width: calc(26 * var(--u)); }
+/* La porte descend au sol : 62 → 118. C'est maintenant l'unique
+   sortie du tableau (retour de playtest le 22/08 — voir bar.js) : un
+   filet de lumière ambrée sur son contour dit ce qu'un seuil au sol,
+   ailleurs, ne disait pas assez fort. */
+.tableau--bar .porte {
+  left: calc(101 * var(--u)); top: calc(62 * var(--u)); width: calc(26 * var(--u));
+  filter: drop-shadow(0 0 calc(2 * var(--u)) rgba(255,178,110,.4));
+}
 
 /* — le comptoir — */
 .tableau--bar .bouteilles { left: calc(154 * var(--u)); top: calc(20 * var(--u)); width: calc(88 * var(--u)); }
@@ -216,35 +222,6 @@
 .tableau--bar .aura--c2 { left: calc(75 * var(--u)); animation-delay: 1.4s; }
 @keyframes aura-bat { 0%,100% { opacity: .82 } 50% { opacity: 1 } }
 
-/* Une barrière d'occasion sur la porte du fond. Dans un bar à flics,
-   l'arrière-salle est le seul endroit qui vaut la peine d'être gardé.
-
-   UNE LENTILLE AJOUTE, ELLE NE RETIRE JAMAIS. Posée pleine et exactement
-   sur la porte, elle en volait tous les clics : en vue astrale, `porte`
-   tombait à 0 % de surface atteignable, et Trash était le seul runner à
-   ne pas pouvoir regarder une porte.
-
-   Elle est donc un CADRE ancré sur l'huisserie, débordant de 8 px d'art
-   tout autour — ce qui est aussi la lecture juste : une barrière se pose
-   sur une ouverture, et celle-ci a été « refaite plusieurs fois par-dessus
-   elle-même », d'où les bandes empilées sur les bords. Le clip-path
-   découpe le centre, et il découpe aussi le test de clic : la porte reste
-   atteignable dessous. */
-.tableau--bar .ward-porte {
-  left: calc(95 * var(--u)); top: calc(54 * var(--u));
-  width: calc(42 * var(--u)); height: calc(72 * var(--u));
-  background: repeating-linear-gradient(45deg,
-    rgba(124,242,196,.34) 0 calc(2 * var(--u)), transparent calc(2 * var(--u)) calc(5 * var(--u)));
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(160,255,220,.6);
-  clip-path: polygon(evenodd,
-    0 0, 100% 0, 100% 100%, 0 100%,
-    calc(8 * var(--u)) calc(8 * var(--u)),
-    calc(100% - 8 * var(--u)) calc(8 * var(--u)),
-    calc(100% - 8 * var(--u)) calc(100% - 8 * var(--u)),
-    calc(8 * var(--u)) calc(100% - 8 * var(--u)));
-  animation: aura-bat 3.1s ease-in-out infinite;
-}
-
 /* ── Calque RA : les ORA, et le BRUIT ───────────────────────────────
    Règle 7 : la RA est saturée de réclame, et ce bruit EST du contenu.
    Vingt ORA au lieu de huit, toutes avec du texte — et les deux qui
@@ -320,36 +297,13 @@
    par les semelles, et la fente de sodium sous les battants — qui sont
    juste hors cadre, en bas. La lumière vient donc du BAS ici, contre
    les deux halos de plafond : c'est ce qui dit « dehors ». */
-/* Repéré en playtest le 22/08 : « on ne comprend pas bien où est la
-   sortie », et une première correction par le seul texte et un glow
-   plus fort n'a pas suffi — pire, « derrière vous » pouvait se lire
-   comme désignant `porte` (l'arrière-salle), le vrai sprite de porte,
-   visible et dessiné, alors que lui n'est PAS la sortie.
-
-   Le vrai problème n'était pas l'intensité, c'était la MATIÈRE : le
-   seuil restait un plancher de bar, juste plus ou moins éclairé. Il
-   devient un pavé mouillé — une texture froide et striée de pluie,
-   qui n'existe nulle part ailleurs dans la salle chaude et brune du
-   bar. Le contraste de matière doit se voir sans qu'on ait à le
-   chercher, même sur la bande de 10 u qui reste dans le cadre. */
-.tableau--bar .seuil {
-  left: 0; top: calc(134 * var(--u)); width: 100%; height: calc(24 * var(--u));
-  overflow: hidden;
-  background:
-    linear-gradient(0deg, rgba(255,178,110,.7) 0 calc(2 * var(--u)), transparent calc(2 * var(--u))),
-    repeating-linear-gradient(90deg, #1c2432 0 calc(9 * var(--u)), #141a26 calc(9 * var(--u)) calc(10 * var(--u))),
-    linear-gradient(180deg, #10141c 0 calc(2 * var(--u)), #0c0f16 calc(2 * var(--u)));
-}
-.tableau--bar .seuil::before {
-  content: "";
-  position: absolute; inset: -40% -10%;
-  pointer-events: none;
-  background: repeating-linear-gradient(96deg,
-    transparent 0 5px, rgba(180,208,240,.32) 5px 6px, transparent 6px 15px);
-  animation: bar-pluie-seuil .85s linear infinite;
-  mix-blend-mode: screen;
-}
-@keyframes bar-pluie-seuil { to { transform: translate3d(-3cqw, 6cqh, 0); } }
+/* Retour de playtest le 22/08 : « on ne comprend pas bien où est la
+   sortie ». Deux essais l'ont cherchée dans ce seuil au sol — d'abord
+   texte + glow, puis une matière de pavé mouillé — avant que la
+   correction demandée soit plus simple : arrêter de la cacher dans le
+   sol et la donner au sprite de porte déjà dessiné (`porte`, plus bas
+   dans ce fichier). Le seuil disparaît avec elle ; deux indices pour
+   une seule sortie aurait fait deux fois le problème. */
 
 /* Les jambages. Ils ne portent aucune cible : leur travail est de mettre
    quelque chose DEVANT la salle. Une élévation frontale sans premier plan
@@ -373,13 +327,12 @@
 
 /* ── Calque tactique ─────────────────────────────────────────────── */
 /* L'issue tactique doit désigner LE MÊME endroit que le hotspot qui fait
-   sortir. Elle montrait l'échappatoire en bas à gauche, et le jeu
-   acceptait le clic sur une bande invisible ailleurs : deux vérités
-   différentes sur l'emplacement de la porte. */
-.tableau--bar .issue--rue { left: 0; top: calc(134 * var(--u)); width: 100%; height: calc(24 * var(--u)); }
-.tableau--bar .cote--rue { left: calc(6 * var(--u));  top: calc(126 * var(--u)); }
-.tableau--bar .issue--fond { left: calc(101 * var(--u)); top: calc(62 * var(--u)); width: calc(26 * var(--u)); height: calc(56 * var(--u));
-                             border-style: dotted; border-color: rgba(255,120,90,.7); background: rgba(90,30,20,.18); }
+   sortir — c'est `porte` depuis le 22/08, plus l'impasse d'arrière-salle
+   qu'elle marquait avant. Elle reprend donc le style `.issue` standard
+   (vert, pointillés) au lieu du rouge « danger » qu'elle portait en
+   cul-de-sac : même code couleur que l'échappatoire de chaque autre
+   tableau. */
+.tableau--bar .issue--fond { left: calc(101 * var(--u)); top: calc(62 * var(--u)); width: calc(26 * var(--u)); height: calc(56 * var(--u)); }
 .tableau--bar .cote--fond { left: calc(98 * var(--u)); top: calc(52 * var(--u)); }
 .tableau--bar .jeton { width: calc(26 * var(--u)); height: calc(9 * var(--u)); }
 .tableau--bar .j1 { left: calc(56 * var(--u));  top: calc(129 * var(--u)); }

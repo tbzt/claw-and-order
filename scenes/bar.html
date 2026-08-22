@@ -68,11 +68,6 @@
   <div class="sprite--prop-tabouret tabouret t1"></div>
   <div class="sprite--prop-tabouret tabouret t2"></div>
 
-  <!-- Le seuil de la rue est un élément de SOL : il passe derrière
-       l'équipe, qui a les pieds dessus. Les jambages, eux, restent
-       devant tout le monde — voir plus bas. -->
-  <div class="seuil" data-hotspot="sortie"></div>
-
   <!-- L'équipe, au premier plan, en groupe. Éclairée par en dessous
        par la rue, dos à la porte : ils viennent d'entrer. -->
   <div class="ombre ombre--drakk"></div>
@@ -88,18 +83,11 @@
   <!-- L’esprit mentor de Trash. Enveloppe + sprite : le trajet est
        sur l’une, les trois images sur l’autre. -->
   <div class="raton"><div class="sprite--raton"></div></div>
-  <!-- ── L'ENTRÉE DE LA RUE, AU PREMIER PLAN ──────────────────────
-       C'est par là qu'on est venus, et c'est par là qu'on repart.
-       La sortie était une bande TRANSPARENTE de 320 x 14 : le seul
-       hotspot du tableau qui fasse avancer le jeu, et il n'était pas
-       dessiné — contre la règle 2.
-
-       Elle est maintenant un seuil visible : le plancher plus sombre,
-       la flaque que la pluie laisse entrer, et la fente de sodium sous
-       les battants, juste hors cadre en bas. Les deux jambages
-       encadrent la scène et lui donnent le PREMIER PLAN qui lui
-       manquait — une élévation frontale sans rien devant se lit comme
-       une séance d'identification. -->
+  <!-- ── LE PREMIER PLAN ────────────────────────────────────────────
+       Les deux jambages encadrent la scène et lui donnent le PREMIER
+       PLAN qui lui manquait — une élévation frontale sans rien devant
+       se lit comme une séance d'identification. Ils ne portent aucune
+       cible : la sortie en porte une, ailleurs (voir `porte`). -->
   <div class="jambage jambage--g"></div>
   <div class="jambage jambage--d"></div>
 
@@ -117,7 +105,6 @@
     <div class="aura aura--barman"></div>
     <div class="aura aura--c1"></div>
     <div class="aura aura--c2"></div>
-    <div class="ward-porte" data-hotspot="ward"></div>
   </div>
 
   <!-- ── Ce que Drakk voit, et lui seul ───────────────────────────
@@ -130,11 +117,9 @@
          est déjà une cible du décor, et une chose du monde n'a droit
          qu'à un seul hotspot. Poser les deux l'un sur l'autre revenait
          à ce que la lentille de Drakk retire la sortie au lieu de la
-         désigner. Sa lecture tactique est sur `sortie`, dans sa voix. -->
-    <div class="issue issue--rue"></div>
-    <div class="cote cote--rue">ÉCHAPPATOIRE — 12 PAS</div>
+         désigner. Sa lecture tactique est sur `porte`, dans sa voix. -->
     <div class="issue issue--fond"></div>
-    <div class="cote cote--fond">CUL-DE-SAC</div>
+    <div class="cote cote--fond">SEULE ISSUE</div>
     <div class="jeton jeton--hostile j1"></div>
     <div class="jeton jeton--hostile j2"></div>
     <div class="jeton jeton--hostile j3"></div>
