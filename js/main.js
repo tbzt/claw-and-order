@@ -139,6 +139,7 @@ const NOMS_LIEUX = {
   greffe: 'Le greffe de nuit',
   retour: 'Le détroit',
   planque: 'La laverie',
+  tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
 }
 

@@ -298,8 +298,8 @@ export const planque = {
            D6 (PLAN_TRAME_ACTES_III_IV §3, validée le 2026-08-22) : le
            tribunal n'est plus terminal. Cette réaction quittait la nuit
            ici (`fin: true`) ; elle descend maintenant d'un cran, vers
-           `tribunal-salle` (chantier 20). La nuit ne s'arrête plus à la
-           laverie — elle s'arrête à la récusation. */
+           le parvis (`tribunal.js`, chantier 20b). La nuit ne s'arrête
+           plus à la laverie — elle s'arrête à la récusation. */
         return c >= 3
           ? { tous: [...commun,
                      '« Bon. »',
@@ -307,13 +307,13 @@ export const planque = {
                      '« Si vous êtes encore là quand je sortirai, je vous paierai un truc. J’aurai rien pour payer, mais je vous le paierai. »',
                      'Il pousse la porte le premier.'],
               hercules: '« Voilà quelqu’un qui vient de décider quelque chose tout seul. C’est plus rare que ça n’en a l’air. »',
-              flags: ['lester-temoigne'], fiches: ['lester-temoigne'], va: 'tribunal-salle' }
+              flags: ['lester-temoigne'], fiches: ['lester-temoigne'], va: 'tribunal' }
           : { tous: [...commun,
                      'Il ne dit rien. Il attend qu’on ouvre la porte et il sort derrière Drakk.',
                      'Il ira au tribunal. Il sera vivant à dix heures. C’était le contrat.',
                      'Ce qu’il dira à la barre, personne ici ne le sait — et lui non plus.'],
               trash: '« On l’a sorti de sa cellule et on ne lui a pas parlé. On l’a juste transporté. »',
-              va: 'tribunal-salle' }
+              va: 'tribunal' }
       },
     },
 

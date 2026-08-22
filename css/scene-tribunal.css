@@ -1,0 +1,89 @@
+/* ── TABLEAU 6 BIS — LE TRIBUNAL, LE PARVIS ───────────────────────────
+   Chantier 20b. Grille 256 x 144 (chantier 8), même --u que les autres
+   tableaux.
+
+   PLACEHOLDER FONCTIONNEL. Même réserve que scene-tribunal-salle.css :
+   pas de grain, pas de calques astral/tactique/RA — la lisibilité
+   d'abord, l'art dans un chantier à part. Palette pierre/marbre pour se
+   distinguer du bois de la salle, à défaut de détail. */
+
+.tableau--tribunal {
+  position: absolute;
+  inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #1a1c22;
+}
+.tableau--tribunal > * { position: absolute; }
+
+.tableau--tribunal .fond {
+  inset: 0;
+  background: linear-gradient(180deg, #26282f 0%, #2e3037 60%, #35373e 100%);
+}
+
+.tableau--tribunal .galeries {
+  left: 0; top: calc(118 * var(--u));
+  width: 100%; height: calc(22 * var(--u));
+  background: repeating-linear-gradient(
+    180deg, #2a2c33 0 calc(4 * var(--u)), #23252b calc(4 * var(--u)) calc(8 * var(--u))
+  );
+}
+
+.tableau--tribunal .colonne {
+  top: calc(8 * var(--u)); width: calc(14 * var(--u)); height: calc(84 * var(--u));
+  background: linear-gradient(90deg, #4a4c54 0%, #63656d 50%, #4a4c54 100%);
+}
+.tableau--tribunal .colonne--g { left: calc(14 * var(--u)); }
+.tableau--tribunal .colonne--d { left: calc(228 * var(--u)); }
+
+.tableau--tribunal .statue {
+  top: calc(10 * var(--u)); width: calc(18 * var(--u)); height: calc(40 * var(--u));
+  background: linear-gradient(180deg, #6b6d75 0%, #52545c 100%);
+  border-radius: calc(9 * var(--u)) calc(9 * var(--u)) 2px 2px;
+}
+.tableau--tribunal .statue--g { left: calc(30 * var(--u)); }
+.tableau--tribunal .statue--d { left: calc(208 * var(--u)); }
+
+.tableau--tribunal .fenetre-etage {
+  left: calc(188 * var(--u)); top: calc(16 * var(--u));
+  width: calc(36 * var(--u)); height: calc(24 * var(--u));
+  background: linear-gradient(180deg, #3a4048 0%, #23262c 100%);
+  border: calc(1 * var(--u)) solid #575b63;
+}
+
+.tableau--tribunal .detecteurs {
+  left: calc(108 * var(--u)); top: calc(58 * var(--u));
+  width: calc(40 * var(--u)); height: calc(34 * var(--u));
+  background: transparent;
+  border: calc(2 * var(--u)) solid #7a828e;
+  border-bottom: none;
+  border-radius: calc(10 * var(--u)) calc(10 * var(--u)) 0 0;
+}
+
+.tableau--tribunal .garde {
+  top: calc(94 * var(--u)); width: calc(16 * var(--u)); height: calc(24 * var(--u));
+  background: #2b3d55;
+  border-radius: 2px;
+}
+.tableau--tribunal .garde--a { left: calc(86 * var(--u)); }
+.tableau--tribunal .garde--b { left: calc(154 * var(--u)); }
+.tableau--tribunal .garde--trouble { left: calc(176 * var(--u)); background: #3a3040; }
+
+.tableau--tribunal .silhouette-mccarthy {
+  left: calc(56 * var(--u)); top: calc(92 * var(--u));
+  width: calc(14 * var(--u)); height: calc(26 * var(--u));
+  background: #4a3a2a;
+  border-radius: 2px;
+}
+
+.tableau--tribunal .p-drakk    { width: calc(38 * var(--u)); left: calc(100 * var(--u)); top: calc(98 * var(--u)); }
+.tableau--tribunal .p-trash    { width: calc(28 * var(--u)); left: calc(132 * var(--u)); top: calc(101 * var(--u)); }
+.tableau--tribunal .p-rabbit   { width: calc(21 * var(--u)); left: calc(158 * var(--u)); top: calc(105 * var(--u)); }
+.tableau--tribunal .p-hercules { width: calc(17 * var(--u)); left: calc(176 * var(--u)); top: calc(109 * var(--u)); }
+
+.tableau--tribunal .portes-salle {
+  left: calc(100 * var(--u)); top: calc(128 * var(--u));
+  width: calc(56 * var(--u)); height: calc(14 * var(--u));
+  background: linear-gradient(180deg, #3d3226 0%, #2c2418 100%);
+  border-top: calc(1 * var(--u)) solid #59492f;
+}

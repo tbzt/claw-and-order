@@ -41,6 +41,16 @@
   );
 }
 
+/* Le retour vers le parvis, sur le côté — distinct de la sortie
+   (`porte-tribunal`, premier plan centre) : l'un revient en arrière
+   gratuitement, l'autre referme la nuit. */
+.tableau--tribunal-salle .porte-laterale {
+  left: calc(4 * var(--u)); top: calc(120 * var(--u));
+  width: calc(16 * var(--u)); height: calc(20 * var(--u));
+  background: #2c2e38;
+  border-right: calc(1 * var(--u)) solid #4a4d5a;
+}
+
 .tableau--tribunal-salle .table {
   top: calc(78 * var(--u)); height: calc(20 * var(--u));
   background: linear-gradient(180deg, #3d3226 0%, #2c2418 100%);

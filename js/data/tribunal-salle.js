@@ -8,30 +8,25 @@
    reste : `depose()`, le troisième verbe de la même grammaire que
    `frotte()` (carnet) et `appelle()` (réseau).
 
-   CE QUE CE FICHIER NE FAIT PAS ENCORE (rang 2, `PLAN_EXECUTION.md`) :
-   - le markup `tribunal` (parvis, entrée accréditée, galeries, la
-     lentille de Wilson jamais payée) — chantier 20b ;
+   Le parvis (`tribunal.js`, chantier 20b) est livré : `entree.utiliser`
+   y mène ici sans coût, comme `quai` → `quai-voilier` (chantier 25).
+   `reculer`, plus bas, fait le chemin inverse — même geste, même
+   gratuité.
+
+   CE QUE CE FICHIER NE FAIT TOUJOURS PAS :
    - l'abordage (`retour`, second passage) que la récusation devrait
      ouvrir — chantier de rang 4. En attendant, les deux branches de la
      sortie (§5.4 du plan) terminent la nuit ici, `fin: true` — la
      retombée 0 existante pour « le contrat est rempli », et une
      retombée provisoire pour « on le remet à l'abri », à remplacer par
      `va: 'retour'` quand l'abordage existera.
-   - l'art du décor — un placeholder fonctionnel, pas un pixel dessiné
-     (voir `css/scene-tribunal-salle.css`).
-
-   Vue rapprochée gratuite du même nœud que le futur `tribunal` (§5.1) :
-   pas de `minutes` sur ce qui y mènera. */
+   - l'art du décor — un placeholder fonctionnel, pas un pixel dessiné,
+     comme celui du parvis (voir les deux `css/scene-tribunal*.css`). */
 
 export const tribunalSalle = {
   markup: 'scenes/tribunal-salle.html',
 
-  /* Le passage par le parvis (détecteurs, accréditation, les deux
-     Justice encapuchonnées) est raconté en une phrase — ce sera le
-     chantier 20b qui le rend jouable. On ouvre directement dans la
-     salle, comme le scénario source le fait pour cette scène. */
   ouverture: [
-    'Le mandat suffit aux détecteurs, l’accréditation suffit aux gardes. Personne n’a demandé les armes.',
     'La salle d’audience. Lester est déjà au banc, en combinaison orange, les mains à plat sur la table.',
     'Le dossier de l’accusation tient sur trois pages. Personne, dans la salle, ne semble y croire tout à fait.',
   ],
@@ -78,6 +73,19 @@ export const tribunalSalle = {
       regarder: {
         tous: ['Quelques avocats au bord de la crise, des familles de victimes d’autres affaires, un garde qui change de pied trop souvent.',
                'Personne, ici, n’est venu pour Lester. C’est bien le problème.'],
+      },
+    },
+
+    /* Le retour, dessiné (règle 2) : le même geste que `quai-voilier`
+       (chantier 25), gratuit dans les deux sens. */
+    reculer: {
+      nom: 'Le fond de la salle',
+      regarder: {
+        tous: 'Les portes, entrebâillées sur le parvis.',
+      },
+      utiliser: {
+        tous: 'Vous redescendez vers le parvis.',
+        va: 'tribunal',
       },
     },
 
