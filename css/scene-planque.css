@@ -222,6 +222,61 @@
    sert d'assise, et c'est chaque fois moins cher qu'un sprite assis. */
 .tableau--planque .p-lester   { width: calc(32 * var(--u)); left: calc(19 * var(--u)); top: calc(102 * var(--u)); }
 
+/* ══ LA CONFIANCE, DANS LE CORPS ═══════════════════════════════════════
+   Trois états dérivés du compte (voir `derive` dans planque.js). On ne
+   redessine pas le sprite : on se sert des deux seules choses que ce
+   tableau a déjà déclarées siennes — la POSITION (il est assis sur une
+   chaise trop basse, donc le tassement se lit) et la LUMIÈRE (« le
+   clair appartient à Lester », en-tête de ce fichier).
+
+   L'écart total fait 6 u de haut sur un sprite de 45 : un dixième de sa
+   hauteur, plus un écart de luminance de 0,82 à 1,14. C'est franc, et
+   ça devait l'être — un pixel de plus n'aurait rien dit.               */
+.tableau--planque .p-lester,
+.tableau--planque .ombre--lester,
+.tableau--planque .aura--lester {
+  transition: translate .55s ease-out, filter .55s ease-out,
+              width .55s ease-out, height .55s ease-out, opacity .55s ease-out;
+}
+
+/* Fermé : tassé, en retrait, dans l'ombre. Aussi l'état où l'on
+   retombe après lui avoir proposé de l'argent. */
+.stage[data-etat~="lester-ferme"] .tableau--planque .p-lester {
+  translate: calc(-1 * var(--u)) calc(3 * var(--u));
+  filter: brightness(.82) saturate(.9);
+}
+/* Il écoute : il s'est redressé, il est revenu dans la lumière. */
+.stage[data-etat~="lester-ecoute"] .tableau--planque .p-lester {
+  translate: 0 0;
+  filter: brightness(1);
+}
+/* Il a décidé : assis droit, appuyé au dossier, tourné vers l'équipe —
+   qui est à sa droite — et c'est lui le point le plus clair du cadre. */
+.stage[data-etat~="lester-ouvert"] .tableau--planque .p-lester {
+  translate: calc(3 * var(--u)) calc(-3 * var(--u));
+  filter: brightness(1.14);
+}
+
+/* L'ombre suit le corps, sinon les pieds se décollent de la chaise. */
+.stage[data-etat~="lester-ferme"]  .tableau--planque .ombre--lester { translate: calc(-1 * var(--u)) 0; opacity: .7; }
+.stage[data-etat~="lester-ouvert"] .tableau--planque .ombre--lester { translate: calc(3 * var(--u)) 0; }
+
+/* ── L'AURA — ce que Trash voit, et lui seul ──────────────────────────
+   Le texte de Trash le dit déjà mot pour mot : « son aura est plus
+   grande qu'au bateau… et elle est tournée vers nous ». Elle le faisait
+   dire à un runner sans que la lentille le montre. Elle grandit donc,
+   et elle penche vers l'équipe (à droite). */
+.stage[data-etat~="lester-ferme"] .tableau--planque .aura--lester {
+  left: calc(20 * var(--u)); top: calc(102 * var(--u));
+  width: calc(30 * var(--u)); height: calc(34 * var(--u));
+  opacity: .55;
+}
+.stage[data-etat~="lester-ouvert"] .tableau--planque .aura--lester {
+  left: calc(12 * var(--u)); top: calc(90 * var(--u));
+  width: calc(66 * var(--u)); height: calc(56 * var(--u));
+  background: radial-gradient(closest-side at 62% 50%, rgba(255,206,140,.42), transparent 72%);
+}
+
 .tableau--planque .p-drakk    { width: calc(46 * var(--u)); left: calc(56 * var(--u));  top: calc(82 * var(--u)); }
 .tableau--planque .p-trash    { width: calc(34 * var(--u)); left: calc(96 * var(--u)); top: calc(85 * var(--u)); }
 .tableau--planque .p-rabbit   { width: calc(24 * var(--u)); left: calc(125 * var(--u)); top: calc(99 * var(--u)); }

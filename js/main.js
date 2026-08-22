@@ -695,9 +695,21 @@ function rendJournal() {
 
 /* ── Rendu du HUD ────────────────────────────────────────── */
 
+/* DEUX SORTES DE VISUELS, et le moteur n'en connaissait qu'une.
+   `etat.visuels` est un registre d'ÉVÉNEMENTS : une réaction pose une
+   marque, elle ne la retire jamais (règle 19), et c'est juste pour une
+   trappe ouverte ou un poste tenu — ça ne se referme pas.
+
+   Mais un état peut aussi être DÉRIVÉ d'un compte, et donc redescendre.
+   La confiance de Lester en est un : huit sources l'augmentent, lui
+   proposer de l'argent en retire deux. Aucune marque cumulative ne sait
+   dire ça. Un tableau peut donc exposer `derive(ctx)` — recalculé à
+   chaque rafraîchissement, jamais stocké, jamais sauvegardé, puisqu'il
+   se redéduit toujours de l'état du monde. */
 function rafraichit() {
   stage.dataset.astral = etat.astral ? 'on' : 'off'
-  stage.dataset.etat = [...etat.visuels].join(' ')
+  const derives = scene?.derive?.(contexte()) ?? []
+  stage.dataset.etat = [...etat.visuels, ...derives].join(' ')
   stage.classList.toggle('est-occupe', occupe || Boolean(dialogue))
 
   for (const bouton of document.querySelectorAll('.verbe'))
@@ -810,10 +822,27 @@ function faitEntrerLEquipe() {
 /* Garde-fou : `flags` (ou `objets`, `visuels`) posé au niveau du hotspot
    au lieu de la réaction est invisible pour le moteur — le verrou devient
    infranchissable sans le moindre message. On le signale au chargement. */
+/* `objets` porte DEUX choses qui n'ont que leur nom en commun :
+
+     objets: ['passe', 'creditube']    dans une réaction — ce qu'elle DONNE
+     objets: { creditube: (ctx) => … } sur une cible    — ce qu'on lui TEND
+
+   La convention (« objets va DANS la réaction ») ne vise que la première.
+   Le contrôle les confondait et criait sur les sept cibles du jeu qui
+   portent légitimement une carte objet × cible — `pecheur`, `corps`,
+   `lester`, `vedette`, `tireur`, `amarres`, `voilier`. Une console qui
+   crie à tort sur du code juste apprend à ne plus la lire, ce qui est
+   exactement le contraire de ce que ce garde-fou est là pour faire.
+
+   La forme les sépare sans ambiguïté : la liste de dons est un TABLEAU,
+   la carte est un objet. */
 function verifieScene() {
-  for (const [nom, h] of Object.entries(scene.hotspots ?? {}))
-    for (const cle of ['flags', 'objets', 'visuels', 'retire', 'fiches'])
+  for (const [nom, h] of Object.entries(scene.hotspots ?? {})) {
+    for (const cle of ['flags', 'visuels', 'retire', 'fiches'])
       if (cle in h) console.error(`[${scene.markup}] ${nom} : « ${cle} » doit être DANS regarder/utiliser/parler, pas à côté.`)
+    if (Array.isArray(h.objets))
+      console.error(`[${scene.markup}] ${nom} : « objets » en TABLEAU est une liste de dons — elle va DANS la réaction. Une carte objet × cible s'écrit en objet.`)
+  }
 }
 
 /* Garde-fou du carnet. Une clé de `presque` se construit en TRIANT les
@@ -974,7 +1003,12 @@ function brancheHud() {
    c'est déjà là qu'on voit si les choix ont porté. */
 const BILAN = [
   ['lester-blesse',     'Lester a une manche ouverte du coude à l’épaule. Il dit que ce n’est rien.'],
-  ['toralf-manque',     'Deux impacts dans le rouf, et personne devant. Drakk avait placé tout le monde.'],
+  /* La ligne nommait Drakk. Depuis que `sait-ou` paie (le perchoir lu
+     par Drakk, le creux violet lu par Trash), n'importe qui peut avoir
+     placé l'équipe — et le bilan racontait alors le mérite de quelqu'un
+     qui n'avait rien fait. Ce qui compte n'est pas qui a donné l'ordre,
+     c'est que quelqu'un ait su où regarder. */
+  ['toralf-manque',     'Deux impacts dans le rouf, et personne devant. Quelqu’un avait su où regarder.'],
   ['star-nous-connait', 'La Lone Star a votre numéro de coque et l’heure exacte. Ça se paiera.'],
   ['trace-matricielle', 'Un ordre de transfert porte une heure que personne n’a signée.'],
   ['esprit-demande',    'Quelque chose vous a suivis jusqu’à Tacoma sans rien demander. Ça aussi, ça se paie.'],

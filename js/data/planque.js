@@ -78,6 +78,25 @@ export const planque = {
     ...(a('camera-aveugle') ? ['camera-aveugle'] : []),
   ],
 
+  /* ══ LA CONFIANCE SE VOIT ═════════════════════════════════════════
+     Il en faut trois sur huit pour qu'il témoigne, et le joueur
+     l'apprenait AU RIDEAU : on découvrait à la fin qu'on avait joué
+     pour quelque chose qu'on ne voyait pas (audit du 22/08).
+
+     Pas de jauge — la doctrine l'interdit, et elle a raison : un
+     chiffre transformerait une conversation en score. Trois postures,
+     donc, qui se lisent comme du langage du corps et pas comme des
+     crans : fermé, il écoute, il a décidé. Le seuil de 3 tombe sur le
+     dernier palier — quand il s'ouvre, c'est qu'il parlera.
+
+     Dérivé, pas posé : `conf-perdue` retire deux points, et une marque
+     cumulative ne sait pas redescendre. Lui proposer de l'argent le
+     REFERME, à l'écran, et c'est tout le propos de ce verrou. */
+  derive: ({ a }) => {
+    const c = compte(a)
+    return [c <= 0 ? 'lester-ferme' : c < 3 ? 'lester-ecoute' : 'lester-ouvert']
+  },
+
   vues: {
     astrale: ['Une laverie ouverte la nuit est un lieu sans mémoire : des milliers de gens y ont passé une heure sans rien y vivre.',
               '« C’est plat. Complètement plat. Sauf lui. »'],
@@ -104,9 +123,27 @@ export const planque = {
           : ['Assis sur une chaise en plastique orange trop basse pour lui, dos à la machine du fond.',
              'Il regarde la porte toutes les deux minutes. Pas la vitre : la porte.'],
         hercules: '« Il a choisi la chaise la plus loin de la rue et la plus près de la sortie. Personne ne lui a appris ça à l’école. »',
-        trash: ['« Son aura est plus grande qu’au bateau. Il prend de la place, maintenant. »',
-                '« Et elle est tournée vers nous. Pas ouverte : tournée. Il attend de voir. »',
-                '« Ce qu’il décidera ce matin, il le décidera dans les deux heures qui viennent. Pas au tribunal. »'],
+        /* La lentille DIT ce qu'elle montre. Elle récitait la même
+           chose du début à la fin de la scène, pendant que l'aura
+           changeait de taille sous les yeux du joueur : Trash décrivait
+           un état qui n'était plus le bon. Il lit maintenant le palier
+           où l'on en est — sans jamais donner de chiffre, c'est un
+           chaman, pas un compteur. */
+        trash: a('conf-perdue')
+          ? ['« Elle s’est refermée. D’un coup, comme une main. »',
+             '« C’était le créditube. Je l’ai vue partir et je n’ai rien dit. »',
+             '« Elle se rouvrira peut-être. Pas ce matin. »']
+          : compte(a) >= 3
+            ? ['« Son aura a doublé depuis le bateau, et elle est tournée vers nous. »',
+               '« Pas ouverte par politesse : tournée. Il a décidé quelque chose et il ne l’a encore dit à personne. »',
+               '« Ce qu’il dira à la barre, il vient de le décider ici. »']
+            : compte(a) >= 1
+              ? ['« Son aura est plus grande qu’au bateau. Il prend de la place, maintenant. »',
+                 '« Et elle est tournée vers nous. Pas ouverte : tournée. Il attend de voir. »',
+                 '« Ce qu’il décidera ce matin, il le décidera dans les deux heures qui viennent. Pas au tribunal. »']
+              : ['« Son aura est serrée sur elle-même. Exactement comme au bateau, et il est descendu du bateau il y a une heure. »',
+                 '« Il est assis avec nous et il n’est avec personne. »',
+                 '« Si on le laisse comme ça, il ira au tribunal et il se taira. »'],
         rabbit: '« Vingt ans. Il a passé plus de temps enfermé cette semaine que moi de toute ma vie, et j’ai grandi dans une tour. »',
         drakk: '« Il ne dort pas alors qu’il pourrait. C’est un homme qui monte encore la garde tout seul. »',
       }),
