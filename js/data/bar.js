@@ -159,12 +159,28 @@ export const bar = {
                 '« Une seule issue franche. Douze pas. »',
                 '« Retenez-la. Ça servira, ou ça ne servira pas, mais on ne le sait qu’après. »'],
       },
-      utiliser: ({ a }) => a('embauche')
-        ? { tous: ['Vous sortez. La pluie a repris.',
-                   'Tacoma est à quarante minutes, et le Sunnyside Beach Park est au bout.'],
-            minutes: 35, va: 'quai' }
-        : { tous: 'Pas sans avoir parlé au vieil ork. C’est pour lui que vous êtes venus.',
-            hercules: '« On ne quitte pas un rendez-vous avant d’avoir vu la couleur de l’argent. »' },
+      /* `sait-ligne` était posé par la lecture tactique de Drakk et
+         RELU NULLE PART dans tout le jeu — audit du 22/08 : le seul
+         drapeau du projet à ne servir à rien. Il paie ici. Sortir en
+         sachant que deux types sont sur la ligne de retraite n'est pas
+         le même geste que sortir sans le savoir : c'est la plus petite
+         récompense possible pour une observation, et elle suffit à ce
+         que regarder avec le bon runner cesse d'être décoratif. */
+      utiliser: ({ a }) => {
+        if (!a('embauche'))
+          return { tous: 'Pas sans avoir parlé au vieil ork. C’est pour lui que vous êtes venus.',
+                   hercules: '« On ne quitte pas un rendez-vous avant d’avoir vu la couleur de l’argent. »' }
+        return a('sait-ligne')
+          ? { tous: ['Drakk sort le premier, et il passe entre les joueurs de fléchettes et la porte.',
+                     'Les deux en uniforme doré le regardent faire. Aucun des deux ne se lève.',
+                     'Vous sortez. La pluie a repris.',
+                     'Tacoma est à quarante minutes, et le Sunnyside Beach Park est au bout.'],
+              drakk: '« On ne tourne pas le dos à une ligne qu’on a vue. On marche dessus. »',
+              minutes: 35, va: 'quai' }
+          : { tous: ['Vous sortez. La pluie a repris.',
+                     'Tacoma est à quarante minutes, et le Sunnyside Beach Park est au bout.'],
+              minutes: 35, va: 'quai' }
+      },
     },
 
     bouteilles: {
@@ -437,10 +453,16 @@ export const bar = {
           quand: ({ a }) => a('sait-le-job') && a('vu:contrat'),
           fin: true,
           flags: ['embauche'],
-          objets: ['contrat', 'mandat'],
+          objets: ['contrat', 'mandat', 'dossier'],
           texte: ['« Bien. »',
                   '« Dix heures. Après, ça ne sert plus à rien. »',
                   'Il pousse deux feuillets sur la table : le contrat, et le mandat de transfert.',
+                  /* LE TROISIÈME. Le scénario fait démarrer la
+                     contre-enquête sur la lecture du dossier, pendant
+                     l'attente à la planque. Encore faut-il l'avoir. */
+                  'Puis il hésite, et il pousse une troisième chose : une chemise cartonnée, épaisse, cornée aux angles.',
+                  '« Ça, c’est pas dans le contrat. »',
+                  '« Vous allez avoir deux heures à tuer quelque part avant l’audience. Lisez-le. Ou le lisez pas. »',
                   'Il retourne à sa quatrième tasse. L’entretien est fini, et la porte de la rue est derrière vous.'],
         },
         /* Un sujet par runner : chacun pose la question que les trois
