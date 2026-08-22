@@ -81,6 +81,16 @@
         <div class="journal__liste" id="journalListe"></div>
       </div>
 
+      <!-- Les états gardés (chantier 15). L'automatique (F5) est unique
+           et s'écrase à chaque repos ; ici, une liste d'instantanés
+           gardés sur demande, chacun étiqueté par son lieu et son
+           heure — jamais un nom tapé au clavier. -->
+      <div class="journal gardees" id="gardees" hidden>
+        <p class="journal__titre">Les états gardés</p>
+        <button class="gardees__garder" id="boutonGarder">Garder cet instant</button>
+        <div class="journal__liste" id="gardeesListe"></div>
+      </div>
+
       <div class="carnet" id="carnet" hidden>
         <p class="carnet__titre">Carnet de recoupement
           <!-- Combien de recoupements existent, et combien sont faits.
@@ -156,6 +166,8 @@
       </button>
 
       <button class="bouton-carnet" id="boutonReseau" aria-pressed="false">Réseau</button>
+
+      <button class="bouton-carnet" id="boutonGardees" aria-pressed="false" title="États gardés (G)">États gardés</button>
 
       <div class="inventaire" id="inventaire" aria-label="Inventaire"></div>
 

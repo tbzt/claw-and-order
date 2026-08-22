@@ -1307,3 +1307,56 @@ body {
 .journal__qui[data-qui="rabbit"]   { color: var(--voix-rabbit); }
 .journal__qui[data-qui="drakk"]    { color: var(--voix-drakk); }
 .journal__vide { font-size: 1.3cqw; color: #4b5468; font-style: italic; }
+
+/* ── Les états gardés (chantier 15) ───────────────────────────────── */
+.gardees__garder {
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 1.1cqw;
+  letter-spacing: .08em;
+  padding: .7cqh 1.6cqw;
+  color: var(--nuit);
+  background: var(--ambre);
+  border: 1px solid var(--ambre);
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.gardees__garder:hover { opacity: .85; }
+.gardees__garder:disabled {
+  color: var(--ardoise);
+  background: transparent;
+  border-color: #2b3145;
+  cursor: default;
+  opacity: 1;
+}
+
+.gardees__ligne {
+  display: flex;
+  align-items: center;
+  gap: .6cqw;
+}
+.gardees__reprendre {
+  flex: 1;
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 1.3cqw;
+  letter-spacing: .04em;
+  padding: .7cqh 1cqw;
+  color: var(--craie);
+  background: #12161f;
+  border: 1px solid #2b3145;
+  cursor: pointer;
+  transition: border-color .14s, color .14s;
+}
+.gardees__reprendre:hover { border-color: var(--cyan); color: var(--cyan); }
+.gardees__oublier {
+  font-family: var(--mono);
+  font-size: 1.1cqw;
+  color: var(--ardoise);
+  background: transparent;
+  border: 1px solid #2b3145;
+  padding: .55cqh .7cqw;
+  cursor: pointer;
+  transition: border-color .14s, color .14s;
+}
+.gardees__oublier:hover { border-color: #b5453f; color: #d16a63; }

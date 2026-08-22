@@ -132,9 +132,10 @@ export const contexte = () => ({ a, tient, sait, astral: etat.astral, qui: etat.
 const SAUVEGARDE_CLE = 'claw-and-order:sauvegarde'
 const SAUVEGARDE_VERSION = 1
 
-export function sauvegarde() {
-  if (!etat.lieu) return
-  const donnees = {
+/* Le même instantané sert à l'automatique et aux états gardés (chantier
+   15) — seul l'endroit où on l'écrit change. */
+function instantane() {
+  return {
     version: SAUVEGARDE_VERSION,
     quand: new Date().toISOString(),
     ou: etat.lieu,
@@ -156,9 +157,13 @@ export function sauvegarde() {
       depuis: etat.depuis,
     },
   }
+}
+
+export function sauvegarde() {
+  if (!etat.lieu) return
   /* `localStorage` peut refuser (navigation privée, quota) : tant pis,
      on continue sans bloquer le jeu pour une sauvegarde manquée. */
-  try { localStorage.setItem(SAUVEGARDE_CLE, JSON.stringify(donnees)) } catch {}
+  try { localStorage.setItem(SAUVEGARDE_CLE, JSON.stringify(instantane())) } catch {}
 }
 
 export function sauvegardeLisible() {
@@ -201,4 +206,51 @@ export function restaure(donnees) {
      l'un ni l'autre, et ce n'est pas une raison de la refuser. */
   etat.visites = d.visites ?? {}
   etat.depuis = d.depuis ?? null
+}
+
+/* ── ÉTATS GARDÉS (chantier 15) ──────────────────────────────────────
+   L'automatique est unique et s'écrase à chaque repos ; un état gardé
+   est un instantané qu'on choisit de garder, empilé à côté des autres
+   dans une liste séparée (§4 du plan). Même format, mêmes trois `Set` —
+   `instantane()` sert aux deux. Le nom qui les rend lisibles n'est pas
+   tapé par le joueur : c'est `ou` + `heure`, comme la reprise
+   automatique le fait déjà (« Le greffe de nuit — 02:14 ») — l'appelant
+   compose l'étiquette, ce module ne connaît pas les noms de lieux. */
+const GARDEES_CLE = 'claw-and-order:gardees'
+
+function litGardees() {
+  try {
+    const brut = localStorage.getItem(GARDEES_CLE)
+    const liste = brut ? JSON.parse(brut) : []
+    return Array.isArray(liste) ? liste.filter((g) => g?.version === SAUVEGARDE_VERSION) : []
+  } catch {
+    return []
+  }
+}
+
+function ecritGardees(liste) {
+  try { localStorage.setItem(GARDEES_CLE, JSON.stringify(liste)) } catch {}
+}
+
+/* Du plus récent au plus ancien — celui qu'on vient de garder est celui
+   qu'on veut revoir en premier. */
+export function sauvegardesGardees() {
+  return litGardees().sort((a, b) => b.id - a.id)
+}
+
+/* On ne sauvegarde qu'au repos (§2 du plan) : à l'appelant de le
+   garantir, comme pour `sauvegarde()`. */
+export function garde() {
+  if (!etat.lieu) return null
+  const g = { ...instantane(), id: Date.now() }
+  ecritGardees([...litGardees(), g])
+  return g
+}
+
+export function gardeeParId(id) {
+  return litGardees().find((g) => g.id === id) ?? null
+}
+
+export function oublieGardee(id) {
+  ecritGardees(litGardees().filter((g) => g.id !== id))
 }

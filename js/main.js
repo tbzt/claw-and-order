@@ -3,7 +3,8 @@
    une scène qu'on lui donne. */
 
 import { etat, a, pose, donne, retire, marque, classe, sait, contexte, avance, formateHeure,
-         sauvegarde, sauvegardeLisible, effaceSauvegarde, restaure, ficheslues } from './state.js'
+         sauvegarde, sauvegardeLisible, effaceSauvegarde, restaure, ficheslues,
+         sauvegardesGardees, garde, gardeeParId, oublieGardee } from './state.js'
 import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
 import { resous, nomDe, enLignes } from './interact.js'
@@ -26,6 +27,7 @@ const carnet = $('carnet')
 const reseau = $('reseau')
 const portrait = $('portrait')
 const journal = $('journal')
+const gardees = $('gardees')
 const repriseAuto = $('repriseAuto')
 
 /* Qui a un visage. Un PNJ sans portrait parle quand même : la bulle
@@ -768,6 +770,77 @@ function rendJournal() {
   liste.scrollTop = liste.scrollHeight
 }
 
+/* ── LES ÉTATS GARDÉS (chantier 15) ──────────────────────────────────
+   L'automatique (F5) est unique et s'écrase à chaque repos ; un état
+   gardé est un instantané que le joueur choisit de garder, écrit sur
+   demande et jamais écrasé — la liste vit dans `state.js`. Même
+   étiquette que la reprise automatique : le lieu et l'heure, jamais un
+   nom tapé au clavier (§4 du plan). */
+
+function basculeGardees() {
+  const ouvert = gardees.hidden
+  gardees.hidden = !ouvert
+  $('boutonGardees').setAttribute('aria-pressed', String(ouvert))
+  if (ouvert) rendGardees()
+  rafraichit()
+}
+
+function rendGardees() {
+  const boutonGarder = $('boutonGarder')
+  const repos = estAuRepos()
+  boutonGarder.disabled = !repos
+  boutonGarder.title = repos ? '' : 'Il faut être au repos pour garder un instant.'
+
+  const liste = $('gardeesListe')
+  liste.replaceChildren()
+  const entrees = sauvegardesGardees()
+  if (!entrees.length) {
+    liste.innerHTML = '<p class="journal__vide">Rien de gardé pour l’instant.</p>'
+    return
+  }
+  for (const g of entrees) {
+    const ligne = document.createElement('div')
+    ligne.className = 'gardees__ligne'
+
+    const reprendre = document.createElement('button')
+    reprendre.className = 'gardees__reprendre'
+    reprendre.textContent = `${NOMS_LIEUX[g.ou] ?? g.ou} — ${formateHeure(g.heure)}`
+    reprendre.addEventListener('click', () => reprendGardee(g.id))
+
+    const oublier = document.createElement('button')
+    oublier.className = 'gardees__oublier'
+    oublier.title = 'Oublier cet état'
+    oublier.textContent = '✕'
+    oublier.addEventListener('click', (e) => {
+      e.stopPropagation()
+      oublieGardee(g.id)
+      rendGardees()
+    })
+
+    ligne.append(reprendre, oublier)
+    liste.append(ligne)
+  }
+}
+
+/* Même geste que `repriseAutoContinuer` (§ SAUVEGARDE AUTOMATIQUE) :
+   `charge()` reconstruit `visuels` depuis `entree()`, donc on l'écrase
+   après coup avec l'instantané gardé, qui les contient déjà. */
+async function reprendGardee(id) {
+  const donnees = gardeeParId(id)
+  if (!donnees) return
+  const lieu = donnees.etat.lieu
+  const visuels = donnees.etat.visuels
+  restaure(donnees)
+  reconstruitFiches()
+  etat.astral = VUES[etat.actif] === 'astrale'
+  gardees.hidden = true
+  $('boutonGardees').setAttribute('aria-pressed', 'false')
+  await charge(lieu, true)
+  etat.visuels = new Set(visuels)
+  peintAllure()
+  rafraichit()
+}
+
 /* ── Rendu du HUD ────────────────────────────────────────── */
 
 /* DEUX SORTES DE VISUELS, et le moteur n'en connaissait qu'une.
@@ -1051,7 +1124,7 @@ function brancheStage() {
   stage.addEventListener('pointerleave', () => { curseur.hidden = true; survolee = null; ecritEtiquette() })
 
   stage.addEventListener('click', (e) => {
-    if (!carnet.hidden || !journal.hidden || !reseau.hidden) return
+    if (!carnet.hidden || !journal.hidden || !reseau.hidden || !gardees.hidden) return
     if (occupe) return suivante()
     if (dialogue) return
     const cible = e.target.closest('[data-hotspot]')
@@ -1099,9 +1172,15 @@ function brancheHud() {
   $('boutonCarnet').addEventListener('click', basculeCarnet)
   $('boutonJournal').addEventListener('click', basculeJournal)
   $('boutonReseau').addEventListener('click', basculeReseau)
+  $('boutonGardees').addEventListener('click', basculeGardees)
   $('boutonAllure').addEventListener('click', changeAllure)
   $('boutonDepose').addEventListener('click', () => {
     if (etat.ficheActive) depose(etat.ficheActive)
+  })
+  $('boutonGarder').addEventListener('click', () => {
+    if (!estAuRepos()) return
+    garde()
+    rendGardees()
   })
 
   addEventListener('keydown', (e) => {
@@ -1110,11 +1189,13 @@ function brancheHud() {
       if (!carnet.hidden) basculeCarnet()
       else if (!journal.hidden) basculeJournal()
       else if (!reseau.hidden) basculeReseau()
+      else if (!gardees.hidden) basculeGardees()
       else rafraichit()
     }
     if (e.key === 'c' || e.key === 'C') basculeCarnet()
     if (e.key === 'j' || e.key === 'J') basculeJournal()
     if (e.key === 'r' || e.key === 'R') basculeReseau()
+    if (e.key === 'g' || e.key === 'G') basculeGardees()
     if (e.key === 'a' || e.key === 'A') changeAllure()
     if (e.key === '1') { etat.verbe = 'regarder'; etat.objetActif = null; rafraichit() }
     if (e.key === '2') { etat.verbe = 'utiliser'; etat.objetActif = null; rafraichit() }
