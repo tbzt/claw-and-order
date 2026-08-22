@@ -12,8 +12,15 @@ export const etat = {
   inventaire: [],
   visuels: new Set(),
   /* Le carnet. `fiches` est ce qu'on sait ; `ficheActive` est celle
-     qu'on tient en main pour la frotter contre une autre. */
+     qu'on tient en main pour la frotter contre une autre.
+
+     `fichesNeuves` est ce qu'on sait SANS L'AVOIR ENCORE LU. Le bouton
+     du HUD signalait déjà « il y a du neuf », mais le carnet ne disait
+     pas LAQUELLE : ouvrir douze fiches pour trouver la treizième est
+     exactement le geste que ce carnet devait supprimer. Une fiche cesse
+     d'être neuve quand le carnet s'est ouvert dessus, pas avant. */
   fiches: new Set(),
+  fichesNeuves: new Set(),
   ficheActive: null,
   /* D-Osk. Le texte défilait à 25,7 caractères par seconde au pire, sans
      réglage et sans historique : une ligne partie était perdue pour de
@@ -68,8 +75,19 @@ export function formateHeure(minutes = etat.heure) {
    `true` quand c'est une nouveauté permet de ne le signaler qu'une fois. */
 export function classe(...ids) {
   let neuf = false
-  for (const f of ids) if (!etat.fiches.has(f)) { etat.fiches.add(f); neuf = true }
+  for (const f of ids) if (!etat.fiches.has(f)) {
+    etat.fiches.add(f)
+    etat.fichesNeuves.add(f)
+    neuf = true
+  }
   return neuf
+}
+
+/* Le carnet s'est ouvert, et il les a montrées : elles ne sont plus
+   neuves. Appelé à la FERMETURE, pas à l'ouverture — sinon la marque
+   disparaîtrait sous les yeux du joueur au moment où il la cherche. */
+export function ficheslues() {
+  etat.fichesNeuves.clear()
 }
 
 export const sait = (fiche) => etat.fiches.has(fiche)
@@ -104,6 +122,7 @@ export function sauvegarde() {
       flags: [...etat.flags],
       visuels: [...etat.visuels],
       fiches: [...etat.fiches],
+      fichesNeuves: [...etat.fichesNeuves],
       allure: etat.allure,
       journal: etat.journal,
       heure: etat.heure,
@@ -142,6 +161,9 @@ export function restaure(donnees) {
   etat.flags = new Set(d.flags)
   etat.visuels = new Set(d.visuels)
   etat.fiches = new Set(d.fiches)
+  /* Une fiche gagnée juste avant un F5 doit rester signalée : sinon la
+     reprise la rend « déjà lue » sans que personne l'ait lue. */
+  etat.fichesNeuves = new Set(d.fichesNeuves ?? [])
   etat.ficheActive = null
   etat.allure = d.allure
   etat.journal = d.journal

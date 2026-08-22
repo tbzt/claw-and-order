@@ -3,7 +3,7 @@
    une scène qu'on lui donne. */
 
 import { etat, a, pose, donne, retire, marque, classe, sait, contexte, avance, formateHeure,
-         sauvegarde, sauvegardeLisible, effaceSauvegarde, restaure } from './state.js'
+         sauvegarde, sauvegardeLisible, effaceSauvegarde, restaure, ficheslues } from './state.js'
 import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
 import { resous, nomDe, enLignes } from './interact.js'
@@ -246,6 +246,23 @@ function suivante() {
   const ligne = file.shift()
   if (ligne === undefined) return termine()
 
+  /* UNE LIGNE PEUT FAIRE BOUGER LE DÉCOR.
+     `visuels` posé sur la réaction s'applique AVANT que le texte
+     commence : le décor a donc déjà changé quand on lit la phrase qui
+     l'annonce, et le coup de feu se voit avant d'être tiré. Une ligne
+     qui porte son propre `visuel` le marque au moment où elle
+     s'affiche — c'est ce qui permet d'écrire une séquence : la terre se
+     referme, la lueur accroche la pluie, le coup part, la manche
+     rougit, la terre s'écarte.
+
+     Le marquage n'enlève jamais rien (règle 19) : un état transitoire —
+     l'éclair au départ du coup — est un état PERMANENT dont le rendu
+     est une animation qui ne se joue qu'une fois. */
+  if (ligne.visuel) {
+    marque(...[].concat(ligne.visuel))
+    stage.dataset.etat = [...etat.visuels].join(' ')
+  }
+
   derniereLigne = ligne.texte
   quiParle = ligne.qui
   journalise(ligne.qui, ligne.texte)
@@ -425,8 +442,12 @@ function basculeCarnet() {
   carnet.hidden = !ouvert
   etat.ficheActive = null
   $('boutonCarnet').setAttribute('aria-pressed', String(ouvert))
-  $('boutonCarnet').classList.remove('a-du-neuf')
+  /* On marque les neuves comme lues à la FERMETURE, pas à l'ouverture :
+     sinon la marque s'efface à l'instant précis où le joueur ouvre le
+     carnet pour la chercher. Elle reste sous ses yeux tant qu'il est
+     dedans, et ne le suit pas une fois ressorti. */
   if (ouvert) rendCarnet()
+  else ficheslues()
   rafraichit()
 }
 
@@ -508,6 +529,9 @@ function creeFicheBouton(id, active, onClick) {
   b.className = 'fiche'
   b.classList.toggle('est-active', active)
   b.classList.toggle('est-deduction', f.ou === 'Recoupement')
+  /* Le CSS pose un bandeau NOUVEAU dessus : savoir qu'il y a du neuf ne
+     sert à rien si on doit relire douze fiches pour trouver laquelle. */
+  b.classList.toggle('est-neuve', etat.fichesNeuves.has(id))
   b.innerHTML = `<span class="fiche__titre"></span><span class="fiche__texte"></span><span class="fiche__ou"></span>`
   b.querySelector('.fiche__titre').textContent = f.titre
   b.querySelector('.fiche__texte').textContent = f.texte
@@ -692,6 +716,15 @@ function rafraichit() {
   rendInventaire()
   $('hudHeure').textContent = formateHeure()
   $('carnetCompte').textContent = String(etat.fiches.size)
+  /* Le bouton porte le NOMBRE de fiches non lues, pas seulement une
+     pulsation : « il y a du neuf » et « il y en a trois » ne demandent
+     pas le même geste. La classe reste pilotée ici plutôt que par
+     `signaleCarnet()` seul, pour qu'une reprise après F5 la retrouve. */
+  const neuves = etat.fichesNeuves.size
+  $('boutonCarnet').classList.toggle('a-du-neuf', neuves > 0)
+  const badge = $('carnetNeuves')
+  badge.hidden = neuves === 0
+  badge.textContent = `+${neuves}`
   peintProgres()
   if (!carnet.hidden) rendCarnet()
   if (!journal.hidden) rendJournal()
