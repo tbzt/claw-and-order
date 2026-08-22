@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/scene-greffe.css">
   <link rel="stylesheet" href="css/scene-retour.css">
   <link rel="stylesheet" href="css/scene-planque.css">
+  <link rel="stylesheet" href="css/scene-tribunal-salle.css">
 </head>
 <body>
 
@@ -85,6 +86,12 @@
           <span class="carnet__progres" id="carnetProgres"></span>
         </p>
         <div class="carnet__grille" id="carnetGrille"></div>
+        <!-- La barre (chantier 20). N'existe QUE dans le tableau qui
+             expose `scene.barre` — ailleurs, ce panneau reste caché,
+             comme il l'a toujours été. -->
+        <div class="carnet__depose" id="carnetDepose" hidden>
+          <button class="depose-barre" id="boutonDepose">Déposer à la barre</button>
+        </div>
         <p class="carnet__aide" id="carnetAide">Pose une fiche sur une autre.</p>
       </div>
 

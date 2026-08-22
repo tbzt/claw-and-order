@@ -1,0 +1,47 @@
+<!--
+  Tableau 6 — LE TRIBUNAL, LA SALLE D'AUDIENCE. Chantier 20, rang 1
+  (`depose()` et la barre), sans le parvis (20b) et sans art dessiné.
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ. Chaque tableau du jeu
+  jusqu'ici porte une passe d'art complète (dégradés, grain, calques
+  astral/tactique/RA) ; celle-ci n'existe pas encore pour ce tableau —
+  elle est son propre chantier, pas celui qu'on valide ce soir. Les
+  formes ci-dessous ne portent que ce qu'il faut pour lire la scène et
+  cliquer les bonnes cibles : un banc, deux tables, un box, une barre.
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--tribunal-salle">
+
+  <div class="fond"></div>
+
+  <!-- Le banc du juge, en fond de salle, surélevé. -->
+  <div class="banc-juge" data-hotspot="juge"></div>
+
+  <!-- La galerie, en arrière-plan : la rumeur du lieu, pas son contenu. -->
+  <div class="galerie" data-hotspot="galerie"></div>
+
+  <!-- Les deux tables, de part et d'autre de l'allée centrale. -->
+  <div class="table table--defense" data-hotspot="defense"></div>
+  <div class="table table--accusation" data-hotspot="accusation"></div>
+
+  <!-- Le box de Lester, entre les deux, contre le mur du fond. -->
+  <div class="box-lester" data-hotspot="lester"></div>
+  <div class="sprite--lester p-lester"></div>
+
+  <!-- La barre des témoins, seule dans l'allée — c'est elle qui compte
+       ce soir. `depose()` ne s'y déclenche pas par un clic ici : voir
+       le bouton dédié dans le carnet. -->
+  <div class="barre-temoins" data-hotspot="barre"></div>
+
+  <!-- L'équipe, debout derrière la table de la défense — pas assise,
+       elle n'est pas partie au procès. -->
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- La sortie, au premier plan. -->
+  <div class="porte-tribunal" data-hotspot="sortir"></div>
+
+</div>

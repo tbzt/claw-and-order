@@ -22,6 +22,12 @@ export const etat = {
   fiches: new Set(),
   fichesNeuves: new Set(),
   ficheActive: null,
+  /* La barre (chantier 20). Une fiche déposée qui « tient » le fait
+     monter ; une qui « se retourne » le fait redescendre. Un registre de
+     compte, comme la confiance de Lester — mais CELUI-CI se sauvegarde :
+     rien ne le redéduit de l'état du monde, chaque dépôt est un geste
+     ponctuel du joueur, pas un fait qui reste vrai qu'on l'ait dit ou non. */
+  credibilite: 0,
   /* D-Osk. Le texte défilait à 25,7 caractères par seconde au pire, sans
      réglage et sans historique : une ligne partie était perdue pour de
      bon. `allure` change la cadence, `journal` garde tout. */
@@ -123,6 +129,7 @@ export function sauvegarde() {
       visuels: [...etat.visuels],
       fiches: [...etat.fiches],
       fichesNeuves: [...etat.fichesNeuves],
+      credibilite: etat.credibilite,
       allure: etat.allure,
       journal: etat.journal,
       heure: etat.heure,
@@ -164,6 +171,7 @@ export function restaure(donnees) {
   /* Une fiche gagnée juste avant un F5 doit rester signalée : sinon la
      reprise la rend « déjà lue » sans que personne l'ait lue. */
   etat.fichesNeuves = new Set(d.fichesNeuves ?? [])
+  etat.credibilite = d.credibilite ?? 0
   etat.ficheActive = null
   etat.allure = d.allure
   etat.journal = d.journal

@@ -6,6 +6,7 @@ import { quaiVoilier } from './quai-voilier.js'
 import { greffe } from './greffe.js'
 import { retour } from './retour.js'
 import { planque } from './planque.js'
+import { tribunalSalle } from './tribunal-salle.js'
 
-export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, retour, planque }
+export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, retour, planque, 'tribunal-salle': tribunalSalle }
 export const depart = 'bar'

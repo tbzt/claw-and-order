@@ -139,6 +139,7 @@ const NOMS_LIEUX = {
   greffe: 'Le greffe de nuit',
   retour: 'Le détroit',
   planque: 'La laverie',
+  'tribunal-salle': 'La salle d’audience',
 }
 
 /* Au démarrage, une automatique lisible se PROPOSE, elle ne se charge
@@ -177,6 +178,7 @@ async function demarre() {
   brancheHud()
   verifieCarnet()
   verifieReseau()
+  verifieBarre()
   /* La jauge d'allure part de son vrai état : sans ça elle reste vide
      jusqu'au premier clic, et le joueur croit le réglage cassé. */
   peintAllure()
@@ -559,6 +561,60 @@ function rendCarnet() {
   }
   if (!etat.fiches.size)
     grille.innerHTML = '<p class="carnet__vide">Rien encore. Une fiche se mérite.</p>'
+
+  /* Le troisième usage n'existe que là où il sert (§5.3 du plan) : un
+     tableau qui expose `scene.barre` gagne le bouton, les autres ne le
+     voient jamais. Même carnet, même grille — juste une cible de plus. */
+  const boiteDepose = $('carnetDepose')
+  boiteDepose.hidden = !scene.barre
+  if (scene.barre) $('boutonDepose').disabled = !etat.ficheActive
+}
+
+/* ── LA BARRE ────────────────────────────────────────────────────────
+   Troisième usage de la même grammaire que `frotte()` et `appelle()` :
+   `frotte(fiche, fiche)` pose une fiche sur une autre, `appelle(fiche,
+   contact)` pose une fiche sur un contact, `depose(fiche)` la pose
+   devant le juge (§5.3 du plan). Le joueur la connaît déjà.
+
+   Trois registres, pas un buzzer : une fiche qui TIENT fait monter la
+   crédibilité, une qui SE RETOURNE la fait redescendre, et le reste —
+   la majorité — N'A PAS SA PLACE : le juge, poliment, n'en fait rien.
+   Comme au carnet, seules les fiches qui comptent vraiment ont une
+   réponse écrite ; les autres tombent dans un refus pioché, dans la
+   voix du runner qui vient d'essayer. */
+
+function depose(idFiche) {
+  const barre = scene.barre
+  if (!barre) return
+  etat.ficheActive = null
+
+  /* On ne rejoue pas une déposition déjà faite : la crédibilité
+     compterait deux fois pour une seule fiche, et rejouer un aveu
+     n'a pas de sens non plus. Le drapeau est celui de la fiche, pas
+     de la scène — une seconde audience (rang 10 du plan) en aura
+     besoin telle quelle. */
+  if (a(`depose:${idFiche}`)) {
+    carnet.hidden = true
+    $('boutonCarnet').setAttribute('aria-pressed', 'false')
+    rafraichit()
+    return dis('Déjà dit. Le juge s’en souvient.', etat.actif, () => rafraichit())
+  }
+
+  pose(`depose:${idFiche}`)
+  carnet.hidden = true
+  $('boutonCarnet').setAttribute('aria-pressed', 'false')
+
+  const reponse = barre.reponses[idFiche]
+  if (!reponse) {
+    rafraichit()
+    return dis(pioche(barre.refus[etat.actif] ?? barre.refus.hercules), etat.actif, () => rafraichit())
+  }
+
+  if (reponse.registre === 'tient') etat.credibilite++
+  if (reponse.registre === 'retourne') etat.credibilite = Math.max(0, etat.credibilite - 1)
+  if (reponse.flags) pose(...reponse.flags)
+  rafraichit()
+  return dis(resousTexte(reponse.dit), etat.actif, () => rafraichit())
 }
 
 /* ── LE RÉSEAU ────────────────────────────────────────────────────────
@@ -897,6 +953,25 @@ function verifieReseau() {
       console.error(`[réseau] ${idContact} n'a aucune ligne de refus.`)
 }
 
+/* Garde-fou de la barre, même esprit que `verifieReseau()`. Une réponse
+   qui pointe une fiche inconnue, ou un runner sans refus, se tairait
+   sans rien dire — silencieusement, exactement le bug que ces
+   garde-fous existent pour empêcher. */
+function verifieBarre() {
+  const salle = scenes['tribunal-salle']
+  if (!salle?.barre) return
+  const ficheConnue = (id) => id in fiches || deductions.some((d) => d.donne.id === id) ||
+                               Object.values(appels).some((ap) => ap.id === id)
+  for (const [id, reponse] of Object.entries(salle.barre.reponses)) {
+    if (!ficheConnue(id)) console.error(`[barre] « ${id} » : fiche inconnue.`)
+    if (!['tient', 'retourne'].includes(reponse.registre))
+      console.error(`[barre] « ${id} » : registre inconnu — ${reponse.registre}.`)
+  }
+  for (const runner of Object.keys(equipe))
+    if (!salle.barre.refus[runner]?.length)
+      console.error(`[barre] ${runner} n'a aucune ligne de refus.`)
+}
+
 /* Bug trouvé en vérifiant le réseau dans le navigateur, pas causé par
    lui : une déduction du carnet (`frotte()`) ou une fiche d'appel
    (`appelle()`) s'injecte dans `fiches` — un DICTIONNAIRE, pas
@@ -980,6 +1055,9 @@ function brancheHud() {
   $('boutonJournal').addEventListener('click', basculeJournal)
   $('boutonReseau').addEventListener('click', basculeReseau)
   $('boutonAllure').addEventListener('click', changeAllure)
+  $('boutonDepose').addEventListener('click', () => {
+    if (etat.ficheActive) depose(etat.ficheActive)
+  })
 
   addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -1021,6 +1099,8 @@ const BILAN = [
   ['lester-temoigne',   'Lester a décidé de parler à la barre. Personne ne l’a acheté : on l’a écouté.'],
   ['conf-perdue',       'Vous lui avez proposé de l’argent. Il ne l’a pas pris, et il n’a pas oublié.'],
   ['camera-aveugle',    'Une caméra municipale a filmé un plafond pendant deux heures.'],
+  /* La récusation, chantier 20. */
+  ['aveu-guilde',       'Vous avez avoué, à la barre, avoir soudoyé votre propre témoin. Le juge a arrêté de prendre des notes à ce moment précis.'],
   /* Neuf heures à la laverie. Le tir part toujours ; le bilan dit ce que
      la pièce lui a donné à lire. */
   ['laverie-manquee',   'Deux trous dans le carrelage d’une laverie, à un mètre de personne. La pièce était noire, chaude et aveugle.'],
@@ -1029,11 +1109,20 @@ const BILAN = [
 ]
 
 function tombeRideau() {
-  $('rideauLigne').textContent = a('lester-temoigne')
-    ? 'Neuf heures moins le quart. Il pousse la porte le premier, et il sait ce qu’il va dire.'
-    : a('goulet-passe')
-      ? 'Neuf heures moins le quart. Il sera vivant à dix heures. C’était le contrat.'
-      : 'La nuit s’arrête ici — pour l’instant.'
+  /* Depuis le chantier 20, la nuit ne s'arrête plus à la planque : elle
+     s'arrête à la récusation, au tribunal. Les deux branches du dessous
+     restent en secours pour un `fin: true` plus ancien qu'aucun chemin
+     du jeu ne déclenche plus, mais qu'une sauvegarde antérieure au
+     20 pourrait encore porter. */
+  $('rideauLigne').textContent = a('recuse-abri')
+    ? 'Le juge s’est récusé. L’audience est repoussée de plusieurs jours — et ce n’est pas fini.'
+    : a('recuse-contrat')
+      ? 'Le juge s’est récusé, l’audience est repoussée, et vous rentrez : le contrat était rempli, il ne vous doit rien de plus.'
+      : a('lester-temoigne')
+        ? 'Neuf heures moins le quart. Il pousse la porte le premier, et il sait ce qu’il va dire.'
+        : a('goulet-passe')
+          ? 'Neuf heures moins le quart. Il sera vivant à dix heures. C’était le contrat.'
+          : 'La nuit s’arrête ici — pour l’instant.'
   const lignes = BILAN.filter(([f]) => a(f)).map(([, t]) => t)
   $('rideauBilan').textContent = lignes.length
     ? lignes.join('\n')

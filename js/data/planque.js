@@ -293,7 +293,13 @@ export const planque = {
         const c = compte(a)
         const commun = ['Il reste vingt minutes de marche, et personne n’attend plus l’heure.',
                         'Lester enjambe le verre sans le regarder.']
-        /* Il vient TOUJOURS. Ce qui change, c'est ce qu'il emporte. */
+        /* Il vient TOUJOURS. Ce qui change, c'est ce qu'il emporte.
+
+           D6 (PLAN_TRAME_ACTES_III_IV §3, validée le 2026-08-22) : le
+           tribunal n'est plus terminal. Cette réaction quittait la nuit
+           ici (`fin: true`) ; elle descend maintenant d'un cran, vers
+           `tribunal-salle` (chantier 20). La nuit ne s'arrête plus à la
+           laverie — elle s'arrête à la récusation. */
         return c >= 3
           ? { tous: [...commun,
                      '« Bon. »',
@@ -301,13 +307,13 @@ export const planque = {
                      '« Si vous êtes encore là quand je sortirai, je vous paierai un truc. J’aurai rien pour payer, mais je vous le paierai. »',
                      'Il pousse la porte le premier.'],
               hercules: '« Voilà quelqu’un qui vient de décider quelque chose tout seul. C’est plus rare que ça n’en a l’air. »',
-              flags: ['lester-temoigne'], fiches: ['lester-temoigne'], fin: true }
+              flags: ['lester-temoigne'], fiches: ['lester-temoigne'], va: 'tribunal-salle' }
           : { tous: [...commun,
                      'Il ne dit rien. Il attend qu’on ouvre la porte et il sort derrière Drakk.',
-                     'Il ira au tribunal. Il sera vivant à dix heures. C’était le contrat, et le contrat sera rempli.',
+                     'Il ira au tribunal. Il sera vivant à dix heures. C’était le contrat.',
                      'Ce qu’il dira à la barre, personne ici ne le sait — et lui non plus.'],
               trash: '« On l’a sorti de sa cellule et on ne lui a pas parlé. On l’a juste transporté. »',
-              fin: true }
+              va: 'tribunal-salle' }
       },
     },
 

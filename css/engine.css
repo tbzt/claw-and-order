@@ -1031,6 +1031,26 @@ body {
 .carnet__aide.est-refus { color: var(--ambre); animation: bulle-entre .2s ease-out; }
 .carnet__vide { font-size: 1.3cqw; color: #4b5468; font-style: italic; }
 
+/* La barre (chantier 20). Troisième cible du même geste que le carnet
+   et le réseau — n'apparaît que dans le tableau qui l'expose. */
+.carnet__depose { display: flex; }
+.depose-barre {
+  width: 100%;
+  padding: 1cqh 1.2cqw;
+  font-family: var(--mono);
+  font-size: 1.2cqw;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--nuit);
+  background: var(--ambre);
+  border: none;
+  border-radius: 2px;
+  cursor: none;
+  transition: opacity .14s, transform .14s;
+}
+.depose-barre:hover:not(:disabled) { transform: translateY(-.2cqh); }
+.depose-barre:disabled { opacity: .35; background: #3d4457; color: var(--ardoise); }
+
 /* ── LE RÉSEAU ────────────────────────────────────────────────────────
    Même geste que le carnet, transposé : une grille de fiches identique
    (on y choisit ce qu'on pose), et une rangée de contacts en dessous

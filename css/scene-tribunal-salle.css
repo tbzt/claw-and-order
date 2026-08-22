@@ -1,0 +1,90 @@
+/* ── TABLEAU 6 — LE TRIBUNAL, LA SALLE D'AUDIENCE ─────────────────────
+   Chantier 20, rang 1 : `depose()` et la barre, sans le parvis (20b) et
+   sans art dessiné. Grille 256 x 144 (chantier 8), même --u que les
+   autres tableaux.
+
+   PLACEHOLDER FONCTIONNEL. Aucun dégradé de grain, aucun calque
+   astral/tactique/RA : ce tableau n'a pas encore eu sa passe d'art, et
+   ce n'est pas ce chantier qui la lui donne. Les formes ci-dessous ne
+   portent que la lisibilité — assez pour reconnaître un banc, deux
+   tables, un box et une barre, et pour valider `depose()` en jeu. */
+
+.tableau--tribunal-salle {
+  position: absolute;
+  inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #14161d;
+}
+.tableau--tribunal-salle > * { position: absolute; }
+
+.tableau--tribunal-salle .fond {
+  inset: 0;
+  background: linear-gradient(180deg, #1b1e29 0%, #1b1e29 55%, #24272f 100%);
+}
+
+/* Le banc du juge, au fond, surélevé. */
+.tableau--tribunal-salle .banc-juge {
+  left: calc(88 * var(--u)); top: calc(12 * var(--u));
+  width: calc(80 * var(--u)); height: calc(26 * var(--u));
+  background: linear-gradient(180deg, #4a3826 0%, #362818 100%);
+  border-bottom: calc(3 * var(--u)) solid #241a0f;
+  border-radius: 2px;
+}
+
+/* La galerie, au premier plan — les rangées, jamais une cible fine. */
+.tableau--tribunal-salle .galerie {
+  left: 0; top: calc(122 * var(--u));
+  width: 100%; height: calc(20 * var(--u));
+  background: repeating-linear-gradient(
+    180deg, #23252e 0 calc(4 * var(--u)), #1b1d24 calc(4 * var(--u)) calc(8 * var(--u))
+  );
+}
+
+.tableau--tribunal-salle .table {
+  top: calc(78 * var(--u)); height: calc(20 * var(--u));
+  background: linear-gradient(180deg, #3d3226 0%, #2c2418 100%);
+  border-top: calc(1 * var(--u)) solid #59492f;
+  border-radius: 2px;
+}
+.tableau--tribunal-salle .table--defense    { left: calc(22 * var(--u)); width: calc(52 * var(--u)); }
+.tableau--tribunal-salle .table--accusation { left: calc(182 * var(--u)); width: calc(52 * var(--u)); }
+
+/* Le box de Lester, entre le banc et la barre, contre le mur du fond. */
+.tableau--tribunal-salle .box-lester {
+  left: calc(20 * var(--u)); top: calc(44 * var(--u));
+  width: calc(40 * var(--u)); height: calc(22 * var(--u));
+  background: #20222b;
+  border: calc(1 * var(--u)) solid #3a3d49;
+  border-radius: 2px;
+}
+.tableau--tribunal-salle .p-lester {
+  left: calc(26 * var(--u)); top: calc(40 * var(--u));
+  width: calc(26 * var(--u));
+}
+
+/* La barre des témoins, seule dans l'allée centrale — c'est elle qui
+   compte ce soir. Traitement ambré : elle se distingue du reste du
+   décor, comme la barre de progrès du carnet. */
+.tableau--tribunal-salle .barre-temoins {
+  left: calc(106 * var(--u)); top: calc(50 * var(--u));
+  width: calc(44 * var(--u)); height: calc(22 * var(--u));
+  background: linear-gradient(180deg, #4a3d24 0%, #332a17 100%);
+  border: calc(1 * var(--u)) solid #7a6534;
+  border-radius: 2px;
+  box-shadow: 0 0 calc(6 * var(--u)) rgba(200, 160, 70, .18);
+}
+
+/* L'équipe, debout derrière la table de la défense. */
+.tableau--tribunal-salle .p-drakk    { width: calc(40 * var(--u)); left: calc(24 * var(--u));  top: calc(96 * var(--u)); }
+.tableau--tribunal-salle .p-trash    { width: calc(30 * var(--u)); left: calc(58 * var(--u)); top: calc(99 * var(--u)); }
+.tableau--tribunal-salle .p-rabbit   { width: calc(22 * var(--u)); left: calc(84 * var(--u)); top: calc(103 * var(--u)); }
+.tableau--tribunal-salle .p-hercules { width: calc(18 * var(--u)); left: calc(102 * var(--u)); top: calc(107 * var(--u)); }
+
+/* La sortie, au premier plan, sous la galerie. */
+.tableau--tribunal-salle .porte-tribunal {
+  left: calc(108 * var(--u)); top: calc(136 * var(--u));
+  width: calc(40 * var(--u)); height: calc(8 * var(--u));
+  background: #2c2e38;
+  border-top: calc(1 * var(--u)) solid #4a4d5a;
+}
