@@ -60,6 +60,17 @@
 .tableau--carte .q--fortlewis { fill: #241d13; }
 .tableau--carte .q--outremer  { fill: #33281a; }
 
+/* McNeil. Ce n'est pas un des douze districts du livre — c'est une île
+   D'OUTREMER (p. 282 : « McNeil (une énorme prison) »), et c'est le
+   greffe du tableau 3. Elle n'est pas encore un nœud (chantier 17) :
+   dessinée et nommée, pas atteignable. Un liseré plus clair que les
+   districts éteints, parce qu'elle est minuscule et qu'elle compte. */
+.tableau--carte .q--mcneil {
+  fill: #3d3020;
+  stroke: rgba(201,160,58,.75);
+  stroke-width: .8;
+}
+
 /* Les deux districts vivants : plus clairs, liseré franc. Ce sont eux
    qu'on peut atteindre ce soir. */
 .tableau--carte .q--downtown,
@@ -72,9 +83,10 @@
 /* Le trajet, en pointillés — un seul segment tant qu'il n'y a que deux
    nœuds. Il se ravive au survol de l'un des deux jalons. */
 .tableau--carte .route {
-  stroke: rgba(201,160,58,.55);
-  stroke-width: 1.1;
-  stroke-dasharray: 3 3;
+  stroke: rgba(255,196,90,.85);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+  stroke-linecap: round;
   transition: stroke .18s ease-out;
 }
 .tableau--carte:has(.jalon--vif:hover) .route { stroke: rgba(255,214,140,.95); }
@@ -115,6 +127,18 @@
   pointer-events: auto;
 }
 
+/* Un lieu-dit : nommé sur le plan, sans numéro — il n'est pas un des
+   douze. McNeil est le seul pour l'instant. */
+.tableau--carte .lieudit {
+  font-family: var(--mono);
+  font-size: calc(4.2 * var(--u));
+  line-height: 1;
+  color: rgba(201,160,58,.8);
+  letter-spacing: .04em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 /* ── La légende ─────────────────────────────────────────────────────
    L'encart du livre, transposé : bandeau ambré, liste numérotée. Les
    deux entrées vives portent le nom du LIEU, pas seulement du district
@@ -150,3 +174,15 @@
 .tableau--carte .legende__liste b { display: inline-block; width: calc(9 * var(--u)); font-weight: 400; }
 .tableau--carte .legende__liste .est-vif { color: rgba(255,222,160,.95); }
 .tableau--carte .legende__liste .est-vif span { color: rgba(255,178,87,.8); }
+
+.tableau--carte .legende__note {
+  margin: 0;
+  padding: calc(2 * var(--u)) calc(3 * var(--u)) calc(2.5 * var(--u));
+  background: rgba(38,24,14,.92);
+  box-shadow: inset 0 0 0 1px rgba(201,160,58,.28);
+  border-top: 1px solid rgba(201,160,58,.28);
+  font-family: var(--mono);
+  font-size: calc(4.2 * var(--u));
+  color: rgba(201,160,58,.55);
+  white-space: nowrap;
+}
