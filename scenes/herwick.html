@@ -1,0 +1,68 @@
+<!--
+  Tableau 5 bis — STRAUBER ANTIQUITÉS, l'arrière-boutique de Herwick.
+  Chantier 36 (`PLAN_PLANQUES.md` § 3.2), étape B du § 8 — « la planque
+  de Drakk, en pilote ».
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `tribunal-salle.html` (chantier 20) : les formes ci-dessous ne portent
+  que ce qu'il faut pour lire la scène et cliquer les bonnes cibles. La
+  passe d'art est son propre chantier, comme la dette déjà notée sur le
+  tribunal. Herwick lui-même n'a pas de sprite (personnage neuf) : une
+  forme simple, pas un `sprite--*`, jusqu'à ce que l'atelier lui en
+  dessine un.
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe et
+  Lester sont placés EN PREMIER, tout le mobilier cliquable APRÈS, pour
+  que les cibles mécaniquement importantes (rideau, armoire, caisse,
+  comptoir, porte) gagnent toujours la main sur un sprite qui les
+  recouvrirait — trouvé en vérifiant les hit-tests, pas en relisant.
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--herwick">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- LESTER, dans le fauteuil qui vaut plus cher que tout ce qu'il a
+       jamais possédé. -->
+  <div class="fauteuil"></div>
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+
+  <!-- Le stock : quarante ans de meubles empilés, en arrière-plan. -->
+  <div class="meubles meubles--b"></div>
+
+  <!-- Le rideau de fer, à l'arrière-plan : la seule ouverture sur la
+       rue, et la ligne de tir de 8 h 40.
+       Classe `volet-fer`, pas `rideau` : `.rideau` est déjà pris par le
+       rideau de FIN (`engine.css`, z-index 70, plein écran) — une
+       collision de nom trouvée en vérifiant, pas en relisant le code. -->
+  <div class="volet-fer" data-hotspot="rideau"></div>
+
+  <!-- La vitrine latérale, dans l'angle mort du rideau — la cible de
+       la précaution d'Hercules, distincte du rideau (une chose du
+       monde, une seule cible). -->
+  <div class="vitrine-laterale"></div>
+  <div class="armoire" data-hotspot="armoire"></div>
+
+  <div class="meubles meubles--a" data-hotspot="meubles"></div>
+
+  <div class="comptoir" data-hotspot="comptoir"></div>
+  <div class="caisse" data-hotspot="caisse"></div>
+  <div class="horloge-arretee" data-hotspot="horloge"></div>
+
+  <!-- Herwick — dette d'art assumée : une forme, pas un sprite. Deux
+       postures, la debout et la blessée, départagées par `data-etat`. -->
+  <div class="herwick herwick--debout" data-hotspot="herwick"></div>
+  <div class="herwick herwick--assis" data-hotspot="herwick"></div>
+  <div class="tache-sang"></div>
+
+  <!-- La sortie, au premier plan : la porte de service vers la ruelle. -->
+  <div class="porte-service" data-hotspot="porte"></div>
+
+</div>

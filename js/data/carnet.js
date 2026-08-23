@@ -100,7 +100,7 @@ export const fiches = {
 
   'lester-temoigne': {
     titre: 'Il a décidé de parler',
-    texte: '« Je vais leur dire. Pas ce qu’ils veulent entendre — ce qui s’est passé. » Personne ne l’a acheté, personne ne l’a convaincu. On l’a écouté trois heures dans une laverie.',
+    texte: '« Je vais leur dire. Pas ce qu’ils veulent entendre — ce qui s’est passé. » Personne ne l’a acheté, personne ne l’a convaincu. On l’a écouté trois heures, à l’abri.',
     ou: 'La planque, à l’aube',
   },
 
@@ -124,6 +124,26 @@ export const fiches = {
     titre: 'Son appartement n’est pas au dossier',
     texte: 'Pas une photo, pas un relevé, pas une ligne. Officiellement, ce n’est pas le lieu du crime — donc officiellement, il n’y a rien à y voir.',
     ou: 'Le dossier, à la planque',
+  },
+
+  /* ── La planque de Drakk, chantier 36 ─────────────────────────────
+     Le pendant, chez Herwick, de ce que `chimera-nous-suit` dit à la
+     laverie : le même fait — on ne vous a pas suivis, on vous a
+     trouvés — mais une fiche à part, parce que les deux scènes ne se
+     visitent jamais dans la même partie et que le texte de l'une
+     nommait « la laverie » au mot près. */
+  'tir-herwick': {
+    titre: 'Ils ont su, jusque dans l’arrière-boutique',
+    texte: 'Un rideau de fer, une adresse que personne n’avait notée nulle part, et un tir à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
+    ou: 'Chez Herwick, à huit heures quarante',
+  },
+  /* Le trou du dossier, comblé à voix humaine et pas au téléphone
+     (`herwick|dossier-vide` ne donne que l'ABSENCE de l'adresse ;
+     celle-ci est l'adresse elle-même — PLAN_PLANQUES.md § 3.2). */
+  'appart-teresa': {
+    titre: 'L’appartement que personne n’a versé au dossier',
+    texte: 'Un studio au-dessus d’un pressing, à Loveland, loué cash depuis huit mois à un nom qui n’est pas le sien. Herwick le situe au mètre près — il ne le doit à aucun registre, seulement à quarante ans à savoir qui vit où sur son trottoir.',
+    ou: 'Herwick Strauber, à l’arrière-boutique',
   },
 
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
@@ -335,6 +355,14 @@ export const presque = {
     'On l’a dite en promenade dans une rue où personne ne se promène. Ça ne tient pas. Ça ne tombe pas non plus : il faudrait quelqu’un pour dire où elle était vraiment.',
   'appart-hors-dossier|navette-huit-heures':
     'On ne verse pas le lieu du crime, et on réserve la navette. Ce sont deux services différents, et ils vont exactement dans le même sens.',
+
+  /* ── La planque de Drakk, chantier 36 ─────────────────────────────
+     Le pendant, chez Herwick, des paires que `chimera-nous-suit` forme
+     à la laverie : même famille de faits, fiche différente. */
+  'tir-herwick|toralf-vise-lester':
+    'Le goulet, puis l’arrière-boutique. Le même employeur, sans doute — ça ne se prouve pas avec deux tirs. Ça se prouve en trouvant qui paie.',
+  'appart-teresa|corps-loveland':
+    'Un corps posé à Loveland, et un studio loué cash à deux rues de là. Il manque encore qui l’a menée du second au premier.',
 
   /* ── Ce qu’on a déjà déduit, frotté contre le reste ──────────────── */
   'deux-mains|teresa':

@@ -7,9 +7,10 @@ import { greffe } from './greffe.js'
 import { greffeCellule } from './greffe-cellule.js'
 import { retour } from './retour.js'
 import { planque } from './planque.js'
+import { herwick } from './herwick.js'
 import { tribunal } from './tribunal.js'
 import { tribunalSalle } from './tribunal-salle.js'
 import { carte } from './carte.js'
 
-export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, 'greffe-cellule': greffeCellule, retour, planque, tribunal, 'tribunal-salle': tribunalSalle, carte }
+export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, 'greffe-cellule': greffeCellule, retour, planque, herwick, tribunal, 'tribunal-salle': tribunalSalle, carte }
 export const depart = 'bar'

@@ -244,6 +244,19 @@ const TABLEAUX = {
       trash: '« Son aura s’est ouverte cette nuit. Je ne lui dirai pas. »',
     },
   },
+
+  /* La planque de Drakk, chantier 36 : « chaque planque neuve a le
+     sien » (PLAN_PLANQUES.md § 6). */
+  herwick: {
+    drakk: {
+      vu: 'Il ne s’assoit pas. Il reste debout, près du rideau, comme s’il montait la garde devant une dette plutôt que devant une porte.',
+      hercules: '« Il n’a pas quitté ce rideau des yeux depuis qu’on est entrés. Ce n’est pas de la méfiance. C’est de la culpabilité qui a pris la forme d’une vigilance. »',
+    },
+    hercules: {
+      vu: 'Il évalue le stock du regard, par réflexe, et s’arrête net en réalisant ce qu’il est en train de faire.',
+      trash: '« Il vient de chiffrer toute la boutique en une seconde, et il vient de s’en vouloir tout aussi vite. »',
+    },
+  },
 }
 
 /* ── LA FABRIQUE ──────────────────────────────────────────────────────

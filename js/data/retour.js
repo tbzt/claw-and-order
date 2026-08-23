@@ -274,6 +274,12 @@ export const retour = {
 
         const abri = a('abri')
 
+        /* CHANTIER 36 : le seul drapeau que le conseil pose vraiment
+           (`choix-herwick`, dialogue `conseil`) décide la destination.
+           Aucun autre choix du conseil n'a encore de porte — Sarah et
+           Duke restent la laverie par défaut, comme au chantier 35. */
+        const destination = a('choix-herwick') ? 'herwick' : 'planque'
+
         /* ══ LA TRAVERSÉE SE REGARDE ═══════════════════════════════════
            Le seul coup de feu de la nuit partait dans un mur de récit
            qui se terminait par un changement de tableau : le joueur
@@ -314,7 +320,7 @@ export const retour = {
                    trash: '« Il n’a pas visé le bateau. Il a visé la place où le gamin était assis. »',
                    flags: ['goulet-passe', 'toralf-manque'],
                    fiches: ['toralf-vise-lester'],
-                   minutes: 10, va: 'planque' }
+                   minutes: 10, va: destination }
 
         return { tous: [...commun,
                         { texte: 'Un claquement sec, et Lester tombe en avant sans un bruit.',
@@ -328,7 +334,7 @@ export const retour = {
                  drakk: '« J’ai vu le poste. Je n’ai pas donné l’ordre. C’est pire que de ne pas voir. »',
                  flags: ['goulet-passe', 'lester-blesse'],
                  fiches: ['toralf-vise-lester'],
-                 minutes: 10, va: 'planque' }
+                 minutes: 10, va: destination }
       },
     },
 
@@ -736,13 +742,18 @@ export const retour = {
 
     /* ══ CHANTIER 35 — LE CONSEIL DE LA TRAVERSÉE (`PLAN_PLANQUES.md` §2) ══
        Étape A du plan : la scène se joue, se mesure, se corrige — zéro
-       pixel, zéro tableau neuf. Trois des quatre planques qu'on y défend
-       (Herwick, Sarah, Duke — §3.2-3.4 du plan) n'existent encore que
-       comme texte : le conseil les nomme et les fait s'opposer, mais
-       `barre.utiliser` continue de retomber sur `va: 'planque'` en dur,
-       parce que c'est la seule qui ait une porte à ce stade du chantier.
-       « Le défaut ne disparaît pas » (§2) : rien ici ne bloque le passage
-       du goulet, discuté ou pas. */
+       pixel, zéro tableau neuf. Les quatre planques qu'on y défend s'y
+       opposent toutes, mais au chantier 35, aucune n'avait de porte :
+       `barre.utiliser` retombait sur `va: 'planque'` en dur, quoi qu'on
+       ait dit. « Le défaut ne disparaît pas » (§2) : rien ici ne bloque
+       le passage du goulet, discuté ou pas.
+
+       CHANTIER 36 — ÉTAPE B DU §8 : Herwick est la seule des trois
+       planques neuves à exister pour de vrai (`herwick.js`). Le sujet
+       `trancher-herwick`, ci-dessous, pose `choix-herwick` ; `destination`
+       (dans `barre.utiliser`) le lit et route vers `herwick` au lieu de
+       `planque`. Sarah et Duke restent du texte, comme au chantier 35,
+       jusqu'à leur propre mesure (§8, étape C puis D). */
     tacoma: {
       nom: 'Les lumières de Tacoma',
       regarder: {
@@ -982,6 +993,25 @@ export const retour = {
             ['hercules', '« Un vieil homme seul, tiré du lit à cinq heures pour héberger cinq inconnus et un fugitif. Tu sais ce que ça lui coûte, si ça tourne mal ? »'],
             ['trash', '« Ce qu’il sait, personne d’autre dans cette pièce ne le sait. C’est un vrai gain, cette nuit. Pas une simple faveur. »'],
             ['rabbit', '« Un rideau de fer, ça se force. Ça ne se pirate pas. Une fois dedans, il n’y a plus de sortie discrète. »'],
+          ],
+        },
+        /* ══ CHANTIER 36 — LA SEULE PLANQUE QUI SE TRANCHE ═══════════
+           Herwick est la seule des trois neuves à exister pour de vrai
+           (`herwick.js`, PLAN_PLANQUES.md § 3.2, étape B du § 8) : Sarah
+           et Duke restent du texte, comme au chantier 35, en attendant
+           leur propre mesure (§ 8, étape C). Trancher reste un geste de
+           Drakk — même grammaire que proposer (« il faut ÊTRE ce runner »,
+           § 2 du plan) — et `barre.utiliser` lit ce seul drapeau neuf,
+           `choix-herwick` : rien d'autre ne change la destination. */
+        {
+          id: 'trancher-herwick',
+          titre: '« Assez parlé. On va chez Herwick. » (Trancher, Drakk)',
+          quand: ({ qui, a }) => qui === 'drakk' && !a('choix-herwick'),
+          fin: true,
+          flags: ['choix-herwick'],
+          texte: [
+            ['drakk', '« Assez parlé. On va chez Herwick. »'],
+            'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
           ],
         },
         {

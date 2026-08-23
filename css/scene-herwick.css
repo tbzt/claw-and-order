@@ -1,0 +1,178 @@
+/* ── TABLEAU 5 BIS — STRAUBER ANTIQUITÉS, L'ARRIÈRE-BOUTIQUE ─────────
+   Chantier 36. Grille 256 x 144 (chantier 8), même --u que les autres
+   tableaux.
+
+   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-tribunal-salle.css`
+   (chantier 20) : aucun dégradé de grain, aucun calque astral/tactique/
+   RA dessiné à la main, aucun sprite neuf pour Herwick (dette d'art
+   assumée — une forme, pas un personnage). Assez pour reconnaître un
+   rideau, un comptoir, une armoire, un fauteuil, et pour valider la
+   mécanique en jeu.
+
+   DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À L'ŒIL : le rideau occupe la
+   moitié droite du mur du fond, l'armoire/la vitrine la moitié gauche —
+   deux zones disjointes, pour qu'aucune ne puisse avaler le centre
+   cliquable de l'autre quel que soit l'ordre du DOM. Trouvé après trois
+   allers-retours de `elementFromPoint()` dans le navigateur : la
+   première disposition (tout massé à gauche) noyait `rideau`, `lester`
+   et `armoire` les uns dans les autres. */
+
+.tableau--herwick {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #241c14;
+}
+.tableau--herwick > * { position: absolute; }
+
+.tableau--herwick .fond {
+  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
+  background: linear-gradient(180deg, #2e2418 0%, #241c14 60%, #1c150e 100%);
+}
+.tableau--herwick .sol {
+  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
+  background: repeating-linear-gradient(90deg, #3a2e1e 0 calc(16 * var(--u)), #332816 calc(16 * var(--u)) calc(32 * var(--u)));
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+}
+
+/* La vitrine latérale et l'armoire — le mur GAUCHE, x:20-70. */
+.tableau--herwick .vitrine-laterale {
+  left: calc(20 * var(--u)); top: calc(16 * var(--u));
+  width: calc(26 * var(--u)); height: calc(36 * var(--u));
+  background: rgba(150, 175, 200, .14);
+  border: calc(1 * var(--u)) solid #1c1712;
+}
+.tableau--herwick .armoire {
+  left: calc(20 * var(--u)); top: calc(30 * var(--u));
+  width: calc(34 * var(--u)); height: calc(70 * var(--u));
+  background: linear-gradient(180deg, #5a4530 0%, #3a2c1c 100%);
+  border: calc(1 * var(--u)) solid #1c1712;
+  border-radius: 2px;
+  transition: left .5s ease, top .5s ease;
+}
+.stage[data-etat~="armoire-poussee"] .tableau--herwick .armoire {
+  left: calc(20 * var(--u)); top: calc(16 * var(--u));
+}
+
+/* L'horloge arrêtée, entre l'armoire et le rideau — x:78-94. */
+.tableau--herwick .horloge-arretee {
+  left: calc(78 * var(--u)); top: calc(10 * var(--u));
+  width: calc(16 * var(--u)); height: calc(24 * var(--u));
+  background: #3a2e1e; border: calc(1 * var(--u)) solid #1c1712; border-radius: 2px;
+}
+
+/* Le rideau de fer — le mur DROIT, x:130-210 : partiellement baissé par
+   défaut (une fente en haut), plein baissé une fois la précaution de
+   Drakk prise.
+   Classe `volet-fer`, PAS `rideau` : `.rideau` est le rideau de FIN
+   (`engine.css`, z-index 70, plein écran) — une collision de nom qui
+   faisait passer ce panneau AU-DESSUS de tout le reste du décor,
+   trouvée en vérifiant les hit-tests dans le navigateur, pas en
+   relisant le code. */
+.tableau--herwick .volet-fer {
+  left: calc(130 * var(--u)); top: calc(6 * var(--u));
+  width: calc(80 * var(--u)); height: calc(74 * var(--u));
+  background: repeating-linear-gradient(180deg, #4a4038 0 calc(4 * var(--u)), #35302a calc(4 * var(--u)) calc(8 * var(--u)));
+  border: calc(1 * var(--u)) solid #1c1712;
+  box-shadow: inset 0 calc(-10 * var(--u)) calc(14 * var(--u)) rgba(160, 150, 200, .12);
+}
+.stage[data-etat~="rideau-baisse"] .tableau--herwick .volet-fer {
+  height: calc(82 * var(--u));
+  box-shadow: none;
+}
+
+/* Le stock, deux piles disjointes des deux murs. */
+.tableau--herwick .meubles {
+  background: linear-gradient(180deg, #4a3c28 0%, #2e2416 100%);
+  border: calc(1 * var(--u)) solid #1c1712;
+}
+.tableau--herwick .meubles--a { left: calc(2 * var(--u)); top: calc(96 * var(--u)); width: calc(16 * var(--u)); height: calc(40 * var(--u)); }
+.tableau--herwick .meubles--b { left: calc(222 * var(--u)); top: calc(4 * var(--u)); width: calc(30 * var(--u)); height: calc(48 * var(--u)); }
+
+/* Le comptoir et la caisse, au premier plan central — x:80-190. */
+.tableau--herwick .comptoir {
+  left: calc(80 * var(--u)); top: calc(96 * var(--u));
+  width: calc(110 * var(--u)); height: calc(20 * var(--u));
+  background: linear-gradient(180deg, #6b5232 0%, #3f2f1c 100%);
+  border-top: calc(1 * var(--u)) solid #8a6a3e;
+  border-radius: 2px;
+}
+.tableau--herwick .caisse {
+  left: calc(150 * var(--u)); top: calc(86 * var(--u));
+  width: calc(14 * var(--u)); height: calc(12 * var(--u));
+  background: #2a2620;
+  border: calc(1 * var(--u)) solid #14100c;
+}
+.tableau--herwick .caisse::after {
+  content: ''; position: absolute; right: calc(1.5 * var(--u)); top: calc(1.5 * var(--u));
+  width: calc(2 * var(--u)); height: calc(2 * var(--u)); border-radius: 50%;
+  background: #6ee08a; box-shadow: 0 0 calc(3 * var(--u)) #6ee08a;
+  animation: herwick-caisse-vie 3.4s steps(1) infinite;
+}
+.stage[data-etat~="caisse-coupee"] .tableau--herwick .caisse::after { animation: none; opacity: .12; box-shadow: none; }
+@keyframes herwick-caisse-vie { 0%, 82% { opacity: 1 } 84% { opacity: .2 } 88% { opacity: 1 } }
+
+/* Herwick — dette d'art assumée. Deux postures en réserve, une seule
+   affichée à la fois selon `herwick-touche` (même mécanisme que
+   `vitre-brisee`/`impacts-mur` dans `scene-planque.css`). Posé à droite
+   du comptoir, x:196-216 — clair du rideau (dessus, mur du fond) et du
+   fauteuil (x:224+). */
+.tableau--herwick .herwick {
+  left: calc(196 * var(--u)); top: calc(60 * var(--u));
+  width: calc(20 * var(--u)); height: calc(34 * var(--u));
+  border-radius: 40% 40% 25% 25% / 55% 55% 20% 20%;
+}
+.tableau--herwick .herwick--debout {
+  background: radial-gradient(65% 80% at 50% 40%, #d8b88a 0%, #a67f4e 45%, #5e4426 80%, transparent 100%);
+}
+.tableau--herwick .herwick--assis {
+  left: calc(192 * var(--u)); top: calc(68 * var(--u));
+  width: calc(24 * var(--u)); height: calc(24 * var(--u));
+  border-radius: 30% 30% 40% 40% / 40% 40% 45% 45%;
+  background: radial-gradient(65% 80% at 50% 35%, #d8b88a 0%, #a67f4e 45%, #5e4426 80%, transparent 100%);
+  display: none;
+}
+.stage[data-etat~="herwick-touche"] .tableau--herwick .herwick--debout { display: none; }
+.stage[data-etat~="herwick-touche"] .tableau--herwick .herwick--assis { display: block; }
+
+.tableau--herwick .tache-sang {
+  left: calc(198 * var(--u)); top: calc(78 * var(--u));
+  width: calc(10 * var(--u)); height: calc(8 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(140, 30, 30, .55), transparent 75%);
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.stage[data-etat~="herwick-touche"] .tableau--herwick .tache-sang { opacity: 1; }
+
+/* Le fauteuil de Lester, à l'écart de tout — x:224-256. */
+.tableau--herwick .fauteuil {
+  left: calc(224 * var(--u)); top: calc(70 * var(--u));
+  width: calc(30 * var(--u)); height: calc(30 * var(--u));
+  background: linear-gradient(180deg, #7a3a3a 0%, #4a2222 100%);
+  border: calc(1 * var(--u)) solid #2a1414;
+  border-radius: 3px;
+}
+.tableau--herwick .p-lester { left: calc(226 * var(--u)); top: calc(56 * var(--u)); width: calc(26 * var(--u)); }
+
+/* L'équipe, sur la bande médiane x:58-176, sous le rideau et devant le
+   comptoir — un couloir libre entre la colonne armoire (x:20-54) et
+   Herwick (x:196+), choisi à la règle après plusieurs échecs de
+   hit-test : aucun de ces quatre ne doit retomber sur le centre du
+   comptoir, de la caisse ou de l'armoire, ni l'inverse. */
+.tableau--herwick .p-drakk    { width: calc(38 * var(--u)); left: calc(58 * var(--u));  top: calc(70 * var(--u)); }
+.tableau--herwick .p-trash    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(66 * var(--u)); }
+.tableau--herwick .p-rabbit   { width: calc(22 * var(--u)); left: calc(132 * var(--u)); top: calc(72 * var(--u)); }
+.tableau--herwick .p-hercules { width: calc(18 * var(--u)); left: calc(158 * var(--u)); top: calc(78 * var(--u)); }
+
+/* Nuance de confiance de Lester (G5) — même geste discret que
+   `scene-planque.css` : un filtre, pas une jauge. */
+.stage[data-etat~="lester-ferme"]  .tableau--herwick .p-lester { filter: saturate(.6) brightness(.85); }
+.stage[data-etat~="lester-ouvert"] .tableau--herwick .p-lester { filter: saturate(1.15) brightness(1.05); }
+
+.tableau--herwick .porte-service {
+  left: calc(2 * var(--u)); top: calc(126 * var(--u));
+  width: calc(20 * var(--u)); height: calc(18 * var(--u));
+  background: #2c2822;
+  border-top: calc(1 * var(--u)) solid #4a4238;
+}

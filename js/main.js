@@ -165,6 +165,7 @@ const NOMS_LIEUX = {
   greffe: 'Le greffe de nuit',
   retour: 'Le détroit',
   planque: 'La laverie',
+  herwick: 'L’arrière-boutique de Herwick',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
   carte: 'La carte',
@@ -488,7 +489,12 @@ function sourceDe(ou) {
   if (ou.includes('Sunnyside Beach Park') || ou.includes('quai')) return 'quai'
   if (ou.includes('greffe')) return 'greffe'
   if (ou.includes('retour') || ou.includes('goulet') || ou.includes('voilier')) return 'detroit'
-  return 'laverie' /* la planque — la laverie où l'équipe se planque à l'aube */
+  /* La planque, quel que soit le lieu réel : la laverie ET, depuis le
+     chantier 36, l'arrière-boutique de Herwick. Un sceau générique
+     plutôt qu'un par lieu — PLAN_PLANQUES.md § 6, § 9 laisse la question
+     ouverte tant que les quatre planques n'existent pas ; rien n'empêche
+     de la retrancher plus tard. */
+  return 'planque'
 }
 
 function basculeCarnet() {
@@ -1405,6 +1411,11 @@ const BILAN = [
   ['abordage-echec', 'Un homme de Chimera a mis un pied sur le pont. Drakk l’a remis à l’eau. Personne n’a tiré.'],
   ['dette-esprit',   'Ce qui vous cache sous la coque a rendu deux services dans la même nuit. Ça se paiera — ça a été dit deux fois.'],
   ['cisco-contact',  'Cisco a rejoint votre réseau. Il n’a pas demandé pourquoi vous en aviez besoin.'],
+  /* La planque de Drakk, chantier 36 (`PLAN_PLANQUES.md` § 5). */
+  ['herwick-touche', 'Un vieil antiquaire a pris une balle destinée à quelqu’un d’autre.'],
+  ['drakk-brise',    'Drakk a amené la guerre chez le seul homme qui lui ait ouvert une porte.'],
+  ['herwick-epargne', 'On n’a rien demandé à un homme qui saignait.'],
+  ['herwick-soigne', 'Trash a soigné Herwick avant de trancher quoi que ce soit. Ça n’a coûté qu’à l’horloge.'],
 ]
 
 function tombeRideau() {

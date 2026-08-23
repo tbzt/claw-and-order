@@ -244,7 +244,11 @@ export const appels = {
     minutes: 15,
     ligne: [
       '« Ouais ? »',
-      '« Un tireur au goulet, hauteur d’épaule, sur le gamin ? J’ai entendu parler d’un contrat comme ça cette semaine — même signature, même style propre, sur un coup à la laverie plus tard dans la nuit. Une seule boîte bosse comme ça dans le coin : Chimera. Sécurité privée, façon polie de dire mercenaires. »',
+      /* CHANTIER 36 — RACCORD (PLAN_PLANQUES.md § 6) : cette ligne
+         nommait « la laverie » en dur, avant que le conseil de la
+         traversée puisse envoyer l'équipe ailleurs. Générique depuis
+         ce chantier — vrai quelle que soit la planque choisie. */
+      '« Un tireur au goulet, hauteur d’épaule, sur le gamin ? J’ai entendu parler d’un contrat comme ça cette semaine — même signature, même style propre, sur un second coup, ailleurs en ville, plus tard dans la nuit. Une seule boîte bosse comme ça dans le coin : Chimera. Sécurité privée, façon polie de dire mercenaires. »',
       '« Si Chimera a mis deux équipes sur le même gamin en une nuit, c’est qu’on paie cher pour qu’il ferme sa bouche. »',
     ],
     dejaLigne: '« Toujours Chimera. Ils n’ont pas changé de crew pour ça. »',

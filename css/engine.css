@@ -36,7 +36,7 @@
   --source-quai:    #4f8fe0;
   --source-greffe:  #4f9d6a;
   --source-detroit: #6b7a90;
-  --source-laverie: #bcd6e0;
+  --source-planque: #bcd6e0;
 
   --mono: ui-monospace, "DejaVu Sans Mono", "Liberation Mono", monospace;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
@@ -1147,7 +1147,7 @@ body {
 .jeton[data-source="quai"]        { border-left-color: var(--source-quai); }
 .jeton[data-source="greffe"]      { border-left-color: var(--source-greffe); }
 .jeton[data-source="detroit"]     { border-left-color: var(--source-detroit); }
-.jeton[data-source="laverie"]     { border-left-color: var(--source-laverie); }
+.jeton[data-source="planque"]     { border-left-color: var(--source-planque); }
 .jeton[data-source="recoupement"] { border-left-color: var(--teinte-recoupement, var(--cyan)); }
 
 /* La fiche tenue prime sur la couleur de sa source — c'est elle qui
@@ -1234,17 +1234,21 @@ body {
   background: var(--source-detroit);
 }
 
-/* Le hublot de la laverie — un anneau, une vitre pâle dedans. */
-.sceau--laverie {
-  border: .16cqw solid var(--source-laverie);
+/* Le sceau de la planque — un anneau, une vitre pâle dedans. Générique
+   depuis le chantier 36 : la laverie ET l'arrière-boutique de Herwick
+   sont toutes deux « la planque » pour le carnet (`sourceDe()` dans
+   main.js) — quatre lieux possibles, un seul sceau, jusqu'à ce qu'une
+   raison de les distinguer se présente (`PLAN_PLANQUES.md` §6, §9). */
+.sceau--planque {
+  border: .16cqw solid var(--source-planque);
   border-radius: 50%;
 }
-.sceau--laverie::before {
+.sceau--planque::before {
   content: "";
   position: absolute;
   inset: 28%;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--source-laverie) 55%, transparent);
+  background: color-mix(in srgb, var(--source-planque) 55%, transparent);
 }
 
 /* Deux moitiés jointes — le seul sceau que le joueur fabrique. */
