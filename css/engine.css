@@ -796,9 +796,34 @@ body {
 }
 
 /* Le plateau prend la teinte de la lentille active. */
-.stage[data-vue="astrale"] .decor { filter: saturate(.35) brightness(.72) hue-rotate(-18deg); }
-.stage[data-vue="ra"]      .decor { filter: saturate(1.15) brightness(.92) hue-rotate(12deg); }
-.decor { transition: filter .45s ease; }
+.stage[data-vue="ra"] .decor { filter: saturate(1.15) brightness(.92) hue-rotate(12deg); }
+.decor, .tableau > * { transition: filter .45s ease; }
+
+/* Chantier 16 (DA §6.1) — L'ASTRAL NE RETIRE RIEN AU VIVANT.
+   `ARCHITECTURE.md` : « une lentille ajoute, elle ne retire jamais ».
+   Dans l'astral de Shadowrun, le vivant brûle plus fort ; l'ancien filtre,
+   posé sur `.decor` entier, grisait aussi les quatre runners — l'exact
+   inverse de la loi qu'il est censé illustrer. Il ne touche plus que le
+   monde mort : tout, sauf les `.pj`, le raton (un esprit déjà natif de
+   l'astral, § IL AGIT plus haut) et `.calque--astral` (les auras,
+   additives par construction — les regriser les aurait affadies). */
+.stage[data-vue="astrale"] .tableau > *:not(.pj):not(.raton):not(.calque--astral) {
+  filter: saturate(.35) brightness(.72) hue-rotate(-18deg);
+}
+.stage[data-vue="astrale"] .pj {
+  filter: brightness(1.3) saturate(1.15) drop-shadow(0 0 .5cqw rgba(178, 130, 255, .55));
+}
+/* Le runner actif garde son liseré de couleur EN PLUS de l'aura — jamais
+   remplacé par elle, même recette de superposition que « IL AGIT ». Un
+   seul sélecteur, pas quatre : `VUES` (main.js) lie l'astral à Trash et
+   à lui seul (hercules→physique, rabbit→ra, drakk→tactique) — les trois
+   autres variantes seraient du code mort, jamais atteint. */
+.stage[data-vue="astrale"][data-actif="trash"] .p-trash {
+  filter: brightness(1.3) saturate(1.15)
+          drop-shadow(0 0 .5cqw rgba(178, 130, 255, .55))
+          drop-shadow(0 0 .3cqw var(--teinte-active))
+          drop-shadow(0 0 1.1cqw color-mix(in srgb, var(--teinte-active) 40%, transparent));
+}
 
 /* ── Les calques de lentille ─────────────────────────────────────────
    Un calque par regard, masqué par défaut. C'est le décor qui porte le
