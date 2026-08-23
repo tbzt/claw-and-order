@@ -99,6 +99,12 @@ let derniereLigne = ''
    l'un l'autre, et partager l'état aurait fait retomber une sélection
    d'un panneau dans l'autre sans que rien ne le justifie. */
 let ficheAppelActive = null
+/* Le jeton survolé dans l'étal du carnet — sert à peindre la table
+   (chantier 21) et l'étiquette du curseur, comme `survolee` le fait
+   pour un hotspot du décor. Distinct de `survolee` : les jetons ne
+   portent pas de `data-hotspot`, et le carnet peut être ouvert par
+   dessus n'importe quel tableau sans se mélanger à son décor. */
+let survoleeFiche = null
 
 /* ── Chargement d'un tableau ─────────────────────────────────
    Le moteur ne connaît aucun décor : il en charge un par son nom, vide
@@ -467,11 +473,32 @@ function signaleCarnet() {
   $('boutonCarnet').classList.add('a-du-neuf')
 }
 
+/* Le texte par défaut de la table, selon qu'une fiche est tenue ou non —
+   le seul concept que le carnet ajoute au geste de l'inventaire, et
+   c'est un texte, pas un mécanisme. */
+const AIDE_VIDE = 'Prends un jeton, pose-le sur un autre.'
+const AIDE_TENUE = 'Pose-la sur une autre fiche.'
+
+/* Le sceau d'une fiche se déduit de son `ou` : cinq lieux, plus le
+   recoupement. Pas de champ neuf sur les fiches — la source qu'elles
+   portent déjà (§3.2 du plan) suffit à la retrouver. */
+function sourceDe(ou) {
+  if (ou === 'Recoupement') return 'recoupement'
+  if (ou.includes('Claw & Order')) return 'bar'
+  if (ou.includes('Sunnyside Beach Park') || ou.includes('quai')) return 'quai'
+  if (ou.includes('greffe')) return 'greffe'
+  if (ou.includes('retour') || ou.includes('goulet') || ou.includes('voilier')) return 'detroit'
+  return 'laverie' /* la planque — la laverie où l'équipe se planque à l'aube */
+}
+
 function basculeCarnet() {
   const ouvert = carnet.hidden
   carnet.hidden = !ouvert
   etat.ficheActive = null
+  survoleeFiche = null
   $('boutonCarnet').setAttribute('aria-pressed', String(ouvert))
+  $('carnetAide').textContent = AIDE_VIDE
+  $('carnetAide').classList.remove('est-refus')
   /* On marque les neuves comme lues à la FERMETURE, pas à l'ouverture :
      sinon la marque s'efface à l'instant précis où le joueur ouvre le
      carnet pour la chercher. Elle reste sous ses yeux tant qu'il est
@@ -515,11 +542,16 @@ function peintProgres() {
 function frotte(idA, idB) {
   const trouvee = chercheDeduction(idA, idB)
   etat.ficheActive = null
+  survoleeFiche = null
 
   if (trouvee) {
     fiches[trouvee.donne.id] = trouvee.donne
     classe(trouvee.donne.id)
     pose(`su:${trouvee.donne.id}`)      /* le seul effet : la parole s'ouvre */
+    /* Le sceau du recoupement se teinte de la voix de celui qui vient
+       de le faire (§3.2 du plan) — l'actif au moment précis où la
+       paire tient, pas au moment où le carnet se rouvrira. */
+    etat.auteurDeductions[trouvee.donne.id] = etat.actif
     carnet.hidden = true
     $('boutonCarnet').setAttribute('aria-pressed', 'false')
     const brut = resousTexte(trouvee.dit)
@@ -537,7 +569,7 @@ function frotte(idA, idB) {
     : presque[cle] ?? pioche(refusCarnet[etat.actif] ?? refusCarnet.hercules)
   aide.classList.remove('est-refus'); void aide.offsetWidth
   aide.classList.add('est-refus')
-  rendCarnet()
+  rafraichit()
 }
 
 /* La déduction se dit dans la voix du runner actif : c'est lui qui vient
@@ -551,8 +583,9 @@ function resousTexte(bloc) {
 
 const pioche = (liste) => liste[Math.floor(Math.random() * liste.length)]
 
-/* Le bouton d'une fiche, partagé entre le carnet et le réseau — même
-   carte, deux panneaux qui ne lui font pas dire la même chose. */
+/* Le bouton d'une fiche, en pleine carte — utilisé par le réseau
+   seulement (le carnet, lui, pose des jetons dans l'étal ; voir
+   `creeJeton()` plus bas, chantier 21). */
 function creeFicheBouton(id, active, onClick) {
   const f = fiches[id]
   const b = document.createElement('button')
@@ -570,20 +603,108 @@ function creeFicheBouton(id, active, onClick) {
   return b
 }
 
+/* La teinte d'un sceau : fixe pour les cinq lieux, celle du runner qui
+   a fait le recoupement pour le sixième. Posée en ligne, sur le jeton
+   ET sur les cartes de la table — les trois lisent la même variable. */
+function teinteSceau(id, source) {
+  if (source !== 'recoupement') return null
+  return `var(--voix-${etat.auteurDeductions[id] ?? etat.actif})`
+}
+
+/* Le jeton : ce que l'étal montre de chaque fiche AVANT qu'on la lise —
+   un sceau, un titre court, un liseré de source (§3.1-3.2 du plan). Le
+   geste qu'il déclenche est celui de l'inventaire : le clic « prend »
+   la fiche, elle n'est plus qu'active-marquée-par-un-liseré. */
+function creeJeton(id, active, onClick) {
+  const f = fiches[id]
+  const source = sourceDe(f.ou)
+  const b = document.createElement('button')
+  b.className = 'jeton'
+  b.dataset.source = source
+  const teinte = teinteSceau(id, source)
+  if (teinte) b.style.setProperty('--teinte-recoupement', teinte)
+  b.classList.toggle('est-active', active)
+  b.classList.toggle('est-neuve', etat.fichesNeuves.has(id))
+  b.innerHTML = `<span class="sceau sceau--${source}"></span><span class="jeton__titre"></span>`
+  b.querySelector('.jeton__titre').textContent = f.titre
+  b.addEventListener('pointerenter', () => {
+    survoleeFiche = id
+    rendCarnetTable()
+    ecritEtiquette()
+  })
+  b.addEventListener('pointerleave', () => {
+    if (survoleeFiche !== id) return
+    survoleeFiche = null
+    rendCarnetTable()
+    ecritEtiquette()
+  })
+  b.addEventListener('click', (e) => { e.stopPropagation(); onClick() })
+  return b
+}
+
+/* Remplit une carte de la table avec le texte plein d'une fiche, ou un
+   vide instructif si rien n'est à montrer. Même trois lignes que
+   `creeFicheBouton` (titre/texte/ou), le sceau en plus. */
+function remplitDetail(el, id, texteVide) {
+  el.classList.toggle('est-vide', !id)
+  /* `el` est un élément persistant (la table ne se recrée pas à chaque
+     rendu) : une teinte posée en ligne la fois précédente doit être
+     effacée avant d'en reposer une autre, sinon une fiche SANS
+     recoupement hérite visuellement de la dernière couleur de runner. */
+  el.style.removeProperty('--teinte-recoupement')
+  if (!id) {
+    el.innerHTML = `<p class="carnet__vide">${texteVide}</p>`
+    return
+  }
+  const f = fiches[id]
+  const source = sourceDe(f.ou)
+  const teinte = teinteSceau(id, source)
+  if (teinte) el.style.setProperty('--teinte-recoupement', teinte)
+  el.innerHTML = `<div class="fiche__entete"><span class="sceau sceau--${source}"></span><span class="fiche__ou"></span></div><p class="fiche__titre"></p><p class="fiche__texte"></p>`
+  el.querySelector('.fiche__ou').textContent = f.ou
+  el.querySelector('.fiche__titre').textContent = f.titre
+  el.querySelector('.fiche__texte').textContent = f.texte
+}
+
+/* La table seule — appelée à chaque survol, sans reconstruire tout
+   l'étal (`rendCarnet()` le fait déjà, plus lourd, à l'ouverture et à
+   chaque prise/dépose). */
+function rendCarnetTable() {
+  remplitDetail($('carnetTenue'), etat.ficheActive, AIDE_VIDE)
+  /* Survoler le jeton qu'on tient déjà ne dit rien de plus : la carte de
+     droite reste vide plutôt que de répéter celle de gauche. */
+  const survoleeAffichee = survoleeFiche && survoleeFiche !== etat.ficheActive ? survoleeFiche : null
+  remplitDetail($('carnetSurvolee'), survoleeAffichee, 'Survole un jeton pour le comparer.')
+}
+
 function rendCarnet() {
   peintProgres()
-  const grille = $('carnetGrille')
-  grille.replaceChildren()
+  const etal = $('carnetGrille')
+  etal.replaceChildren()
   for (const id of etat.fiches) {
     if (!fiches[id]) continue
-    grille.append(creeFicheBouton(id, etat.ficheActive === id, () => {
-      if (!etat.ficheActive) { etat.ficheActive = id; return rendCarnet() }
-      if (etat.ficheActive === id) { etat.ficheActive = null; return rendCarnet() }
+    etal.append(creeJeton(id, etat.ficheActive === id, () => {
+      /* `rafraichit()`, pas `rendCarnet()` seul : c'est lui qui allume
+         le curseur `porte-objet` (chantier 21, §3.3) — le rebuild de
+         l'étal n'est que la moitié du geste. */
+      if (!etat.ficheActive) {
+        etat.ficheActive = id
+        $('carnetAide').textContent = AIDE_TENUE
+        $('carnetAide').classList.remove('est-refus')
+        return rafraichit()
+      }
+      if (etat.ficheActive === id) {
+        etat.ficheActive = null
+        $('carnetAide').textContent = AIDE_VIDE
+        return rafraichit()
+      }
       frotte(etat.ficheActive, id)
     }))
   }
   if (!etat.fiches.size)
-    grille.innerHTML = '<p class="carnet__vide">Rien encore. Une fiche se mérite.</p>'
+    etal.innerHTML = '<p class="carnet__vide">Rien encore. Une fiche se mérite.</p>'
+
+  rendCarnetTable()
 
   /* Le troisième usage n'existe que là où il sert (§5.3 du plan) : un
      tableau qui expose `scene.barre` gagne le bouton, les autres ne le
@@ -897,7 +1018,11 @@ function rafraichit() {
   if (!journal.hidden) rendJournal()
   if (!reseau.hidden) rendReseau()
   curseur.dataset.verbe = etat.verbe
-  curseur.classList.toggle('porte-objet', Boolean(etat.objetActif))
+  /* Le geste du carnet est celui de l'inventaire (chantier 21, §3.3 du
+     plan) : une fiche tenue allume le même curseur ambré qu'un objet
+     porté — un seul signal visuel pour « quelque chose est en main »,
+     pas un de plus à apprendre. */
+  curseur.classList.toggle('porte-objet', Boolean(etat.objetActif || etat.ficheActive))
   ecritEtiquette()
 
   if (estAuRepos()) sauvegarde()
@@ -923,6 +1048,25 @@ function rendInventaire() {
 }
 
 function ecritEtiquette() {
+  /* Le carnet ouvert a sa propre cible : un jeton de l'étal, pas un
+     hotspot du décor. Même grammaire d'étiquette que les objets
+     (« X sur Y »), chantier 21 §3.3 — c'est le geste qui s'unifie, pas
+     seulement son résultat. */
+  if (!carnet.hidden) {
+    if (!survoleeFiche) {
+      etiquette.hidden = true
+      curseur.classList.remove('est-sur-cible')
+      return
+    }
+    const nom = fiches[survoleeFiche].titre
+    etiquette.innerHTML = etat.ficheActive && etat.ficheActive !== survoleeFiche
+      ? `<em>${fiches[etat.ficheActive].titre}</em> sur ${nom}`
+      : nom
+    etiquette.hidden = false
+    curseur.classList.add('est-sur-cible')
+    return
+  }
+
   if (!survolee || occupe || dialogue) {
     etiquette.hidden = true
     curseur.classList.remove('est-sur-cible')
@@ -1177,6 +1321,18 @@ function brancheHud() {
     location.reload()
   })
   $('boutonCarnet').addEventListener('click', basculeCarnet)
+  /* Clic dans le vide de l'étal ou de la table = repose la fiche, sans
+     fermer le panneau — le même geste qu'un clic dans le vide du décor
+     repose un objet (chantier 21, §3.3 du plan). Les jetons stoppent
+     déjà leur propagation (`creeJeton`), donc ce gestionnaire ne voit
+     que les clics qui ne visaient rien. */
+  carnet.addEventListener('click', () => {
+    if (!etat.ficheActive) return
+    etat.ficheActive = null
+    $('carnetAide').textContent = AIDE_VIDE
+    $('carnetAide').classList.remove('est-refus')
+    rafraichit()
+  })
   $('boutonJournal').addEventListener('click', basculeJournal)
   $('boutonReseau').addEventListener('click', basculeReseau)
   $('boutonGardees').addEventListener('click', basculeGardees)

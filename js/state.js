@@ -22,6 +22,11 @@ export const etat = {
   fiches: new Set(),
   fichesNeuves: new Set(),
   ficheActive: null,
+  /* Qui a fait chaque recoupement — `{ 'pas-de-proces': 'trash', … }`.
+     Une déduction se signe (chantier 21, plan du carnet §3.2) : le
+     sceau qui la représente au carnet se teint de la voix du runner
+     actif au moment où `frotte()` a réussi, pas d'une couleur fixe. */
+  auteurDeductions: {},
   /* La barre (chantier 20). Une fiche déposée qui « tient » le fait
      monter ; une qui « se retourne » le fait redescendre. Un registre de
      compte, comme la confiance de Lester — mais CELUI-CI se sauvegarde :
@@ -155,6 +160,7 @@ function instantane() {
       heure: etat.heure,
       visites: etat.visites,
       depuis: etat.depuis,
+      auteurDeductions: etat.auteurDeductions,
     },
   }
 }
@@ -206,6 +212,10 @@ export function restaure(donnees) {
      l'un ni l'autre, et ce n'est pas une raison de la refuser. */
   etat.visites = d.visites ?? {}
   etat.depuis = d.depuis ?? null
+  /* Même geste : une sauvegarde d'avant le chantier 21 n'a pas de
+     signature de recoupement, et un sceau sans teinte de runner
+     retombe sur le cyan par défaut (CSS) — rien à refuser. */
+  etat.auteurDeductions = d.auteurDeductions ?? {}
 }
 
 /* ── ÉTATS GARDÉS (chantier 15) ──────────────────────────────────────

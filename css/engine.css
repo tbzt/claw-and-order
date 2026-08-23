@@ -26,6 +26,18 @@
   --voix-rabbit:   #f27a2a;
   --voix-drakk:    #c9a03a;
 
+  /* LES SCEAUX DE SOURCE (chantier 21, plan du carnet §3.2). Cinq lieux,
+     cinq teintes — les mêmes qui serviront de vocabulaire à la carte de
+     navigation quand elle existera. Un recoupement n'a pas de teinte
+     fixe : la sienne est celle du runner qui l'a fait
+     (`--voix-<runner>`), posée en ligne par le CSS custom property
+     `--teinte-recoupement`. */
+  --source-bar:     var(--ambre);
+  --source-quai:    #4f8fe0;
+  --source-greffe:  #4f9d6a;
+  --source-detroit: #6b7a90;
+  --source-laverie: #bcd6e0;
+
   --mono: ui-monospace, "DejaVu Sans Mono", "Liberation Mono", monospace;
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
 }
@@ -90,7 +102,13 @@ body {
   width: 2.1cqw; height: 2.1cqw;
   margin: -1.05cqw 0 0 -1.05cqw;
   pointer-events: none;
-  z-index: 60;
+  /* Au-dessus de tous les panneaux opaques (carnet 65, réseau 65,
+     journal/gardées 66) : sinon le curseur maison passe DERRIÈRE leur
+     fond dès qu'un panneau s'ouvre, et devient invisible — exactement
+     ce que le geste unifié du carnet (chantier 21) ne peut pas se
+     permettre. Reste sous le rideau et la reprise auto (70, 72), ces
+     écrans-là n'ont pas de jeton à survoler. */
+  z-index: 68;
   will-change: transform;
 }
 .curseur::before,
@@ -133,7 +151,7 @@ body {
   border-left: .18cqw solid var(--cyan);
   pointer-events: none;
   white-space: nowrap;
-  z-index: 55;
+  z-index: 67;
 }
 .etiquette[hidden] { display: none; }
 .etiquette em { color: var(--ambre); font-style: normal; }
@@ -1056,6 +1074,216 @@ body {
 .fiche__titre { font-family: var(--mono); font-size: 1.35cqw; letter-spacing: .04em; color: var(--craie); }
 .fiche__texte { font-size: 1.2cqw; line-height: 1.45; color: var(--ardoise); }
 .fiche__ou    { font-family: var(--mono); font-size: 1cqw; color: #4b5468; letter-spacing: .06em; }
+
+/* ── L'ÉTAL ET LA TABLE (chantier 21, plan du carnet §3.1) ────────────
+   Le carnet se coupe en deux. À gauche, l'étal : toutes les fiches en
+   jetons, reconnaissables avant d'être lues. À droite, la table : le
+   texte long de la fiche tenue et de celle qu'on survole, toujours
+   visibles ENSEMBLE — c'est ce qui manquait pour croiser deux fiches
+   sans jouer au ping-pong de défilement (§2.1). Le texte des fiches ne
+   change pas d'un signe : c'est un problème de place, pas d'écriture. */
+.carnet__corps {
+  flex: 1;
+  display: flex;
+  gap: 1.6cqw;
+  min-height: 0;
+}
+
+.carnet__etal {
+  flex: 1.5;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5cqw, 1fr));
+  grid-auto-rows: min-content;
+  align-content: start;
+  gap: .7cqh .7cqw;
+  overflow-y: auto;
+  padding-right: .3cqw;
+}
+
+.carnet__table {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .8cqh;
+  padding-left: 1.6cqw;
+  border-left: 1px solid #2b3145;
+  overflow-y: auto;
+}
+
+/* Le jeton : un sceau, un titre court, un liseré de source — le quart
+   de la carte d'avant, pour que vingt-quatre tiennent sans défiler. */
+.jeton {
+  display: flex;
+  align-items: flex-start;
+  gap: .5cqw;
+  text-align: left;
+  padding: .5cqh .6cqw;
+  background: #10131d;
+  border: 1px solid #2b3145;
+  border-left: .22cqw solid #3d4457;
+  border-radius: 2px;
+  cursor: none;
+  transition: border-color .14s, background .14s, transform .14s;
+}
+.jeton:hover { transform: translateY(-.2cqh); border-color: var(--ardoise); }
+.jeton.est-neuve { box-shadow: 0 0 .9cqw color-mix(in srgb, var(--ambre) 30%, transparent); }
+
+.jeton__titre {
+  font-family: var(--mono);
+  font-size: .92cqw;
+  line-height: 1.3;
+  letter-spacing: .01em;
+  color: var(--craie);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Le liseré dit la source avant que le titre soit lu. */
+.jeton[data-source="bar"]         { border-left-color: var(--source-bar); }
+.jeton[data-source="quai"]        { border-left-color: var(--source-quai); }
+.jeton[data-source="greffe"]      { border-left-color: var(--source-greffe); }
+.jeton[data-source="detroit"]     { border-left-color: var(--source-detroit); }
+.jeton[data-source="laverie"]     { border-left-color: var(--source-laverie); }
+.jeton[data-source="recoupement"] { border-left-color: var(--teinte-recoupement, var(--cyan)); }
+
+/* La fiche tenue prime sur la couleur de sa source — c'est elle qui
+   commande le geste en cours, pas d'où elle vient. Placée APRÈS les
+   règles de source pour gagner par l'ordre : même spécificité des deux
+   côtés (une classe, ou une classe et un attribut). */
+.jeton.est-active {
+  border-color: var(--ambre);
+  border-left-color: var(--ambre);
+  background: color-mix(in srgb, var(--ambre) 10%, #10131d);
+}
+
+/* ── LE SCEAU ─────────────────────────────────────────────────────────
+   Un pictogramme par lieu, dessiné comme les icônes d'inventaire
+   (.objet__contrat…) : des formes, pas des images. Le recoupement se
+   teinte de la voix du runner qui l'a fait — posée en ligne par
+   `--teinte-recoupement`, la même custom property que le liseré. */
+.sceau { position: relative; flex: 0 0 auto; width: 1.5cqw; height: 1.5cqw; margin-top: .1cqh; }
+
+/* Le verre du bar, vu de face — un fond qui s'évase, un pied. */
+.sceau--bar::before {
+  content: "";
+  position: absolute;
+  inset: 6% 22% 22% 22%;
+  background: var(--source-bar);
+  clip-path: polygon(15% 0, 85% 0, 68% 100%, 32% 100%);
+}
+.sceau--bar::after {
+  content: "";
+  position: absolute;
+  inset: 82% 34% 0 34%;
+  background: var(--source-bar);
+}
+
+/* La vague du quai — deux crêtes, la seconde plus sourde. */
+.sceau--quai::before,
+.sceau--quai::after {
+  content: "";
+  position: absolute;
+  left: 4%; right: 4%;
+  height: 34%;
+  background: var(--source-quai);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+.sceau--quai::before { top: 24%; }
+.sceau--quai::after  { top: 58%; opacity: .55; }
+
+/* Le tampon du greffe — un cadre, une barre : l'encre, pas le papier. */
+.sceau--greffe {
+  background: var(--source-greffe);
+  border-radius: 1px;
+}
+.sceau--greffe::before {
+  content: "";
+  position: absolute;
+  inset: 24% 14%;
+  border: 1px solid color-mix(in srgb, var(--nuit) 65%, transparent);
+}
+.sceau--greffe::after {
+  content: "";
+  position: absolute;
+  inset: 46% 20%;
+  height: 8%;
+  background: color-mix(in srgb, var(--nuit) 65%, transparent);
+}
+
+/* La barre du détroit — une roue de gouvernail réduite à sa croix. */
+.sceau--detroit {
+  border: .16cqw solid var(--source-detroit);
+  border-radius: 50%;
+}
+.sceau--detroit::before {
+  content: "";
+  position: absolute;
+  inset: 44% 4%;
+  height: 12%;
+  background: var(--source-detroit);
+}
+.sceau--detroit::after {
+  content: "";
+  position: absolute;
+  inset: 4% 44%;
+  width: 12%;
+  background: var(--source-detroit);
+}
+
+/* Le hublot de la laverie — un anneau, une vitre pâle dedans. */
+.sceau--laverie {
+  border: .16cqw solid var(--source-laverie);
+  border-radius: 50%;
+}
+.sceau--laverie::before {
+  content: "";
+  position: absolute;
+  inset: 28%;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--source-laverie) 55%, transparent);
+}
+
+/* Deux moitiés jointes — le seul sceau que le joueur fabrique. */
+.sceau--recoupement::before,
+.sceau--recoupement::after {
+  content: "";
+  position: absolute;
+  top: 8%; bottom: 8%;
+  width: 42%;
+  background: var(--teinte-recoupement, var(--cyan));
+  border-radius: 1px;
+}
+.sceau--recoupement::before { left: 6%; }
+.sceau--recoupement::after  { right: 6%; }
+
+/* ── LA TABLE : le texte long, deux à la fois ────────────────────────
+   Même contenu qu'une fiche pleine grandeur (.fiche__titre/__texte/__ou
+   réutilisés tels quels) — seule la carte qui les entoure change. */
+.carnet__fiche {
+  display: flex;
+  flex-direction: column;
+  gap: .4cqh;
+  padding: 1cqh 1.2cqw;
+  background: #10131d;
+  border: 1px solid #2b3145;
+  border-left: .25cqw solid #3d4457;
+  border-radius: 2px;
+  min-height: 9cqh;
+}
+.carnet__fiche--tenue { border-left-color: var(--ambre); }
+.carnet__fiche.est-vide {
+  border-style: dashed;
+  justify-content: center;
+  align-items: flex-start;
+}
+.carnet__fiche .fiche__entete { display: flex; align-items: center; gap: .5cqw; }
+.carnet__fiche .sceau { width: 1.3cqw; height: 1.3cqw; }
+.carnet__fiche .fiche__titre { font-size: 1.3cqw; }
+.carnet__fiche .fiche__texte { font-size: 1.15cqw; }
 
 .carnet__aide {
   font-family: var(--mono);

@@ -92,20 +92,30 @@
         <div class="journal__liste" id="gardeesListe"></div>
       </div>
 
+      <!-- L'étal + la table (chantier 21). L'étal montre toutes les
+           fiches en jetons courts, reconnaissables avant d'être lus ;
+           la table lit le texte long — la fiche tenue et celle qu'on
+           survole, toujours visibles ensemble. -->
       <div class="carnet" id="carnet" hidden>
         <p class="carnet__titre">Carnet de recoupement
           <!-- Combien de recoupements existent, et combien sont faits.
                C'est la seule chose qui dise au joueur qu'il en reste. -->
           <span class="carnet__progres" id="carnetProgres"></span>
         </p>
-        <div class="carnet__grille" id="carnetGrille"></div>
+        <div class="carnet__corps">
+          <div class="carnet__etal" id="carnetGrille"></div>
+          <div class="carnet__table">
+            <div class="carnet__fiche carnet__fiche--tenue" id="carnetTenue"></div>
+            <p class="carnet__aide" id="carnetAide">Prends un jeton, pose-le sur un autre.</p>
+            <div class="carnet__fiche carnet__fiche--survolee" id="carnetSurvolee"></div>
+          </div>
+        </div>
         <!-- La barre (chantier 20). N'existe QUE dans le tableau qui
              expose `scene.barre` — ailleurs, ce panneau reste caché,
              comme il l'a toujours été. -->
         <div class="carnet__depose" id="carnetDepose" hidden>
           <button class="depose-barre" id="boutonDepose">Déposer à la barre</button>
         </div>
-        <p class="carnet__aide" id="carnetAide">Pose une fiche sur une autre.</p>
       </div>
 
       <!-- Le réseau. Le geste du carnet, transposé : on pose une fiche
