@@ -365,6 +365,7 @@ export const planque = {
           : '« Trois heures. C’est long quand on n’a rien à faire et court quand on a quelqu’un à écouter. »',
         drakk: '« La veille avant la bataille. C’est toujours le meilleur moment, et personne ne le sait jamais sur le coup. »',
       }),
+      utiliser: 'La régler ne raccourcirait rien. Autant la laisser dire la vérité.',
     },
 
     /* UNE CHOSE DU MONDE, UNE SEULE CIBLE. La baie a trois âges dans ce
@@ -420,6 +421,7 @@ export const planque = {
         : { tous: 'Vue de l’intérieur, l’enseigne rouge se lit à l’envers et bat un peu. LAV’O’MATIC.',
             trash: '« Elle bat au même rythme que le néon du fond. Ils sont sur le même circuit. Tout ici est sur le même circuit. »',
             drakk: '« Une bannière rouge. De mauvais augure, mais je commence à croire que je dis ça de tout. »' },
+      utiliser: 'On ne redresse pas une enseigne depuis l’intérieur.',
     },
 
     distributeur: {
@@ -446,6 +448,7 @@ export const planque = {
         trash: '« Quelqu’un a eu besoin d’écrire ça. C’est plus triste que le règlement. »',
         drakk: '« Un édit. Trois lois, dont deux nous concernent. »',
       },
+      utiliser: 'Tu ne corriges pas le règlement d’une laverie à six heures du matin.',
     },
 
     table: {

@@ -503,6 +503,7 @@ export const retour = {
         rabbit: '« Ils s’en apercevront quand quelqu’un relira l’heure que j’ai écrite. »',
         drakk: '« La forteresse s’éloigne. On n’a pas eu à l’assiéger. Personne ne chantera ça. »',
       },
+      utiliser: 'On ne rentre pas. On regarde le mur s’éloigner, et ça suffit.',
     },
 
     tacoma: {
@@ -513,6 +514,7 @@ export const retour = {
         hercules: '« Cinq heures pour tenir un homme en vie dans une ville qui préfère qu’il meure. C’est jouable. J’ai eu pire. »',
         trash: '« C’est là qu’on va se cacher. On se cache toujours dans ce qui brille. »',
       },
+      utiliser: 'Encore trop loin pour que la regarder change quoi que ce soit.',
     },
 
     mat: {
@@ -521,6 +523,7 @@ export const retour = {
         tous: 'Voile ferlée, drisses qui claquent contre l’espar. Le bruit le plus régulier de la nuit.',
         drakk: '« La lance du navire. Elle ne sert à rien ce soir : nous allons au moteur, comme des marchands. »',
       },
+      utiliser: 'Tu poses la main dessus. Il vibre avec le vent, rien de plus.',
     },
 
     bastingage: {

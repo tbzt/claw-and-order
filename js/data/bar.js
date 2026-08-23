@@ -95,6 +95,7 @@ export const bar = {
         drakk: '« Des lanceurs. Deux portent les couleurs de la garde. »',
       },
       parler: 'Ce n’est pas le moment, et ce ne sera jamais le moment.',
+      utiliser: 'Tu ne ramasses pas une fléchette dans un bar plein d’étoiles. Pas ce soir.',
     },
 
     horloge: {
@@ -293,6 +294,7 @@ export const bar = {
         rabbit: '« Trente commlinks, tous en mode discret. Le réseau le plus poli de Seattle. »',
         drakk: '« Une salle commune. Peu de rires. Mauvaise auberge. »',
       },
+      utiliser: 'On ne réarrange pas un bar à flics. On y reste discret, ou on en sort.',
     },
   },
 

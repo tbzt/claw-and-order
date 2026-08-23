@@ -154,6 +154,10 @@ export const greffe = {
         tous: 'Un dôme noir dans l’angle, au-dessus du guichet.',
         rabbit: '« Elle enregistre en local, écrasement toutes les soixante-douze heures. Personne ne la regarde en direct à quatre heures du matin. »',
       },
+      utiliser: {
+        tous: 'Un dôme fixe, à trois mètres du sol. Rien à quoi se raccrocher.',
+        rabbit: '« Je pourrais la geler une minute. Je ne peux pas effacer ce qu’elle a déjà vu, et ce n’est pas ce soir qu’il faut essayer. »',
+      },
     },
 
     horloge: {
@@ -169,6 +173,7 @@ export const greffe = {
         trash: a('trash-epuise') ? '« J’ai mal au bras. Ne me demandez pas de recommencer. »' : undefined,
         hercules: '« Et une heure de bateau au retour. On a moins de marge que ça n’en a l’air. »',
       }),
+      utiliser: 'La régler ne ferait pas gagner une minute, et vous n’êtes pas de son quart.',
     },
 
     /* ── Astral ─────────────────────────────────────────────────── */
@@ -241,6 +246,7 @@ export const greffe = {
     salle: {
       nom: 'Le greffe',
       regarder: 'Un couloir d’attente, un guichet, un sas. Rien n’a été repeint depuis vingt ans et tout est propre.',
+      utiliser: 'On ne réaménage pas un greffe à quatre heures du matin. On sort, ou on reste sages.',
     },
   },
 
