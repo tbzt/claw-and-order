@@ -404,6 +404,44 @@
 }
 @keyframes retour-faisceau { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
 
+/* ── L'abordage (chantier 4) — le sillage, et le point d'accostage ─────
+   Masqués par défaut, comme `.vedette`/`.projecteur` : ils n'existent
+   que si `entree()` marque `poursuite` (second passage uniquement,
+   `retour.js`). Un même drapeau ouvre les deux : ils apparaissent et
+   disparaissent ensemble, ce sont les deux moitiés d'une seule menace. */
+.tableau--retour .poursuite,
+.tableau--retour .grappin { opacity: 0; transition: opacity 1.4s ease; pointer-events: none; }
+.stage[data-etat~="poursuite"] .tableau--retour .poursuite,
+.stage[data-etat~="poursuite"] .tableau--retour .grappin { opacity: 1; pointer-events: auto; }
+.stage[data-etat~="poursuite-partie"] .tableau--retour .poursuite,
+.stage[data-etat~="poursuite-partie"] .tableau--retour .grappin { opacity: 0; pointer-events: none; }
+
+/* Sans feux, sans gyrophare : une coque sombre qui gagne du terrain
+   lentement — c'est le SILLAGE qui doit se lire, pas le bateau. */
+.tableau--retour .poursuite {
+  left: calc(196 * var(--u)); top: calc(56 * var(--u));
+  width: calc(30 * var(--u)); height: calc(10 * var(--u));
+  background: linear-gradient(180deg, #171d29 0 calc(3 * var(--u)), #0d1119 calc(3 * var(--u)));
+  clip-path: polygon(4% 0, 78% 0, 100% 48%, 88% 100%, 10% 100%, 0 48%);
+  animation: retour-vedette 6.4s ease-in-out infinite reverse;
+}
+.tableau--retour .poursuite::after {
+  content: ""; position: absolute;
+  left: -60%; bottom: 0;
+  width: 60%; height: calc(2 * var(--u));
+  background: linear-gradient(90deg, transparent, rgba(140,160,190,.20));
+}
+
+/* Le point du bastingage où l'autre bateau viendrait mordre. `z-index`
+   au-dessus du bastingage (z-index auto) — même correctif que `.vhf`
+   plus haut : un hotspot posé après un décor plus large qui le
+   recouvre a besoin de son propre rang, sinon rien n'y répond au clic. */
+.tableau--retour .grappin {
+  left: calc(56 * var(--u)); top: calc(129 * var(--u));
+  width: calc(22 * var(--u)); height: calc(11 * var(--u));
+  z-index: 2;
+}
+
 /* ── Calque astral ─────────────────────────────────────────────────── */
 
 .tableau--retour .aura { mix-blend-mode: screen; border-radius: 50%; filter: blur(calc(2 * var(--u))); }

@@ -13,13 +13,14 @@
    `reculer`, plus bas, fait le chemin inverse — même geste, même
    gratuité.
 
+   CHANTIER DE RANG 4 (`PLAN_TRAME_ACTES_III_IV.md` §6) : l'abordage.
+   « On remet Lester à l'abri » descend maintenant vers `retour`
+   (`js/data/retour.js`), qui rejoue le tableau 4 en second passage — la
+   seconde tentative de Chimera que le texte source prévoit pendant la
+   traversée retour vers McNeil. « Le contrat est rempli » reste la seule
+   vraie fin ici : la retombée 0.
+
    CE QUE CE FICHIER NE FAIT TOUJOURS PAS :
-   - l'abordage (`retour`, second passage) que la récusation devrait
-     ouvrir — chantier de rang 4. En attendant, les deux branches de la
-     sortie (§5.4 du plan) terminent la nuit ici, `fin: true` — la
-     retombée 0 existante pour « le contrat est rempli », et une
-     retombée provisoire pour « on le remet à l'abri », à remplacer par
-     `va: 'retour'` quand l'abordage existera.
    - l'art du décor — un placeholder fonctionnel, pas un pixel dessiné,
      comme celui du parvis (voir les deux `css/scene-tribunal*.css`). */
 
@@ -124,7 +125,7 @@ export const tribunalSalle = {
         return a('recuse-abri')
           ? { tous: ['« On le ramène à McNeil, » dit McCarthy. « Nouveau passeur, ce soir. »',
                      'Ce que ça veut dire pour la traversée, personne ne le dit encore à voix haute.'],
-              fin: true }
+              va: 'retour' }
           : { tous: ['« Le contrat est rempli, » dit McCarthy. « Il sera vivant à dix heures. C’était le prix demandé. »',
                      'La nuit s’arrête là, pour vous. Pas pour lui.'],
               fin: true }

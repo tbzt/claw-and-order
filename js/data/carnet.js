@@ -77,6 +77,15 @@ export const fiches = {
     ou: 'Le pont du voilier, au retour',
   },
 
+  /* ── L'abordage, chantier de rang 4 ───────────────────────────────
+     Vraie quel que soit ce qu'on en a fait au goulet : c'est la
+     TENTATIVE elle-même qui est le fait, pas son issue. */
+  'abordage-repousse': {
+    titre: 'Ils ont retenté, en groupe',
+    texte: 'Un second bateau a suivi le vôtre depuis McNeil, tous feux éteints, jusqu’au goulet. Personne n’a tiré cette fois. Ils voulaient monter à bord, pas tirer de loin.',
+    ou: 'Le goulet, à l’abordage',
+  },
+
   'chimera-nous-suit': {
     titre: 'Ils savaient où on était',
     texte: 'Une laverie choisie au hasard à six heures du matin, et un tir à travers la baie à huit heures quarante. Personne ne nous a suivis depuis Tacoma — quelqu’un nous a trouvés autrement.',

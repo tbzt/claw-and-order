@@ -792,6 +792,12 @@ function rendReseau() {
   const boutons = $('reseauContacts')
   boutons.replaceChildren()
   for (const [id, c] of Object.entries(contacts)) {
+    /* Chantier 4 (l'abordage) : « les cinq contacts, et ceux qui
+       s'ajoutent » (chantier 32) — un contact peut porter `requiert`,
+       un drapeau sans lequel il n'apparaît pas du tout dans le
+       panneau. Cisco est le premier ; les cinq d'origine n'ont pas ce
+       champ et passent donc toujours. */
+    if (c.requiert && !a(c.requiert)) continue
     const b = document.createElement('button')
     b.className = 'contact'
     b.classList.toggle('est-indisponible', etat.actif !== c.runner)
@@ -1395,23 +1401,30 @@ const BILAN = [
   ['laverie-manquee',   'Deux trous dans le carrelage d’une laverie, à un mètre de personne. La pièce était noire, chaude et aveugle.'],
   ['lester-coupe',      'Lester a la joue ouverte par un éclat de baie vitrée. Il n’a pas crié.'],
   ['lester-touche-laverie', 'On lui a tiré dessus une seconde fois, dans une pièce éclairée, et cette fois on ne l’avait rien fait pour l’empêcher.'],
+  /* L'abordage, chantier de rang 4. */
+  ['abordage-echec', 'Un homme de Chimera a mis un pied sur le pont. Drakk l’a remis à l’eau. Personne n’a tiré.'],
+  ['dette-esprit',   'Ce qui vous cache sous la coque a rendu deux services dans la même nuit. Ça se paiera — ça a été dit deux fois.'],
+  ['cisco-contact',  'Cisco a rejoint votre réseau. Il n’a pas demandé pourquoi vous en aviez besoin.'],
 ]
 
 function tombeRideau() {
   /* Depuis le chantier 20, la nuit ne s'arrête plus à la planque : elle
-     s'arrête à la récusation, au tribunal. Les deux branches du dessous
-     restent en secours pour un `fin: true` plus ancien qu'aucun chemin
-     du jeu ne déclenche plus, mais qu'une sauvegarde antérieure au
-     20 pourrait encore porter. */
-  $('rideauLigne').textContent = a('recuse-abri')
-    ? 'Le juge s’est récusé. L’audience est repoussée de plusieurs jours — et ce n’est pas fini.'
-    : a('recuse-contrat')
-      ? 'Le juge s’est récusé, l’audience est repoussée, et vous rentrez : le contrat était rempli, il ne vous doit rien de plus.'
-      : a('lester-temoigne')
-        ? 'Neuf heures moins le quart. Il pousse la porte le premier, et il sait ce qu’il va dire.'
-        : a('goulet-passe')
-          ? 'Neuf heures moins le quart. Il sera vivant à dix heures. C’était le contrat.'
-          : 'La nuit s’arrête ici — pour l’instant.'
+     s'arrête à la récusation, au tribunal — puis, depuis le chantier 4,
+     à l'abordage qu'elle ouvre. Les deux branches du dessous restent en
+     secours pour un `fin: true` plus ancien qu'aucun chemin du jeu ne
+     déclenche plus, mais qu'une sauvegarde antérieure pourrait encore
+     porter. */
+  $('rideauLigne').textContent = a('abordage-passe')
+    ? 'Le goulet, une seconde fois. Lester est vivant, McNeil est devant, et l’enquête, elle, n’a pas commencé.'
+    : a('recuse-abri')
+      ? 'Le juge s’est récusé. L’audience est repoussée de plusieurs jours — et ce n’est pas fini.'
+      : a('recuse-contrat')
+        ? 'Le juge s’est récusé, l’audience est repoussée, et vous rentrez : le contrat était rempli, il ne vous doit rien de plus.'
+        : a('lester-temoigne')
+          ? 'Neuf heures moins le quart. Il pousse la porte le premier, et il sait ce qu’il va dire.'
+          : a('goulet-passe')
+            ? 'Neuf heures moins le quart. Il sera vivant à dix heures. C’était le contrat.'
+            : 'La nuit s’arrête ici — pour l’instant.'
   const lignes = BILAN.filter(([f]) => a(f)).map(([, t]) => t)
   $('rideauBilan').textContent = lignes.length
     ? lignes.join('\n')

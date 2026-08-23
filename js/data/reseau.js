@@ -68,6 +68,22 @@ export const contacts = {
     runner: 'rabbit',
     specialite: 'criminel',
   },
+
+  /* ── Cisco — le premier contact qui « s'ajoute » (chantier 4,
+     l'abordage) ────────────────────────────────────────────────────
+     Les cinq contacts ci-dessus sont là depuis le début de la partie ;
+     Cisco ne l'est pas. `requiert` est lu par `rendReseau()` dans
+     main.js : sans le drapeau, le contact n'apparaît simplement pas
+     dans le panneau — ni verrou visible, ni case grisée, il n'existe
+     pas encore. Posé en parlant à la barre pendant l'abordage
+     (`retour.js`, dialogue `cisco`), jamais par un objet (G5). */
+  cisco: {
+    nom: 'Cisco',
+    titre: 'passeur, le Sunnyside',
+    runner: 'hercules',
+    specialite: 'transport, discrétion',
+    requiert: 'cisco-contact',
+  },
 }
 
 /* ── LES APPELS QUI RÉPONDENT ─────────────────────────────────────────
@@ -297,5 +313,9 @@ export const refus = {
   duke: [
     '« Connais pas. Et ce que je connais pas, j’invente pas. »',
     '« C’est pas mon rayon, ça. Mon rayon, c’est plus sale. »',
+  ],
+  cisco: [
+    '« Ça, c’est pas du transport. Rappelle quand t’as un bateau à bouger. »',
+    '« Je facture le silence, pas les questions. Trouve-toi quelqu’un d’autre pour celle-là. »',
   ],
 }

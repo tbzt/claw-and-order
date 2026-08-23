@@ -28,7 +28,39 @@
    > RÈGLE 17 — Perdre coûte un état, jamais la partie.
    > Passer le goulet à découvert ne tue personne. Ça écorche Lester, et
    > `lester-blesse` se paiera à la planque et à l'audience.
-   ============================================================ */
+
+   ══ CHANTIER DE RANG 4 — L'ABORDAGE (`PLAN_TRAME_ACTES_III_IV.md` §6) ══
+   Le tribunal se récuse (`tribunal-salle.js`) : Lester repart vers McNeil,
+   nouveau passeur, le soir même. D7 (§3 du plan) est explicite : « la
+   seconde traversée réutilise `retour`, par `entree()` et des drapeaux,
+   jamais par un tableau neuf ». Ce fichier gagne donc un second état,
+   gardé partout par `a('recuse-abri')` — jamais une branche qui retire
+   quelque chose au premier passage, seulement une qui s'ajoute à côté
+   (règle 19). Précédent : `quai-voilier` (chantier 25) prouvait déjà
+   qu'un tableau peut se reconstruire depuis ses drapeaux à la revisite.
+
+   « Pas de combat » (§6 du plan) : ce qui se joue, c'est se débarrasser,
+   pas se battre. Chaque route de secours rappelle un tableau antérieur —
+   Trash et l'ondine (`esprit`, si `esprit-eau` tient toujours), Hercules
+   et la VHF (impossible si `star-nous-connait`), White_Rabbit et le
+   transpondeur (`muet`, une seconde fois), Drakk et un placement — mais
+   « cette fois il n'y a pas de rouf » : se mettre à couvert ne veut plus
+   rien dire contre un abordage qui vient du bastingage, pas d'un
+   surplomb. Sa route est donc une cible neuve, `grappin`, pas une
+   nouvelle branche d'`ecoutille`.
+
+   Cisco, le nouveau passeur, est le contact que le chantier 32 attendait
+   (« ceux qui s'ajoutent », `PLAN_CAPACITES_ET_RESEAU.md` §5) : il tient
+   la barre, on lui parle, et il rejoint le réseau EN PARLANT — jamais un
+   objet ne l'achète, même grammaire que Lester (G5). Sans sprite neuf :
+   comme McCarthy au téléphone ou la vedette sur le 16, une voix suffit.
+
+   PROVISOIRE, ASSUMÉ : la traversée retombe sur `fin: true`, comme
+   `tribunal-salle.js` le faisait pour elle avant ce chantier. L'acte IV
+   (chantiers 26-28, l'appartement/le Shameless/les amis) n'a encore
+   aucun lieu où atterrir — quand il en aura un, cette fin se change en
+   `va: '<hub-acte-iv>'`, exactement le geste que ce chantier vient de
+   faire pour `tribunal-salle.js`. */
 
 import { equipiers } from './equipiers.js'
 
@@ -44,7 +76,17 @@ export const retour = {
      premier branchement de `signature`, et pas les quatre autres décors.
      Gardé par `goulet-passe` : une fois le danger encaissé, le pressentir
      encore serait un mensonge du moteur. */
-  ouverture: ({ a, qui }) => [
+  ouverture: ({ a, qui }) => a('recuse-abri') ? [
+    /* ══ L'ABORDAGE — second passage ═══════════════════════════════ */
+    'Le même bateau, une autre nuit. Cisco a pris la barre sans discuter le prix, et il n’a posé qu’une question : « Vivant ou discret ? Je ne fais pas les deux à la fois ce soir. »',
+    'Tacoma s’efface derrière la pluie, pour la seconde fois. Cette fois, c’est McNeil qui attend, au bout du chenal.',
+    'Lester est assis contre le rouf. Au même endroit. Le trou dans le bois n’a toujours pas été rebouché.',
+    ...(a('lester-blesse') || a('lester-touche-laverie') ? [
+      'Son bras porte un second pansement, par-dessus le premier. Il ne dit rien. Il n’a plus besoin de le dire.',
+    ] : []),
+    'Personne, à bord, n’a encore vu ce qui vous suit. Ça n’a empêché personne de s’en apercevoir.',
+    'OBJECTIF — franchir le goulet une seconde fois, et rendre Lester à McNeil. Quelque chose gagne du terrain derrière vous, sans se presser.',
+  ] : [
     'Le voilier a repris la mer avec un passager de plus. McNeil s’efface derrière la pluie.',
     a('esprit-eau')
       ? 'La coque ne tape pas. Elle glisse, et personne à bord n’a envie de demander pourquoi.'
@@ -70,8 +112,14 @@ export const retour = {
 
   /* La vedette et l'esprit ne sont pas des surprises : ce sont des
      conséquences. On les pose au chargement, à partir de ce que le
-     joueur a fait ailleurs. */
-  entree: ({ a }) => [
+     joueur a fait ailleurs. Second passage : `poursuite` remplace
+     `vedette` (la Star n'a aucune raison d'être là ce soir-là), et
+     `abri` ne traverse pas — il décrivait un couvert contre un tireur
+     immobile, pas contre un abordage. */
+  entree: ({ a }) => a('recuse-abri') ? [
+    'poursuite',
+    ...(a('esprit-eau') ? ['esprit'] : []),
+  ] : [
     ...(a('trace-matricielle') ? ['vedette'] : []),
     ...(a('esprit-eau') ? ['esprit'] : []),
     /* `visuels` est vidé à chaque `charge()` : sans ça, une reprise
@@ -143,13 +191,75 @@ export const retour = {
     /* ══ LA BARRE — le verrou du tableau ══════════════════════════════ */
     barre: {
       nom: 'La barre',
-      regarder: {
-        tous: ['La barre franche, et le goulet droit devant : quatre cents mètres entre deux pointes de terre.',
-               'C’est le seul endroit du trajet où l’on ne peut ni virer ni faire demi-tour.'],
+      regarder: ({ a }) => ({
+        tous: a('recuse-abri')
+          ? ['Cisco tient la barre, capuche rabattue, et regarde le chenal comme s’il l’avait déjà traversé cent fois — ce qui est sans doute vrai.',
+             'C’est le seul endroit du trajet où l’on ne peut ni virer ni faire demi-tour.']
+          : ['La barre franche, et le goulet droit devant : quatre cents mètres entre deux pointes de terre.',
+             'C’est le seul endroit du trajet où l’on ne peut ni virer ni faire demi-tour.'],
         drakk: '« Un défilé. Encore un. Celui-ci avance tout seul, ce qui est pire. »',
         rabbit: '« Chenal 12. Une seule route possible, et elle est sur toutes les cartes. »',
-      },
+      }),
+      /* Cisco « s'ajoute en parlant » (§6 du plan, chantier 32 :
+         « ceux qui s'ajoutent ») — jamais un objet ne l'achète, même
+         grammaire que Lester (G5). Pas de sprite neuf : une voix à la
+         barre suffit, comme la vedette sur le 16 ou McCarthy au
+         téléphone. Premier passage : la barre ne tient personne, on ne
+         parle pas à un gouvernail vide — le refus générique de
+         `equipe[qui].refus.parler` suffit déjà, pas besoin de l'écrire
+         ici deux fois. */
+      parler: ({ a }) => a('recuse-abri')
+        ? { texte: [], dialogue: 'cisco' }
+        : { tous: 'La barre. Personne ne la tient, sinon celui qui vient de la lâcher.',
+            drakk: '« On ne parle pas à un gouvernail. »' },
       utiliser: ({ a }) => {
+        /* ══ L'ABORDAGE — la traversée retour ═══════════════════════════
+           Gardé en tout premier : `goulet-passe` est vrai pour de bon
+           depuis le premier passage et resterait vrai pour toujours —
+           sans ce garde-fou, la ligne juste en dessous (« c'est derrière
+           nous ») répondrait à la place de tout ce bloc. */
+        if (a('recuse-abri')) {
+          if (a('abordage-passe')) return 'Le chenal est vide, cette fois aussi. Personne ne retente un abordage deux fois la même nuit.'
+
+          /* Chaque route rappelle un tableau antérieur (§6 du plan) ;
+             il en suffit UNE. Comptées, pas choisies au hasard : la
+             voix qui commente l'issue dépend de ce qui a vraiment
+             servi, dans l'ordre où le plan les liste. */
+          const routes = ['abordage-vitesse', 'abordage-vhf', 'abordage-transpondeur', 'abordage-grappin'].filter(a)
+
+          const commun = [
+            { texte: 'La barre à droite toute, une seconde fois. Le chenal se referme.',
+              visuel: 'goulet-serre' },
+            'Le sillage, derrière, ne lâche pas la distance.',
+          ]
+
+          if (routes.length)
+            return { tous: [...commun,
+                            { texte: 'Le sillage hésite, puis vire au large. Il ne vous suit pas dans le goulet.',
+                              visuel: ['goulet-passe', 'poursuite-partie'] },
+                            'Personne ne saura jamais s’il a renoncé, ou s’il a compris qu’il n’avait plus rien à y gagner.'],
+                     drakk: routes.includes('abordage-grappin')
+                       ? '« Il n’avait plus de quoi accoster. On ne monte pas à bord les mains vides. »'
+                       : '« Il a compris avant de comprendre pourquoi. C’est déjà ça. »',
+                     ...(routes.includes('abordage-vhf')
+                       ? { hercules: '« Une patrouille qui répond, ça change une nuit entière. »' }
+                       : {}),
+                     flags: ['abordage-passe'],
+                     fiches: ['abordage-repousse'],
+                     minutes: 10, fin: true }
+
+          return { tous: [...commun,
+                          'Un choc sourd contre la coque. Une main gantée passe par-dessus le bastingage.',
+                          'Cisco lâche la barre une seconde — une seule — et Drakk s’en charge : l’homme repart à l’eau plus vite qu’il n’est monté.',
+                          { texte: 'Le sillage renonce, cette fois, et la terre s’écarte. McNeil est devant.',
+                            visuel: ['goulet-passe', 'poursuite-partie'] }],
+                   hercules: '« On a eu de la chance. La chance, ça ne se facture pas deux fois. »',
+                   drakk: '« Un contre un, sur mon propre pont. Je ne demandais que ça. »',
+                   flags: ['abordage-passe', 'abordage-echec'],
+                   fiches: ['abordage-repousse'],
+                   minutes: 10, fin: true }
+        }
+
         if (a('goulet-passe')) return 'C’est derrière nous.'
 
         /* La vedette bloque tant qu'elle n'est pas réglée. Elle n'existe
@@ -287,6 +397,23 @@ export const retour = {
         trash: '« Je vois une étiquette. Ce n’est pas mon plan. »',
       },
       utiliser: ({ a, qui }) => {
+        /* ══ L'ABORDAGE — une seconde intrusion sur le même boîtier ═════
+           « Chaque intrusion s'accumule » (§6 du plan) : le compteur
+           d'exposition lui-même appartient à D9, pas encore construit
+           (backlog acte IV) — mais le coût se DIT ici, dans la voix de
+           White_Rabbit, sans attendre le mécanisme pour exister. */
+        if (a('recuse-abri')) {
+          if (a('abordage-transpondeur')) return 'Il ment déjà. Une fois par nuit, c’est le tarif.'
+          if (qui !== 'rabbit')
+            return { tous: 'Il faudrait rentrer dans le boîtier, et il faut un deck pour ça.',
+                     hercules: '« C’est le sien, ce rayon. Toujours. »' }
+          return { tous: ['White_Rabbit rentre une seconde fois dans le même boîtier. Ça prend moins de temps qu’avant : elle connaît déjà la serrure.',
+                          'CHALUTIER — GIG HARBOR — ÉMET, encore.'],
+                   rabbit: ['« Deux fois dans la même nuit, sur le même boîtier. Ce n’est plus discret, c’est comptable. »',
+                            '« Quelqu’un, quelque part, additionne mes passages. Ce ne sera pas gratuit plus tard. »'],
+                   flags: ['abordage-transpondeur'] }
+        }
+
         if (a('muet')) return 'Il raconte maintenant qu’on est un chalutier de Gig Harbor. Personne n’a rien à redire.'
         if (qui !== 'rabbit')
           return { tous: 'Il faudrait entrer dans le boîtier, et il faut un deck pour ça.',
@@ -309,6 +436,28 @@ export const retour = {
         rabbit: '« Je peux masquer une machine. Je ne peux pas masquer un homme qui répond mal à une question simple. »',
       },
       utiliser: ({ a, qui }) => {
+        /* ══ L'ABORDAGE — appeler la patrouille sur ses propres agresseurs
+           Impossible si `star-nous-connait` (§6 du plan) : la dernière
+           fois qu'Hercules a parlé à la Star sur ce canal, c'était pour
+           avouer un mensonge (`vedette.objets.contrat`, premier passage).
+           On ne rappelle pas ensuite pour demander un service. */
+        if (a('recuse-abri')) {
+          if (a('abordage-vhf')) return 'Ils savent déjà. Répéter n’avancerait rien.'
+          if (a('star-nous-connait'))
+            return { tous: 'Le canal 16 attend une réponse. La dernière fois qu’on leur a parlé sur ce canal, on avouait un mensonge.',
+                     hercules: '« Ils ont mon numéro de coque et un motif de me trouver suspect. Je ne vais pas leur demander une faveur en plus. »' }
+          if (qui !== 'hercules')
+            return { tous: 'Il faudrait une voix qui sait faire peur poliment. Ce n’est pas la tienne, pas cette fois.',
+                     trash: '« On m’entendrait mentir sur l’urgence. »',
+                     rabbit: '« Une voix, ça ne se falsifie pas en quarante secondes. »',
+                     drakk: '« Je crierais la vérité. Ça ne ferait venir personne assez vite. »' }
+          return { tous: ['Hercules décroche et ne joue plus rien : « Sunnyside quatre-deux, on est suivis de près par un bateau sans feux, chenal 12, direction McNeil. On a un mineur à bord. »',
+                          'Trois secondes.',
+                          '« Reçu, quatre-deux. On envoie. Tenez le cap. »'],
+                   hercules: '« Voilà ce qu’on paie des impôts pour faire. Pour une fois, ça a marché. »',
+                   flags: ['abordage-vhf'] }
+        }
+
         if (!a('trace-matricielle'))
           return { tous: 'Le canal 16 est calme. Personne ne demande rien à personne.',
                    drakk: '« Le cor se tait. J’aime autant. »' }
@@ -402,6 +551,15 @@ export const retour = {
         rabbit: '« Lester est adossé à une cloison, et de l’autre côté il y a un cadavre. Il ne le sait pas. Je préférerais qu’il continue. »',
       },
       utiliser: ({ a, qui }) => {
+        /* « Cette fois il n'y a pas de rouf » (§6 du plan) : se mettre à
+           couvert protégeait d'un tireur immobile sur UN côté. Un
+           abordage vient du bastingage, des deux côtés à la fois — le
+           rouf ne tranche plus rien. La route de Drakk se joue au
+           bastingage (`grappin`), pas ici. */
+        if (a('recuse-abri'))
+          return { tous: 'Se planquer derrière le rouf ne dit pas de quel côté ils vont accoster. Ce n’est plus la bonne question.',
+                   drakk: '« Cette fois, ce n’est pas un mur qu’il me faut. C’est un endroit où me tenir. »' }
+
         if (a('abri')) return 'Tout le monde est du bon côté du rouf. On attend le goulet.'
         if (qui === 'drakk')
           return { tous: ['Drakk prend Lester par le col sans un mot et le pose de l’autre côté du rouf.',
@@ -453,6 +611,29 @@ export const retour = {
         if (qui !== 'trash')
           return { tous: 'Tu parles à de l’eau noire. Elle ne répond pas.',
                    drakk: '« On ne hèle pas la mer deux fois dans la même nuit. »' }
+
+        /* ══ L'ABORDAGE — la route de Trash ══════════════════════════════
+           « Si l'ondine est encore là » (§6 du plan) : `esprit-eau` n'a
+           jamais été retiré, mais un second service dans la même nuit
+           n'est pas le MÊME service que `esprit-demande` gardait déjà —
+           d'où un drapeau à part, `abordage-vitesse`. « Elle se
+           paiera » (Trash le disait déjà au premier passage) : la dette
+           se pose ici, `dette-esprit`, sans mécanisme pour l'encaisser —
+           ce sera à l'acte IV de le faire, pas à ce chantier. */
+        if (a('recuse-abri')) {
+          if (!a('esprit-eau'))
+            return { tous: 'L’eau est vide, cette fois. Ce qui la remplissait n’a pas suivi jusqu’ici.',
+                     trash: '« Je ne peux pas lui en vouloir. Je ne l’ai payée qu’une fois. »' }
+          if (a('abordage-vitesse'))
+            return { tous: 'Elle est déjà là. On ne redemande pas la même chose deux fois dans la même nuit.',
+                     trash: '« Elle a dit que ça se paierait. Je crois que c’est en train de se faire. »' }
+          return { tous: ['Trash pose de nouveau la paume sur le bordé. Cette fois, elle met plus longtemps à répondre.',
+                          'Quand la coque cesse de taper, quelque chose, quelque part, note une dette.'],
+                   trash: ['« Deux fois dans la même nuit. Elle me l’a fait comprendre sans un mot. »',
+                           '« Ça se paiera. Elle l’a dit à l’aller. Ce n’était pas une politesse. »'],
+                   flags: ['abordage-vitesse', 'dette-esprit'] }
+        }
+
         if (a('esprit-demande'))
           return { tous: 'Elle est là. Elle attend.',
                    trash: '« Je lui ai déjà demandé. On ne demande pas deux fois. »' }
@@ -481,6 +662,53 @@ export const retour = {
       utiliser: {
         tous: 'Un creux ne se touche pas. Il se contourne.',
         trash: '« Je ne vais pas là-haut lui demander ce qu’il ressent. La réponse est déjà dans la question. »',
+      },
+    },
+
+    /* ══ LA POURSUITE — le second passage n'a pas de tireur, il a un
+       bateau ═══════════════════════════════════════════════════════
+       Cible neuve. Visible dès l'entrée du second passage (`entree()`
+       ci-dessus), masquée sinon par `css/scene-retour.css`. Purement
+       `regarder` : le sillage ne se traite pas d'ici, il se traite en
+       préparant l'une des quatre routes avant la barre. */
+    poursuite: {
+      nom: 'Un sillage, qui gagne du terrain',
+      regarder: {
+        tous: ['Un bateau sans feux qui prend la même route que vous depuis McNeil. Il ne se rapproche pas vite. Il se rapproche sûrement.',
+               'Personne à bord ne répond sur le 16.'],
+        hercules: '« Ceux-là ne sont pas la Star. La Star, au moins, s’identifie. »',
+        drakk: '« Il ne presse pas le pas. Il sait qu’on ne peut pas accélérer plus que le goulet ne le permet. »',
+        trash: '« Je ne sens rien, à bord de ce bateau-là. Rien du tout. Ça ne veut pas dire qu’il n’y a personne. »',
+        rabbit: '« Transpondeur muet, coque nue, pas un octet émis. Ça, au moins, c’est du travail propre. »',
+      },
+      utiliser: {
+        tous: 'Trop loin encore. Ce n’est pas en le regardant fort qu’il ralentira.',
+        drakk: '« On ne va pas à sa rencontre. On choisit où on l’attend. »',
+      },
+    },
+
+    /* ══ LE GRAPPIN — la route de Drakk, cette fois sans rouf ═════════
+       Cible neuve. Même masquage que `poursuite`. Reprend le geste
+       d'`ecoutille.utiliser` (Drakk place la troupe) mais sur un autre
+       problème : ici, on empêche l'abordage d'avoir lieu, on ne se
+       met pas à couvert d'un tir qui vient d'une seule direction. */
+    grappin: {
+      nom: 'Le bastingage, côté poursuite',
+      regarder: {
+        tous: ['Une gaffe et un grappin traînent contre le bastingage — pas les vôtres.',
+               'Pas de rouf, cette fois, pour se mettre derrière. Juste un bastingage et de l’eau noire des deux côtés.'],
+        drakk: '« S’ils montent, c’est par là. Je le sais avant eux : c’est le seul endroit du pont assez bas sur l’eau. »',
+      },
+      utiliser: ({ a, qui }) => {
+        if (a('abordage-grappin')) return 'C’est fait. Personne ne remonte à bord deux fois du même endroit.'
+        if (qui !== 'drakk')
+          return { tous: 'Il faudrait savoir où se poster, et vite. Ce n’est pas ton métier.',
+                   hercules: '« Drakk. C’est pour toi, ça. »' }
+        return { tous: ['Drakk repère où l’autre bateau viendrait mordre, et s’y poste avant lui, les mains vides.',
+                        'Quand un grappin adverse s’accroche au bastingage, il le soulève et le jette à l’eau avec son câble.',
+                        'Personne ne monte à bord d’un pont qu’un adepte a décidé de garder.'],
+                 drakk: '« Le mur entre vous et l’eau. Toujours. »',
+                 flags: ['abordage-grappin'] }
       },
     },
 
@@ -655,6 +883,39 @@ export const retour = {
           fin: true,
           texte: ['Personne ne décroche. Le projecteur reste où il est.',
                   'Ça ne les décourage pas. Ça ne les presse pas non plus.'],
+        },
+      ],
+    },
+
+    /* ══ CISCO — le nouveau passeur, et le contact que le chantier 32
+       attendait (« ceux qui s'ajoutent ») ══════════════════════════════
+       Pas de sprite : une voix à la barre, comme la vedette sur le 16.
+       Il rejoint le réseau EN PARLANT (`contacts.cisco`, js/data/reseau.js),
+       jamais par un objet — même grammaire que Lester (G5). */
+    cisco: {
+      qui: 'cisco',
+      accueil: ['Il n’a pas donné son prénom avant de larguer les amarres. Il l’a donné après.',
+                '« Cisco. Je tiens le Sunnyside depuis plus longtemps que Wilson n’a tenu ce bateau. Il me devait de l’argent. Vous, vous me payez d’avance. »'],
+      retour: ['« La barre, et rien d’autre, tant qu’on n’est pas passés. »'],
+      sujets: [
+        {
+          id: 'wilson',
+          titre: '« Vous connaissiez Wilson ? »',
+          texte: ['« Assez pour savoir qu’il prenait des à-côtés que je ne prends pas. »',
+                  '« Vous voyez où ça l’a mené. »'],
+        },
+        {
+          id: 'contact',
+          titre: '« On pourrait avoir besoin de vous, après cette nuit. »',
+          flags: ['cisco-contact'],
+          texte: ['« Je ne pose pas de questions. C’est facturé en plus. »',
+                  'Il ne vous donne pas de carte — une carte, ça se retrouve dans une poche — juste un numéro, à retenir.'],
+        },
+        {
+          id: 'silence',
+          titre: '(Le laisser barrer.)',
+          fin: true,
+          texte: ['Il ne dit plus rien jusqu’au goulet.'],
         },
       ],
     },
