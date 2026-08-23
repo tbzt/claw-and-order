@@ -22,14 +22,20 @@ import { equipiers } from './equipiers.js'
 export const greffe = {
   markup: 'scenes/greffe.html',
 
-  ouverture: ({ a }) => [
-    a('esprit-eau')
-      ? 'Greffe de l’établissement pénitentiaire de McNeil. 3 h 46. Vous avez de l’avance, et personne n’a l’habitude d’en avoir.'
-      : 'Greffe de l’établissement pénitentiaire de McNeil. 4 h 12.',
-    'Néons trop blancs, murs vert administration, un banc pour ceux qui attendent. Personne n’attend.',
-    'Derrière la vitre du guichet, un seul homme de garde. Il vous a vus, et il n’a pas l’air content d’être vu.',
-    'OBJECTIF — faire sortir Lester maintenant. Pas à huit heures.',
-  ],
+  /* Chantier 33 : `visite` vient de `charge()`. La projection astrale de
+     Trash (cible `sas`, ci-dessous) fait un aller-retour vers un second
+     tableau (`greffe-cellule`) — même bug de principe que celui trouvé au
+     chantier 13 sur `quai`, corrigé ici avant qu'il n'existe. */
+  ouverture: ({ a }, visite) => visite > 1
+    ? ['Le guichet, encore. Le gardien n’a pas bougé. Trash cligne des yeux, une seconde de trop pour que ce soit juste un clignement.']
+    : [
+        a('esprit-eau')
+          ? 'Greffe de l’établissement pénitentiaire de McNeil. 3 h 46. Vous avez de l’avance, et personne n’a l’habitude d’en avoir.'
+          : 'Greffe de l’établissement pénitentiaire de McNeil. 4 h 12.',
+        'Néons trop blancs, murs vert administration, un banc pour ceux qui attendent. Personne n’attend.',
+        'Derrière la vitre du guichet, un seul homme de garde. Il vous a vus, et il n’a pas l’air content d’être vu.',
+        'OBJECTIF — faire sortir Lester maintenant. Pas à huit heures.',
+      ],
 
   vues: {
     astrale: ['Le lieu est propre, au sens astral : rien n’est passé ici depuis longtemps.',
@@ -124,11 +130,27 @@ export const greffe = {
         tous: 'Deux battants blindés, un verrou électromagnétique de chaque côté, et une vitre longue comme une main.',
         drakk: '« Verrou double. Il ne cède ni à l’épaule ni au levier. Celui-là s’ouvre par la parole ou pas du tout. »',
         rabbit: '« Commandé depuis le poste, pas depuis le réseau. Je ne peux pas l’ouvrir d’ici. »',
+        /* La lentille annonce, la main exécute (PLAN_CAPACITES § 2) : la
+           projection astrale n'est atteignable qu'après avoir été montrée
+           ici, dans la voix de Trash — même geste que `aura-gardien` et
+           `ordre` plus bas pour Drakk et White_Rabbit. */
+        trash: '« Le battant est plein. L’astral, lui, ne l’est pas. Je peux passer voir, si vous voulez. »',
       },
-      utiliser: ({ a }) => {
-        if (!a('sas-ouvert'))
+      /* Chantier 33 — la projection astrale (PLAN_CAPACITES § 3, Trash).
+         Avant que le sas ne s'ouvre pour de vrai, Trash peut y aller SEUL,
+         sans corps : `va: 'greffe-cellule'`, gratuit (D3 — voir n'est pas
+         agir), et son corps reste ici, debout, pendant ce temps-là — les
+         trois autres le constatent s'ils cliquent ailleurs qu'sur lui. */
+      utiliser: ({ a, qui }) => {
+        if (!a('sas-ouvert')) {
+          if (qui === 'trash')
+            return { tous: ['Trash pose une main à plat sur le battant froid, et ferme les yeux.',
+                             'Son corps reste debout, contre la vitre. Le reste de lui passe au travers, sans bruit.'],
+                     trash: '« Je reviens. »',
+                     va: 'greffe-cellule' }
           return { tous: 'Verrouillé. Il s’ouvre depuis le poste, et le poste ne veut pas.',
                    drakk: '« Inutile de pousser. J’ai déjà poussé. »' }
+        }
         if (!a('lester-arrive'))
           return { tous: ['Le sas s’ouvre en deux temps, avec le bruit d’un frigo qu’on débranche.',
                           'On vous amène Lester. Il a l’air d’avoir vingt ans, et d’en avoir seize.',
