@@ -734,6 +734,15 @@ export const retour = {
       utiliser: 'On ne rentre pas. On regarde le mur s’éloigner, et ça suffit.',
     },
 
+    /* ══ CHANTIER 35 — LE CONSEIL DE LA TRAVERSÉE (`PLAN_PLANQUES.md` §2) ══
+       Étape A du plan : la scène se joue, se mesure, se corrige — zéro
+       pixel, zéro tableau neuf. Trois des quatre planques qu'on y défend
+       (Herwick, Sarah, Duke — §3.2-3.4 du plan) n'existent encore que
+       comme texte : le conseil les nomme et les fait s'opposer, mais
+       `barre.utiliser` continue de retomber sur `va: 'planque'` en dur,
+       parce que c'est la seule qui ait une porte à ce stade du chantier.
+       « Le défaut ne disparaît pas » (§2) : rien ici ne bloque le passage
+       du goulet, discuté ou pas. */
     tacoma: {
       nom: 'Les lumières de Tacoma',
       regarder: {
@@ -742,7 +751,17 @@ export const retour = {
         hercules: '« Cinq heures pour tenir un homme en vie dans une ville qui préfère qu’il meure. C’est jouable. J’ai eu pire. »',
         trash: '« C’est là qu’on va se cacher. On se cache toujours dans ce qui brille. »',
       },
-      utiliser: 'Encore trop loin pour que la regarder change quoi que ce soit.',
+      /* Un sujet par runner, et il faut ÊTRE ce runner pour le proposer
+         (§2 du plan) — la grammaire `quand: ({ qui }) => qui === '…'`,
+         déjà utilisée 23 fois ailleurs dans le jeu, tranche seule qui
+         peut défendre quelle planque. Gardé par `recuse-abri` en tout
+         premier : le second passage ne repose plus la question, Lester
+         va déjà chez McNeil — texte d'origine, inchangé. */
+      utiliser: ({ a }) => {
+        if (a('recuse-abri')) return 'Encore trop loin pour que la regarder change quoi que ce soit.'
+        if (a('goulet-passe')) return 'On est déjà de l’autre côté. Un peu tard pour en discuter.'
+        return { tous: 'Cinq heures, et personne à bord n’a encore dit où on allait.', dialogue: 'conseil' }
+      },
     },
 
     mat: {
@@ -916,6 +935,82 @@ export const retour = {
           titre: '(Le laisser barrer.)',
           fin: true,
           texte: ['Il ne dit plus rien jusqu’au goulet.'],
+        },
+      ],
+    },
+
+    /* ══ LE CONSEIL DE LA TRAVERSÉE — chantier 35, `PLAN_PLANQUES.md` §2 ══
+       Aucun interlocuteur : c'est l'équipe qui se parle à elle-même,
+       d'où `qui: 'recit'` — un locuteur qui n'a jamais de portrait
+       (`VISAGES` ne le connaît pas) et dont les lignes non attribuées
+       tombent dans la bulle du récit, exactement ce qu'il faut pour une
+       scène sans PNJ en face. Chaque ligne attribuée par paire
+       (`['drakk', '…']`) garde sa voix et sa teinte, comme partout
+       ailleurs dans ce fichier (voir l'en-tête, `ouverture`).
+
+       Quatre sujets, un par runner, chacun visible SEULEMENT si ce
+       runner est actif (`quand: ({ qui }) => qui === '…'`) : proposer
+       une planque, c'est être son runner. Les trois autres objectent
+       dans la foulée, dans la même réplique — « le vrai contenu moral
+       de la scène » (§2 du plan). Aucun sujet ne ferme les autres : on
+       peut les rouvrir dans n'importe quel ordre, en changeant de
+       runner actif en cours de dialogue (déjà permis par `selectionne()`
+       dans main.js). Rien ne force à trancher — `barre` ne lit aucun
+       drapeau posé ici. */
+    conseil: {
+      qui: 'recit',
+      accueil: ['Cinq heures. Pour la première fois de la nuit, personne n’a rien à faire — et c’est bien tout le problème : il va falloir décider où poser Lester avant l’audience, et un endroit, ici, ça veut toujours dire quelqu’un.'],
+      retour: ['« On n’a toujours rien décidé. »'],
+      sujets: [
+        {
+          id: 'laverie',
+          titre: '« La laverie. On ne doit rien à personne. » (Hercules)',
+          quand: ({ qui }) => qui === 'hercules',
+          texte: [
+            ['hercules', '« Un lav-o-matic ouvert toute la nuit. Cinq personnes qui attendent une machine à cette heure, ça n’étonne personne — et on ne réveille personne pour lui demander une faveur qu’il ne peut pas refuser. »'],
+            ['drakk', '« Une vitrine sur la rue. Toute la ville peut vous compter à travers. »'],
+            ['trash', '« C’est le seul endroit de cette liste où personne d’autre ne dort. Personne d’autre ne paie, non plus. »'],
+            ['rabbit', '« Pas de terminal à faire taire, pas de serrure à forcer. Juste une baie vitrée qu’on ne peut pas éteindre. »'],
+          ],
+        },
+        {
+          id: 'herwick',
+          titre: '« Strauber. L’homme qui m’a sorti de la rue, à seize ans. » (Drakk)',
+          quand: ({ qui }) => qui === 'drakk',
+          texte: [
+            ['drakk', '« Un antiquaire, rideau de fer, une arrière-boutique chauffée. Il connaît Loveland mieux que la Lone Star. Et je ne lui demande pas une faveur — je lui en dois une. »'],
+            ['hercules', '« Un vieil homme seul, tiré du lit à cinq heures pour héberger cinq inconnus et un fugitif. Tu sais ce que ça lui coûte, si ça tourne mal ? »'],
+            ['trash', '« Ce qu’il sait, personne d’autre dans cette pièce ne le sait. C’est un vrai gain, cette nuit. Pas une simple faveur. »'],
+            ['rabbit', '« Un rideau de fer, ça se force. Ça ne se pirate pas. Une fois dedans, il n’y a plus de sortie discrète. »'],
+          ],
+        },
+        {
+          id: 'sarah',
+          titre: '« Le cabinet de Sarah. Le bras de Lester, d’abord. » (Trash)',
+          quand: ({ qui }) => qui === 'trash',
+          texte: [
+            ['trash', '« Une clinique de rue ne ferme jamais. Elle recoud ce que personne d’autre ne veut recoudre, et elle recoudra Lester sans poser une question. »'],
+            ['hercules', '« Et la salle d’attente ? Il y a des gens qui patientent là-dedans depuis des heures, cette nuit comme toutes les autres. »'],
+            ['drakk', '« Vider une pièce pleine d’inconnus pour en protéger cinq. Je connais ce calcul. Je ne l’aime toujours pas. »'],
+            ['rabbit', '« Un cabinet, ça a une adresse fixe et un registre de patients. C’est le lieu le plus facile à retrouver de toute la liste. »'],
+          ],
+        },
+        {
+          id: 'duke',
+          titre: '« Le sous-sol de Duke. Personne n’y tire à travers un mur. » (White_Rabbit)',
+          quand: ({ qui }) => qui === 'rabbit',
+          texte: [
+            ['rabbit', '« Du béton, pas une fenêtre, huit personnes armées qui ne doivent rien à la Star. Pas de ligne de mire possible, là-dedans. »'],
+            ['hercules', '« Huit personnes armées qui ne NOUS doivent rien non plus. Duke ne fait jamais crédit. »'],
+            ['drakk', '« Et il faudra payer avant d’entrer, pas après. Je n’aime pas les portes qui se ferment derrière un prix. »'],
+            ['trash', '« Lester va passer trois heures à regarder ceux qui le protègent traiter avec exactement le genre de gens que l’accusation dit qu’il est. »'],
+          ],
+        },
+        {
+          id: 'silence',
+          titre: '(En rester là, pour l’instant.)',
+          fin: true,
+          texte: ['Personne ne tranche. Le goulet, de toute façon, ne se traverse pas en discutant.'],
         },
       ],
     },
