@@ -76,10 +76,10 @@
   border-radius: 2px;
 }
 
-.tableau--tribunal .p-drakk    { width: calc(38 * var(--u)); left: calc(100 * var(--u)); top: calc(98 * var(--u)); }
-.tableau--tribunal .p-trash    { width: calc(28 * var(--u)); left: calc(132 * var(--u)); top: calc(101 * var(--u)); }
-.tableau--tribunal .p-rabbit   { width: calc(21 * var(--u)); left: calc(158 * var(--u)); top: calc(105 * var(--u)); }
-.tableau--tribunal .p-hercules { width: calc(17 * var(--u)); left: calc(176 * var(--u)); top: calc(109 * var(--u)); }
+.tableau--tribunal .p-drakk    { width: calc(46 * var(--u)); left: calc(96 * var(--u)); top: calc(86 * var(--u)); }
+.tableau--tribunal .p-trash    { width: calc(34 * var(--u)); left: calc(134 * var(--u)); top: calc(90 * var(--u)); }
+.tableau--tribunal .p-rabbit   { width: calc(24 * var(--u)); left: calc(166 * var(--u)); top: calc(97 * var(--u)); }
+.tableau--tribunal .p-hercules { width: calc(20 * var(--u)); left: calc(190 * var(--u)); top: calc(105 * var(--u)); }
 
 .tableau--tribunal .portes-salle {
   left: calc(100 * var(--u)); top: calc(128 * var(--u));

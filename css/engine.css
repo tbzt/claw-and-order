@@ -727,8 +727,13 @@ body {
 
    Mêmes TROIS LONGHANDS que l'attente, pour la même raison : un
    raccourci `animation` sur `.pj` écraserait tout le reste. Le sélecteur
-   passe devant celui du runner actif, qui parle aussi. */
-.stage .decor .pj.parle {
+   passe devant celui du runner actif, qui parle aussi.
+
+   Il ne dit plus `.pj` mais TOUTE silhouette du décor : Lester, McCarthy
+   et Renfield ont leurs deux images de parole depuis le chantier 34, et
+   ce ne sont pas des `.pj`. Le portrait, lui, vit dans le panneau de
+   dialogue et pas dans `.decor` — il garde sa règle à part. */
+.stage .decor .parle {
   animation-name: var(--parle-nom, var(--repos-nom));
   animation-duration: var(--parle-duree, var(--repos-duree));
   animation-timing-function: steps(var(--parle-crans, var(--repos-crans)), jump-none);
@@ -1198,8 +1203,24 @@ body {
   text-shadow: 0 .12cqw .4cqw #000;
 }
 
-/* Il parle : la même planche, quatre fois plus vite. */
-.portrait.parle .portrait__image { animation-duration: .62s; }
+/* IL PARLE : SA BOUCHE S'OUVRE.
+   Cette règle disait « la même planche, quatre fois plus vite » — et
+   c'était vrai au pixel près : sur les six images d'attente d'un
+   portrait, la bouche est identique, seuls les yeux clignent. Parler
+   revenait donc à cligner quatre fois plus vite, et le gros plan
+   promettait un signal qui n'existait pas.
+
+   Les DEUX DERNIÈRES images de chaque portrait sont maintenant sa bouche
+   fermée et sa bouche ouverte (chantier 34). Mêmes trois longhands que
+   `.pj.parle`, pour la même raison : un raccourci `animation` écraserait
+   l'attente. Le clignement s'arrête pendant la parole — un œil qui
+   clignote pendant qu'une bouche s'ouvre tire le regard au mauvais
+   endroit ; c'est le point tranché en regardant le rendu. */
+.portrait.parle .portrait__image {
+  animation-name: var(--parle-nom, var(--repos-nom));
+  animation-duration: var(--parle-duree, .62s);
+  animation-timing-function: steps(var(--parle-crans, var(--repos-crans)), jump-none);
+}
 
 /* Tout ce qui parle s'écarte pour laisser la place au visage : la bulle
    du PNJ, et surtout la liste des sujets, qui passait dessous. */

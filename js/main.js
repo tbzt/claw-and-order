@@ -63,19 +63,26 @@ function montrePortrait(qui) {
 const nomDuLocuteur = (qui) => equipe[qui]?.nom ?? VISAGES[qui] ?? contacts[qui]?.nom ?? ''
 
 /* IL PARLE, ET ÇA SE VOIT.
-   Le portrait d'un PNJ s'anime pendant qu'il parle. Les runners n'en ont
-   pas, et il leur manquait donc la seule chose que le portrait apportait :
-   qu'on VOIE qui parle. Chaque planche de runner porte deux images de
-   parole en bout ; `.parle` les joue (voir `.pj.parle` dans engine.css).
+   Chaque planche porte deux images de parole en bout ; `.parle` les joue
+   (voir `.decor .parle` dans engine.css).
+
+   La garde était `if (equipe[qui])`, c'est-à-dire : les runners seulement.
+   Un PNJ qui parlait voyait donc son PORTRAIT s'animer pendant que son
+   corps, dans le décor, continuait son attente ordinaire — rien ne
+   reliait la voix au corps, ce qui est exactement le défaut qu'on avait
+   corrigé pour les runners. La garde saute : `faitParler` pose `.parle`
+   sur n'importe quelle silhouette présente dans le décor. Celles qui
+   n'ont pas d'images de parole retombent sur leur attente, parce que
+   `--parle-nom` a `var(--repos-nom)` pour valeur de repli.
 
    Un seul à la fois : celui qui vient de se taire retrouve son attente. */
 function faitParler(qui) {
   seTait()
-  if (equipe[qui]) decor.querySelector(`.p-${qui}`)?.classList.add('parle')
+  decor.querySelector(`.p-${qui}`)?.classList.add('parle')
 }
 
 function seTait() {
-  for (const el of decor.querySelectorAll('.pj.parle')) el.classList.remove('parle')
+  for (const el of decor.querySelectorAll('.parle')) el.classList.remove('parle')
 }
 
 

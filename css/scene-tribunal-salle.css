@@ -69,8 +69,8 @@
   border-radius: 2px;
 }
 .tableau--tribunal-salle .p-lester {
-  left: calc(26 * var(--u)); top: calc(40 * var(--u));
-  width: calc(26 * var(--u));
+  left: calc(22 * var(--u)); top: calc(32 * var(--u));
+  width: calc(32 * var(--u));
 }
 
 /* La barre des témoins, seule dans l'allée centrale — c'est elle qui
@@ -86,10 +86,10 @@
 }
 
 /* L'équipe, debout derrière la table de la défense. */
-.tableau--tribunal-salle .p-drakk    { width: calc(40 * var(--u)); left: calc(24 * var(--u));  top: calc(96 * var(--u)); }
-.tableau--tribunal-salle .p-trash    { width: calc(30 * var(--u)); left: calc(58 * var(--u)); top: calc(99 * var(--u)); }
-.tableau--tribunal-salle .p-rabbit   { width: calc(22 * var(--u)); left: calc(84 * var(--u)); top: calc(103 * var(--u)); }
-.tableau--tribunal-salle .p-hercules { width: calc(18 * var(--u)); left: calc(102 * var(--u)); top: calc(107 * var(--u)); }
+.tableau--tribunal-salle .p-drakk    { width: calc(46 * var(--u)); left: calc(20 * var(--u));  top: calc(87 * var(--u)); }
+.tableau--tribunal-salle .p-trash    { width: calc(34 * var(--u)); left: calc(60 * var(--u)); top: calc(91 * var(--u)); }
+.tableau--tribunal-salle .p-rabbit   { width: calc(24 * var(--u)); left: calc(92 * var(--u)); top: calc(98 * var(--u)); }
+.tableau--tribunal-salle .p-hercules { width: calc(20 * var(--u)); left: calc(116 * var(--u)); top: calc(105 * var(--u)); }
 
 /* La sortie, au premier plan, sous la galerie. */
 .tableau--tribunal-salle .porte-tribunal {
