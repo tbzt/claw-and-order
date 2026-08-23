@@ -18,7 +18,21 @@
 .tableau--quai .jetee { top: calc(94 * var(--u)); height: calc(62 * var(--u)); background: #241d18; }
 .tableau--quai .planches {
   left: 0; top: calc(94 * var(--u)); width: 100%; height: calc(62 * var(--u));
-  background: repeating-linear-gradient(180deg, #2b221b 0 calc(7 * var(--u)), #1d1712 calc(7 * var(--u)) calc(8 * var(--u)));
+}
+/* Perspective au sol : les lattes avaient un pas fixe (8u), du papier
+   millimétré. Deux bandes de pas croissant vers le bas donnent un ponton
+   qui fuit vers l'horizon, sans diagonale. Le liseré du haut EST la ligne
+   d'horizon — la jonction eau/jetée (y=94). */
+.tableau--quai .planches::before,
+.tableau--quai .planches::after { content: ''; position: absolute; left: 0; width: 100%; }
+.tableau--quai .planches::before {
+  top: 0; height: calc(20 * var(--u));
+  background: repeating-linear-gradient(180deg, #2b221b 0 calc(5 * var(--u)), #1d1712 calc(5 * var(--u)) calc(6 * var(--u)));
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.5);
+}
+.tableau--quai .planches::after {
+  top: calc(20 * var(--u)); height: calc(42 * var(--u));
+  background: repeating-linear-gradient(180deg, #2b221b 0 calc(9 * var(--u)), #1d1712 calc(9 * var(--u)) calc(11 * var(--u)));
 }
 
 /* Étoiles et reflets : des dégradés répétés, pas des sprites. Sur des
@@ -88,7 +102,13 @@
 
 .tableau--quai .pecheur { left: calc(214 * var(--u)); top: calc(102 * var(--u)); width: calc(26 * var(--u)); }
 
-.tableau--quai .ombre { background: rgba(4,3,8,.55); height: calc(2 * var(--u)); }
+/* Ellipse de contact, pas une barre — même principe que le bar. */
+.tableau--quai .ombre {
+  height: calc(4 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(4,3,8,.6) 0%, rgba(4,3,8,0) 72%);
+  opacity: var(--profondeur, 1);
+}
 .tableau--quai .ombre--pecheur { left: calc(218 * var(--u)); top: calc(123 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--quai .ombre--drakk { left: calc(72 * var(--u)); top: calc(139 * var(--u)); width: calc(42 * var(--u)); }
 .tableau--quai .ombre--trash { left: calc(114 * var(--u)); top: calc(139 * var(--u)); width: calc(30 * var(--u)); }
@@ -304,3 +324,22 @@
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
 .tableau--quai .raton { left: calc(125 * var(--u)); top: calc(125 * var(--u)); }
+
+/* Un bollard d'amarrage, en bas à gauche : le seul élément de premier
+   plan du tableau, celui qui donne un « devant » à l'équipe massée sur
+   la jetée. */
+.tableau--quai .avant { position: absolute; z-index: 5; pointer-events: none; }
+.tableau--quai .avant--bollard { left: calc(8 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); height: calc(20 * var(--u)); }
+.tableau--quai .avant--bollard::before {
+  content: ''; position: absolute; left: calc(-1 * var(--u)); top: 0;
+  width: calc(16 * var(--u)); height: calc(6 * var(--u));
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(180deg, #3a332a, #241f18);
+  box-shadow: 0 0 0 calc(1 * var(--u)) #14110c;
+}
+.tableau--quai .avant--bollard::after {
+  content: ''; position: absolute; left: calc(3 * var(--u)); top: calc(5 * var(--u));
+  width: calc(8 * var(--u)); height: calc(15 * var(--u));
+  background: linear-gradient(180deg, #2c261e, #1a1611);
+  box-shadow: 0 0 0 calc(1 * var(--u)) #14110c;
+}

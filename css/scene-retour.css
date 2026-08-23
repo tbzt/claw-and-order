@@ -173,9 +173,20 @@
 }
 .tableau--retour .pont-planches {
   left: 0; top: calc(105 * var(--u)); width: 100%; height: calc(47 * var(--u));
-  background: repeating-linear-gradient(90deg,
-    rgba(0,0,0,.34) 0 1px, transparent 1px calc(11 * var(--u)));
   pointer-events: none;
+}
+/* Perspective au sol : coutures serrées près du rouf (loin), espacées
+   près du bastingage (près) — le même principe que la houle, appliqué
+   au pont. */
+.tableau--retour .pont-planches::before,
+.tableau--retour .pont-planches::after { content: ''; position: absolute; left: 0; width: 100%; }
+.tableau--retour .pont-planches::before {
+  top: 0; height: calc(18 * var(--u));
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,.30) 0 1px, transparent 1px calc(7 * var(--u)));
+}
+.tableau--retour .pont-planches::after {
+  top: calc(18 * var(--u)); height: calc(29 * var(--u));
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,.36) 0 1px, transparent 1px calc(15 * var(--u)));
 }
 
 .tableau--retour .mat {
@@ -228,6 +239,10 @@
   background: #1b2230;
   box-shadow: 0 0 0 calc(1 * var(--u)) #0d0a08,
               inset 0 calc(2 * var(--u)) 0 rgba(90,200,255,.35);
+  /* Le rectangle réel du sprite `.p-lester` (z-index 4) déborde très
+     au-delà de sa largeur en unités d'art et recouvre ce hotspot :
+     sans z-index propre, la VHF n'était cliquable nulle part. */
+  z-index: 5;
 }
 
 /* Les feux de navigation. Ce sont eux qu'on éteint pour disparaître :
@@ -269,7 +284,12 @@
 
 /* ── Les gens ──────────────────────────────────────────────────────── */
 
-.tableau--retour .ombre { background: rgba(6,8,14,.55); height: calc(2 * var(--u)); }
+.tableau--retour .ombre {
+  height: calc(4 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(6,8,14,.6) 0%, rgba(6,8,14,0) 72%);
+  opacity: var(--profondeur, 1);
+}
 .tableau--retour .ombre--lester   { left: calc(168 * var(--u)); top: calc(132 * var(--u)); width: calc(28 * var(--u)); }
 .tableau--retour .ombre--drakk    { left: calc(30 * var(--u));  top: calc(136 * var(--u)); width: calc(42 * var(--u)); }
 .tableau--retour .ombre--trash    { left: calc(70 * var(--u));  top: calc(133 * var(--u)); width: calc(30 * var(--u)); }
@@ -474,6 +494,20 @@
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
 .tableau--retour .raton { left: calc(53 * var(--u)); top: calc(117 * var(--u)); }
+
+/* Un hauban tendu en travers du cadre, au premier plan : plus proche de
+   la caméra que le gréement (`.hauban--g/d`, z-index d'un rien), il
+   passe devant le groupe — les `.pj` de ce tableau montent jusqu'à
+   z-index 5, celui-ci doit dépasser. */
+.tableau--retour .avant { position: absolute; z-index: 6; pointer-events: none; }
+.tableau--retour .avant--hauban {
+  left: calc(-10 * var(--u)); top: calc(78 * var(--u));
+  width: calc(280 * var(--u)); height: calc(2 * var(--u));
+  background: linear-gradient(180deg, rgba(10,8,7,.55), rgba(10,8,7,.85));
+  transform: rotate(4deg);
+  transform-origin: 0 50%;
+  box-shadow: 0 0 calc(1 * var(--u)) rgba(0,0,0,.6);
+}
 
 /* ══ LA TRAVERSÉE DU GOULET ═══════════════════════════════════════════
    Le tableau écrivait le coup de feu dans un mur de récit qui se

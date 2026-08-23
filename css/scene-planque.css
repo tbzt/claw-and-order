@@ -52,10 +52,25 @@
 }
 .tableau--planque .sol-joints {
   left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(48 * var(--u));
-  background:
-    repeating-linear-gradient(90deg, rgba(60,68,64,.30) 0 1px, transparent 1px calc(20 * var(--u))),
-    repeating-linear-gradient(180deg, rgba(60,68,64,.24) 0 1px, transparent 1px calc(12 * var(--u)));
   pointer-events: none;
+}
+/* Perspective au sol : les rangs de carreaux resserrés près de la plinthe
+   (loin), espacés près du cadre (près). Le liseré du haut EST la ligne
+   d'horizon — la jonction plinthe/sol (y=112). */
+.tableau--planque .sol-joints::before,
+.tableau--planque .sol-joints::after { content: ''; position: absolute; left: 0; width: 100%; }
+.tableau--planque .sol-joints::before {
+  top: 0; height: calc(16 * var(--u));
+  background:
+    repeating-linear-gradient(90deg, rgba(60,68,64,.30) 0 1px, transparent 1px calc(14 * var(--u))),
+    repeating-linear-gradient(180deg, rgba(60,68,64,.24) 0 1px, transparent 1px calc(8 * var(--u)));
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.35);
+}
+.tableau--planque .sol-joints::after {
+  top: calc(16 * var(--u)); height: calc(32 * var(--u));
+  background:
+    repeating-linear-gradient(90deg, rgba(60,68,64,.30) 0 1px, transparent 1px calc(26 * var(--u))),
+    repeating-linear-gradient(180deg, rgba(60,68,64,.24) 0 1px, transparent 1px calc(15 * var(--u)));
 }
 
 /* ── Les néons ─────────────────────────────────────────────────────────
@@ -209,7 +224,12 @@
 
 /* ── Les gens ──────────────────────────────────────────────────────── */
 
-.tableau--planque .ombre { background: rgba(40,48,46,.42); height: calc(2 * var(--u)); }
+.tableau--planque .ombre {
+  height: calc(4 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(40,48,46,.5) 0%, rgba(40,48,46,0) 72%);
+  opacity: var(--profondeur, 1);
+}
 .tableau--planque .ombre--lester   { left: calc(21 * var(--u));  top: calc(136 * var(--u)); width: calc(28 * var(--u)); }
 .tableau--planque .ombre--drakk    { left: calc(58 * var(--u));  top: calc(138 * var(--u)); width: calc(42 * var(--u)); }
 .tableau--planque .ombre--trash    { left: calc(98 * var(--u)); top: calc(135 * var(--u)); width: calc(30 * var(--u)); }
@@ -382,6 +402,22 @@
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
 .tableau--planque .raton { left: calc(80 * var(--u)); top: calc(119 * var(--u)); }
+
+/* Une machine à laver de dos, en bas à droite, coupée par le cadre :
+   le dos plat d'une machine plutôt qu'une face, pour qu'on comprenne
+   qu'on est DANS la rangée, pas devant elle. */
+.tableau--planque .avant { position: absolute; z-index: 5; pointer-events: none; }
+.tableau--planque .avant--machine {
+  left: calc(226 * var(--u)); top: calc(120 * var(--u));
+  width: calc(30 * var(--u)); height: calc(24 * var(--u));
+  background: linear-gradient(180deg, #7d8580 0 calc(3 * var(--u)), #5c6560 calc(3 * var(--u)));
+  box-shadow: 0 0 0 calc(1 * var(--u)) #3a423e;
+}
+.tableau--planque .avant--machine::after {
+  content: ''; position: absolute; left: calc(4 * var(--u)); top: calc(6 * var(--u));
+  width: calc(6 * var(--u)); height: calc(14 * var(--u));
+  background: #3a423e;
+}
 
 /* ══ NEUF HEURES ══════════════════════════════════════════════════════
    La laverie annonçait un danger et ne l'honorait jamais : Drakk répète

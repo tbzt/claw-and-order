@@ -19,7 +19,20 @@
 .tableau--greffe .plinthe { top: calc(106 * var(--u)); height: calc(6 * var(--u)); background: #222c26; }
 .tableau--greffe .sol {
   top: calc(112 * var(--u)); height: calc(54 * var(--u));
-  background: repeating-linear-gradient(90deg, #4a4f4a 0 calc(20 * var(--u)), #3f443f calc(20 * var(--u)) calc(40 * var(--u)));
+}
+/* Perspective au sol : deux bandes de pas croissant vers le bas au lieu
+   du quadrillage régulier (20u partout). Le liseré du haut EST la ligne
+   d'horizon — la jonction plinthe/sol (y=112). */
+.tableau--greffe .sol::before,
+.tableau--greffe .sol::after { content: ''; position: absolute; left: 0; width: 100%; }
+.tableau--greffe .sol::before {
+  top: 0; height: calc(18 * var(--u));
+  background: repeating-linear-gradient(90deg, #4a4f4a 0 calc(13 * var(--u)), #3f443f calc(13 * var(--u)) calc(26 * var(--u)));
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+}
+.tableau--greffe .sol::after {
+  top: calc(18 * var(--u)); height: calc(36 * var(--u));
+  background: repeating-linear-gradient(90deg, #4a4f4a 0 calc(26 * var(--u)), #3f443f calc(26 * var(--u)) calc(52 * var(--u)));
 }
 
 /* Deux tubes néon, dont un qui ne va pas bien. */
@@ -66,7 +79,12 @@
   width: calc(46 * var(--u)); height: calc(6 * var(--u));
   background: #5c4a32; box-shadow: 0 0 0 calc(1 * var(--u)) #1a1208; }
 
-.tableau--greffe .ombre { background: rgba(6,10,8,.45); height: calc(2 * var(--u)); }
+.tableau--greffe .ombre {
+  height: calc(4 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(6,10,8,.5) 0%, rgba(6,10,8,0) 72%);
+  opacity: var(--profondeur, 1);
+}
 .tableau--greffe .ombre--drakk    { left: calc(70 * var(--u));  top: calc(140 * var(--u)); width: calc(42 * var(--u)); }
 .tableau--greffe .ombre--trash    { left: calc(112 * var(--u)); top: calc(140 * var(--u)); width: calc(30 * var(--u)); }
 .tableau--greffe .ombre--rabbit   { left: calc(144 * var(--u)); top: calc(140 * var(--u)); width: calc(20 * var(--u)); }
@@ -164,3 +182,14 @@
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
 .tableau--greffe .raton { left: calc(122 * var(--u)); top: calc(126 * var(--u)); }
+
+/* Le montant du sas, en premier plan : le pilier qui borde la porte
+   blindée, plus proche de la caméra que le sas lui-même — c'est lui qui
+   mord sur Drakk (le plus reculé du groupe) et donne un « devant ». */
+.tableau--greffe .avant { position: absolute; z-index: 5; pointer-events: none; }
+.tableau--greffe .avant--montant {
+  left: calc(64 * var(--u)); top: calc(30 * var(--u));
+  width: calc(10 * var(--u)); height: calc(114 * var(--u));
+  background: linear-gradient(90deg, #232c27 0 calc(2 * var(--u)), #161c18 calc(2 * var(--u)));
+  box-shadow: inset calc(1 * var(--u)) 0 0 rgba(200,230,210,.08);
+}

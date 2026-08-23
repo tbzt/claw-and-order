@@ -31,8 +31,25 @@
 }
 .tableau--bar .sol {
   top: calc(118 * var(--u)); height: calc(40 * var(--u));
+  background: #241d24;
+}
+/* Perspective au sol : le quadrillage était un pas fixe (32u), du papier
+   millimétré. Deux bandes de pas croissant vers le bas donnent un plancher
+   qui fuit sans une seule diagonale (aucun lissage à côté du pixel art) :
+   colonnes serrées près du lambris (loin), larges près du cadre (près).
+   Le liseré du haut EST la ligne d'horizon — la jonction lambris/sol. */
+.tableau--bar .sol::before,
+.tableau--bar .sol::after { content: ''; position: absolute; left: 0; width: 100%; }
+.tableau--bar .sol::before {
+  top: 0; height: calc(13 * var(--u));
   background: repeating-linear-gradient(90deg,
-    #241d24 0 calc(16 * var(--u)), #2b2229 calc(16 * var(--u)) calc(32 * var(--u)));
+    #241d24 0 calc(10 * var(--u)), #2b2229 calc(10 * var(--u)) calc(20 * var(--u)));
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.45);
+}
+.tableau--bar .sol::after {
+  top: calc(13 * var(--u)); height: calc(27 * var(--u));
+  background: repeating-linear-gradient(90deg,
+    #241d24 0 calc(22 * var(--u)), #2b2229 calc(22 * var(--u)) calc(44 * var(--u)));
 }
 
 .tableau--bar .etagere {
@@ -161,8 +178,10 @@
    retouche — c'est déjà leur rôle. `--profondeur` (engine.css) module la
    même mise en retrait qui s'applique à tout `.pj` au repos ; elle laisse
    intact le liseré du runner actif, une couche à part. */
-.tableau--bar .p-drakk    { --profondeur: .82; }
-.tableau--bar .p-hercules { --profondeur: 1.18; }
+/* Posée aussi sur l'ombre, pas seulement le sprite : --profondeur ne
+   traverse pas les frères et sœurs du DOM, et l'ombre en est un. */
+.tableau--bar .p-drakk,    .tableau--bar .ombre--drakk    { --profondeur: .82; }
+.tableau--bar .p-hercules, .tableau--bar .ombre--hercules { --profondeur: 1.18; }
 
 /* Personne ne fait face au joueur (R2) : les deux runners côté mur —
    Drakk et Trash — se tournent vers le comptoir, comme le reste du
@@ -192,8 +211,16 @@
 .tableau--bar .tf1 { left: calc(117 * var(--u)); top: calc(111 * var(--u)); width: calc(34 * var(--u)); }
 .tableau--bar .tf2 { left: calc(145 * var(--u)); top: calc(109 * var(--u)); width: calc(34 * var(--u)); }
 
-/* — ombres de contact : base au sol (155) ou sur la surface porteuse — */
-.tableau--bar .ombre { background: rgba(8,6,10,.5); height: calc(2 * var(--u)); }
+/* — ombres de contact : base au sol (155) ou sur la surface porteuse —
+   Une ellipse, pas une barre : sa largeur suit déjà le sprite (posée par
+   chaque .ombre--X ci-dessous), son opacité suit --profondeur, le même
+   registre qui assombrit le runner au repos (chantier 9). */
+.tableau--bar .ombre {
+  height: calc(4 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(8,6,10,.55) 0%, rgba(8,6,10,0) 72%);
+  opacity: var(--profondeur, 1);
+}
 .tableau--bar .ombre--c1 { left: calc(59 * var(--u));  top: calc(131 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--bar .ombre--c2 { left: calc(82 * var(--u)); top: calc(131 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--bar .ombre--mccarthy { left: calc(15 * var(--u));  top: calc(131 * var(--u)); width: calc(28 * var(--u)); }
@@ -201,7 +228,7 @@
    profondeur crédible quand les bases diffèrent. */
 /* Ombre longue et diffuse pour le plan du fond (R1) : elle s'étire et
    se brouille au lieu de suivre exactement la silhouette. */
-.tableau--bar .ombre--drakk    { left: calc(114 * var(--u)); top: calc(136 * var(--u)); width: calc(58 * var(--u)); filter: blur(calc(1.5 * var(--u))); opacity: .75; }
+.tableau--bar .ombre--drakk    { left: calc(114 * var(--u)); top: calc(136 * var(--u)); width: calc(58 * var(--u)); filter: blur(calc(1.5 * var(--u))); }
 .tableau--bar .ombre--trash    { left: calc(161 * var(--u)); top: calc(133 * var(--u)); width: calc(30 * var(--u)); }
 .tableau--bar .ombre--rabbit   { left: calc(189 * var(--u)); top: calc(138 * var(--u)); width: calc(20 * var(--u)); }
 .tableau--bar .ombre--hercules { left: calc(212 * var(--u)); top: calc(140 * var(--u)); width: calc(16 * var(--u)); }
@@ -347,6 +374,19 @@
 }
 .tableau--bar .jambage--g { left: 0; box-shadow: inset calc(-1 * var(--u)) 0 0 rgba(255,168,92,.13); }
 .tableau--bar .jambage--d { right: 0; box-shadow: inset calc(1 * var(--u)) 0 0 rgba(255,168,92,.13); }
+
+/* L'angle du comptoir, en bas à droite, coupé par le cadre (chantier
+   « sol, ombres, premier plan ») : le bois du comptoir se prolonge dans
+   le premier plan et mord sur Hercules — c'est ce contraste devant/derrière
+   qui donne la profondeur, pas les jambages (qui ne font qu'encadrer). */
+.tableau--bar .avant { position: absolute; z-index: 5; pointer-events: none; }
+.tableau--bar .avant--comptoir {
+  left: calc(214 * var(--u)); top: calc(130 * var(--u));
+  width: calc(42 * var(--u)); height: calc(14 * var(--u));
+  background: linear-gradient(180deg,
+    #6b4a2c 0 calc(2 * var(--u)), #3d2a1c calc(2 * var(--u)) calc(8 * var(--u)), #2a1c13 calc(8 * var(--u)));
+  box-shadow: 0 0 0 calc(1 * var(--u)) #1a1210;
+}
 
 /* Le commlink de McCarthy : posé sur sa table, il diffuse encore. */
 .tableau--bar .ora--commlink {
