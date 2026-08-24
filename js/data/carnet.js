@@ -146,18 +146,12 @@ export const fiches = {
     ou: 'Herwick Strauber, à l’arrière-boutique',
   },
 
-  /* ── Le cabinet de Sarah, chantier 37 ─────────────────────────────
-     Le pendant, chez Sarah, de `tir-herwick` : même famille de faits,
-     fiche différente parce que les deux scènes ne se visitent jamais
-     dans la même partie. */
-  'tir-sarah': {
-    titre: 'Ils ont su, jusque dans son cabinet',
-    texte: 'Une salle d’attente, une adresse que personne n’avait notée nulle part, et un tir à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
-    ou: 'Chez Sarah, à huit heures quarante',
-  },
-  /* La confidence unique de ce décor (garde-fou § 4.3 du plan) : Sarah
-     est la seule personne du jeu qui puisse la dire, parce qu'elle est
-     la seule à avoir soigné Teresa de son vivant. */
+  /* Sarah, depuis le chantier 39, est une halte et non plus une
+     planque (`PLAN_PLANQUES.md` § 3.6) : il n'y a plus de tir dans son
+     cabinet, donc plus de fiche `tir-sarah` — seule `teresa-cliente`
+     survit de ce décor. Sarah est la seule personne du jeu qui puisse
+     dire cette confidence, parce qu'elle est la seule à avoir soigné
+     Teresa de son vivant. */
   'teresa-cliente': {
     titre: 'Elle est déjà venue ici',
     texte: 'Deux fois, cet automne. Elle voulait savoir comment on disparaît proprement — des papiers, un nom qu’on ne peut pas retracer. Sarah n’a pas pu l’aider, et n’a jamais su de qui elle se cachait.',
@@ -165,9 +159,9 @@ export const fiches = {
   },
 
   /* ── Le sous-sol de Duke, chantier 37 ─────────────────────────────
-     Même famille que `tir-herwick`/`tir-sarah` — un tir qui trouve la
-     planque malgré tout — mais un mode d'attaque différent (« pas de
-     ligne de tir… alors quelqu'un entre », PLAN_PLANQUES.md § 3.4). */
+     Même famille que `tir-herwick` — un tir qui trouve la planque
+     malgré tout — mais un mode d'attaque différent (« pas de ligne de
+     tir… alors quelqu'un entre », PLAN_PLANQUES.md § 3.4). */
   'tir-duke': {
     titre: 'Ils ont su, jusque dans le sous-sol',
     texte: 'Un escalier, une adresse que personne n’avait notée nulle part, et quelqu’un qui tente d’entrer à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
@@ -400,11 +394,9 @@ export const presque = {
   'appart-teresa|corps-loveland':
     'Un corps posé à Loveland, et un studio loué cash à deux rues de là. Il manque encore qui l’a menée du second au premier.',
 
-  /* ── Le cabinet de Sarah, chantier 37 ─────────────────────────────
-     Même famille que les deux paires ci-dessus, dans le troisième décor
-     à porter le tir de 8 h 40. */
-  'tir-sarah|toralf-vise-lester':
-    'Le goulet, puis le cabinet. Le même employeur, sans doute — ça ne se prouve pas avec deux tirs. Ça se prouve en trouvant qui paie.',
+  /* Sarah est une halte depuis le chantier 39 : plus de tir dans son
+     cabinet, donc plus de paire `tir-sarah|toralf-vise-lester`. Celle-ci
+     survit — `teresa-cliente` n'a jamais dépendu du tir. */
   'famille-tir|teresa-cliente':
     'Elle cherchait à disparaître, et sa famille voulait la faire taire. Ce n’est peut-être pas la même chose qu’elle fuyait. Ça se recoupe, ça ne se prouve pas encore.',
 

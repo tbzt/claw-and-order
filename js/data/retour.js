@@ -65,8 +65,14 @@
 import { equipiers } from './equipiers.js'
 
 /* Un seul `choix-*` peut être posé par partie (chantiers 36-37) : chaque
-   sujet `trancher-*` du conseil se ferme dès qu'un autre a tranché. */
-const decisionPrise = (a) => a('choix-herwick') || a('choix-sarah') || a('choix-duke')
+   sujet `trancher-*` du conseil se ferme dès qu'un autre a tranché.
+   Sarah n'y participe plus depuis le chantier 39 (§3.6 du plan) : ce
+   n'est plus une planque concurrente, c'est une halte automatique sur
+   le chemin de celle qu'on choisit ici. Exporté : `sarah.js` route vers
+   la même destination en sortant du cabinet. */
+export const decisionPrise = (a) => a('choix-herwick') || a('choix-duke')
+export const destinationPlanque = (a) =>
+  a('choix-herwick') ? 'herwick' : a('choix-duke') ? 'duke' : 'planque'
 
 export const retour = {
   markup: 'scenes/retour.html',
@@ -278,13 +284,14 @@ export const retour = {
 
         const abri = a('abri')
 
-        /* CHANTIER 37 : les quatre planques ont maintenant chacune leur
-           porte. `choix-herwick`, `choix-sarah` et `choix-duke` sont
-           mutuellement exclusifs par construction — chaque sujet
-           `trancher-*` de `conseil` ne pose son drapeau que si aucun
-           autre n'a déjà tranché (`!decisionPrise(a)`, plus bas) — donc
-           l'ordre de ce `?:` ne fait aucune différence en pratique. */
-        const destination = a('choix-herwick') ? 'herwick' : a('choix-sarah') ? 'sarah' : a('choix-duke') ? 'duke' : 'planque'
+        /* CHANTIER 37 : Herwick et Duke ont chacun leur porte, `choix-
+           herwick` et `choix-duke` mutuellement exclusifs par
+           construction — chaque sujet `trancher-*` de `conseil` ne pose
+           son drapeau que si aucun autre n'a déjà tranché
+           (`!decisionPrise(a)`, plus bas). CHANTIER 39 : Sarah n'est
+           plus une troisième option de ce `?:` — elle route en amont,
+           juste au-dessous, quand Lester est touché. */
+        const destination = destinationPlanque(a)
 
         /* ══ LA TRAVERSÉE SE REGARDE ═══════════════════════════════════
            Le seul coup de feu de la nuit partait dans un mur de récit
@@ -340,7 +347,11 @@ export const retour = {
                  drakk: '« J’ai vu le poste. Je n’ai pas donné l’ordre. C’est pire que de ne pas voir. »',
                  flags: ['goulet-passe', 'lester-blesse'],
                  fiches: ['toralf-vise-lester'],
-                 minutes: 10, va: destination }
+                 /* CHANTIER 39 — la halte, automatique : un bras qui
+                    saigne s'arrête chez Sarah avant d'aller n'importe où
+                    ailleurs. `sarah.js` route ensuite vers `destination`
+                    (`destinationPlanque(a)`, identique ici) en sortant. */
+                 minutes: 10, va: 'sarah' }
       },
     },
 
@@ -761,9 +772,17 @@ export const retour = {
        `planque`.
 
        CHANTIER 37 — ÉTAPE D DU §8 : Sarah puis Duke rejoignent Herwick
-       (`sarah.js`, `duke.js`), `trancher-sarah` et `trancher-duke`
-       posent `choix-sarah` / `choix-duke`, même geste. Les quatre
-       planques ont maintenant chacune leur porte. */
+       (`sarah.js`, `duke.js`). Duke pose `choix-duke`, même geste que
+       Herwick.
+
+       CHANTIER 39 — ÉTAPE B DU §8 DE `PLAN_PLANQUES.md` : Sarah cesse
+       d'être une troisième option de ce conseil. Playtest du
+       2026-08-24 (voir §0 du plan) : sa salle d'attente n'a jamais été
+       une planque défendable, seulement une raison de soigner un bras
+       déjà blessé. Son sujet et son `trancher-sarah` disparaissent d'ici
+       ; le cabinet redevient une halte, routée automatiquement depuis
+       `barre.utiliser` (`va: 'sarah'`) quand Lester est touché au
+       goulet — jamais un choix pris à cette table. */
     tacoma: {
       nom: 'Les lumières de Tacoma',
       regarder: {
@@ -973,20 +992,23 @@ export const retour = {
        (`['drakk', '…']`) garde sa voix et sa teinte, comme partout
        ailleurs dans ce fichier (voir l'en-tête, `ouverture`).
 
-       Quatre sujets, un par runner. Depuis le chantier 38 (lisibilité,
-       niveau 1), les quatre propositions sont VISIBLES ET OUVERTES à
-       n'importe quel runner actif : n'importe qui peut mettre une
-       planque sur la table, la réplique restant dans la voix de son
-       auteur. Les trois autres objectent dans la foulée, dans la même
-       réplique — « le vrai contenu moral de la scène » (§2 du plan des
-       planques). Trancher, en revanche, reste un geste personnel : les
-       sujets `trancher-*` portent `acteur`, donc restent VISIBLES mais
-       VERROUILLÉS tant que ce n'est pas leur auteur qui est en main
-       (niveau 2 de la lisibilité). Aucun sujet ne ferme les autres : on
-       peut les rouvrir dans n'importe quel ordre, en changeant de
-       runner actif en cours de dialogue (déjà permis par `selectionne()`
-       dans main.js). Rien ne force à trancher — `barre` ne lit aucun
-       drapeau posé ici. */
+       Trois sujets, un par runner qui propose vraiment un lieu — depuis
+       le chantier 39, Sarah n'en est plus : ce n'est plus une planque
+       concurrente, c'est une halte que `barre.utiliser` prend d'elle-
+       même quand Lester est touché (§3.6 du plan des planques). Depuis
+       le chantier 38 (lisibilité, niveau 1), les propositions restantes
+       sont VISIBLES ET OUVERTES à n'importe quel runner actif :
+       n'importe qui peut mettre une planque sur la table, la réplique
+       restant dans la voix de son auteur. Les trois autres objectent
+       dans la foulée, dans la même réplique — « le vrai contenu moral
+       de la scène » (§2 du plan des planques). Trancher, en revanche,
+       reste un geste personnel : les sujets `trancher-*` portent
+       `acteur`, donc restent VISIBLES mais VERROUILLÉS tant que ce n'est
+       pas leur auteur qui est en main (niveau 2 de la lisibilité).
+       Aucun sujet ne ferme les autres : on peut les rouvrir dans
+       n'importe quel ordre, en changeant de runner actif en cours de
+       dialogue (déjà permis par `selectionne()` dans main.js). Rien ne
+       force à trancher — `barre` ne lit aucun drapeau posé ici. */
     conseil: {
       qui: 'recit',
       accueil: ['Cinq heures. Pour la première fois de la nuit, personne n’a rien à faire — et c’est bien tout le problème : il va falloir décider où poser Lester avant l’audience, et un endroit, ici, ça veut toujours dire quelqu’un.'],
@@ -1012,17 +1034,17 @@ export const retour = {
             ['rabbit', '« Un rideau de fer, ça se force. Ça ne se pirate pas. Une fois dedans, il n’y a plus de sortie discrète. »'],
           ],
         },
-        /* ══ CHANTIER 36-37 — LES PLANQUES QUI SE TRANCHENT ═══════════
-           Herwick (chantier 36) et Sarah (chantier 37) existent pour de
-           vrai ; Duke reste du texte, comme au chantier 35, en attendant
-           son propre chantier. `decisionPrise(a)` empêche de trancher
-           deux fois — un seul `choix-*` peut être posé par partie, et
-           chaque sujet `trancher-*` DISPARAÎT (via `quand`) dès qu'un
-           autre a débranché la question : ce n'est plus un choix, donc
-           plus rien à verrouiller. Trancher reste, lui, un geste du
-           runner qui a PROPOSÉ le lieu — `acteur`, pas `quand` (chantier
-           38) : les trois autres le VOIENT, grisé, et un clic dessus se
-           refuse dans leur propre voix plutôt que de disparaître. Et
+        /* ══ CHANTIER 36-37 (Sarah retirée au chantier 39) — LES PLANQUES
+           QUI SE TRANCHENT ══════════════════════════════════════════
+           Herwick (chantier 36) et Duke (chantier 37) existent pour de
+           vrai. `decisionPrise(a)` empêche de trancher deux fois — un
+           seul `choix-*` peut être posé par partie, et chaque sujet
+           `trancher-*` DISPARAÎT (via `quand`) dès qu'un autre a
+           débranché la question : ce n'est plus un choix, donc plus rien
+           à verrouiller. Trancher reste, lui, un geste du runner qui a
+           PROPOSÉ le lieu — `acteur`, pas `quand` (chantier 38) : les
+           trois autres le VOIENT, grisé, et un clic dessus se refuse
+           dans leur propre voix plutôt que de disparaître. Et
            `barre.utiliser` lit ces drapeaux : rien d'autre ne change la
            destination. */
         {
@@ -1034,28 +1056,6 @@ export const retour = {
           flags: ['choix-herwick'],
           texte: [
             ['drakk', '« Assez parlé. On va chez Herwick. »'],
-            'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
-          ],
-        },
-        {
-          id: 'sarah',
-          titre: '« Le cabinet de Sarah. Le bras de Lester, d’abord. » (Trash)',
-          texte: [
-            ['trash', '« Une clinique de rue ne ferme jamais. Elle recoud ce que personne d’autre ne veut recoudre, et elle recoudra Lester sans poser une question. »'],
-            ['hercules', '« Et la salle d’attente ? Il y a des gens qui patientent là-dedans depuis des heures, cette nuit comme toutes les autres. »'],
-            ['drakk', '« Vider une pièce pleine d’inconnus pour en protéger cinq. Je connais ce calcul. Je ne l’aime toujours pas. »'],
-            ['rabbit', '« Un cabinet, ça a une adresse fixe et un registre de patients. C’est le lieu le plus facile à retrouver de toute la liste. »'],
-          ],
-        },
-        {
-          id: 'trancher-sarah',
-          titre: '« Assez parlé. On va chez Sarah. » (Trancher, Trash)',
-          acteur: 'trash',
-          quand: ({ a }) => !decisionPrise(a),
-          fin: true,
-          flags: ['choix-sarah'],
-          texte: [
-            ['trash', '« Assez parlé. On va chez Sarah. »'],
             'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
           ],
         },

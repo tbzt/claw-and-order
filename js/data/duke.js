@@ -13,9 +13,8 @@
    Ici plus qu'ailleurs, parce que ce décor n'a PAS de ligne de tir : « pas
    de fenêtre… Chimera ne peut pas tirer de loin. Alors quelqu'un entre. »
    L'attaque ne se négocie donc pas — ni précaution, ni décision ne
-   l'évite, contrairement à Herwick (comptage) et Sarah (choix) : elle est
-   fixe, comme le coût du cabinet de Sarah (`sarah-brulee`) ou celui de
-   la boutique de Herwick (`herwick-touche`). `ganger-touche` et
+   l'évite, contrairement à Herwick (comptage) : elle est fixe, comme le
+   coût de la boutique de Herwick (`herwick-touche`). `ganger-touche` et
    `dette-duke` tombent TOUJOURS, au premier passage à la porte.
 
    ══ CE QUE CE DÉCOR AJOUTE : UN PRIX QUI SE PAIE AVANT ═══════════════
@@ -49,7 +48,7 @@
 
 import { equipiers } from './equipiers.js'
 
-/* ══ LE G5, REPRIS DE `planque.js` / `herwick.js` / `sarah.js` ═══════ */
+/* ══ LE G5, REPRIS DE `planque.js` / `herwick.js` ═════════════════════ */
 const GRATUITES = ['conf-job', 'conf-question', 'conf-silence']
 const CHAINEES  = ['conf-teresa', 'conf-guilde', 'conf-bras',
                    'conf-mccarthy', 'conf-deduction', 'conf-dossier',
@@ -322,8 +321,8 @@ export const duke = {
 
   dialogues: {
 
-    /* ══ LESTER — le même G5, repris de `planque.js` / `herwick.js` /
-       `sarah.js` ═══════════════════════════════════════════════════
+    /* ══ LESTER — le même G5, repris de `planque.js` / `herwick.js`
+       ═══════════════════════════════════════════════════════════════
        Trois sujets ouverts à tout le monde, quatre paient des chaînes
        plantées ailleurs dans la nuit, un septième — `conf-duke` —
        n'existe qu'ici, gardé par `ganger-touche`. Un sujet de plus,

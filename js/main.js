@@ -473,6 +473,13 @@ function choisit(sujet) {
   if (sujet.objets) donne(...sujet.objets)
   if (sujet.visuels) marque(...sujet.visuels)
   if (sujet.fiches && classe(...sujet.fiches)) signaleCarnet()
+  /* Même geste que `joue()` (ligne 367) pour une réaction de hotspot —
+     jusqu'ici absent ici, donc `minutes` sur un sujet de dialogue ne
+     coûtait jamais rien à l'horloge. Trouvé chantier 39 en vérifiant
+     `soigner` (`sarah.js`) dans le navigateur : le même défaut touchait
+     déjà `herwick.js:547` (le `soigner` de Herwick, chantier 36),
+     silencieux depuis, faute d'avoir mesuré l'horloge à cet endroit. */
+  if (sujet.minutes) avance(sujet.minutes)
   const qui = dialogue.qui
   if (sujet.fin) {
     dialogue = null
@@ -1437,9 +1444,9 @@ const BILAN = [
   ['drakk-brise',    'Drakk a amené la guerre chez le seul homme qui lui ait ouvert une porte.'],
   ['herwick-epargne', 'On n’a rien demandé à un homme qui saignait.'],
   ['herwick-soigne', 'Trash a soigné Herwick avant de trancher quoi que ce soit. Ça n’a coûté qu’à l’horloge.'],
-  /* Le cabinet de Sarah, chantier 37 (`PLAN_PLANQUES.md` § 5). */
-  ['sarah-brulee',   'Le seul cabinet du quartier qui soignait sans poser de question a fermé.'],
-  ['patient-touche', 'Quelqu’un qui attendait depuis quatre heures a pris une balle qui ne lui était pas destinée.'],
+  /* Le cabinet de Sarah — une halte depuis le chantier 39, plus une
+     planque (`PLAN_PLANQUES.md` § 3.6) : `sarah-brulee` et
+     `patient-touche` ne se posent plus, il n'y a plus de tir ici. */
   ['lester-soigne',  'Il se tient droit à la barre : quelqu’un a enfin recousu ce bras correctement.'],
   /* Le sous-sol de Duke, chantier 37 (`PLAN_PLANQUES.md` § 5). */
   ['ganger-touche', 'Il avait l’âge de Lester.'],

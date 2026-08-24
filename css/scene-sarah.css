@@ -1,6 +1,9 @@
 /* ── TABLEAU 5 TER — LE CABINET DE SARAH CARPENTER ────────────────────
-   Chantier 37. Grille 256 x 144 (chantier 8), même --u que les autres
-   tableaux.
+   Chantier 37, rétrogradé en halte au chantier 39 (`PLAN_PLANQUES.md`
+   § 3.6) : plus de tir, plus de dilemme vider/garder — la salle
+   d'attente ne change plus visuellement, ses trois patients restent en
+   place tout le tableau. Grille 256 x 144 (chantier 8), même --u que
+   les autres tableaux.
 
    PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css`
    (chantier 36) : aucun dégradé de grain, aucun calque astral/tactique/
@@ -74,12 +77,6 @@
 .tableau--sarah .patient--2 { left: calc(35 * var(--u)); }
 .tableau--sarah .patient--3 { left: calc(57 * var(--u)); }
 
-/* Une fois vidée : les chaises restent, les patients disparaissent — le
-   ticket qu'un des trois a laissé derrière lui se lit dans le texte, pas
-   dans le décor (garde-fou : un état, jamais un mort, rien à dessiner
-   de plus pour le dire). */
-.stage[data-etat~="salle-videe"] .tableau--sarah .patient { display: none; }
-
 .tableau--sarah .salle-attente {
   left: calc(8 * var(--u)); top: calc(70 * var(--u));
   width: calc(68 * var(--u)); height: calc(42 * var(--u));
@@ -102,11 +99,6 @@
 /* Lester, près de la porte du cabinet — entre le couloir de l'équipe et
    la salle d'attente, mais hors des deux boîtes. */
 .tableau--sarah .p-lester { left: calc(94 * var(--u)); top: calc(86 * var(--u)); width: calc(22 * var(--u)); }
-
-/* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs :
-   un filtre, pas une jauge. */
-.stage[data-etat~="lester-ferme"]  .tableau--sarah .p-lester { filter: saturate(.6) brightness(.85); }
-.stage[data-etat~="lester-ouvert"] .tableau--sarah .p-lester { filter: saturate(1.15) brightness(1.05); }
 
 /* ── LE CABINET — x:184-256 ──────────────────────────────────────────── */
 .tableau--sarah .autoclave {
@@ -131,19 +123,14 @@
   border-radius: 2px;
 }
 
-/* Sarah — dette d'art assumée : une forme, pas un sprite. Deux couleurs
-   de fond selon `sarah-brulee`, même mécanisme que `.herwick` dans
-   `scene-herwick.css` mais sans changer de posture : elle reste debout
-   tout le tableau (elle n'est jamais touchée elle-même — § 3.3 du
-   plan : c'est le cabinet qui paie, pas elle). */
+/* Sarah — dette d'art assumée : une forme, pas un sprite. Elle ne
+   change plus d'état depuis le chantier 39 : plus de tir, plus de
+   posture à changer. */
 .tableau--sarah .sarah {
   left: calc(216 * var(--u)); top: calc(50 * var(--u));
   width: calc(20 * var(--u)); height: calc(34 * var(--u));
   border-radius: 40% 40% 25% 25% / 55% 55% 20% 20%;
   background: radial-gradient(65% 80% at 50% 40%, #dcc8a8 0%, #a68a5e 45%, #5e4a30 80%, transparent 100%);
-}
-.stage[data-etat~="sarah-brulee"] .tableau--sarah .sarah {
-  filter: saturate(.75) brightness(.9);
 }
 
 .tableau--sarah .porte-cabinet {
