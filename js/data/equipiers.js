@@ -257,6 +257,18 @@ const TABLEAUX = {
       trash: '« Il vient de chiffrer toute la boutique en une seconde, et il vient de s’en vouloir tout aussi vite. »',
     },
   },
+
+  /* Le cabinet de Sarah, chantier 37 : même raccord, troisième décor. */
+  sarah: {
+    trash: {
+      vu: 'Il ne s’assoit pas non plus. Il reste debout près de la table d’examen, comme s’il attendait son tour depuis toujours, sans jamais le prendre.',
+      hercules: '« Il connaît cette pièce mieux qu’il ne connaît la nôtre. Ça devrait m’inquiéter pour lui, et ça ne fait que me rassurer pour nous. »',
+    },
+    hercules: {
+      vu: 'Il compte les trois inconnus de la salle d’attente sans en avoir l’air, comme il compte tout le reste.',
+      drakk: '« Le halfelin fait l’inventaire d’une salle de gens malades. J’ai vu des maîtres de jeu plus cyniques que lui, et aucun d’aussi affecté par ce qu’il compte. »',
+    },
+  },
 }
 
 /* ── LA FABRIQUE ──────────────────────────────────────────────────────

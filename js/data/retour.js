@@ -64,6 +64,10 @@
 
 import { equipiers } from './equipiers.js'
 
+/* Un seul `choix-*` peut être posé par partie (chantiers 36-37) : chaque
+   sujet `trancher-*` du conseil se ferme dès qu'un autre a tranché. */
+const decisionPrise = (a) => a('choix-herwick') || a('choix-sarah')
+
 export const retour = {
   markup: 'scenes/retour.html',
 
@@ -274,11 +278,14 @@ export const retour = {
 
         const abri = a('abri')
 
-        /* CHANTIER 36 : le seul drapeau que le conseil pose vraiment
-           (`choix-herwick`, dialogue `conseil`) décide la destination.
-           Aucun autre choix du conseil n'a encore de porte — Sarah et
-           Duke restent la laverie par défaut, comme au chantier 35. */
-        const destination = a('choix-herwick') ? 'herwick' : 'planque'
+        /* CHANTIER 37 : Sarah gagne sa propre porte. `choix-herwick` et
+           `choix-sarah` sont mutuellement exclusifs par construction —
+           chaque sujet `trancher-*` de `conseil` ne pose son drapeau que
+           si aucun autre n'a déjà tranché (`!decisionPrise(a)`, plus bas)
+           — donc l'ordre de ce `?:` ne fait aucune différence en
+           pratique. Duke reste la laverie par défaut, comme au
+           chantier 36, en attendant le chantier 37 lui-même. */
+        const destination = a('choix-herwick') ? 'herwick' : a('choix-sarah') ? 'sarah' : 'planque'
 
         /* ══ LA TRAVERSÉE SE REGARDE ═══════════════════════════════════
            Le seul coup de feu de la nuit partait dans un mur de récit
@@ -748,12 +755,15 @@ export const retour = {
        ait dit. « Le défaut ne disparaît pas » (§2) : rien ici ne bloque
        le passage du goulet, discuté ou pas.
 
-       CHANTIER 36 — ÉTAPE B DU §8 : Herwick est la seule des trois
+       CHANTIER 36 — ÉTAPE B DU §8 : Herwick est la première des trois
        planques neuves à exister pour de vrai (`herwick.js`). Le sujet
        `trancher-herwick`, ci-dessous, pose `choix-herwick` ; `destination`
        (dans `barre.utiliser`) le lit et route vers `herwick` au lieu de
-       `planque`. Sarah et Duke restent du texte, comme au chantier 35,
-       jusqu'à leur propre mesure (§8, étape C puis D). */
+       `planque`.
+
+       CHANTIER 37 — ÉTAPE D DU §8 : Sarah rejoint Herwick (`sarah.js`),
+       `trancher-sarah` pose `choix-sarah`, même geste. Duke reste du
+       texte, comme au chantier 35, jusqu'à son propre chantier. */
     tacoma: {
       nom: 'Les lumières de Tacoma',
       regarder: {
@@ -995,18 +1005,20 @@ export const retour = {
             ['rabbit', '« Un rideau de fer, ça se force. Ça ne se pirate pas. Une fois dedans, il n’y a plus de sortie discrète. »'],
           ],
         },
-        /* ══ CHANTIER 36 — LA SEULE PLANQUE QUI SE TRANCHE ═══════════
-           Herwick est la seule des trois neuves à exister pour de vrai
-           (`herwick.js`, PLAN_PLANQUES.md § 3.2, étape B du § 8) : Sarah
-           et Duke restent du texte, comme au chantier 35, en attendant
-           leur propre mesure (§ 8, étape C). Trancher reste un geste de
-           Drakk — même grammaire que proposer (« il faut ÊTRE ce runner »,
-           § 2 du plan) — et `barre.utiliser` lit ce seul drapeau neuf,
-           `choix-herwick` : rien d'autre ne change la destination. */
+        /* ══ CHANTIER 36-37 — LES PLANQUES QUI SE TRANCHENT ═══════════
+           Herwick (chantier 36) et Sarah (chantier 37) existent pour de
+           vrai ; Duke reste du texte, comme au chantier 35, en attendant
+           son propre chantier. `decisionPrise(a)` empêche de trancher
+           deux fois — un seul `choix-*` peut être posé par partie, et
+           chaque sujet `trancher-*` disparaît dès qu'un autre a débranché
+           la question. Trancher reste un geste du runner qui a PROPOSÉ le
+           lieu — même grammaire que proposer (« il faut ÊTRE ce runner »,
+           § 2 du plan) — et `barre.utiliser` lit ces drapeaux : rien
+           d'autre ne change la destination. */
         {
           id: 'trancher-herwick',
           titre: '« Assez parlé. On va chez Herwick. » (Trancher, Drakk)',
-          quand: ({ qui, a }) => qui === 'drakk' && !a('choix-herwick'),
+          quand: ({ qui, a }) => qui === 'drakk' && !decisionPrise(a),
           fin: true,
           flags: ['choix-herwick'],
           texte: [
@@ -1023,6 +1035,17 @@ export const retour = {
             ['hercules', '« Et la salle d’attente ? Il y a des gens qui patientent là-dedans depuis des heures, cette nuit comme toutes les autres. »'],
             ['drakk', '« Vider une pièce pleine d’inconnus pour en protéger cinq. Je connais ce calcul. Je ne l’aime toujours pas. »'],
             ['rabbit', '« Un cabinet, ça a une adresse fixe et un registre de patients. C’est le lieu le plus facile à retrouver de toute la liste. »'],
+          ],
+        },
+        {
+          id: 'trancher-sarah',
+          titre: '« Assez parlé. On va chez Sarah. » (Trancher, Trash)',
+          quand: ({ qui, a }) => qui === 'trash' && !decisionPrise(a),
+          fin: true,
+          flags: ['choix-sarah'],
+          texte: [
+            ['trash', '« Assez parlé. On va chez Sarah. »'],
+            'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
           ],
         },
         {

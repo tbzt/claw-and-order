@@ -166,6 +166,7 @@ const NOMS_LIEUX = {
   retour: 'Le détroit',
   planque: 'La laverie',
   herwick: 'L’arrière-boutique de Herwick',
+  sarah: 'Le cabinet de Sarah Carpenter',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
   carte: 'La carte',
@@ -1416,6 +1417,10 @@ const BILAN = [
   ['drakk-brise',    'Drakk a amené la guerre chez le seul homme qui lui ait ouvert une porte.'],
   ['herwick-epargne', 'On n’a rien demandé à un homme qui saignait.'],
   ['herwick-soigne', 'Trash a soigné Herwick avant de trancher quoi que ce soit. Ça n’a coûté qu’à l’horloge.'],
+  /* Le cabinet de Sarah, chantier 37 (`PLAN_PLANQUES.md` § 5). */
+  ['sarah-brulee',   'Le seul cabinet du quartier qui soignait sans poser de question a fermé.'],
+  ['patient-touche', 'Quelqu’un qui attendait depuis quatre heures a pris une balle qui ne lui était pas destinée.'],
+  ['lester-soigne',  'Il se tient droit à la barre : quelqu’un a enfin recousu ce bras correctement.'],
 ]
 
 function tombeRideau() {

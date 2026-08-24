@@ -1,0 +1,66 @@
+<!--
+  Tableau 5 ter — LE CABINET DE SARAH CARPENTER, au-dessus d'une
+  supérette. Chantier 37 (`PLAN_PLANQUES.md` § 3.3), étape D du § 8 —
+  après Herwick (chantier 36).
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `herwick.html` (chantier 36) et `tribunal-salle.html` (chantier 20) :
+  les formes ci-dessous ne portent que ce qu'il faut pour lire la scène
+  et cliquer les bonnes cibles. Sarah elle-même n'a pas de sprite
+  (personnage neuf) : une forme simple, pas un `sprite--*`, jusqu'à ce
+  que l'atelier lui en dessine un — dette d'art assumée, comme Herwick.
+
+  DEUX PIÈCES, UN SEUL TABLEAU : la salle d'attente (gauche, trois
+  chaises) et le cabinet (droite, table d'examen, autoclave, bureau),
+  séparées par une cloison basse — pas deux `tableau` distincts, pour
+  rester dans le gabarit d'une planque (§7 du plan : « une pièce, une
+  dizaine de cibles »).
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe et
+  Lester sont placés EN PREMIER, tout le mobilier cliquable APRÈS — même
+  leçon que le chantier 36 (« les cibles mécaniquement importantes
+  gagnent toujours la main »).
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--sarah">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- LESTER, près de la porte du cabinet, à mi-chemin entre les deux
+       pièces. -->
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+
+  <!-- La cloison basse qui sépare les deux pièces — décor, pas une
+       cible : elle dit « deux pièces » sans en imposer une seconde. -->
+  <div class="cloison"></div>
+
+  <!-- LA SALLE D'ATTENTE, à gauche : trois chaises, trois patients
+       (décor), la fenêtre sur la supérette. -->
+  <div class="chaise chaise--1"></div>
+  <div class="chaise chaise--2"></div>
+  <div class="chaise chaise--3"></div>
+  <div class="patient patient--1"></div>
+  <div class="patient patient--2"></div>
+  <div class="patient patient--3"></div>
+  <div class="salle-attente" data-hotspot="salle"></div>
+  <div class="fenetre" data-hotspot="fenetre"></div>
+
+  <!-- LE CABINET, à droite : table d'examen, autoclave, bureau. -->
+  <div class="table-examen" data-hotspot="table"></div>
+  <div class="autoclave" data-hotspot="autoclave"></div>
+  <div class="bureau" data-hotspot="bureau"></div>
+
+  <!-- Sarah — dette d'art assumée : une forme, pas un sprite. -->
+  <div class="sarah" data-hotspot="sarah"></div>
+
+  <!-- La sortie, au premier plan : la porte vers l'escalier de service. -->
+  <div class="porte-cabinet" data-hotspot="porte"></div>
+
+</div>

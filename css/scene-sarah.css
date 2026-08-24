@@ -1,0 +1,154 @@
+/* ── TABLEAU 5 TER — LE CABINET DE SARAH CARPENTER ────────────────────
+   Chantier 37. Grille 256 x 144 (chantier 8), même --u que les autres
+   tableaux.
+
+   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css`
+   (chantier 36) : aucun dégradé de grain, aucun calque astral/tactique/
+   RA dessiné à la main, aucun sprite neuf pour Sarah (dette d'art
+   assumée). Assez pour reconnaître une salle d'attente, un cabinet, et
+   pour valider la mécanique en jeu.
+
+   DEUX PIÈCES, DISPOSITION PAR BANDES DISJOINTES — même leçon que le
+   chantier 36 (« deux zones disjointes, pour qu'aucune ne puisse avaler
+   le centre cliquable de l'autre »), étendue à trois bandes ici : la
+   salle d'attente (x:6-90), le couloir de l'équipe (x:96-206, séparé de
+   la salle par la cloison), le cabinet (x:184-256). Les chaises et les
+   patients de la salle d'attente ne sont PAS des cibles : `.salle-attente`
+   est un survol transparent posé PAR-DESSUS eux dans le DOM, qui capte
+   le clic sans rien cacher visuellement — le même geste qu'ailleurs
+   pour une cible faite de plusieurs pièces de décor. */
+
+.tableau--sarah {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #1c2620;
+}
+.tableau--sarah > * { position: absolute; }
+
+.tableau--sarah .fond {
+  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
+  background: linear-gradient(180deg, #26332b 0%, #1c2620 60%, #141c18 100%);
+}
+.tableau--sarah .sol {
+  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
+  background: repeating-linear-gradient(90deg, #33403a 0 calc(16 * var(--u)), #2c3832 calc(16 * var(--u)) calc(32 * var(--u)));
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+}
+
+/* La cloison basse qui sépare les deux pièces — x:118-122, décor pur,
+   posée APRÈS l'équipe dans le markup mais hors de toute boîte de
+   personnage (voir le commentaire de tête) pour ne jamais leur voler un
+   pixel cliquable. */
+.tableau--sarah .cloison {
+  left: calc(118 * var(--u)); top: calc(20 * var(--u));
+  width: calc(4 * var(--u)); height: calc(92 * var(--u));
+  background: linear-gradient(180deg, #3a4640 0%, #232e28 100%);
+  border: calc(1 * var(--u)) solid #14201a;
+}
+
+/* ── LA SALLE D'ATTENTE — x:6-92 ─────────────────────────────────────── */
+.tableau--sarah .fenetre {
+  left: calc(6 * var(--u)); top: calc(10 * var(--u));
+  width: calc(26 * var(--u)); height: calc(28 * var(--u));
+  background: rgba(150, 190, 175, .14);
+  border: calc(1 * var(--u)) solid #14201a;
+}
+.tableau--sarah .chaise {
+  top: calc(92 * var(--u)); width: calc(14 * var(--u)); height: calc(16 * var(--u));
+  background: linear-gradient(180deg, #4a5a4e 0%, #2c3832 100%);
+  border: calc(1 * var(--u)) solid #14201a;
+  border-radius: 2px;
+}
+.tableau--sarah .chaise--1 { left: calc(12 * var(--u)); }
+.tableau--sarah .chaise--2 { left: calc(34 * var(--u)); }
+.tableau--sarah .chaise--3 { left: calc(56 * var(--u)); }
+
+.tableau--sarah .patient {
+  top: calc(76 * var(--u)); width: calc(12 * var(--u)); height: calc(18 * var(--u));
+  border-radius: 40% 40% 25% 25% / 55% 55% 20% 20%;
+  background: radial-gradient(65% 80% at 50% 40%, #9aa89e 0%, #6b7a70 45%, #3c4640 80%, transparent 100%);
+  opacity: .85;
+}
+.tableau--sarah .patient--1 { left: calc(13 * var(--u)); }
+.tableau--sarah .patient--2 { left: calc(35 * var(--u)); }
+.tableau--sarah .patient--3 { left: calc(57 * var(--u)); }
+
+/* Une fois vidée : les chaises restent, les patients disparaissent — le
+   ticket qu'un des trois a laissé derrière lui se lit dans le texte, pas
+   dans le décor (garde-fou : un état, jamais un mort, rien à dessiner
+   de plus pour le dire). */
+.stage[data-etat~="salle-videe"] .tableau--sarah .patient { display: none; }
+
+.tableau--sarah .salle-attente {
+  left: calc(8 * var(--u)); top: calc(70 * var(--u));
+  width: calc(68 * var(--u)); height: calc(42 * var(--u));
+  background: transparent;
+}
+
+/* ── LE COULOIR DE L'ÉQUIPE — x:96-206, hors de toute autre boîte ─────
+   Relevé par `getBoundingClientRect()` dans le navigateur, pas à l'œil
+   (même méthode que le chantier 36) : les hauteurs des quatre sprites
+   sont automatiques, pas fixées ici, donc trois boîtes débordaient sous
+   ces `top` plus bas au premier essai — dans `lester` et dans `table`.
+   Remontées jusqu'à ce que les quatre boîtes finissent strictement
+   au-dessus de `y:86` (le haut de `lester`) et `y:88` (le haut de
+   `table`), vérifié par un test d'overlap pair à pair, pas par calcul. */
+.tableau--sarah .p-drakk    { width: calc(30 * var(--u)); left: calc(96 * var(--u));  top: calc(40 * var(--u)); }
+.tableau--sarah .p-trash    { width: calc(24 * var(--u)); left: calc(130 * var(--u)); top: calc(38 * var(--u)); }
+.tableau--sarah .p-rabbit   { width: calc(18 * var(--u)); left: calc(158 * var(--u)); top: calc(46 * var(--u)); }
+.tableau--sarah .p-hercules { width: calc(16 * var(--u)); left: calc(180 * var(--u)); top: calc(54 * var(--u)); }
+
+/* Lester, près de la porte du cabinet — entre le couloir de l'équipe et
+   la salle d'attente, mais hors des deux boîtes. */
+.tableau--sarah .p-lester { left: calc(94 * var(--u)); top: calc(86 * var(--u)); width: calc(22 * var(--u)); }
+
+/* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs :
+   un filtre, pas une jauge. */
+.stage[data-etat~="lester-ferme"]  .tableau--sarah .p-lester { filter: saturate(.6) brightness(.85); }
+.stage[data-etat~="lester-ouvert"] .tableau--sarah .p-lester { filter: saturate(1.15) brightness(1.05); }
+
+/* ── LE CABINET — x:184-256 ──────────────────────────────────────────── */
+.tableau--sarah .autoclave {
+  left: calc(188 * var(--u)); top: calc(14 * var(--u));
+  width: calc(16 * var(--u)); height: calc(26 * var(--u));
+  background: #3a463f; border: calc(1 * var(--u)) solid #14201a; border-radius: 2px;
+}
+
+.tableau--sarah .table-examen {
+  left: calc(128 * var(--u)); top: calc(88 * var(--u));
+  width: calc(50 * var(--u)); height: calc(20 * var(--u));
+  background: linear-gradient(180deg, #c8d4cc 0%, #8a988e 100%);
+  border: calc(1 * var(--u)) solid #14201a;
+  border-radius: 2px;
+}
+
+.tableau--sarah .bureau {
+  left: calc(206 * var(--u)); top: calc(92 * var(--u));
+  width: calc(44 * var(--u)); height: calc(18 * var(--u));
+  background: linear-gradient(180deg, #4a5a4e 0%, #2c3832 100%);
+  border-top: calc(1 * var(--u)) solid #6a7a6e;
+  border-radius: 2px;
+}
+
+/* Sarah — dette d'art assumée : une forme, pas un sprite. Deux couleurs
+   de fond selon `sarah-brulee`, même mécanisme que `.herwick` dans
+   `scene-herwick.css` mais sans changer de posture : elle reste debout
+   tout le tableau (elle n'est jamais touchée elle-même — § 3.3 du
+   plan : c'est le cabinet qui paie, pas elle). */
+.tableau--sarah .sarah {
+  left: calc(216 * var(--u)); top: calc(50 * var(--u));
+  width: calc(20 * var(--u)); height: calc(34 * var(--u));
+  border-radius: 40% 40% 25% 25% / 55% 55% 20% 20%;
+  background: radial-gradient(65% 80% at 50% 40%, #dcc8a8 0%, #a68a5e 45%, #5e4a30 80%, transparent 100%);
+}
+.stage[data-etat~="sarah-brulee"] .tableau--sarah .sarah {
+  filter: saturate(.75) brightness(.9);
+}
+
+.tableau--sarah .porte-cabinet {
+  left: calc(4 * var(--u)); top: calc(118 * var(--u));
+  width: calc(22 * var(--u)); height: calc(24 * var(--u));
+  background: #2c3832;
+  border-top: calc(1 * var(--u)) solid #4a5a4e;
+}
