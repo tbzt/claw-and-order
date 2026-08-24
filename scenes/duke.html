@@ -1,0 +1,56 @@
+<!--
+  Tableau 5 quater — LE SOUS-SOL DE DUKE. Chantier 37 (`PLAN_PLANQUES.md`
+  § 3.4), étape D du § 8 — après Herwick (36) et Sarah (37, 1/2).
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `herwick.html` et `sarah.html`. Duke et ses gens n'ont pas de sprite
+  (personnages neufs) : des formes simples, pas de `sprite--*`, jusqu'à
+  ce que l'atelier leur en dessine un — dette d'art assumée.
+
+  PAS DE FENÊTRE (§3.4 du plan, à la lettre) : aucune cible de ce
+  tableau n'est une ouverture sur l'extérieur — le seul chemin, c'est
+  l'escalier, et c'est par là que l'attaque de 8 h 40 entre, pas par un
+  carreau qui vole en éclats.
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe et
+  Lester en premier, tout le mobilier cliquable après.
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--duke">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- LESTER, contre le mur du fond. -->
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+
+  <!-- Les huit personnes de Duke : décor, pas des cibles individuelles —
+       une seule d'entre elles compte mécaniquement (`ganger-touche`), et
+       le texte la désigne sans qu'un sprite à part soit nécessaire. -->
+  <div class="ganger ganger--1"></div>
+  <div class="ganger ganger--2"></div>
+  <div class="ganger ganger--3"></div>
+  <div class="matelas"></div>
+
+  <div class="rateliers" data-hotspot="armurerie"></div>
+  <div class="moniteurs-mur" data-hotspot="moniteurs"></div>
+
+  <!-- L'escalier, seul chemin d'entrée et de l'attaque. -->
+  <div class="escalier-marches" data-hotspot="escalier"></div>
+
+  <div class="caisse-munitions" data-hotspot="coffre"></div>
+
+  <!-- Duke — dette d'art assumée : une forme, pas un sprite. -->
+  <div class="fauteuil-duke"></div>
+  <div class="duke" data-hotspot="duke"></div>
+
+  <!-- La sortie, au premier plan. -->
+  <div class="porte-blindee" data-hotspot="porte"></div>
+
+</div>

@@ -269,6 +269,19 @@ const TABLEAUX = {
       drakk: '« Le halfelin fait l’inventaire d’une salle de gens malades. J’ai vu des maîtres de jeu plus cyniques que lui, et aucun d’aussi affecté par ce qu’il compte. »',
     },
   },
+
+  /* Le sous-sol de Duke, chantier 37 : même raccord, quatrième et
+     dernier décor. */
+  duke: {
+    rabbit: {
+      vu: 'Elle ne s’assoit pas non plus. Elle reste debout, entre Duke et l’escalier, comme si sa place était déjà décidée depuis longtemps dans cette pièce.',
+      trash: '« Son aura change, ici. Moins de gêne qu’ailleurs. Elle est chez des gens qui ne lui demandent pas d’expliquer qui elle est. »',
+    },
+    drakk: {
+      vu: 'Il compte les issues et les armes de la pièce, par réflexe de troll des rues, et s’arrête en réalisant que huit personnes font déjà ce calcul pour lui.',
+      hercules: '« Pour une fois, il n’est pas le plus grand danger de la pièce. Je crois que ça le repose plus qu’il ne l’admettra. »',
+    },
+  },
 }
 
 /* ── LA FABRIQUE ──────────────────────────────────────────────────────

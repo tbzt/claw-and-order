@@ -66,7 +66,7 @@ import { equipiers } from './equipiers.js'
 
 /* Un seul `choix-*` peut être posé par partie (chantiers 36-37) : chaque
    sujet `trancher-*` du conseil se ferme dès qu'un autre a tranché. */
-const decisionPrise = (a) => a('choix-herwick') || a('choix-sarah')
+const decisionPrise = (a) => a('choix-herwick') || a('choix-sarah') || a('choix-duke')
 
 export const retour = {
   markup: 'scenes/retour.html',
@@ -278,14 +278,13 @@ export const retour = {
 
         const abri = a('abri')
 
-        /* CHANTIER 37 : Sarah gagne sa propre porte. `choix-herwick` et
-           `choix-sarah` sont mutuellement exclusifs par construction —
-           chaque sujet `trancher-*` de `conseil` ne pose son drapeau que
-           si aucun autre n'a déjà tranché (`!decisionPrise(a)`, plus bas)
-           — donc l'ordre de ce `?:` ne fait aucune différence en
-           pratique. Duke reste la laverie par défaut, comme au
-           chantier 36, en attendant le chantier 37 lui-même. */
-        const destination = a('choix-herwick') ? 'herwick' : a('choix-sarah') ? 'sarah' : 'planque'
+        /* CHANTIER 37 : les quatre planques ont maintenant chacune leur
+           porte. `choix-herwick`, `choix-sarah` et `choix-duke` sont
+           mutuellement exclusifs par construction — chaque sujet
+           `trancher-*` de `conseil` ne pose son drapeau que si aucun
+           autre n'a déjà tranché (`!decisionPrise(a)`, plus bas) — donc
+           l'ordre de ce `?:` ne fait aucune différence en pratique. */
+        const destination = a('choix-herwick') ? 'herwick' : a('choix-sarah') ? 'sarah' : a('choix-duke') ? 'duke' : 'planque'
 
         /* ══ LA TRAVERSÉE SE REGARDE ═══════════════════════════════════
            Le seul coup de feu de la nuit partait dans un mur de récit
@@ -761,9 +760,10 @@ export const retour = {
        (dans `barre.utiliser`) le lit et route vers `herwick` au lieu de
        `planque`.
 
-       CHANTIER 37 — ÉTAPE D DU §8 : Sarah rejoint Herwick (`sarah.js`),
-       `trancher-sarah` pose `choix-sarah`, même geste. Duke reste du
-       texte, comme au chantier 35, jusqu'à son propre chantier. */
+       CHANTIER 37 — ÉTAPE D DU §8 : Sarah puis Duke rejoignent Herwick
+       (`sarah.js`, `duke.js`), `trancher-sarah` et `trancher-duke`
+       posent `choix-sarah` / `choix-duke`, même geste. Les quatre
+       planques ont maintenant chacune leur porte. */
     tacoma: {
       nom: 'Les lumières de Tacoma',
       regarder: {
@@ -1057,6 +1057,17 @@ export const retour = {
             ['hercules', '« Huit personnes armées qui ne NOUS doivent rien non plus. Duke ne fait jamais crédit. »'],
             ['drakk', '« Et il faudra payer avant d’entrer, pas après. Je n’aime pas les portes qui se ferment derrière un prix. »'],
             ['trash', '« Lester va passer trois heures à regarder ceux qui le protègent traiter avec exactement le genre de gens que l’accusation dit qu’il est. »'],
+          ],
+        },
+        {
+          id: 'trancher-duke',
+          titre: '« Assez parlé. On va chez Duke. » (Trancher, White_Rabbit)',
+          quand: ({ qui, a }) => qui === 'rabbit' && !decisionPrise(a),
+          fin: true,
+          flags: ['choix-duke'],
+          texte: [
+            ['rabbit', '« Assez parlé. On va chez Duke. »'],
+            'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
           ],
         },
         {

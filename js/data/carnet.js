@@ -164,6 +164,24 @@ export const fiches = {
     ou: 'Sarah Carpenter, au cabinet',
   },
 
+  /* ── Le sous-sol de Duke, chantier 37 ─────────────────────────────
+     Même famille que `tir-herwick`/`tir-sarah` — un tir qui trouve la
+     planque malgré tout — mais un mode d'attaque différent (« pas de
+     ligne de tir… alors quelqu'un entre », PLAN_PLANQUES.md § 3.4). */
+  'tir-duke': {
+    titre: 'Ils ont su, jusque dans le sous-sol',
+    texte: 'Un escalier, une adresse que personne n’avait notée nulle part, et quelqu’un qui tente d’entrer à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
+    ou: 'Chez Duke, à huit heures quarante',
+  },
+  /* Le prix qui se paie avant (garde-fou § 4.3 du plan) : Toralf nommé,
+     et le fil qui remonte à Telestrian — le même nom que porte déjà la
+     fiche `teresa` (chantier 1, au bar), pas une coïncidence. */
+  'duke-toralf': {
+    titre: 'Il a un nom : Toralf',
+    texte: 'Un tireur scandinave, déjà reparti au nord — inutile de le chercher. Payé par un compte qui remonte à une famille corpo. Telestrian, si le nom dit quelque chose.',
+    ou: 'Duke, au sous-sol',
+  },
+
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
   'registre-anterieur': {
     titre: 'La ligne est plus ancienne que lui',
@@ -389,6 +407,18 @@ export const presque = {
     'Le goulet, puis le cabinet. Le même employeur, sans doute — ça ne se prouve pas avec deux tirs. Ça se prouve en trouvant qui paie.',
   'famille-tir|teresa-cliente':
     'Elle cherchait à disparaître, et sa famille voulait la faire taire. Ce n’est peut-être pas la même chose qu’elle fuyait. Ça se recoupe, ça ne se prouve pas encore.',
+
+  /* ── Le sous-sol de Duke, chantier 37 ─────────────────────────────
+     Même famille que les paires ci-dessus, dans le quatrième et
+     dernier décor à porter le tir de 8 h 40 — sauf que celui-ci n'est
+     pas de Toralf (un tireur, pas un homme qui force une porte), d'où
+     la paire avec `chimera-nous-suit` plutôt qu'avec `toralf-vise-lester`. */
+  'chimera-nous-suit|tir-duke':
+    'La laverie, puis le sous-sol. Le même employeur, sans doute — mais pas la même main : celui qui force une porte n’est pas celui qui tire de loin. Chimera a plus d’un homme sur ce contrat.',
+  'duke-toralf|teresa':
+    'Un tireur payé par un compte Telestrian, et une victime au SIN Telestrian. Le même nom, deux fois, dans la même nuit. Ça ne se décide pas avec deux faits. Ça commence à devenir difficile à ignorer.',
+  'duke-toralf|toralf-vise-lester':
+    'Le tireur du goulet, et celui que Duke vient de nommer. Le même homme, sans doute — ça se prouve en trouvant qui paie, et Duke vient de le dire : Telestrian.',
 
   /* ── Ce qu’on a déjà déduit, frotté contre le reste ──────────────── */
   'deux-mains|teresa':

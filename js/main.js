@@ -167,6 +167,7 @@ const NOMS_LIEUX = {
   planque: 'La laverie',
   herwick: 'L’arrière-boutique de Herwick',
   sarah: 'Le cabinet de Sarah Carpenter',
+  duke: 'Le sous-sol de Duke',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
   carte: 'La carte',
@@ -1421,6 +1422,9 @@ const BILAN = [
   ['sarah-brulee',   'Le seul cabinet du quartier qui soignait sans poser de question a fermé.'],
   ['patient-touche', 'Quelqu’un qui attendait depuis quatre heures a pris une balle qui ne lui était pas destinée.'],
   ['lester-soigne',  'Il se tient droit à la barre : quelqu’un a enfin recousu ce bras correctement.'],
+  /* Le sous-sol de Duke, chantier 37 (`PLAN_PLANQUES.md` § 5). */
+  ['ganger-touche', 'Il avait l’âge de Lester.'],
+  ['dette-duke',    'On doit quelque chose à un gang, et il s’en souviendra.'],
 ]
 
 function tombeRideau() {
