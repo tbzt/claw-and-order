@@ -264,6 +264,17 @@ body {
 }
 .choix button.est-epuise { color: #4b5468; }
 
+/* Niveau 2 de la lisibilité (chantier 38) : visible, pas ouvert — l'italique
+   dit « ce n'est pas à moi » avant même le clic, et le survol reste sourd
+   là où les sujets ouverts s'éclairent au cyan. */
+.choix button.est-verrouille { color: #4b5468; font-style: italic; }
+.choix button.est-verrouille:hover {
+  color: var(--ardoise);
+  border-left-color: #2b3145;
+  background: color-mix(in srgb, var(--nuit) 88%, transparent);
+  padding-left: 1.1cqw;
+}
+
 /* ── Rideau de fin ───────────────────────────────────────── */
 
 .rideau {

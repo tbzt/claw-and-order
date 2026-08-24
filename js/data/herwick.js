@@ -449,7 +449,8 @@ export const herwick = {
         {
           id: 'bras',
           titre: '« Montre ce bras. » (Trash)',
-          quand: ({ a, qui }) => qui === 'trash' && a('lester-blesse') && !a('conf-bras'),
+          acteur: 'trash',
+          quand: ({ a }) => a('lester-blesse') && !a('conf-bras'),
           flags: ['conf-bras'],
           texte: ['Trash lui prend le poignet sans demander, remonte la manche, et regarde longtemps sans rien dire.',
                   '« Tu vas garder une marque. »',
@@ -459,7 +460,8 @@ export const herwick = {
         {
           id: 'guilde',
           titre: '« Tu fais partie de la compagnie, maintenant. » (Drakk)',
-          quand: ({ a, qui }) => qui === 'drakk' && a('guilde') && !a('conf-guilde'),
+          acteur: 'drakk',
+          quand: ({ a }) => a('guilde') && !a('conf-guilde'),
           flags: ['conf-guilde'],
           texte: ['« C’était quoi, sur le bateau ? La bouteille. »',
                   '« Un serment », dit Drakk, avec un sérieux absolu.',
@@ -539,7 +541,8 @@ export const herwick = {
         {
           id: 'soigner',
           titre: '« Laisse-moi voir cette épaule d’abord. » (Trash)',
-          quand: ({ a, qui }) => qui === 'trash' && !a('herwick-soigne') && !a('herwick-epargne') && !a('drakk-brise'),
+          acteur: 'trash',
+          quand: ({ a }) => !a('herwick-soigne') && !a('herwick-epargne') && !a('drakk-brise'),
           flags: ['herwick-soigne'],
           minutes: 20,
           texte: ['Trash écarte la chemise sans demander la permission, et Herwick le laisse faire — il n’a manifestement pas le choix, et il le sait.',

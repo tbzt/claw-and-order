@@ -387,7 +387,8 @@ export const sarah = {
         {
           id: 'bras',
           titre: '« Montre ce bras. » (Trash)',
-          quand: ({ a, qui }) => qui === 'trash' && a('lester-blesse') && !a('lester-soigne') && !a('conf-bras'),
+          acteur: 'trash',
+          quand: ({ a }) => a('lester-blesse') && !a('lester-soigne') && !a('conf-bras'),
           flags: ['conf-bras'],
           texte: ['Trash lui prend le poignet sans demander, remonte la manche, et regarde longtemps sans rien dire.',
                   '« Tu vas garder une marque. »',
@@ -397,7 +398,8 @@ export const sarah = {
         {
           id: 'guilde',
           titre: '« Tu fais partie de la compagnie, maintenant. » (Drakk)',
-          quand: ({ a, qui }) => qui === 'drakk' && a('guilde') && !a('conf-guilde'),
+          acteur: 'drakk',
+          quand: ({ a }) => a('guilde') && !a('conf-guilde'),
           flags: ['conf-guilde'],
           texte: ['« C’était quoi, sur le bateau ? La bouteille. »',
                   '« Un serment », dit Drakk, avec un sérieux absolu.',
@@ -477,7 +479,8 @@ export const sarah = {
         {
           id: 'soigner',
           titre: '« Le bras de Lester. Vraiment, cette fois. » (Trash)',
-          quand: ({ a, qui }) => qui === 'trash' && a('lester-blesse') && !a('lester-soigne'),
+          acteur: 'trash',
+          quand: ({ a }) => a('lester-blesse') && !a('lester-soigne'),
           flags: ['lester-soigne'],
           minutes: 25,
           texte: ['Elle l’assoit sur la table d’examen sans lui demander la permission, et découpe la manche au lieu de la remonter.',
@@ -516,7 +519,8 @@ export const sarah = {
         {
           id: 'vider',
           titre: '« Videz la salle d’attente. » (Trash)',
-          quand: ({ a, qui }) => qui === 'trash' && !decidee(a),
+          acteur: 'trash',
+          quand: ({ a }) => !decidee(a),
           fin: true,
           flags: ['salle-videe'],
           /* `visuels`, pas seulement `flags` : `.patient { display:none }`
@@ -538,7 +542,8 @@ export const sarah = {
         {
           id: 'garder',
           titre: '(Laisser la salle telle quelle.)',
-          quand: ({ a, qui }) => qui === 'trash' && !decidee(a),
+          acteur: 'trash',
+          quand: ({ a }) => !decidee(a),
           fin: true,
           flags: ['salle-pleine'],
           texte: ['Personne ne dit rien aux trois inconnus. Ils restent, sans savoir pourquoi cette décision-là vient d’être prise pour eux.',

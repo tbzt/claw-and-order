@@ -9,7 +9,7 @@ import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
 import { resous, nomDe, enLignes } from './interact.js'
 import { equipe } from './data/equipe.js'
-import { sujetsOuverts, estEpuise, retiens, entree } from './dialogue.js'
+import { sujetsVisibles, estEpuise, estVerrouille, retiens, entree } from './dialogue.js'
 import { eveille, entre } from './ambiance.js'
 import { fiches, deductions, refus as refusCarnet, presque } from './data/carnet.js'
 import { contacts, appels, refus as refusReseau } from './data/reseau.js'
@@ -433,18 +433,37 @@ function ouvreDialogue(idPnj) {
 
 function montreChoix() {
   boiteChoix.replaceChildren()
-  for (const sujet of sujetsOuverts(dialogue)) {
+  for (const sujet of sujetsVisibles(dialogue)) {
     const bouton = document.createElement('button')
-    bouton.textContent = sujet.titre
+    const verrouille = estVerrouille(sujet)
+    /* La convention `« … » (Trash)` existe déjà sur la moitié des sujets :
+       on ne la double pas, on ne l'ajoute que là où le titre ne nomme pas
+       déjà le runner qui le tient. */
+    const nomActeur = verrouille ? equipe[sujet.acteur].nom : null
+    bouton.textContent = nomActeur && !sujet.titre.includes(nomActeur)
+      ? `${sujet.titre} (${nomActeur})`
+      : sujet.titre
     if (estEpuise(sujet)) bouton.classList.add('est-epuise')
+    if (verrouille) bouton.classList.add('est-verrouille')
     bouton.addEventListener('click', (e) => {
       e.stopPropagation()
+      if (verrouille) return refuseSujet()
       choisit(sujet)
     })
     boiteChoix.append(bouton)
   }
   boiteChoix.hidden = false
   rafraichit()
+}
+
+/* RÈGLE 11 au conseil comme partout ailleurs : un sujet verrouillé ne se
+   joue jamais, il se refuse dans la voix du runner actif — la manière la
+   moins chère d'apprendre que le bouton de runner change ce qu'on a le
+   droit de dire (chantier 38, `PLAN_LISIBILITE.md` §2.2). */
+function refuseSujet() {
+  const stock = equipe[etat.actif]?.refus?.verrouille
+  const texte = stock?.length ? stock[Math.floor(Math.random() * stock.length)] : 'Non — ça, c’est à quelqu’un d’autre de le dire.'
+  dis(texte, etat.actif, montreChoix)
 }
 
 function choisit(sujet) {

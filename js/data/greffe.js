@@ -298,8 +298,9 @@ export const greffe = {
         {
           id: 'couverture',
           titre: '« Un ordre signé vous couvre. La navette, non. » (Hercules)',
-          quand: ({ a, qui }) => qui === 'hercules' && a('mandat-presente') && !a('sas-ouvert')
-                                 && (a('sait-peur-gardien') || a('sait-gardien-seul')),
+          acteur: 'hercules',
+          quand: ({ a }) => a('mandat-presente') && !a('sas-ouvert')
+                            && (a('sait-peur-gardien') || a('sait-gardien-seul')),
           flags: ['sas-ouvert'],
           visuels: ['sas-ouvert'],
           texte: ['« Vous avez peur d’être celui qui a signé la sortie. Je comprends. »',
@@ -311,7 +312,8 @@ export const greffe = {
         {
           id: 'menacer',
           titre: '« Ouvrez cette porte. » (Drakk)',
-          quand: ({ a, qui }) => qui === 'drakk' && a('mandat-presente') && !a('sas-ouvert'),
+          acteur: 'drakk',
+          quand: ({ a }) => a('mandat-presente') && !a('sas-ouvert'),
           texte: ['Drakk se penche vers la grille. La vitre fait huit centimètres.',
                   '« Ouvrez ce pont-levis, gardien. »',
                   '« … C’est ça. Et je préviens la relève, aussi. »',

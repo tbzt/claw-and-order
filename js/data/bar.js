@@ -316,7 +316,8 @@ export const bar = {
         {
           id: 'rang-haut',
           titre: '« La rangée du haut. Une bouteille. » (White_Rabbit paie)',
-          quand: ({ a, qui }) => qui === 'rabbit' && !a('achat-bouteille'),
+          acteur: 'rabbit',
+          quand: ({ a }) => !a('achat-bouteille'),
           flags: ['achat-bouteille'],
           objets: ['bouteille'],
           texte: ['Il regarde White_Rabbit. Puis l’étagère. Puis White_Rabbit.',
@@ -326,16 +327,10 @@ export const bar = {
                   '« … Bonne nuit. »'],
         },
         {
-          id: 'rang-haut-refus',
-          titre: '« La rangée du haut. Une bouteille. »',
-          quand: ({ a, qui }) => qui !== 'rabbit' && !a('achat-bouteille'),
-          texte: ['« Vous avez de quoi ? »',
-                  'Il n’a pas tort de demander.'],
-        },
-        {
           id: 'filtre',
           titre: '« Vous gardez des choses derrière le comptoir. » (White_Rabbit paie)',
-          quand: ({ a, qui }) => qui === 'rabbit' && a('sait-le-job') && !a('achat-filtre'),
+          acteur: 'rabbit',
+          quand: ({ a }) => a('sait-le-job') && !a('achat-filtre'),
           flags: ['achat-filtre'],
           objets: ['filtre'],
           texte: ['« Des ardoises. »',
@@ -347,7 +342,8 @@ export const bar = {
         {
           id: 'verre-mccarthy',
           titre: '« Le café du vieux, c’est pour nous. » (White_Rabbit paie)',
-          quand: ({ a, qui }) => qui === 'rabbit' && a('parle:mccarthy') && !a('verre-mccarthy'),
+          acteur: 'rabbit',
+          quand: ({ a }) => a('parle:mccarthy') && !a('verre-mccarthy'),
           flags: ['verre-mccarthy'],
           texte: ['« Il a déjà payé. »',
                   '« Il paie toujours. »',
@@ -437,7 +433,8 @@ export const bar = {
         {
           id: 'argent',
           titre: '« Et si on trouvait ça un peu léger ? » (Hercules)',
-          quand: ({ a, qui }) => qui === 'hercules' && a('sait-le-job'),
+          acteur: 'hercules',
+          quand: ({ a }) => a('sait-le-job'),
           /* Le scénario est explicite : McCarthy coupe court à toute
              tentative de négociation. Il ne marchande pas, il explique
              pourquoi il ne peut pas — ce qui est pire. */
@@ -483,7 +480,8 @@ export const bar = {
         {
           id: 'tir',
           titre: '« La victime était du Tír. » (Trash)',
-          quand: ({ a, qui }) => qui === 'trash' && a('sait-gamin'),
+          acteur: 'trash',
+          quand: ({ a }) => a('sait-gamin'),
           texte: ['Le vieil ork le regarde autrement. « Vous connaissez ? »',
                   '« Alors vous savez ce que ça veut dire, une famille de là-bas qui veut que ça se taise. »',
                   '« Moi je l’ai appris en trois jours. Ça m’a suffi. »'],
@@ -493,7 +491,8 @@ export const bar = {
         {
           id: 'ork',
           titre: '« Le gamin est ork. C’est ça, le dossier. » (White_Rabbit)',
-          quand: ({ a, qui }) => qui === 'rabbit' && a('sait-dossier-vide'),
+          acteur: 'rabbit',
+          quand: ({ a }) => a('sait-dossier-vide'),
           texte: ['« … »',
                   '« Trente-quatre ans que je porte cette étoile. J’ai signé des rapports que je ne relis pas. »',
                   '« Celui-là, je le relis. C’est pour ça que vous êtes là. »'],
@@ -502,7 +501,8 @@ export const bar = {
         {
           id: 'opposition',
           titre: '« Combien d’hommes en face ? » (Drakk)',
-          quand: ({ a, qui }) => qui === 'drakk' && a('sait-le-job'),
+          acteur: 'drakk',
+          quand: ({ a }) => a('sait-le-job'),
           texte: ['« Aucune idée. Officiellement, personne : le transfert est légal et c’est moi qui le signe. »',
                   '« Officieusement, quelqu’un a passé un coup de fil il y a deux heures, et je ne sais pas à qui. »'],
         },

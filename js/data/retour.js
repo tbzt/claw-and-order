@@ -772,12 +772,14 @@ export const retour = {
         hercules: '« Cinq heures pour tenir un homme en vie dans une ville qui préfère qu’il meure. C’est jouable. J’ai eu pire. »',
         trash: '« C’est là qu’on va se cacher. On se cache toujours dans ce qui brille. »',
       },
-      /* Un sujet par runner, et il faut ÊTRE ce runner pour le proposer
-         (§2 du plan) — la grammaire `quand: ({ qui }) => qui === '…'`,
-         déjà utilisée 23 fois ailleurs dans le jeu, tranche seule qui
-         peut défendre quelle planque. Gardé par `recuse-abri` en tout
-         premier : le second passage ne repose plus la question, Lester
-         va déjà chez McNeil — texte d'origine, inchangé. */
+      /* Un sujet par runner, et une seule règle : proposer est ouvert à
+         tous, trancher reste à l'auteur de la proposition (chantier 38,
+         `PLAN_LISIBILITE.md` §2.2 — « délibérer est ouvert, s'engager est
+         personnel »). Les quatre propositions n'ont donc plus de garde
+         d'identité ; les `trancher-*` gardent la leur via `acteur`. Gardé
+         par `recuse-abri` en tout premier : le second passage ne repose
+         plus la question, Lester va déjà chez McNeil — texte d'origine,
+         inchangé. */
       utiliser: ({ a }) => {
         if (a('recuse-abri')) return 'Encore trop loin pour que la regarder change quoi que ce soit.'
         if (a('goulet-passe')) return 'On est déjà de l’autre côté. Un peu tard pour en discuter.'
@@ -857,7 +859,8 @@ export const retour = {
         {
           id: 'relit',
           titre: '« Il relit ce dossier parce qu’il n’y croit pas. » (White_Rabbit)',
-          quand: ({ a, qui }) => qui === 'rabbit' && a('mccarthy-avoue') && a('lester-parle'),
+          acteur: 'rabbit',
+          quand: ({ a }) => a('mccarthy-avoue') && a('lester-parle'),
           flags: ['lester-sait-mccarthy'],
           texte: ['« … »',
                   '« Alors pourquoi il l’a signé. »',
@@ -890,7 +893,8 @@ export const retour = {
         {
           id: 'nom',
           titre: '« Sunnyside quatre-deux. On rentre au chantier. » (Hercules)',
-          quand: ({ qui, a }) => qui === 'hercules' && !a('vedette-tiede') && !a('vedette-reglee'),
+          acteur: 'hercules',
+          quand: ({ a }) => !a('vedette-tiede') && !a('vedette-reglee'),
           flags: ['vedette-tiede'],
           texte: ['« Reçu. Vous naviguez au nom de Wilson, W. »',
                   '« Wilson est enregistré seul à bord. Vous êtes cinq sur le pont. »',
@@ -969,11 +973,16 @@ export const retour = {
        (`['drakk', '…']`) garde sa voix et sa teinte, comme partout
        ailleurs dans ce fichier (voir l'en-tête, `ouverture`).
 
-       Quatre sujets, un par runner, chacun visible SEULEMENT si ce
-       runner est actif (`quand: ({ qui }) => qui === '…'`) : proposer
-       une planque, c'est être son runner. Les trois autres objectent
-       dans la foulée, dans la même réplique — « le vrai contenu moral
-       de la scène » (§2 du plan). Aucun sujet ne ferme les autres : on
+       Quatre sujets, un par runner. Depuis le chantier 38 (lisibilité,
+       niveau 1), les quatre propositions sont VISIBLES ET OUVERTES à
+       n'importe quel runner actif : n'importe qui peut mettre une
+       planque sur la table, la réplique restant dans la voix de son
+       auteur. Les trois autres objectent dans la foulée, dans la même
+       réplique — « le vrai contenu moral de la scène » (§2 du plan des
+       planques). Trancher, en revanche, reste un geste personnel : les
+       sujets `trancher-*` portent `acteur`, donc restent VISIBLES mais
+       VERROUILLÉS tant que ce n'est pas leur auteur qui est en main
+       (niveau 2 de la lisibilité). Aucun sujet ne ferme les autres : on
        peut les rouvrir dans n'importe quel ordre, en changeant de
        runner actif en cours de dialogue (déjà permis par `selectionne()`
        dans main.js). Rien ne force à trancher — `barre` ne lit aucun
@@ -986,7 +995,6 @@ export const retour = {
         {
           id: 'laverie',
           titre: '« La laverie. On ne doit rien à personne. » (Hercules)',
-          quand: ({ qui }) => qui === 'hercules',
           texte: [
             ['hercules', '« Un lav-o-matic ouvert toute la nuit. Cinq personnes qui attendent une machine à cette heure, ça n’étonne personne — et on ne réveille personne pour lui demander une faveur qu’il ne peut pas refuser. »'],
             ['drakk', '« Une vitrine sur la rue. Toute la ville peut vous compter à travers. »'],
@@ -997,7 +1005,6 @@ export const retour = {
         {
           id: 'herwick',
           titre: '« Strauber. L’homme qui m’a sorti de la rue, à seize ans. » (Drakk)',
-          quand: ({ qui }) => qui === 'drakk',
           texte: [
             ['drakk', '« Un antiquaire, rideau de fer, une arrière-boutique chauffée. Il connaît Loveland mieux que la Lone Star. Et je ne lui demande pas une faveur — je lui en dois une. »'],
             ['hercules', '« Un vieil homme seul, tiré du lit à cinq heures pour héberger cinq inconnus et un fugitif. Tu sais ce que ça lui coûte, si ça tourne mal ? »'],
@@ -1010,15 +1017,19 @@ export const retour = {
            vrai ; Duke reste du texte, comme au chantier 35, en attendant
            son propre chantier. `decisionPrise(a)` empêche de trancher
            deux fois — un seul `choix-*` peut être posé par partie, et
-           chaque sujet `trancher-*` disparaît dès qu'un autre a débranché
-           la question. Trancher reste un geste du runner qui a PROPOSÉ le
-           lieu — même grammaire que proposer (« il faut ÊTRE ce runner »,
-           § 2 du plan) — et `barre.utiliser` lit ces drapeaux : rien
-           d'autre ne change la destination. */
+           chaque sujet `trancher-*` DISPARAÎT (via `quand`) dès qu'un
+           autre a débranché la question : ce n'est plus un choix, donc
+           plus rien à verrouiller. Trancher reste, lui, un geste du
+           runner qui a PROPOSÉ le lieu — `acteur`, pas `quand` (chantier
+           38) : les trois autres le VOIENT, grisé, et un clic dessus se
+           refuse dans leur propre voix plutôt que de disparaître. Et
+           `barre.utiliser` lit ces drapeaux : rien d'autre ne change la
+           destination. */
         {
           id: 'trancher-herwick',
           titre: '« Assez parlé. On va chez Herwick. » (Trancher, Drakk)',
-          quand: ({ qui, a }) => qui === 'drakk' && !decisionPrise(a),
+          acteur: 'drakk',
+          quand: ({ a }) => !decisionPrise(a),
           fin: true,
           flags: ['choix-herwick'],
           texte: [
@@ -1029,7 +1040,6 @@ export const retour = {
         {
           id: 'sarah',
           titre: '« Le cabinet de Sarah. Le bras de Lester, d’abord. » (Trash)',
-          quand: ({ qui }) => qui === 'trash',
           texte: [
             ['trash', '« Une clinique de rue ne ferme jamais. Elle recoud ce que personne d’autre ne veut recoudre, et elle recoudra Lester sans poser une question. »'],
             ['hercules', '« Et la salle d’attente ? Il y a des gens qui patientent là-dedans depuis des heures, cette nuit comme toutes les autres. »'],
@@ -1040,7 +1050,8 @@ export const retour = {
         {
           id: 'trancher-sarah',
           titre: '« Assez parlé. On va chez Sarah. » (Trancher, Trash)',
-          quand: ({ qui, a }) => qui === 'trash' && !decisionPrise(a),
+          acteur: 'trash',
+          quand: ({ a }) => !decisionPrise(a),
           fin: true,
           flags: ['choix-sarah'],
           texte: [
@@ -1051,7 +1062,6 @@ export const retour = {
         {
           id: 'duke',
           titre: '« Le sous-sol de Duke. Personne n’y tire à travers un mur. » (White_Rabbit)',
-          quand: ({ qui }) => qui === 'rabbit',
           texte: [
             ['rabbit', '« Du béton, pas une fenêtre, huit personnes armées qui ne doivent rien à la Star. Pas de ligne de mire possible, là-dedans. »'],
             ['hercules', '« Huit personnes armées qui ne NOUS doivent rien non plus. Duke ne fait jamais crédit. »'],
@@ -1062,7 +1072,8 @@ export const retour = {
         {
           id: 'trancher-duke',
           titre: '« Assez parlé. On va chez Duke. » (Trancher, White_Rabbit)',
-          quand: ({ qui, a }) => qui === 'rabbit' && !decisionPrise(a),
+          acteur: 'rabbit',
+          quand: ({ a }) => !decisionPrise(a),
           fin: true,
           flags: ['choix-duke'],
           texte: [
