@@ -1,0 +1,62 @@
+<!--
+  Tableau 5 sexies — LE TRIPOT D'HERCULES. Chantier 41 (`PLAN_PLANQUES.md`
+  § 3.5), étape D du § 8 — après Herwick (36), Sarah (37, 1/2), Duke
+  (37, 2/2) et Trash (40). Les cinq décors annoncés par le chantier 35
+  existent maintenant tous.
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `herwick.html`, `sarah.html`, `duke.html` et `squat.html`. Le Patron,
+  le videur et les cinq joueurs n'ont pas de sprite (personnages neufs) :
+  des formes simples, pas de `sprite--*`, jusqu'à ce que l'atelier leur
+  en dessine un — dette d'art assumée.
+
+  PAS DE FENÊTRE, COMME CHEZ DUKE : aucune cible de ce tableau n'est une
+  ouverture sur l'extérieur. La seule porte est aussi le seul chemin de
+  l'attaque de 8 h 40 — pas un carreau qui vole en éclats.
+
+  LA TABLE DE JEU EST LA CIBLE MÉCANIQUE (`table`, § en-tête de
+  `hercules.js`) : les cinq joueurs autour d'elle sont du décor, pas des
+  cibles individuelles — un seul d'entre eux compte, et le texte le
+  désigne sans sprite à part, même geste que les gangers de Duke.
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe et
+  Lester en premier, le mobilier cliquable après.
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--tripot">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- LESTER, à l'écart de la table. -->
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+
+  <div class="rateliers-jetons" data-hotspot="jetons"></div>
+
+  <!-- La table de jeu et ses cinq joueurs — décor sauf la table
+       elle-même, seule cible mécanique de ce tableau. -->
+  <div class="joueur joueur--1"></div>
+  <div class="joueur joueur--2"></div>
+  <div class="joueur joueur--3"></div>
+  <div class="joueur joueur--4"></div>
+  <div class="joueur joueur--5"></div>
+  <div class="table-jeu" data-hotspot="table"></div>
+
+  <div class="guichet-change" data-hotspot="guichet"></div>
+
+  <!-- Le Patron — dette d'art assumée : une forme, pas un sprite. -->
+  <div class="caisse-patron"></div>
+  <div class="patron" data-hotspot="patron"></div>
+
+  <div class="videur-forme" data-hotspot="videur"></div>
+
+  <!-- La sortie, au premier plan. -->
+  <div class="porte-sans-enseigne" data-hotspot="porte"></div>
+
+</div>

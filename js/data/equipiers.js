@@ -296,6 +296,21 @@ const TABLEAUX = {
       hercules: '« Personne ne lui a rien demandé. Il a juste décidé que c’était sa place, ce soir. Je ne discute pas ce genre de décision. »',
     },
   },
+
+  /* Le tripot d'Hercules, chantier 41 : ici c'est HERCULES qui est
+     l'hôte — comme Trash au squat — donc sa propre entrée porte le
+     poids que Drakk portait chez Herwick, pas une ligne de plus sur un
+     cinquième runner. */
+  tripot: {
+    hercules: {
+      vu: 'Il ne s’assoit pas à la table. Il reste debout, à la lisière, comme quelqu’un qui connaît trop bien les règles de la maison pour vouloir y jouer ce soir.',
+      trash: '« Son aura tremble depuis qu’on est entrés, et ce n’est pas la fumée. Il a peur de cette pièce plus qu’il ne l’admettra. »',
+    },
+    drakk: {
+      vu: 'Il observe la partie comme il observerait une table de jeu de rôle mal maîtrisée : les règles existent, personne ne les dit à voix haute.',
+      hercules: '« Il vient de repérer trois tricheurs à l’œil nu. Je ne sais pas s’il faut que ça me rassure ou que ça m’inquiète. »',
+    },
+  },
 }
 
 /* ── LA FABRIQUE ──────────────────────────────────────────────────────

@@ -1,0 +1,140 @@
+/* ── TABLEAU 5 SEXIES — LE TRIPOT D'HERCULES ─────────────────────────
+   Chantier 41. Grille 256 x 144 (chantier 8), même --u que les autres
+   tableaux.
+
+   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css`,
+   `scene-sarah.css`, `scene-duke.css` et `scene-squat.css` : aucun
+   sprite neuf pour le Patron, le videur ou les cinq joueurs (dette
+   d'art assumée). Assez pour reconnaître une table de jeu, un guichet
+   de change, un râtelier de jetons, et pour valider la mécanique en jeu.
+
+   DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
+   cibles cliquables (mêmes coordonnées que celles utilisées pour
+   composer ce fichier) avant tout test au navigateur — même discipline
+   que `scene-duke.css` et `scene-squat.css`, qui avaient trouvé leurs
+   chevauchements en jeu plutôt qu'en amont. */
+
+.tableau--tripot {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #14120f;
+}
+.tableau--tripot > * { position: absolute; }
+
+.tableau--tripot .fond {
+  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
+  background: linear-gradient(180deg, #221d16 0%, #17140f 55%, #100e0a 100%);
+}
+.tableau--tripot .sol {
+  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
+  background: repeating-linear-gradient(90deg, #2a2318 0 calc(16 * var(--u)), #241f16 calc(16 * var(--u)) calc(32 * var(--u)));
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+}
+
+/* ── LE RÂTELIER DE JETONS — x:6-36, y:8-32 ──────────────────────────── */
+.tableau--tripot .rateliers-jetons {
+  left: calc(6 * var(--u)); top: calc(8 * var(--u));
+  width: calc(30 * var(--u)); height: calc(24 * var(--u));
+  background: linear-gradient(180deg, #3a3020 0%, #221c12 100%);
+  border: calc(1 * var(--u)) solid #0e0b07;
+  border-radius: 2px;
+}
+
+/* ── LE GUICHET DE CHANGE — x:60-116, y:8-28, où se lit le dossier ───── */
+.tableau--tripot .guichet-change {
+  left: calc(60 * var(--u)); top: calc(8 * var(--u));
+  width: calc(56 * var(--u)); height: calc(20 * var(--u));
+  background: linear-gradient(180deg, #302a1e 0%, #1c180f 100%);
+  border: calc(1 * var(--u)) solid #0e0b07;
+}
+.stage[data-etat~="dossier-lu"] .tableau--tripot .guichet-change {
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(200, 180, 120, .3);
+}
+
+/* ── LE COULOIR DE L'ÉQUIPE — x:74-172, y:34-46 ──────────────────────── */
+.tableau--tripot .p-drakk    { width: calc(28 * var(--u)); left: calc(74 * var(--u));  top: calc(34 * var(--u)); }
+.tableau--tripot .p-trash    { width: calc(22 * var(--u)); left: calc(108 * var(--u)); top: calc(36 * var(--u)); }
+.tableau--tripot .p-rabbit   { width: calc(16 * var(--u)); left: calc(136 * var(--u)); top: calc(42 * var(--u)); }
+.tableau--tripot .p-hercules { width: calc(14 * var(--u)); left: calc(158 * var(--u)); top: calc(46 * var(--u)); }
+
+/* Nuance quand Hercules est démasqué : rien de spectaculaire, juste un
+   soupçon de retrait — il ne se tient plus tout à fait de la même façon. */
+.stage[data-etat~="hercules-demasque"] .tableau--tripot .p-hercules {
+  filter: saturate(.85);
+}
+.stage[data-etat~="hercules-touche"] .tableau--tripot .p-hercules {
+  filter: saturate(.7) brightness(.82);
+}
+
+/* ── LA TABLE DE JEU — x:66-162, y:86-108, la cible mécanique ────────── */
+.tableau--tripot .table-jeu {
+  left: calc(66 * var(--u)); top: calc(86 * var(--u));
+  width: calc(96 * var(--u)); height: calc(22 * var(--u));
+  background: radial-gradient(60% 90% at 50% 50%, #1c4a2e 0%, #123420 60%, #0c2416 100%);
+  border: calc(1 * var(--u)) solid #0a1a10;
+  border-radius: 40% / 60%;
+}
+.stage[data-etat~="tueur-repere"] .tableau--tripot .table-jeu {
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(180, 60, 40, .35);
+}
+.stage[data-etat~="tripot-brule"] .tableau--tripot .table-jeu {
+  filter: brightness(.7) saturate(.6);
+}
+
+/* Les cinq joueurs — décor pur, jamais des cibles (une seule chaise
+   compte mécaniquement, désignée par le texte, pas par un sprite à
+   part — même geste que les gangers de Duke). */
+.tableau--tripot .joueur {
+  top: calc(72 * var(--u)); width: calc(12 * var(--u)); height: calc(20 * var(--u));
+  border-radius: 30% 30% 20% 20% / 40% 40% 15% 15%;
+  background: radial-gradient(65% 80% at 50% 35%, #6a5c48 0%, #423a2c 45%, #221e16 80%, transparent 100%);
+}
+.tableau--tripot .joueur--1 { left: calc(72 * var(--u)); }
+.tableau--tripot .joueur--2 { left: calc(94 * var(--u)); }
+.tableau--tripot .joueur--3 { left: calc(116 * var(--u)); }
+.tableau--tripot .joueur--4 { left: calc(138 * var(--u)); }
+.tableau--tripot .joueur--5 { left: calc(160 * var(--u)); }
+.stage[data-etat~="tripot-brule"] .tableau--tripot .joueur { opacity: .5; }
+
+/* ── LE PATRON, DERRIÈRE SA CAISSE — x:192-218, y:60-94 ──────────────── */
+.tableau--tripot .caisse-patron {
+  left: calc(192 * var(--u)); top: calc(80 * var(--u));
+  width: calc(40 * var(--u)); height: calc(20 * var(--u));
+  background: linear-gradient(180deg, #3c3020 0%, #221a10 100%);
+  border: calc(1 * var(--u)) solid #0e0b07;
+}
+.tableau--tripot .patron {
+  left: calc(198 * var(--u)); top: calc(60 * var(--u));
+  width: calc(20 * var(--u)); height: calc(34 * var(--u));
+  border-radius: 35% 35% 20% 20% / 50% 50% 20% 20%;
+  background: radial-gradient(65% 80% at 50% 40%, #c8ac80 0%, #8a6c44 45%, #483a20 80%, transparent 100%);
+}
+
+/* ── LESTER — x:224-244, à l'écart de la table ───────────────────────── */
+.tableau--tripot .p-lester { left: calc(224 * var(--u)); top: calc(80 * var(--u)); width: calc(20 * var(--u)); }
+
+/* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
+.stage[data-etat~="lester-ferme"]  .tableau--tripot .p-lester { filter: saturate(.6) brightness(.85); }
+.stage[data-etat~="lester-ouvert"] .tableau--tripot .p-lester { filter: saturate(1.15) brightness(1.05); }
+
+/* ── LE VIDEUR — x:6-26, y:60-100 ─────────────────────────────────────── */
+.tableau--tripot .videur-forme {
+  left: calc(6 * var(--u)); top: calc(60 * var(--u));
+  width: calc(20 * var(--u)); height: calc(40 * var(--u));
+  border-radius: 30% 30% 15% 15% / 20% 20% 10% 10%;
+  background: linear-gradient(180deg, #302c28 0%, #18160f 100%);
+  border: calc(1 * var(--u)) solid #0a0906;
+}
+
+/* ── LA SORTIE — x:10-44, y:118-140, bas de tableau ──────────────────── */
+.tableau--tripot .porte-sans-enseigne {
+  left: calc(10 * var(--u)); top: calc(118 * var(--u));
+  width: calc(34 * var(--u)); height: calc(22 * var(--u));
+  background: #241f16;
+  border-top: calc(1 * var(--u)) solid #443c2c;
+  border-left: calc(1 * var(--u)) solid #443c2c;
+}
+.stage[data-etat~="tripot-brule"] .tableau--tripot .porte-sans-enseigne {
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(150, 40, 40, .3);
+}

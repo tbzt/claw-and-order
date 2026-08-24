@@ -195,6 +195,26 @@ export const fiches = {
     ou: 'Trash, à la loge',
   },
 
+  /* ── Le tripot d'Hercules, chantier 41 ─────────────────────────────
+     Même famille que `tir-herwick`/`tir-duke`/`tir-squat` — un tir qui
+     trouve la planque malgré tout — mais un troisième mode d'attaque
+     (« on n'entre pas de force, on achète une place à la table »,
+     PLAN_PLANQUES.md § 3.5). */
+  'tir-tripot': {
+    titre: 'Ils ont su, jusque dans le tripot',
+    texte: 'Une porte sans enseigne, une adresse que personne n’avait notée nulle part, et quelqu’un déjà assis à la table qui passe à l’action à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
+    ou: 'Au tripot, à huit heures quarante',
+  },
+  /* Le gain propre à ce décor (garde-fou § 4.3 du plan) : pas une
+     adresse ni un nom de tireur, comme chez Herwick ou Duke — la manière
+     dont Chimera opère, révélée par le seul homme du jeu qui a été payé
+     pour regarder ailleurs. */
+  'tripot-embauche': {
+    titre: 'Il paie cash, et jamais deux fois le même visage',
+    texte: 'Un professionnel, pas un habitué — payé à l’avance pour qu’on regarde ailleurs. Ce n’est pas un nom. C’est une méthode, et elle dit qu’il y en a plus d’un sur ce contrat.',
+    ou: 'Le Patron, au tripot',
+  },
+
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
   'registre-anterieur': {
     titre: 'La ligne est plus ancienne que lui',
@@ -434,6 +454,21 @@ export const presque = {
   /* ── La loge de Trash, chantier 40 ─────────────────────────────── */
   'famille-tir|trash-repere':
     'La même vulnérabilité, deux fois dans la même nuit : ce qui l’a fait fuir sa famille est aussi ce qui vient de le trahir. On ne se cache jamais de ce qu’on est, seulement de ceux qui le cherchent.',
+
+  /* ── Le tripot d'Hercules, chantier 41 ─────────────────────────────
+     Pas de paire avec `chimera-nous-suit` ni `tir-herwick`/`tir-duke`/
+     `tir-squat` : ces fiches viennent chacune d'une planque différente,
+     et une seule se visite par partie (`decisionPrise`, `retour.js`) —
+     les recouper serait une paire morte, comme `chimera-nous-suit|tir-
+     duke` l'est déjà depuis le chantier 37 (jamais joignable en jeu,
+     trouvé en écrivant celle-ci, hors du périmètre de ce chantier). Les
+     deux paires ci-dessous recoupent `tripot-embauche` avec des fiches
+     universelles (le goulet, le bar), atteignables quel que soit le
+     choix de planque. */
+  'toralf-vise-lester|tripot-embauche':
+    'Un tireur au goulet, un homme assis à une table de jeu. Deux méthodes différentes, engagées de la même façon — cash, à l’avance. Chimera n’a pas un contrat. Il a un budget.',
+  'teresa|tripot-embauche':
+    'Une victime au SIN Telestrian, et un homme payé pour ne jamais laisser de visage derrière lui. Ça se recoupe. Ça ne nomme toujours personne.',
 
   /* ── Ce qu’on a déjà déduit, frotté contre le reste ──────────────── */
   'deux-mains|teresa':

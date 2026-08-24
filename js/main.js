@@ -169,6 +169,7 @@ const NOMS_LIEUX = {
   sarah: 'Le cabinet de Sarah Carpenter',
   duke: 'Le sous-sol de Duke',
   squat: 'La loge de Trash',
+  tripot: 'Le tripot d’Hercules',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
   carte: 'La carte',
@@ -1456,6 +1457,11 @@ const BILAN = [
      lignes exactes du plan, reprises telles quelles. */
   ['loge-brulee', 'Trash n’a plus d’endroit à lui, et quelqu’un sait à quoi il ressemble de l’autre côté.'],
   ['trash-trace', 'Ce n’est pas la loge qu’on a trouvée. C’est lui.'],
+  /* Le tripot d'Hercules, chantier 41 (`PLAN_PLANQUES.md` § 5) — les
+     deux lignes exactes du plan, reprises telles quelles. */
+  ['hercules-demasque', 'On sait maintenant pourquoi il a quitté l’administration, et ce n’est pas sa version.'],
+  ['tripot-brule', 'Une salle de jeu ferme, et ceux qui la tenaient savent qui a amené ça.'],
+  ['hercules-touche', 'Il a pris un coup qui n’était pas pour lui, dans sa propre salle de jeu.'],
 ]
 
 function tombeRideau() {

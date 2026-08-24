@@ -64,15 +64,15 @@
 
 import { equipiers } from './equipiers.js'
 
-/* Un seul `choix-*` peut être posé par partie (chantiers 36-37, 40) :
+/* Un seul `choix-*` peut être posé par partie (chantiers 36-37, 40-41) :
    chaque sujet `trancher-*` du conseil se ferme dès qu'un autre a
    tranché. Sarah n'y participe plus depuis le chantier 39 (§3.6 du
    plan) : ce n'est plus une planque concurrente, c'est une halte
    automatique sur le chemin de celle qu'on choisit ici. Exporté :
    `sarah.js` route vers la même destination en sortant du cabinet. */
-export const decisionPrise = (a) => a('choix-herwick') || a('choix-duke') || a('choix-squat')
+export const decisionPrise = (a) => a('choix-herwick') || a('choix-duke') || a('choix-squat') || a('choix-tripot')
 export const destinationPlanque = (a) =>
-  a('choix-herwick') ? 'herwick' : a('choix-duke') ? 'duke' : a('choix-squat') ? 'squat' : 'planque'
+  a('choix-herwick') ? 'herwick' : a('choix-duke') ? 'duke' : a('choix-squat') ? 'squat' : a('choix-tripot') ? 'tripot' : 'planque'
 
 export const retour = {
   markup: 'scenes/retour.html',
@@ -284,11 +284,12 @@ export const retour = {
 
         const abri = a('abri')
 
-        /* CHANTIERS 37, 40 : Herwick, Duke et la loge de Trash ont
-           chacun leur porte, `choix-herwick`, `choix-duke` et `choix-
-           squat` mutuellement exclusifs par construction — chaque
-           sujet `trancher-*` de `conseil` ne pose son drapeau que si
-           aucun autre n'a déjà tranché (`!decisionPrise(a)`, plus bas).
+        /* CHANTIERS 37, 40, 41 : Herwick, Duke, la loge de Trash et le
+           tripot d'Hercules ont chacun leur porte, `choix-herwick`,
+           `choix-duke`, `choix-squat` et `choix-tripot` mutuellement
+           exclusifs par construction — chaque sujet `trancher-*` de
+           `conseil` ne pose son drapeau que si aucun autre n'a déjà
+           tranché (`!decisionPrise(a)`, plus bas).
            CHANTIER 39 : Sarah n'est plus une troisième option de ce
            `?:` — elle route en amont, juste au-dessous, quand Lester
            est touché. */
@@ -783,7 +784,15 @@ export const retour = {
        déjà blessé. Son sujet et son `trancher-sarah` disparaissent d'ici
        ; le cabinet redevient une halte, routée automatiquement depuis
        `barre.utiliser` (`va: 'sarah'`) quand Lester est touché au
-       goulet — jamais un choix pris à cette table. */
+       goulet — jamais un choix pris à cette table.
+
+       CHANTIER 40 — ÉTAPE C DU §8 : la loge de Trash (`trash.js`) rejoint
+       Herwick et Duke, `trancher-squat` pose `choix-squat`.
+
+       CHANTIER 41 — ÉTAPE D DU §8 : le tripot d'Hercules (`hercules.js`)
+       ferme la liste. Quatre planques réelles, plus la laverie par
+       défaut — les cinq mécaniques annoncées par `PLAN_PLANQUES.md` §3
+       existent maintenant toutes en jeu. */
     tacoma: {
       nom: 'Les lumières de Tacoma',
       regarder: {
@@ -993,10 +1002,14 @@ export const retour = {
        (`['drakk', '…']`) garde sa voix et sa teinte, comme partout
        ailleurs dans ce fichier (voir l'en-tête, `ouverture`).
 
-       Trois sujets, un par runner qui propose vraiment un lieu — depuis
+       Quatre sujets, un par runner qui propose vraiment un lieu — depuis
        le chantier 39, Sarah n'en est plus : ce n'est plus une planque
        concurrente, c'est une halte que `barre.utiliser` prend d'elle-
-       même quand Lester est touché (§3.6 du plan des planques). Depuis
+       même quand Lester est touché (§3.6 du plan des planques). Hercules
+       en propose deux (la laverie, sans `trancher-*` — § 2.1 du plan :
+       « elle reste sélectionnable, mais elle n'a pas de sujet trancher » —
+       puis le tripot, chantier 41), mais un seul lui appartient vraiment.
+       Depuis
        le chantier 38 (lisibilité, niveau 1), les propositions restantes
        sont VISIBLES ET OUVERTES à n'importe quel runner actif :
        n'importe qui peut mettre une planque sur la table, la réplique
@@ -1107,6 +1120,35 @@ export const retour = {
           flags: ['choix-duke'],
           texte: [
             ['rabbit', '« Assez parlé. On va chez Duke. »'],
+            'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
+          ],
+        },
+        /* ══ CHANTIER 41 — LE TRIPOT D'HERCULES ═══════════════════════
+           Cinquième mécanique de la table (§3 du plan) : une observation,
+           pas une précaution. Hercules a ouvert avec la laverie (sujet
+           `laverie`, plus haut) sans y croire — il le savait déjà. La
+           proposer une seconde fois est un aveu : une dette, un endroit
+           où il est connu (§2.1 du plan). `trancher-tripot` suit le même
+           moule que les trois autres (`acteur`, pas `quand` : chantier 38). */
+        {
+          id: 'tripot',
+          titre: '« … Ou le tripot où je dois de l’argent. Pas de fenêtre, personne n’y regarde personne. » (Hercules)',
+          texte: [
+            ['hercules', '« Sans fenêtre, sécurité déjà payée par quelqu’un d’autre, et cinq inconnus à une table à six heures du matin n’y sont pas une anomalie. C’est la définition du lieu. »'],
+            ['drakk', '« Tu proposes une dette pour en éviter une autre. J’ai déjà vu ce tour de table se retourner contre celui qui le fait. »'],
+            ['rabbit', '« Aucune caméra, aucun terminal. Pour une fois, je ne pourrai rien vérifier avant qu’on y soit. »'],
+            ['trash', '« Ce que ça te coûte, tu ne le dis pas encore. Ça viendra. Ça vient toujours. »'],
+          ],
+        },
+        {
+          id: 'trancher-tripot',
+          titre: '« Assez parlé. On va à mon tripot. » (Trancher, Hercules)',
+          acteur: 'hercules',
+          quand: ({ a }) => !decisionPrise(a),
+          fin: true,
+          flags: ['choix-tripot'],
+          texte: [
+            ['hercules', '« Assez parlé. On va à mon tripot. »'],
             'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
           ],
         },
