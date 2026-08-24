@@ -168,6 +168,7 @@ const NOMS_LIEUX = {
   herwick: 'L’arrière-boutique de Herwick',
   sarah: 'Le cabinet de Sarah Carpenter',
   duke: 'Le sous-sol de Duke',
+  squat: 'La loge de Trash',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
   carte: 'La carte',
@@ -1451,6 +1452,10 @@ const BILAN = [
   /* Le sous-sol de Duke, chantier 37 (`PLAN_PLANQUES.md` § 5). */
   ['ganger-touche', 'Il avait l’âge de Lester.'],
   ['dette-duke',    'On doit quelque chose à un gang, et il s’en souviendra.'],
+  /* La loge de Trash, chantier 40 (`PLAN_PLANQUES.md` § 5) — les deux
+     lignes exactes du plan, reprises telles quelles. */
+  ['loge-brulee', 'Trash n’a plus d’endroit à lui, et quelqu’un sait à quoi il ressemble de l’autre côté.'],
+  ['trash-trace', 'Ce n’est pas la loge qu’on a trouvée. C’est lui.'],
 ]
 
 function tombeRideau() {

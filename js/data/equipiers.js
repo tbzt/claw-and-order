@@ -270,8 +270,7 @@ const TABLEAUX = {
     },
   },
 
-  /* Le sous-sol de Duke, chantier 37 : même raccord, quatrième et
-     dernier décor. */
+  /* Le sous-sol de Duke, chantier 37 : même raccord, quatrième décor. */
   duke: {
     rabbit: {
       vu: 'Elle ne s’assoit pas non plus. Elle reste debout, entre Duke et l’escalier, comme si sa place était déjà décidée depuis longtemps dans cette pièce.',
@@ -280,6 +279,21 @@ const TABLEAUX = {
     drakk: {
       vu: 'Il compte les issues et les armes de la pièce, par réflexe de troll des rues, et s’arrête en réalisant que huit personnes font déjà ce calcul pour lui.',
       hercules: '« Pour une fois, il n’est pas le plus grand danger de la pièce. Je crois que ça le repose plus qu’il ne l’admettra. »',
+    },
+  },
+
+  /* La loge de Trash, chantier 40 : cinquième et dernier décor. Ici
+     c'est TRASH qui est l'hôte — le seul des quatre — donc sa propre
+     entrée porte le poids que Drakk portait chez Herwick, pas une ligne
+     de plus sur un cinquième runner. */
+  squat: {
+    trash: {
+      vu: 'Il touche les objets de la pièce comme s’il les comptait, pas comme s’il les admirait — un geste de propriétaire qu’on ne lui voit nulle part ailleurs cette nuit.',
+      drakk: '« Il garde un œil sur chaque chose qu’il a sauvée, l’un après l’autre. C’est la première fois de la nuit que je le vois monter la garde sur autre chose qu’une personne. »',
+    },
+    drakk: {
+      vu: 'Il reste près de la trappe, les bras croisés, comme s’il montait déjà la garde avant qu’on le lui demande.',
+      hercules: '« Personne ne lui a rien demandé. Il a juste décidé que c’était sa place, ce soir. Je ne discute pas ce genre de décision. »',
     },
   },
 }

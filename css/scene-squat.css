@@ -1,0 +1,140 @@
+/* ── TABLEAU 5 QUINQUIES — LE SQUAT DE TRASH ─────────────────────────
+   Chantier 40. Grille 256 x 144 (chantier 8), même --u que les autres
+   tableaux.
+
+   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css`,
+   `scene-sarah.css` et `scene-duke.css` : aucun sprite neuf pour le
+   mobilier (dette d'art assumée). Assez pour reconnaître une trappe de
+   toit, un autel de fortune, une malle, et pour valider la mécanique en
+   jeu.
+
+   DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE PAR UN TEST D'OVERLAP
+   PAIR À PAIR DANS LE NAVIGATEUR (même méthode que `scene-duke.css`,
+   chantier 37) : un premier jet plaçait `autel` sous la bande de
+   l'équipe (chevauchant `drakk` et `rabbit`) et `branchements` sous
+   `trash` — les deux corrigés ici, revérifiés à 0 / 78 paires. */
+
+.tableau--squat {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #1a1712;
+}
+.tableau--squat > * { position: absolute; }
+
+.tableau--squat .fond {
+  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
+  background: linear-gradient(180deg, #241f18 0%, #1a1712 55%, #120f0a 100%);
+}
+.tableau--squat .sol {
+  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
+  background: repeating-linear-gradient(90deg, #2c2620 0 calc(18 * var(--u)), #26211b calc(18 * var(--u)) calc(36 * var(--u)));
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+}
+
+/* ── LA TRAPPE DE TOIT — x:8-38, y:4-30, le seul accès ────────────────── */
+.tableau--squat .trappe-toit {
+  left: calc(8 * var(--u)); top: calc(4 * var(--u));
+  width: calc(30 * var(--u)); height: calc(26 * var(--u));
+  background: linear-gradient(180deg, #3a3428 0%, #221e16 100%);
+  border: calc(1 * var(--u)) solid #0e0c08;
+}
+.stage[data-etat~="echelle-tenue"] .tableau--squat .trappe-toit {
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(120, 150, 90, .4);
+}
+.stage[data-etat~="loge-alerte"]:not([data-etat~="loge-brulee"]) .tableau--squat .trappe-toit {
+  box-shadow: 0 0 calc(4 * var(--u)) calc(1 * var(--u)) rgba(180, 60, 40, .35);
+}
+
+/* ── LES LAMPES ET LE BRANCHEMENT — x:44-78, y:4-28 ──────────────────── */
+.tableau--squat .lampes {
+  top: calc(4 * var(--u)); width: calc(4 * var(--u)); height: calc(12 * var(--u));
+  background: radial-gradient(circle at 50% 20%, #e8c878 0%, #a07830 60%, transparent 100%);
+  border-radius: 0 0 40% 40%;
+}
+.tableau--squat .lampes--1 { left: calc(46 * var(--u)); }
+.tableau--squat .lampes--2 { left: calc(58 * var(--u)); }
+.tableau--squat .lampes--3 { left: calc(70 * var(--u)); }
+.stage[data-etat~="loge-eteinte"] .tableau--squat .lampes { display: none; }
+
+.tableau--squat .branchement-mur {
+  left: calc(44 * var(--u)); top: calc(6 * var(--u));
+  width: calc(30 * var(--u)); height: calc(22 * var(--u));
+  background: linear-gradient(180deg, #302a20 0%, #1c1810 100%);
+  border: calc(1 * var(--u)) solid #0e0c08;
+}
+.stage[data-etat~="loge-eteinte"] .tableau--squat .branchement-mur {
+  filter: brightness(.6);
+}
+
+/* ── LA CAGE D'ESCALIER — x:6-40, y:88-112, le palier d'en dessous ───── */
+.tableau--squat .cage-escalier {
+  left: calc(6 * var(--u)); top: calc(88 * var(--u));
+  width: calc(34 * var(--u)); height: calc(24 * var(--u));
+  background: repeating-linear-gradient(180deg, #2c2620 0 calc(5 * var(--u)), #221e16 calc(5 * var(--u)) calc(10 * var(--u)));
+  border: calc(1 * var(--u)) solid #0e0c08;
+}
+.stage[data-etat~="palier-tenu"] .tableau--squat .cage-escalier {
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(200, 170, 90, .35);
+}
+
+/* ── LE COULOIR DE L'ÉQUIPE — x:60-156, y:36-73 ──────────────────────── */
+.tableau--squat .p-trash    { width: calc(22 * var(--u)); left: calc(60 * var(--u));  top: calc(40 * var(--u)); }
+.tableau--squat .p-drakk    { width: calc(28 * var(--u)); left: calc(90 * var(--u));  top: calc(36 * var(--u)); }
+.tableau--squat .p-rabbit   { width: calc(16 * var(--u)); left: calc(122 * var(--u)); top: calc(46 * var(--u)); }
+.tableau--squat .p-hercules { width: calc(14 * var(--u)); left: calc(142 * var(--u)); top: calc(48 * var(--u)); }
+
+/* ── L'AUTEL — x:98-136, y:102-140, le métier à tisser transformé ────── */
+.tableau--squat .autel-metier {
+  left: calc(98 * var(--u)); top: calc(102 * var(--u));
+  width: calc(38 * var(--u)); height: calc(38 * var(--u));
+  background: linear-gradient(180deg, #4a3c24 0%, #2a2214 100%);
+  border: calc(1 * var(--u)) solid #16110a;
+  border-radius: 2px;
+}
+
+/* ── LA MALLE — x:142-184, y:100-118, où se lit le dossier ────────────── */
+.tableau--squat .malle-cuir {
+  left: calc(142 * var(--u)); top: calc(100 * var(--u));
+  width: calc(42 * var(--u)); height: calc(18 * var(--u));
+  background: linear-gradient(180deg, #5a3c26 0%, #341f10 100%);
+  border: calc(1 * var(--u)) solid #1c1208;
+  border-radius: 2px;
+}
+
+/* ── LE MIROIR — x:192-224, y:8-40, décor mural ───────────────────────── */
+.tableau--squat .miroir-cadre {
+  left: calc(192 * var(--u)); top: calc(8 * var(--u));
+  width: calc(24 * var(--u)); height: calc(32 * var(--u));
+  background: radial-gradient(60% 70% at 50% 40%, #8a8060 0%, #4a4230 60%, #2a2418 100%);
+  border: calc(2 * var(--u)) solid #6a5828;
+  border-radius: 45% 45% 15% 15% / 55% 55% 10% 10%;
+}
+
+/* ── LE FAUTEUIL ÉVENTRÉ — x:188-226, y:88-114 ───────────────────────── */
+.tableau--squat .fauteuil-eventre {
+  left: calc(188 * var(--u)); top: calc(88 * var(--u));
+  width: calc(38 * var(--u)); height: calc(26 * var(--u));
+  background: linear-gradient(180deg, #4a2c30 0%, #26161a 100%);
+  border: calc(1 * var(--u)) solid #140c0e;
+  border-radius: 4px;
+}
+
+/* Lester, à côté du fauteuil qu'il n'ose pas remplir tout à fait. */
+.tableau--squat .p-lester { left: calc(232 * var(--u)); top: calc(74 * var(--u)); width: calc(20 * var(--u)); }
+
+/* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
+.stage[data-etat~="lester-ferme"]  .tableau--squat .p-lester { filter: saturate(.6) brightness(.85); }
+.stage[data-etat~="lester-ouvert"] .tableau--squat .p-lester { filter: saturate(1.15) brightness(1.05); }
+
+/* ── LA SORTIE — x:230-254, y:122-142, bas de tableau ────────────────── */
+.tableau--squat .trappe-sortie {
+  left: calc(230 * var(--u)); top: calc(122 * var(--u));
+  width: calc(24 * var(--u)); height: calc(20 * var(--u));
+  background: #2c2620;
+  border-top: calc(1 * var(--u)) solid #4c4436;
+  border-left: calc(1 * var(--u)) solid #4c4436;
+}
+.stage[data-etat~="loge-brulee"] .tableau--squat .trappe-sortie {
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(150, 40, 40, .3);
+}

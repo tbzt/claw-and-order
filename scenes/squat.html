@@ -1,0 +1,59 @@
+<!--
+  Tableau 5 quinquies — LE SQUAT DE TRASH. Chantier 40 (`PLAN_PLANQUES.md`
+  § 3.4), étape C du § 8 — après Herwick (36), Sarah (37, 1/2, rétrogradée
+  au 39) et Duke (37, 2/2).
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `herwick.html`, `sarah.html` et `duke.html`. Aucun sprite neuf : des
+  formes simples pour les meubles, jusqu'à ce que l'atelier les dessine —
+  dette d'art assumée. Trash lui-même garde son sprite existant (il
+  reste un équipier normal, `js/data/equipiers.js`).
+
+  UN SEUL ACCÈS PHYSIQUE (§3.4 du plan, à la lettre) : la trappe de
+  toit, `echelle`. Tout le reste du décor est du mobilier ou une
+  conversation, jamais une seconde ouverture sur l'extérieur.
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe et
+  Lester en premier, le mobilier cliquable après.
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--squat">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- LESTER, sur le fauteuil éventré. -->
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+
+  <!-- La trappe de toit et son échelle de secours — le seul accès. -->
+  <div class="trappe-toit" data-hotspot="echelle"></div>
+
+  <!-- Le branchement volé, sous les trois lampes de fortune. -->
+  <div class="lampes lampes--1"></div>
+  <div class="lampes lampes--2"></div>
+  <div class="lampes lampes--3"></div>
+  <div class="branchement-mur" data-hotspot="branchements"></div>
+
+  <!-- Le palier, un étage plus bas — visible en contrebas du décor. -->
+  <div class="cage-escalier" data-hotspot="palier"></div>
+
+  <!-- Le métier à tisser, transformé en autel. -->
+  <div class="autel-metier" data-hotspot="autel"></div>
+
+  <!-- La malle, où se lit le dossier. -->
+  <div class="malle-cuir" data-hotspot="malle"></div>
+
+  <!-- Décor ambiant : le miroir doré, le fauteuil Second Empire. -->
+  <div class="miroir-cadre" data-hotspot="miroir"></div>
+  <div class="fauteuil-eventre" data-hotspot="fauteuil"></div>
+
+  <!-- La sortie, au premier plan. -->
+  <div class="trappe-sortie" data-hotspot="porte"></div>
+
+</div>

@@ -10,9 +10,10 @@ import { planque } from './planque.js'
 import { herwick } from './herwick.js'
 import { sarah } from './sarah.js'
 import { duke } from './duke.js'
+import { squat } from './trash.js'
 import { tribunal } from './tribunal.js'
 import { tribunalSalle } from './tribunal-salle.js'
 import { carte } from './carte.js'
 
-export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, 'greffe-cellule': greffeCellule, retour, planque, herwick, sarah, duke, tribunal, 'tribunal-salle': tribunalSalle, carte }
+export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, 'greffe-cellule': greffeCellule, retour, planque, herwick, sarah, duke, squat, tribunal, 'tribunal-salle': tribunalSalle, carte }
 export const depart = 'bar'

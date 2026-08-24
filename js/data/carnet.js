@@ -176,6 +176,25 @@ export const fiches = {
     ou: 'Duke, au sous-sol',
   },
 
+  /* ── La loge de Trash, chantier 40 ─────────────────────────────────
+     Même famille que `tir-herwick`/`tir-duke` — un tir qui trouve la
+     planque malgré tout — mais un mode d'attaque différent (« pas de
+     ligne de tir, un préavis », PLAN_PLANQUES.md § 3.4). */
+  'tir-squat': {
+    titre: 'Ils ont su, jusque dans la loge',
+    texte: 'Une trappe sans adresse, un branchement volé, et quelqu’un qui force quand même le passage à huit heures quarante. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
+    ou: 'Chez Trash, à huit heures quarante',
+  },
+  /* Le gain propre à ce décor (garde-fou § 4.3 du plan) : pas une
+     adresse ni un nom de tireur, comme chez Herwick ou Duke — une
+     capacité de l'adversaire, révélée parce que Trash est le seul à
+     pouvoir la lire. */
+  'trash-repere': {
+    titre: 'Ils l’ont retrouvé par sa propre lumière',
+    texte: 'Aucun registre, aucune adresse — ils ont suivi ce qui restait de lui à l’astral, du bateau jusqu’au greffe. Chimera a quelqu’un qui voit comme Trash, ou pire.',
+    ou: 'Trash, à la loge',
+  },
+
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
   'registre-anterieur': {
     titre: 'La ligne est plus ancienne que lui',
@@ -411,6 +430,10 @@ export const presque = {
     'Un tireur payé par un compte Telestrian, et une victime au SIN Telestrian. Le même nom, deux fois, dans la même nuit. Ça ne se décide pas avec deux faits. Ça commence à devenir difficile à ignorer.',
   'duke-toralf|toralf-vise-lester':
     'Le tireur du goulet, et celui que Duke vient de nommer. Le même homme, sans doute — ça se prouve en trouvant qui paie, et Duke vient de le dire : Telestrian.',
+
+  /* ── La loge de Trash, chantier 40 ─────────────────────────────── */
+  'famille-tir|trash-repere':
+    'La même vulnérabilité, deux fois dans la même nuit : ce qui l’a fait fuir sa famille est aussi ce qui vient de le trahir. On ne se cache jamais de ce qu’on est, seulement de ceux qui le cherchent.',
 
   /* ── Ce qu’on a déjà déduit, frotté contre le reste ──────────────── */
   'deux-mains|teresa':

@@ -64,15 +64,15 @@
 
 import { equipiers } from './equipiers.js'
 
-/* Un seul `choix-*` peut être posé par partie (chantiers 36-37) : chaque
-   sujet `trancher-*` du conseil se ferme dès qu'un autre a tranché.
-   Sarah n'y participe plus depuis le chantier 39 (§3.6 du plan) : ce
-   n'est plus une planque concurrente, c'est une halte automatique sur
-   le chemin de celle qu'on choisit ici. Exporté : `sarah.js` route vers
-   la même destination en sortant du cabinet. */
-export const decisionPrise = (a) => a('choix-herwick') || a('choix-duke')
+/* Un seul `choix-*` peut être posé par partie (chantiers 36-37, 40) :
+   chaque sujet `trancher-*` du conseil se ferme dès qu'un autre a
+   tranché. Sarah n'y participe plus depuis le chantier 39 (§3.6 du
+   plan) : ce n'est plus une planque concurrente, c'est une halte
+   automatique sur le chemin de celle qu'on choisit ici. Exporté :
+   `sarah.js` route vers la même destination en sortant du cabinet. */
+export const decisionPrise = (a) => a('choix-herwick') || a('choix-duke') || a('choix-squat')
 export const destinationPlanque = (a) =>
-  a('choix-herwick') ? 'herwick' : a('choix-duke') ? 'duke' : 'planque'
+  a('choix-herwick') ? 'herwick' : a('choix-duke') ? 'duke' : a('choix-squat') ? 'squat' : 'planque'
 
 export const retour = {
   markup: 'scenes/retour.html',
@@ -284,13 +284,14 @@ export const retour = {
 
         const abri = a('abri')
 
-        /* CHANTIER 37 : Herwick et Duke ont chacun leur porte, `choix-
-           herwick` et `choix-duke` mutuellement exclusifs par
-           construction — chaque sujet `trancher-*` de `conseil` ne pose
-           son drapeau que si aucun autre n'a déjà tranché
-           (`!decisionPrise(a)`, plus bas). CHANTIER 39 : Sarah n'est
-           plus une troisième option de ce `?:` — elle route en amont,
-           juste au-dessous, quand Lester est touché. */
+        /* CHANTIERS 37, 40 : Herwick, Duke et la loge de Trash ont
+           chacun leur porte, `choix-herwick`, `choix-duke` et `choix-
+           squat` mutuellement exclusifs par construction — chaque
+           sujet `trancher-*` de `conseil` ne pose son drapeau que si
+           aucun autre n'a déjà tranché (`!decisionPrise(a)`, plus bas).
+           CHANTIER 39 : Sarah n'est plus une troisième option de ce
+           `?:` — elle route en amont, juste au-dessous, quand Lester
+           est touché. */
         const destination = destinationPlanque(a)
 
         /* ══ LA TRAVERSÉE SE REGARDE ═══════════════════════════════════
@@ -1056,6 +1057,34 @@ export const retour = {
           flags: ['choix-herwick'],
           texte: [
             ['drakk', '« Assez parlé. On va chez Herwick. »'],
+            'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
+          ],
+        },
+        /* ══ CHANTIER 40 — LA LOGE DE TRASH ═══════════════════════════
+           Cinquième mécanique de la table (§3 du plan) : un préavis,
+           pas une précaution. Trash propose le seul lieu qu'on ne
+           trouve pas dans une base de données — parce qu'on le trouve,
+           lui. `trancher-squat` suit le même moule que les deux autres
+           (`acteur`, pas `quand` : chantier 38). */
+        {
+          id: 'squat',
+          titre: '« Ma loge. Personne n’a d’adresse à y trouver. » (Trash)',
+          texte: [
+            ['trash', '« Aucun bail, aucun SIN, aucune facture. Rien à trouver dans un registre — et je saurai qu’ils arrivent avant qu’ils arrivent. »'],
+            ['hercules', '« Aucun registre, mais toi. C’est ta signature qui a un prix, cette nuit, pas une adresse. »'],
+            ['drakk', '« Prêter son seul toit à un otage. Je connais ce genre de générosité. Elle coûte cher, et elle coûte à celui qui la fait. »'],
+            ['rabbit', '« Pas de terminal, pas de caméra, rien à pirater pour eux. Pour une fois, je n’ai rien à faire, et ça me rend nerveuse. »'],
+          ],
+        },
+        {
+          id: 'trancher-squat',
+          titre: '« Assez parlé. On va chez moi. » (Trancher, Trash)',
+          acteur: 'trash',
+          quand: ({ a }) => !decisionPrise(a),
+          fin: true,
+          flags: ['choix-squat'],
+          texte: [
+            ['trash', '« Assez parlé. On va chez moi. »'],
             'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
           ],
         },
