@@ -809,7 +809,14 @@ function depose(idFiche) {
   carnet.hidden = true
   $('boutonCarnet').setAttribute('aria-pressed', 'false')
 
-  const reponse = barre.reponses[idFiche]
+  /* Rang 10 : `hayden` doit pouvoir répondre différemment selon que
+     Chimera a corrompu le témoignage (`chimera-avance`, D9) — une
+     réponse peut donc être une fonction du contexte, comme partout
+     ailleurs dans le jeu (`regarder`, `utiliser`), plutôt qu'un objet
+     figé. Les quatre réponses de la 1ʳᵉ audience restent des objets
+     simples : rien à leur changer. */
+  const brute = barre.reponses[idFiche]
+  const reponse = typeof brute === 'function' ? brute(contexte()) : brute
   if (!reponse) {
     rafraichit()
     return dis(pioche(barre.refus[etat.actif] ?? barre.refus.hercules), etat.actif, () => rafraichit())
@@ -890,6 +897,21 @@ function appelle(idContact) {
 
   const appel = appels[`${idContact}|${ficheAppelActive}`]
   ficheAppelActive = null
+
+  /* D9, tranché le 2026-08-25 : « plus l'équipe appelle ses contacts,
+     plus l'information a de chances de remonter à Chimera » — mais
+     Chimera ne peut plus atteindre Lester (McNeil, chantier 28) ni
+     l'équipe (pas de combat, §11 du plan) : la seule chose qu'il peut
+     encore abîmer, c'est un témoignage. Deux présages, symétriques à
+     ceux du Tír (`tir-prevenu`/`tir-retour`, appartement.js/amis.js) —
+     chaque appel pendant l'acte IV compte, réussi ou non : solliciter
+     les Ombres est déjà le risque, avant même la réponse. Le second
+     présage (`chimera-avance`) est lu par `hayden`, à la barre
+     (`tribunal-salle.js`). */
+  if (a('abordage-passe')) {
+    if (!a('chimera-alerte')) pose('chimera-alerte')
+    else if (!a('chimera-avance')) pose('chimera-avance')
+  }
 
   if (!appel) {
     avance(5)
@@ -1293,8 +1315,14 @@ function verifieBarre() {
   if (!salle?.barre) return
   const ficheConnue = (id) => id in fiches || deductions.some((d) => d.donne.id === id) ||
                                Object.values(appels).some((ap) => ap.id === id)
-  for (const [id, reponse] of Object.entries(salle.barre.reponses)) {
+  for (const [id, brute] of Object.entries(salle.barre.reponses)) {
     if (!ficheConnue(id)) console.error(`[barre] « ${id} » : fiche inconnue.`)
+    /* Rang 10 : une réponse peut être une fonction du contexte (`hayden`,
+       corrompue ou non par `chimera-avance`). On l'évalue avec l'état du
+       moment pour vérifier au moins la branche qu'il produit — ce garde-
+       fou n'a jamais prétendu couvrir tous les états possibles, voir
+       `verifieReseau()` juste au-dessus. */
+    const reponse = typeof brute === 'function' ? brute(contexte()) : brute
     if (!['tient', 'retourne'].includes(reponse.registre))
       console.error(`[barre] « ${id} » : registre inconnu — ${reponse.registre}.`)
   }
@@ -1560,6 +1588,14 @@ const BILAN = [
      seul n'a pas sa ligne : rester silencieux n'est pas un événement, et
      la rencontre elle-même se lit déjà dans le carnet et le dialogue. */
   ['renfield-retourne',  'Un vieux chaman a promis d’aller lui-même dire aux parents d’Hayden ce que vous saviez. Vous l’avez cru sur parole.'],
+  /* D9, tranché le 2026-08-25 (rang 10, `PLAN_TRAME_ACTES_III_IV.md`
+     §10) : le front Chimera, symétrique à celui du Tír (`tir-prevenu`/
+     `tir-retour`), avance quand on appelle un contact pendant l'acte IV.
+     `chimera-avance` seul suffit ici : sa vraie conséquence — le
+     témoignage sur Hayden qui se rétracte à la barre — se lit déjà dans
+     le dialogue de la 2ᵉ audience (`tribunal-salle.js`). */
+  ['chimera-alerte', 'Un premier appel, pendant l’enquête. Quelque part, quelqu’un a noté qui posait la question.'],
+  ['chimera-avance', 'Un second appel, et cette fois l’information a voyagé plus vite que vous.'],
 ]
 
 function tombeRideau() {
@@ -1572,14 +1608,16 @@ function tombeRideau() {
      du jeu ne déclenche plus — `abordage-passe` en fait désormais
      partie — mais qu'une sauvegarde antérieure pourrait encore
      porter. */
-  $('rideauLigne').textContent = a('enquete-close')
+  $('rideauLigne').textContent = a('denouement-verite')
     ? (a('renfield-retourne')
-        ? 'Un nom, une preuve, et un vieux chaman assez lucide pour choisir la vérité contre vingt ans de loyauté. Il pousse la porte de la salle en sachant que, quelque part dans une tour Telestrian, quelqu’un est déjà en train de tout dire aux parents d’Hayden.'
-        : a('su:lester-innocent') && a('su:hayden')
-        ? 'Un nom, et de quoi montrer qu’on savait déjà. Il pousse la porte de la salle avec ça derrière lui, et pour la première fois de l’affaire ce n’est pas lui qui a quelque chose à expliquer.'
-        : a('su:lester-innocent') || a('su:hayden')
-          ? 'Vous remontez vers Downtown avec une moitié de réponse. Une moitié, ce n’est pas rien — c’est juste moins que ce qu’il y avait à prendre.'
-          : 'Vous remontez vers Downtown à peu près comme vous en étiez partis. L’audience aura lieu, et elle ressemblera à la première.')
+        ? 'Un nom, une preuve, et un vieux chaman assez lucide pour avoir choisi la vérité contre vingt ans de loyauté. Il a déjà tout dit aux parents d’Hayden. Vous, vous venez de le dire au juge.'
+        : 'Un nom, et de quoi montrer qu’on savait déjà. Il a poussé la porte de la salle avec ça derrière lui, et pour la première fois de l’affaire ce n’est pas lui qui avait quelque chose à expliquer.')
+    : a('denouement-tractation')
+    ? 'Personne n’a rien dit à voix haute. Vous avez posé, sur la table, de quoi faire dérailler une carrière — et attendu de voir qui céderait le premier.'
+    : a('denouement-echec')
+    ? (a('chimera-avance')
+        ? 'Vous êtes remontés vers Downtown les mains presque vides. Chimera, lui, n’avait pas besoin de grand-chose de plus.'
+        : 'Vous êtes remontés vers Downtown à peu près comme vous en étiez partis. Personne n’a rien prouvé à personne — et ça a suffi à personne.')
     : a('appart-quitte')
     ? (a('su:lester-innocent')
         ? 'Ils savaient. Depuis le premier jour, ils savaient, et ils ont mis un gamin de vingt ans dans une navette de huit heures. Il reste à le prouver devant quelqu’un.'

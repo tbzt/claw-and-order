@@ -49,9 +49,10 @@
    visite (§7.4 du plan des actes), c'est enfin l'arbitrage que l'acte IV
    devait porter : chercher plus, c'est se faire trouver.
 
-   PROVISOIRE ET DÉCLARÉ, comme les trois fois précédentes : `audience`
-   retombe sur `fin: true`. La 2ᵉ audience est le rang 10 du §10 et elle
-   n'est pas écrite ; quand elle le sera, ce `fin` deviendra un `va`.
+   RANG 10 DU §10, LIVRÉ : `audience` mène maintenant à `tribunal-salle`
+   pour de vrai (`va`, plus `fin`) — la 2ᵉ audience, où `depose()` lit les
+   quatre fiches de l'acte IV et où les trois retombées (`PLAN_TRAME_
+   ACTES_III_IV.md` §8) se tranchent. Voir `tribunal-salle.js`.
 
    ══ LES DEUX LOIS DE LA NUIT, INCHANGÉES ═══════════════════════════
    L1 — le temps est la seule ressource : chaque trajet porte son coût
@@ -243,7 +244,7 @@ function noeud(id) {
         ? { tous: [...(RECITS[`${depuis}|${id}`] ?? [`Vous prenez la route vers ${lieux[id].nom}.`]),
                    'Dix heures moins le quart, le lendemain matin. Le palais est ouvert, la salle est la même, et cette fois vous savez pourquoi vous y êtes.'],
             flags: ['enquete-close'],
-            fin: true }
+            va: 'tribunal-salle' }
         : enquete
           ? { tous: RECITS[`${depuis}|${id}`] ?? `Vous prenez la route vers ${lieux[id].nom}.`,
               va: id }

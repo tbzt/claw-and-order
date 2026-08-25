@@ -2,11 +2,10 @@
    TABLEAU 6 — LE TRIBUNAL, LA SALLE D'AUDIENCE.
 
    Chantier 20 redéfini par `PLAN_TRAME_ACTES_III_IV.md` §5 : le tribunal
-   n'est plus un nœud terminal, mais un PIVOT qui se joue deux fois. Ce
-   fichier ne construit que la première moitié de la première audience —
-   décidé le 2026-08-22 pour valider la pièce la plus risquée avant le
-   reste : `depose()`, le troisième verbe de la même grammaire que
-   `frotte()` (carnet) et `appelle()` (réseau).
+   n'est plus un nœud terminal, mais un PIVOT qui se joue deux fois. La
+   1ʳᵉ audience (2026-08-22) a validé la pièce la plus risquée en premier :
+   `depose()`, le troisième verbe de la même grammaire que `frotte()`
+   (carnet) et `appelle()` (réseau).
 
    Le parvis (`tribunal.js`, chantier 20b) est livré : `entree.utiliser`
    y mène ici sans coût, comme `quai` → `quai-voilier` (chantier 25).
@@ -20,17 +19,55 @@
    traversée retour vers McNeil. « Le contrat est rempli » reste la seule
    vraie fin ici : la retombée 0.
 
+   ══ RANG 10 (`PLAN_TRAME_ACTES_III_IV.md` §8-10) — LA 2ᵉ AUDIENCE ═════
+   Même tableau, même markup, deuxième visite — pas un fichier neuf
+   (D7 : « une conséquence ajoute »). `carte.js` y mène pour de vrai
+   depuis le nœud `audience`, en posant `enquete-close`. `ouverture`
+   distingue les deux visites par `etat.visites` (l'idiome déjà établi
+   par `carte.js` et `quai-voilier.js`), et `acte` — un getter, pas un
+   champ statique — ne vaut 4 (donc ne consomme un TOUR, D8) qu'une fois
+   `enquete-close` posé : la 1ʳᵉ audience se joue toujours en MINUTES,
+   avant que l'acte IV n'existe.
+
+   `barre.reponses` gagne les quatre fiches de l'acte IV — additif, les
+   quatre réponses de la 1ʳᵉ audience ne changent pas. `hayden` seule est
+   une fonction : Chimera (`chimera-avance`, D9, `appelle()` dans
+   `main.js`) ne peut plus atteindre ni Lester (McNeil) ni l'équipe (pas
+   de combat, §11) — il ne peut plus qu'abîmer un témoignage, et c'est le
+   seul qui NOMME quelqu'un.
+
+   `sortir.utiliser` gagne un troisième étage, après la récusation
+   (1ʳᵉ audience) : à `enquete-close`, il calcule la retombée 2
+   (`enregistrement-recupere` déposé), 3 (`hayden` déposé ET confirmé,
+   plus une ancre) ou 1 (ni l'un ni l'autre) — « 2 et 3 ne s'excluent
+   pas » (§8) ouvre le dialogue `verdict`, un choix, pas un tirage.
+
    CE QUE CE FICHIER NE FAIT TOUJOURS PAS :
    - l'art du décor — un placeholder fonctionnel, pas un pixel dessiné,
-     comme celui du parvis (voir les deux `css/scene-tribunal*.css`). */
+     comme celui du parvis (voir les deux `css/scene-tribunal*.css`) ;
+   - le compteur d'exposition dans son sens d'origine (D9 le remplace
+     ici par une conséquence narrative précise, pas un chiffre affiché). */
+
+import { a } from '../state.js'
 
 export const tribunalSalle = {
   markup: 'scenes/tribunal-salle.html',
 
-  ouverture: [
-    'La salle d’audience. Lester est déjà au banc, en combinaison orange, les mains à plat sur la table.',
-    'Le dossier de l’accusation tient sur trois pages. Personne, dans la salle, ne semble y croire tout à fait.',
-  ],
+  /* Un getter, pas un champ : la 1ʳᵉ audience se joue avant que l'acte IV
+     n'existe (D8 — le tour n'a de sens qu'à partir de l'abordage), donc
+     `charge()` ne doit incrémenter `etat.tour` qu'à la seconde visite,
+     une fois `enquete-close` posé par `carte.js`. */
+  get acte() { return a('enquete-close') ? 4 : undefined },
+
+  ouverture: (ctx, visite) => visite > 1
+    ? [ctx.a('renfield-retourne')
+        ? 'La même salle, trois jours plus tard. Lester est encore au banc, mais il se tient autrement — quelqu’un lui a déjà dit qu’un vieil homme parlait, en ce moment même, à des parents qui ne savaient pas encore avoir un fils à pleurer.'
+        : 'La même salle, trois jours plus tard. Le dossier de l’accusation n’a pas changé d’une page. Vous, si.',
+       'Le juge n’a pas oublié où il en était. Personne, ici, ne fait comme si c’était une nouvelle affaire.']
+    : [
+        'La salle d’audience. Lester est déjà au banc, en combinaison orange, les mains à plat sur la table.',
+        'Le dossier de l’accusation tient sur trois pages. Personne, dans la salle, ne semble y croire tout à fait.',
+      ],
 
   hotspots: {
 
@@ -63,10 +100,16 @@ export const tribunalSalle = {
 
     lester: {
       nom: 'Lester, au banc',
-      regarder: {
-        tous: 'On ne peut plus rien lui dire d’ici. Il regarde ses mains, puis le juge, puis ses mains.',
-        drakk: '« Il a déjà fait la moitié du chemin, tout seul, dans une laverie. Le reste ne dépend plus de nous. »',
-      },
+      /* Fonction depuis le rang 10 : la 2ᵉ audience le retrouve au même
+         endroit, mais pas dans le même état — il sait maintenant ce que
+         l'équipe a trouvé, ou n'a pas trouvé, pendant trois jours. */
+      regarder: ({ a }) => a('enquete-close')
+        ? { tous: 'Trois jours plus tard, même banc. Il ne regarde plus ses mains — il vous regarde, vous, en attendant de savoir ce que vous avez apporté.',
+            drakk: a('chimera-avance')
+              ? '« Il sait qu’on a cherché. Il ne sait pas encore que quelqu’un d’autre a cherché plus vite. »'
+              : '« Il a arrêté d’espérer tout seul. Ça se voit, à la façon dont il attend maintenant. »' }
+        : { tous: 'On ne peut plus rien lui dire d’ici. Il regarde ses mains, puis le juge, puis ses mains.',
+            drakk: '« Il a déjà fait la moitié du chemin, tout seul, dans une laverie. Le reste ne dépend plus de nous. »' },
     },
 
     galerie: {
@@ -127,13 +170,43 @@ export const tribunalSalle = {
         if (!a('recusation-dite'))
           return { tous: 'Le marteau tombe. « L’audience est repoussée. » McCarthy est déjà debout, le commlink à l’oreille.',
                    dialogue: 'mccarthy' }
-        return a('recuse-abri')
-          ? { tous: ['« On le ramène à McNeil, » dit McCarthy. « Nouveau passeur, ce soir. »',
-                     'Ce que ça veut dire pour la traversée, personne ne le dit encore à voix haute.'],
-              va: 'retour' }
-          : { tous: ['« Le contrat est rempli, » dit McCarthy. « Il sera vivant à dix heures. C’était le prix demandé. »',
-                     'La nuit s’arrête là, pour vous. Pas pour lui.'],
-              fin: true }
+        if (!a('enquete-close'))
+          return a('recuse-abri')
+            ? { tous: ['« On le ramène à McNeil, » dit McCarthy. « Nouveau passeur, ce soir. »',
+                       'Ce que ça veut dire pour la traversée, personne ne le dit encore à voix haute.'],
+                va: 'retour' }
+            : { tous: ['« Le contrat est rempli, » dit McCarthy. « Il sera vivant à dix heures. C’était le prix demandé. »',
+                       'La nuit s’arrête là, pour vous. Pas pour lui.'],
+                fin: true }
+
+        /* ══ RANG 10 — LA 2ᵉ AUDIENCE, LE VERDICT ═══════════════════════
+           Même geste en deux temps que la récusation : si les retombées
+           2 ET 3 sont réunies (`§8` : « 2 et 3 ne s'excluent pas »), un
+           premier clic ouvre `verdict` — un choix, pas un tirage — et un
+           second, une fois le choix posé, referme vraiment. Sinon, un
+           seul clic suffit : il n'y a rien à choisir. */
+        const texteVerite = ['« Le nom que vous portez ce soir n’est pas celui du dossier, » dit le juge. « Ça va prendre du temps. »',
+                              'Ça en a déjà pris trois jours de trop.']
+        const texteTractation = ['Personne, dans la salle, ne sait ce que vous venez de garder en poche.',
+                                  'McCarthy vous regarde sortir sans poser de question. Il a appris, cette nuit-là, à ne pas en poser.']
+        const texteEchec = a('chimera-avance')
+          ? ['Le juge referme le dossier. « Rien de nouveau, » dit-il — et de son point de vue à lui, c’est exact.',
+             'McCarthy raccroche vite. Trop vite pour que ce soit une bonne nouvelle.']
+          : ['Le juge referme le dossier. « Rien de nouveau, » dit-il, et pour une fois il n’a pas tort.',
+             'Vous ressortez du palais avec ce que vous y aviez apporté. Ce n’était pas assez.']
+
+        if (a('denouement-verite')) return { tous: texteVerite, fin: true }
+        if (a('denouement-tractation')) return { tous: texteTractation, fin: true }
+
+        const verite = a('hayden-confirme') && (a('depose:lester-innocent') || a('depose:amant-secret'))
+        const tractation = a('depose:enregistrement-recupere')
+
+        if (verite && tractation)
+          return { tous: ['La salle attend. Vous avez de quoi faire les deux — dire la vérité, ou la garder pour un usage plus utile qu’un tribunal. Ce n’est pas au juge de trancher ça.'],
+                   dialogue: 'verdict' }
+        if (verite) return { tous: texteVerite, flags: ['denouement-verite'], fin: true }
+        if (tractation) return { tous: texteTractation, flags: ['denouement-tractation'], fin: true }
+        return { tous: texteEchec, flags: ['denouement-echec'], fin: true }
       },
     },
   },
@@ -165,6 +238,41 @@ export const tribunalSalle = {
           fin: true,
           texte: ['« … Très bien. » Il ne discute pas. « Il sera vivant à dix heures. C’est ce qu’on vous a payés à faire. »',
                   'Il raccroche avant vous.'],
+        },
+      ],
+    },
+
+    /* ══ LE VERDICT — rang 10, §8 : « 2 et 3 ne s'excluent pas » ═══════
+       Aucun interlocuteur, comme `conseil` (`retour.js`, chantier 35) :
+       c'est l'équipe qui décide, d'où `qui: 'recit'`. Ouvert seulement
+       quand les deux retombées sont réunies (`sortir.utiliser`) — sinon
+       il n'y a rien à choisir, et le tableau tranche tout seul. */
+    verdict: {
+      qui: 'recit',
+      accueil: ['Deux issues, et aucune n’efface l’autre. La dire, ici, devant tout le monde — ou la garder, et la vendre plus tard à qui a le plus à perdre à ce qu’elle se dise.'],
+      retour: ['La décision n’est toujours pas prise.'],
+      sujets: [
+        {
+          id: 'verite',
+          titre: '« On le dit. Ici, maintenant, à voix haute. » (Trash)',
+          acteur: 'trash',
+          fin: true,
+          flags: ['denouement-verite'],
+          texte: [
+            ['trash', '« Hayden Telestrian a tué Teresa Banks. On a de quoi le montrer, et on ne le vendra à personne. »'],
+            'Le juge ne dit rien. Le procureur, pour la première fois de la nuit, prend une note qui compte.',
+          ],
+        },
+        {
+          id: 'tractation',
+          titre: '« On garde ça pour une meilleure table. » (Hercules)',
+          acteur: 'hercules',
+          fin: true,
+          flags: ['denouement-tractation'],
+          texte: [
+            ['hercules', '« On ne dit rien ici. On le dit ailleurs, à quelqu’un qui a plus à perdre qu’un procureur fatigué. »'],
+            'Personne, dans la salle, ne remarque ce qui vient de ne pas se passer.',
+          ],
         },
       ],
     },
@@ -228,6 +336,70 @@ export const tribunalSalle = {
           drakk: '« Une compagnie partage sa gourde. Un tribunal appelle ça autrement. »',
         },
       },
+
+      /* ══ RANG 10 — LES QUATRE FICHES DE L'ACTE IV ═══════════════════
+         Additif, comme le reste du chantier (D7) : les quatre réponses
+         ci-dessus, écrites pour la 1ʳᵉ audience, ne changent pas d'une
+         ligne. `hayden` seule est une fonction — la seule fiche que
+         Chimera peut encore atteindre (D9, `chimera-avance`, posé dans
+         `appelle()`, `main.js`) : il ne peut plus toucher ni Lester
+         (McNeil) ni l'équipe (pas de combat, §11), seulement ce
+         témoignage-là, parce que c'est le seul qui NOMME quelqu'un. */
+      'lester-innocent': {
+        registre: 'tient',
+        dit: {
+          tous: 'Tu déposes le journal du maglock, à côté de ce que la Lone Star a relevé et jamais versé. Le juge lit les deux pièces dans l’ordre, puis les relit dans l’autre sens.',
+          hercules: '« La Lone Star savait, Votre Honneur. Avant nous, avant lui, avant vous. Elle a choisi d’écrire un autre nom à la place. »',
+          trash: '« Ils ont eu la vérité entre les mains. Ils ont préféré la ranger. »',
+          rabbit: '« Un journal d’accès, un relevé d’ADN, trois jours de silence entre les deux. Ce n’est pas une négligence. C’est un choix, horodaté deux fois. »',
+          drakk: '« Ils avaient la carte du coupable depuis le début. Ils ont joué celle du plus proche. »',
+        },
+      },
+      'amant-secret': {
+        registre: 'tient',
+        dit: {
+          tous: 'Tu déposes ce que le Shameless a rendu : une voiture qui ne se garait jamais deux fois au même endroit, un commlink coupé avant chaque rendez-vous. Le juge fronce les sourcils — pour la première fois, pas contre Lester.',
+          hercules: '« Elle protégeait quelqu’un, Votre Honneur. Ce n’était pas mon client. »',
+          trash: '« Un protocole, pas une habitude. Quelqu’un le lui avait appris. »',
+          rabbit: '« Une prudence excessive pour une liaison ordinaire. La discrétion avait un prix, et ce n’est pas elle qui le payait. »',
+          drakk: '« Elle portait le secret de quelqu’un d’autre. Voilà un motif que personne n’avait cherché. »',
+        },
+      },
+      'enregistrement-recupere': (ctx) => ({
+        registre: 'tient',
+        dit: {
+          tous: ctx.a('bombe-declenchee')
+            ? 'Tu déposes ce qu’il en reste — une bande abîmée, à moitié lisible, mais sa voix y est encore. Le juge demande qu’on l’écoute en chambre, pas en pleine salle.'
+            : 'Tu déposes l’enregistrement, intact. Quatre titres, et elle qui parle entre les prises — une voix que ce dossier n’avait jamais portée.',
+          hercules: '« Ce n’est pas une preuve, Votre Honneur. C’est elle. Personne, ici, ne l’avait encore entendue. »',
+          trash: '« On ne dépose pas ça pour gagner un procès. On le dépose parce qu’elle n’est pas qu’un dossier. »',
+          rabbit: '« Authentifié, non modifié. Et il dit une chose que trois pages d’accusation ne disaient pas : elle avait une voix. »',
+          drakk: '« Elle parle encore, entre deux prises. C’est plus que ce dossier ne lui avait laissé depuis trois jours. »',
+        },
+      }),
+      hayden: (ctx) => ctx.a('chimera-avance')
+        ? {
+            registre: 'retourne',
+            flags: ['hayden-conteste'],
+            dit: {
+              tous: 'Tu prononces le nom — Hayden Telestrian — et tu attends le témoin qui devait le confirmer. Il ne vient pas. Quelqu’un lui a parlé avant vous.',
+              hercules: '« On avait un nom, Votre Honneur. On n’a plus que ça, à présent. »',
+              trash: '« Il a eu peur plus vite que nous n’avons été discrets. »',
+              rabbit: '« Le témoin s’est rétracté ce matin. Ce n’est pas une coïncidence. C’est un délai. »',
+              drakk: '« Le nom tient toujours. La bouche qui devait le porter s’est refermée. »',
+            },
+          }
+        : {
+            registre: 'tient',
+            flags: ['hayden-confirme'],
+            dit: {
+              tous: 'Tu déposes le nom, et ce qui le tient debout : un prénom mal écrit, un nom de famille que tout le Tír connaît, et personne dans cette salle pour le contredire.',
+              hercules: '« Hayden Telestrian, Votre Honneur. Ce n’est plus une rumeur — c’est un nom, avec une adresse derrière. »',
+              trash: '« Je connais cette famille. Je sais ce qu’elle fait, d’habitude, de ce qui la gêne. Cette fois, elle n’a pas eu le temps. »',
+              rabbit: '« Deux témoins indépendants, une faute d’orthographe qui prouve l’un et confirme l’autre. C’est amplement suffisant. »',
+              drakk: '« Nous avions le nom depuis Loveland. La salle l’a, enfin. »',
+            },
+          },
     },
 
     refus: {
