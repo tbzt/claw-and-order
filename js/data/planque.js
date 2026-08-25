@@ -80,6 +80,58 @@ const compte = (a) =>
   CHAINEES.filter((f) => a(f)).length -
   (a('conf-perdue') ? 2 : 0)
 
+/* ── LA LECTURE DU DOSSIER, EN UN SEUL ENDROIT ────────────────────────
+   Elle existait en CINQ copies — la laverie et les quatre planques —
+   identiques à une ligne près, celle du meuble sur lequel Hercules
+   étale la chemise. Cinq copies d'un même texte, c'est cinq occasions
+   de le corriger quatre fois, et le 2026-08-25 l'a démontré : la
+   correction de l'adresse (voir plus bas) aurait dû se faire cinq fois
+   à la main. Elle se fait ici ; les quatre décors passent leur meuble.
+   Même geste que `destinationPlanque` dans `retour.js` — une donnée
+   partagée vit chez celui qui l'a écrite en premier.
+
+   ══ L'ADRESSE EST DANS LE DOSSIER, ET C'EST LE SUJET ════════════════
+   Elle venait de Herwick jusqu'au 2026-08-25, et l'utilisateur a eu
+   raison de le refuser : une équipe qui tient le dossier de police
+   d'une victime de meurtre n'a pas besoin d'un antiquaire pour savoir
+   où elle habitait. Le dernier domicile connu est une pièce d'identité,
+   pas une pièce d'enquête — il est en page deux de n'importe quel
+   dossier, et il y est.
+
+   Ce qui change n'est pas le poids du fait, c'est SON SENS. Avant :
+   « on a retiré son adresse du dossier », ce qui est un complot
+   compliqué. Maintenant : « l'adresse est écrite noir sur blanc, et
+   personne n'y est jamais allé », ce qui est infiniment pire et
+   parfaitement banal. Le dossier rend donc QUATRE fiches au lieu de
+   trois, et les deux dernières sont les deux moitiés de ce fait-là.
+
+   Ce que Herwick garde, lui, c'est ce qu'aucun dossier ne porte : QUI
+   PAIE le loyer. Voir `herwick.js`. */
+export const lectureDossier = (surface, ambiance = null) => ({ a }) => a('dossier-lu')
+  ? { tous: 'Vous l’avez lu. Trois fois, à quatre. Il ne dira rien de plus ici.',
+      rabbit: '« Ce qui manque dedans ne va pas apparaître parce qu’on rouvre la chemise. »' }
+  : {
+      tous: [`Hercules étale la chemise ${surface}, et la partage en trois tas, par réflexe de bureaucrate.`,
+             /* La seule ligne qui appartienne au LIEU et pas au dossier :
+                la laverie avait « Pendant deux heures, personne ne dit
+                grand-chose. Les machines tournent. » Elle valait mieux
+                que d'être perdue dans la mise en commun. */
+             ...(ambiance ? [ambiance] : []),
+             'Le dossier tient en quatre faits, et ils ne se regardent pas dans les yeux.',
+             'UN — le corps a été trouvé dans un taudis de Loveland, à deux rues de chez Lester.',
+             'DEUX — l’accusation appelle ça une agression de rue. Ça règle la question du mobile en la supprimant.',
+             'TROIS — page deux, section identité : TERESA BANKS, dernier domicile connu, 2214 South Sheridan, Loveland, au-dessus d’un pressing. C’est écrit en haut de la page, comme sur tous les dossiers du monde.',
+             'QUATRE — et cette adresse ne reparaît jamais. Pas une photo, pas un relevé, pas un procès-verbal de transport. Elle est écrite une fois, et personne n’a poussé la porte.'],
+      hercules: ['« Trente ans d’administration. Une adresse en page deux et rien en face dans les pièces, ce n’est pas un dossier bâclé. »',
+                 '« Un dossier bâclé, ça oublie l’adresse. Celui-là l’écrit, et s’arrête là. C’est un dossier ARBITRÉ. »'],
+      trash: '« Il y a un endroit dans cette histoire où quelqu’un est mort, et personne n’a poussé sa porte. Elle est écrite là, cette porte. Ça me gêne physiquement. »',
+      rabbit: ['« Trois jours de procédure, zéro pièce matérielle sur le lieu du décès. »',
+               '« Et l’adresse y est depuis le début. Ils n’ont pas oublié d’y aller. Ils ont décidé de ne pas y aller. »'],
+      drakk: '« On a désigné un coupable, puis on a bâti la carte autour de lui — et l’on a laissé dessus le seul chemin qui n’y mène pas. »',
+      flags: ['dossier-lu'],
+      fiches: ['corps-loveland', 'crime-crapuleux', 'adresse-teresa', 'appart-hors-dossier'],
+    }
+
 import { equipiers } from './equipiers.js'
 
 export const planque = {
@@ -472,29 +524,19 @@ export const planque = {
 
            Quatre lectures dans la même réaction, parce que c'est
            exactement ce que le jeu prétend être : les mêmes pages ne
-           disent pas la même chose selon qui les tient. Trois fiches
+           disent pas la même chose selon qui les tient. QUATRE fiches
            en sortent, et aucune ne conclut — le dossier ouvre une
            question, il ne la referme pas. Les recoupements qu'elles
            permettent sont des `presque`, pas des déductions : la
-           réponse n'est pas dans ces pages, et c'est le sujet. */
-        dossier: ({ a }) => a('dossier-lu')
-          ? { tous: 'Vous l’avez lu. Trois fois, à quatre. Il ne dira rien de plus ici.',
-              rabbit: '« Ce qui manque dedans ne va pas apparaître parce qu’on rouvre la chemise. »' }
-          : {
-              tous: ['Hercules étale la chemise sur le formica et la partage en trois tas, par réflexe de bureaucrate.',
-                     'Pendant deux heures, personne ne dit grand-chose. Les machines tournent.',
-                     'Le dossier tient en trois faits, et les trois se regardent de travers.',
-                     'UN — le corps a été trouvé dans un taudis de Loveland, à deux rues de chez Lester.',
-                     'DEUX — l’accusation appelle ça une agression de rue. Ça règle la question du mobile en la supprimant.',
-                     'TROIS — son appartement à elle n’est nulle part dans ces pages. Ni photo, ni relevé, ni ligne.'],
-              hercules: '« Trente ans d’administration. Un dossier qui ne verse pas une adresse, ce n’est pas un dossier bâclé. C’est un dossier arbitré. »',
-              trash: '« Il y a un endroit dans cette histoire où quelqu’un est mort, et il n’est pas écrit ici. Ça me gêne physiquement. »',
-              rabbit: ['« Trois jours de procédure, zéro pièce matérielle sur le lieu du décès. »',
-                       '« Ce n’est pas un trou. Un trou, c’est rond. Celui-là a des bords droits. »'],
-              drakk: '« On a désigné un coupable, puis on a bâti la carte autour de lui. J’ai fait pire, comme maître de jeu. Jamais avec un vrai gamin. »',
-              flags: ['dossier-lu'],
-              fiches: ['corps-loveland', 'crime-crapuleux', 'appart-hors-dossier'],
-            },
+           réponse n'est pas dans ces pages, et c'est le sujet.
+
+           LE TEXTE LUI-MÊME VIT EN HAUT DE CE FICHIER (`lectureDossier`)
+           depuis le 2026-08-25 : il était recopié dans les cinq décors
+           où le dossier se lit, ce qui est cinq occasions de le
+           corriger quatre fois. Ici, on ne passe plus que le meuble et
+           la ligne d'ambiance du lieu. */
+        dossier: lectureDossier('sur le formica',
+                                 'Pendant deux heures, personne ne dit grand-chose. Les machines tournent.'),
       },
     },
 

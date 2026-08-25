@@ -67,6 +67,10 @@
    en plus de la porte, pas SI on passe. */
 
 import { equipiers } from './equipiers.js'
+/* Le dossier se lit dans les cinq décors où l'équipe attend l'audience,
+   et c'est le MÊME dossier : son texte vit chez celui qui l'a écrit en
+   premier (`planque.js`), et on ne passe ici que le meuble. */
+import { lectureDossier } from './planque.js'
 
 /* ══ LE G5, REPRIS DE `planque.js` / `herwick.js` / `duke.js` / `trash.js` ══ */
 const GRATUITES = ['conf-job', 'conf-question', 'conf-silence']
@@ -232,23 +236,7 @@ export const tripot = {
       }),
       utiliser: 'Tu t’y appuies. Personne ne te demande de jetons.',
       objets: {
-        dossier: ({ a }) => a('dossier-lu')
-          ? { tous: 'Vous l’avez lu. Trois fois, à quatre. Il ne dira rien de plus ici.',
-              rabbit: '« Ce qui manque dedans ne va pas apparaître parce qu’on rouvre la chemise. »' }
-          : {
-              tous: ['Hercules étale la chemise sur le guichet, entre deux jeux de cartes scellés, et la partage en trois tas.',
-                     'Le dossier tient en trois faits, et les trois se regardent de travers.',
-                     'UN — le corps a été trouvé dans un taudis de Loveland, à deux rues de chez Lester.',
-                     'DEUX — l’accusation appelle ça une agression de rue. Ça règle la question du mobile en la supprimant.',
-                     'TROIS — son appartement à elle n’est nulle part dans ces pages. Ni photo, ni relevé, ni ligne.'],
-              hercules: '« Trente ans d’administration. Un dossier qui ne verse pas une adresse, ce n’est pas un dossier bâclé. C’est un dossier arbitré. »',
-              trash: '« Il y a un endroit dans cette histoire où quelqu’un est mort, et il n’est pas écrit ici. Ça me gêne physiquement. »',
-              rabbit: ['« Trois jours de procédure, zéro pièce matérielle sur le lieu du décès. »',
-                       '« Ce n’est pas un trou. Un trou, c’est rond. Celui-là a des bords droits. »'],
-              drakk: '« On a désigné un coupable, puis on a bâti la carte autour de lui. J’ai fait pire, comme maître de jeu. Jamais avec un vrai gamin. »',
-              flags: ['dossier-lu'],
-              fiches: ['corps-loveland', 'crime-crapuleux', 'appart-hors-dossier'],
-            },
+        dossier: lectureDossier('sur le guichet, entre deux jeux de cartes scellés'),
       },
     },
 

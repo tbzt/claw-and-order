@@ -27,12 +27,25 @@
    chaînée qui lui est propre »).
 
    ══ LE DOSSIER SE LIT ICI AUSSI (garde-fou § 4.2) ═════════════════
-   Mêmes trois fiches qu'à la laverie (`corps-loveland`, `crime-crapuleux`,
-   `appart-hors-dossier`) : c'est le même dossier, lu dans une autre
-   pièce. Ce que Herwick ajoute PAR-DESSUS, à voix humaine et pas au
-   téléphone, c'est `appart-teresa` — le trou que ni le dossier ni un
-   appel ne comblait (§3.2 : « la seule pièce du jeu où le trou du
-   dossier … se comble à voix humaine »).
+   Mêmes quatre fiches qu'à la laverie : c'est le même dossier, lu dans
+   une autre pièce, et son texte vit désormais dans `planque.js`
+   (`lectureDossier`) plutôt qu'en cinq copies.
+
+   ══ CE QUE HERWICK AJOUTE PAR-DESSUS — REVU LE 2026-08-25 ══════════
+   C'était `appart-teresa`, et c'était L'ADRESSE : « il le situe au
+   mètre près ». L'utilisateur a refusé, et il avait raison — une équipe
+   qui tient le dossier de police d'une victime n'a pas besoin d'un
+   antiquaire pour savoir où elle habitait ; le dernier domicile connu
+   est en page deux. Le dilemme de ce décor aurait alors porté sur un
+   numéro de rue, ce qui ne vaut pas une amitié, et `drakk-brise` serait
+   devenu indéfendable.
+
+   Ce que Herwick sait et que le dossier ne portera jamais, c'est QUI
+   PAIE : huit mois de loyer en liquide, à un nom qui n'existe pas, et
+   la patronne du pressing qui encaisse sans poser de question. Ça,
+   c'est quarante ans de trottoir, et ça vaut qu'on abîme quelque
+   chose pour l'obtenir. La fiche garde son identifiant — c'est le même
+   appartement — et change de contenu.
 
    ══ TROIS GESTES, AUCUN GRATUIT (§3.2 du plan) ════════════════════
    « Le soigner d'abord » est un geste À PART, pas une troisième
@@ -45,6 +58,10 @@
    et soigner peut se combiner avec l'un ou l'autre. */
 
 import { equipiers } from './equipiers.js'
+/* Le dossier se lit dans les cinq décors où l'équipe attend l'audience,
+   et c'est le MÊME dossier : son texte vit chez celui qui l'a écrit en
+   premier (`planque.js`), et on ne passe ici que le meuble. */
+import { lectureDossier } from './planque.js'
 
 /* ══ LE G5, REPRIS DE `planque.js` ═══════════════════════════════════
    Même arithmétique, mêmes noms de drapeau : GRATUITES plafonnées à
@@ -271,23 +288,7 @@ export const herwick = {
       }),
       utiliser: 'Tu t’y appuies. Il tient, comme tout ici depuis quarante ans.',
       objets: {
-        dossier: ({ a }) => a('dossier-lu')
-          ? { tous: 'Vous l’avez lu. Trois fois, à quatre. Il ne dira rien de plus ici.',
-              rabbit: '« Ce qui manque dedans ne va pas apparaître parce qu’on rouvre la chemise. »' }
-          : {
-              tous: ['Hercules étale la chemise sur le comptoir, entre une pendule arrêtée et un lot de timbales dépareillées, et la partage en trois tas.',
-                     'Le dossier tient en trois faits, et les trois se regardent de travers.',
-                     'UN — le corps a été trouvé dans un taudis de Loveland, à deux rues de chez Lester.',
-                     'DEUX — l’accusation appelle ça une agression de rue. Ça règle la question du mobile en la supprimant.',
-                     'TROIS — son appartement à elle n’est nulle part dans ces pages. Ni photo, ni relevé, ni ligne.'],
-              hercules: '« Trente ans d’administration. Un dossier qui ne verse pas une adresse, ce n’est pas un dossier bâclé. C’est un dossier arbitré. »',
-              trash: '« Il y a un endroit dans cette histoire où quelqu’un est mort, et il n’est pas écrit ici. Ça me gêne physiquement. »',
-              rabbit: ['« Trois jours de procédure, zéro pièce matérielle sur le lieu du décès. »',
-                       '« Ce n’est pas un trou. Un trou, c’est rond. Celui-là a des bords droits. »'],
-              drakk: '« On a désigné un coupable, puis on a bâti la carte autour de lui. J’ai fait pire, comme maître de jeu. Jamais avec un vrai gamin. »',
-              flags: ['dossier-lu'],
-              fiches: ['corps-loveland', 'crime-crapuleux', 'appart-hors-dossier'],
-            },
+        dossier: lectureDossier('sur le comptoir, entre une pendule arrêtée et un lot de timbales dépareillées'),
       },
     },
 
@@ -553,13 +554,22 @@ export const herwick = {
         },
         {
           id: 'demander',
-          titre: '« Le Loveland, l’appartement — il faut qu’on sache. »',
+          titre: '« Le studio au-dessus du pressing. Qui paie le loyer ? »',
           quand: ({ a }) => !a('herwick-epargne') && !a('drakk-brise'),
           fin: true,
           flags: ['drakk-brise'],
           fiches: ['appart-teresa'],
           texte: ['Herwick ferme les yeux une seconde, puis les rouvre.',
-                  '« … Un studio, au-dessus d’un pressing, à Loveland. Loué cash depuis huit mois, à un nom qui n’est pas le sien. Je le situe au mètre près — je ne le dois à aucun registre, seulement à quarante ans à savoir qui vit où sur mon trottoir. »',
+                  /* Vraie que le dossier ait été lu ou non — `sujet.texte`
+                     est une DONNÉE, jamais une fonction (établi au
+                     chantier 28), donc la phrase doit tenir dans les deux
+                     cas. Elle dit où l'adresse est, pas que l'équipe l'a :
+                     un joueur qui a sauté le dossier apprend ici qu'il
+                     peut encore le lire, et le dossier se lit aussi dans
+                     cette pièce. */
+                  '« … L’adresse ? Elle est dans votre chemise. Page deux, section identité. Elle est dans toutes les chemises. Si personne ne l’a lue, c’est votre affaire, pas la mienne. »',
+                  '« Ce que vous n’avez pas, c’est qui règle. Huit mois de loyer en liquide, à un nom qui n’existe pas — et ce n’est pas elle qui payait. »',
+                  '« La patronne du pressing encaisse pour le propriétaire et ne pose jamais de question. C’est le service qu’on lui achète en même temps que le loyer, et ça, aucun registre ne l’écrira jamais. »',
                   ['drakk', '« … »'],
                   ['drakk', '« Je vous ai vus le faire. Je ne l’oublierai pas. »'],
                   'Herwick ne le regarde pas en le disant. Il regarde la fente du rideau, comme avant.',

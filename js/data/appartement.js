@@ -43,17 +43,23 @@
    `trace-archive`, sa propre ligne, et la deuxième marque au compteur
    d'un decker qui en laisse une à chaque fois.
 
-   ══ L'ADRESSE N'EST PAS UN VERROU, ET C'EST UNE DÉCISION ════════════
-   `appart-teresa` — l'adresse au mètre près — vient de Herwick, qui est
-   UNE planque sur cinq. En faire la condition d'entrée aurait laissé
-   quatre parties sur cinq devant une porte qu'elles ne trouvent pas, et
-   surtout : le garde-fou D12 dit qu'aucune planque ne ferme un maillon
-   de la chaîne de preuves. Ce n'est pas son adresse qui était cachée,
-   c'est le fait que ce soit le lieu du crime (`appart-hors-dossier`).
-   Herwick paie donc en TEXTE, pas en accès : avec `appart-teresa`,
-   l'équipe sait où elle va ; sans, elle cherche l'immeuble, et arrive
-   quand même. Règle 12 à la lettre — une déduction ouvre la parole,
-   jamais une porte.
+   ══ L'ADRESSE VIENT DU DOSSIER, ET ELLE N'EST PAS UN VERROU ═════════
+   Elle venait de Herwick à la livraison de ce chantier, et l'utilisateur
+   l'a refusé le jour même : une équipe qui tient le dossier de police
+   d'une victime de meurtre n'a pas besoin d'un antiquaire pour savoir
+   où elle habitait. Corrigé — `adresse-teresa` sort de la lecture du
+   dossier (`lectureDossier`, `planque.js`), donc des cinq lieux où
+   l'équipe attend l'audience, donc de n'importe quelle partie.
+
+   Ça reste sans verrou : lire le dossier est facultatif, et ne pas
+   l'avoir lu coûte trois quarts d'heure à chercher l'immeuble, pas
+   l'accès. Le garde-fou D12 est respecté par construction — aucune
+   planque ne décide plus de rien ici — et la règle 12 aussi : le
+   dossier ouvre une porte de RÉCIT, jamais un obstacle.
+
+   Ce que Herwick garde, `appart-teresa`, est maintenant le bail : qui
+   paie, et pourquoi la patronne du pressing ne pose pas de question.
+   Ça se paie en texte, à deux endroits — l'ouverture, et la sortie.
 
    ══ LE FRONT DU TÍR AVANCE, ET SANS COMPTEUR (§ 7.4) ════════════════
    Le plan veut que les runners du Tír progressent « quand on passe dans
@@ -88,10 +94,13 @@ export const appartement = {
      après-midi » quand on arrive du local le même jour. */
   acte: 4,
 
-  ouverture: ({ a }) => [
+  ouverture: ({ a, sait }) => [
+    ...(sait('adresse-teresa')
+      ? ['2214 South Sheridan. C’était écrit en page deux du dossier depuis le début : un pressing au rez-de-chaussée, deux étages au-dessus, la porte du fond.']
+      : ['Il a fallu trois quarts d’heure pour trouver l’immeuble — personne n’avait lu le dossier jusqu’à la page où son adresse est écrite. Un pressing au rez-de-chaussée, deux étages au-dessus, et aucun nom sur les boîtes aux lettres.']),
     ...(a('appart-teresa')
-      ? ['Herwick l’avait situé au mètre près : au-dessus d’un pressing, deuxième étage, la porte du fond. Il ne s’était pas trompé d’un pas.']
-      : ['Il a fallu trois quarts d’heure pour trouver l’immeuble — un pressing au rez-de-chaussée, deux étages au-dessus, et aucun nom sur les boîtes aux lettres.']),
+      ? ['La patronne du pressing vous regarde monter et ne dit rien. Herwick avait prévenu : c’est elle qui encaisse le loyer, et c’est pour ça qu’on la paie.']
+      : []),
     'La porte du studio n’est pas fermée à clé. Elle porte, en travers, deux rubans jaunes qui n’existent qu’en réalité augmentée : SCÈNE PLACÉE SOUS SCELLÉS — LONE STAR. Physiquement, il n’y a rien. On passe la main au travers.',
     'Dedans, une pièce et demie, et l’odeur du détachant qui monte du pressing. Rien n’a bougé depuis trois jours. Rien du tout.',
     ...(a('su:hayden')
@@ -171,6 +180,9 @@ export const appartement = {
             ? [{ texte: 'En bas, le pressing tourne. La patronne vous regarde passer, décroche son commlink avant même que vous ayez atteint le trottoir, et compose un numéro qu’elle connaît par cœur.',
                  visuel: 'tir-dehors' },
                'Ils avaient laissé leur carte à quatre endroits du quartier. Elle en fait partie.',
+               ...(a('appart-teresa')
+                 ? [['drakk', '« Elle encaisse le loyer et elle ne pose pas de question. Herwick nous l’avait dit. Il ne nous avait pas dit à qui elle en pose, elle. »']]
+                 : []),
                ...(a('local-quitte')
                  ? ['Trente secondes plus tard, à trois kilomètres de là, quelqu’un pousse un rideau de fer qui ne redescend plus et demande à quatre personnes en deuil si des gens sont venus leur poser des questions.']
                  : [])]

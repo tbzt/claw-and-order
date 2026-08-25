@@ -120,9 +120,25 @@ export const fiches = {
     texte: 'L’accusation a décrété une agression de rue : elle aurait erré là par hasard. C’est commode — ça ne supprime pas le mobile, ça supprime la question du mobile.',
     ou: 'Le dossier, à la planque',
   },
+  /* L'ADRESSE EST DANS LE DOSSIER (corrigé le 2026-08-25, sur la
+     critique de l'utilisateur). Elle venait de Herwick, ce qui
+     supposait qu'une équipe tenant le dossier de police d'une victime
+     de meurtre ait besoin d'un antiquaire pour savoir où elle habitait.
+     Le dernier domicile connu est une pièce d'IDENTITÉ, pas une pièce
+     d'enquête : il est en page deux de n'importe quel dossier.
+
+     Les deux fiches ci-dessous sont les deux moitiés du même fait, et
+     elles ne disent quelque chose qu'ensemble — d'où le `presque` qui
+     les recoupe. La première donne un endroit où aller ; la seconde
+     dit que personne n'y est allé. C'est la seconde qui accuse. */
+  'adresse-teresa': {
+    titre: 'Elle habitait à deux rues',
+    texte: 'TERESA BANKS — dernier domicile connu : 2214 South Sheridan, Loveland, au-dessus d’un pressing. En page deux du dossier, section identité, en haut de la page, comme sur tous les dossiers du monde. À deux rues du taudis où on l’a retrouvée.',
+    ou: 'Le dossier, à la planque',
+  },
   'appart-hors-dossier': {
-    titre: 'Son appartement n’est pas au dossier',
-    texte: 'Pas une photo, pas un relevé, pas une ligne. Officiellement, ce n’est pas le lieu du crime — donc officiellement, il n’y a rien à y voir.',
+    titre: 'Personne n’a jamais poussé la porte',
+    texte: 'Son adresse est écrite une fois, en page deux, et elle ne reparaît plus jamais : pas une photo, pas un relevé, pas un procès-verbal de transport. Officiellement, ce n’est pas le lieu du crime — donc officiellement, il n’y avait rien à y voir. Il a suffi de ne pas y aller.',
     ou: 'Le dossier, à la planque',
   },
 
@@ -137,12 +153,19 @@ export const fiches = {
     texte: 'Un rideau de fer, une adresse que personne n’avait notée nulle part, et un tir à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
     ou: 'Chez Herwick, à huit heures quarante',
   },
-  /* Le trou du dossier, comblé à voix humaine et pas au téléphone
-     (`herwick|dossier-vide` ne donne que l'ABSENCE de l'adresse ;
-     celle-ci est l'adresse elle-même — PLAN_PLANQUES.md § 3.2). */
+  /* CE QUE HERWICK GARDE, ET QU'AUCUN DOSSIER NE PORTE (revu le
+     2026-08-25). Ce n'était plus tenable que le trou du dossier soit
+     l'ADRESSE : elle y est, en page deux. Alors le dilemme de ce décor
+     — demander à un vieil homme qui saigne, et casser Drakk pour ça —
+     aurait porté sur un numéro de rue, ce qui ne vaut pas une amitié.
+     Il porte maintenant sur QUI PAIE le loyer, que quarante ans de
+     trottoir savent et qu'aucune procédure n'écrit. C'est ce qui rend
+     `drakk-brise` défendable, et c'est aussi ce qui explique, deux
+     tableaux plus loin, pourquoi la patronne du pressing décroche son
+     commlink quand l'équipe ressort de chez Teresa. */
   'appart-teresa': {
-    titre: 'L’appartement que personne n’a versé au dossier',
-    texte: 'Un studio au-dessus d’un pressing, à Loveland, loué cash depuis huit mois à un nom qui n’est pas le sien. Herwick le situe au mètre près — il ne le doit à aucun registre, seulement à quarante ans à savoir qui vit où sur son trottoir.',
+    titre: 'Le bail est au nom de personne',
+    texte: 'Le studio est loué depuis huit mois, cash, à un nom qui n’existe pas — et ce n’est pas elle qui payait. La patronne du pressing encaisse pour le propriétaire et n’a jamais posé de question : c’est le service qu’on lui achète en même temps que le loyer.',
     ou: 'Herwick Strauber, à l’arrière-boutique',
   },
 
@@ -554,7 +577,13 @@ export const presque = {
   'tir-herwick|toralf-vise-lester':
     'Le goulet, puis l’arrière-boutique. Le même employeur, sans doute — ça ne se prouve pas avec deux tirs. Ça se prouve en trouvant qui paie.',
   'appart-teresa|corps-loveland':
-    'Un corps posé à Loveland, et un studio loué cash à deux rues de là. Il manque encore qui l’a menée du second au premier.',
+    'Un corps posé à Loveland, et un studio payé cash à deux rues de là par quelqu’un qui n’a jamais donné son nom. Il manque encore qui l’a menée du second au premier.',
+  'adresse-teresa|appart-hors-dossier':
+    'L’adresse est écrite en page deux, et rien ne la suit dans tout le reste de la chemise. Les deux tiennent dans le même dossier, à trois pages d’écart. Ce n’est pas un oubli — un oubli n’écrit pas l’adresse d’abord.',
+  'adresse-teresa|corps-loveland':
+    'Deux rues. Elle habitait à deux rues de l’endroit où on l’a retrouvée, et le dossier porte les deux adresses sans jamais les mettre côte à côte. Il faudrait aller voir la première pour savoir ce que ça change.',
+  'adresse-teresa|appart-teresa':
+    'Le dossier donne l’adresse, la rue donne le bail. Le même studio, vu par une administration qui l’écrit sans y aller et par un vieil homme qui sait qui paie. Il manque le nom sur l’enveloppe.',
 
   /* Sarah est une halte depuis le chantier 39 : plus de tir dans son
      cabinet, donc plus de paire `tir-sarah|toralf-vise-lester`. Celle-ci
