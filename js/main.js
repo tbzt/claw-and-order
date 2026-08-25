@@ -186,6 +186,7 @@ const NOMS_LIEUX = {
   squat: 'La loge de Trash',
   tripot: 'Le tripot d’Hercules',
   amis: 'Le local de répétition',
+  appartement: 'L’appartement de Teresa',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
   carte: 'La carte',
@@ -1541,6 +1542,13 @@ const BILAN = [
   ['nita-ferme',     'Une permanente de l’ORC a demandé pour qui vous travailliez. Ne pas répondre était déjà une réponse.'],
   ['orc-contact',    'Amelia Brown prend vos appels. Ça ne s’achète pas — ça se recommande.'],
   ['tir-prevenu',    'Le quartier a prévenu les elfes du Tír que quelqu’un d’autre posait des questions. C’est pour ça qu’ils avaient laissé une carte.'],
+  /* L'appartement de Teresa, chantier 26 — la première ancre. */
+  ['su:lester-innocent', 'La preuve qu’il n’a rien fait était consultable depuis trois jours, pour qui avait un numéro de contrat à quatre chiffres.'],
+  ['maglock-journal',    'Deux hommes sont entrés chez elle après sa mort et sont ressortis ensemble. C’est écrit en clair, chez un serrurier de Puyallup.'],
+  ['trace-archive',      'Une archive commerciale a été lue par quelqu’un qui n’y avait pas droit. Ça se verra un jour, et pas aujourd’hui.'],
+  ['rubans-intacts',     'Trois jours de scellés, pas une rupture. Personne de la Lone Star n’est jamais revenu sur les lieux.'],
+  ['valise-faite',       'Sa valise était aux trois quarts faite. Elle n’a pas été surprise par sa mort — elle a été rattrapée par son départ.'],
+  ['tir-retour',         'Les elfes du Tír sont retournés voir les quatre amis. Ils y sont allés parce que vous y étiez allés.'],
 ]
 
 function tombeRideau() {
@@ -1553,7 +1561,11 @@ function tombeRideau() {
      du jeu ne déclenche plus — `abordage-passe` en fait désormais
      partie — mais qu'une sauvegarde antérieure pourrait encore
      porter. */
-  $('rideauLigne').textContent = a('local-quitte')
+  $('rideauLigne').textContent = a('appart-quitte')
+    ? (a('su:lester-innocent')
+        ? 'Ils savaient. Depuis le premier jour, ils savaient, et ils ont mis un gamin de vingt ans dans une navette de huit heures. Il reste à le prouver devant quelqu’un.'
+        : 'Une pièce et demie au-dessus d’un pressing, vide depuis trois jours. Vous en ressortez avec l’odeur du détachant et pas grand-chose d’autre.')
+    : a('local-quitte')
     ? (a('su:hayden')
         ? 'Un prénom écrit à l’oreille, un nom de famille, et un homme au bout des deux. L’enquête a commencé, et elle a quelqu’un à chercher.'
         : 'Trois jours, quatre personnes qui l’ont connue, et vous ressortez de Loveland avec ce que vous y avez apporté.')

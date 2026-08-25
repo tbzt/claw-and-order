@@ -1,0 +1,63 @@
+<!--
+  Tableau 9 — L'APPARTEMENT DE TERESA BANKS. Chantier 26
+  (`PLAN_TRAME_ACTES_III_IV.md` § 7.1-7.2, rang 6 du § 10) — la première
+  des trois ancres du scénario source, et le second tableau de l'acte IV.
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `herwick.html`, `sarah.html`, `duke.html`, `squat.html`, `tripot.html`
+  et `amis.html`. Dette d'art assumée, notée dans `PLAN_EXECUTION.md`.
+
+  AUCUN PNJ, ET C'EST LE PREMIER TABLEAU DU JEU DANS CE CAS. Il n'y a
+  personne à qui parler ici : la pièce est vide depuis trois jours, et
+  c'est exactement ce qu'elle a à dire. Les quatre runners, et rien
+  d'autre de vivant.
+
+  LA PORTE EST À LA FOIS LA CIBLE DES SCELLÉS ET LA SORTIE — une chose du
+  monde, une seule cible. Le LECTEUR DU HALL, lui, en est une autre : il
+  est en bas de l'escalier, visible par la porte restée ouverte, et c'est
+  la serrure de l'IMMEUBLE, pas celle du studio.
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe
+  d'abord, le mobilier ensuite.
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--appartement">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <!-- Le jour qui entre par la fenêtre — premier tableau diurne du jeu
+       avec le local de répétition. -->
+  <div class="jour"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- La cage d'escalier, par la porte restée ouverte, et le lecteur de
+       la porte de l'immeuble tout en bas. -->
+  <div class="cage-escalier"></div>
+  <div class="lecteur-hall" data-hotspot="maglock"></div>
+
+  <!-- La porte du studio et ses deux rubans de RA : la sortie. -->
+  <div class="porte-scellee" data-hotspot="porte">
+    <span class="ruban ruban--haut"></span>
+    <span class="ruban ruban--bas"></span>
+  </div>
+
+  <div class="fenetre-rue" data-hotspot="fenetre"></div>
+
+  <div class="placard-pharmacie" data-hotspot="pharmacie"></div>
+
+  <div class="coin-cuisine" data-hotspot="cuisine"></div>
+
+  <!-- La pile de courrier, poussée contre le mur près de la porte. -->
+  <div class="pile-courrier" data-hotspot="courrier"></div>
+
+  <!-- Le lit nu, la poudre à empreintes, et la valise dessous. -->
+  <div class="lit-nu" data-hotspot="lit"></div>
+  <div class="valise-cabine" data-hotspot="valise"></div>
+
+</div>

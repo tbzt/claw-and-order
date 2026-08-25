@@ -247,6 +247,44 @@ export const fiches = {
     ou: 'Nova, au local de répétition',
   },
 
+  /* ── L'APPARTEMENT DE TERESA, chantier 26 — la première ancre ──────
+     `PLAN_TRAME_ACTES_III_IV.md` § 7.1. Le scénario source est net :
+     « c'est le VRAI lieu du crime ; la Lone Star a relevé l'ADN et ne
+     l'a jamais versé au dossier ». Ces fiches ne disent pas qu'elle est
+     morte là — elles disent que LA STAR LE SAIT, ce qui est une autre
+     affaire, et beaucoup plus lourde.
+
+     `draps-emportes` et `maglock-journal` sont la paire de
+     `lester-innocent`. Comme pour `hayden` au local, elles viennent du
+     même tableau par deux chemins différents : un constat que n'importe
+     qui peut faire, et une intrusion que White_Rabbit seule peut mener
+     — et qui coûte une trace. */
+  'rubans-intacts': {
+    titre: 'Personne n’est repassé',
+    texte: 'Les scellés de RA portent leur horodatage de pose et pas une seule rupture depuis. Trois jours, et aucun enquêteur n’a rouvert cette porte. On ne ferme pas une scène de crime le jour où on la trouve — sauf quand on a déjà décidé de ce qu’on écrirait dedans.',
+    ou: 'L’appartement de Teresa',
+  },
+  'draps-emportes': {
+    titre: 'Ils ont relevé, et ils n’ont rien versé',
+    texte: 'Le lit est nu et la poudre à empreintes est encore sur la tête de lit. La Lone Star a fait un relevé complet dans un appartement qui, officiellement, n’est pas le lieu du crime. Le rapport existe. Il n’est pas au dossier de Lester.',
+    ou: 'L’appartement de Teresa',
+  },
+  'affaires-homme': {
+    titre: 'Il vivait ici à moitié',
+    texte: 'Un rasoir en acier massif qui vaut plus cher que la pièce, une seconde brosse à dents, et six gélules blanches dans un flacon sans étiquette. Il ne dormait pas là : il s’y rasait, et il s’y préparait à être brillant ailleurs.',
+    ou: 'L’appartement de Teresa',
+  },
+  'valise-faite': {
+    titre: 'Elle partait',
+    texte: 'Une valise cabine à moitié faite sous le lit, les vêtements pliés et pas jetés, la trousse déjà fermée. Rien de sentimental dedans, pas une photo. Ce n’était pas un voyage : c’était un départ, et il avait une date.',
+    ou: 'L’appartement de Teresa',
+  },
+  'maglock-journal': {
+    titre: 'Deux portes ouvertes après sa mort',
+    texte: '22:04, elle rentre — la dernière fois. 22:51, une seconde ouverture, un autre porteur. 23:58, une troisième. Et les deux ressortent à 00:26, à une minute d’intervalle. C’est archivé en clair chez le prestataire de serrures de l’immeuble, et personne n’était allé le chercher.',
+    ou: 'Puyallup Lockworks, contrat 4471-B',
+  },
+
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
   'registre-anterieur': {
     titre: 'La ligne est plus ancienne que lui',
@@ -359,6 +397,30 @@ export const deductions = [
       trash: '« Je connais cette famille. Pas cet homme — la famille. Et je sais exactement ce qu’elle fait de ce qui la gêne, parce que la mienne faisait pareil. »',
       rabbit: '« Une faute de frappe a protégé un homme pendant trois jours. Aucun chiffrement au monde n’a jamais fait aussi bien. »',
       drakk: '« Nous avions le nom depuis le début. Il était écrit dans la mauvaise langue, voilà tout. »',
+    },
+  },
+
+  /* ── LA DEUXIÈME DÉDUCTION DE L'ACTE IV — chantier 26 ─────────────
+     Elle ne prouve pas que Lester n'a rien fait : elle prouve que la
+     Lone Star a de quoi le savoir depuis le premier jour, et qu'elle a
+     rangé ce qu'il fallait pour ne pas le savoir. C'est la différence
+     entre une erreur judiciaire et ce que ce jeu raconte, et c'est pour
+     ça que la fiche s'appelle `lester-innocent` sans jamais parler de
+     Lester : les deux pièces parlent d'EUX. */
+  {
+    paire: ['draps-emportes', 'maglock-journal'],
+    donne: {
+      id: 'lester-innocent',
+      titre: 'Ils savent depuis le premier jour',
+      texte: 'Ils ont relevé l’ADN sur des draps qu’ils ont emportés d’un appartement dont ils n’ont jamais versé l’existence, et il existe un journal en clair où deux hommes entrent chez elle après sa mort et ressortent ensemble. Aucune des deux pièces n’accuse Lester. Ensemble, elles disent qu’on a construit un dossier autour d’un homme qu’on savait innocent.',
+      ou: 'Recoupement',
+    },
+    dit: {
+      tous: 'Les deux fiches tiennent debout séparément. Posées l’une sur l’autre, elles cessent de parler de Teresa.',
+      hercules: '« Ce n’est pas un dossier bâclé. Un dossier bâclé, ça manque de pièces. Celui-là a les pièces et les a rangées ailleurs. Ça s’appelle autrement. »',
+      trash: '« Ils ont su avant nous, avant lui, avant tout le monde. Et ils ont mis un gamin de vingt ans dans une navette. »',
+      rabbit: '« Deux relevés, un journal, trois jours. La preuve de son innocence était consultable par n’importe qui, moyennant un numéro de contrat à quatre chiffres. »',
+      drakk: '« Ils n’ont pas manqué le coupable. Ils ont choisi un autre nom, et ils l’ont écrit à la place. »',
     },
   },
 ]
@@ -550,6 +612,29 @@ export const presque = {
     'Un studio loué cash sous un nom qui n’est pas le sien, et quelqu’un d’assez haut placé pour qu’elle n’en dise jamais le nom. Elle ne se cachait pas de lui : elle se cachait AVEC lui.',
   'prenom-mal-ecrit|teresa':
     'Elle est morte étranglée, et elle avait gardé un prénom au dos d’un papier. Les deux sont vrais. Il manque tout le reste.',
+
+  /* ── L'appartement de Teresa, chantier 26 ─────────────────────────
+     La paire qui PROUVE (`draps-emportes|maglock-journal`) est une
+     déduction, plus haut. Celles-ci sont les frottements que le joueur
+     a une bonne raison d'essayer en ressortant du studio — et deux
+     d'entre elles raccordent enfin des fiches qui dormaient depuis la
+     nuit du contrat. */
+  'appart-hors-dossier|rubans-intacts':
+    'Rien au dossier, et personne qui repasse. Les deux racontent le même désintérêt, et le désintérêt n’est pas une preuve — c’est ce qu’on invoque quand on n’en a pas.',
+  'corps-loveland|maglock-journal':
+    'Elle est sortie de chez elle à 00:26, portée par deux hommes, et on l’a retrouvée à deux rues. Le trajet manquant du dossier est là. Il manque encore leurs noms.',
+  'draps-emportes|elfe-autopsie':
+    'Une main d’elfe sur sa gorge, et un relevé complet fait puis enterré. S’ils ont l’ADN, ils ont le nom. S’ils ont le nom et qu’ils poursuivent un ork, ce n’est plus une enquête.',
+  'affaires-homme|gros-ponte-telestrian':
+    'Un rasoir qu’on ne s’achète pas, des stimulants sans étiquette, et un homme de la maison Telestrian assez haut placé pour n’avoir jamais de nom de famille. Ce sont les mêmes affaires. Ça ne fait toujours pas une main sur une gorge.',
+  'teresa-cliente|valise-faite':
+    'Elle demandait à une doc des rues comment on disparaît proprement, et sa valise était aux trois quarts faite. Elle n’a pas été surprise par sa mort : elle a été rattrapée par son départ.',
+  'hayden|valise-faite':
+    'Elle partait, et il le savait peut-être. Ce serait un mobile — ce n’est pour l’instant qu’une chronologie, et une chronologie ne condamne personne.',
+  'rubans-intacts|tir-herwick':
+    'Ils n’ont pas remis les pieds chez elle en trois jours, et ils vous ont trouvés en une nuit. Ce ne sont pas les mêmes gens qui cherchent, ou ce ne sont pas les mêmes ordres.',
+  'maglock-journal|toralf-vise-lester':
+    'Deux hommes chez elle après minuit, un tireur au goulet trois jours plus tard. Le second a été payé ; les deux premiers avaient une clé. Ce n’est pas le même métier.',
 
   /* ── Ce qu’on a déjà déduit, frotté contre le reste ──────────────── */
   'deux-mains|teresa':

@@ -79,9 +79,9 @@
    pas de carrefour à dessiner (D11 — pas de nœuds de carte tant que
    l'acte IV n'existe pas ; il commence à exister avec ce fichier). Il
    ne construit pas non plus le compteur d'exposition de D9. La sortie
-   retombe donc sur `fin: true`, avec la même honnêteté que `retour.js`
-   avant lui : quand l'appartement (26) et le Shameless (27) existeront,
-   c'est ici que la carte reprendra la main. */
+   retombait sur `fin: true` — **elle mène à l'appartement depuis le
+   chantier 26** ; quand le Shameless (27) existera à son tour, c'est là
+   que la carte reprendra la main. */
 
 import { equipiers } from './equipiers.js'
 
@@ -439,9 +439,16 @@ export const amis = {
            arrêtée : la nuit du contrat s'arrêtait à l'abordage, elle
            s'arrête maintenant ici. Un drapeau et pas `etat.lieu` —
            `tombeRideau()` ne lit que des drapeaux, et il doit continuer
-           à savoir répondre à une sauvegarde plus ancienne. */
+           à savoir répondre à une sauvegarde plus ancienne.
+
+           CE QUI ÉTAIT PROVISOIRE NE L'EST PLUS (chantier 26) : ce
+           `fin: true` est devenu `va: 'appartement'`. Le local disait
+           lui-même, en en-tête, que c'est ici que la suite se
+           brancherait — troisième fois que le jeu paie cette dette-là,
+           après `tribunal-salle.js` (chantier 4) et `retour.js`
+           (chantier 28), et toujours de la même façon. */
         flags: ['local-quitte'],
-        fin: true,
+        va: 'appartement',
       }),
     },
   },

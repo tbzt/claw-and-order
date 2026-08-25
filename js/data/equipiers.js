@@ -320,6 +320,24 @@ const TABLEAUX = {
      de deux hommes qui rentrent chez eux. Hercules ne peut acheter
      personne ; Trash reconnaît la famille qui vient de passer avant
      eux, parce que c'est la sienne. */
+  /* L'appartement de Teresa, chantier 26 : le premier décor du jeu SANS
+     PERSONNE en face. Les cinq planques avaient Lester, le local avait
+     quatre amis ; ici il n'y a que l'équipe et une pièce vide depuis
+     trois jours. Les deux entrées sont donc celles des deux runners que
+     le vide met au travail — White_Rabbit, parce que le seul maillon
+     qui reste est matriciel, et Drakk, parce qu'il est le seul à savoir
+     quoi faire d'un endroit où quelqu'un est mort. */
+  appartement: {
+    rabbit: {
+      vu: 'Elle ne touche à rien. Elle fait le tour de la pièce en lisant ce qui flotte dessus, les mains dans les poches, comme dans un musée dont elle serait la seule visiteuse.',
+      trash: '« Elle est la seule d’entre nous qui voie encore quelque chose ici. Nous trois, on regarde des meubles. »',
+    },
+    drakk: {
+      vu: 'Il enlève son bonnet en entrant. Personne ne lui a rien demandé, et personne ne fait de commentaire.',
+      hercules: '« Il a retiré son bonnet. Je ne l’avais jamais vu faire ça de toute la nuit, pas même au tribunal. »',
+    },
+  },
+
   amis: {
     hercules: {
       vu: 'Il ouvre la bouche deux fois avant de dire quoi que ce soit. Trente ans qu’il entre dans une pièce en sachant ce qu’il va vendre, et il n’a rien à vendre ici.',
