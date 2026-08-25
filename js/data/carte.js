@@ -68,7 +68,15 @@
    — c'est tout l'intérêt d'avoir écrit ce chantier en fonction générique
    plutôt qu'en cas particulier au 17. Le Shameless n'est pas à Loveland
    (§7.1 du plan : « entre le concert et chez elle ») : il est posé sur
-   la route, dans Tacoma — ni chez elle, ni au tribunal, entre les deux. */
+   la route, dans Tacoma — ni chez elle, ni au tribunal, entre les deux.
+
+   ══ CHANTIER 43 — LE QUATRIÈME LIEU, ET PAS UNE QUATRIÈME ANCRE ═════
+   `waters` s'ajoute au registre à son tour, toujours sans rien changer
+   à `noeud()`. Différence avec les trois précédents : les trois
+   déductions réservées à l'acte IV sont déjà posées (`hayden`,
+   `lester-innocent`, `amant-secret`) — ce lieu ne rend pas une
+   déduction de plus, il rend le LEVIER que `amis.js` annonçait déjà
+   (l'enregistrement chez Reginald Waters, §7.1 du plan). */
 
 import { etat, formateHeure, formateTour } from '../state.js'
 
@@ -140,6 +148,18 @@ export const lieux = {
     x: 44.0, y: 97.0,
     acte: 4,
   },
+  /* LE QUATRIÈME LIEU D'ENQUÊTE (chantier 43) — pas une quatrième
+     ancre : les trois déductions de l'acte IV sont déjà posées, celui-
+     ci rend un LEVIER (§7.1 du plan). « À Puyallup », comme le local et
+     l'appartement, mais pas à Loveland : Waters n'a aucun lien avec le
+     quartier de Teresa, seulement avec sa musique — le point est donc
+     posé à part, au sud du jalon 9, pas dans le même mouchoir. */
+  waters: {
+    nom: 'Waters Sound',
+    ou: 'Puyallup',
+    x: 40.0, y: 136.0,
+    acte: 4,
+  },
   /* Le seul nœud du jeu qui ne mène nulle part : il REFERME l'acte IV.
      Downtown, à côté du 6 — le palais est à deux pas du Claw & Order,
      ce que le scénario dit et que le jeu n'avait jamais montré. */
@@ -171,9 +191,16 @@ const RECITS = {
   'shameless|amis': ['Vous laissez les basses du Shameless derrière vous et remontez vers Loveland. Trois kilomètres, et une nuit qui recommence à faire du bruit.'],
   'appartement|shameless': ['Vous quittez le studio de Teresa pour un club qui, lui, n’a jamais prétendu être un endroit innocent.'],
   'shameless|appartement': ['Vous laissez le Shameless derrière vous. L’appartement, lui, n’ira nulle part — il attend depuis trois jours, il peut attendre encore.'],
+  'amis|waters': ['Vous quittez Loveland pour Puyallup, plus au sud. Pas la même adresse — la même affaire, vue par quelqu’un qui n’a jamais connu Teresa autrement qu’en musique.'],
+  'waters|amis': ['Vous laissez Waters à sa console et remontez vers Loveland.'],
+  'appartement|waters': ['Vous quittez le studio de Teresa vide pour un studio qui, lui, est resté habité.'],
+  'waters|appartement': ['Vous laissez Waters Sound derrière vous pour l’appartement, qui n’attend toujours que vous.'],
+  'shameless|waters': ['Vous quittez le Shameless pour Puyallup. Un club qui gardait un secret, un studio qui en garde un autre.'],
+  'waters|shameless': ['Vous laissez Waters à sa console et redescendez vers le Shameless.'],
   'amis|audience': ['Vous laissez Loveland derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
   'appartement|audience': ['Vous laissez Loveland derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
   'shameless|audience': ['Vous laissez le Shameless derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
+  'waters|audience': ['Vous laissez Puyallup derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
 }
 
 const coutDe = (depuis, vers) => lieux[depuis]?.minutes?.[vers]
@@ -235,8 +262,8 @@ export const carte = {
   ouverture: (ctx, visite) => ctx.a('abordage-passe')
     ? (visite > 1
         ? [['drakk', '« La province ne change pas de forme. Seuls les jours y changent de visage. »']]
-        : ['Drakk ressort le plan. Ce n’est plus le même : quatre lieux y sont marqués, tous au crayon, et deux d’entre eux tiennent dans un mouchoir.',
-           ['drakk', '« Loveland. Trois kilomètres de côté, et la moitié de l’affaire dedans. L’autre moitié boit ailleurs. »'],
+        : ['Drakk ressort le plan. Ce n’est plus le même : cinq lieux y sont marqués, tous au crayon, et deux d’entre eux tiennent dans un mouchoir.',
+           ['drakk', '« Loveland. Trois kilomètres de côté, et la moitié de l’affaire dedans. L’autre moitié boit ailleurs, et la dernière enregistre. »'],
            ['drakk', '« Le dernier point, c’est la sortie. Nous y allons quand nous décidons d’y aller, et pas quand nous n’avons plus le choix. »']])
     : visite > 1
     ? [['drakk', '« La province ne change pas de forme. Seule l’heure y change de visage. »']]
@@ -257,6 +284,7 @@ export const carte = {
     amis: noeud('amis'),
     appartement: noeud('appartement'),
     shameless: noeud('shameless'),
+    waters: noeud('waters'),
     audience: noeud('audience'),
   },
 

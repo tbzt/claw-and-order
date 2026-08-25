@@ -1549,6 +1549,11 @@ const BILAN = [
   ['rubans-intacts',     'Trois jours de scellés, pas une rupture. Personne de la Lone Star n’est jamais revenu sur les lieux.'],
   ['valise-faite',       'Sa valise était aux trois quarts faite. Elle n’a pas été surprise par sa mort — elle a été rattrapée par son départ.'],
   ['tir-retour',         'Les elfes du Tír sont retournés voir les quatre amis. Ils y sont allés parce que vous y étiez allés.'],
+  /* Waters Sound, chantier 43 — le levier, pas une déduction de plus.
+     Les deux flags sont mutuellement exclusifs : le coffre ne se
+     résout qu'une fois par partie (`waters.js`, `coffre.utiliser`). */
+  ['waters-convaincu',   'Un vieil homme qui n’aimait personne vous a donné, de lui-même, ce qu’il gardait depuis six mois.'],
+  ['bombe-declenchee',   'Une bombe matricielle a fait ce pour quoi Waters l’avait payée. L’enregistrement existe, à moitié — et White_Rabbit en garde une brûlure au poignet.'],
   /* La carte de l'acte IV, chantier 17 réécrit. */
   ['enquete-close',      'Vous avez décidé vous-mêmes du moment où ça suffisait. Personne ne vous a poussés dehors.'],
 ]

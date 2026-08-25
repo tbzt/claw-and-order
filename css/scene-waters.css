@@ -1,0 +1,180 @@
+/* ── TABLEAU 11 — WATERS SOUND ────────────────────────────────────────
+   Chantier 43, le levier de la retombée 2. Grille 256 x 144
+   (chantier 8), même --u que les autres tableaux.
+
+   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-amis.css` et
+   `scene-shameless.css` : aucun sprite neuf pour Waters. Assez pour
+   reconnaître un studio d'enregistrement de quartier fatigué — une
+   console, des rayonnages de bandes, un mur de disques encadrés, une
+   cabine vitrée, un coffre dans le mur du fond — et pour valider le
+   dilemme du coffre en jeu.
+
+   LA LUMIÈRE EST CHAUDE ET BASSE, JAMAIS FROIDE : contrairement à
+   l'appartement (scellés, abandon) ou au Shameless (nuit, discrétion),
+   c'est un lieu HABITÉ, où quelqu'un vit plus qu'il ne travaille.
+
+   DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
+   cibles cliquables avant tout test au navigateur — même discipline que
+   `scene-shameless.css`. Les coordonnées de chaque cible sont écrites
+   en commentaire au-dessus d'elle. */
+
+.tableau--waters {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #171208;
+}
+.tableau--waters > * { position: absolute; }
+
+.tableau--waters .fond {
+  left: 0; top: 0; width: 100%; height: calc(114 * var(--u));
+  background: linear-gradient(180deg, #2a2114 0%, #201808 60%, #16100a 100%);
+}
+.tableau--waters .sol {
+  left: 0; top: calc(114 * var(--u)); width: 100%; height: calc(30 * var(--u));
+  background: linear-gradient(180deg, #2c2314 0%, #19140c 100%);
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.5);
+}
+
+/* ── LA CONSOLE DE MIXAGE — x:8-70, y:8-46 ───────────────────────────
+   Rangée de curseurs usés, un cendrier, un casque au crochet. */
+.tableau--waters .console {
+  left: calc(8 * var(--u)); top: calc(8 * var(--u));
+  width: calc(62 * var(--u)); height: calc(38 * var(--u));
+  background:
+    repeating-linear-gradient(90deg, #4a3a20 0 calc(3 * var(--u)), #3a2c18 calc(3 * var(--u)) calc(6 * var(--u))),
+    #2e2314;
+  border: calc(1 * var(--u)) solid #100c06;
+}
+.tableau--waters .console::after {
+  content: ''; position: absolute;
+  right: calc(6 * var(--u)); top: calc(6 * var(--u));
+  width: calc(10 * var(--u)); height: calc(8 * var(--u));
+  border-radius: 50%;
+  background: #1a140a;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(200,170,120,.2);
+}
+
+/* ── LES RAYONNAGES DE BANDES — x:82-150, y:8-46 ─────────────────────
+   « Il garde tout » : des étagères pleines, étiquetées par date. */
+.tableau--waters .archive {
+  left: calc(82 * var(--u)); top: calc(8 * var(--u));
+  width: calc(68 * var(--u)); height: calc(38 * var(--u));
+  background:
+    repeating-linear-gradient(0deg, #2c2212 0 calc(9 * var(--u)), #221a0c calc(9 * var(--u)) calc(10 * var(--u))),
+    #241c10;
+  border: calc(1 * var(--u)) solid #100c06;
+}
+.tableau--waters .archive::after {
+  content: ''; position: absolute;
+  left: calc(6 * var(--u)); top: calc(4 * var(--u)); right: calc(6 * var(--u));
+  height: calc(4 * var(--u));
+  background: repeating-linear-gradient(90deg, #6a5a38 0 calc(4 * var(--u)), transparent calc(4 * var(--u)) calc(8 * var(--u)));
+  opacity: .5;
+}
+
+/* ── LE MUR DE DISQUES ENCADRÉS — x:162-248, y:8-40 ──────────────────
+   Une douzaine de cadres, et une petite photo dans un coin. */
+.tableau--waters .murs {
+  left: calc(162 * var(--u)); top: calc(8 * var(--u));
+  width: calc(86 * var(--u)); height: calc(32 * var(--u));
+  background:
+    repeating-linear-gradient(90deg, #4e3e1c 0 calc(14 * var(--u)), #3c3016 calc(14 * var(--u)) calc(16 * var(--u))),
+    #2e2412;
+  border: calc(1 * var(--u)) solid #100c06;
+}
+.tableau--waters .murs::after {
+  content: ''; position: absolute;
+  right: calc(6 * var(--u)); bottom: calc(4 * var(--u));
+  width: calc(10 * var(--u)); height: calc(10 * var(--u));
+  background: #14100a;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(220,200,160,.25);
+}
+
+/* ── LA CABINE D'ENREGISTREMENT — x:8-70, y:50-70 ────────────────────
+   Vitrée, vide, un pied de micro sans micro. Empilée sous la console
+   (même colonne en x, bandes en y disjointes de la console ET de
+   l'équipe). */
+.tableau--waters .cabine {
+  left: calc(8 * var(--u)); top: calc(50 * var(--u));
+  width: calc(62 * var(--u)); height: calc(20 * var(--u));
+  background: linear-gradient(180deg, rgba(140,170,190,.08) 0%, rgba(20,16,10,.9) 100%);
+  border: calc(1 * var(--u)) solid #100c06;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(180,200,210,.1);
+}
+.tableau--waters .cabine::after {
+  content: ''; position: absolute;
+  left: calc(28 * var(--u)); top: calc(4 * var(--u));
+  width: calc(2 * var(--u)); height: calc(14 * var(--u));
+  background: #4a4238;
+}
+
+/* ── WATERS — x:34-64, y:78-140 ──────────────────────────────────────
+   Casquette, cardigan, écouteurs au cou — une silhouette qui ne bouge
+   pas beaucoup. */
+.tableau--waters .pnj--waters {
+  left: calc(34 * var(--u)); top: calc(78 * var(--u));
+  width: calc(28 * var(--u)); height: calc(62 * var(--u));
+  border-radius: 26% 26% 12% 12% / 36% 36% 10% 10%;
+  background: radial-gradient(64% 76% at 46% 28%, #a08858 0%, #6a5638 48%, #362a1a 82%, transparent 100%);
+}
+.stage[data-etat~="waters-convaincu"] .tableau--waters .pnj--waters { filter: brightness(1.08); }
+.stage[data-etat~="waters-vexe"]     .tableau--waters .pnj--waters { filter: saturate(.5) brightness(.78); }
+
+/* ── LE COFFRE, DANS LA SALLE DE MONTAGE — x:190-230, y:80-136 ───────
+   Encastré, une étagère de bandes poussée devant. Se vide une fois
+   ouvert : la porte s'entrebâille. */
+.tableau--waters .coffre {
+  left: calc(190 * var(--u)); top: calc(80 * var(--u));
+  width: calc(40 * var(--u)); height: calc(56 * var(--u));
+  background: linear-gradient(180deg, #201a10 0%, #120e08 100%);
+  border: calc(1 * var(--u)) solid #050402;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.05);
+}
+.tableau--waters .coffre::after {
+  content: ''; position: absolute;
+  left: calc(16 * var(--u)); top: calc(22 * var(--u));
+  width: calc(8 * var(--u)); height: calc(8 * var(--u));
+  border-radius: 50%;
+  background: #3a3024;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.5);
+}
+.stage[data-etat~="enregistrement-recupere"] .tableau--waters .coffre::after {
+  background: #0a0806;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.8), 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.08);
+}
+.stage[data-etat~="bombe-declenchee"] .tableau--waters .coffre {
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.05), 0 0 calc(4 * var(--u)) rgba(220,120,60,.3);
+}
+
+/* ── LA PORTE D'ENTRÉE — x:4-26, y:74-140, la sortie ─────────────────
+   Sous l'enseigne au S manquant (le S n'est pas dessiné : la dette
+   d'art assumée dans l'en-tête). */
+.tableau--waters .porte-entree {
+  left: calc(4 * var(--u)); top: calc(74 * var(--u));
+  width: calc(22 * var(--u)); height: calc(66 * var(--u));
+  background: linear-gradient(180deg, #241c10 0%, #14100a 100%);
+  border: calc(1 * var(--u)) solid #050402;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.04);
+}
+.tableau--waters .porte-entree::after {
+  content: ''; position: absolute;
+  right: calc(3 * var(--u)); top: calc(30 * var(--u));
+  width: calc(2 * var(--u)); height: calc(6 * var(--u));
+  background: #8a7040;
+  border-radius: 50%;
+}
+
+/* ── LE COULOIR DE L'ÉQUIPE — x:82-166, y:66-140 ─────────────────────
+   Même geste qu'ailleurs : entrée par le bas, rangée du plus grand au
+   plus petit sur une bande que rien d'autre n'occupe en x. */
+.tableau--waters .p-drakk    { width: calc(28 * var(--u)); left: calc(82 * var(--u));  top: calc(66 * var(--u)); }
+.tableau--waters .p-trash    { width: calc(20 * var(--u)); left: calc(112 * var(--u)); top: calc(76 * var(--u)); }
+.tableau--waters .p-rabbit   { width: calc(16 * var(--u)); left: calc(134 * var(--u)); top: calc(82 * var(--u)); }
+.tableau--waters .p-hercules { width: calc(14 * var(--u)); left: calc(152 * var(--u)); top: calc(86 * var(--u)); }
+
+/* ── CE QUE LA PIÈCE A RENDU, RELISIBLE SANS LE CARNET ───────────────
+   Même geste qu'`amis`/`appartement`/`shameless` : la salle s'éclaire
+   d'un cran à mesure que le dilemme se dénoue. */
+.stage[data-etat~="studio-ferme"]      .tableau--waters .fond { filter: brightness(.9) saturate(.85); }
+.stage[data-etat~="studio-ouvert"]     .tableau--waters .fond { filter: brightness(1.05); }

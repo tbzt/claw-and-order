@@ -327,6 +327,17 @@ export const fiches = {
     ou: 'Iris, au bar du Shameless',
   },
 
+  /* ── WATERS SOUND, chantier 43 — le levier, pas une quatrième ancre ─
+     `PLAN_TRAME_ACTES_III_IV.md` § 7.1 : « l'enregistrement… (pas une
+     déduction : un levier) ». Une seule fiche, texture plutôt que
+     preuve — ce qu'on EN FERA (la tractation de la retombée 2) reste au
+     rang 10, pas encore écrit. */
+  'enregistrement-recupere': {
+    titre: 'L’enregistrement est à vous',
+    texte: 'Un commlink neuf, jamais connecté, que Teresa avait elle-même confié à Waters pour qu’il n’existe nulle part ailleurs. Quatre titres, et elle qui parle entre les prises.',
+    ou: 'Reginald Waters, à Puyallup',
+  },
+
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
   'registre-anterieur': {
     titre: 'La ligne est plus ancienne que lui',
@@ -733,4 +744,13 @@ export const presque = {
     'Elle demandait à une doc des rues comment on disparaît proprement, et elle coupait déjà son commlink avant chaque rendez-vous. Elle s’entraînait.',
   'famille-tir|voiture-luxe':
     'Une berline corpo dans un quartier qui n’en voit jamais, et une famille du Tír qui préfère effacer ce qui la gêne. C’est le genre de voiture qu’on envoie quand on a les moyens d’effacer.',
+
+  /* ── Waters Sound, chantier 43 ─────────────────────────────────────
+     Pas de déduction ici (§7.1 : un levier, pas une preuve) — donc pas
+     de paire qui NOMME, seulement celles qui relient ce qu'on a obtenu
+     à ce qu'on savait déjà. */
+  'enregistrement-recupere|enregistrement-waters':
+    'Psych avait dit qu’il existait. Il existe, et il est dans votre poche — quatre titres, et sa voix entre les prises.',
+  'enregistrement-recupere|hayden':
+    'Un nom, et maintenant la voix de la femme qu’il fréquentait en secret. Ensemble, ils ne prouvent toujours pas ce qu’il a fait — seulement qu’il avait beaucoup à protéger.',
 }

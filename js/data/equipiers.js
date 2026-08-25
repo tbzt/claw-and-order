@@ -364,6 +364,21 @@ const TABLEAUX = {
       trash: '« Son aura s’est refermée d’un cran en entrant. Ce n’est pas la musique. C’est le genre de silence que les riches paient pour avoir. »',
     },
   },
+
+  /* Waters Sound, chantier 43 : le quatrième décor de l'acte IV, et le
+     premier où l'enjeu n'est ni un deuil ni une confiance à gagner mais
+     un COFFRE — Rabbit et Hercules portent l'entrée, chacun reconnaissant
+     dans la pièce une version déformée de son propre métier. */
+  waters: {
+    rabbit: {
+      vu: 'Elle repère le verrou du coffre avant même d’avoir salué qui que ce soit, par réflexe — puis se force à regarder le reste de la pièce en second.',
+      hercules: '« Elle vient d’évaluer une porte avant un homme. Je fais l’inverse depuis trente ans. Je ne sais plus lequel de nous deux a raison. »',
+    },
+    hercules: {
+      vu: 'Il inspecte le mur de disques encadrés en connaisseur, puis s’arrête sur la petite photo dans le coin du cadre — celle où Waters est encore devant le micro, pas derrière.',
+      trash: '« Il vient de reconnaître un homme qui a raté quelque chose, parce qu’il en est un lui aussi. Ça ne le rend pas plus tendre. Ça le rend plus précis. »',
+    },
+  },
 }
 
 /* ── LA FABRIQUE ──────────────────────────────────────────────────────

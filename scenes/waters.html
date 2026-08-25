@@ -1,0 +1,66 @@
+<!--
+  Tableau 11 — WATERS SOUND. Un studio d'enregistrement de quartier, à
+  Puyallup. Chantier 43 (`PLAN_TRAME_ACTES_III_IV.md` § 7.1, rang 8 du
+  § 10) — le levier de la retombée 2, pas une quatrième ancre.
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `amis.html`, `appartement.html`, `shameless.html` et les cinq décors
+  de planque. Waters n'a pas de sprite : une forme simple, jusqu'à ce
+  que l'atelier lui en dessine un. Dette d'art assumée, notée dans
+  `PLAN_EXECUTION.md`.
+
+  PAS DE LESTER : ce n'est pas une planque, c'est un lieu d'enquête de
+  l'acte IV, comme les trois précédents — aucune mécanique de confiance
+  G5 ici.
+
+  UNE SEULE OUVERTURE, la porte d'entrée, au premier plan à gauche.
+
+  LE COFFRE EST UNE CIBLE À PART DE LA SALLE DE MONTAGE : il n'y a pas
+  de mobilier « salle de montage » distinct — le coffre EST la cible qui
+  porte cette pièce, comme l'ardoise portait le comptoir chez
+  `shameless.html`.
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe
+  d'abord, Waters, puis le mobilier.
+
+  DISPOSITION EN BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
+  cibles cliquables — même discipline que `scene-shameless.css`. Bande
+  du haut (console, archive, murs), bande médiane (cabine), bande du bas
+  (porte, Waters, l'équipe, coffre) : deux cibles ne partagent jamais à
+  la fois une plage en x et une plage en y.
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--waters">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- La console de mixage, vingt ans de matériel usé. -->
+  <div class="console" data-hotspot="console"></div>
+
+  <!-- Les rayonnages de bandes — « il garde tout ». -->
+  <div class="archive" data-hotspot="archive"></div>
+
+  <!-- Le mur de disques encadrés, et la petite photo dans un coin. -->
+  <div class="murs" data-hotspot="murs"></div>
+
+  <!-- La cabine d'enregistrement vitrée, vide. -->
+  <div class="cabine" data-hotspot="cabine"></div>
+
+  <!-- WATERS, entre sa console et la salle de montage. -->
+  <div class="pnj pnj--waters" data-hotspot="waters"></div>
+
+  <!-- Le coffre, dans la salle de montage — visible depuis la pièce
+       principale, derrière l'étagère de bandes qu'il faut pousser. -->
+  <div class="coffre" data-hotspot="coffre"></div>
+
+  <!-- La sortie : la porte d'entrée, sous l'enseigne au S manquant. -->
+  <div class="porte-entree" data-hotspot="porte"></div>
+
+</div>
