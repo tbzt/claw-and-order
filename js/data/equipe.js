@@ -459,28 +459,35 @@ export const pnj = {
     signature: 'sabotage-inacheve',
   },
 
+  /* ══ CHANTIER RENFIELD (rang 9, PLAN_TRAME_ACTES_III_IV.md §10) ══════
+     D10 (validée le 2026-08-22, jamais appliquée faute de scène où il
+     parle) : le texte source en fait un vieux chaman amérindien, fixeur
+     par loyauté envers la famille Telestrian — pas l'elfe intermédiaire
+     que cette fiche en faisait. Corrigé ici, au moment où il ouvre
+     enfin la bouche pour la première fois du jeu (`carte.js`, le
+     dialogue `renfield`). */
   renfield: {
     nom: 'Renfield',
-    metatype: 'elfe',
+    metatype: 'humain',
     taille: 1.90,
     motsCles: [
-      'Elfe, Seattle',
-      'Intermédiaire de la famille Telestrian',
-      'Fixeur, mais il déteste le mot',
-      'Train de vie : élevé',
-      'Ne travaille que pour des gens qu’il méprise',
+      'Humain, chaman, âgé',
+      'Ami de la famille Telestrian, depuis plus longtemps qu’Hayden n’est né',
+      'Fixeur à contrecœur, mage de combat si vraiment il le faut',
+      'Train de vie : élevé, et jamais dépensé pour lui',
+      'N’a pas participé à un bain de sang depuis des années, et compte que ça dure',
     ],
     comportements: [
-      'Parle du Tír comme d’un endroit qu’il a quitté, alors qu’il n’y a jamais vécu.',
-      'Paie comptant, et trop, pour ne pas avoir à revenir.',
-      'Se souvient des visages, pas des noms. C’est un choix.',
-      'Ne menace jamais lui-même.',
+      'Ne menace jamais lui-même. Il n’en a pas besoin, et ça le dégoûterait.',
+      'Répète qu’il n’a pas choisi ce travail, sans jamais dire qu’il pourrait le refuser.',
+      'Écoute plus qu’il ne parle. Vingt ans de silence, ça laisse une habitude.',
+      'Ne défend pas Hayden. Il défend ce qu’il doit aux parents.',
     ],
     repliques: [
-      '« Vous n’êtes pas obligés de comprendre. »',
-      '« La famille préfère que ça reste une affaire de famille. »',
-      '« Je ne suis pas un fixeur. Je suis un intermédiaire. »',
-      '« Combien, pour que vous ne soyez jamais venus ? »',
+      '« Je savais que vous viendriez me trouver avant que je vous trouve, moi. »',
+      '« Ce n’est pas mon crime. Je n’ai fait que le porter. »',
+      '« Je n’ai plus mis les mains dans ce genre d’affaire depuis longtemps. Je préférerais ne pas recommencer. »',
+      '« Dites-moi ce que vous savez. Après, c’est moi qui déciderai quoi en faire. »',
     ],
     signature: 'remonte-a-hayden',
   },

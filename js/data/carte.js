@@ -234,8 +234,11 @@ function noeud(id) {
         : { tous: `${lieux[id].nom}, ${lieux[id].ou}. À ${coutDe(depuis, id)} minutes d’ici.`,
             drakk: `« ${coutDe(depuis, id)} minutes de route, si personne ne nous arrête en chemin. »` },
 
-    utiliser: ({ depuis }) => depuis === id
+    utiliser: ({ depuis, a }) => depuis === id
       ? { tous: 'Vous y êtes déjà.' }
+      : enquete && !a('renfield-croise') && a('su:hayden') &&
+          (a('su:lester-innocent') || a('su:amant-secret'))
+      ? { dialogue: 'renfield' }
       : lieux[id].referme
         ? { tous: [...(RECITS[`${depuis}|${id}`] ?? [`Vous prenez la route vers ${lieux[id].nom}.`]),
                    'Dix heures moins le quart, le lendemain matin. Le palais est ouvert, la salle est la même, et cette fois vous savez pourquoi vous y êtes.'],
@@ -248,6 +251,107 @@ function noeud(id) {
               minutes: coutDe(depuis, id),
               va: id },
   }
+}
+
+/* ══ RENFIELD — rang 9, PLAN_TRAME_ACTES_III_IV.md §10 ═══════════════
+   « Pas un lieu, une rencontre » (§2 du plan) : pas de nœud de carte
+   neuf, pas de décor — Renfield a déjà son art (portrait et corps,
+   `css/sprites.css`), câblé depuis longtemps (`VISAGES.renfield`,
+   `main.js`) sans qu'aucune scène ne l'ait jamais fait parler.
+
+   LE DÉCLENCHEUR SERT AUSSI DE CONDITION DE RETOURNEMENT — décidé avec
+   l'utilisateur le 2026-08-25, pour ne pas avoir à inventer un compteur
+   d'exposition séparé (le risque que D9 refusait déjà de coder sans
+   trancher). La rencontre ne se déclenche QUE quand l'équipe a de quoi
+   agir : `su:hayden` (le nom) et au moins une ancre de poids
+   (`su:lester-innocent` ou `su:amant-secret`, la preuve). Un joueur qui
+   fonce vers `audience` avec le seul nom ne croise jamais Renfield —
+   cohérent avec « l'enquête reste optionnelle » (§11 du plan).
+
+   MÊME GESTE EN DEUX TEMPS QUE `conseil` → `trancher-*` → `barre`
+   (retour.js, chantiers 35-38) : les sujets de clôture ferment le
+   dialogue (`fin: true`) sans jamais `va` — le joueur reclique le jalon
+   qu'il visait, et cette fois `renfield-croise` bloque le
+   redéclenchement, donc le trajet se joue normalement. Un seul dialogue
+   pour les cinq destinations, pas cinq copies.
+
+   Il ne construit ni la 2ᵉ audience (rang 10 — `audience` retombe
+   toujours sur `fin: true` + `enquete-close`) ni aucune menace physique
+   (le jeu n'ajoute pas de combat, §11, et Lester est déjà en sécurité à
+   McNeil depuis le chantier 28 — la branche « Renfield monte une équipe
+   pour l'exécuter » du texte source ne s'applique plus). */
+const dialogueRenfield = {
+  qui: 'renfield',
+  accueil: [
+    'Le jalon suivant attendra. Un homme âgé se tient là, immobile, appuyé contre un mur — il ne s’est pas caché. Il voulait qu’on le voie.',
+    ['renfield', '« Vous cherchez un nom que vous avez déjà. Je le sais parce que je vous cherche depuis que vous l’avez trouvé. »'],
+    ['renfield', '« Je m’appelle Renfield. Je rends service à une famille depuis plus longtemps qu’Hayden n’est né. Ce service, aujourd’hui, c’est vous. »'],
+    ['drakk', '« On ne vous a rien demandé. »'],
+    ['renfield', '« Non. C’est moi qui demande. Dites-moi ce que vous savez, et je déciderai quoi en faire — avant que quelqu’un d’autre ne décide à ma place. »'],
+  ],
+  retour: ['Il est toujours là, à attendre une réponse qu’on ne lui a pas encore donnée.'],
+  sujets: [
+    {
+      id: 'hercules',
+      titre: '« Un vieux chaman qui veut qu’on lui parle. Pourquoi ? » (Hercules)',
+      acteur: 'hercules',
+      texte: [
+        ['hercules', '« Vous avez pisté cinq inconnus jusqu’ici pour qu’on vous raconte ce qu’on sait. Ça vaut cher, ou ça vaut rien. Lequel ? »'],
+        ['renfield', '« Ni l’un ni l’autre. Ça vaut une décision que je ne veux pas prendre seul. »'],
+        ['renfield', '« Vous croyez négocier. Vous ne négociez rien. Vous répondez, ou vous partez, et je continuerai sans vous. »'],
+      ],
+    },
+    {
+      id: 'drakk',
+      titre: '« Vous trahissez votre client. Ça coûte, un geste pareil. » (Drakk)',
+      acteur: 'drakk',
+      texte: [
+        ['drakk', '« Je connais le tarif d’un fixeur qui lâche son client. On ne retravaille plus jamais dans cette ville. »'],
+        ['renfield', '« Je le sais mieux que vous. J’ai vécu assez longtemps pour voir ce tarif payé par d’autres. »'],
+        ['renfield', '« Je ne le lâche pas pour vous. Je le lâche parce que ce que je porte depuis trois jours ne devrait pas se porter seul. »'],
+      ],
+    },
+    {
+      id: 'rabbit',
+      titre: '« Personne ne nous a suivis jusqu’ici. Comment nous avez-vous trouvés ? » (White_Rabbit)',
+      acteur: 'rabbit',
+      texte: [
+        ['rabbit', '« J’aurais vu une filature. Matricielle ou pas. »'],
+        ['renfield', '« Vous auriez vu quelqu’un vous suivre. Je n’ai jamais eu besoin de vous suivre — juste de savoir où vous cherchiez, et pourquoi. »'],
+        ['rabbit', '« Ça, ça ne s’improvise pas. Ça se prépare depuis le premier jour. »'],
+      ],
+    },
+    {
+      id: 'trash',
+      titre: '« Un Éveillé qui sert des gens qu’il méprise. Je connais la forme. » (Trash)',
+      acteur: 'trash',
+      texte: [
+        ['trash', '« Vous auriez pu monter une équipe. Vous êtes venu seul, et vous attendez. Je connais cette forme-là. Je la porte. »'],
+        ['renfield', '« Alors vous savez pourquoi je n’ai pas encore choisi. »'],
+        ['trash', '« Je le sais. Je sais aussi que ça ne s’arrête pas tout seul. »'],
+      ],
+    },
+    {
+      id: 'convaincre',
+      titre: '« Il n’ira pas leur dire tout seul. Donnez-lui de quoi le faire. » (Trancher, Trash)',
+      acteur: 'trash',
+      fin: true,
+      flags: ['renfield-croise', 'renfield-retourne'],
+      texte: [
+        ['trash', '« Hayden Telestrian. Un prénom mal écrit par une femme qui ne l’avait jamais vu épelé, un nom que tout le Tír connaît, et ce qu’ils cachaient tous les deux. Vous savez déjà tout ça. Ce qui manque, c’est quelqu’un pour le dire à voix haute. »'],
+        'Il ne répond pas tout de suite. Vingt ans de silence, et pour la première fois, ça ne suffit plus.',
+        ['renfield', '« Je le porte depuis trois jours parce que je le dois à ses parents, pas à lui. Je le leur dirai moi-même. Ils préféreront ça à l’apprendre autrement. »'],
+        ['renfield', '« Ne me remerciez pas. Ce n’est pas pour vous que je le fais. »'],
+      ],
+    },
+    {
+      id: 'silence',
+      titre: '(Le laisser partir.)',
+      fin: true,
+      flags: ['renfield-croise'],
+      texte: ['Personne n’insiste. Renfield hoche la tête, une fois, et s’en va sans dire s’il a compris quelque chose ou seulement gagné du temps.'],
+    },
+  ],
 }
 
 export const carte = {
@@ -288,5 +392,7 @@ export const carte = {
     audience: noeud('audience'),
   },
 
-  dialogues: {},
+  dialogues: {
+    renfield: dialogueRenfield,
+  },
 }

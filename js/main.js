@@ -1556,6 +1556,10 @@ const BILAN = [
   ['bombe-declenchee',   'Une bombe matricielle a fait ce pour quoi Waters l’avait payée. L’enregistrement existe, à moitié — et White_Rabbit en garde une brûlure au poignet.'],
   /* La carte de l'acte IV, chantier 17 réécrit. */
   ['enquete-close',      'Vous avez décidé vous-mêmes du moment où ça suffisait. Personne ne vous a poussés dehors.'],
+  /* Renfield, rang 9 (`PLAN_TRAME_ACTES_III_IV.md` §10). `renfield-croise`
+     seul n'a pas sa ligne : rester silencieux n'est pas un événement, et
+     la rencontre elle-même se lit déjà dans le carnet et le dialogue. */
+  ['renfield-retourne',  'Un vieux chaman a promis d’aller lui-même dire aux parents d’Hayden ce que vous saviez. Vous l’avez cru sur parole.'],
 ]
 
 function tombeRideau() {
@@ -1569,7 +1573,9 @@ function tombeRideau() {
      partie — mais qu'une sauvegarde antérieure pourrait encore
      porter. */
   $('rideauLigne').textContent = a('enquete-close')
-    ? (a('su:lester-innocent') && a('su:hayden')
+    ? (a('renfield-retourne')
+        ? 'Un nom, une preuve, et un vieux chaman assez lucide pour choisir la vérité contre vingt ans de loyauté. Il pousse la porte de la salle en sachant que, quelque part dans une tour Telestrian, quelqu’un est déjà en train de tout dire aux parents d’Hayden.'
+        : a('su:lester-innocent') && a('su:hayden')
         ? 'Un nom, et de quoi montrer qu’on savait déjà. Il pousse la porte de la salle avec ça derrière lui, et pour la première fois de l’affaire ce n’est pas lui qui a quelque chose à expliquer.'
         : a('su:lester-innocent') || a('su:hayden')
           ? 'Vous remontez vers Downtown avec une moitié de réponse. Une moitié, ce n’est pas rien — c’est juste moins que ce qu’il y avait à prendre.'
