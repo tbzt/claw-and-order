@@ -10,9 +10,23 @@
   formes de la carte. Seul le RENDU est au jeu : aplats ambrés,
   quadrillage doré, numéros et légende comme sur la page.
 
-  Deux nœuds cliquables pour l'instant, et ce sont les deux numéros
-  vifs : 6 (Downtown, le bar) et 10 (Tacoma, le quai). Les dix autres
-  districts sont dessinés, numérotés, éteints. Grille 256 x 144.
+  DEUX REGISTRES, JAMAIS LES DEUX À LA FOIS (chantier 17 réécrit).
+
+  LA NUIT — deux nœuds vifs : 6 (Downtown, le bar) et 10 (Tacoma, le
+  quai). Les dix autres districts sont dessinés, numérotés, éteints.
+
+  L'ENQUÊTE — trois points au crayon, qui ne sont pas des districts mais
+  des ADRESSES : le local de répétition et l'appartement de Teresa,
+  serrés l'un contre l'autre dans Loveland (un quartier de Puyallup,
+  jalon 9), et le palais de justice à Downtown, à deux pas du 6. Ils ne
+  portent pas de numéro : ce ne sont pas des districts du livre, ce sont
+  les trois endroits où cette affaire se joue.
+
+  Le CSS éteint les nœuds de l'autre registre en `display: none`, pas en
+  `opacity` — un jalon transparent capterait quand même le curseur, et
+  le joueur cliquerait sur une cible qu'il ne voit pas.
+
+  Grille 256 x 144.
 -->
 <div class="tableau tableau--carte">
 
@@ -54,6 +68,14 @@
   <div class="jalon" style="left:calc(25.4 * var(--u)); top:calc(111.9 * var(--u))">11</div>
   <div class="jalon" style="left:calc(30.8 * var(--u)); top:calc(77.0 * var(--u))">12</div>
   <div class="lieudit" style="left:calc(9.5 * var(--u)); top:calc(103.5 * var(--u))">McNeil</div>
+
+  <!-- LES TROIS POINTS DE L'ENQUÊTE. Pas de numéro : ce sont des
+       adresses, pas des districts. Les deux premiers tiennent dans
+       Loveland, à trois kilomètres l'un de l'autre. -->
+  <div class="jalon jalon--enquete" style="left:calc(36.0 * var(--u)); top:calc(122.0 * var(--u))" data-hotspot="amis"></div>
+  <div class="jalon jalon--enquete" style="left:calc(48.5 * var(--u)); top:calc(122.5 * var(--u))" data-hotspot="appartement"></div>
+  <div class="jalon jalon--enquete jalon--sortie" style="left:calc(46.8 * var(--u)); top:calc(48.6 * var(--u))" data-hotspot="audience"></div>
+  <div class="lieudit lieudit--enquete" style="left:calc(33.0 * var(--u)); top:calc(128.5 * var(--u))">Loveland</div>
 
   <div class="legende">
     <p class="legende__titre">Légende</p>

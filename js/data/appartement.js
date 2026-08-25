@@ -94,7 +94,16 @@ export const appartement = {
      après-midi » quand on arrive du local le même jour. */
   acte: 4,
 
-  ouverture: ({ a, sait }) => [
+  /* L3, comme au local : la carte rend ce tableau revisitable, donc il
+     doit changer. Ici le changement est plus froid — personne ne vit
+     dedans, et c'est le quartier qui a bougé, pas la pièce. */
+  ouverture: ({ a, sait }, visite) => visite > 1 ? [
+    'Le rideau de RA est toujours en travers de la porte, toujours intact. La pièce n’a pas bougé d’un objet.',
+    ...(a('tir-prevenu')
+      ? ['En bas, la patronne du pressing vous a regardés monter une seconde fois, et cette fois elle a décroché avant que vous ayez atteint le palier.']
+      : ['En bas, la patronne du pressing ne lève toujours pas la tête.']),
+    'OBJECTIF — reprendre ce qu’on n’a pas vu la première fois.',
+  ] : [
     ...(sait('adresse-teresa')
       ? ['2214 South Sheridan. C’était écrit en page deux du dossier depuis le début : un pressing au rez-de-chaussée, deux étages au-dessus, la porte du fond.']
       : ['Il a fallu trois quarts d’heure pour trouver l’immeuble — personne n’avait lu le dossier jusqu’à la page où son adresse est écrite. Un pressing au rez-de-chaussée, deux étages au-dessus, et aucun nom sur les boîtes aux lettres.']),
@@ -159,7 +168,7 @@ export const appartement = {
        Regarder rend la fiche ; utiliser fait sortir. ═════════════════ */
     porte: {
       nom: 'La porte, sous scellés',
-      sortie: true,
+      sortie: 'carte',
       regarder: ({ a }) => a('rubans-intacts')
         ? { tous: 'Les deux rubans jaunes, toujours en travers, toujours horodatés du premier jour.',
             rabbit: '« Et toujours pas rompus. Personne. »' }
@@ -203,7 +212,12 @@ export const appartement = {
            crans, et il n'a rien coûté à écrire. */
         flags: ['appart-quitte', 'tir-prevenu',
                 ...(a('tir-prevenu') && a('local-quitte') ? ['tir-retour'] : [])],
-        fin: true,
+        /* CHANTIER 17 RÉÉCRIT : la sortie ne referme plus la partie,
+           elle rend la main à la carte. Ce qui referme l'acte IV est
+           devenu un nœud à part — le palais de justice — parce qu'avec
+           deux lieux qui se renvoient l'un à l'autre, plus rien ne
+           permettait d'arrêter de chercher. */
+        va: 'carte',
       }),
     },
 

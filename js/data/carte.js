@@ -8,11 +8,52 @@
    qui justifie en fiction qu'elle n'ait ni menu ni liste, seulement des
    points sur un plan.
 
-   PORTÉE DE CE CHANTIER : deux nœuds seulement, bar et quai, aller-
+   PORTÉE DU CHANTIER 13 : deux nœuds seulement, bar et quai, aller-
    retour. « Valider le geste avant d'en dépendre » (CONCEPTION § 12,
-   déjà cité pour le carnet et le réseau) — les cinq nœuds, les
-   fermetures horaires et le tribunal terminal sont le chantier 17.
+   déjà cité pour le carnet et le réseau).
 
+   ══ CHANTIER 17, RÉÉCRIT — DEUX REGISTRES DANS LA MÊME CARTE ════════
+   Le 17 d'origine voulait « cinq nœuds, les `partir`, les fermetures
+   horaires ». D11 l'a démoli le 2026-08-23 : le greffe, le détroit et
+   la planque sont des passages scriptés à sens unique, pas des lieux
+   d'enquête, et « seuls des lieux où l'on peut vouloir REVENIR méritent
+   d'être navigables » (l'utilisateur, au mot près). Le chantier est
+   resté suspendu à une condition : que l'acte IV existe.
+
+   Il existe. Deux lieux d'enquête (chantiers 28 et 26), et ils se
+   chaînaient en ligne droite — ce qui était juste tant qu'il n'y avait
+   rien à choisir. Ce fichier porte donc maintenant DEUX REGISTRES DE
+   DÉPLACEMENT, et c'est tout le contenu du 17 réécrit :
+
+     LA NUIT      bar ⇄ quai. Le trajet coûte des MINUTES, l'étiquette
+                  dit l'heure d'arrivée. Inchangé depuis le chantier 13.
+     L'ENQUÊTE    le local ⇄ l'appartement ⇄ le palais de justice. Le
+                  trajet coûte UN TOUR (D8), l'étiquette dit le moment
+                  d'arrivée — « jour 1, soir ». Aucune minute : l'acte IV
+                  dure des jours, et l'horloge de la nuit n'y veut plus
+                  rien dire.
+
+   Les deux registres ne se croisent jamais : `abordage-passe` bascule
+   la carte de l'un à l'autre, et le CSS éteint les nœuds de l'autre
+   registre (`display: none`, donc pas de cible fantôme sous le
+   curseur). On ne revient pas au Claw & Order trois jours après, et on
+   ne va pas chez Teresa à deux heures du matin.
+
+   ══ CE QUE LE TROISIÈME NŒUD RÈGLE, ET IL FALLAIT Y PENSER ══════════
+   Avec deux lieux qui se renvoient l'un à l'autre, plus rien ne termine
+   l'acte IV : on ne peut plus jamais arrêter de chercher. Le nœud
+   `audience` — le palais de justice, la seconde audience — est la
+   sortie, et il change la nature du tableau : **arrêter l'enquête
+   devient un CHOIX** au lieu d'être la conséquence d'avoir quitté la
+   dernière pièce. Croisé avec le front du Tír, qui avance à chaque
+   visite (§7.4 du plan des actes), c'est enfin l'arbitrage que l'acte IV
+   devait porter : chercher plus, c'est se faire trouver.
+
+   PROVISOIRE ET DÉCLARÉ, comme les trois fois précédentes : `audience`
+   retombe sur `fin: true`. La 2ᵉ audience est le rang 10 du §10 et elle
+   n'est pas écrite ; quand elle le sera, ce `fin` deviendra un `va`.
+
+   ══ LES DEUX LOIS DE LA NUIT, INCHANGÉES ═══════════════════════════
    L1 — le temps est la seule ressource : chaque trajet porte son coût
    en minutes, prélevé au moment où on CHOISIT la destination sur la
    carte, pas au moment où on quitte le lieu de départ (voir bar.js et
@@ -21,7 +62,7 @@
    avance déjà virtuellement (`formateHeure(heure + coût)`), et la ligne
    de récit du trajet se lit après le clic, avant l'arrivée. */
 
-import { formateHeure } from '../state.js'
+import { etat, formateHeure, formateTour } from '../state.js'
 
 /* Le registre des nœuds. Même forme que `scenes.js` : ajouter un lieu,
    c'est ajouter une ligne — `x`/`y` (en unités d'art, 256 x 144) sont
@@ -53,6 +94,43 @@ export const lieux = {
     x: 32.7, y: 89.7,
     minutes: { bar: 35 },
   },
+
+  /* ── LES NŒUDS DE L'ENQUÊTE (chantier 17 réécrit) ──────────────────
+     `acte: 4` est la seule chose qui les distingue : pas de table de
+     `minutes`, parce qu'un trajet de l'acte IV coûte un TOUR et que le
+     tour est prélevé à l'ARRIVÉE, par `charge()`, sur la foi du
+     `acte: 4` du tableau de destination. La carte n'a donc rien à
+     facturer — elle annonce seulement ce que le prochain moment sera.
+
+     LES DEUX PREMIERS SONT DANS LE MÊME DISTRICT, et c'est la
+     géographie du texte : Loveland est un quartier de Puyallup
+     (Anarchy v2 p. 282), le taudis où le corps a été déposé est à deux
+     rues de l'appartement, et le local de répétition à trois kilomètres.
+     Leurs jalons sont donc deux points serrés autour du 9, pas deux
+     districts — la carte est à l'échelle du métroplexe et ces trois
+     lieux tiennent dans un mouchoir. */
+  amis: {
+    nom: 'Le local de répétition',
+    ou: 'Loveland, Puyallup',
+    x: 36.0, y: 122.0,
+    acte: 4,
+  },
+  appartement: {
+    nom: 'L’appartement de Teresa',
+    ou: 'Loveland, Puyallup',
+    x: 48.5, y: 122.5,
+    acte: 4,
+  },
+  /* Le seul nœud du jeu qui ne mène nulle part : il REFERME l'acte IV.
+     Downtown, à côté du 6 — le palais est à deux pas du Claw & Order,
+     ce que le scénario dit et que le jeu n'avait jamais montré. */
+  audience: {
+    nom: 'Le palais de justice',
+    ou: 'Downtown — la seconde audience',
+    x: 46.8, y: 48.6,
+    acte: 4,
+    referme: true,
+  },
 }
 
 /* Le récit du trajet, par sens — c'est la ligne que portait autrefois
@@ -65,26 +143,59 @@ export const lieux = {
 const RECITS = {
   'bar|quai': ['Vous sortez sous la pluie. Tacoma est à trente-cinq minutes, et le Sunnyside Beach Park est au bout.'],
   'quai|bar': ['Vous reprenez la route vers Downtown. Le Claw & Order n’a pas fermé — pas encore.'],
+  /* L'ENQUÊTE. Les trajets ne se comptent plus en minutes : ils se
+     comptent en ce qu'on abandonne pour les faire. Trois kilomètres
+     dans Loveland, ce n'est pas une distance, c'est une décision. */
+  'amis|appartement': ['Trois kilomètres dans Loveland. Personne ne parle dans la voiture, et personne ne met la radio.'],
+  'appartement|amis': ['Vous refaites les trois kilomètres en sens inverse. Le rideau de fer sera toujours à mi-hauteur : il n’y a personne pour le baisser.'],
+  'amis|audience': ['Vous laissez Loveland derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
+  'appartement|audience': ['Vous laissez Loveland derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
 }
 
 const coutDe = (depuis, vers) => lieux[depuis]?.minutes?.[vers]
 
+/* Le moment d'arrivée d'un trajet d'enquête. Le tour n'est pas prélevé
+   ici — `charge()` le fait à l'entrée du tableau, sur la foi de son
+   `acte: 4` — donc l'étiquette annonce `tour + 1` et ne ment pas : elle
+   dit ce que le HUD affichera dans deux secondes. */
+const prochainMoment = () => formateTour((etat.tour ?? 0) + 1)
+
 function noeud(id) {
+  const enquete = lieux[id].acte === 4
+
   return {
     nom: ({ depuis, heure }) => depuis === id
       ? `${lieux[id].nom} — vous y êtes`
-      : `${lieux[id].nom} — ${coutDe(depuis, id)} min → ${formateHeure(heure + coutDe(depuis, id))}`,
+      : enquete
+        ? `${lieux[id].nom} — un tour → ${prochainMoment()}`
+        : `${lieux[id].nom} — ${coutDe(depuis, id)} min → ${formateHeure(heure + coutDe(depuis, id))}`,
 
     regarder: ({ depuis }) => depuis === id
       ? { tous: `${lieux[id].nom}, ${lieux[id].ou}. C’est là que vous êtes déjà.` }
-      : { tous: `${lieux[id].nom}, ${lieux[id].ou}. À ${coutDe(depuis, id)} minutes d’ici.`,
-          drakk: `« ${coutDe(depuis, id)} minutes de route, si personne ne nous arrête en chemin. »` },
+      : enquete
+        ? (lieux[id].referme
+            ? { tous: [`${lieux[id].nom}, ${lieux[id].ou}.`,
+                       'Y aller, c’est arrêter de chercher. Ce que vous avez à ce moment-là est ce avec quoi il entrera dans la salle.'],
+                hercules: '« On n’a jamais assez. Le métier consiste à décider quand on arrête d’en manquer. »',
+                drakk: '« La quête se referme quand la compagnie décide qu’elle se referme. Jamais avant, jamais toute seule. »' }
+            : { tous: `${lieux[id].nom}, ${lieux[id].ou}. Une demi-journée pour y aller et en revenir.`,
+                trash: '« Chaque fois qu’on se montre là-bas, quelqu’un d’autre l’apprend. Je ne dis pas de ne pas y aller. Je dis de le savoir. »' })
+        : { tous: `${lieux[id].nom}, ${lieux[id].ou}. À ${coutDe(depuis, id)} minutes d’ici.`,
+            drakk: `« ${coutDe(depuis, id)} minutes de route, si personne ne nous arrête en chemin. »` },
 
     utiliser: ({ depuis }) => depuis === id
       ? { tous: 'Vous y êtes déjà.' }
-      : { tous: RECITS[`${depuis}|${id}`] ?? `Vous prenez la route vers ${lieux[id].nom}.`,
-          minutes: coutDe(depuis, id),
-          va: id },
+      : lieux[id].referme
+        ? { tous: [...(RECITS[`${depuis}|${id}`] ?? [`Vous prenez la route vers ${lieux[id].nom}.`]),
+                   'Dix heures moins le quart, le lendemain matin. Le palais est ouvert, la salle est la même, et cette fois vous savez pourquoi vous y êtes.'],
+            flags: ['enquete-close'],
+            fin: true }
+        : enquete
+          ? { tous: RECITS[`${depuis}|${id}`] ?? `Vous prenez la route vers ${lieux[id].nom}.`,
+              va: id }
+          : { tous: RECITS[`${depuis}|${id}`] ?? `Vous prenez la route vers ${lieux[id].nom}.`,
+              minutes: coutDe(depuis, id),
+              va: id },
   }
 }
 
@@ -97,15 +208,31 @@ export const carte = {
      Ce n'est pas encore une « seconde fenêtre » (chantier 19, qui
      réécrit les LIEUX eux-mêmes) — seulement la carte qui ne ment pas
      sur le fait qu'on l'a déjà dépliée. */
-  ouverture: (ctx, visite) => visite > 1
+  ouverture: (ctx, visite) => ctx.a('abordage-passe')
+    ? (visite > 1
+        ? [['drakk', '« La province ne change pas de forme. Seuls les jours y changent de visage. »']]
+        : ['Drakk ressort le plan. Ce n’est plus le même : trois lieux y sont marqués, tous les trois au crayon, et deux d’entre eux tiennent dans un mouchoir.',
+           ['drakk', '« Loveland. Trois kilomètres de côté, et toute l’affaire dedans. »'],
+           ['drakk', '« Le troisième point, c’est la sortie. Nous y allons quand nous décidons d’y aller, et pas quand nous n’avons plus le choix. »']])
+    : visite > 1
     ? [['drakk', '« La province ne change pas de forme. Seule l’heure y change de visage. »']]
     : ['Drakk étale un plan sur ses genoux — dessiné à la main, jamais le même deux fois.',
        ['drakk', '« Ce n’est pas une carte. C’est une PROVINCE. La vôtre, cette nuit. »'],
        'Deux lieux y sont marqués pour l’instant. Le reste attend d’être découvert autrement qu’en le devinant.'],
 
+  /* Quel registre la carte montre. `abordage-passe` est le basculement :
+     il tombe au bout du goulet, juste avant que l'abordage ne rende la
+     main à l'acte IV. Le CSS éteint les nœuds de l'autre registre en
+     `display: none` — pas en `opacity`, pour qu'ils ne captent pas le
+     curseur. */
+  derive: ({ a }) => [a('abordage-passe') ? 'registre-enquete' : 'registre-nuit'],
+
   hotspots: {
     bar: noeud('bar'),
     quai: noeud('quai'),
+    amis: noeud('amis'),
+    appartement: noeud('appartement'),
+    audience: noeud('audience'),
   },
 
   dialogues: {},

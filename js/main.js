@@ -1549,6 +1549,8 @@ const BILAN = [
   ['rubans-intacts',     'Trois jours de scellés, pas une rupture. Personne de la Lone Star n’est jamais revenu sur les lieux.'],
   ['valise-faite',       'Sa valise était aux trois quarts faite. Elle n’a pas été surprise par sa mort — elle a été rattrapée par son départ.'],
   ['tir-retour',         'Les elfes du Tír sont retournés voir les quatre amis. Ils y sont allés parce que vous y étiez allés.'],
+  /* La carte de l'acte IV, chantier 17 réécrit. */
+  ['enquete-close',      'Vous avez décidé vous-mêmes du moment où ça suffisait. Personne ne vous a poussés dehors.'],
 ]
 
 function tombeRideau() {
@@ -1561,7 +1563,13 @@ function tombeRideau() {
      du jeu ne déclenche plus — `abordage-passe` en fait désormais
      partie — mais qu'une sauvegarde antérieure pourrait encore
      porter. */
-  $('rideauLigne').textContent = a('appart-quitte')
+  $('rideauLigne').textContent = a('enquete-close')
+    ? (a('su:lester-innocent') && a('su:hayden')
+        ? 'Un nom, et de quoi montrer qu’on savait déjà. Il pousse la porte de la salle avec ça derrière lui, et pour la première fois de l’affaire ce n’est pas lui qui a quelque chose à expliquer.'
+        : a('su:lester-innocent') || a('su:hayden')
+          ? 'Vous remontez vers Downtown avec une moitié de réponse. Une moitié, ce n’est pas rien — c’est juste moins que ce qu’il y avait à prendre.'
+          : 'Vous remontez vers Downtown à peu près comme vous en étiez partis. L’audience aura lieu, et elle ressemblera à la première.')
+    : a('appart-quitte')
     ? (a('su:lester-innocent')
         ? 'Ils savaient. Depuis le premier jour, ils savaient, et ils ont mis un gamin de vingt ans dans une navette de huit heures. Il reste à le prouver devant quelqu’un.'
         : 'Une pièce et demie au-dessus d’un pressing, vide depuis trois jours. Vous en ressortez avec l’odeur du détachant et pas grand-chose d’autre.')

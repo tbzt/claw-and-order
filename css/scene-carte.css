@@ -186,3 +186,40 @@
   color: rgba(201,160,58,.55);
   white-space: nowrap;
 }
+
+
+/* ── CHANTIER 17 RÉÉCRIT — LES DEUX REGISTRES ────────────────────────
+   La carte porte la nuit (bar ⇄ quai, en minutes) et l'enquête (le
+   local ⇄ l'appartement ⇄ le palais, en tours). Jamais les deux à la
+   fois : `carte.derive()` pose `registre-nuit` ou `registre-enquete`
+   selon `abordage-passe`, et l'autre registre passe en `display: none`.
+
+   `display` et pas `opacity` : un jalon transparent reste sous le
+   curseur et se laisse cliquer. Le joueur atteindrait alors une cible
+   qu'il ne voit pas — le pire des défauts de point & click, parce qu'il
+   ressemble à une trouvaille. */
+.stage[data-etat~="registre-nuit"]    .tableau--carte .jalon--enquete,
+.stage[data-etat~="registre-nuit"]    .tableau--carte .lieudit--enquete { display: none; }
+.stage[data-etat~="registre-enquete"] .tableau--carte .jalon--vif       { display: none; }
+
+/* Les trois points de l'enquête : au crayon, pas au tampon. Pas de
+   numéro dedans — ce ne sont pas des districts du livre. */
+.tableau--carte .jalon--enquete {
+  width: calc(4 * var(--u)); height: calc(4 * var(--u));
+  margin: calc(-2 * var(--u)) 0 0 calc(-2 * var(--u));
+  border-radius: 50%;
+  background: #e8c98a;
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(20, 14, 6, .7),
+              0 0 calc(4 * var(--u)) rgba(232, 201, 138, .5);
+  font-size: 0;
+}
+/* La sortie se distingue des deux autres : un anneau, pas un point
+   plein. On n'y va pas chercher — on y va conclure. */
+.tableau--carte .jalon--sortie {
+  width: calc(6 * var(--u)); height: calc(6 * var(--u));
+  margin: calc(-3 * var(--u)) 0 0 calc(-3 * var(--u));
+  background: transparent;
+  border: calc(1 * var(--u)) solid #e8c98a;
+  box-shadow: 0 0 calc(5 * var(--u)) rgba(232, 201, 138, .45);
+}
+.tableau--carte .lieudit--enquete { font-size: calc(4 * var(--u)); opacity: .8; }

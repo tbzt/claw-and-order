@@ -93,7 +93,21 @@ export const amis = {
      appartenir à l'acte IV, et il suffit. */
   acte: 4,
 
-  ouverture: ({ a }) => [
+  /* L3 — « revenir doit changer quelque chose » (`PLAN_CARTE_NAVIGATION`).
+     Le chantier 17 réécrit rend ce tableau revisitable ; une seconde
+     visite identique à la première contredirait la loi qui justifie la
+     carte. Elle n'est pas cosmétique ici : si le Tír est repassé
+     (`tir-retour`, posé en ressortant de chez Teresa), la pièce a
+     changé de personnes. */
+  ouverture: ({ a }, visite) => visite > 1 ? [
+    ...(a('tir-retour')
+      ? ['Le rideau de fer est toujours à mi-hauteur. Dedans, ils sont trois au lieu de quatre, et personne ne dit qui manque.',
+         'Nita range ses tracts dans un carton. Elle ne les trie plus.',
+         '« Ils sont revenus. Après vous. Ils ont demandé ce que vous aviez demandé, dans le même ordre. »']
+      : ['Le rideau de fer est toujours à mi-hauteur, et ils sont toujours quatre. Rien n’a bougé — dans une pièce comme celle-ci, c’est la meilleure nouvelle possible.',
+         'Le micro est toujours sur son pied. Personne ne l’a rangé cette fois non plus.']),
+    'OBJECTIF — reprendre ce qu’on n’a pas pris la première fois.',
+  ] : [
     'Trois jours que l’audience est repoussée. En trois jours, le nom de Teresa Banks n’est apparu dans aucun journal, sur aucun fil, dans aucune conversation qui ne soit pas la vôtre.',
     'Le local est un ancien magasin de disques dont le rideau de fer ne redescend plus. Deux amplis, une batterie à qui il manque la caisse claire, et des bacs encore pleins d’un stock que personne n’a racheté.',
     'Quatre personnes sont là dedans à dix heures du matin. Aucune n’a d’autre endroit où porter ça.',
@@ -406,7 +420,7 @@ export const amis = {
        seule chose que ce tableau doive au § 7.4. */
     grille: {
       nom: 'Le rideau de fer',
-      sortie: true,
+      sortie: 'carte',
       regarder: ({ a }) => ({
         tous: a('tir-prevenu')
           ? ['Le rideau de fer est resté à mi-hauteur depuis que vous êtes entrés. Dehors, la rue est la même qu’à l’arrivée.',
@@ -448,7 +462,12 @@ export const amis = {
            après `tribunal-salle.js` (chantier 4) et `retour.js`
            (chantier 28), et toujours de la même façon. */
         flags: ['local-quitte'],
-        va: 'appartement',
+        /* CHANTIER 17 RÉÉCRIT : ce n'est plus l'appartement en dur.
+           Il y a maintenant deux lieux d'enquête et une sortie, donc
+           un choix, donc une carte. Troisième fois que cette ligne
+           change de destination, et la dernière : au-delà, c'est la
+           carte qui décide. */
+        va: 'carte',
       }),
     },
   },

@@ -109,12 +109,16 @@ export function avanceTour() {
 
 const MOMENTS = ['matin', 'après-midi', 'soir']
 
-/* `jour 2 — après-midi`, l'exemple exact de D8. Prend `etat.tour` par
-   défaut ; accepte un autre numéro pour étiqueter une SAUVEGARDE sans
-   la charger, comme `formateHeure()` le fait pour l'heure. */
+/* `jour 2, après-midi`. D8 écrivait l'exemple avec un tiret cadratin ;
+   il est devenu une virgule au chantier 17, quand l'étiquette d'un nœud
+   de carte s'est mise à composer « … — un tour → jour 1 — après-midi »,
+   avec deux tirets qui ne séparaient pas la même chose. Le tiret reste
+   au niveau du dessus, la virgule à l'intérieur du moment.
+   Prend `etat.tour` par défaut ; accepte un autre numéro pour étiqueter
+   une SAUVEGARDE sans la charger, comme `formateHeure()` pour l'heure. */
 export function formateTour(t = etat.tour) {
   const n = Math.max(1, t | 0)
-  return `jour ${Math.floor((n - 1) / MOMENTS.length) + 1} — ${MOMENTS[(n - 1) % MOMENTS.length]}`
+  return `jour ${Math.floor((n - 1) / MOMENTS.length) + 1}, ${MOMENTS[(n - 1) % MOMENTS.length]}`
 }
 
 /* `23:41`, jamais autre chose : pas de barre, pas de jauge — un chiffre.
