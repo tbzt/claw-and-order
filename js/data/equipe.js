@@ -484,4 +484,124 @@ export const pnj = {
     ],
     signature: 'remonte-a-hayden',
   },
+
+  /* ── LES QUATRE AMIS DE TERESA — chantier 28, acte IV ──────────────
+     `PLAN_TRAME_ACTES_III_IV.md` § 7.3 : « quatre PNJ, quatre serrures
+     qui ne sont pas des serrures ». C'est le second verrou-manifeste du
+     jeu, celui qui rejoue la leçon de G5 en quatre variantes — un ami
+     ne s'ouvre pas, il décide de parler.
+
+     Ils sont ici, dans `pnj` et pas dans `equipe`, pour deux raisons de
+     moteur et une de fond : `LOCUTEURS` (interact.js) est construit sur
+     `equipe` + `pnj`, donc une paire ['mark', '…'] ne s'attribue que
+     si la fiche existe ici ; `dis()` (main.js) envoie dans la bulle du
+     RÉCIT tout ce qui est dans `equipe`, ce qui est juste pour les
+     quatre runners et faux pour quelqu'un d'en face. Et sur le fond :
+     ce sont des personnages, pas des cibles — ils méritent la même
+     fiche que McCarthy ou le pêcheur. */
+
+  mark: {
+    nom: 'Mark',
+    metatype: 'humain',
+    taille: 1.72,
+    motsCles: [
+      'Humain, dix-neuf ans',
+      'Loveland, livreur de nuit',
+      'Amoureux d’elle, et elle ne l’a jamais su',
+      'Train de vie : celui de sa mère',
+      'A gardé tout ce qu’elle a écrit',
+    ],
+    comportements: [
+      'Répond aux questions sur elle. Jamais à celles sur l’autre.',
+      'Ne prend pas d’argent. Ce n’est pas de la fierté, c’est pire.',
+      'Tient une pochette de disque vide pendant toute la conversation.',
+      'S’ouvre à qui parle d’elle au présent.',
+    ],
+    repliques: [
+      '« Vous êtes qui, vous. »',
+      '« Personne demande jamais comment elle allait. »',
+      '« J’ai pas envie que ça serve à quelque chose. »',
+      '« Elle l’a écrit une fois. Je l’ai gardé. »',
+    ],
+    /* Le petit frère de G5 : même verrou, quinze ans de moins. */
+    signature: 'se-convainc-pas-sachete',
+  },
+
+  psych: {
+    nom: 'Psych',
+    metatype: 'humain',
+    taille: 1.80,
+    motsCles: [
+      'Humain, âge indéterminé',
+      'Loveland, nulle part précisément',
+      'Ingénieur du son quand il tient debout',
+      'Train de vie : ce qu’on lui donne',
+      'A entendu chaque prise qu’elle a chantée',
+    ],
+    comportements: [
+      'Parle contre un peu d’argent. Ça marche à chaque fois.',
+      'Parle aussi gratuitement, à qui l’interroge sur la musique.',
+      'Ne ment pas : il n’a pas la place en mémoire pour deux versions.',
+      'S’endort au milieu d’une phrase, et la reprend au même mot.',
+    ],
+    repliques: [
+      '« T’as quelque chose ? »',
+      '« La troisième prise. C’est la troisième qui était bonne. »',
+      '« Waters a tout gardé. Waters garde tout. »',
+      '« Personne me demande jamais comment elle chantait. »',
+    ],
+    signature: 'venal-et-gratuit',
+  },
+
+  nova: {
+    nom: 'Nova',
+    metatype: 'orke',
+    taille: 1.88,
+    motsCles: [
+      'Orke, vingt-quatre ans',
+      'Loveland, ancienne des Halloweeners',
+      'En rupture, et ça se paie tous les jours',
+      'Train de vie : bas, assumé',
+      'Interrogée avant vous, et elle n’en parle pas',
+    ],
+    comportements: [
+      'Tient la porte du local sans qu’on le lui ait demandé.',
+      'Ne dit jamais la première chose qu’on lui demande.',
+      'Reconnaît un nom de gang avant de reconnaître un visage.',
+      'A été polie avec des gens polis, et elle s’en veut encore.',
+    ],
+    repliques: [
+      '« Vous êtes la deuxième équipe cette semaine. »',
+      '« J’ai rien dit. J’ai juste répondu. »',
+      '« Ils avaient des cartes de visite. Vous, non. »',
+      '« Elle chantait, et nous on tenait la porte. »',
+    ],
+    signature: 'deuxieme-equipe',
+  },
+
+  nita: {
+    nom: 'Nita',
+    metatype: 'humaine',
+    taille: 1.65,
+    motsCles: [
+      'Humaine, chamane de l’Ours',
+      'Loveland, permanence de l’ORC',
+      'Militante — le mot lui va, elle le revendique',
+      'Train de vie : celui de l’association',
+      'Donne, mais elle veut savoir à qui',
+    ],
+    comportements: [
+      'Pose la question de l’employeur avant toute autre.',
+      'Encaisse une vérité désagréable mieux qu’une politesse.',
+      'Ferme définitivement à qui esquive, et sans hausser le ton.',
+      'Reconnaît un Éveillé d’un coup d’œil, et le traite en confrère.',
+    ],
+    repliques: [
+      '« Pour qui vous travaillez ? »',
+      '« Répondez d’abord. Ensuite on verra ce que je sais. »',
+      '« Un ork accusé à la place d’un elfe. On a un dossier par mois. »',
+      '« Amelia prend les appels. Dites que vous venez de ma part. »',
+    ],
+    signature: 'pour-qui-vous-travaillez',
+  },
 }

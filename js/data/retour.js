@@ -55,12 +55,14 @@
    objet ne l'achète, même grammaire que Lester (G5). Sans sprite neuf :
    comme McCarthy au téléphone ou la vedette sur le 16, une voix suffit.
 
-   PROVISOIRE, ASSUMÉ : la traversée retombe sur `fin: true`, comme
-   `tribunal-salle.js` le faisait pour elle avant ce chantier. L'acte IV
-   (chantiers 26-28, l'appartement/le Shameless/les amis) n'a encore
-   aucun lieu où atterrir — quand il en aura un, cette fin se change en
-   `va: '<hub-acte-iv>'`, exactement le geste que ce chantier vient de
-   faire pour `tribunal-salle.js`. */
+   ══ CE QUI ÉTAIT PROVISOIRE NE L'EST PLUS (chantier 28) ═════════════
+   Ce fichier disait, jusqu'au 2026-08-25 : « la traversée retombe sur
+   `fin: true`… l'acte IV n'a encore aucun lieu où atterrir — quand il
+   en aura un, cette fin se change en `va: '<hub-acte-iv>'` ». Il en a
+   un. Les deux issues du goulet à l'abordage mènent maintenant à
+   `amis`, le local de répétition (`js/data/amis.js`), et la nuit ne
+   s'arrête plus ici : elle change d'acte. Le geste est exactement
+   celui que le chantier 4 avait fait pour `tribunal-salle.js`. */
 
 import { equipiers } from './equipiers.js'
 
@@ -202,8 +204,9 @@ export const retour = {
     barre: {
       nom: 'La barre',
       /* Trois issues possibles selon l'abordage et la planque choisie
-         (`destinationPlanque(a)`, `'sarah'`, ou `fin: true`) : jamais une
-         seule chaîne fixe, donc `true` générique (§3.3 du plan). */
+         (`destinationPlanque(a)`, `'sarah'`, ou `'amis'` depuis le
+         chantier 28) : jamais une seule chaîne fixe, donc `true`
+         générique (§3.3 du plan). */
       sortie: true,
       regarder: ({ a }) => ({
         tous: a('recuse-abri')
@@ -260,7 +263,11 @@ export const retour = {
                        : {}),
                      flags: ['abordage-passe'],
                      fiches: ['abordage-repousse'],
-                     minutes: 10, fin: true }
+                     /* L'ACTE IV COMMENCE ICI (chantier 28). `minutes`
+                        reste : ces dix minutes-là appartiennent encore
+                        à la nuit du contrat, et c'est `amis` qui bascule
+                        l'horloge en tours à l'arrivée (D8, `acte: 4`). */
+                     minutes: 10, va: 'amis' }
 
           return { tous: [...commun,
                           'Un choc sourd contre la coque. Une main gantée passe par-dessus le bastingage.',
@@ -271,7 +278,7 @@ export const retour = {
                    drakk: '« Un contre un, sur mon propre pont. Je ne demandais que ça. »',
                    flags: ['abordage-passe', 'abordage-echec'],
                    fiches: ['abordage-repousse'],
-                   minutes: 10, fin: true }
+                   minutes: 10, va: 'amis' }
         }
 
         if (a('goulet-passe')) return 'C’est derrière nous.'

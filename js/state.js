@@ -43,6 +43,23 @@ export const etat = {
      jamais au clic ni au temps réel. Départ 23:00, en minutes depuis
      minuit. */
   heure: 23 * 60,
+  /* ── L'ACTE IV COMPTE EN TOURS, PAS EN MINUTES (D8) ────────────────
+     `PLAN_TRAME_ACTES_III_IV.md` § 3 : « `etat.heure` est en minutes
+     depuis minuit et l'acte I s'y tient très bien. L'acte IV dure
+     plusieurs jours : la même variable ne peut pas porter les deux sans
+     que le HUD devienne illisible. »
+
+     `null` tant qu'on est dans la nuit du contrat — c'est ce qui dit au
+     HUD que l'horloge fait toujours foi. Le premier tableau déclarant
+     `acte: 4` le passe à 1, et chaque entrée dans un lieu de l'acte IV
+     l'incrémente : UN TOUR = UNE VISITE DE LIEU. La règle D3 est
+     préservée à la lettre — le compteur n'avance que quand le joueur a
+     choisi d'aller quelque part, jamais au clic ni au temps réel.
+
+     Trois moments par jour, et pas quatre : matin, après-midi, soir.
+     C'est le grain le plus grossier qui reste lisible, et le seul qu'on
+     puisse tenir sans écrire une heure qu'aucune scène ne connaît. */
+  tour: null,
   /* Le tableau courant. `null` avant le premier `charge()` — c'est ce qui
      dit à `sauvegarde()` qu'il n'y a encore rien à écrire. */
   lieu: null,
@@ -82,6 +99,22 @@ export function marque(...visuels) {
 
 export function avance(minutes) {
   etat.heure += minutes
+}
+
+/* Un tour de plus. Appelé par `charge()` (main.js) à l'entrée d'un
+   tableau qui déclare `acte: 4`, jamais ailleurs. */
+export function avanceTour() {
+  etat.tour = (etat.tour ?? 0) + 1
+}
+
+const MOMENTS = ['matin', 'après-midi', 'soir']
+
+/* `jour 2 — après-midi`, l'exemple exact de D8. Prend `etat.tour` par
+   défaut ; accepte un autre numéro pour étiqueter une SAUVEGARDE sans
+   la charger, comme `formateHeure()` le fait pour l'heure. */
+export function formateTour(t = etat.tour) {
+  const n = Math.max(1, t | 0)
+  return `jour ${Math.floor((n - 1) / MOMENTS.length) + 1} — ${MOMENTS[(n - 1) % MOMENTS.length]}`
 }
 
 /* `23:41`, jamais autre chose : pas de barre, pas de jauge — un chiffre.
@@ -145,6 +178,10 @@ function instantane() {
     quand: new Date().toISOString(),
     ou: etat.lieu,
     heure: etat.heure,
+    /* Au même rang que `heure`, et pour la même raison : c'est ce qui
+       étiquette une sauvegarde dans la liste sans avoir à la charger.
+       `null` hors de l'acte IV — l'étiquette retombe alors sur l'heure. */
+    tour: etat.tour,
     etat: {
       lieu: etat.lieu,
       verbe: etat.verbe,
@@ -158,6 +195,7 @@ function instantane() {
       allure: etat.allure,
       journal: etat.journal,
       heure: etat.heure,
+      tour: etat.tour,
       visites: etat.visites,
       depuis: etat.depuis,
       auteurDeductions: etat.auteurDeductions,
@@ -208,6 +246,11 @@ export function restaure(donnees) {
   etat.allure = d.allure
   etat.journal = d.journal
   etat.heure = d.heure
+  /* Même geste que `visites`/`depuis` : une sauvegarde d'avant le
+     chantier 28 n'a pas de registre de tours, et une nuit du contrat
+     n'en aura jamais — `null` est la valeur juste dans les deux cas,
+     donc rien à refuser et pas de bump de version. */
+  etat.tour = d.tour ?? null
   /* `?? {}`/`?? null` : une sauvegarde d'avant le chantier 13 n'a ni
      l'un ni l'autre, et ce n'est pas une raison de la refuser. */
   etat.visites = d.visites ?? {}

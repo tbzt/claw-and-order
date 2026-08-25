@@ -2,13 +2,13 @@
    Ce fichier ne connaît aucun contenu — il ne sait que faire tourner
    une scène qu'on lui donne. */
 
-import { etat, a, pose, donne, retire, marque, classe, sait, contexte, avance, formateHeure,
+import { etat, a, pose, donne, retire, marque, classe, sait, contexte, avance, formateHeure, avanceTour, formateTour,
          sauvegarde, sauvegardeLisible, effaceSauvegarde, restaure, ficheslues,
          sauvegardesGardees, garde, gardeeParId, oublieGardee } from './state.js'
 import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
 import { resous, nomDe, enLignes } from './interact.js'
-import { equipe } from './data/equipe.js'
+import { equipe, pnj } from './data/equipe.js'
 import { sujetsVisibles, estEpuise, estVerrouille, retiens, entree } from './dialogue.js'
 import { eveille, entre } from './ambiance.js'
 import { fiches, deductions, refus as refusCarnet, presque } from './data/carnet.js'
@@ -60,7 +60,15 @@ function montrePortrait(qui) {
    une deutéranopie. La couleur seule ne peut donc pas porter « qui
    parle ». C'est la règle de Kiro appliquée au texte : une silhouette
    avant une couleur, donc un nom avant une teinte. */
-const nomDuLocuteur = (qui) => equipe[qui]?.nom ?? VISAGES[qui] ?? contacts[qui]?.nom ?? ''
+/* `pnj` s'ajoute au chantier 28 : le local de répétition met QUATRE
+   interlocuteurs dans la même pièce, et une bulle sans nom ne dit plus
+   lequel des quatre vient de parler. Ajout strictement additif — les
+   PNJ à portrait (`mccarthy`, `lester`, `gardien`) passent toujours par
+   `VISAGES` avant, donc rien de ce qui existait ne change de rendu.
+   `patron` (chantier 41) et `vedette` restent sans nom : ils ne sont ni
+   dans `pnj` ni dans `contacts`, et les corriger n'appartient pas à ce
+   chantier. */
+const nomDuLocuteur = (qui) => equipe[qui]?.nom ?? VISAGES[qui] ?? pnj[qui]?.nom ?? contacts[qui]?.nom ?? ''
 
 /* IL PARLE, ET ÇA SE VOIT.
    Chaque planche porte deux images de parole en bout ; `.parle` les joue
@@ -123,6 +131,13 @@ async function charge(idScene, muet = false) {
   scene = scenes[idScene]
   etat.lieu = idScene
   if (!muet) etat.visites[idScene] = (etat.visites[idScene] ?? 0) + 1
+  /* D8 — un tour = une visite de lieu, et seulement dans l'acte IV.
+     Un tableau le déclare avec `acte: 4` (voir `amis.js`) ; tout le
+     reste du jeu ne connaît pas ce champ et continue de compter en
+     minutes. `muet` couvre la reprise d'une sauvegarde : `restaure()`
+     vient de reposer le tour, l'incrémenter ici le ferait avancer d'un
+     cran à chaque F5. */
+  if (!muet && scene.acte === 4) avanceTour()
   clearTimeout(minuteur)
   dialogue = null
   survolee = null
@@ -170,17 +185,26 @@ const NOMS_LIEUX = {
   duke: 'Le sous-sol de Duke',
   squat: 'La loge de Trash',
   tripot: 'Le tripot d’Hercules',
+  amis: 'Le local de répétition',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
   carte: 'La carte',
 }
+
+/* L'ÉTIQUETTE DE TEMPS D'UNE SAUVEGARDE (chantier 28). Une nuit du
+   contrat s'étiquette par son heure ; une journée d'acte IV par son
+   tour. Sans ça, un instantané pris au local de répétition se serait
+   rangé dans la liste sous « 09:12 » — l'heure de la nuit d'avant, à
+   trois jours près. Le champ `tour` est absent des sauvegardes plus
+   anciennes, et `??` retombe alors sur l'heure : rien à refuser. */
+const etiquetteTemps = (d) => d.tour ? formateTour(d.tour) : formateHeure(d.heure)
 
 /* Au démarrage, une automatique lisible se PROPOSE, elle ne se charge
    pas d'office (§4) : rouvrir l'onglet pour recommencer une nuit ne
    doit pas rejeter le joueur au milieu de celle d'hier. */
 function proposeReprise(donnees) {
   $('repriseAutoLieu').textContent =
-    `${NOMS_LIEUX[donnees.ou] ?? donnees.ou} — ${formateHeure(donnees.heure)}`
+    `${NOMS_LIEUX[donnees.ou] ?? donnees.ou} — ${etiquetteTemps(donnees)}`
   repriseAuto.hidden = false
 
   $('repriseAutoContinuer').addEventListener('click', async () => {
@@ -974,7 +998,7 @@ function rendGardees() {
 
     const reprendre = document.createElement('button')
     reprendre.className = 'gardees__reprendre'
-    reprendre.textContent = `${NOMS_LIEUX[g.ou] ?? g.ou} — ${formateHeure(g.heure)}`
+    reprendre.textContent = `${NOMS_LIEUX[g.ou] ?? g.ou} — ${etiquetteTemps(g)}`
     reprendre.addEventListener('click', () => reprendGardee(g.id))
 
     const oublier = document.createElement('button')
@@ -1044,7 +1068,12 @@ function rafraichit() {
     bouton.classList.toggle('est-actif', bouton.dataset.runner === etat.actif)
 
   rendInventaire()
-  $('hudHeure').textContent = formateHeure()
+  /* D8 : l'horloge de la nuit cède la place au registre en tours dès
+     que l'acte IV commence. Le `title` suit — « L'heure, cette nuit »
+     posé en dur dans index.html deviendrait faux le premier matin. */
+  const hud = $('hudHeure')
+  hud.textContent = etat.tour === null ? formateHeure() : formateTour()
+  hud.title = etat.tour === null ? 'L’heure, cette nuit' : 'Depuis la récusation'
   $('carnetCompte').textContent = String(etat.fiches.size)
   /* Le bouton porte le NOMBRE de fiches non lues, pas seulement une
      pulsation : « il y a du neuf » et « il y en a trois » ne demandent
@@ -1500,16 +1529,35 @@ const BILAN = [
   ['hercules-demasque', 'On sait maintenant pourquoi il a quitté l’administration, et ce n’est pas sa version.'],
   ['tripot-brule', 'Une salle de jeu ferme, et ceux qui la tenaient savent qui a amené ça.'],
   ['hercules-touche', 'Il a pris un coup qui n’était pas pour lui, dans sa propre salle de jeu.'],
+  /* Le local de répétition, chantier 28 — le premier bilan qui parle
+     de l'acte IV. Les quatre serrures s'y relisent : ce qu'on a obtenu,
+     ce qu'on a fermé, et ce que le quartier a fait de notre passage. */
+  ['su:hayden',      'Vous avez un nom. Hayden Telestrian — et il ne sait pas encore que quelqu’un l’a écrit correctement.'],
+  ['mark-convaincu', 'Quelqu’un a fini par demander à Mark comment elle était. Il avait attendu trois jours.'],
+  ['mark-ferme',     'Vous avez posé deux mille nuyens à côté d’un garçon de dix-neuf ans qui tenait la seule chose qu’elle ait écrite.'],
+  ['psych-paye',     'Psych a parlé contre un créditube, en huit secondes. Il l’aurait fait pour rien : il suffisait de demander pour elle.'],
+  ['psych-ecoute',   'On a demandé à Psych comment elle chantait. C’était la bonne question, et elle ne coûtait rien.'],
+  ['nova-parle',     'Nova a dit à quatre inconnus ce qu’elle n’avait dit à personne. Elle tient toujours la porte.'],
+  ['nita-ferme',     'Une permanente de l’ORC a demandé pour qui vous travailliez. Ne pas répondre était déjà une réponse.'],
+  ['orc-contact',    'Amelia Brown prend vos appels. Ça ne s’achète pas — ça se recommande.'],
+  ['tir-prevenu',    'Le quartier a prévenu les elfes du Tír que quelqu’un d’autre posait des questions. C’est pour ça qu’ils avaient laissé une carte.'],
 ]
 
 function tombeRideau() {
   /* Depuis le chantier 20, la nuit ne s'arrête plus à la planque : elle
      s'arrête à la récusation, au tribunal — puis, depuis le chantier 4,
-     à l'abordage qu'elle ouvre. Les deux branches du dessous restent en
-     secours pour un `fin: true` plus ancien qu'aucun chemin du jeu ne
-     déclenche plus, mais qu'une sauvegarde antérieure pourrait encore
+     à l'abordage qu'elle ouvre, et depuis le chantier 28 au LOCAL DE
+     RÉPÉTITION, premier tableau de l'acte IV, où l'abordage mène
+     maintenant (`retour.js`, `barre.utiliser`). Les branches du dessous
+     restent en secours pour un `fin: true` plus ancien qu'aucun chemin
+     du jeu ne déclenche plus — `abordage-passe` en fait désormais
+     partie — mais qu'une sauvegarde antérieure pourrait encore
      porter. */
-  $('rideauLigne').textContent = a('abordage-passe')
+  $('rideauLigne').textContent = a('local-quitte')
+    ? (a('su:hayden')
+        ? 'Un prénom écrit à l’oreille, un nom de famille, et un homme au bout des deux. L’enquête a commencé, et elle a quelqu’un à chercher.'
+        : 'Trois jours, quatre personnes qui l’ont connue, et vous ressortez de Loveland avec ce que vous y avez apporté.')
+    : a('abordage-passe')
     ? 'Le goulet, une seconde fois. Lester est vivant, McNeil est devant, et l’enquête, elle, n’a pas commencé.'
     : a('recuse-abri')
       ? 'Le juge s’est récusé. L’audience est repoussée de plusieurs jours — et ce n’est pas fini.'

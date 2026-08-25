@@ -311,6 +311,25 @@ const TABLEAUX = {
       hercules: '« Il vient de repérer trois tricheurs à l’œil nu. Je ne sais pas s’il faut que ça me rassure ou que ça m’inquiète. »',
     },
   },
+
+  /* Le local de répétition, chantier 28 : le premier décor de l'acte IV,
+     et le premier où PERSONNE n'est l'hôte. Les cinq décors de planque
+     avaient chacun le leur (Drakk chez Herwick, Trash à la loge,
+     Hercules au tripot…) ; ici, les quatre runners sont également
+     étrangers à la pièce, et ce sont deux MÉTHODES qui échouent au lieu
+     de deux hommes qui rentrent chez eux. Hercules ne peut acheter
+     personne ; Trash reconnaît la famille qui vient de passer avant
+     eux, parce que c'est la sienne. */
+  amis: {
+    hercules: {
+      vu: 'Il ouvre la bouche deux fois avant de dire quoi que ce soit. Trente ans qu’il entre dans une pièce en sachant ce qu’il va vendre, et il n’a rien à vendre ici.',
+      drakk: '« Le halfelin ne trouve pas sa première phrase. Je ne l’avais jamais vu manquer une entrée. »',
+    },
+    trash: {
+      vu: 'Il reste près de la porte, ce qui ne lui ressemble pas dans une pièce pleine d’auras. Il regarde surtout le comptoir.',
+      rabbit: '« Il a compris avant nous qui était passé ici. Il n’a pas eu besoin de lire la carte : il a reconnu la manière. »',
+    },
+  },
 }
 
 /* ── LA FABRIQUE ──────────────────────────────────────────────────────

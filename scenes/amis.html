@@ -1,0 +1,76 @@
+<!--
+  Tableau 8 — LE LOCAL DE RÉPÉTITION. Les amis de Teresa Banks.
+  Chantier 28 (`PLAN_TRAME_ACTES_III_IV.md` § 7.3, rang 5 du § 10) — le
+  premier tableau de l'ACTE IV, et le premier du jeu qui ne se joue pas
+  la nuit du contrat.
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `herwick.html`, `sarah.html`, `duke.html`, `squat.html` et
+  `tripot.html`. Mark, Psych, Nova et Nita n'ont pas de sprite : quatre
+  formes simples, pas de `sprite--*`, jusqu'à ce que l'atelier leur en
+  dessine un. Dette d'art assumée, notée dans `PLAN_EXECUTION.md`.
+
+  PAS DE LESTER DANS CE DÉCOR, et c'est le fait de mise en scène du
+  tableau : il est à McNeil, et l'équipe travaille pour lui sans l'avoir
+  sur les bras. Les cinq décors de planque avaient tous une silhouette
+  assise à l'écart ; celui-ci n'en a pas, et le vide se voit.
+
+  UNE SEULE OUVERTURE, le rideau de fer, au premier plan à droite —
+  comme chez Duke et au tripot, aucune cible n'est une fenêtre.
+
+  LA CARTE DE VISITE EST UNE CIBLE À PART DU COMPTOIR : le comptoir est
+  du décor (aucun `data-hotspot`), la carte en est une. Ce ne sont pas
+  deux cibles pour une même chose — c'est un meuble et un objet posé
+  dessus (convention « une chose du monde, une seule cible »).
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe
+  d'abord, les quatre amis et le mobilier ensuite — le mobilier du
+  premier plan repasse donc devant les jambes, exactement comme la table
+  du tripot (chantier 14).
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--amis">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- Le mur d'affiches, et les onze photos d'elle. -->
+  <div class="mur-affiches" data-hotspot="mur"></div>
+
+  <!-- NITA, debout près du mur, sa pile de tracts sous le bras. -->
+  <div class="ami ami--nita" data-hotspot="nita"></div>
+
+  <!-- Les bacs à vinyles — ce qui reste du magasin. -->
+  <div class="bacs-vinyles" data-hotspot="bacs"></div>
+
+  <!-- Décor : la batterie sans caisse claire, et l'ampli posé au sol. -->
+  <div class="batterie"></div>
+  <div class="ampli ampli--sol"></div>
+
+  <!-- Le micro d'elle, encore sur son pied, encore branché. -->
+  <div class="pied-micro" data-hotspot="micro"></div>
+
+  <!-- MARK, assis sur le second ampli, la pochette vide entre les mains. -->
+  <div class="ampli ampli--mark"></div>
+  <div class="ami ami--mark" data-hotspot="mark"></div>
+
+  <!-- Le comptoir de l'ancien magasin — décor — et ce qu'on y a laissé. -->
+  <div class="comptoir"></div>
+  <div class="carte-tir" data-hotspot="carte"></div>
+
+  <!-- NOVA, adossée au montant du rideau, entre vous et la rue. -->
+  <div class="ami ami--nova" data-hotspot="nova"></div>
+
+  <!-- PSYCH, allongé entre les amplis, au premier plan. -->
+  <div class="ami ami--psych" data-hotspot="psych"></div>
+
+  <!-- La sortie : le rideau de fer bloqué à mi-hauteur. -->
+  <div class="grille-fer" data-hotspot="grille"></div>
+
+</div>

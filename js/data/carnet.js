@@ -215,6 +215,38 @@ export const fiches = {
     ou: 'Le Patron, au tripot',
   },
 
+  /* ── LES AMIS DE TERESA, chantier 28 — l'acte IV s'ouvre ──────────
+     `PLAN_TRAME_ACTES_III_IV.md` § 7.1 : les quatre choses que ce lieu
+     doit rendre. Trois d'entre elles ne servent à rien seules — c'est
+     voulu : ce tableau ne donne pas une réponse, il donne les deux
+     moitiés d'un nom et deux fils qui partent ailleurs (le studio de
+     Waters, les runners du Tír).
+
+     `prenom-mal-ecrit` et `gros-ponte-telestrian` sont la PAIRE de la
+     déduction `hayden`. Elles viennent de deux personnes différentes,
+     qui ne s'ouvrent pas de la même façon : le nom ne tombe donc jamais
+     d'une seule conversation, et jamais d'un seul geste. */
+  'prenom-mal-ecrit': {
+    titre: 'Un prénom, écrit à l’oreille',
+    texte: 'HAIDEN, au dos d’un flyer, de la main de Teresa. Elle l’avait entendu, jamais lu — les deux fautes le prouvent. Mark a gardé le flyer sans jamais le montrer à personne.',
+    ou: 'Mark, au local de répétition',
+  },
+  'gros-ponte-telestrian': {
+    titre: 'Un gros ponte chez Telestrian',
+    texte: 'Elle voyait quelqu’un de la maison Telestrian, assez haut placé pour qu’elle n’en dise jamais le nom de famille. Nita le tient d’elle, un soir, et n’a rien pu en faire depuis.',
+    ou: 'Nita, au local de répétition',
+  },
+  'enregistrement-waters': {
+    titre: 'Il existe un enregistrement',
+    texte: 'Quatre titres, mis en boîte chez Reginald Waters, un studio de Puyallup. Elle y a parlé entre deux prises, et Waters garde tout — les prises ratées comprises.',
+    ou: 'Psych, au local de répétition',
+  },
+  'elfes-du-tir': {
+    titre: 'Ils sont passés avant vous',
+    texte: 'Trois elfes, polis, deux jours plus tôt. Ils ont posé exactement les mêmes questions que vous, et ils ont laissé une carte de visite — le genre de geste qu’on fait quand on compte revenir.',
+    ou: 'Nova, au local de répétition',
+  },
+
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
   'registre-anterieur': {
     titre: 'La ligne est plus ancienne que lui',
@@ -298,6 +330,35 @@ export const deductions = [
       trash: '« Il n’a pas déclenché ça. Il est arrivé dedans. »',
       rabbit: '« L’horodatage est antérieur. Quelqu’un a écrit la fin avant qu’on écrive le début. »',
       drakk: '« Le piège était tendu avant que nous entrions dans la taverne. »',
+    },
+  },
+
+  /* ── LA DÉDUCTION DE L'ACTE IV — chantier 28 ──────────────────────
+     La troisième des trois que `carnet.js` réservait aux trois ancres
+     (D5, `PLAN_TRAME_ACTES_III_IV.md` § 7.1). Elle est la seule du jeu
+     dont les deux fiches viennent du MÊME tableau et de deux personnes
+     différentes : c'est la forme que prend « quatre serrures qui ne
+     sont pas des serrures » une fois traduite en mécanique — deux
+     conversations gagnées séparément, et le carnet fait le reste.
+
+     Elle ne nomme pas un coupable : elle nomme un HOMME. Ce qu'il a
+     fait reste à prouver, et c'est le travail des deux autres ancres
+     (l'appartement, le Shameless) — règle 12, une déduction ouvre la
+     parole, jamais une porte. */
+  {
+    paire: ['gros-ponte-telestrian', 'prenom-mal-ecrit'],
+    donne: {
+      id: 'hayden',
+      titre: 'Hayden Telestrian',
+      texte: 'Un prénom écrit à l’oreille par quelqu’un qui ne l’avait jamais vu écrit, et un nom de famille que tout le Tír connaît. Posés l’un sur l’autre, ils font un homme — et cet homme est de la maison qui paie les elfes polis qui posent des questions à Loveland.',
+      ou: 'Recoupement',
+    },
+    dit: {
+      tous: 'Deux moitiés de nom, et personne dans cette pièce ne les avait jamais mises côte à côte.',
+      hercules: '« Haiden. Hayden. Elle l’a écrit comme elle l’entendait. Voilà pourquoi personne ne l’a jamais trouvé : il n’était mal orthographié que sur le seul papier qui le portait. »',
+      trash: '« Je connais cette famille. Pas cet homme — la famille. Et je sais exactement ce qu’elle fait de ce qui la gêne, parce que la mienne faisait pareil. »',
+      rabbit: '« Une faute de frappe a protégé un homme pendant trois jours. Aucun chiffrement au monde n’a jamais fait aussi bien. »',
+      drakk: '« Nous avions le nom depuis le début. Il était écrit dans la mauvaise langue, voilà tout. »',
     },
   },
 ]
@@ -469,6 +530,26 @@ export const presque = {
     'Un tireur au goulet, un homme assis à une table de jeu. Deux méthodes différentes, engagées de la même façon — cash, à l’avance. Chimera n’a pas un contrat. Il a un budget.',
   'teresa|tripot-embauche':
     'Une victime au SIN Telestrian, et un homme payé pour ne jamais laisser de visage derrière lui. Ça se recoupe. Ça ne nomme toujours personne.',
+
+  /* ── Les amis de Teresa, chantier 28 ──────────────────────────────
+     Le local de répétition rend quatre fiches, et la paire qui NOMME
+     (`gros-ponte-telestrian|prenom-mal-ecrit`) est une déduction, pas
+     un presque — elle est plus haut. Ce qui suit, ce sont les six
+     autres frottements que le joueur a une bonne raison d'essayer en
+     sortant de ce tableau, et qui doivent lui dire qu'il n'a pas tort,
+     seulement pas encore assez. */
+  'elfes-du-tir|famille-tir':
+    'Une famille qui étouffe ce qui la gêne, et trois elfes polis qui remontent la piste avant vous. C’est cohérent au point d’en être évident — et ça ne dit toujours pas ce qu’ils cherchent, eux.',
+  'elfes-du-tir|enregistrement-waters':
+    'Ils sont passés poser des questions, et il existe quelque part quatre titres où elle parle entre deux prises. Ils ne cherchent peut-être pas un coupable. Il faudrait entendre la bande pour le savoir.',
+  'enregistrement-waters|gros-ponte-telestrian':
+    'Elle voyait un homme de la maison, et elle a passé des heures dans un studio à parler entre deux prises. Ce qui manque n’est pas un lien : c’est la bande elle-même.',
+  'elfe-autopsie|prenom-mal-ecrit':
+    'Un elfe l’a touchée en dernier, et elle avait noté un prénom au dos d’un flyer. Un prénom n’est pas une main. Il lui manque un nom de famille pour le devenir.',
+  'appart-teresa|gros-ponte-telestrian':
+    'Un studio loué cash sous un nom qui n’est pas le sien, et quelqu’un d’assez haut placé pour qu’elle n’en dise jamais le nom. Elle ne se cachait pas de lui : elle se cachait AVEC lui.',
+  'prenom-mal-ecrit|teresa':
+    'Elle est morte étranglée, et elle avait gardé un prénom au dos d’un papier. Les deux sont vrais. Il manque tout le reste.',
 
   /* ── Ce qu’on a déjà déduit, frotté contre le reste ──────────────── */
   'deux-mains|teresa':

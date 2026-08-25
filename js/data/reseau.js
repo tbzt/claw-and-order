@@ -84,6 +84,31 @@ export const contacts = {
     specialite: 'transport, discrétion',
     requiert: 'cisco-contact',
   },
+
+  /* ── Amelia Brown — le second contact qui « s'ajoute » (chantier 28,
+     les amis de Teresa) ────────────────────────────────────────────
+     `PLAN_CAPACITES_ET_RESEAU.md` § 5 la nommait déjà comme l'un des
+     deux contacts suivants (« Amelia Brown (ORC) et Wú Chen (STV) »),
+     et `PLAN_TRAME_ACTES_III_IV.md` § 7.3 dit par qui la porte s'ouvre :
+     Nita, la chamane de l'Ours, « ouvre la porte vers l'ORC — le contact
+     de Trash, la contre-partie de Sarah ». Contre-partie au sens fort :
+     Sarah répare des corps, Amelia attaque des dossiers, et les deux
+     appartiennent au même runner.
+
+     COMME CISCO, ET POUR LA MÊME RAISON : elle rejoint le réseau EN
+     PARLANT (L2), et elle n'a PAS ENCORE D'APPEL. Ce n'est pas un
+     oubli — D9 (`PLAN_TRAME_ACTES_III_IV.md` § 3) a tranché que le prix
+     d'un appel à l'acte IV est l'EXPOSITION, pas les minutes, et le
+     compteur d'exposition n'existe pas. Lui écrire un appel à 15
+     minutes maintenant, ce serait facturer la nuit à une enquête qui
+     dure des jours — exactement l'horloge qu'il faudrait défaire. */
+  amelia: {
+    nom: 'Amelia Brown',
+    titre: 'permanente de l’ORC',
+    runner: 'trash',
+    specialite: 'juridique, communautaire',
+    requiert: 'orc-contact',
+  },
 }
 
 /* ── LES APPELS QUI RÉPONDENT ─────────────────────────────────────────
@@ -321,5 +346,14 @@ export const refus = {
   cisco: [
     '« Ça, c’est pas du transport. Rappelle quand t’as un bateau à bouger. »',
     '« Je facture le silence, pas les questions. Trouve-toi quelqu’un d’autre pour celle-là. »',
+  ],
+  /* Amelia n'a pas encore d'appel qui réponde (voir plus haut, D9), mais
+     elle DOIT avoir ses refus : `verifieReseau()` crie au chargement
+     pour un contact muet, et il a raison — un contact qu'on peut
+     composer et qui ne dit rien est exactement le buzzer que le plan du
+     réseau interdit. Elle décroche donc, et elle décline en parlant. */
+  amelia: [
+    '« Ce n’est pas un dossier, ça. C’est une intuition. Revenez quand quelqu’un l’a signée. »',
+    '« On perd neuf fois sur dix, et on les perd sur des pièces solides. Alors imaginez avec celle-là. »',
   ],
 }
