@@ -60,7 +60,15 @@
    quai.js : leurs sorties n'avancent plus l'horloge elles-mêmes).
    L5 — le trajet se joue : l'heure affichée dans l'étiquette au survol
    avance déjà virtuellement (`formateHeure(heure + coût)`), et la ligne
-   de récit du trajet se lit après le clic, avant l'arrivée. */
+   de récit du trajet se lit après le clic, avant l'arrivée.
+
+   ══ CHANTIER 27 — LA TROISIÈME ANCRE REJOINT LE REGISTRE D'ENQUÊTE ═══
+   `shameless` s'ajoute au registre : le local ⇄ l'appartement ⇄ le
+   Shameless ⇄ le palais de justice. Rien dans `noeud()` n'a dû changer
+   — c'est tout l'intérêt d'avoir écrit ce chantier en fonction générique
+   plutôt qu'en cas particulier au 17. Le Shameless n'est pas à Loveland
+   (§7.1 du plan : « entre le concert et chez elle ») : il est posé sur
+   la route, dans Tacoma — ni chez elle, ni au tribunal, entre les deux. */
 
 import { etat, formateHeure, formateTour } from '../state.js'
 
@@ -121,6 +129,17 @@ export const lieux = {
     x: 48.5, y: 122.5,
     acte: 4,
   },
+  /* LA TROISIÈME ANCRE (chantier 27) : « entre le concert et chez
+     elle » (SCÉNARIO_SOURCE.md). Ni Downtown ni Loveland — un point sur
+     la route entre les deux, dans Tacoma, comme le quai. Le club
+     lui-même n'a rien de doré ; c'est la voiture qui détonnait dans SON
+     quartier à lui, pas l'inverse. */
+  shameless: {
+    nom: 'Le Shameless',
+    ou: 'Tacoma',
+    x: 44.0, y: 97.0,
+    acte: 4,
+  },
   /* Le seul nœud du jeu qui ne mène nulle part : il REFERME l'acte IV.
      Downtown, à côté du 6 — le palais est à deux pas du Claw & Order,
      ce que le scénario dit et que le jeu n'avait jamais montré. */
@@ -148,8 +167,13 @@ const RECITS = {
      dans Loveland, ce n'est pas une distance, c'est une décision. */
   'amis|appartement': ['Trois kilomètres dans Loveland. Personne ne parle dans la voiture, et personne ne met la radio.'],
   'appartement|amis': ['Vous refaites les trois kilomètres en sens inverse. Le rideau de fer sera toujours à mi-hauteur : il n’y a personne pour le baisser.'],
+  'amis|shameless': ['Vous quittez Loveland pour un club qui n’a jamais eu besoin d’être beau pour tenir debout. Personne n’en parle. C’est peut-être pour ça.'],
+  'shameless|amis': ['Vous laissez les basses du Shameless derrière vous et remontez vers Loveland. Trois kilomètres, et une nuit qui recommence à faire du bruit.'],
+  'appartement|shameless': ['Vous quittez le studio de Teresa pour un club qui, lui, n’a jamais prétendu être un endroit innocent.'],
+  'shameless|appartement': ['Vous laissez le Shameless derrière vous. L’appartement, lui, n’ira nulle part — il attend depuis trois jours, il peut attendre encore.'],
   'amis|audience': ['Vous laissez Loveland derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
   'appartement|audience': ['Vous laissez Loveland derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
+  'shameless|audience': ['Vous laissez le Shameless derrière vous et vous remontez vers Downtown. Ce que vous avez, vous l’avez.'],
 }
 
 const coutDe = (depuis, vers) => lieux[depuis]?.minutes?.[vers]
@@ -211,9 +235,9 @@ export const carte = {
   ouverture: (ctx, visite) => ctx.a('abordage-passe')
     ? (visite > 1
         ? [['drakk', '« La province ne change pas de forme. Seuls les jours y changent de visage. »']]
-        : ['Drakk ressort le plan. Ce n’est plus le même : trois lieux y sont marqués, tous les trois au crayon, et deux d’entre eux tiennent dans un mouchoir.',
-           ['drakk', '« Loveland. Trois kilomètres de côté, et toute l’affaire dedans. »'],
-           ['drakk', '« Le troisième point, c’est la sortie. Nous y allons quand nous décidons d’y aller, et pas quand nous n’avons plus le choix. »']])
+        : ['Drakk ressort le plan. Ce n’est plus le même : quatre lieux y sont marqués, tous au crayon, et deux d’entre eux tiennent dans un mouchoir.',
+           ['drakk', '« Loveland. Trois kilomètres de côté, et la moitié de l’affaire dedans. L’autre moitié boit ailleurs. »'],
+           ['drakk', '« Le dernier point, c’est la sortie. Nous y allons quand nous décidons d’y aller, et pas quand nous n’avons plus le choix. »']])
     : visite > 1
     ? [['drakk', '« La province ne change pas de forme. Seule l’heure y change de visage. »']]
     : ['Drakk étale un plan sur ses genoux — dessiné à la main, jamais le même deux fois.',
@@ -232,6 +256,7 @@ export const carte = {
     quai: noeud('quai'),
     amis: noeud('amis'),
     appartement: noeud('appartement'),
+    shameless: noeud('shameless'),
     audience: noeud('audience'),
   },
 

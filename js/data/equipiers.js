@@ -348,6 +348,22 @@ const TABLEAUX = {
       rabbit: '« Il a compris avant nous qui était passé ici. Il n’a pas eu besoin de lire la carte : il a reconnu la manière. »',
     },
   },
+
+  /* Le Shameless, chantier 27 : la troisième ancre, et le seul décor de
+     l'acte IV qui ne soit ni un lieu de deuil ni un lieu de travail —
+     un club, tard, où personne de l'équipe n'a sa place. Drakk et
+     White_Rabbit portent l'entrée, comme au local : deux façons
+     différentes de ne pas être d'ici. */
+  shameless: {
+    drakk: {
+      vu: 'Il garde les mains dans le dos, comme s’il craignait de casser quelque chose rien qu’en le regardant. Ce genre d’endroit ne figure dans aucun de ses livres.',
+      hercules: '« Il vient de calculer le prix d’un verre au bar, et il vient de perdre une teinte. Pour un troll de deux mètres cinquante, c’est un exploit. »',
+    },
+    rabbit: {
+      vu: 'Elle scanne la salle par réflexe, puis s’arrête : il n’y a presque rien à lire ici. Un club qui ne veut pas qu’on sache qui vient.',
+      trash: '« Son aura s’est refermée d’un cran en entrant. Ce n’est pas la musique. C’est le genre de silence que les riches paient pour avoir. »',
+    },
+  },
 }
 
 /* ── LA FABRIQUE ──────────────────────────────────────────────────────

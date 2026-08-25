@@ -15,12 +15,13 @@
   LA NUIT — deux nœuds vifs : 6 (Downtown, le bar) et 10 (Tacoma, le
   quai). Les dix autres districts sont dessinés, numérotés, éteints.
 
-  L'ENQUÊTE — trois points au crayon, qui ne sont pas des districts mais
+  L'ENQUÊTE — quatre points au crayon, qui ne sont pas des districts mais
   des ADRESSES : le local de répétition et l'appartement de Teresa,
   serrés l'un contre l'autre dans Loveland (un quartier de Puyallup,
-  jalon 9), et le palais de justice à Downtown, à deux pas du 6. Ils ne
-  portent pas de numéro : ce ne sont pas des districts du livre, ce sont
-  les trois endroits où cette affaire se joue.
+  jalon 9), le Shameless, posé sur la route entre le concert et chez
+  elle (Tacoma, chantier 27), et le palais de justice à Downtown, à deux
+  pas du 6. Ils ne portent pas de numéro : ce ne sont pas des districts
+  du livre, ce sont les endroits où cette affaire se joue.
 
   Le CSS éteint les nœuds de l'autre registre en `display: none`, pas en
   `opacity` — un jalon transparent capterait quand même le curseur, et
@@ -69,11 +70,15 @@
   <div class="jalon" style="left:calc(30.8 * var(--u)); top:calc(77.0 * var(--u))">12</div>
   <div class="lieudit" style="left:calc(9.5 * var(--u)); top:calc(103.5 * var(--u))">McNeil</div>
 
-  <!-- LES TROIS POINTS DE L'ENQUÊTE. Pas de numéro : ce sont des
+  <!-- LES QUATRE POINTS DE L'ENQUÊTE (chantier 27 : le Shameless
+       s'ajoute aux trois du chantier 17). Pas de numéro : ce sont des
        adresses, pas des districts. Les deux premiers tiennent dans
-       Loveland, à trois kilomètres l'un de l'autre. -->
+       Loveland, à trois kilomètres l'un de l'autre ; le Shameless est
+       sur la route, entre le concert et chez elle — ni Loveland, ni
+       Downtown. -->
   <div class="jalon jalon--enquete" style="left:calc(36.0 * var(--u)); top:calc(122.0 * var(--u))" data-hotspot="amis"></div>
   <div class="jalon jalon--enquete" style="left:calc(48.5 * var(--u)); top:calc(122.5 * var(--u))" data-hotspot="appartement"></div>
+  <div class="jalon jalon--enquete" style="left:calc(44.0 * var(--u)); top:calc(97.0 * var(--u))" data-hotspot="shameless"></div>
   <div class="jalon jalon--enquete jalon--sortie" style="left:calc(46.8 * var(--u)); top:calc(48.6 * var(--u))" data-hotspot="audience"></div>
   <div class="lieudit lieudit--enquete" style="left:calc(33.0 * var(--u)); top:calc(128.5 * var(--u))">Loveland</div>
 

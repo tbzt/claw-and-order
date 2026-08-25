@@ -308,6 +308,25 @@ export const fiches = {
     ou: 'Puyallup Lockworks, contrat 4471-B',
   },
 
+  /* ── LE SHAMELESS, chantier 27 — la troisième ancre ────────────────
+     `PLAN_TRAME_ACTES_III_IV.md` § 7.1 : « la voiture de luxe qui
+     détonnait dans le quartier · son commlink coupé — volontairement,
+     pour protéger quelqu'un ». Même forme que `hayden` et
+     `lester-innocent` : deux fiches du même tableau, deux témoins qui
+     ne s'ouvrent pas de la même façon — un videur dont c'est le métier
+     de remarquer une voiture qui ne devrait pas être là, une gérante
+     qui ne parle d'elle qu'à qui la mérite. */
+  'voiture-luxe': {
+    titre: 'Une voiture qui détonnait',
+    texte: 'Une berline corpo à vitres teintées, garée en double file devant un club où personne d’autre ne roule sans dette. Une fois par semaine, toujours à la même heure, et personne n’a jamais vu le visage du chauffeur.',
+    ou: 'Denny, videur au Shameless',
+  },
+  'commlink-coupe': {
+    titre: 'Elle l’éteignait elle-même',
+    texte: 'Chaque fois qu’elle sortait retrouver quelqu’un, elle coupait son commlink au comptoir, devant témoin. « Pas pour moi », elle a dit une fois. « Pour lui. » Elle protégeait un nom, pas sa propre trace.',
+    ou: 'Iris, au bar du Shameless',
+  },
+
   /* ── Ce qu'on lit au greffe ───────────────────────────────────── */
   'registre-anterieur': {
     titre: 'La ligne est plus ancienne que lui',
@@ -444,6 +463,31 @@ export const deductions = [
       trash: '« Ils ont su avant nous, avant lui, avant tout le monde. Et ils ont mis un gamin de vingt ans dans une navette. »',
       rabbit: '« Deux relevés, un journal, trois jours. La preuve de son innocence était consultable par n’importe qui, moyennant un numéro de contrat à quatre chiffres. »',
       drakk: '« Ils n’ont pas manqué le coupable. Ils ont choisi un autre nom, et ils l’ont écrit à la place. »',
+    },
+  },
+
+  /* ── LA TROISIÈME ET DERNIÈRE DÉDUCTION DE L'ACTE IV — chantier 27 ──
+     La troisième et dernière des trois que `carnet.js` réservait aux
+     trois ancres (D5). Comme `hayden`, elle ne nomme personne : elle
+     dit qu'il y a un homme à trouver, et pourquoi il fallait le
+     cacher. Ni l'une ni l'autre des deux fiches ne suffit seule —
+     une voiture chère n'est qu'une voiture, un commlink éteint n'est
+     qu'une habitude. Ensemble, elles décrivent un PROTOCOLE, pas un
+     hasard. */
+  {
+    paire: ['voiture-luxe', 'commlink-coupe'],
+    donne: {
+      id: 'amant-secret',
+      titre: 'Elle avait un amant, et il payait pour le rester',
+      texte: 'Une berline qui ne se gare jamais deux fois au même endroit, et un commlink qu’elle coupait elle-même avant chaque rendez-vous. Personne ne prend ces précautions pour une histoire ordinaire — elle protégeait quelqu’un qui avait tout à perdre à être vu avec elle. Commencer par un nom.',
+      ou: 'Recoupement',
+    },
+    dit: {
+      tous: 'Les deux fiches se répondent, et aucune des deux ne dit un nom — mais elles disent qu’il y en a un à trouver.',
+      hercules: '« Une voiture de ce prix, dans ce quartier-là, une fois par semaine ? C’est pas de la discrétion. C’est une habitude qu’on a les moyens de se payer. »',
+      trash: '« Elle coupait le fil elle-même, pour lui. Je connais cette forme de loyauté. Elle finit rarement bien pour celle qui la porte. »',
+      rabbit: '« Éteindre un commlink avant un rendez-vous, ce n’est pas de la prudence amateur. C’est un protocole. Quelqu’un le lui a appris, ou quelqu’un le lui a imposé. »',
+      drakk: '« Elle gardait le secret d’un autre, au prix du sien. C’est le sacrifice le plus commun de toutes les histoires, et le moins souvent raconté depuis son point de vue à elle. »',
     },
   },
 ]
@@ -670,4 +714,23 @@ export const presque = {
     'Deux paires de mains, et une seule morte pour l’instant. La seconde paire n’a pas fini sa nuit.',
   'deux-mains|famille-tir':
     'Une main de colère, une main de tarif. Reste à savoir qui paie la seconde en couvrant la première — et personne ne l’a encore dit à voix haute.',
+
+  /* ── Le Shameless, chantier 27 ─────────────────────────────────────
+     La paire qui NOMME l'existence de l'amant (`commlink-coupe|voiture-
+     luxe`) est une déduction, plus haut. Celles-ci sont les frottements
+     que le joueur a une bonne raison d'essayer en ressortant du club —
+     et deux d'entre elles raccordent enfin des fiches qui dormaient
+     depuis l'appartement et le local de répétition. */
+  'commlink-coupe|valise-faite':
+    'Elle coupait le fil pour lui, et elle faisait sa valise pour elle. Deux départs se préparaient en même temps, et rien ne dit qu’ils menaient au même endroit.',
+  'affaires-homme|voiture-luxe':
+    'Un rasoir hors de prix dans son placard, une berline hors de prix devant le club. Le même homme, sans doute — ça ne se prouve pas encore avec deux objets chers.',
+  'commlink-coupe|gros-ponte-telestrian':
+    'Elle protégeait un nom en coupant son commlink ; Nita tient déjà la moitié de ce nom-là. Il en manque l’autre moitié, et elle n’est pas dans ce bar.',
+  'appart-teresa|voiture-luxe':
+    'Un studio loué cash sous un nom qui n’existe pas, une berline qui ne se gare jamais deux fois au même endroit. La même prudence, à deux adresses différentes.',
+  'commlink-coupe|teresa-cliente':
+    'Elle demandait à une doc des rues comment on disparaît proprement, et elle coupait déjà son commlink avant chaque rendez-vous. Elle s’entraînait.',
+  'famille-tir|voiture-luxe':
+    'Une berline corpo dans un quartier qui n’en voit jamais, et une famille du Tír qui préfère effacer ce qui la gêne. C’est le genre de voiture qu’on envoie quand on a les moyens d’effacer.',
 }

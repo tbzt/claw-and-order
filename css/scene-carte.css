@@ -202,8 +202,8 @@
 .stage[data-etat~="registre-nuit"]    .tableau--carte .lieudit--enquete { display: none; }
 .stage[data-etat~="registre-enquete"] .tableau--carte .jalon--vif       { display: none; }
 
-/* Les trois points de l'enquête : au crayon, pas au tampon. Pas de
-   numéro dedans — ce ne sont pas des districts du livre. */
+/* Les points de l'enquête : au crayon, pas au tampon. Pas de numéro
+   dedans — ce ne sont pas des districts du livre. */
 .tableau--carte .jalon--enquete {
   width: calc(4 * var(--u)); height: calc(4 * var(--u));
   margin: calc(-2 * var(--u)) 0 0 calc(-2 * var(--u));

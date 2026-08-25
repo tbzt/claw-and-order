@@ -1,0 +1,173 @@
+/* ── TABLEAU 10 — LE SHAMELESS ────────────────────────────────────────
+   Chantier 27, la troisième ancre de l'acte IV. Grille 256 x 144
+   (chantier 8), même --u que les autres tableaux.
+
+   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-amis.css` et
+   `scene-appartement.css` : aucun sprite neuf pour Denny ou Iris. Assez
+   pour reconnaître un club sans prétention — un mur de flyers, une
+   piste vide, une alcôve, un comptoir avec son ardoise, une porte
+   noire — et pour valider les deux témoins en jeu.
+
+   LA LUMIÈRE EST BASSE ET ARTIFICIELLE : ni le petit matin d'`amis`, ni
+   l'après-midi froid d'`appartement'. Un club fermé au public tourne
+   en éclairage de service, jamais éteint tout à fait.
+
+   DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
+   cibles cliquables avant tout test au navigateur — même discipline que
+   `scene-amis.css`. Les coordonnées de chaque cible sont écrites en
+   commentaire au-dessus d'elle. Le mobilier (comptoir) n'a pas de
+   `data-hotspot` : il peut donc recouvrir ce qu'il veut. */
+
+.tableau--shameless {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #14110f;
+}
+.tableau--shameless > * { position: absolute; }
+
+.tableau--shameless .fond {
+  left: 0; top: 0; width: 100%; height: calc(114 * var(--u));
+  background: linear-gradient(180deg, #211a1c 0%, #1a1517 60%, #120e10 100%);
+}
+.tableau--shameless .sol {
+  left: 0; top: calc(114 * var(--u)); width: 100%; height: calc(30 * var(--u));
+  background: linear-gradient(180deg, #241c1e 0%, #171214 100%);
+  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.5);
+}
+
+/* ── LE MUR DE FLYERS — x:8-64, y:8-46 ───────────────────────────────
+   Le coin arraché est un rectangle plus sombre : quelque chose manque,
+   et ça se voit avant même de regarder de près. */
+.tableau--shameless .mur-flyers {
+  left: calc(8 * var(--u)); top: calc(8 * var(--u));
+  width: calc(56 * var(--u)); height: calc(38 * var(--u));
+  background:
+    repeating-linear-gradient(58deg, #4a2e34 0 calc(5 * var(--u)), #3c2429 calc(5 * var(--u)) calc(11 * var(--u))),
+    #2e1c20;
+  border: calc(1 * var(--u)) solid #100a0c;
+}
+.tableau--shameless .mur-flyers::after {
+  content: ''; position: absolute;
+  left: calc(30 * var(--u)); top: calc(10 * var(--u));
+  width: calc(12 * var(--u)); height: calc(12 * var(--u));
+  background: #1e1214;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.6);
+}
+
+/* ── LA PISTE ET LA RÉGIE — x:78-146, y:8-46 ─────────────────────────
+   Vide, chaises montées sur les tables au bord, régie éteinte. */
+.tableau--shameless .piste-dj {
+  left: calc(78 * var(--u)); top: calc(8 * var(--u));
+  width: calc(68 * var(--u)); height: calc(38 * var(--u));
+  background:
+    repeating-linear-gradient(90deg, #241a1c 0 calc(8 * var(--u)), #1c1416 calc(8 * var(--u)) calc(9 * var(--u))),
+    #221a1c;
+  border: calc(1 * var(--u)) solid #100a0c;
+}
+.tableau--shameless .piste-dj::after {
+  content: ''; position: absolute;
+  right: calc(4 * var(--u)); top: calc(4 * var(--u));
+  width: calc(16 * var(--u)); height: calc(10 * var(--u));
+  background: #171012;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.6);
+}
+
+/* ── L'ALCÔVE DU FOND — x:160-220, y:8-46 ────────────────────────────
+   Banquette dos au mur, face à la porte. `amant-trouve` la souligne
+   d'un filet froid une fois le recoupement fait — c'est la place d'où
+   on surveille qui entre. */
+.tableau--shameless .alcove {
+  left: calc(160 * var(--u)); top: calc(8 * var(--u));
+  width: calc(60 * var(--u)); height: calc(38 * var(--u));
+  border-radius: 10% / 30%;
+  background: linear-gradient(180deg, #3a2228 0%, #22141a 100%);
+  border: calc(1 * var(--u)) solid #120a0e;
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(120, 70, 80, .12);
+}
+.stage[data-etat~="amant-trouve"] .tableau--shameless .alcove {
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(120, 70, 80, .12),
+              0 0 0 calc(1 * var(--u)) rgba(150, 190, 210, .4);
+}
+
+/* ── L'ARDOISE — x:168-202, y:50-66 ──────────────────────────────────
+   Accrochée au mur, au-dessus du comptoir. Le nom « T. » y reste
+   toujours lisible : ce n'est pas un état qui change à l'écran, la
+   scène n'a rien à y montrer de plus qu'au premier regard. */
+.tableau--shameless .ardoise {
+  left: calc(168 * var(--u)); top: calc(50 * var(--u));
+  width: calc(34 * var(--u)); height: calc(16 * var(--u));
+  background: #171213;
+  border: calc(1 * var(--u)) solid #050303;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.05);
+}
+.tableau--shameless .ardoise::after {
+  content: ''; position: absolute;
+  left: calc(4 * var(--u)); top: calc(3 * var(--u));
+  width: calc(14 * var(--u)); height: calc(2 * var(--u));
+  background: rgba(226, 220, 200, .55);
+}
+
+/* ── LA PORTE NOIRE — x:4-26, y:74-140, la sortie ────────────────────
+   Le nom de classe évite `.rideau`, déjà pris par le rideau final du
+   jeu (`engine.css`, z-index 70). */
+.tableau--shameless .porte-noire {
+  left: calc(4 * var(--u)); top: calc(74 * var(--u));
+  width: calc(22 * var(--u)); height: calc(66 * var(--u));
+  background: linear-gradient(180deg, #1c1214 0%, #100a0b 100%);
+  border: calc(1 * var(--u)) solid #050303;
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.04);
+}
+.tableau--shameless .porte-noire::after {
+  content: ''; position: absolute;
+  right: calc(3 * var(--u)); top: calc(30 * var(--u));
+  width: calc(2 * var(--u)); height: calc(6 * var(--u));
+  background: #6a5a40;
+  border-radius: 50%;
+}
+
+/* ── DENNY — x:30-58, y:78-140 ───────────────────────────────────────
+   Large, immobile, bras croisés. Il regarde la rue (donc la sortie),
+   pas l'équipe — la silhouette est tournée d'un quart vers la porte. */
+.tableau--shameless .pnj--denny {
+  left: calc(30 * var(--u)); top: calc(78 * var(--u));
+  width: calc(26 * var(--u)); height: calc(62 * var(--u));
+  border-radius: 30% 30% 14% 14% / 40% 40% 12% 12%;
+  background: radial-gradient(64% 76% at 46% 30%, #8a7062 0%, #5c463c 48%, #2c201a 82%, transparent 100%);
+}
+.stage[data-etat~="denny-parle"] .tableau--shameless .pnj--denny { filter: brightness(1.06); }
+
+/* ── IRIS — x:206-234, y:72-140 ──────────────────────────────────────
+   Derrière son comptoir, donc coupée à mi-hauteur par le meuble qui la
+   précède dans le DOM. */
+.tableau--shameless .pnj--iris {
+  left: calc(206 * var(--u)); top: calc(72 * var(--u));
+  width: calc(24 * var(--u)); height: calc(46 * var(--u));
+  border-radius: 32% 32% 10% 10% / 42% 42% 10% 10%;
+  background: radial-gradient(64% 78% at 50% 30%, #b09078 0%, #6e5648 48%, #362820 82%, transparent 100%);
+}
+.stage[data-etat~="iris-convaincue"] .tableau--shameless .pnj--iris { filter: brightness(1.08); }
+.stage[data-etat~="iris-fermee"]    .tableau--shameless .pnj--iris { filter: saturate(.5) brightness(.8); }
+
+/* ── LE COMPTOIR, SANS CIBLE — x:196-252, y:96-124 ───────────────────
+   Décor : il peut recouvrir Iris et l'ardoise à son gré. */
+.tableau--shameless .comptoir {
+  left: calc(196 * var(--u)); top: calc(96 * var(--u));
+  width: calc(56 * var(--u)); height: calc(28 * var(--u));
+  background: linear-gradient(180deg, #2e2020 0%, #180f10 100%);
+  border: calc(1 * var(--u)) solid #0a0505;
+}
+
+/* ── LE COULOIR DE L'ÉQUIPE — x:70-154, y:66-140 ─────────────────────
+   Même geste qu'ailleurs : entrée par le bas, rangée du plus grand au
+   plus petit sur une bande que rien d'autre n'occupe en x. */
+.tableau--shameless .p-drakk    { width: calc(28 * var(--u)); left: calc(70 * var(--u));  top: calc(66 * var(--u)); }
+.tableau--shameless .p-trash    { width: calc(20 * var(--u)); left: calc(100 * var(--u)); top: calc(76 * var(--u)); }
+.tableau--shameless .p-rabbit   { width: calc(16 * var(--u)); left: calc(122 * var(--u)); top: calc(82 * var(--u)); }
+.tableau--shameless .p-hercules { width: calc(14 * var(--u)); left: calc(140 * var(--u)); top: calc(86 * var(--u)); }
+
+/* ── CE QUE LA PIÈCE A RENDU, RELISIBLE SANS LE CARNET ───────────────
+   Même geste qu'`amis`/`appartement` : la salle s'éclaire d'un cran à
+   mesure que les deux témoins parlent. */
+.stage[data-etat~="club-froid"]      .tableau--shameless .fond { filter: brightness(.9) saturate(.85); }
+.stage[data-etat~="club-ouvert"]     .tableau--shameless .fond { filter: brightness(1.05); }

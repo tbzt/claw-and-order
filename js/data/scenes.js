@@ -14,9 +14,10 @@ import { squat } from './trash.js'
 import { tripot } from './hercules.js'
 import { amis } from './amis.js'
 import { appartement } from './appartement.js'
+import { shameless } from './shameless.js'
 import { tribunal } from './tribunal.js'
 import { tribunalSalle } from './tribunal-salle.js'
 import { carte } from './carte.js'
 
-export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, 'greffe-cellule': greffeCellule, retour, planque, herwick, sarah, duke, squat, tripot, amis, appartement, tribunal, 'tribunal-salle': tribunalSalle, carte }
+export const scenes = { bar, quai, 'quai-voilier': quaiVoilier, greffe, 'greffe-cellule': greffeCellule, retour, planque, herwick, sarah, duke, squat, tripot, amis, appartement, shameless, tribunal, 'tribunal-salle': tribunalSalle, carte }
 export const depart = 'bar'

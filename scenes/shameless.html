@@ -1,0 +1,66 @@
+<!--
+  Tableau 10 — LE SHAMELESS. Un club sans enseigne, entre le concert et
+  Loveland. Chantier 27 (`PLAN_TRAME_ACTES_III_IV.md` § 7.1, rang 7 du
+  § 10) — la troisième et dernière ancre de l'acte IV.
+
+  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
+  `amis.html`, `appartement.html`, `herwick.html`, `sarah.html`,
+  `duke.html`, `squat.html` et `tripot.html`. Denny et Iris n'ont pas de
+  sprite : deux formes simples, jusqu'à ce que l'atelier leur en
+  dessine un. Dette d'art assumée, notée dans `PLAN_EXECUTION.md`.
+
+  PAS DE LESTER, PAS DE G5 : ce n'est pas une planque, c'est un lieu
+  d'enquête de l'acte IV, comme `amis` et `appartement` avant lui —
+  aucune mécanique de confiance ici, seulement deux témoins.
+
+  UNE SEULE OUVERTURE, la porte noire, au premier plan à gauche.
+
+  L'ARDOISE EST UNE CIBLE À PART DU COMPTOIR : le comptoir est du décor
+  (aucun `data-hotspot`), l'ardoise en est une — même convention que la
+  carte de visite sur le comptoir chez `amis.html` (« une chose du
+  monde, une seule cible »).
+
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe
+  d'abord, Denny, Iris et le mobilier ensuite.
+
+  DISPOSITION EN BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
+  cibles cliquables — même discipline que `scene-amis.css`. Bande du
+  haut (mur, piste, alcôve), bande médiane (ardoise), bande du bas
+  (porte, Denny, l'équipe, Iris) : deux cibles ne partagent jamais à la
+  fois une plage en x et une plage en y.
+
+  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+-->
+<div class="tableau tableau--shameless">
+
+  <div class="fond"></div>
+  <div class="sol"></div>
+
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+
+  <!-- Le mur de flyers, et le coin arraché. -->
+  <div class="mur-flyers" data-hotspot="mur"></div>
+
+  <!-- La piste vide et la régie DJ éteinte. -->
+  <div class="piste-dj" data-hotspot="piste"></div>
+
+  <!-- L'alcôve du fond, dos au mur, face à la porte. -->
+  <div class="alcove" data-hotspot="alcove"></div>
+
+  <!-- Le comptoir — décor — et l'ardoise accrochée au mur derrière. -->
+  <div class="comptoir"></div>
+  <div class="ardoise" data-hotspot="ardoise"></div>
+
+  <!-- IRIS, derrière son comptoir. -->
+  <div class="pnj pnj--iris" data-hotspot="iris"></div>
+
+  <!-- DENNY, entre l'équipe et la porte. -->
+  <div class="pnj pnj--denny" data-hotspot="denny"></div>
+
+  <!-- La sortie : la porte noire, sans enseigne. -->
+  <div class="porte-noire" data-hotspot="porte"></div>
+
+</div>
