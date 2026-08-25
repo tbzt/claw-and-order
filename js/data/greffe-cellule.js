@@ -63,6 +63,7 @@ export const greffeCellule = {
 
     revenir: {
       nom: 'Revenir',
+      sortie: 'greffe',
       regarder: { tous: 'Le fil qui relie Trash à son corps, ténu, mais entier.' },
       utiliser: {
         tous: 'Trash cligne des yeux. Il est de retour derrière la vitre, dans son corps, les jambes un peu molles.',

@@ -201,6 +201,10 @@ export const retour = {
     /* ══ LA BARRE — le verrou du tableau ══════════════════════════════ */
     barre: {
       nom: 'La barre',
+      /* Trois issues possibles selon l'abordage et la planque choisie
+         (`destinationPlanque(a)`, `'sarah'`, ou `fin: true`) : jamais une
+         seule chaîne fixe, donc `true` générique (§3.3 du plan). */
+      sortie: true,
       regarder: ({ a }) => ({
         tous: a('recuse-abri')
           ? ['Cisco tient la barre, capuche rabattue, et regarde le chenal comme s’il l’avait déjà traversé cent fois — ce qui est sans doute vrai.',

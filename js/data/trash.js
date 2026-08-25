@@ -341,6 +341,7 @@ export const squat = {
        rien de plus qu'une adresse déjà grillée. */
     porte: {
       nom: 'La trappe, refermée derrière vous',
+      sortie: 'tribunal',
       regarder: {
         tous: ['La trappe par laquelle vous êtes montés. Le tribunal est à vingt minutes, en coupant par les toits puis la rue.',
                'Il est un peu plus de cinq heures. On peut partir quand on veut, et c’est le problème : il faut savoir quand.'],

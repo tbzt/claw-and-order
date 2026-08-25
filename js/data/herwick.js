@@ -321,6 +321,7 @@ export const herwick = {
        `tribunal`, exactement comme `planque.js`. */
     porte: {
       nom: 'La porte de service, vers la ruelle',
+      sortie: 'tribunal',
       regarder: {
         tous: ['Une porte en tôle, à l’arrière, qui donne sur une ruelle de service. Le tribunal est à vingt minutes, à pied.',
                'Il est un peu plus de cinq heures. On peut partir quand on veut, et c’est le problème : il faut savoir quand.'],

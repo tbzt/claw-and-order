@@ -110,6 +110,7 @@ export const tribunal = {
        salle ne coûte rien. */
     entree: {
       nom: 'Les portes de la salle d’audience',
+      sortie: 'tribunal-salle',
       regarder: {
         tous: 'Deux battants de bois sombre, déjà entrebâillés. On entend la salle avant de la voir.',
       },

@@ -158,6 +158,7 @@ export const bar = {
        elle plutôt que laissés à décrire une porte qui n'existe plus. */
     porte: {
       nom: 'La porte de la rue',
+      sortie: 'carte',
       regarder: {
         tous: 'La porte battante par laquelle vous êtes entrés. Derrière, il pleut sur Downtown et il est bientôt minuit.',
         rabbit: '« Pas de lecteur, pas de serrure connectée. Ça s’ouvre à la main, comme au siècle dernier. »',

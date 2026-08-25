@@ -278,6 +278,7 @@ export const tripot = {
        c'est QUI encaisse en plus — personne, ou Hercules. */
     porte: {
       nom: 'La porte sans enseigne',
+      sortie: 'tribunal',
       regarder: {
         tous: ['La porte par laquelle vous êtes entrés. Le tribunal est à vingt minutes, une fois dehors.',
                'Il est un peu plus de six heures. On peut partir quand on veut, et c’est le problème : il faut savoir quand.'],

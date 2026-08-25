@@ -126,6 +126,12 @@ export const greffe = {
 
     sas: {
       nom: 'Le sas',
+      /* Deux destinations possibles (`greffe-cellule` en projection
+         astrale, `retour` une fois Lester sorti) selon l'état — pas une
+         seule chaîne connue d'avance. `true` reste générique : l'étape B
+         (`PLAN_LISIBILITE.md` §3.3) ne nomme la destination QUE si elle
+         est fixe, jamais en la devinant. */
+      sortie: true,
       regarder: {
         tous: 'Deux battants blindés, un verrou électromagnétique de chaque côté, et une vitre longue comme une main.',
         drakk: '« Verrou double. Il ne cède ni à l’épaule ni au levier. Celui-là s’ouvre par la parole ou pas du tout. »',

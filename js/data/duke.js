@@ -262,6 +262,7 @@ export const duke = {
        de confiance (G5). */
     porte: {
       nom: 'La porte blindée, vers le garage',
+      sortie: 'tribunal',
       regarder: {
         tous: ['Une porte renforcée, avec une barre de sécurité qu’il faut lever à deux mains. Le tribunal est à vingt minutes, une fois dehors.',
                'Il est un peu plus de six heures. On peut partir quand on veut, et c’est le problème : il faut savoir quand.'],

@@ -213,6 +213,7 @@ export const planque = {
     /* ══ LA PORTE — la sortie, qui s'ouvre toujours ═══════════════════ */
     porte: {
       nom: 'La porte de la laverie',
+      sortie: 'tribunal',
       regarder: {
         tous: ['Une porte vitrée qui donne sur le trottoir. Le tribunal est à trente minutes, à Downtown, angle de la 5e.',
                'Il est six heures. On peut partir quand on veut, et c’est le problème : il faut savoir quand.'],

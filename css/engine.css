@@ -94,6 +94,16 @@ body {
           brightness(1.18);
 }
 
+/* Chantier 42, `PLAN_LISIBILITE.md` §3.4 : maintenir Espace entoure
+   toutes les cibles du tableau — un contour, jamais un nom ni un verbe
+   (§1, « chercher QUOI, jamais OÙ »). `outline` suit la BOÎTE, pas la
+   silhouette (contrairement au survol ci-dessus) : c'est délibéré, un
+   contour dit « il y a quelque chose ici », pas « voici sa forme ». */
+.stage:not(.est-occupe).revele-cibles [data-hotspot] {
+  outline: .12cqw dashed var(--cyan);
+  outline-offset: .12cqw;
+}
+
 /* ── Curseur maison ──────────────────────────────────────── */
 
 .curseur {
@@ -135,6 +145,24 @@ body {
   background: var(--ambre);
   box-shadow: 0 0 1cqw var(--ambre);
 }
+
+/* Chantier 42, `PLAN_LISIBILITE.md` §3.3 : un sixième état, au-dessus
+   des cinq autres — `sortie` est une propriété de la CIBLE, pas du
+   verbe actif, donc la flèche s'affiche quel que soit `data-verbe`. Le
+   point central (`::after`) s'efface : la flèche porte déjà le sens.
+   Le second bloc, sur `[data-verbe]` (présent sur tout `.curseur`,
+   quelle que soit sa valeur), égale la spécificité de la règle
+   `.est-sur-cible[data-verbe="utiliser"]` ci-dessus et la bat à l'ordre
+   de la feuille — sinon `utiliser` remettrait sa propre rotation par-
+   dessus la flèche. */
+.curseur.est-sortie::before {
+  border: none;
+  background: var(--cyan);
+  border-radius: 0;
+  clip-path: polygon(8% 34%, 56% 34%, 56% 12%, 96% 50%, 56% 88%, 56% 66%, 8% 66%);
+}
+.curseur.est-sortie[data-verbe]::before { transform: scale(1.3) rotate(0deg); }
+.curseur.est-sortie::after { opacity: 0; }
 
 /* ── Étiquette de survol ─────────────────────────────────── */
 

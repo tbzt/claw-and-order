@@ -1097,7 +1097,7 @@ function ecritEtiquette() {
   if (!carnet.hidden) {
     if (!survoleeFiche) {
       etiquette.hidden = true
-      curseur.classList.remove('est-sur-cible')
+      curseur.classList.remove('est-sur-cible', 'est-sortie')
       return
     }
     const nom = fiches[survoleeFiche].titre
@@ -1111,13 +1111,34 @@ function ecritEtiquette() {
 
   if (!survolee || occupe || dialogue) {
     etiquette.hidden = true
-    curseur.classList.remove('est-sur-cible')
+    curseur.classList.remove('est-sur-cible', 'est-sortie')
     return
   }
   const nom = nomDe(scene, survolee, contexte())
-  etiquette.innerHTML = etat.objetActif
-    ? `<em>${objets[etat.objetActif].nom}</em> sur ${nom}`
-    : `${etat.verbe} · ${nom}`
+  /* Chantier 42, `PLAN_LISIBILITE.md` §3.2-3.3 : `sortie` est une donnée
+     posée par l'auteur de la cible, pas une déduction du moteur (`va:`
+     est rendu par la réaction, souvent sous condition). Une cible qui
+     porte `sortie` allume le curseur en flèche quel que soit le verbe
+     actif — c'est une propriété de la CIBLE, pas du geste — et
+     l'étiquette ne bascule sur « sortir » que si le verbe en cours est
+     bien celui qui ferait sortir (`utiliser`), sans objet ni fiche en
+     main. */
+  const cible = scene.hotspots[survolee]
+  const enSortie = Boolean(cible?.sortie) && !etat.objetActif && !etat.ficheActive
+  curseur.classList.toggle('est-sortie', enSortie)
+  if (etat.objetActif) {
+    etiquette.innerHTML = `<em>${objets[etat.objetActif].nom}</em> sur ${nom}`
+  } else if (enSortie && etat.verbe === 'utiliser') {
+    /* La destination ne se dit que si elle est CONNUE (une chaîne fixe,
+       pas `true`) et déjà VISITÉE — sinon on nomme la porte, pas ce
+       qu'elle cache (§3.3, point 3 : « on ne divulgue pas la carte »). */
+    const dest = typeof cible.sortie === 'string' ? cible.sortie : null
+    etiquette.innerHTML = dest && (etat.visites[dest] ?? 0) > 0
+      ? `sortir · vers ${NOMS_LIEUX[dest] ?? dest}`
+      : `sortir · ${nom}`
+  } else {
+    etiquette.innerHTML = `${etat.verbe} · ${nom}`
+  }
   etiquette.hidden = false
   curseur.classList.add('est-sur-cible')
 }
@@ -1409,7 +1430,24 @@ function brancheHud() {
     const rangs = ['hercules', 'trash', 'rabbit', 'drakk']
     const f = e.key.match(/^F([1-4])$/)
     if (f) { e.preventDefault(); selectionne(rangs[+f[1] - 1]) }
+    /* Chantier 42, `PLAN_LISIBILITE.md` §3.4 : maintenir Espace entoure
+       les 170 `data-hotspot` du tableau — un contour, jamais un nom ni
+       un verbe (§1). `e.preventDefault()` empêche le défilement de page
+       ET l'activation d'un bouton qui aurait le focus (Espace clique un
+       <button> par défaut) ; `!e.repeat` évite de re-basculer la classe
+       à chaque répétition de touche pendant l'appui. */
+    if (e.code === 'Space') {
+      e.preventDefault()
+      if (!e.repeat) stage.classList.add('revele-cibles')
+    }
   })
+
+  addEventListener('keyup', (e) => {
+    if (e.code === 'Space') stage.classList.remove('revele-cibles')
+  })
+  /* Alt-tab pendant l'appui ne renvoie jamais de `keyup` : sans ce filet,
+     le contour resterait affiché jusqu'à la prochaine pression. */
+  addEventListener('blur', () => stage.classList.remove('revele-cibles'))
 }
 
 /* Le rideau dit ce qui s'est passé, pas une formule. Il lit l'état du

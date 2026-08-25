@@ -81,6 +81,7 @@ export const tribunalSalle = {
        (chantier 25), gratuit dans les deux sens. */
     reculer: {
       nom: 'Le fond de la salle',
+      sortie: 'tribunal',
       regarder: {
         tous: 'Les portes, entrebâillées sur le parvis.',
       },
@@ -115,6 +116,10 @@ export const tribunalSalle = {
        conversation). */
     sortir: {
       nom: 'La sortie',
+      /* Mène à `retour` (recusé, refuge dénoncé) ou `fin: true` (le
+         contrat rempli) selon `recuse-abri` : deux issues, pas une
+         chaîne fixe — `true` générique (§3.3 du plan). */
+      sortie: true,
       regarder: {
         tous: 'Le couloir, et au bout, la rue. Le commlink de McCarthy vibre déjà dans sa poche.',
       },

@@ -68,6 +68,7 @@ export const quai = {
 
     voilier: {
       nom: 'Le voilier',
+      sortie: 'quai-voilier',
       regarder: {
         tous: ['Un huit mètres fatigué, amarré au bout de la jetée. Les voiles sont ferlées mais les taquets sont libérés : quelqu’un s’apprêtait à partir.',
                'Aucune lumière à bord.'],
@@ -293,6 +294,7 @@ export const quai = {
 
     jetee: {
       nom: 'La jetée',
+      sortie: 'carte',
       regarder: {
         tous: ['Cinquante bateaux éteints, des pontons qui grincent, et une odeur d’essence et de vase.',
                'Personne, sauf le pêcheur.'],

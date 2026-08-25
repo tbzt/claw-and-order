@@ -168,6 +168,10 @@ export const sarah = {
        partagée avec `retour.js`). */
     porte: {
       nom: 'La porte du cabinet, vers l’escalier de service',
+      /* Route vers `destinationPlanque(a)` (chantier 39) : herwick, duke,
+         squat, tripot ou la laverie par défaut selon ce qui a été tranché
+         au conseil — jamais une chaîne fixe, donc `true` générique. */
+      sortie: true,
       regarder: {
         tous: ['Une porte métallique qui donne sur l’escalier au-dessus de la supérette. Le tribunal est à vingt-cinq minutes, à pied.',
                'Il est un peu plus de six heures. On peut partir dès que le bras tient.'],

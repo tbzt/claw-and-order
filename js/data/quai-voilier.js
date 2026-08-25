@@ -306,6 +306,7 @@ export const quaiVoilier = {
 
     amarres: {
       nom: 'Le verrou de ponton',
+      sortie: 'greffe',
       regarder: ({ a }) => {
         const postes = ['poste-barre', 'poste-aussieres', 'poste-vigie', 'poste-radio'].filter((p) => a(p)).length
         return { tous: [`Deux aussières et un verrou de ponton électronique.`,
@@ -350,6 +351,7 @@ export const quaiVoilier = {
        forme (§ 3 du plan). */
     reculer: {
       nom: 'Redescendre sur le ponton',
+      sortie: 'quai',
       regarder: {
         tous: 'Le ponton, juste en contrebas.',
       },
