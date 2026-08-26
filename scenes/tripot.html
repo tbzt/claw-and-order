@@ -66,4 +66,69 @@
   <!-- La sortie, au premier plan. -->
   <div class="porte-sans-enseigne" data-hotspot="porte"></div>
 
+
+  <!-- ── Ce que Trash voit, et lui seul ────────────────────────────
+       CINQ, PLUS UNE. Sa vue donne l'arithmétique exacte — « cinq auras
+       penchées sur des cartes, et une SIXIÈME, plus froide, qui ne joue
+       pas pour l'argent posé sur le tapis » — et c'est la seule chose
+       que ce calque dessine. Ni le Patron, ni le videur, ni Lester : le
+       compte EST le contenu, et une septième aura aurait cassé la seule
+       information que Trash apporte à ce tableau.
+
+       LA SIXIÈME N'EST POSÉE SUR PERSONNE, et c'est délibéré. Le
+       tableau tient sur « rien ne le distingue » (§3.5 du plan) : c'est
+       `table.regarder`, tenu par Hercules, qui pose `tueur-repere`.
+       Une aura froide centrée sur un joueur précis aurait donné le
+       nom à la place du personnage. Elle flotte donc au-dessus du
+       tapis, à cheval sur trois places — assez pour qu'on la voie,
+       jamais assez pour qu'on sache laquelle. -->
+  <div class="calque calque--astral">
+    <div class="aura aura--joueur aj1"></div>
+    <div class="aura aura--joueur aj2"></div>
+    <div class="aura aura--joueur aj3"></div>
+    <div class="aura aura--joueur aj4"></div>
+    <div class="aura aura--joueur aj5"></div>
+    <div class="aura aura--froide"></div>
+  </div>
+
+  <!-- ── Ce que Drakk voit, et lui seul ───────────────────────────
+       Pas de fenêtre, une porte, une table au milieu. Les cinq jetons
+       de la table sont IDENTIQUES, pour la même raison que les trois
+       gardes du parvis le sont : le décor refuse de désigner qui que ce
+       soit, et une lentille qui le ferait à sa place viderait le beat
+       d'Hercules de son sens. -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <div class="issue issue--porte"></div>
+    <div class="cote cote--porte">SEULE ISSUE</div>
+    <div class="cote cote--sansfenetre">AUCUNE FENÊTRE</div>
+    <div class="couvert couvert--table"></div>
+    <div class="couvert couvert--caisse"></div>
+    <div class="cote cote--couvert">COUVERT</div>
+    <div class="jeton jj jj1"></div>
+    <div class="jeton jj jj2"></div>
+    <div class="jeton jj jj3"></div>
+    <div class="jeton jj jj4"></div>
+    <div class="jeton jj jj5"></div>
+    <div class="jeton j-patron"></div>
+    <div class="jeton j-videur"></div>
+    <div class="jeton j-lester"></div>
+  </div>
+
+  <!-- ── Ce que White_Rabbit voit, et lui seul ────────────────────
+       LE CALQUE RA LE PLUS VIDE DU JEU, ET IL EST VIDE EXPRÈS. « Aucun
+       signal. Pas une caméra, pas un lecteur, pas un tag — le genre
+       d'endroit qui existe exprès pour ne rien laisser à lire. »
+
+       Il reste UN cadre, et ce n'est pas une ORA : c'est le résultat du
+       balayage, dessiné creux — trait pointillé, fond nul, aucun
+       flottement — pour qu'on ne le confonde jamais avec quelque chose
+       qui émet. Sans lui, la lentille de Rabbit aurait eu l'air d'un
+       oubli au lieu d'une réponse ; avec lui, « la sécurité la plus
+       efficace que j'aie jamais vue : ne rien connecter du tout »
+       devient une chose qu'on regarde. -->
+  <div class="calque calque--ra">
+    <div class="ora ora--nul">BALAYAGE — AUCUN SIGNAL</div>
+  </div>
+
 </div>

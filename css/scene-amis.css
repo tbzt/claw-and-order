@@ -262,3 +262,77 @@
    est aussi ce qui se passe pour de vrai. */
 .stage[data-etat~="local-muet"]   .tableau--amis .fond { filter: brightness(.92) saturate(.9); }
 .stage[data-etat~="local-ouvert"] .tableau--amis .fond { filter: brightness(1.06); }
+
+/* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
+   Le vocabulaire commun est dans `engine.css` ; ici, le local. */
+
+/* ── Astral ──────────────────────────────────────────────────────────
+   LA VEILLÉE, ET SON TROU. Le masque radial creuse la nappe au-dessus
+   du mur d'affiches (x 4-52, y 6-40) : c'est là que sont ses onze
+   photos, et c'est le seul endroit du local où l'astral ne dit rien.
+   « Pas de la fille » — trois mots, et tout le calque en découle.
+
+   Elle ne bat presque pas : trois jours que ça dure, et un deuil qui
+   n'a pas de place où aller ne palpite pas, il stagne. */
+.tableau--amis .veillee {
+  left: 0; top: 0; width: 100%; height: calc(120 * var(--u));
+  background: radial-gradient(120% 90% at 62% 70%, rgba(190,150,110,.22), rgba(150,120,150,.12) 55%, transparent 90%);
+  mix-blend-mode: screen;
+  filter: blur(calc(5 * var(--u)));
+  -webkit-mask: radial-gradient(closest-side at 11% 19%, transparent 0 46%, #000 88%);
+          mask: radial-gradient(closest-side at 11% 19%, transparent 0 46%, #000 88%);
+  animation: aura-bat 12s ease-in-out infinite;
+}
+/* Quatre façons de ne pas être ailleurs : même famille de teinte, quatre
+   rythmes — ils sont venus séparément et ils repartiront séparément. */
+.tableau--amis .aura--nita {
+  left: 0; top: calc(52 * var(--u)); width: calc(40 * var(--u)); height: calc(58 * var(--u));
+  background: radial-gradient(closest-side, rgba(255,180,120,.26), transparent 68%);
+  animation: aura-bat 5.4s ease-in-out infinite;
+}
+.tableau--amis .aura--mark {
+  left: calc(168 * var(--u)); top: calc(54 * var(--u)); width: calc(44 * var(--u)); height: calc(52 * var(--u));
+  background: radial-gradient(closest-side, rgba(230,160,140,.24), transparent 68%);
+  animation: aura-bat 6.8s ease-in-out infinite;
+}
+.tableau--amis .aura--nova {
+  left: calc(218 * var(--u)); top: calc(56 * var(--u)); width: calc(38 * var(--u)); height: calc(58 * var(--u));
+  background: radial-gradient(closest-side, rgba(200,150,190,.24), transparent 68%);
+  animation: aura-bat 4.9s ease-in-out infinite;
+}
+.tableau--amis .aura--psych {
+  left: calc(174 * var(--u)); top: calc(108 * var(--u)); width: calc(64 * var(--u)); height: calc(34 * var(--u));
+  background: radial-gradient(closest-side, rgba(170,150,210,.22), transparent 66%);
+  animation: aura-bat 8.2s ease-in-out infinite;
+}
+
+/* ── Tactique ────────────────────────────────────────────────────── */
+.tableau--amis .issue--grille {
+  left: calc(234 * var(--u)); top: calc(98 * var(--u));
+  width: calc(22 * var(--u)); height: calc(44 * var(--u));
+}
+.tableau--amis .cote--grille { left: calc(166 * var(--u)); top: calc(90 * var(--u)); }
+.tableau--amis .couvert--comptoir { left: calc(203 * var(--u)); top: calc(95 * var(--u)); width: calc(30 * var(--u)); height: calc(26 * var(--u)); }
+.tableau--amis .couvert--bacs     { left: calc(3 * var(--u));   top: calc(105 * var(--u)); width: calc(44 * var(--u)); height: calc(24 * var(--u)); }
+.tableau--amis .cote--couvert { left: calc(6 * var(--u));  top: calc(98 * var(--u)); }
+.tableau--amis .cote--donjon  { left: calc(56 * var(--u)); top: calc(130 * var(--u)); }
+.tableau--amis .jeton { width: calc(22 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--amis .j-nita  { left: calc(7 * var(--u));   top: calc(102 * var(--u)); }
+.tableau--amis .j-mark  { left: calc(178 * var(--u)); top: calc(97 * var(--u)); }
+.tableau--amis .j-nova  { left: calc(230 * var(--u)); top: calc(106 * var(--u)); }
+.tableau--amis .j-psych { left: calc(194 * var(--u)); top: calc(128 * var(--u)); }
+
+/* ── RA ──────────────────────────────────────────────────────────── */
+.tableau--amis .ora--carte {
+  left: calc(158 * var(--u)); top: calc(38 * var(--u));
+  width: calc(92 * var(--u)); height: calc(8 * var(--u));
+  animation: ora-flotte 6.2s ease-in-out infinite;
+}
+/* Le fil descend de la fiche jusqu'au comptoir, à l'endroit exact où la
+   carte est posée face en l'air (x 208-228, y 98). Sans lui, la seule
+   fiche du tableau flotte sans rien désigner. */
+.tableau--amis .fil-carte {
+  left: calc(204 * var(--u)); top: calc(46 * var(--u));
+  width: calc(1 * var(--u)); height: calc(53 * var(--u));
+  background: linear-gradient(180deg, rgba(90,200,255,.75), rgba(90,200,255,.12));
+}

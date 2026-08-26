@@ -232,3 +232,85 @@
   background: #2c2822;
   border-top: calc(1 * var(--u)) solid #4a4238;
 }
+
+/* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
+   Le vocabulaire commun est dans `engine.css` ; ici, l'arrière-boutique. */
+
+/* ── Astral ──────────────────────────────────────────────────────────
+   PAS UNE SEULE `.aura` DANS CE CALQUE. Voir le commentaire du markup :
+   Trash dit qu'il ne trouve personne, et un halo l'aurait contredit.
+   Ce qui reste est une saturation faite de trois trames décalées — 7,
+   9 et 11 unités de pas, donc jamais en phase — et d'un semis de foyers
+   trop nombreux et trop semblables pour qu'un œil en isole un. */
+.tableau--herwick .saturation {
+  left: 0; top: calc(4 * var(--u)); width: 100%; height: calc(116 * var(--u));
+  background:
+    repeating-linear-gradient(24deg,  rgba(170,140,120,.11) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(7 * var(--u))),
+    repeating-linear-gradient(-38deg, rgba(150,130,160,.10) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(9 * var(--u))),
+    repeating-linear-gradient(88deg,  rgba(190,160,120,.09) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(11 * var(--u)));
+  mix-blend-mode: screen;
+  filter: blur(calc(1.5 * var(--u)));
+  animation: aura-bat 13s ease-in-out infinite;
+}
+.tableau--herwick .deuils {
+  left: 0; top: calc(10 * var(--u)); width: 100%; height: calc(108 * var(--u));
+  background: repeating-radial-gradient(circle at center,
+    rgba(200,170,140,.16) 0 calc(3 * var(--u)),
+    transparent calc(5 * var(--u)) calc(17 * var(--u)));
+  background-size: calc(29 * var(--u)) calc(23 * var(--u));
+  mix-blend-mode: screen;
+  filter: blur(calc(3 * var(--u)));
+  animation: aura-bat 9.7s ease-in-out infinite reverse;
+}
+
+/* ── Tactique ────────────────────────────────────────────────────── */
+/* La ligne de tir de 8 h 40, et le seul marqueur du jeu que le joueur
+   peut faire disparaître par un geste. */
+.tableau--herwick .menace--rideau {
+  left: calc(128 * var(--u)); top: calc(4 * var(--u));
+  width: calc(84 * var(--u)); height: calc(78 * var(--u));
+  background: linear-gradient(180deg, rgba(255,80,80,.28), rgba(255,80,80,.05) 82%);
+  animation: jeton-bat 2.8s ease-in-out infinite;
+}
+.tableau--herwick .cote--rideau { left: calc(130 * var(--u)); top: calc(84 * var(--u)); }
+/* RIDEAU BAISSÉ : la rue ne voit plus dedans, donc la carte non plus.
+   `data-etat` réécrit le marqueur ; la réaction ne touche pas au DOM. */
+.stage[data-etat~="rideau-baisse"] .tableau--herwick .menace--rideau {
+  background: linear-gradient(180deg, rgba(90,240,160,.16), transparent 78%);
+  animation: none;
+}
+.stage[data-etat~="rideau-baisse"] .tableau--herwick .cote--rideau { font-size: 0; }
+.stage[data-etat~="rideau-baisse"] .tableau--herwick .cote--rideau::before {
+  content: "RIDEAU BAISSÉ — COUVERT";
+  font-size: calc(5 * var(--u));
+}
+.tableau--herwick .issue--porte {
+  left: calc(0 * var(--u)); top: calc(124 * var(--u));
+  width: calc(26 * var(--u)); height: calc(20 * var(--u));
+}
+.tableau--herwick .cote--porte { left: calc(2 * var(--u)); top: calc(116 * var(--u)); }
+.tableau--herwick .couvert--comptoir { left: calc(94 * var(--u)); top: calc(94 * var(--u)); width: calc(94 * var(--u)); height: calc(24 * var(--u)); }
+.tableau--herwick .cote--couvert { left: calc(96 * var(--u)); top: calc(87 * var(--u)); }
+.tableau--herwick .jeton { width: calc(24 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--herwick .j-herwick { left: calc(194 * var(--u)); top: calc(96 * var(--u)); }
+.tableau--herwick .j-lester  { left: calc(228 * var(--u)); top: calc(100 * var(--u)); }
+
+/* ── RA ──────────────────────────────────────────────────────────── */
+.tableau--herwick .ora--caisse {
+  left: calc(122 * var(--u)); top: calc(70 * var(--u));
+  width: calc(82 * var(--u)); height: calc(8 * var(--u));
+  animation: ora-flotte 6.4s ease-in-out infinite;
+}
+/* Coupée. « Il ne dira plus à personne qu'il y a une boutique ouverte
+   à cette heure » — donc la fiche cesse d'émettre, et le dit. */
+.stage[data-etat~="caisse-coupee"] .tableau--herwick .ora--caisse {
+  border-color: rgba(120,130,140,.5);
+  background: rgba(24,28,32,.55);
+  color: rgba(150,160,170,.6);
+  animation: none;
+  font-size: 0;
+}
+.stage[data-etat~="caisse-coupee"] .tableau--herwick .ora--caisse::before {
+  content: "TERMINAL CAISSE · HORS LIGNE";
+  font-size: calc(4 * var(--u));
+}

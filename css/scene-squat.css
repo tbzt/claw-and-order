@@ -170,3 +170,96 @@
 .tableau--squat .ombre--trash    { left: calc(80 * var(--u));  top: calc(111 * var(--u)); width: calc(20 * var(--u)); }
 .tableau--squat .ombre--rabbit   { left: calc(112 * var(--u)); top: calc(112 * var(--u)); width: calc(16 * var(--u)); }
 .tableau--squat .ombre--hercules { left: calc(143 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }
+
+/* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
+   Le vocabulaire commun est dans `engine.css` ; ici, la loge. */
+
+/* ── Astral ──────────────────────────────────────────────────────────
+   UNE LOGE A UN BORD, et c'est ce qui la distingue d'une pièce où
+   quelqu'un a de la chance. La lisière est nette (le `radial-gradient`
+   passe de rien à quelque chose en douze pour cent de rayon), centrée
+   sur le métier à tisser transformé en autel — le point d'accord. */
+.tableau--squat .loge {
+  left: calc(4 * var(--u)); top: calc(6 * var(--u));
+  width: calc(248 * var(--u)); height: calc(126 * var(--u));
+  background: radial-gradient(closest-side at 46% 56%,
+    rgba(255,190,110,.10) 0 52%,
+    rgba(255,170,90,.30) 66%,
+    rgba(255,150,80,.10) 78%,
+    transparent 90%);
+  mix-blend-mode: screen;
+  filter: blur(calc(3 * var(--u)));
+  animation: aura-bat 7.8s ease-in-out infinite;
+}
+.tableau--squat .autel-chaud {
+  left: calc(92 * var(--u)); top: calc(58 * var(--u));
+  width: calc(50 * var(--u)); height: calc(48 * var(--u));
+  background: radial-gradient(closest-side, rgba(255,210,140,.34), transparent 72%);
+  mix-blend-mode: screen;
+  filter: blur(calc(2 * var(--u)));
+  animation: aura-bat 5.4s ease-in-out infinite;
+}
+/* Elle déborde plus large qu'une aura normale, et de la même teinte que
+   la loge : « comme un vêtement porté longtemps ». */
+.tableau--squat .aura--trash {
+  left: calc(50 * var(--u)); top: calc(80 * var(--u)); width: calc(44 * var(--u)); height: calc(52 * var(--u));
+  background: radial-gradient(closest-side, rgba(255,190,110,.30), transparent 74%);
+  animation: aura-bat 6.6s ease-in-out infinite;
+}
+/* La seule qui n'appartient pas à l'endroit. */
+.tableau--squat .aura--lester {
+  left: calc(222 * var(--u)); top: calc(82 * var(--u)); width: calc(34 * var(--u)); height: calc(42 * var(--u));
+  background: radial-gradient(closest-side, rgba(150,180,220,.26), transparent 68%);
+  animation: aura-bat 4.6s ease-in-out infinite;
+}
+
+/* ── Tactique ────────────────────────────────────────────────────── */
+.tableau--squat .issue--trappe {
+  left: calc(6 * var(--u)); top: calc(2 * var(--u));
+  width: calc(34 * var(--u)); height: calc(30 * var(--u));
+}
+.tableau--squat .cote--trappe { left: calc(44 * var(--u)); top: calc(32 * var(--u)); }
+.tableau--squat .menace--palier {
+  left: calc(4 * var(--u)); top: calc(84 * var(--u));
+  width: calc(40 * var(--u)); height: calc(32 * var(--u));
+  background: linear-gradient(0deg, rgba(255,80,80,.28), rgba(255,80,80,.04) 84%);
+  animation: jeton-bat 2.9s ease-in-out infinite;
+}
+.tableau--squat .cote--palier { left: calc(6 * var(--u)); top: calc(76 * var(--u)); }
+/* Le palier tenu : la montée n'est plus une montée. */
+.stage[data-etat~="palier-tenu"] .tableau--squat .menace--palier {
+  background: linear-gradient(0deg, rgba(90,240,160,.18), transparent 80%);
+  animation: none;
+}
+.stage[data-etat~="palier-tenu"] .tableau--squat .cote--palier { font-size: 0; }
+.stage[data-etat~="palier-tenu"] .tableau--squat .cote--palier::before {
+  content: "PALIER TENU";
+  font-size: calc(5 * var(--u));
+}
+.tableau--squat .couvert--malle    { left: calc(140 * var(--u)); top: calc(98 * var(--u)); width: calc(46 * var(--u)); height: calc(22 * var(--u)); }
+.tableau--squat .couvert--fauteuil { left: calc(186 * var(--u)); top: calc(86 * var(--u)); width: calc(42 * var(--u)); height: calc(30 * var(--u)); }
+.tableau--squat .cote--couvert { left: calc(142 * var(--u)); top: calc(91 * var(--u)); }
+.tableau--squat .jeton { width: calc(22 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--squat .j-lester { left: calc(230 * var(--u)); top: calc(112 * var(--u)); }
+
+/* ── RA ──────────────────────────────────────────────────────────────
+   Une fiche, un bus, TROIS fils — x 48, 60 et 72, exactement sous les
+   trois lampes de fortune (`.lampes--1/2/3`). Le chiffre est dans le
+   texte ; il fallait pouvoir le recompter à l'écran. */
+.tableau--squat .ora--branchement {
+  left: calc(80 * var(--u)); top: calc(12 * var(--u));
+  width: calc(70 * var(--u)); height: calc(8 * var(--u));
+  animation: ora-flotte 5.9s ease-in-out infinite;
+}
+.tableau--squat .bus-vole {
+  left: calc(46 * var(--u)); top: calc(20 * var(--u));
+  width: calc(34 * var(--u)); height: calc(1 * var(--u));
+  background: rgba(90,200,255,.7);
+}
+.tableau--squat .fil-lampe {
+  top: calc(14 * var(--u)); width: calc(1 * var(--u)); height: calc(6 * var(--u));
+  background: rgba(90,200,255,.7);
+}
+.tableau--squat .fl1 { left: calc(48 * var(--u)); }
+.tableau--squat .fl2 { left: calc(60 * var(--u)); }
+.tableau--squat .fl3 { left: calc(72 * var(--u)); }

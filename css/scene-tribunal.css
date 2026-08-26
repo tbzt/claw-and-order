@@ -24,9 +24,11 @@
    deux autres ; c'est la barre d'espace (chantier 42) qui le rend
    trouvable, pas sa couleur.
 
-   CE QUE CE FICHIER NE FAIT TOUJOURS PAS : les trois calques de
-   lentille (astral / tactique / RA), absents des onze décors récents —
-   une dette de série, pas de ce tableau. */
+   LES TROIS CALQUES DE LENTILLE SONT LÀ, tout en bas de cette feuille.
+   Ils l'ont été en dernier, avec les dix autres décors qui les
+   attendaient : c'était une dette de SÉRIE, pas de ce tableau, et elle
+   se traitait d'un coup ou pas du tout. Le vocabulaire commun est passé
+   dans `engine.css` au même moment ; ici il ne reste que le parvis. */
 
 .tableau--tribunal {
   position: absolute;
@@ -196,3 +198,137 @@
 }
 .tableau--tribunal .jambage--g { left: 0; }
 .tableau--tribunal .jambage--d { right: 0; background: linear-gradient(90deg, #101216 0%, #16181d 100%); }
+
+/* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
+   La dette de série du chantier 23, refermée. Le vocabulaire commun
+   (`.aura`, `.ora`, `.couvert`, `.jeton`, `.issue`, `.menace`, `.cote`,
+   `.grille-tac`) vit dans `engine.css` ; ici, seulement ce qui
+   appartient à CE parvis : des coordonnées, des teintes, des rythmes. */
+
+/* ── Astral ──────────────────────────────────────────────────────────
+   Le courant froid du couloir du fond. Ce n'est pas une aura — une aura
+   est ronde et appartient à quelqu'un ; ça, c'est un courant d'air, ça
+   tombe. Il descend l'entrebâillement des deux battants, exactement là
+   où le décor laisse voir les couloirs. */
+.tableau--tribunal .courant {
+  left: calc(110 * var(--u)); top: calc(38 * var(--u));
+  width: calc(38 * var(--u)); height: calc(80 * var(--u));
+  background: linear-gradient(180deg, rgba(150,200,235,.34) 0%, rgba(110,160,210,.16) 45%, transparent 88%);
+  mix-blend-mode: screen;
+  filter: blur(calc(3 * var(--u)));
+  animation: tribunal-descend 6.2s ease-in-out infinite;
+}
+@keyframes tribunal-descend {
+  0%,100% { opacity: .7;  transform: translateY(calc(-2 * var(--u))) }
+  50%     { opacity: 1;   transform: translateY(calc(3 * var(--u))) }
+}
+/* « Trop de monde, ici, a eu peur au même endroit. » L'endroit est le
+   portique : c'est là qu'on vide ses poches, et c'est la seule ligne du
+   parvis par laquelle TOUT LE MONDE est passé. À hauteur d'homme, donc
+   basse et large, jamais un halo. */
+.tableau--tribunal .peur-basse {
+  left: calc(84 * var(--u)); top: calc(82 * var(--u));
+  width: calc(88 * var(--u)); height: calc(32 * var(--u));
+  background: linear-gradient(180deg, transparent, rgba(150,120,190,.20) 55%, rgba(120,100,160,.10));
+  mix-blend-mode: screen;
+  filter: blur(calc(4 * var(--u)));
+  animation: aura-bat 8.6s ease-in-out infinite;
+}
+.tableau--tribunal .aura--mccarthy {
+  left: calc(44 * var(--u)); top: calc(74 * var(--u));
+  width: calc(40 * var(--u)); height: calc(42 * var(--u));
+  background: radial-gradient(closest-side, rgba(255,170,90,.28), transparent 70%);
+  animation: aura-bat 6.4s ease-in-out infinite;
+}
+/* LES TROIS, IDENTIQUES. Une seule règle porte tout ce qui se voit ;
+   les trois classes qui suivent ne portent QUE `left`. Écrire trois
+   déclarations complètes aurait laissé la porte ouverte à ce qu'elles
+   divergent un jour, et le jour où elles divergent, l'astral désigne le
+   garde qu'Hercules est seul à devoir trouver. */
+.tableau--tribunal .aura--garde {
+  top: calc(78 * var(--u));
+  width: calc(28 * var(--u)); height: calc(34 * var(--u));
+  background: radial-gradient(closest-side, rgba(120,170,255,.22), transparent 66%);
+  animation: aura-bat 7.1s ease-in-out infinite;
+}
+.tableau--tribunal .ag-a { left: calc(73 * var(--u)); }
+.tableau--tribunal .ag-t { left: calc(181 * var(--u)); }
+.tableau--tribunal .ag-b { left: calc(207 * var(--u)); }
+
+/* ── Tactique ────────────────────────────────────────────────────── */
+.tableau--tribunal .issue--entree {
+  left: calc(92 * var(--u)); top: calc(60 * var(--u));
+  width: calc(72 * var(--u)); height: calc(44 * var(--u));
+}
+.tableau--tribunal .cote--entree { left: calc(93 * var(--u)); top: calc(50 * var(--u)); }
+/* La fenêtre du deuxième, celle que Drakk trouve « oubliée » ouverte :
+   ce qui l'intéresse n'est pas d'y entrer, c'est ce qu'elle voit. Le
+   faisceau descend d'elle et coupe le parvis en diagonale. */
+.tableau--tribunal .menace--fenetre {
+  left: calc(104 * var(--u)); top: calc(42 * var(--u));
+  width: calc(104 * var(--u)); height: calc(70 * var(--u));
+  background: linear-gradient(203deg, rgba(255,80,80,.30), rgba(255,80,80,.05) 78%);
+  clip-path: polygon(84% 0, 100% 0, 26% 100%, 6% 100%);
+  animation: jeton-bat 3.4s ease-in-out infinite;
+}
+.tableau--tribunal .cote--fenetre { left: calc(166 * var(--u)); top: calc(14 * var(--u)); }
+/* Deux colonnes sur une esplanade : c'est tout ce qu'il y a. */
+.tableau--tribunal .couvert--colonne {
+  top: calc(84 * var(--u)); width: calc(18 * var(--u)); height: calc(34 * var(--u));
+}
+.tableau--tribunal .cc-g { left: calc(13 * var(--u)); }
+.tableau--tribunal .cc-d { left: calc(225 * var(--u)); }
+.tableau--tribunal .cote--couvert   { left: calc(9 * var(--u));  top: calc(75 * var(--u)); }
+.tableau--tribunal .cote--decouvert { left: calc(16 * var(--u)); top: calc(126 * var(--u)); }
+.tableau--tribunal .jeton { width: calc(22 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--tribunal .jg-a { left: calc(76 * var(--u));  top: calc(104 * var(--u)); }
+.tableau--tribunal .jg-t { left: calc(184 * var(--u)); top: calc(104 * var(--u)); }
+.tableau--tribunal .jg-b { left: calc(210 * var(--u)); top: calc(104 * var(--u)); }
+.tableau--tribunal .j-mccarthy { left: calc(51 * var(--u)); top: calc(104 * var(--u)); }
+
+/* ── RA ──────────────────────────────────────────────────────────────
+   Quatre balises de service, et rien d'autre. Pas une réclame : un
+   palais de justice ne loue pas de mètre carré de RA, et c'est ce vide
+   qui fait du cinquième objet une anomalie visible à l'œil nu — l'exact
+   inverse du bar, où l'utile se cache dans le bruit. */
+.tableau--tribunal .ora { height: calc(8 * var(--u)); }
+.tableau--tribunal .ora--palais      { left: calc(14 * var(--u));  top: calc(8 * var(--u));  width: calc(114 * var(--u)); animation: ora-flotte 6.2s ease-in-out infinite; }
+.tableau--tribunal .ora--audiences   { left: calc(126 * var(--u)); top: calc(8 * var(--u));  width: calc(118 * var(--u)); animation: ora-flotte 7.4s ease-in-out infinite reverse; }
+.tableau--tribunal .ora--orientation { left: calc(20 * var(--u));  top: calc(22 * var(--u)); width: calc(80 * var(--u));  animation: ora-flotte 5.6s ease-in-out infinite; }
+.tableau--tribunal .ora--portique    { left: calc(92 * var(--u));  top: calc(76 * var(--u)); width: calc(92 * var(--u));  animation: ora-flotte 6.8s ease-in-out infinite reverse; }
+
+/* ELLE NE FLOTTE PAS, ET C'EST TOUT LE PROPOS. Les quatre balises
+   ci-dessus respirent ; celle-ci est posée, immobile, sous la fenêtre
+   du deuxième — « Elle ne bouge pas. Elle regarde quand même. » Une
+   ORA qui bat aurait dit « vivant » là où le texte dit « à l'affût ». */
+.tableau--tribunal .ora--araignee {
+  left: calc(92 * var(--u)); top: calc(43 * var(--u)); width: calc(70 * var(--u));
+  border-color: rgba(255,120,90,.9);
+  background: rgba(74,24,16,.62);
+  color: rgba(255,178,150,.95);
+  animation: none;
+}
+/* La bête elle-même : un corps trapu contre la corniche, l'objectif
+   tourné vers le parvis, et LA PATTE REPLIÉE que le texte nomme. */
+.tableau--tribunal .araignee {
+  left: calc(164 * var(--u)); top: calc(46 * var(--u));
+  width: calc(12 * var(--u)); height: calc(7 * var(--u));
+  border-radius: calc(3 * var(--u)) calc(3 * var(--u)) calc(1 * var(--u)) calc(1 * var(--u));
+  background: linear-gradient(180deg, #2a1a18 0%, #16100f 100%);
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(255,120,90,.45);
+}
+.tableau--tribunal .araignee::before {
+  content: ''; position: absolute;
+  left: calc(4 * var(--u)); top: calc(4 * var(--u));
+  width: calc(3 * var(--u)); height: calc(2 * var(--u)); border-radius: 50%;
+  background: rgba(255,120,90,.95);
+  box-shadow: 0 0 calc(3 * var(--u)) rgba(255,120,90,.8);
+}
+.tableau--tribunal .araignee::after {
+  content: ''; position: absolute;
+  left: calc(9 * var(--u)); top: calc(-3 * var(--u));
+  width: calc(10 * var(--u)); height: calc(1 * var(--u));
+  background: rgba(255,120,90,.8);
+  transform: rotate(-34deg);
+  transform-origin: left center;
+}

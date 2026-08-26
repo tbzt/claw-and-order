@@ -100,4 +100,64 @@
   <div class="ombre ombre--denny"></div>
   <div class="pnj pnj--denny sprite--prop-denny" data-hotspot="denny"></div>
 
+
+  <!-- ── Ce que Trash voit, et lui seul ────────────────────────────
+       « Une aura de salle d'attente, EMPILÉE NUIT APRÈS NUIT. » Empilée
+       se dessine : des strates horizontales, une par nuit, la plus
+       ancienne en bas — pas un halo diffus, une sédimentation. C'est le
+       seul calque astral du jeu qui a une TEXTURE au lieu d'une forme.
+
+       Et le fond de l'alcôve en a plus que le reste, parce que c'est là
+       qu'on attend : « la seule place de la salle d'où on voit tout le
+       monde entrer avant d'être vu soi-même. »
+
+       DEUX AURAS SEULEMENT, et ce sont les deux qui travaillent ici.
+       « Personne ne vient ici pour ce lieu » — donc personne d'autre
+       n'y a laissé quelque chose qui lui appartienne. -->
+  <div class="calque calque--astral">
+    <div class="strates"></div>
+    <div class="attente-alcove"></div>
+    <div class="aura aura--denny"></div>
+    <div class="aura aura--iris"></div>
+  </div>
+
+  <!-- ── Ce que Drakk voit, et lui seul ───────────────────────────
+       « On ne planque pas ici. On y passe, on en ressort. C'est
+       construit pour ça, pas pour tenir un siège. » Trois cotes suffisent
+       à le prouver : une entrée qui est aussi la sortie, une porte au
+       fond qu'on n'a JAMAIS VUE S'OUVRIR (donc tiretée deux fois : elle
+       est supposée, pas constatée), et la banquette du fond, qui est le
+       seul point de la salle avec un angle de vue sur l'entrée. -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <div class="issue issue--porte"></div>
+    <div class="cote cote--porte">ENTRÉE / SORTIE</div>
+    <div class="issue issue--arriere"></div>
+    <div class="cote cote--arriere">ARRIÈRE-SALLE — NON VUE</div>
+    <div class="couvert couvert--comptoir"></div>
+    <div class="cote cote--couvert">COUVERT — LE BAR</div>
+    <div class="cote cote--alcove">VUE SUR L’ENTRÉE</div>
+    <div class="jeton j-denny"></div>
+    <div class="jeton j-iris"></div>
+  </div>
+
+  <!-- ── Ce que White_Rabbit voit, et lui seul ────────────────────
+       « Aucune caméra, aucun tag commercial, un brouilleur artisanal
+       au-dessus du bar QUI BAVE UN PEU SUR LES FRÉQUENCES VOISINES. »
+       La bavure est le calque : deux fiches à demi mangées, illisibles,
+       qui sont tout ce qui reste de la réclame du quartier une fois
+       passée dans le brouilleur. Elles n'ont pas de texte utile — c'est
+       le seul endroit du jeu où une ORA ne veut rien dire, et c'est la
+       preuve que l'appareil marche.
+
+       « La discrétion, ici, c'est le produit. » Il y a donc exactement
+       un objet lisible dans cette pièce, et c'est celui qui rend tous
+       les autres illisibles. -->
+  <div class="calque calque--ra">
+    <div class="ora ora--parasite pa1">S█YCAF PR█ · -3█ %</div>
+    <div class="ora ora--parasite pa2">L█VRAIS█N · ██ MIN</div>
+    <div class="ora ora--brouilleur">BROUILLEUR ARTISANAL · ACTIF</div>
+    <div class="bave"></div>
+  </div>
+
 </div>

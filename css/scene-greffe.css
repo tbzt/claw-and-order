@@ -132,7 +132,6 @@
 .tableau--greffe .aura--sas { left: calc(19 * var(--u)); top: calc(36 * var(--u));
   width: calc(56 * var(--u)); height: calc(40 * var(--u));
   background: radial-gradient(closest-side, rgba(90,110,140,.24), transparent 70%); }
-@keyframes aura-bat { 0%,100% { opacity: .8 } 50% { opacity: 1 } }
 
 /* Même typographie qu'au bar et au quai : la RA se lit pareil partout,
    sinon ce n'est plus une lentille. Ici il y a peu de spam — un greffe
@@ -155,7 +154,6 @@
 .tableau--greffe .ora--cam { left: calc(170 * var(--u)); top: calc(0 * var(--u)); width: calc(86 * var(--u)); height: calc(8 * var(--u)); }
 .tableau--greffe .ora--porte { left: calc(10 * var(--u));  top: calc(30 * var(--u)); width: calc(92 * var(--u)); height: calc(8 * var(--u)); }
 .tableau--greffe .ora--pub   { left: calc(24 * var(--u)); top: calc(12 * var(--u)); width: calc(128 * var(--u)); height: calc(8 * var(--u)); }
-@keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
 
 .tableau--greffe .jeton { border: calc(1 * var(--u)) solid rgba(201,160,58,.85); border-radius: 50%;
   background: rgba(201,160,58,.1); width: calc(30 * var(--u)); height: calc(9 * var(--u));

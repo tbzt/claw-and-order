@@ -72,4 +72,66 @@
   <div class="lit-nu sprite--prop-lit" data-hotspot="lit"></div>
   <div class="valise-cabine sprite--prop-valise" data-hotspot="valise"></div>
 
+
+  <!-- ── Ce que Trash voit, et lui seul ────────────────────────────
+       UN SEUL ÉLÉMENT DANS TOUT LE CALQUE, et c'est le calque astral le
+       plus vide du jeu. Sa vue ne laisse aucune marge : « Il reste de la
+       peur, EN COUCHE MINCE, À HAUTEUR D'HOMME, et elle est vieille de
+       trois jours. RIEN D'AUTRE. » Pas de halo sur le lit, pas de nœud
+       à l'endroit où elle est morte — trois mots l'interdisent, et
+       ajouter le halo que le joueur attend aurait démenti la seule
+       chose que Trash dit ensuite : « Je ne peux pas le prouver. »
+
+       ET ELLE NE BAT PAS. Toutes les auras du jeu respirent ; celle-ci
+       a trois jours et ne respire plus. C'est la seule chose qui la
+       distingue d'une aura vivante, et c'est suffisant.
+
+       La bande s'arrête au chambranle : la peur est dans la PIÈCE. La
+       cage d'escalier, elle, appartient à la lentille de Rabbit. -->
+  <div class="calque calque--astral">
+    <div class="peur-mince"></div>
+  </div>
+
+  <!-- ── Ce que Drakk voit, et lui seul ───────────────────────────
+       « On ne choisit pas cet endroit pour tuer quelqu'un. On y tue
+       quelqu'un parce qu'on y était déjà. » Ce que la carte montre est
+       ce qui produit cette phrase : une porte, une fenêtre qui expose,
+       une masse derrière laquelle se mettre, et AUCUN JETON — premier
+       tableau du jeu sans personne dedans, donc première carte tactique
+       sans un seul marqueur. La grille toute seule dit déjà tout. -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <div class="issue issue--porte"></div>
+    <div class="cote cote--porte">SEULE ISSUE</div>
+    <div class="menace menace--fenetre"></div>
+    <div class="cote cote--fenetre">EXPOSÉ — RUE</div>
+    <div class="couvert couvert--lit"></div>
+    <div class="cote cote--couvert">COUVERT — LE LIT</div>
+    <div class="cote cote--approche">AUCUNE VOIE D’APPROCHE</div>
+  </div>
+
+  <!-- ── Ce que White_Rabbit voit, et lui seul ────────────────────
+       LA BLAGUE DU TABLEAU EST DANS LA RÉPARTITION, pas dans le nombre.
+       « Cette pièce est morte côté réseau, et la cage d'escalier ne
+       l'est pas du tout. C'est DEHORS qu'il faut regarder. » Donc :
+       trois fiches dedans, quatre dehors — et la seule réclame du
+       tableau est sur le palier, à un mètre d'une scène de crime que
+       personne n'est venu rouvrir depuis trois jours.
+
+       LES DEUX RUBANS DE SCELLÉS NE SONT PAS ICI, et c'est voulu : ils
+       sont déjà dans le décor, en RA, teinte froide et changement
+       d'état compris (voir plus haut dans cette feuille). Les redoubler
+       en fiche aurait fait deux fois la même chose. Ce que la lentille
+       AJOUTE, c'est leur journal — et un journal à zéro rupture est un
+       fait que le décor ne pouvait pas montrer. -->
+  <div class="calque calque--ra">
+    <div class="ora ora--scelle">SCELLÉ LS · RUPTURES : 0</div>
+    <div class="ora ora--lecteur">LOCKWORKS · JOURNAL</div>
+    <div class="ora ora--courrier">3 J · NON ACCUSÉS RÉCEPTION</div>
+    <div class="ora ora--palier op1">4B · PRÉSENT</div>
+    <div class="ora ora--palier op2">LIVRAISON · 4 MIN</div>
+    <div class="ora ora--palier op3">IMMEUBLE · NŒUD PUBLIC</div>
+    <div class="ora ora--palier op4">SOYCAF PRO · -20 %</div>
+  </div>
+
 </div>

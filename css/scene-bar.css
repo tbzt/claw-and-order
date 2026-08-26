@@ -279,7 +279,6 @@
 }
 .tableau--bar .aura--c1 { left: calc(53 * var(--u)); }
 .tableau--bar .aura--c2 { left: calc(75 * var(--u)); animation-delay: 1.4s; }
-@keyframes aura-bat { 0%,100% { opacity: .82 } 50% { opacity: 1 } }
 
 /* ── Calque RA : les ORA, et le BRUIT ───────────────────────────────
    Règle 7 : la RA est saturée de réclame, et ce bruit EST du contenu.
@@ -345,8 +344,6 @@
 .tableau--bar .b1 { left: calc(54 * var(--u));  top: calc(96 * var(--u)); width: calc(28 * var(--u)); }
 .tableau--bar .b2 { left: calc(79 * var(--u));  top: calc(90 * var(--u)); width: calc(28 * var(--u)); }
 .tableau--bar .b3 { left: calc(212 * var(--u)); top: calc(48 * var(--u));  width: calc(28 * var(--u)); }
-
-@keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
 
 /* ── L'entrée de la rue, au premier plan ──────────────────────────────
    La sortie est le seul hotspot du tableau qui fasse avancer le jeu.

@@ -27,10 +27,12 @@
    figures prennent leur liseré SUR L'ARÊTE DU HAUT, et c'est ce que
    `retouches/palais.py` leur a posé.
 
-   CE QUE CE FICHIER NE FAIT TOUJOURS PAS : les trois calques de
-   lentille (astral / tactique / RA). Ils n'existent dans aucun des onze
-   décors récents — c'est une dette de série, pas une dette de ce
-   tableau, et elle se traitera d'un coup. */
+   LES TROIS CALQUES DE LENTILLE SONT LÀ, tout en bas de cette feuille,
+   posés en même temps que ceux des dix autres décors qui les
+   attendaient : c'était bien une dette de série, et elle s'est traitée
+   d'un coup. Le vocabulaire commun (`.aura`, `.ora`, `.couvert`) est
+   passé dans `engine.css` au même moment ; ici il ne reste que la
+   salle. */
 
 .tableau--tribunal-salle {
   position: absolute;
@@ -231,3 +233,110 @@
   border-left: calc(1 * var(--u)) solid #4a4d5a;
   border-top: calc(1 * var(--u)) solid #4a4d5a;
 }
+
+/* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
+   Le vocabulaire commun est dans `engine.css` ; ici, la salle. */
+
+/* ── Astral ────────────────────────────────────────────────────────── */
+/* La barre : le seul meuble de la salle par lequel TOUT LE MONDE est
+   passé, un à un, pour dire quelque chose qui comptait. Le parvis a la
+   même chose devant son portique — c'est la même loi, à deux endroits
+   du même bâtiment. */
+.tableau--tribunal-salle .barre-froid {
+  left: calc(168 * var(--u)); top: calc(40 * var(--u));
+  width: calc(48 * var(--u)); height: calc(44 * var(--u));
+  background: linear-gradient(180deg, rgba(150,200,235,.26), rgba(110,160,210,.08) 70%, transparent);
+  mix-blend-mode: screen;
+  filter: blur(calc(3 * var(--u)));
+  animation: aura-bat 7.6s ease-in-out infinite;
+}
+/* Il écoute. C'est la seule aura de la salle qui ne tremble pas. */
+.tableau--tribunal-salle .aura--juge {
+  left: calc(108 * var(--u)); top: calc(12 * var(--u));
+  width: calc(40 * var(--u)); height: calc(42 * var(--u));
+  background: radial-gradient(closest-side, rgba(180,215,255,.26), transparent 70%);
+  animation: aura-bat 9.2s ease-in-out infinite;
+}
+.tableau--tribunal-salle .aura--lester {
+  left: calc(10 * var(--u)); top: calc(30 * var(--u));
+  width: calc(44 * var(--u)); height: calc(52 * var(--u));
+  background: radial-gradient(closest-side, rgba(255,196,120,.30), transparent 70%);
+  animation: aura-bat 3.8s ease-in-out infinite;
+}
+.tableau--tribunal-salle .aura--defense {
+  left: calc(32 * var(--u)); top: calc(60 * var(--u));
+  width: calc(38 * var(--u)); height: calc(40 * var(--u));
+  background: radial-gradient(closest-side, rgba(90,220,160,.30), transparent 66%);
+  animation: aura-bat 4.6s ease-in-out infinite;
+}
+/* « Ce n'est pas un homme qui veut gagner. C'est un homme qui veut que
+   ce soit fini. » Une aura qui a déjà rangé ses affaires. */
+.tableau--tribunal-salle .aura--accusation {
+  left: calc(192 * var(--u)); top: calc(58 * var(--u));
+  width: calc(46 * var(--u)); height: calc(42 * var(--u));
+  background: radial-gradient(closest-side, rgba(150,155,165,.16), transparent 62%);
+  animation: aura-bat 11s ease-in-out infinite;
+}
+/* PAS DE BATTEMENT, PAS DE COULEUR, PAS DE BORD. Une nappe. */
+.tableau--tribunal-salle .indifference {
+  left: 0; top: calc(116 * var(--u)); width: 100%; height: calc(28 * var(--u));
+  background: linear-gradient(180deg, transparent, rgba(120,124,138,.14) 60%);
+  mix-blend-mode: screen;
+  filter: blur(calc(4 * var(--u)));
+}
+
+/* ── Tactique ────────────────────────────────────────────────────── */
+.tableau--tribunal-salle .issue--allee {
+  left: calc(106 * var(--u)); top: calc(126 * var(--u));
+  width: calc(44 * var(--u)); height: calc(18 * var(--u));
+}
+.tableau--tribunal-salle .cote--allee { left: calc(100 * var(--u)); top: calc(118 * var(--u)); }
+.tableau--tribunal-salle .issue--laterale {
+  left: calc(232 * var(--u)); top: calc(52 * var(--u));
+  width: calc(24 * var(--u)); height: calc(42 * var(--u));
+}
+.tableau--tribunal-salle .cote--laterale { left: calc(188 * var(--u)); top: calc(44 * var(--u)); }
+.tableau--tribunal-salle .couvert--banc {
+  left: calc(85 * var(--u)); top: calc(41 * var(--u));
+  width: calc(86 * var(--u)); height: calc(38 * var(--u));
+}
+.tableau--tribunal-salle .cote--hauteur { left: calc(88 * var(--u)); top: calc(33 * var(--u)); }
+.tableau--tribunal-salle .couvert--table { top: calc(91 * var(--u)); width: calc(62 * var(--u)); height: calc(24 * var(--u)); }
+.tableau--tribunal-salle .ct-g { left: calc(19 * var(--u)); }
+.tableau--tribunal-salle .ct-d { left: calc(175 * var(--u)); }
+.tableau--tribunal-salle .cote--couvert { left: calc(21 * var(--u)); top: calc(84 * var(--u)); }
+/* La cote qui dit le personnage plus que la pièce. */
+.tableau--tribunal-salle .cote--rien { left: calc(60 * var(--u)); top: calc(24 * var(--u)); }
+.tableau--tribunal-salle .jeton { width: calc(24 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--tribunal-salle .j-juge   { left: calc(116 * var(--u)); top: calc(44 * var(--u)); }
+.tableau--tribunal-salle .j-lester { left: calc(20 * var(--u));  top: calc(74 * var(--u)); }
+
+/* ── RA ──────────────────────────────────────────────────────────── */
+.tableau--tribunal-salle .ora { height: calc(8 * var(--u)); }
+.tableau--tribunal-salle .ora--role    { left: calc(12 * var(--u));  top: calc(6 * var(--u));  width: calc(114 * var(--u)); animation: ora-flotte 6.4s ease-in-out infinite; }
+.tableau--tribunal-salle .ora--greffe  { left: calc(130 * var(--u)); top: calc(6 * var(--u));  width: calc(102 * var(--u)); animation: ora-flotte 7.8s ease-in-out infinite reverse; }
+.tableau--tribunal-salle .ora--banc    { left: calc(96 * var(--u));  top: calc(22 * var(--u)); width: calc(94 * var(--u));  animation: ora-flotte 5.8s ease-in-out infinite; }
+.tableau--tribunal-salle .ora--micro   { left: calc(164 * var(--u)); top: calc(34 * var(--u)); width: calc(68 * var(--u));  animation: ora-flotte 6.9s ease-in-out infinite reverse; }
+.tableau--tribunal-salle .ora--dossier { left: calc(172 * var(--u)); top: calc(82 * var(--u)); width: calc(82 * var(--u));  animation: ora-flotte 5.2s ease-in-out infinite; }
+
+/* ⚠️ CE QU'ON N'A PAS PU FAIRE ICI, ET POURQUOI C'EST ÉCRIT PLUTÔT QUE
+   TENTÉ. La fiche du rôle devrait basculer sur « AUDIENCE REPOUSSÉE »
+   quand le marteau tombe, comme la caméra de la laverie bascule sur
+   « BOUCLE » quand Rabbit l'aveugle. Le CSS de cette bascule a été écrit,
+   vérifié au navigateur (il marche), puis RETIRÉ — parce qu'il ne se
+   déclencherait jamais en jeu.
+
+   La raison est dans les données, pas ici : `data-etat` n'est pas la
+   liste des flags, c'est `etat.visuels`, et `tribunal-salle.js` est la
+   seule scène du jeu qui n'ait ni `entree()`, ni `visuel:`, ni
+   `visuels:` — donc son `data-etat` est vide en permanence. La règle
+   aurait été du code mort déguisé en fonctionnalité.
+
+   CE QU'IL FAUDRAIT, si on veut la bascule (quatre lignes, dans
+   `js/data/tribunal-salle.js`, sur le patron exact de `herwick.js`) :
+   `visuels: ['recusation-dite']` sur les DEUX réactions qui posent déjà
+   le flag (`sortir.utiliser`, branches `recuse-abri` et
+   `recuse-contrat`), et un `entree: ({ a }) => a('recusation-dite') ?
+   ['recusation-dite'] : []` pour que ça survive à un retour du parvis.
+   C'est une modification de données de l'acte III, pas d'un calque —
+   d'où la note plutôt que le commit. */

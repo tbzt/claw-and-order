@@ -942,6 +942,55 @@ body {
   font-family: var(--mono); font-size: calc(5 * var(--u));
   color: rgba(201,160,58,.9); letter-spacing: .08em; white-space: nowrap;
 }
+/* Le couvert : ce qui arrête une balle. Il manquait ici alors que trois
+   feuilles de scène (bar, planque, retour) le recopiaient déjà mot pour
+   mot. Même vert que l'issue, et c'est voulu — ce sont les deux bonnes
+   nouvelles de la lentille — mais un trait PLEIN, quand l'issue est
+   tiretée : une issue est un passage, un couvert est une masse. */
+.calque--tactique .couvert {
+  border: calc(1 * var(--u)) solid rgba(90,240,160,.7);
+  background: linear-gradient(180deg, rgba(30,90,60,.25), transparent);
+}
+
+/* ── LE VOCABULAIRE COMMUN DES DEUX AUTRES LENTILLES ─────────────────
+   `.aura` et `.ora` étaient recopiés à l'identique dans les CINQ
+   feuilles de scène qui avaient des calques. Onze décors de plus en
+   auraient fait seize copies de la même douzaine de déclarations, et
+   c'est exactement ce que « dette de SÉRIE » voulait dire.
+
+   CE QUI EST ICI ET CE QUI N'Y EST PAS, et la règle est nette : le
+   LOOK est commun (un halo est un halo, une fiche de RA est une fiche
+   de RA), la TAILLE et le RYTHME ne le sont pas. Poser `height` ou
+   `animation` ici aurait réécrit les cinq scènes existantes — l'aura
+   plate de la laverie (« l'astral y est PLAT ») se serait mise à
+   battre. Une scène déclare donc encore où, de quelle couleur, à quel
+   rythme ; elle ne redéclare plus ce qu'est un halo. */
+.calque--astral .aura {
+  mix-blend-mode: screen;
+  border-radius: 50%;
+  filter: blur(calc(2 * var(--u)));
+}
+.calque--ra .ora {
+  border: calc(1 * var(--u)) solid rgba(90,200,255,.7);
+  background: rgba(16,44,68,.58);
+  font-family: var(--mono);
+  font-size: calc(4 * var(--u));
+  line-height: calc(6 * var(--u));
+  letter-spacing: .02em;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 calc(1 * var(--u));
+  color: rgba(150,214,255,.88);
+}
+
+/* Les deux battements, définis UNE fois. Ils l'étaient cinq fois, avec
+   deux valeurs différentes (.8 et .82) — et comme un `@keyframes` de
+   même nom est global, la dernière feuille chargée (`scene-planque`)
+   décidait déjà pour toutes les autres. Les cinq copies partaient donc
+   avec un bug latent que personne ne voyait ; la valeur retenue est
+   celle qui gagnait de fait, donc rien ne change à l'écran. */
+@keyframes aura-bat  { 0%,100% { opacity: .82 } 50% { opacity: 1 } }
+@keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
 
 /* ── LE CARNET DE RECOUPEMENT ────────────────────────────────────────
    On y pose deux fiches l'une sur l'autre. Si la paire est prévue, elle

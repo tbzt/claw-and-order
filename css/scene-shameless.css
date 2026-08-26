@@ -205,3 +205,106 @@
    mesure que les deux témoins parlent. */
 .stage[data-etat~="club-froid"]      .tableau--shameless .fond { filter: brightness(.9) saturate(.85); }
 .stage[data-etat~="club-ouvert"]     .tableau--shameless .fond { filter: brightness(1.05); }
+
+/* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
+   Le vocabulaire commun est dans `engine.css` ; ici, le club. */
+
+/* ── Astral ──────────────────────────────────────────────────────────
+   LES STRATES. Un `repeating-linear-gradient` horizontal : chaque bande
+   est une nuit, et il y en a une trentaine dans la hauteur de la salle.
+   C'est le seul moyen honnête de dessiner « empilée nuit après nuit » —
+   un dégradé continu aurait dit « brume », pas « couches ». */
+.tableau--shameless .strates {
+  left: 0; top: calc(28 * var(--u)); width: 100%; height: calc(88 * var(--u));
+  background: repeating-linear-gradient(180deg,
+    rgba(150,140,190,.16) 0 calc(1 * var(--u)),
+    transparent calc(1 * var(--u)) calc(3 * var(--u)));
+  mix-blend-mode: screen;
+  filter: blur(calc(1 * var(--u)));
+  animation: aura-bat 10s ease-in-out infinite;
+}
+/* Là où on attend vraiment : la banquette du fond. Mêmes strates, plus
+   serrées — plus de nuits au même endroit. */
+.tableau--shameless .attente-alcove {
+  left: calc(154 * var(--u)); top: calc(52 * var(--u));
+  width: calc(64 * var(--u)); height: calc(52 * var(--u));
+  background: repeating-linear-gradient(180deg,
+    rgba(170,150,210,.22) 0 calc(1 * var(--u)),
+    transparent calc(1 * var(--u)) calc(2 * var(--u)));
+  mix-blend-mode: screen;
+  filter: blur(calc(2 * var(--u)));
+  animation: aura-bat 7.4s ease-in-out infinite;
+}
+.tableau--shameless .aura--denny {
+  left: calc(16 * var(--u)); top: calc(72 * var(--u)); width: calc(54 * var(--u)); height: calc(62 * var(--u));
+  background: radial-gradient(closest-side, rgba(120,190,140,.24), transparent 68%);
+  animation: aura-bat 7.8s ease-in-out infinite;
+}
+.tableau--shameless .aura--iris {
+  left: calc(192 * var(--u)); top: calc(72 * var(--u)); width: calc(46 * var(--u)); height: calc(52 * var(--u));
+  background: radial-gradient(closest-side, rgba(220,170,110,.24), transparent 68%);
+  animation: aura-bat 6.2s ease-in-out infinite;
+}
+
+/* ── Tactique ────────────────────────────────────────────────────── */
+.tableau--shameless .issue--porte {
+  left: calc(2 * var(--u)); top: calc(58 * var(--u));
+  width: calc(26 * var(--u)); height: calc(54 * var(--u));
+}
+.tableau--shameless .cote--porte { left: calc(4 * var(--u)); top: calc(50 * var(--u)); }
+/* SUPPOSÉE, PAS CONSTATÉE. Le tireté est plus court et le fond plus
+   pâle que sur une vraie issue : Drakk ne l'a pas vue s'ouvrir, il la
+   déduit d'un mur qui fait un mètre de trop. */
+.tableau--shameless .issue--arriere {
+  left: calc(150 * var(--u)); top: calc(54 * var(--u));
+  width: calc(16 * var(--u)); height: calc(46 * var(--u));
+  border-style: dotted;
+  border-color: rgba(90,240,160,.55);
+  background: rgba(20,80,50,.08);
+}
+.tableau--shameless .cote--arriere { left: calc(120 * var(--u)); top: calc(44 * var(--u)); }
+.tableau--shameless .couvert--comptoir { left: calc(202 * var(--u)); top: calc(98 * var(--u)); width: calc(54 * var(--u)); height: calc(30 * var(--u)); }
+.tableau--shameless .cote--couvert { left: calc(196 * var(--u)); top: calc(90 * var(--u)); }
+.tableau--shameless .cote--alcove  { left: calc(158 * var(--u)); top: calc(108 * var(--u)); }
+.tableau--shameless .jeton { width: calc(24 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--shameless .j-denny { left: calc(31 * var(--u));  top: calc(133 * var(--u)); }
+.tableau--shameless .j-iris  { left: calc(203 * var(--u)); top: calc(94 * var(--u)); }
+
+/* ── RA ──────────────────────────────────────────────────────────────
+   Le brouilleur est la seule chose lisible ; les deux fiches voisines
+   sont ce qu'il en reste. Elles sont floutées ET tremblées : un texte
+   simplement effacé aurait eu l'air d'un bug, un texte qui bouge a l'air
+   d'un signal qu'on n'arrive pas à accrocher. */
+.tableau--shameless .ora { height: calc(8 * var(--u)); }
+.tableau--shameless .ora--brouilleur {
+  left: calc(176 * var(--u)); top: calc(86 * var(--u)); width: calc(78 * var(--u));
+  border-color: rgba(255,150,90,.85);
+  background: rgba(70,38,14,.6);
+  color: rgba(255,196,150,.95);
+  animation: ora-flotte 5.8s ease-in-out infinite;
+}
+.tableau--shameless .ora--parasite {
+  width: calc(60 * var(--u));
+  border-color: rgba(90,200,255,.3);
+  background: rgba(16,44,68,.3);
+  color: rgba(150,214,255,.5);
+  filter: blur(calc(.6 * var(--u)));
+}
+.tableau--shameless .pa1 { left: calc(96 * var(--u));  top: calc(20 * var(--u)); animation: sham-parasite 3.1s steps(6) infinite; }
+.tableau--shameless .pa2 { left: calc(104 * var(--u)); top: calc(34 * var(--u)); animation: sham-parasite 4.3s steps(6) infinite reverse; }
+@keyframes sham-parasite {
+  0%,100% { opacity: .5;  transform: translateX(0) }
+  40%     { opacity: .18; transform: translateX(calc(2 * var(--u))) }
+  70%     { opacity: .6;  transform: translateX(calc(-1 * var(--u))) }
+}
+/* La bavure elle-même : des franges qui montent du bar et se perdent. */
+.tableau--shameless .bave {
+  left: calc(170 * var(--u)); top: calc(24 * var(--u));
+  width: calc(86 * var(--u)); height: calc(64 * var(--u));
+  background: repeating-linear-gradient(180deg,
+    rgba(255,150,90,.14) 0 calc(1 * var(--u)),
+    transparent calc(1 * var(--u)) calc(4 * var(--u)));
+  -webkit-mask: linear-gradient(0deg, #000, transparent 85%);
+          mask: linear-gradient(0deg, #000, transparent 85%);
+  animation: sham-parasite 2.6s steps(8) infinite;
+}

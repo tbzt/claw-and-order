@@ -526,9 +526,6 @@
 }
 .stage[data-etat~="vedette"] .tableau--retour .ora--star { opacity: 1; }
 
-@keyframes aura-bat { 0%,100% { opacity: .82 } 50% { opacity: 1 } }
-@keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
-
 /* Le raton laveur de Trash, posé au sol à sa gauche. Sa ronde et son
    ombre sont dans engine.css ; ici, seulement son point de départ. */
 .tableau--retour .raton { left: calc(53 * var(--u)); top: calc(117 * var(--u)); }

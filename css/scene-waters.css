@@ -191,3 +191,75 @@
    d'un cran à mesure que le dilemme se dénoue. */
 .stage[data-etat~="studio-ferme"]      .tableau--waters .fond { filter: brightness(.9) saturate(.85); }
 .stage[data-etat~="studio-ouvert"]     .tableau--waters .fond { filter: brightness(1.05); }
+
+/* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
+   Le vocabulaire commun est dans `engine.css` ; ici, le studio. */
+
+/* ── Astral ──────────────────────────────────────────────────────────
+   LES VANITÉS, EN GRILLE. Un `repeating-radial-gradient` calé sur le
+   mur de disques (x 176-248) : un petit foyer par cadre, tous de la
+   même taille et de la même chaleur. Une seule grosse aura aurait dit
+   « il est fier » ; une grille de petites dit « il en a accroché un de
+   plus, chaque année, et personne n'est venu les voir ». */
+.tableau--waters .vanites {
+  left: calc(174 * var(--u)); top: calc(4 * var(--u));
+  width: calc(78 * var(--u)); height: calc(58 * var(--u));
+  background: repeating-radial-gradient(circle at center,
+    rgba(230,190,110,.26) 0 calc(2 * var(--u)),
+    transparent calc(3 * var(--u)) calc(10 * var(--u)));
+  background-size: calc(20 * var(--u)) calc(19 * var(--u));
+  mix-blend-mode: screen;
+  filter: blur(calc(1.5 * var(--u)));
+  animation: aura-bat 9.4s ease-in-out infinite;
+}
+/* Le reste de la pièce : froid, large, sans grain. La cabine (x 30-92,
+   y 6-48) est dedans, et elle n'a rien de plus — c'est le seul endroit
+   du studio fait pour quelqu'un d'autre. */
+.tableau--waters .solitude {
+  left: 0; top: calc(4 * var(--u)); width: calc(176 * var(--u)); height: calc(112 * var(--u));
+  background: radial-gradient(110% 80% at 30% 55%, rgba(110,140,180,.13), transparent 82%);
+  mix-blend-mode: screen;
+  filter: blur(calc(5 * var(--u)));
+}
+.tableau--waters .aura--waters {
+  left: calc(20 * var(--u)); top: calc(70 * var(--u)); width: calc(56 * var(--u)); height: calc(64 * var(--u));
+  background: radial-gradient(closest-side, rgba(220,170,110,.26), transparent 68%);
+  animation: aura-bat 8.6s ease-in-out infinite;
+}
+
+/* ── Tactique ────────────────────────────────────────────────────── */
+.tableau--waters .issue--porte {
+  left: calc(2 * var(--u)); top: calc(60 * var(--u));
+  width: calc(26 * var(--u)); height: calc(56 * var(--u));
+}
+.tableau--waters .cote--porte { left: calc(4 * var(--u)); top: calc(52 * var(--u)); }
+.tableau--waters .couvert--console { left: calc(28 * var(--u)); top: calc(72 * var(--u)); width: calc(66 * var(--u)); height: calc(28 * var(--u)); }
+.tableau--waters .cote--couvert { left: calc(30 * var(--u)); top: calc(64 * var(--u)); }
+.tableau--waters .cote--rien    { left: calc(104 * var(--u)); top: calc(72 * var(--u)); }
+.tableau--waters .jeton { width: calc(24 * var(--u)); height: calc(8 * var(--u)); }
+.tableau--waters .j-waters { left: calc(36 * var(--u)); top: calc(133 * var(--u)); }
+
+/* ── RA ──────────────────────────────────────────────────────────────
+   Trois fiches usées et une neuve. L'écart se joue sur trois choses à
+   la fois — le trait (pointillé contre plein), la teinte (éteinte
+   contre vive) et le liseré (aucun contre double) — parce qu'une seule
+   d'entre elles se serait lue comme une variation de style. */
+.tableau--waters .ora { height: calc(8 * var(--u)); }
+.tableau--waters .ora--vieux {
+  border-style: dotted;
+  border-color: rgba(90,200,255,.4);
+  background: rgba(16,44,68,.34);
+  color: rgba(150,214,255,.55);
+}
+.tableau--waters .ov1 { left: calc(30 * var(--u));  top: calc(26 * var(--u)); width: calc(86 * var(--u)); animation: ora-flotte 7.6s ease-in-out infinite; }
+.tableau--waters .ov2 { left: calc(34 * var(--u));  top: calc(40 * var(--u)); width: calc(58 * var(--u)); animation: ora-flotte 8.8s ease-in-out infinite reverse; }
+.tableau--waters .ov3 { left: calc(104 * var(--u)); top: calc(16 * var(--u)); width: calc(56 * var(--u)); animation: ora-flotte 9.4s ease-in-out infinite; }
+.tableau--waters .ora--verrou {
+  left: calc(184 * var(--u)); top: calc(66 * var(--u)); width: calc(70 * var(--u));
+  border-color: rgba(140,230,255,.95);
+  background: rgba(18,64,96,.75);
+  color: rgba(210,240,255,1);
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(140,230,255,.35),
+              0 0 calc(4 * var(--u)) rgba(90,200,255,.45);
+  animation: ora-flotte 4.4s ease-in-out infinite;
+}

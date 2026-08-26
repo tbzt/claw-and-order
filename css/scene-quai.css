@@ -179,7 +179,6 @@
   width: calc(46 * var(--u)); height: calc(44 * var(--u));
   background: radial-gradient(closest-side, rgba(120,170,255,.26), transparent 66%);
 }
-@keyframes aura-bat { 0%,100% { opacity: .8 } 50% { opacity: 1 } }
 
 /* ── Calque RA ─────────────────────────────────────────────────────── */
 /* La typographie des étiquettes est celle du bar, au pixel près : même
@@ -247,7 +246,6 @@
   border-color: rgba(90,200,255,.4); background: rgba(20,60,90,.35);
   box-shadow: none; animation: aura-bat 3.2s ease-in-out infinite;
 }
-@keyframes ora-flotte { 0%,100% { transform: translateY(0) } 50% { transform: translateY(calc(-2 * var(--u))) } }
 
 /* ── Calque tactique ─────────────────────────────────────────────── */
 .tableau--quai .defile {

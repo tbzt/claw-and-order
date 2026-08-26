@@ -261,3 +261,57 @@
    est passé. */
 .stage[data-etat~="appart-froid"]   .tableau--appartement .fond { filter: saturate(.85) brightness(.94); }
 .stage[data-etat~="appart-compris"] .tableau--appartement .fond { filter: saturate(1.08); }
+
+/* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
+   Le vocabulaire commun est dans `engine.css` ; ici, le studio. */
+
+/* ── Astral ──────────────────────────────────────────────────────────
+   UNE BANDE, ET RIEN D'AUTRE. Elle commence au chambranle (x 46) et
+   court jusqu'au bord droit ; elle est haute de 24 unités, centrée sur
+   la hauteur des têtes de l'équipe (y 70-90) — « à hauteur d'homme »
+   n'est pas une image, c'est une cote. Pas d'`animation` : trois jours.
+   La seule aura immobile du jeu, et c'est le sujet du tableau. */
+.tableau--appartement .peur-mince {
+  left: calc(46 * var(--u)); top: calc(64 * var(--u));
+  width: calc(210 * var(--u)); height: calc(24 * var(--u));
+  background: linear-gradient(180deg, transparent, rgba(160,150,190,.17) 45%, transparent);
+  mix-blend-mode: screen;
+  filter: blur(calc(4 * var(--u)));
+}
+
+/* ── Tactique ────────────────────────────────────────────────────── */
+.tableau--appartement .issue--porte {
+  left: calc(46 * var(--u)); top: calc(18 * var(--u));
+  width: calc(32 * var(--u)); height: calc(88 * var(--u));
+}
+.tableau--appartement .cote--porte { left: calc(46 * var(--u)); top: calc(10 * var(--u)); }
+.tableau--appartement .menace--fenetre {
+  left: calc(180 * var(--u)); top: calc(10 * var(--u));
+  width: calc(48 * var(--u)); height: calc(48 * var(--u));
+  background: linear-gradient(180deg, rgba(255,80,80,.28), rgba(255,80,80,.04) 80%);
+  animation: jeton-bat 3.2s ease-in-out infinite;
+}
+.tableau--appartement .cote--fenetre  { left: calc(170 * var(--u)); top: calc(59 * var(--u)); }
+.tableau--appartement .couvert--lit   { left: calc(85 * var(--u)); top: calc(97 * var(--u)); width: calc(82 * var(--u)); height: calc(26 * var(--u)); }
+.tableau--appartement .cote--couvert  { left: calc(88 * var(--u)); top: calc(90 * var(--u)); }
+.tableau--appartement .cote--approche { left: calc(20 * var(--u)); top: calc(130 * var(--u)); }
+
+/* ── RA ──────────────────────────────────────────────────────────────
+   DEDANS : trois fiches, toutes administratives, toutes en fin de vie.
+   DEHORS : quatre, dont la seule réclame du tableau. */
+.tableau--appartement .ora { height: calc(8 * var(--u)); }
+.tableau--appartement .ora--scelle   { left: calc(80 * var(--u)); top: calc(24 * var(--u)); width: calc(68 * var(--u)); animation: ora-flotte 6.6s ease-in-out infinite; }
+.tableau--appartement .ora--lecteur  { left: calc(2 * var(--u));  top: calc(66 * var(--u)); width: calc(56 * var(--u)); animation: ora-flotte 7.2s ease-in-out infinite reverse; }
+/* « Une pile de courrier qui CLIGNOTE DOUCEMENT parce que personne ne
+   l'a accusée réception. » Doucement : lent, et jamais éteint. */
+.tableau--appartement .ora--courrier {
+  left: calc(46 * var(--u)); top: calc(116 * var(--u)); width: calc(74 * var(--u));
+  animation: appart-clignote 4.8s ease-in-out infinite;
+}
+@keyframes appart-clignote { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
+/* Le palier. Serré, bavard, et vivant — l'exact inverse de la pièce. */
+.tableau--appartement .ora--palier { left: calc(2 * var(--u)); width: calc(48 * var(--u)); }
+.tableau--appartement .op1 { top: calc(12 * var(--u)); animation: ora-flotte 5.4s ease-in-out infinite; }
+.tableau--appartement .op2 { top: calc(26 * var(--u)); animation: ora-flotte 6.1s ease-in-out infinite reverse; }
+.tableau--appartement .op3 { top: calc(40 * var(--u)); width: calc(60 * var(--u)); animation: ora-flotte 7.5s ease-in-out infinite; }
+.tableau--appartement .op4 { top: calc(54 * var(--u)); width: calc(52 * var(--u)); animation: ora-flotte 6.8s ease-in-out infinite reverse; }

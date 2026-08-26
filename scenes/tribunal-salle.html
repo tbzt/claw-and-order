@@ -66,4 +66,72 @@
   <!-- La sortie, au bout de l'allée. -->
   <div class="porte-tribunal" data-hotspot="sortir"></div>
 
+
+  <!-- ── Ce que Trash voit, et lui seul ────────────────────────────
+       QUATRE AURAS QUI NE SE RESSEMBLENT PAS, et chacune répète ce que
+       son hotspot dit déjà en toutes lettres : le juge ÉCOUTE (une aura
+       lente, sans à-coup, la seule de la salle qui ne tremble pas),
+       l'avocate SE BAT AVEC CE QU'ON LUI DONNE (serrée, vive), le
+       procureur VEUT QUE CE SOIT FINI (grise, molle, presque éteinte),
+       Lester regarde ses mains.
+
+       ET LA GALERIE N'EST PAS UN HALO. « Personne, ici, n'est venu pour
+       Lester » : une indifférence n'a pas de porteur, donc pas de
+       forme ronde. C'est une nappe plate, uniforme, sans battement —
+       on ne dessine pas une absence en n'y mettant rien. -->
+  <div class="calque calque--astral">
+    <div class="barre-froid"></div>
+    <div class="aura aura--juge"></div>
+    <div class="aura aura--lester"></div>
+    <div class="aura aura--defense"></div>
+    <div class="aura aura--accusation"></div>
+    <div class="indifference"></div>
+  </div>
+
+  <!-- ── Ce que Drakk voit, et lui seul ───────────────────────────
+       Le pendant exact du parvis, et c'est pour ça que les deux
+       tableaux ont été faits ensemble : dehors, « une seule sortie
+       civilisée » ; ici, deux issues, des tables pour se mettre à
+       couvert, une estrade en position haute — tout ce qu'il faut pour
+       tenir une pièce, et rien à y tenir. Le vocabulaire est faux, la
+       lecture est juste : il n'y a pas de bataille ici, il y a un
+       homme au banc. -->
+  <div class="calque calque--tactique">
+    <div class="grille-tac"></div>
+    <div class="issue issue--allee"></div>
+    <div class="cote cote--allee">ISSUE — L’ALLÉE</div>
+    <div class="issue issue--laterale"></div>
+    <div class="cote cote--laterale">ISSUE LATÉRALE</div>
+    <div class="couvert couvert--banc"></div>
+    <div class="cote cote--hauteur">POSITION HAUTE</div>
+    <div class="couvert couvert--table ct-g"></div>
+    <div class="couvert couvert--table ct-d"></div>
+    <div class="cote cote--couvert">COUVERT — TABLES</div>
+    <div class="cote cote--rien">RIEN À TENIR ICI</div>
+    <div class="jeton j-juge"></div>
+    <div class="jeton j-lester"></div>
+  </div>
+
+  <!-- ── Ce que White_Rabbit voit, et lui seul ────────────────────
+       Même exception à la règle 7 que le parvis : un palais de justice
+       ne loue pas de mètre carré de réclame. Cinq fiches de service, et
+       DEUX D'ENTRE ELLES SONT DES CHIFFRES QUE LA PROSE DONNAIT DÉJÀ —
+       « trois pages, et il en a déjà tourné deux » se lit à l'écran,
+       et « le manque de conviction est mesurable » cesse d'être une
+       formule.
+
+       LE MICRO DE LA BARRE EST EN ATTENTE, parce que le texte le dit :
+       « un micro qu'on n'a pas encore allumé ». La fiche du rôle,
+       elle, devrait suivre le marteau et ne le fait PAS — la raison
+       tient en quatre lignes de données qui manquent, et elle est
+       écrite en toutes lettres au bas de `css/scene-tribunal-salle.css`
+       plutôt que passée sous silence. -->
+  <div class="calque calque--ra">
+    <div class="ora ora--role">RÔLE DU JOUR · SALLE 4 · AUDIENCE EN COURS</div>
+    <div class="ora ora--greffe">TRANSCRIPTION · EN DIRECT · NON SIGNÉE</div>
+    <div class="ora ora--banc">TERMINAL DU BANC · SAISIE EN COURS</div>
+    <div class="ora ora--micro">BARRE · MICRO EN ATTENTE</div>
+    <div class="ora ora--dossier">ACCUSATION · 3 P. · 2 TOURNÉES</div>
+  </div>
+
 </div>
