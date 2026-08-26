@@ -2,10 +2,17 @@
    Chantier 37. Grille 256 x 144 (chantier 8), même --u que les autres
    tableaux.
 
-   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css` et
-   `scene-sarah.css` : aucun sprite neuf pour Duke ou sa bande (dette
-   d'art assumée). Assez pour reconnaître un escalier, un râtelier, un
-   mur de moniteurs, et pour valider la mécanique en jeu.
+   PASSE D'ART FAITE (chantier 23, lot des cinq planques). Deux sprites
+   neufs — LE RÂTELIER et LE MUR DE MONITEURS — et les trois gangers,
+   qui étaient encore des losanges, portent la carte de silhouette
+   anonyme. Ce que le texte promettait : « PLUS DE FUSILS QUE DE
+   PERSONNES dans la pièce » (il y en a neuf, le râtelier en porte dix),
+   et « quatre écrans, tous braqués sur l'escalier… AUCUN NE MONTRE
+   AUTRE CHOSE » — donc quatre fois la même image, décalée d'un pixel.
+
+   LA LUMIÈRE : la lueur verte des quatre écrans, et rien d'autre. Un
+   sous-sol sans fenêtre n'a pas d'autre source, et c'est elle qui
+   éclaire la pièce plus qu'elle ne la surveille.
 
    DISPOSITION PAR BANDES DISJOINTES, vérifiée par un test d'overlap
    pair à pair dans le navigateur (même méthode que `scene-sarah.css`,

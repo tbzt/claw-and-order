@@ -2,11 +2,20 @@
    Chantier 41. Grille 256 x 144 (chantier 8), même --u que les autres
    tableaux.
 
-   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css`,
-   `scene-sarah.css`, `scene-duke.css` et `scene-squat.css` : aucun
-   sprite neuf pour le Patron, le videur ou les cinq joueurs (dette
-   d'art assumée). Assez pour reconnaître une table de jeu, un guichet
-   de change, un râtelier de jetons, et pour valider la mécanique en jeu.
+   PASSE D'ART FAITE (chantier 23, lot des cinq planques). Le râtelier
+   de jetons a son sprite, et LES CINQ JOUEURS ET LE VIDEUR cessent
+   d'être des losanges.
+
+   ⚠️ ET ILS PORTENT TOUS LA MÊME CARTE, EXPRÈS. Le bar avait appris à
+   ne jamais servir deux fois le même sprite côte à côte ; ce tableau
+   demande l'inverse, mot pour mot : « Cinq joueurs… RIEN NE DISTINGUE
+   PERSONNE. C'est probablement voulu. » Cinq fois la même carte, deux
+   retournées.
+
+   LA LUMIÈRE EST DÉCRITE PAR LE TEXTE, ce qui n'arrive nulle part
+   ailleurs dans le jeu : « une lampe basse QUI NE MONTE PAS PLUS HAUT
+   QUE LES ÉPAULES — personne ici ne veut qu'on lise son visage. » Elle
+   est au ras du tapis, et elle s'arrête sous les têtes.
 
    DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
    cibles cliquables (mêmes coordonnées que celles utilisées pour

@@ -2,11 +2,14 @@
    Chantier 40. Grille 256 x 144 (chantier 8), même --u que les autres
    tableaux.
 
-   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css`,
-   `scene-sarah.css` et `scene-duke.css` : aucun sprite neuf pour le
-   mobilier (dette d'art assumée). Assez pour reconnaître une trappe de
-   toit, un autel de fortune, une malle, et pour valider la mécanique en
-   jeu.
+   PASSE D'ART FAITE (chantier 23, lot des cinq planques). Deux sprites
+   neufs — L'AUTEL et LE MIROIR — et un vrai sol. Ce que le texte
+   promettait : un métier à tisser MUET (ses fils sont tendus et nus)
+   couvert de trois babioles nommées et pas une de plus, « une pièce de
+   monnaie pliée en deux, trois clés qui n'ouvrent plus rien, une dent
+   de quelque chose » ; et un miroir dont « le tain s'écaille EN
+   DENTELLE » alors que « le cadre est doré à la feuille » — deux états
+   dans un seul objet, et c'est tout le personnage de Trash.
 
    DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE PAR UN TEST D'OVERLAP
    PAIR À PAIR DANS LE NAVIGATEUR (même méthode que `scene-duke.css`,
