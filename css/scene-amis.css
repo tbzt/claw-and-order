@@ -108,12 +108,15 @@
 .stage[data-etat~="nita-ferme"] .tableau--amis .ami--nita { filter: saturate(.55) brightness(.86); }
 .stage[data-etat~="nita-ferme"] .tableau--amis .ami--nita::after { right: auto; left: calc(-2 * var(--u)); }
 
-/* MARK — x:176-202, y:50-100. Assis sur l'ampli : plus bas et plus
-   ramassé que les autres. La pochette vide est le carré pâle. */
+/* MARK — y:50-100. Assis sur l'ampli. Sprite `prop-mark` (chantier 23) :
+   le seul du décor dont la POSE a dû être dessinée, parce que rien ne
+   passe devant lui — le torse vient de Renfield, les cuisses et les
+   tibias sont neufs. La pochette vide reste le carré pâle du `::after`,
+   parce qu'elle bouge quand il se ferme. */
 .tableau--amis .ami--mark {
-  left: calc(178 * var(--u)); top: calc(50 * var(--u));
-  width: calc(22 * var(--u)); height: calc(50 * var(--u));
-  background: radial-gradient(62% 74% at 50% 28%, #b8a184 0%, #7e6a50 46%, #40352a 80%, transparent 100%);
+  left: calc(172 * var(--u)); top: calc(50 * var(--u));
+  width: calc(35 * var(--u));
+  border-radius: 0;
 }
 .tableau--amis .ami--mark::after {
   content: ''; position: absolute;
@@ -134,13 +137,15 @@
   border-radius: 0;
 }
 
-/* PSYCH — x:180-232, y:108-132. Allongé, donc large et bas, et au
-   premier plan : c'est la seule silhouette que le sol traverse. */
+/* PSYCH — y:108-132. Allongé, donc large et bas, et au premier plan.
+   Sprite `prop-psych` : LE SEUL DU JEU QUI NE DÉRIVE DE RIEN. Aucun
+   corps n'est horizontal, et une carte couchée ne se fabrique pas en
+   tournant une carte debout. Sa géométrie ne bouge pas d'une unité —
+   la boîte fait 52 × 24 u (rapport 0,46) et la carte 104 × 48 (0,46). */
 .tableau--amis .ami--psych {
   left: calc(180 * var(--u)); top: calc(108 * var(--u));
-  width: calc(52 * var(--u)); height: calc(24 * var(--u));
-  border-radius: 44% 30% 30% 44% / 60% 50% 50% 60%;
-  background: radial-gradient(70% 80% at 30% 40%, #a89678 0%, #6e6048 48%, #362e22 82%, transparent 100%);
+  width: calc(52 * var(--u));
+  border-radius: 0;
 }
 .stage[data-etat~="local-ouvert"] .tableau--amis .ami--psych { filter: brightness(1.08); }
 
