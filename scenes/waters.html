@@ -3,11 +3,16 @@
   Puyallup. Chantier 43 (`PLAN_TRAME_ACTES_III_IV.md` § 7.1, rang 8 du
   § 10) — le levier de la retombée 2, pas une quatrième ancre.
 
-  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
-  `amis.html`, `appartement.html`, `shameless.html` et les cinq décors
-  de planque. Waters n'a pas de sprite : une forme simple, jusqu'à ce
-  que l'atelier lui en dessine un. Dette d'art assumée, notée dans
-  `PLAN_EXECUTION.md`.
+  PASSE D'ART FAITE (chantier 23, 5ᵉ décor). Six sprites — et la même
+  correction qu'au Shameless : la console et l'archive étaient rangées
+  en panneaux muraux. Une console de mixage a des pieds, et ils touchent
+  le sol ; la cabine, elle, est une VITRE dans le mur, au-dessus de la
+  console qui lui fait face.
+
+  ✅ ET LE S EST DESSINÉ. La feuille de style portait la dette en toutes
+  lettres (« le S n'est pas dessiné »). L'enseigne est peinte sur la
+  vitre de la porte, et vue du dedans elle se lit à l'envers : le trou
+  du S final est au DÉBUT du mot.
 
   PAS DE LESTER : ce n'est pas une planque, c'est un lieu d'enquête de
   l'acte IV, comme les trois précédents — aucune mécanique de confiance
@@ -20,47 +25,65 @@
   porte cette pièce, comme l'ardoise portait le comptoir chez
   `shameless.html`.
 
-  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe
-  d'abord, Waters, puis le mobilier.
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici), et il a
+  changé avec la passe d'art : le mobilier passe MAINTENANT AVANT
+  l'équipe, puisqu'il est derrière elle dans la pièce. Waters reste
+  après, au premier plan, entre sa console et la salle de montage.
 
-  DISPOSITION EN BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
-  cibles cliquables — même discipline que `scene-shameless.css`. Bande
-  du haut (console, archive, murs), bande médiane (cabine), bande du bas
-  (porte, Waters, l'équipe, coffre) : deux cibles ne partagent jamais à
-  la fois une plage en x et une plage en y.
+  ⚠️ LE MOBILIER SANS CIBLE NE VOLE JAMAIS UN CLIC : `engine.css` pose
+  `.decor { pointer-events: none }` et ne rend `auto` qu'aux
+  `[data-hotspot]`. Seules deux CIBLES se disputent un point, et c'est
+  la dernière du DOM qui gagne.
+
+  DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À LA MAIN : les onze cibles
+  reprises une par une dans le navigateur après recomposition.
 
   Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
 -->
 <div class="tableau tableau--waters">
 
   <div class="fond"></div>
+  <div class="plinthe"></div>
   <div class="sol"></div>
+  <div class="lampe-console"></div>
 
+  <!-- La cabine vitrée, dans le mur, au-dessus de la console qui lui
+       fait face : mousse jaunie par plaques, et un pied de micro dont
+       la pince est ouverte et vide. -->
+  <div class="cabine sprite--prop-cabine" data-hotspot="cabine"></div>
+
+  <!-- La console de mixage, vingt ans de matériel usé — et ses curseurs
+       laissés où la dernière main les a laissés. -->
+  <div class="console sprite--prop-console" data-hotspot="console"></div>
+
+  <!-- Les rayonnages de bandes — « il garde tout », donc pleins jusqu'en
+       haut, étiquetés à la main et tous à la même hauteur. -->
+  <div class="archive sprite--prop-archive" data-hotspot="archive"></div>
+
+  <!-- Le mur de disques encadrés, et la petite photo glissée dans le
+       coin du plus visible : ce n'est pas un client, c'est lui. -->
+  <div class="murs sprite--prop-disques" data-hotspot="murs"></div>
+
+  <!-- Le coffre, dans la salle de montage — à moitié caché par
+       l'étagère de bandes qu'il faut pousser. -->
+  <div class="coffre sprite--prop-coffre" data-hotspot="coffre"></div>
+
+  <!-- La sortie : la porte d'entrée, et l'enseigne au S manquant peinte
+       à l'envers sur sa vitre. -->
+  <div class="porte-entree sprite--prop-porte-studio" data-hotspot="porte"></div>
+
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--hercules"></div>
   <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
   <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
   <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
   <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
 
-  <!-- La console de mixage, vingt ans de matériel usé. -->
-  <div class="console" data-hotspot="console"></div>
-
-  <!-- Les rayonnages de bandes — « il garde tout ». -->
-  <div class="archive" data-hotspot="archive"></div>
-
-  <!-- Le mur de disques encadrés, et la petite photo dans un coin. -->
-  <div class="murs" data-hotspot="murs"></div>
-
-  <!-- La cabine d'enregistrement vitrée, vide. -->
-  <div class="cabine" data-hotspot="cabine"></div>
-
-  <!-- WATERS, entre sa console et la salle de montage. -->
+  <!-- WATERS, entre sa console et la salle de montage — au premier
+       plan, donc après tout le reste. -->
+  <div class="ombre ombre--waters"></div>
   <div class="pnj pnj--waters sprite--prop-waters" data-hotspot="waters"></div>
-
-  <!-- Le coffre, dans la salle de montage — visible depuis la pièce
-       principale, derrière l'étagère de bandes qu'il faut pousser. -->
-  <div class="coffre" data-hotspot="coffre"></div>
-
-  <!-- La sortie : la porte d'entrée, sous l'enseigne au S manquant. -->
-  <div class="porte-entree" data-hotspot="porte"></div>
 
 </div>

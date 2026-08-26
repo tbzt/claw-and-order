@@ -1,22 +1,33 @@
 /* ── TABLEAU 11 — WATERS SOUND ────────────────────────────────────────
-   Chantier 43, le levier de la retombée 2. Grille 256 x 144
-   (chantier 8), même --u que les autres tableaux.
+   Chantier 43 pour la mécanique (le levier de la retombée 2), CHANTIER
+   23 pour la passe d'art. Grille 256 x 144 (chantier 8).
 
-   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-amis.css` et
-   `scene-shameless.css` : aucun sprite neuf pour Waters. Assez pour
-   reconnaître un studio d'enregistrement de quartier fatigué — une
-   console, des rayonnages de bandes, un mur de disques encadrés, une
-   cabine vitrée, un coffre dans le mur du fond — et pour valider le
-   dilemme du coffre en jeu.
+   CE QUI CHANGE. Six sprites, et la même correction de composition qu'au
+   Shameless : la console, l'archive et la cabine occupaient toutes les
+   trois une bande haute (`y:8-46`) comme des panneaux muraux. Une
+   console de mixage est un MEUBLE — elle a des pieds et ils touchent le
+   sol. La cabine, elle, reste en hauteur, mais à sa vraie place : une
+   VITRE dans le mur, au-dessus de la console qui lui fait face. C'est
+   la disposition de n'importe quelle régie, et elle était à portée de
+   main.
+
+   ⚠️ ET LE SOL, QUATRIÈME FOIS : l'équipe s'arrêtait entre 100 et 109
+   quand `.sol` commençait à 114. Cherché d'office avant de dessiner.
+
+   ✅ LA DETTE DU S EST REFERMÉE. L'en-tête de ce fichier disait « le S
+   n'est pas dessiné : la dette d'art assumée ». L'enseigne est
+   maintenant peinte sur la vitre de la porte — et vue du DEDANS, elle
+   se lit à l'envers, donc le trou du S final est au DÉBUT du mot.
 
    LA LUMIÈRE EST CHAUDE ET BASSE, JAMAIS FROIDE : contrairement à
    l'appartement (scellés, abandon) ou au Shameless (nuit, discrétion),
-   c'est un lieu HABITÉ, où quelqu'un vit plus qu'il ne travaille.
+   c'est un lieu HABITÉ, où quelqu'un vit plus qu'il ne travaille. Cette
+   règle était déjà écrite ici avant la passe d'art ; l'atelier n'a eu
+   qu'à la lire — des ambres et des bruns, une lampe de console au ras
+   du plan de travail, et aucun blanc nulle part.
 
-   DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
-   cibles cliquables avant tout test au navigateur — même discipline que
-   `scene-shameless.css`. Les coordonnées de chaque cible sont écrites
-   en commentaire au-dessus d'elle. */
+   DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À LA MAIN : les onze cibles
+   reprises une par une dans le navigateur après recomposition. */
 
 .tableau--waters {
   position: absolute; inset: 0;
@@ -27,86 +38,86 @@
 .tableau--waters > * { position: absolute; }
 
 .tableau--waters .fond {
-  left: 0; top: 0; width: 100%; height: calc(114 * var(--u));
-  background: linear-gradient(180deg, #2a2114 0%, #201808 60%, #16100a 100%);
+  left: 0; top: 0; width: 100%; height: calc(96 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.08) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(20 * var(--u))),
+    linear-gradient(180deg, #2a2114 0%, #211a0e 60%, #191309 100%);
+}
+.tableau--waters .plinthe {
+  left: 0; top: calc(96 * var(--u)); width: 100%; height: calc(4 * var(--u));
+  background: linear-gradient(180deg, #4a3a20 0%, #241c10 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.55);
 }
 .tableau--waters .sol {
-  left: 0; top: calc(114 * var(--u)); width: 100%; height: calc(30 * var(--u));
-  background: linear-gradient(180deg, #2c2314 0%, #19140c 100%);
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.5);
+  left: 0; top: calc(100 * var(--u)); width: 100%; height: calc(44 * var(--u));
+  background: repeating-linear-gradient(90deg, #2c2314 0 calc(15 * var(--u)), #251e10 calc(15 * var(--u)) calc(30 * var(--u)));
 }
 
-/* ── LA CONSOLE DE MIXAGE — x:8-70, y:8-46 ───────────────────────────
-   Rangée de curseurs usés, un cendrier, un casque au crochet. */
+/* LA LAMPE DE CONSOLE — la source, basse et chaude, au ras du plan de
+   travail. Elle n'éclaire que son coin ; le reste de la pièce vit de ce
+   qu'elle laisse passer. */
+.tableau--waters .lampe-console {
+  left: calc(14 * var(--u)); top: calc(30 * var(--u));
+  width: calc(110 * var(--u)); height: calc(90 * var(--u));
+  background: radial-gradient(ellipse at 45% 40%, rgba(224, 180, 90, .13), transparent 68%);
+  pointer-events: none;
+}
+
+/* ── LA CONSOLE — x:30-92, y:50-100, POSÉE AU SOL ───────────────────
+   Sprite `prop-console`. Vingt curseurs, et ils ne sont PAS ALIGNÉS :
+   « usés à l'endroit exact où une main revient sans cesse ». Une rangée
+   régulière aurait dit l'inverse du texte — les six du milieu sont usés
+   jusqu'au laiton, là où la main revient. Le cendrier plein et le
+   casque au crochet sont dans la carte ; celui-ci est le casque de
+   l'invité, puisque le sien ne quitte pas son cou.
+
+   Elle a des PIEDS, et ils touchent le sol : c'est un meuble, pas un
+   panneau accroché au mur. */
 .tableau--waters .console {
-  left: calc(8 * var(--u)); top: calc(8 * var(--u));
-  width: calc(62 * var(--u)); height: calc(38 * var(--u));
-  background:
-    repeating-linear-gradient(90deg, #4a3a20 0 calc(3 * var(--u)), #3a2c18 calc(3 * var(--u)) calc(6 * var(--u))),
-    #2e2314;
-  border: calc(1 * var(--u)) solid #100c06;
-}
-.tableau--waters .console::after {
-  content: ''; position: absolute;
-  right: calc(6 * var(--u)); top: calc(6 * var(--u));
-  width: calc(10 * var(--u)); height: calc(8 * var(--u));
-  border-radius: 50%;
-  background: #1a140a;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(200,170,120,.2);
+  left: calc(30 * var(--u)); top: calc(50 * var(--u));
+  width: calc(62 * var(--u));
 }
 
-/* ── LES RAYONNAGES DE BANDES — x:82-150, y:8-46 ─────────────────────
-   « Il garde tout » : des étagères pleines, étiquetées par date. */
+/* ── LES RAYONNAGES DE BANDES — x:100-168, y:26-100, jusqu'au sol ────
+   Sprite `prop-archive`. « Il garde tout », et ça ne se montre pas par
+   une étagère bien rangée : par une étagère PLEINE JUSQU'EN HAUT, sans
+   un centimètre libre, avec des boîtes de largeurs inégales — vingt ans
+   de formats différents. Les étiquettes sont toutes à la MÊME HAUTEUR
+   sur la tranche : un seul homme, toujours de la même façon, et par
+   date, jamais par nom. */
 .tableau--waters .archive {
-  left: calc(82 * var(--u)); top: calc(8 * var(--u));
-  width: calc(68 * var(--u)); height: calc(38 * var(--u));
-  background:
-    repeating-linear-gradient(0deg, #2c2212 0 calc(9 * var(--u)), #221a0c calc(9 * var(--u)) calc(10 * var(--u))),
-    #241c10;
-  border: calc(1 * var(--u)) solid #100c06;
-}
-.tableau--waters .archive::after {
-  content: ''; position: absolute;
-  left: calc(6 * var(--u)); top: calc(4 * var(--u)); right: calc(6 * var(--u));
-  height: calc(4 * var(--u));
-  background: repeating-linear-gradient(90deg, #6a5a38 0 calc(4 * var(--u)), transparent calc(4 * var(--u)) calc(8 * var(--u)));
-  opacity: .5;
+  left: calc(100 * var(--u)); top: calc(26 * var(--u));
+  width: calc(68 * var(--u));
 }
 
-/* ── LE MUR DE DISQUES ENCADRÉS — x:162-248, y:8-40 ──────────────────
-   Une douzaine de cadres, et une petite photo dans un coin. */
+/* ── LE MUR DE DISQUES ENCADRÉS — x:176-248, y:6-38, sur le mur ─────
+   Sprite `prop-disques`. Douze, comptables, dont trois dorés — et sur
+   celui du milieu du rang du haut, **le plus visible**, une photo plus
+   petite que les autres, GLISSÉE dans un coin du cadre, de travers.
+   « Ce n'est pas un client. C'est lui. » Tout le personnage est dans ce
+   coin de cadre : douze disques accrochés pour les autres, et une seule
+   photo pour lui, même pas encadrée. */
 .tableau--waters .murs {
-  left: calc(162 * var(--u)); top: calc(8 * var(--u));
-  width: calc(86 * var(--u)); height: calc(32 * var(--u));
-  background:
-    repeating-linear-gradient(90deg, #4e3e1c 0 calc(14 * var(--u)), #3c3016 calc(14 * var(--u)) calc(16 * var(--u))),
-    #2e2412;
-  border: calc(1 * var(--u)) solid #100c06;
-}
-.tableau--waters .murs::after {
-  content: ''; position: absolute;
-  right: calc(6 * var(--u)); bottom: calc(4 * var(--u));
-  width: calc(10 * var(--u)); height: calc(10 * var(--u));
-  background: #14100a;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(220,200,160,.25);
+  left: calc(176 * var(--u)); top: calc(6 * var(--u));
+  width: calc(72 * var(--u));
 }
 
-/* ── LA CABINE D'ENREGISTREMENT — x:8-70, y:50-70 ────────────────────
-   Vitrée, vide, un pied de micro sans micro. Empilée sous la console
-   (même colonne en x, bandes en y disjointes de la console ET de
-   l'équipe). */
+/* ── LA CABINE — x:30-92, y:6-46, UNE VITRE DANS LE MUR ─────────────
+   Sprite `prop-cabine`. Elle est AU-DESSUS de la console et lui fait
+   face : c'est la disposition de n'importe quelle régie, et le
+   placeholder la rangeait en dessous, comme un troisième panneau.
+
+   Ce qu'on voit dedans : la mousse acoustique **jaunie par plaques**
+   (irrégulièrement — uniformément jaune, elle dirait « vieille » ; par
+   plaques, elle dit « jamais remplacée, morceau par morceau ») et **un
+   pied de micro sans micro dessus**. La pince est OUVERTE et vide :
+   c'est elle, et rien d'autre, qui dit qu'il manque quelque chose —
+   troisième fois du chantier qu'une absence se montre par ce qui la
+   tenait, après la main de la Justice et le pied de caisse claire. */
 .tableau--waters .cabine {
-  left: calc(8 * var(--u)); top: calc(50 * var(--u));
-  width: calc(62 * var(--u)); height: calc(20 * var(--u));
-  background: linear-gradient(180deg, rgba(140,170,190,.08) 0%, rgba(20,16,10,.9) 100%);
-  border: calc(1 * var(--u)) solid #100c06;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(180,200,210,.1);
-}
-.tableau--waters .cabine::after {
-  content: ''; position: absolute;
-  left: calc(28 * var(--u)); top: calc(4 * var(--u));
-  width: calc(2 * var(--u)); height: calc(14 * var(--u));
-  background: #4a4238;
+  left: calc(30 * var(--u)); top: calc(6 * var(--u));
+  width: calc(62 * var(--u));
 }
 
 /* ── WATERS — x:34-64, y:78-140 ──────────────────────────────────────
@@ -124,57 +135,56 @@
 .stage[data-etat~="waters-convaincu"] .tableau--waters .pnj--waters { filter: brightness(1.08); }
 .stage[data-etat~="waters-vexe"]     .tableau--waters .pnj--waters { filter: saturate(.5) brightness(.78); }
 
-/* ── LE COFFRE, DANS LA SALLE DE MONTAGE — x:190-230, y:80-136 ───────
-   Encastré, une étagère de bandes poussée devant. Se vide une fois
-   ouvert : la porte s'entrebâille. */
+/* ── LE COFFRE — x:196-236, y:46-102, dans la salle de montage ──────
+   Sprite `prop-coffre`. Il est dessiné À MOITIÉ CACHÉ par l'étagère de
+   bandes qu'il faut pousser : c'est la seule façon de rendre à la fois
+   « il y a un coffre » et « personne ne l'aurait vu ». Le clavier est
+   du côté dégagé — sinon Waters ne pourrait pas composer son code sans
+   pousser d'abord, et le texte dit l'inverse. */
 .tableau--waters .coffre {
-  left: calc(190 * var(--u)); top: calc(80 * var(--u));
-  width: calc(40 * var(--u)); height: calc(56 * var(--u));
-  background: linear-gradient(180deg, #201a10 0%, #120e08 100%);
-  border: calc(1 * var(--u)) solid #050402;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.05);
+  left: calc(196 * var(--u)); top: calc(46 * var(--u));
+  width: calc(40 * var(--u));
 }
-.tableau--waters .coffre::after {
-  content: ''; position: absolute;
-  left: calc(16 * var(--u)); top: calc(22 * var(--u));
-  width: calc(8 * var(--u)); height: calc(8 * var(--u));
-  border-radius: 50%;
-  background: #3a3024;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.5);
-}
-.stage[data-etat~="enregistrement-recupere"] .tableau--waters .coffre::after {
-  background: #0a0806;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.8), 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.08);
+.stage[data-etat~="enregistrement-recupere"] .tableau--waters .coffre {
+  filter: brightness(.82) saturate(.7);
 }
 .stage[data-etat~="bombe-declenchee"] .tableau--waters .coffre {
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.05), 0 0 calc(4 * var(--u)) rgba(220,120,60,.3);
+  filter: drop-shadow(0 0 calc(2 * var(--u)) rgba(220, 120, 60, .55));
 }
 
-/* ── LA PORTE D'ENTRÉE — x:4-26, y:74-140, la sortie ─────────────────
-   Sous l'enseigne au S manquant (le S n'est pas dessiné : la dette
-   d'art assumée dans l'en-tête). */
+/* ── LA PORTE D'ENTRÉE — x:4-26, y:62-128, la sortie ────────────────
+   Sprite `prop-porte-studio`, ET LA DETTE DU S EST REFERMÉE. L'enseigne
+   est peinte sur la vitre ; vue du dedans elle se lit à l'envers, donc
+   **le trou du S final est au début du mot**. À cette largeur on ne lit
+   pas des lettres, on lit un rythme de traits — et c'est le vide au
+   bout qui porte l'information, comme la ligne sans solde de l'ardoise
+   au Shameless. */
 .tableau--waters .porte-entree {
-  left: calc(4 * var(--u)); top: calc(74 * var(--u));
-  width: calc(22 * var(--u)); height: calc(66 * var(--u));
-  background: linear-gradient(180deg, #241c10 0%, #14100a 100%);
-  border: calc(1 * var(--u)) solid #050402;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.04);
-}
-.tableau--waters .porte-entree::after {
-  content: ''; position: absolute;
-  right: calc(3 * var(--u)); top: calc(30 * var(--u));
-  width: calc(2 * var(--u)); height: calc(6 * var(--u));
-  background: #8a7040;
-  border-radius: 50%;
+  left: calc(4 * var(--u)); top: calc(62 * var(--u));
+  width: calc(22 * var(--u));
 }
 
 /* ── LE COULOIR DE L'ÉQUIPE — x:82-166, y:66-140 ─────────────────────
    Même geste qu'ailleurs : entrée par le bas, rangée du plus grand au
    plus petit sur une bande que rien d'autre n'occupe en x. */
-.tableau--waters .p-drakk    { width: calc(28 * var(--u)); left: calc(82 * var(--u));  top: calc(66 * var(--u)); }
-.tableau--waters .p-trash    { width: calc(20 * var(--u)); left: calc(112 * var(--u)); top: calc(76 * var(--u)); }
-.tableau--waters .p-rabbit   { width: calc(16 * var(--u)); left: calc(134 * var(--u)); top: calc(82 * var(--u)); }
-.tableau--waters .p-hercules { width: calc(14 * var(--u)); left: calc(152 * var(--u)); top: calc(86 * var(--u)); }
+.tableau--waters .p-drakk    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(84 * var(--u)); }
+.tableau--waters .p-trash    { width: calc(20 * var(--u)); left: calc(130 * var(--u)); top: calc(92 * var(--u)); }
+.tableau--waters .p-rabbit   { width: calc(16 * var(--u)); left: calc(148 * var(--u)); top: calc(96 * var(--u)); }
+.tableau--waters .p-hercules { width: calc(14 * var(--u)); left: calc(166 * var(--u)); top: calc(104 * var(--u)); }
+
+/* Les ombres de contact (chantier 14) : ce tableau n'en avait aucune,
+   faute de sol où les poser. */
+.tableau--waters .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.5), transparent 78%);
+  pointer-events: none;
+}
+.tableau--waters .ombre--drakk    { left: calc(102 * var(--u)); top: calc(116 * var(--u)); width: calc(24 * var(--u)); }
+.tableau--waters .ombre--trash    { left: calc(131 * var(--u)); top: calc(119 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--waters .ombre--rabbit   { left: calc(149 * var(--u)); top: calc(121 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--waters .ombre--hercules { left: calc(167 * var(--u)); top: calc(122 * var(--u)); width: calc(12 * var(--u)); }
+.tableau--waters .ombre--waters   { left: calc(36 * var(--u));  top: calc(137 * var(--u)); width: calc(24 * var(--u)); }
 
 /* ── CE QUE LA PIÈCE A RENDU, RELISIBLE SANS LE CARNET ───────────────
    Même geste qu'`amis`/`appartement`/`shameless` : la salle s'éclaire
