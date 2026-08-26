@@ -123,14 +123,17 @@
   border-radius: 2px;
 }
 
-/* Sarah — dette d'art assumée : une forme, pas un sprite. Elle ne
-   change plus d'état depuis le chantier 39 : plus de tir, plus de
-   posture à changer. */
+/* Sarah — sprite `prop-sarah` depuis le chantier 23, dérivé du corps
+   d'Iris (la seule silhouette de femme du jeu). Elle ne change pas
+   d'état depuis le chantier 39 : plus de tir, plus de posture à changer.
+
+   SA GÉOMÉTRIE NE BOUGE PAS D'UNE UNITÉ, et c'est une coïncidence utile :
+   le losange faisait 20 × 34 u, soit un rapport de 1,70, et la carte
+   d'Iris fait 48 × 82 px, soit 1,71. Le seul des losanges dont les
+   proportions étaient déjà celles d'une figure. */
 .tableau--sarah .sarah {
   left: calc(216 * var(--u)); top: calc(50 * var(--u));
-  width: calc(20 * var(--u)); height: calc(34 * var(--u));
-  border-radius: 40% 40% 25% 25% / 55% 55% 20% 20%;
-  background: radial-gradient(65% 80% at 50% 40%, #dcc8a8 0%, #a68a5e 45%, #5e4a30 80%, transparent 100%);
+  width: calc(20 * var(--u));
 }
 
 .tableau--sarah .porte-cabinet {

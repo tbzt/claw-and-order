@@ -86,12 +86,17 @@
   border-radius: 34% 34% 18% 18% / 46% 46% 14% 14%;
 }
 
-/* NITA — x:8-30, y:46-96. Debout au mur, la seule qui soit venue pour
-   faire quelque chose. Le fétiche d'ours se retourne quand elle ferme. */
+/* NITA — y:46-96. Debout au mur, la seule qui soit venue pour faire
+   quelque chose. Sprite `prop-nita` (chantier 23), dérivé du corps
+   d'Iris. Hauteur et ligne de pieds conservées, largeur rendue aux
+   proportions de la figure (29 u au lieu de 22), `left` recentré.
+   Le fétiche d'ours reste au CSS : c'est un `::after` qui change de
+   côté quand elle se ferme, donc un ÉTAT, et un état n'entre pas dans
+   un sprite fixe. */
 .tableau--amis .ami--nita {
-  left: calc(8 * var(--u)); top: calc(46 * var(--u));
-  width: calc(22 * var(--u)); height: calc(50 * var(--u));
-  background: radial-gradient(62% 78% at 50% 32%, #c2a97e 0%, #8a7048 46%, #4a3c24 80%, transparent 100%);
+  left: calc(4 * var(--u)); top: calc(46 * var(--u));
+  width: calc(29 * var(--u));
+  border-radius: 0;
 }
 .tableau--amis .ami--nita::after {
   content: ''; position: absolute;
@@ -121,12 +126,12 @@
 .stage[data-etat~="mark-ferme"] .tableau--amis .ami--mark { filter: saturate(.5) brightness(.82); }
 .stage[data-etat~="mark-ferme"] .tableau--amis .ami--mark::after { top: calc(24 * var(--u)); }
 
-/* NOVA — x:232-252, y:46-96. Adossée au montant du rideau, entre
-   l'équipe et la rue. */
+/* NOVA — y:46-96. Adossée au montant du rideau, entre l'équipe et la
+   rue. Sprite `prop-nova`, même dérivation que Nita. */
 .tableau--amis .ami--nova {
-  left: calc(232 * var(--u)); top: calc(46 * var(--u));
-  width: calc(20 * var(--u)); height: calc(50 * var(--u));
-  background: radial-gradient(62% 78% at 50% 30%, #8fae86 0%, #5c7454 46%, #2c3a28 80%, transparent 100%);
+  left: calc(227 * var(--u)); top: calc(46 * var(--u));
+  width: calc(29 * var(--u));
+  border-radius: 0;
 }
 
 /* PSYCH — x:180-232, y:108-132. Allongé, donc large et bas, et au
