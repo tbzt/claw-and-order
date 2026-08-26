@@ -327,10 +327,19 @@
    déclencherait jamais en jeu.
 
    La raison est dans les données, pas ici : `data-etat` n'est pas la
-   liste des flags, c'est `etat.visuels`, et `tribunal-salle.js` est la
-   seule scène du jeu qui n'ait ni `entree()`, ni `visuel:`, ni
-   `visuels:` — donc son `data-etat` est vide en permanence. La règle
-   aurait été du code mort déguisé en fonctionnalité.
+   liste des flags, c'est `etat.visuels` réuni à ce que rend `derive()`
+   (`main.js`, `stage.dataset.etat = [...etat.visuels, ...derives]`), et
+   `tribunal-salle.js` ne déclare AUCUNE des quatre sources possibles —
+   ni `entree()`, ni `derive()`, ni `visuels:`, ni `visuel:`. Son
+   `data-etat` est donc vide en permanence, et la règle aurait été du
+   code mort déguisé en fonctionnalité.
+
+   ⚠️ IL N'EST PAS LE SEUL, et la première rédaction de ce commentaire
+   disait le contraire sans l'avoir compté. Relevé sur les 19 scènes :
+   `bar`, `tribunal`, `tribunal-salle` et `greffe-cellule` sont dans ce
+   cas. Aucune des quatre n'a de sélecteur `data-etat~="…"` dans sa
+   feuille — donc aucune règle morte nulle part, et c'était bien le seul
+   point à vérifier.
 
    CE QU'IL FAUDRAIT, si on veut la bascule (quatre lignes, dans
    `js/data/tribunal-salle.js`, sur le patron exact de `herwick.js`) :
