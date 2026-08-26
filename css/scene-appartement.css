@@ -1,29 +1,48 @@
 /* ── TABLEAU 9 — L'APPARTEMENT DE TERESA BANKS ───────────────────────
-   Chantier 26, second tableau de l'acte IV. Grille 256 x 144
-   (chantier 8), même --u que les autres tableaux.
+   Chantier 26 pour la mécanique (la première ancre, le fil maglock),
+   CHANTIER 23 pour la passe d'art. Grille 256 x 144 (chantier 8), même
+   --u que les autres tableaux.
 
-   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css`,
-   `scene-duke.css`, `scene-squat.css`, `scene-tripot.css` et
-   `scene-amis.css` : aucun sprite neuf. Assez pour reconnaître un
-   studio d'une pièce et demie sous scellés — un lit nu, un placard de
-   salle de bain, une pile de courrier, une porte barrée de deux rubans
-   de RA — et pour valider le fil maglock en jeu.
+   CE QUI CHANGE. La feuille portait « PLACEHOLDER FONCTIONNEL, aucun
+   sprite neuf ». C'est le décor où ça coûtait le plus cher : **ce
+   tableau n'a personne dedans** — son markup le dit, « la pièce est
+   vide depuis trois jours, et c'est exactement ce qu'elle a à dire ».
+   Partout ailleurs des sprites de gens portent l'image ; ici il n'y a
+   que le décor, et le décor était en dégradés.
 
-   LA PIÈCE EST VIDE, ET ÇA SE VOIT AU FOND ET PAS AU MOBILIER : le fond
-   ne porte aucune source chaude. La seule lumière est celle du jour, et
-   elle vient de la fenêtre, en biais. C'est le deuxième tableau diurne
-   du jeu, après le local de répétition.
+   SEPT SPRITES, ET TOUT CE STUDIO DIT LA MÊME CHOSE DE SIX FAÇONS —
+   ils étaient DEUX. Le placard rend deux brosses à dents, l'évier deux
+   verres et deux assiettes, le lit ses aplats de poudre, la valise son
+   dessus qui manque, le courrier sa facture Lockworks, et le lecteur du
+   hall son boîtier de travers. Rien de tout ça n'était montré.
 
-   LES DEUX RUBANS DE SCELLÉS SONT EN RA, PAS EN PLASTIQUE. Ils ne sont
-   donc pas peints comme un objet du décor : ils ont la teinte froide
-   des étiquettes de lentille (`engine.css`), et ils restent visibles
-   pour tout le monde — c'est le jeu qui dit, par le texte, que Trash et
-   Drakk passent la main au travers sans les voir.
+   ⚠️ ET LE SOL A ÉTÉ CORRIGÉ, comme au local de répétition et pour la
+   même raison : `.fond` descendait à 114, `.sol` commençait là, et
+   l'équipe s'arrêtait à 67 — cinquante unités au-dessus. Le défaut se
+   cachait derrière l'absence d'art qui l'avait causé (deux bandes de
+   même valeur, donc aucune ligne de sol visible). Trois bandes
+   maintenant, et des lignes de pieds vraies :
 
-   DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE AU
-   `getBoundingClientRect()` en jeu sur les douze cibles cliquables —
-   la méthode du chantier 28, qui n'avait laissé aucun chevauchement.
-   Les coordonnées sont écrites au-dessus de chaque règle. */
+       l'équipe, debout dans la pièce   104-110
+       le coin cuisine, contre le mur   100
+       le lit, au premier plan          126
+       le courrier, au pied de la porte 132
+       la valise, devant tout           140
+
+   LA LUMIÈRE VIENT DE LA FENÊTRE, EN BIAIS — troisième règle du
+   chantier et troisième différente (le bar avait ses suspensions, le
+   palais son plafond, le local son rideau au ras du sol). La source est
+   en haut à droite, et les sept props ont été éclairés d'autant plus
+   qu'ils en sont proches : le placard, collé à la fenêtre, est le plus
+   clair ; le lecteur du hall, au fond de la cage d'escalier, est le
+   plus sombre du jeu.
+
+   LES DEUX RUBANS DE SCELLÉS RESTENT EN RA, PAS EN PLASTIQUE, et donc
+   en CSS : ils ont la teinte froide des étiquettes de lentille, ils
+   changent d'état, et un sprite fixe ne saurait pas faire les deux.
+
+   DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À LA MAIN : les douze cibles
+   reprises une par une dans le navigateur après recomposition. */
 
 .tableau--appartement {
   position: absolute; inset: 0;
@@ -33,61 +52,78 @@
 }
 .tableau--appartement > * { position: absolute; }
 
+/* ── LE MUR, LA PLINTHE, LE PLANCHER ─────────────────────────────── */
 .tableau--appartement .fond {
-  left: 0; top: 0; width: 100%; height: calc(114 * var(--u));
-  background: linear-gradient(180deg, #33363c 0%, #262930 58%, #1b1e23 100%);
+  left: 0; top: 0; width: 100%; height: calc(98 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.07) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(22 * var(--u))),
+    linear-gradient(180deg, #33363c 0%, #292c32 58%, #212429 100%);
+}
+.tableau--appartement .plinthe {
+  left: 0; top: calc(98 * var(--u)); width: 100%; height: calc(4 * var(--u));
+  background: linear-gradient(180deg, #4a453c 0%, #2a2620 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.5);
 }
 .tableau--appartement .sol {
-  left: 0; top: calc(114 * var(--u)); width: 100%; height: calc(30 * var(--u));
+  left: 0; top: calc(102 * var(--u)); width: 100%; height: calc(42 * var(--u));
   background: repeating-linear-gradient(90deg, #3a332a 0 calc(9 * var(--u)), #342e26 calc(9 * var(--u)) calc(18 * var(--u)));
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.5);
 }
 
-/* LE JOUR, EN BIAIS DEPUIS LA FENÊTRE. Décoratif, jamais cliquable. */
+/* LE JOUR, EN BIAIS DEPUIS LA FENÊTRE. Décoratif, jamais cliquable —
+   et c'est lui qui a décidé de l'éclairement des sept sprites. */
 .tableau--appartement .jour {
-  left: calc(120 * var(--u)); top: calc(14 * var(--u));
-  width: calc(120 * var(--u)); height: calc(126 * var(--u));
-  background: linear-gradient(214deg, rgba(226, 226, 214, .16) 0%, rgba(226, 226, 214, .04) 42%, rgba(226, 226, 214, 0) 70%);
+  left: calc(110 * var(--u)); top: calc(12 * var(--u));
+  width: calc(146 * var(--u)); height: calc(132 * var(--u));
+  background: linear-gradient(214deg, rgba(226, 226, 214, .17) 0%, rgba(226, 226, 214, .05) 42%, rgba(226, 226, 214, 0) 70%);
+  pointer-events: none;
 }
 
 /* ── LA CAGE D'ESCALIER — x:0-46, décor, vue par la porte ouverte ──── */
 .tableau--appartement .cage-escalier {
-  left: 0; top: calc(8 * var(--u));
+  left: 0; top: calc(6 * var(--u));
   width: calc(46 * var(--u)); height: calc(106 * var(--u));
   background: linear-gradient(180deg, #1a1c20 0%, #101215 62%, #0b0d10 100%);
   border-right: calc(1 * var(--u)) solid #0a0b0d;
 }
-/* Les marches, suggérées. */
 .tableau--appartement .cage-escalier::after {
   content: ''; position: absolute; inset: 0;
   background: repeating-linear-gradient(168deg, rgba(255,255,255,.05) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(9 * var(--u)));
 }
 
-/* ── LE LECTEUR DU HALL — x:6-26, y:88-108 ───────────────────────────
-   La serrure de l'IMMEUBLE, en bas de l'escalier : le morceau de
-   bravoure de White_Rabbit (§7.2). Il s'allume en deux temps — lu, puis
-   forcé — parce que le fil se joue en deux temps. */
+/* ── LE LECTEUR DU HALL — x:6-26, y:74-94 ────────────────────────────
+   Sprite `prop-lecteur`. La serrure de l'IMMEUBLE, en bas de
+   l'escalier : le morceau de bravoure de White_Rabbit (§7.2). « Il est
+   vieux, il est MAL POSÉ, et il fonctionne » — c'est le de-travers qui
+   rend la suite crédible, et c'est ce que le sprite dessine : deux vis
+   en haut, une seule en bas, et un coin qui décolle du mur.
+
+   Sa diode est dans le sprite, en ambre. L'état `maglock-lu` la repeint
+   en bleu par-dessus : une diode qui change de couleur ne peut pas
+   vivre dans une carte fixe. */
 .tableau--appartement .lecteur-hall {
-  left: calc(6 * var(--u)); top: calc(88 * var(--u));
-  width: calc(20 * var(--u)); height: calc(20 * var(--u));
-  background: linear-gradient(180deg, #4a4d52 0%, #2a2d32 100%);
-  border: calc(1 * var(--u)) solid #0c0e10;
+  left: calc(6 * var(--u)); top: calc(74 * var(--u));
+  width: calc(20 * var(--u));
 }
 .tableau--appartement .lecteur-hall::after {
   content: ''; position: absolute;
-  left: calc(6 * var(--u)); top: calc(6 * var(--u));
-  width: calc(8 * var(--u)); height: calc(3 * var(--u));
-  background: #6b4a2a;
+  left: calc(6.5 * var(--u)); top: calc(11.5 * var(--u));
+  width: calc(2 * var(--u)); height: calc(2 * var(--u));
+  background: transparent;
+  transition: background .3s ease;
 }
-.stage[data-etat~="maglock-lu"] .tableau--appartement .lecteur-hall::after { background: #46a0c8; }
+.stage[data-etat~="maglock-lu"] .tableau--appartement .lecteur-hall::after {
+  background: #46a0c8;
+  box-shadow: 0 0 calc(3 * var(--u)) rgba(70, 160, 200, .8);
+}
 .stage[data-etat~="trace-archive"] .tableau--appartement .lecteur-hall {
-  box-shadow: 0 0 0 calc(2 * var(--u)) rgba(70, 160, 200, .3);
+  filter: drop-shadow(0 0 calc(2 * var(--u)) rgba(70, 160, 200, .5));
 }
 
-/* ── LA PORTE SOUS SCELLÉS — x:48-76, y:26-108, et c'est la sortie ─── */
+/* ── LA PORTE SOUS SCELLÉS — x:48-76, y:20-104, et c'est la sortie ─── */
 .tableau--appartement .porte-scellee {
-  left: calc(48 * var(--u)); top: calc(26 * var(--u));
-  width: calc(28 * var(--u)); height: calc(82 * var(--u));
+  left: calc(48 * var(--u)); top: calc(20 * var(--u));
+  width: calc(28 * var(--u)); height: calc(84 * var(--u));
   background: linear-gradient(90deg, #2a2620 0%, #3a352c 70%, #221f19 100%);
   border: calc(1 * var(--u)) solid #100e0b;
 }
@@ -100,28 +136,22 @@
   transform: rotate(-7deg);
 }
 .tableau--appartement .ruban--haut { top: calc(28 * var(--u)); }
-.tableau--appartement .ruban--bas  { top: calc(50 * var(--u)); transform: rotate(6deg); }
+.tableau--appartement .ruban--bas  { top: calc(52 * var(--u)); transform: rotate(6deg); }
 /* Lus, ils cessent d'être du décor et deviennent un fait daté. */
 .stage[data-etat~="appart-lu"] .tableau--appartement .ruban,
 .stage[data-etat~="appart-compris"] .tableau--appartement .ruban {
   background: rgba(120, 200, 230, .5);
 }
 
-/* ── LA FENÊTRE — x:182-226, y:14-56 ─────────────────────────────────
-   La seule source de lumière, et le seul endroit d'où l'on voit que le
-   quartier vous regarde. */
+/* ── LA FENÊTRE — x:182-226, y:12-54 ─────────────────────────────────
+   Sprite `prop-fenetre`. La seule source de lumière du tableau, donc
+   le seul objet plus clair que tout le reste — et la seule ouverture
+   sur Loveland de tout le jeu : la façade d'en face, ses fenêtres, un
+   escalier de secours, et une bande de ciel blanc de matin d'automne.
+   Le croisillon est dedans ; il n'a plus besoin d'un `::after`. */
 .tableau--appartement .fenetre-rue {
-  left: calc(182 * var(--u)); top: calc(14 * var(--u));
-  width: calc(44 * var(--u)); height: calc(42 * var(--u));
-  background: linear-gradient(180deg, #b9bcae 0%, #8e9186 55%, #6b6d64 100%);
-  border: calc(2 * var(--u)) solid #23252a;
-}
-/* Le croisillon. */
-.tableau--appartement .fenetre-rue::after {
-  content: ''; position: absolute; inset: 0;
-  background:
-    linear-gradient(90deg, transparent 0 calc(20 * var(--u)), #23252a calc(20 * var(--u)) calc(22 * var(--u)), transparent calc(22 * var(--u)) 100%),
-    linear-gradient(180deg, transparent 0 calc(19 * var(--u)), #23252a calc(19 * var(--u)) calc(21 * var(--u)), transparent calc(21 * var(--u)) 100%);
+  left: calc(182 * var(--u)); top: calc(12 * var(--u));
+  width: calc(44 * var(--u));
 }
 /* Le présage du Tír : quelqu'un, sur le trottoir d'en face. */
 .stage[data-etat~="tir-prevenu"] .tableau--appartement .fenetre-rue {
@@ -131,103 +161,103 @@
   box-shadow: inset 0 0 0 calc(3 * var(--u)) rgba(170, 60, 50, .5);
 }
 
-/* ── LE PLACARD À PHARMACIE — x:232-254, y:14-48 ─────────────────────
-   Le miroir de la porte, et derrière, ce qui prouve qu'ils étaient deux. */
+/* ── LE PLACARD À PHARMACIE — x:230-252, y:14-48 ─────────────────────
+   Sprite `prop-pharmacie`, et c'est L'ANCRE DU TABLEAU. Il est dessiné
+   ENTROUVERT : fermé, il ne montrerait qu'un miroir, et tout ce que le
+   texte énumère resterait derrière. Ce qu'on doit y voir tient dans un
+   nombre — **deux brosses à dents dans le même verre** — plus le rasoir
+   de sûreté et le flacon sans étiquette et ses six gélules. */
 .tableau--appartement .placard-pharmacie {
-  left: calc(232 * var(--u)); top: calc(14 * var(--u));
-  width: calc(22 * var(--u)); height: calc(34 * var(--u));
-  background: linear-gradient(160deg, #6e7278 0%, #3e4247 48%, #55595f 100%);
-  border: calc(1 * var(--u)) solid #191b1e;
+  left: calc(230 * var(--u)); top: calc(14 * var(--u));
+  width: calc(22 * var(--u));
 }
 .stage[data-etat~="appart-compris"] .tableau--appartement .placard-pharmacie {
-  border-color: #7c8087;
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(140, 190, 210, .35);
 }
 
-/* ── LE COIN CUISINE — x:182-222, y:66-100 ───────────────────────────
-   Deux verres, deux assiettes, lavés. La cible qui ne rend rien. */
+/* ── LE COIN CUISINE — x:176-216, y:66-100 ───────────────────────────
+   Sprite `prop-cuisine`. Deux plaques, un évier, et dedans **deux
+   verres retournés et deux assiettes sur la tranche** — la cible qui ne
+   rend aucune fiche et qui dit tout. */
 .tableau--appartement .coin-cuisine {
-  left: calc(182 * var(--u)); top: calc(66 * var(--u));
-  width: calc(40 * var(--u)); height: calc(34 * var(--u));
-  background: linear-gradient(180deg, #4c4a44 0%, #2e2d29 100%);
-  border: calc(1 * var(--u)) solid #131211;
-}
-/* Les deux verres à l'égouttoir. */
-.tableau--appartement .coin-cuisine::after {
-  content: ''; position: absolute;
-  left: calc(6 * var(--u)); top: calc(6 * var(--u));
-  width: calc(14 * var(--u)); height: calc(8 * var(--u));
-  background:
-    radial-gradient(circle at 25% 50%, rgba(210, 220, 220, .6) 0 calc(3 * var(--u)), transparent calc(3 * var(--u))),
-    radial-gradient(circle at 75% 50%, rgba(210, 220, 220, .6) 0 calc(3 * var(--u)), transparent calc(3 * var(--u)));
+  left: calc(176 * var(--u)); top: calc(66 * var(--u));
+  width: calc(40 * var(--u));
 }
 
-/* ── LA PILE DE COURRIER — x:52-80, y:112-134 ────────────────────────
-   L'étape 2 du fil maglock, et la seule qui ne demande pas un decker. */
-.tableau--appartement .pile-courrier {
-  left: calc(52 * var(--u)); top: calc(112 * var(--u));
-  width: calc(28 * var(--u)); height: calc(22 * var(--u));
-  background: repeating-linear-gradient(174deg, #b8b2a2 0 calc(2 * var(--u)), #8e897b calc(2 * var(--u)) calc(4 * var(--u)));
-  box-shadow: 0 calc(1 * var(--u)) calc(2 * var(--u)) rgba(0,0,0,.5);
-}
-/* La facture, une fois ressortie de la pile : posée à plat, bien en vue. */
-.stage[data-etat~="bail-numero"] .tableau--appartement .pile-courrier::after {
-  content: ''; position: absolute;
-  left: calc(4 * var(--u)); top: calc(-4 * var(--u));
-  width: calc(20 * var(--u)); height: calc(7 * var(--u));
-  background: #ddd8c8;
-  box-shadow: 0 calc(1 * var(--u)) 0 rgba(0,0,0,.45);
-}
-
-/* ── LE LIT NU — x:90-170, y:88-116 ──────────────────────────────────
-   Un matelas sans rien dessus, et de la poudre à empreintes sur la tête
-   de lit. C'est la fiche la plus lourde du tableau. */
-.tableau--appartement .lit-nu {
-  left: calc(90 * var(--u)); top: calc(88 * var(--u));
-  width: calc(80 * var(--u)); height: calc(28 * var(--u));
-  background: linear-gradient(180deg, #8a8377 0%, #6d6659 60%, #4e4940 100%);
-  border: calc(1 * var(--u)) solid #201d18;
-  border-radius: calc(2 * var(--u));
-}
-/* La poudre grise, en aplats réguliers, sur le montant. */
-.tableau--appartement .lit-nu::after {
-  content: ''; position: absolute;
-  left: calc(4 * var(--u)); top: calc(2 * var(--u));
-  width: calc(24 * var(--u)); height: calc(6 * var(--u));
-  background: repeating-linear-gradient(90deg, rgba(190,190,190,.45) 0 calc(3 * var(--u)), transparent calc(3 * var(--u)) calc(5 * var(--u)));
-}
-
-/* ── LA VALISE — x:96-126, y:120-138, au premier plan ─────────────── */
-.tableau--appartement .valise-cabine {
-  left: calc(96 * var(--u)); top: calc(120 * var(--u));
-  width: calc(30 * var(--u)); height: calc(18 * var(--u));
-  background: linear-gradient(180deg, #5a4632 0%, #3a2d20 100%);
-  border: calc(1 * var(--u)) solid #17110b;
-  border-radius: calc(2 * var(--u));
-}
-.tableau--appartement .valise-cabine::after {
-  content: ''; position: absolute;
-  left: calc(11 * var(--u)); top: calc(-3 * var(--u));
-  width: calc(8 * var(--u)); height: calc(3 * var(--u));
-  background: #2a2018;
-  border-radius: calc(2 * var(--u)) calc(2 * var(--u)) 0 0;
-}
-
-/* ── LE COULOIR DE L'ÉQUIPE — x:86-178, y:30-46 ─────────────────────
-   Bande que rien d'autre n'occupe en x. Les quatre descendent jusqu'à
-   y≈67 au plus bas (mesuré) ; le lit commence à 88. */
-.tableau--appartement .p-drakk    { width: calc(28 * var(--u)); left: calc(86 * var(--u));  top: calc(30 * var(--u)); }
-.tableau--appartement .p-trash    { width: calc(20 * var(--u)); left: calc(118 * var(--u)); top: calc(34 * var(--u)); }
-.tableau--appartement .p-rabbit   { width: calc(16 * var(--u)); left: calc(142 * var(--u)); top: calc(40 * var(--u)); }
-.tableau--appartement .p-hercules { width: calc(14 * var(--u)); left: calc(164 * var(--u)); top: calc(44 * var(--u)); }
+/* ── LE COULOIR DE L'ÉQUIPE — x:86-178 ───────────────────────────────
+   Bande que rien d'autre n'occupe en x. Leurs pieds tombent maintenant
+   sur le plancher (104-110) et non plus au milieu du mur ; le lit, qui
+   est devant eux, leur coupe le bas des jambes. */
+.tableau--appartement .p-drakk    { width: calc(28 * var(--u)); left: calc(86 * var(--u));  top: calc(70 * var(--u)); }
+.tableau--appartement .p-trash    { width: calc(20 * var(--u)); left: calc(118 * var(--u)); top: calc(76 * var(--u)); }
+.tableau--appartement .p-rabbit   { width: calc(16 * var(--u)); left: calc(142 * var(--u)); top: calc(79 * var(--u)); }
+.tableau--appartement .p-hercules { width: calc(14 * var(--u)); left: calc(164 * var(--u)); top: calc(89 * var(--u)); }
 
 /* Elle a passé deux minutes assise par terre dans une archive : ça se
    voit d'un cran, et ça se remet à l'endroit tout seul. */
 .stage[data-etat~="trace-archive"] .tableau--appartement .p-rabbit { filter: brightness(1.08); }
 
+/* Les ombres de contact (chantier 14) : ce tableau n'en avait aucune,
+   faute de sol où les poser. */
+.tableau--appartement .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.45), transparent 78%);
+  pointer-events: none;
+}
+.tableau--appartement .ombre--drakk    { left: calc(88 * var(--u));  top: calc(103 * var(--u)); width: calc(24 * var(--u)); }
+.tableau--appartement .ombre--trash    { left: calc(119 * var(--u)); top: calc(104 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--appartement .ombre--rabbit   { left: calc(143 * var(--u)); top: calc(105 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--appartement .ombre--hercules { left: calc(165 * var(--u)); top: calc(107 * var(--u)); width: calc(12 * var(--u)); }
+
+/* ── LE LIT NU — x:86-166, y:98-126, au premier plan ─────────────────
+   Sprite `prop-lit`. Un matelas sans rien dessus — le vide EST le
+   sujet, un oreiller dessiné ici serait un contresens — et sur le
+   montant de la tête de lit, **la poudre grise en aplats réguliers**
+   que personne n'a essuyée. La tête est du côté de la fenêtre : la
+   poudre ne se verrait pas dans l'ombre. */
+.tableau--appartement .lit-nu {
+  left: calc(86 * var(--u)); top: calc(98 * var(--u));
+  width: calc(80 * var(--u));
+}
+.stage[data-etat~="innocent"] .tableau--appartement .lit-nu {
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(140, 190, 210, .3);
+}
+
+/* ── LA VALISE — x:100-130, y:122-140, devant tout ───────────────────
+   Sprite `prop-valise`. « À moitié faite. Des vêtements PLIÉS, pas
+   jetés » — donc des bandes nettes empilées, jamais un fouillis : c'est
+   la différence entre préparer un départ et fuir. Et **il manque le
+   dessus** : le tiers du haut de la coque reste vide, on y voit la
+   doublure. Même figure que le pied de caisse claire au local — une
+   absence se montre par ce qui la contenait. */
+.tableau--appartement .valise-cabine {
+  left: calc(100 * var(--u)); top: calc(122 * var(--u));
+  width: calc(30 * var(--u));
+}
+
+/* ── LA PILE DE COURRIER — x:52-80, y:110-132 ────────────────────────
+   Sprite `prop-courrier`. « Glissée sous la porte et POUSSÉE EN TAS
+   contre le mur » : des enveloppes de travers, pas une pile droite —
+   quelqu'un les a repoussées du pied en entrant. La facture Lockworks
+   est dedans et se voit : c'est elle qui porte le numéro de contrat,
+   donc le fil maglock tout entier. */
+.tableau--appartement .pile-courrier {
+  left: calc(52 * var(--u)); top: calc(110 * var(--u));
+  width: calc(28 * var(--u));
+}
+/* La facture, une fois ressortie de la pile : posée à plat, bien en vue. */
+.stage[data-etat~="bail-numero"] .tableau--appartement .pile-courrier::after {
+  content: ''; position: absolute;
+  left: calc(4 * var(--u)); top: calc(-5 * var(--u));
+  width: calc(20 * var(--u)); height: calc(7 * var(--u));
+  background: #ddd8c8;
+  box-shadow: 0 calc(1 * var(--u)) 0 rgba(0,0,0,.45);
+}
+
 /* ── CE QUE LA PIÈCE A RENDU, RELISIBLE SANS LE CARNET ──────────────
-   Trois paliers, posés par `derive()` — même geste qu'au local de
-   répétition. La pièce ne s'éclaire pas : elle se refroidit d'un cran
-   de moins à mesure qu'on comprend ce qui s'y est passé. */
-.stage[data-etat~="appart-froid"]    .tableau--appartement .fond { filter: saturate(.85) brightness(.94); }
-.stage[data-etat~="appart-compris"]  .tableau--appartement .fond { filter: saturate(1.08); }
-.stage[data-etat~="innocent"]        .tableau--appartement .lit-nu { border-color: #6a6154; }
+   Trois paliers, posés par `derive()`. La pièce ne s'éclaire pas : elle
+   se refroidit d'un cran de moins à mesure qu'on comprend ce qui s'y
+   est passé. */
+.stage[data-etat~="appart-froid"]   .tableau--appartement .fond { filter: saturate(.85) brightness(.94); }
+.stage[data-etat~="appart-compris"] .tableau--appartement .fond { filter: saturate(1.08); }

@@ -3,9 +3,16 @@
   (`PLAN_TRAME_ACTES_III_IV.md` § 7.1-7.2, rang 6 du § 10) — la première
   des trois ancres du scénario source, et le second tableau de l'acte IV.
 
-  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
-  `herwick.html`, `sarah.html`, `duke.html`, `squat.html`, `tripot.html`
-  et `amis.html`. Dette d'art assumée, notée dans `PLAN_EXECUTION.md`.
+  PASSE D'ART FAITE (chantier 23, 3ᵉ décor). Sept sprites, et tout ce
+  studio dit la même chose de six façons — ILS ÉTAIENT DEUX : deux
+  brosses à dents dans le placard, deux verres et deux assiettes dans
+  l'évier, la poudre à empreintes en aplats réguliers sur la tête de
+  lit, la valise dont il manque le dessus, la facture Lockworks dans le
+  tas de courrier, et le lecteur du hall posé de travers.
+
+  ET LE SOL EN EST UN, MAINTENANT : trois bandes au lieu de deux, et des
+  lignes de pieds vraies. Avant ce lot, l'équipe s'arrêtait cinquante
+  unités au-dessus de la ligne de sol.
 
   AUCUN PNJ, ET C'EST LE PREMIER TABLEAU DU JEU DANS CE CAS. Il n'y a
   personne à qui parler ici : la pièce est vide depuis trois jours, et
@@ -25,12 +32,17 @@
 <div class="tableau tableau--appartement">
 
   <div class="fond"></div>
+  <div class="plinthe"></div>
   <div class="sol"></div>
 
   <!-- Le jour qui entre par la fenêtre — premier tableau diurne du jeu
        avec le local de répétition. -->
   <div class="jour"></div>
 
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--hercules"></div>
   <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
   <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
   <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
@@ -39,7 +51,7 @@
   <!-- La cage d'escalier, par la porte restée ouverte, et le lecteur de
        la porte de l'immeuble tout en bas. -->
   <div class="cage-escalier"></div>
-  <div class="lecteur-hall" data-hotspot="maglock"></div>
+  <div class="lecteur-hall sprite--prop-lecteur" data-hotspot="maglock"></div>
 
   <!-- La porte du studio et ses deux rubans de RA : la sortie. -->
   <div class="porte-scellee" data-hotspot="porte">
@@ -47,17 +59,17 @@
     <span class="ruban ruban--bas"></span>
   </div>
 
-  <div class="fenetre-rue" data-hotspot="fenetre"></div>
+  <div class="fenetre-rue sprite--prop-fenetre" data-hotspot="fenetre"></div>
 
-  <div class="placard-pharmacie" data-hotspot="pharmacie"></div>
+  <div class="placard-pharmacie sprite--prop-pharmacie" data-hotspot="pharmacie"></div>
 
-  <div class="coin-cuisine" data-hotspot="cuisine"></div>
+  <div class="coin-cuisine sprite--prop-cuisine" data-hotspot="cuisine"></div>
 
   <!-- La pile de courrier, poussée contre le mur près de la porte. -->
-  <div class="pile-courrier" data-hotspot="courrier"></div>
+  <div class="pile-courrier sprite--prop-courrier" data-hotspot="courrier"></div>
 
   <!-- Le lit nu, la poudre à empreintes, et la valise dessous. -->
-  <div class="lit-nu" data-hotspot="lit"></div>
-  <div class="valise-cabine" data-hotspot="valise"></div>
+  <div class="lit-nu sprite--prop-lit" data-hotspot="lit"></div>
+  <div class="valise-cabine sprite--prop-valise" data-hotspot="valise"></div>
 
 </div>
