@@ -381,9 +381,14 @@ export const carte = {
   /* Drakk étale un vrai plan, à chaque fois qu'on y revient — mais on ne
      le regarde pas deux fois de la même façon. `visite` vient de
      `charge()` (chantier 13) : 1 la première fois, davantage ensuite.
-     Ce n'est pas encore une « seconde fenêtre » (chantier 19, qui
-     réécrit les LIEUX eux-mêmes) — seulement la carte qui ne ment pas
-     sur le fait qu'on l'a déjà dépliée. */
+     Chantier 19, tranché le 2026-08-26 : PAS de « seconde fenêtre »
+     propre à bar/quai, contrairement à ce que ce commentaire annonçait
+     avant cette date. Il n'existe aucun chemin de retour après
+     l'embarquement (`amarres.utiliser` est à sens unique), et rien ne
+     motive un aller-retour bar⇄quai avant : ça coûte 70 min sur une
+     horloge de onze heures pour un gain nul. Les lignes `visite > 1`
+     ci-dessous restent la version définitive, pas une étape en attente.
+     Voir `PLAN_EXECUTION.md`, chantier 19. */
   ouverture: (ctx, visite) => ctx.a('abordage-passe')
     ? (visite > 1
         ? [['drakk', '« La province ne change pas de forme. Seuls les jours y changent de visage. »']]

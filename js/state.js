@@ -69,11 +69,12 @@ export const etat = {
      voudrait un jour distinguer d'où on arrive. */
   depuis: null,
   /* Combien de fois chaque tableau a été chargé. `{ bar: 2, quai: 1, … }` —
-     chantier 13. Sert à écrire une ouverture différente au second passage
-     sans construire tout de suite les « secondes fenêtres » (chantier 19,
-     bien plus gros) : un nœud qu'on retrouve identique à sa première
-     visite contredit L3 (« revenir doit changer quelque chose »), même
-     si ce n'est que le texte d'ouverture qui change pour l'instant. */
+     chantier 13. Sert à écrire une ouverture différente au second passage.
+     Le chantier 19 (« les secondes fenêtres », bien plus gros dans le
+     plan d'origine) a été tranché le 2026-08-26 : abandonné pour bar/quai,
+     faute d'intérêt de jeu à y retourner (voir `PLAN_EXECUTION.md`) — les
+     quatre lieux d'enquête de l'acte IV, eux, ont déjà leur propre
+     traitement de seconde visite, construit avec chacun d'eux. */
   visites: {},
   /* La carte-mémoire (chantier 18, `PLAN_CARTE_NAVIGATION.md` L4/D2b) :
      « chaque nœud porte ce qu'on y a appris », jamais un signal d'où

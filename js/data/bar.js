@@ -22,8 +22,12 @@ export const bar = {
   /* Chantier 13 : `visite` vient de `charge()`, 1 la première fois. Ce
      texte plantait 23 h en dur — le rejouer tel quel à un retour depuis
      la carte, à une heure qui n'est plus 23 h, contredirait l'horloge
-     affichée au HUD. Pas encore une « seconde fenêtre » (chantier 19) :
-     juste une ouverture qui ne ment plus sur l'heure. */
+     affichée au HUD. Ça reste tout ce que ce retour a à dire : le
+     chantier 19 (une vraie « seconde fenêtre ») a été tranché avec
+     l'utilisateur le 2026-08-26 — rien ne motive un retour au bar une
+     fois `embauche` posé (aucune fiche, aucun objet n'y attend l'équipe),
+     et chaque aller-retour coûte 70 minutes sur l'horloge de l'audience
+     pour un gain nul. Voir `PLAN_EXECUTION.md`, chantier 19. */
   ouverture: (ctx, visite) => visite > 1
     ? ['Vous repoussez la porte battante du Claw & Order. La salle n’a pas changé — l’heure, elle, a tourné.']
     : ['Le Claw & Order, Downtown, 23 h. Un vieux bar dans son jus — un bar à flics-à-louer, relativement méta-friendly, ce qui explique qu’on vous laisse entrer.',
