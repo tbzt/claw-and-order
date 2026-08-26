@@ -50,12 +50,17 @@
   <!-- L'alcôve du fond, dos au mur, face à la porte. -->
   <div class="alcove" data-hotspot="alcove"></div>
 
+  <!-- IRIS, derrière son comptoir — donc AVANT lui dans le DOM.
+       Elle était placée après, ce que la feuille de style affirmait
+       pourtant déjà l'inverse (« coupée à mi-hauteur par le meuble qui la
+       précède dans le DOM »). Ça ne se voyait pas tant qu'elle était un
+       losange de 46 u qui s'arrêtait au-dessus du comptoir ; avec un
+       corps entier, ses jambes le traversaient. -->
+  <div class="pnj pnj--iris sprite--prop-iris" data-hotspot="iris"></div>
+
   <!-- Le comptoir — décor — et l'ardoise accrochée au mur derrière. -->
   <div class="comptoir"></div>
   <div class="ardoise" data-hotspot="ardoise"></div>
-
-  <!-- IRIS, derrière son comptoir. -->
-  <div class="pnj pnj--iris" data-hotspot="iris"></div>
 
   <!-- DENNY, entre l'équipe et la porte. -->
   <div class="pnj pnj--denny sprite--prop-denny" data-hotspot="denny"></div>

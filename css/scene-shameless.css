@@ -147,11 +147,15 @@
 /* ── IRIS — x:206-234, y:72-140 ──────────────────────────────────────
    Derrière son comptoir, donc coupée à mi-hauteur par le meuble qui la
    précède dans le DOM. */
+/* Sprite `prop-iris`, dérivé du corps de White_Rabbit — la seule
+   silhouette de femme du jeu. Son équipement de deckeuse a été retiré
+   pièce par pièce, pas repeint (voir `retouches/corps-pnj.py`). Elle est
+   coupée à mi-hauteur par le comptoir, qui la précède dans le DOM :
+   c'est pourquoi le sprite peut descendre jusqu'à 140 comme les autres
+   alors que le losange s'arrêtait à 118 — ce qui dépasse est masqué. */
 .tableau--shameless .pnj--iris {
-  left: calc(206 * var(--u)); top: calc(72 * var(--u));
-  width: calc(24 * var(--u)); height: calc(46 * var(--u));
-  border-radius: 32% 32% 10% 10% / 42% 42% 10% 10%;
-  background: radial-gradient(64% 78% at 50% 30%, #b09078 0%, #6e5648 48%, #362820 82%, transparent 100%);
+  left: calc(197 * var(--u)); top: calc(78 * var(--u));
+  width: calc(36 * var(--u));
 }
 .stage[data-etat~="iris-convaincue"] .tableau--shameless .pnj--iris { filter: brightness(1.08); }
 .stage[data-etat~="iris-fermee"]    .tableau--shameless .pnj--iris { filter: saturate(.5) brightness(.8); }
