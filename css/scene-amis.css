@@ -1,25 +1,44 @@
 /* ── TABLEAU 8 — LE LOCAL DE RÉPÉTITION ──────────────────────────────
-   Chantier 28, le premier tableau de l'acte IV. Grille 256 x 144
-   (chantier 8), même --u que les autres tableaux.
+   Chantier 28 pour la mécanique (le premier tableau de l'acte IV),
+   CHANTIER 23 pour la passe d'art. Grille 256 x 144 (chantier 8), même
+   --u que les autres tableaux.
 
-   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-herwick.css`,
-   `scene-sarah.css`, `scene-duke.css`, `scene-squat.css` et
-   `scene-tripot.css` : aucun sprite neuf pour Mark, Psych, Nova ou
-   Nita. Assez pour reconnaître un ancien magasin de disques devenu
-   local de répétition — des bacs, un mur d'affiches, un pied de micro,
-   un rideau de fer bloqué — et pour valider les quatre serrures en jeu.
+   CE QUI CHANGE. La feuille portait « PLACEHOLDER FONCTIONNEL » : des
+   dégradés pour les affiches, une rayure pour les bacs, un trait pour
+   le pied de micro, une gélule pour la batterie. Or **la prose de ce
+   tableau COMPTE des choses** — onze photos sur trente, six bacs, une
+   caisse claire qui manque, un câble encore branché, deux lignes sur
+   une carte de visite et rien d'autre — et aucune n'était montrée. Six
+   sprites les portent maintenant (`retouches/local.py`).
 
-   LA LUMIÈRE EST CELLE DU MATIN, et c'est le premier tableau du jeu à
-   en avoir : dix heures, un rideau à mi-hauteur, et une bande de jour
-   qui entre par le bas à droite. Tous les autres décors sont nocturnes.
+   ⚠️ ET LE SOL A ÉTÉ CORRIGÉ, parce qu'il n'en était pas un. La bande
+   `.fond` descendait à 114 et `.sol` commençait là ; or les pieds de
+   Nita s'arrêtaient à 96, ceux de l'équipe à 64. **Personne ne touchait
+   le sol** : tout le monde flottait sur le mur. Ça ne se voyait pas —
+   les deux bandes avaient presque la même teinte, si bien que la ligne
+   de sol n'existait pas à l'œil non plus. Elle existe maintenant (une
+   plinthe, un plancher qui a du sens), donc il a fallu que les lignes
+   de pieds soient vraies :
 
-   DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les treize
-   cibles cliquables avant tout test au navigateur — même discipline que
-   `scene-duke.css`, `scene-squat.css` et `scene-tripot.css`. Les
-   coordonnées de chaque cible sont écrites en commentaire au-dessus
-   d'elle ; deux cibles ne partagent jamais à la fois une plage en x et
-   une plage en y. Le mobilier (comptoir, amplis, batterie) n'a pas de
-   `data-hotspot` : il peut donc recouvrir ce qu'il veut. */
+       l'équipe, au fond          100-103
+       Nita, contre le mur        108
+       Nova, contre le rideau     112
+       Mark, assis sur l'ampli    109 (l'ampli à 120)
+       les bacs, au premier plan  134
+       Psych, allongé devant      118-142
+
+   LA LUMIÈRE EST CELLE DU MATIN, et c'est le seul décor du jeu dans ce
+   cas : dix heures, un rideau à mi-hauteur, une bande de jour qui entre
+   par le bas à DROITE. Elle est aussi INÉGALE — elle s'éteint sur
+   74 unités — donc chaque prop a reçu sa dose selon son abscisse, à
+   l'atelier : les bacs et les affiches (x 4) n'en ont qu'un frottement,
+   la carte sur le comptoir (x 208) est l'objet le plus clair du jeu.
+
+   DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À LA MAIN : les treize cibles
+   ont été reprises une par une dans le navigateur (`elementFromPoint`
+   au centre géométrique) après recomposition. Le mobilier sans
+   `data-hotspot` (comptoir, amplis, batterie) peut recouvrir ce qu'il
+   veut. */
 
 .tableau--amis {
   position: absolute; inset: 0;
@@ -29,19 +48,34 @@
 }
 .tableau--amis > * { position: absolute; }
 
+/* ── LE MUR, LA PLINTHE, LE PLANCHER ─────────────────────────────────
+   Trois bandes au lieu de deux, et c'est la plinthe qui fait tout le
+   travail : sans elle, un mur sombre et un sol sombre ne se séparent
+   pas, et rien ne dit où les pieds se posent. */
 .tableau--amis .fond {
-  left: 0; top: 0; width: 100%; height: calc(114 * var(--u));
-  background: linear-gradient(180deg, #2a2622 0%, #211d19 60%, #191612 100%);
+  left: 0; top: 0; width: 100%; height: calc(96 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.10) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(18 * var(--u))),
+    linear-gradient(180deg, #2a2622 0%, #241f1a 62%, #1d1914 100%);
+}
+.tableau--amis .plinthe {
+  left: 0; top: calc(96 * var(--u)); width: 100%; height: calc(5 * var(--u));
+  background: linear-gradient(180deg, #453b2c 0%, #2a2318 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.5);
 }
 .tableau--amis .sol {
-  left: 0; top: calc(114 * var(--u)); width: 100%; height: calc(30 * var(--u));
-  background: linear-gradient(180deg, #302a22 0%, #241f18 100%);
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.45);
+  left: 0; top: calc(101 * var(--u)); width: 100%; height: calc(43 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      #322b22 0 calc(11 * var(--u)), #2b251d calc(11 * var(--u)) calc(22 * var(--u))),
+    #2e281f;
 }
 
 /* LE JOUR QUI ENTRE PAR LE RIDEAU. Une bande claire au sol, côté
-   sortie : c'est la seule source de lumière naturelle de tout le jeu.
-   Décorative, jamais cliquable — le rideau, lui, est une cible. */
+   sortie : c'est la seule source de lumière naturelle de tout le jeu,
+   et c'est elle qui a décidé de l'éclairement des six sprites.
+   Décorative, jamais cliquable. */
 .tableau--amis .sol::after {
   content: ''; position: absolute;
   right: 0; top: 0; width: calc(74 * var(--u)); height: 100%;
@@ -49,54 +83,67 @@
 }
 
 /* ── LE MUR D'AFFICHES — x:4-52, y:6-38 ──────────────────────────────
-   Les onze photos d'elle sont rassemblées au même endroit du mur : le
-   `::after` les figure, et il s'éclaire quand Mark a parlé d'elle. */
+   Sprite `prop-affiches`. Quinze ans d'affiches en couches, et
+   par-dessus **trente photos punaisées à plat, dont ONZE portent son
+   visage** — comptables à l'écran, ce que le texte annonce depuis le
+   chantier 28 et qu'un dégradé ne pouvait pas tenir.
+
+   L'amas ne couvre pas le mur : « quelqu'un les a rassemblées au même
+   endroit », donc les affiches se voient autour. Le `::after` n'est plus
+   les photos (elles sont dans le sprite) — c'est le jour qui les
+   atteint quand Mark a parlé d'elle. */
 .tableau--amis .mur-affiches {
   left: calc(4 * var(--u)); top: calc(6 * var(--u));
-  width: calc(48 * var(--u)); height: calc(32 * var(--u));
-  background:
-    repeating-linear-gradient(72deg, #4a4136 0 calc(5 * var(--u)), #3c342b calc(5 * var(--u)) calc(11 * var(--u))),
-    #332c24;
-  border: calc(1 * var(--u)) solid #14110d;
+  width: calc(48 * var(--u));
 }
 .tableau--amis .mur-affiches::after {
   content: ''; position: absolute;
-  left: calc(6 * var(--u)); top: calc(8 * var(--u));
-  width: calc(20 * var(--u)); height: calc(16 * var(--u));
-  background: repeating-linear-gradient(90deg, #6e6250 0 calc(4 * var(--u)), #3c342b calc(4 * var(--u)) calc(6 * var(--u)));
-  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.5);
+  left: calc(4 * var(--u)); top: calc(8 * var(--u));
+  width: calc(29 * var(--u)); height: calc(19 * var(--u));
+  background: radial-gradient(ellipse at 50% 50%, rgba(226, 208, 160, .20), transparent 72%);
+  opacity: 0;
+  transition: opacity .5s ease;
 }
-.stage[data-etat~="local-ouvert"] .tableau--amis .mur-affiches::after {
-  background: repeating-linear-gradient(90deg, #a3927a 0 calc(4 * var(--u)), #4a4136 calc(4 * var(--u)) calc(6 * var(--u)));
-}
-
-/* ── LE COULOIR DE L'ÉQUIPE — x:62-152, y:30-46 ──────────────────────
-   Même geste qu'au tripot : les quatre entrent par le bas et se rangent
-   en file, du plus grand au plus petit, sur une bande que rien d'autre
-   n'occupe en x. */
-.tableau--amis .p-drakk    { width: calc(28 * var(--u)); left: calc(62 * var(--u));  top: calc(30 * var(--u)); }
-.tableau--amis .p-trash    { width: calc(20 * var(--u)); left: calc(92 * var(--u));  top: calc(34 * var(--u)); }
-.tableau--amis .p-rabbit   { width: calc(16 * var(--u)); left: calc(116 * var(--u)); top: calc(40 * var(--u)); }
-.tableau--amis .p-hercules { width: calc(14 * var(--u)); left: calc(138 * var(--u)); top: calc(44 * var(--u)); }
-
-/* ── LES QUATRE AMIS — dette d'art assumée ───────────────────────────
-   Une forme, pas un sprite. Les silhouettes debout partagent la même
-   base ; Psych, allongé, a la sienne. */
-.tableau--amis .ami {
-  border-radius: 34% 34% 18% 18% / 46% 46% 14% 14%;
+.stage[data-etat~="local-ouvert"] .tableau--amis .mur-affiches::after { opacity: 1; }
+.stage[data-etat~="nom-trouve"] .tableau--amis .mur-affiches {
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(140, 190, 210, .28);
 }
 
-/* NITA — y:46-96. Debout au mur, la seule qui soit venue pour faire
-   quelque chose. Sprite `prop-nita` (chantier 23), dérivé du corps
-   d'Iris. Hauteur et ligne de pieds conservées, largeur rendue aux
-   proportions de la figure (29 u au lieu de 22), `left` recentré.
-   Le fétiche d'ours reste au CSS : c'est un `::after` qui change de
-   côté quand elle se ferme, donc un ÉTAT, et un état n'entre pas dans
-   un sprite fixe. */
+/* ── LE COULOIR DE L'ÉQUIPE — x:62-152 ───────────────────────────────
+   Même geste qu'au tripot : les quatre entrent et se rangent en file,
+   du plus grand au plus petit, sur une bande que rien d'autre n'occupe
+   en x. Leurs pieds tombent maintenant sur le plancher (100-103) et non
+   plus au milieu du mur. */
+.tableau--amis .p-drakk    { width: calc(28 * var(--u)); left: calc(62 * var(--u));  top: calc(66 * var(--u)); }
+.tableau--amis .p-trash    { width: calc(20 * var(--u)); left: calc(92 * var(--u));  top: calc(72 * var(--u)); }
+.tableau--amis .p-rabbit   { width: calc(16 * var(--u)); left: calc(116 * var(--u)); top: calc(75 * var(--u)); }
+.tableau--amis .p-hercules { width: calc(14 * var(--u)); left: calc(138 * var(--u)); top: calc(83 * var(--u)); }
+
+/* Les ombres de contact (chantier 14) : le tableau n'en avait aucune,
+   faute de sol où les poser. */
+.tableau--amis .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.5), transparent 78%);
+  pointer-events: none;
+}
+.tableau--amis .ombre--drakk    { left: calc(64 * var(--u));  top: calc(99 * var(--u));  width: calc(24 * var(--u)); }
+.tableau--amis .ombre--trash    { left: calc(93 * var(--u));  top: calc(100 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--amis .ombre--rabbit   { left: calc(117 * var(--u)); top: calc(101 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--amis .ombre--hercules { left: calc(139 * var(--u)); top: calc(102 * var(--u)); width: calc(12 * var(--u)); }
+.tableau--amis .ombre--nita     { left: calc(9 * var(--u));   top: calc(106 * var(--u)); width: calc(19 * var(--u)); }
+.tableau--amis .ombre--nova     { left: calc(232 * var(--u)); top: calc(110 * var(--u)); width: calc(19 * var(--u)); }
+
+/* ── LES QUATRE AMIS ─────────────────────────────────────────────────
+   Sprites depuis le chantier 23, lot 7. */
+
+/* NITA — debout au mur, la seule qui soit venue pour faire quelque
+   chose. Le fétiche d'ours reste au CSS : c'est un `::after` qui change
+   de côté quand elle se ferme, donc un ÉTAT, et un état n'entre pas
+   dans un sprite fixe. */
 .tableau--amis .ami--nita {
-  left: calc(4 * var(--u)); top: calc(46 * var(--u));
+  left: calc(4 * var(--u)); top: calc(58 * var(--u));
   width: calc(29 * var(--u));
-  border-radius: 0;
 }
 .tableau--amis .ami--nita::after {
   content: ''; position: absolute;
@@ -108,15 +155,12 @@
 .stage[data-etat~="nita-ferme"] .tableau--amis .ami--nita { filter: saturate(.55) brightness(.86); }
 .stage[data-etat~="nita-ferme"] .tableau--amis .ami--nita::after { right: auto; left: calc(-2 * var(--u)); }
 
-/* MARK — y:50-100. Assis sur l'ampli. Sprite `prop-mark` (chantier 23) :
-   le seul du décor dont la POSE a dû être dessinée, parce que rien ne
-   passe devant lui — le torse vient de Renfield, les cuisses et les
-   tibias sont neufs. La pochette vide reste le carré pâle du `::after`,
-   parce qu'elle bouge quand il se ferme. */
+/* MARK — assis sur le second ampli. Le seul sprite du décor dont la
+   POSE a dû être dessinée, parce que rien ne passe devant lui. La
+   pochette vide reste un `::after` : elle remonte quand il se ferme. */
 .tableau--amis .ami--mark {
-  left: calc(172 * var(--u)); top: calc(50 * var(--u));
+  left: calc(172 * var(--u)); top: calc(60 * var(--u));
   width: calc(35 * var(--u));
-  border-radius: 0;
 }
 .tableau--amis .ami--mark::after {
   content: ''; position: absolute;
@@ -125,114 +169,85 @@
   background: #6d6252;
   box-shadow: inset 0 0 0 calc(1 * var(--u)) #2a241c;
 }
-/* Il la tient entre vous et lui : elle remonte, et il se désature. */
 .stage[data-etat~="mark-ferme"] .tableau--amis .ami--mark { filter: saturate(.5) brightness(.82); }
 .stage[data-etat~="mark-ferme"] .tableau--amis .ami--mark::after { top: calc(24 * var(--u)); }
 
-/* NOVA — y:46-96. Adossée au montant du rideau, entre l'équipe et la
-   rue. Sprite `prop-nova`, même dérivation que Nita. */
+/* NOVA — adossée au montant du rideau, entre l'équipe et la rue. C'est
+   elle qui est le plus près du jour : ses pieds tombent le plus bas. */
 .tableau--amis .ami--nova {
-  left: calc(227 * var(--u)); top: calc(46 * var(--u));
+  left: calc(227 * var(--u)); top: calc(62 * var(--u));
   width: calc(29 * var(--u));
-  border-radius: 0;
 }
 
-/* PSYCH — y:108-132. Allongé, donc large et bas, et au premier plan.
-   Sprite `prop-psych` : LE SEUL DU JEU QUI NE DÉRIVE DE RIEN. Aucun
-   corps n'est horizontal, et une carte couchée ne se fabrique pas en
-   tournant une carte debout. Sa géométrie ne bouge pas d'une unité —
-   la boîte fait 52 × 24 u (rapport 0,46) et la carte 104 × 48 (0,46). */
+/* PSYCH — allongé, donc large et bas, et au premier plan. LE SEUL
+   SPRITE DU JEU QUI NE DÉRIVE DE RIEN. La boîte fait 52 × 24 u
+   (rapport 0,46) et la carte 104 × 48 (0,46). */
 .tableau--amis .ami--psych {
-  left: calc(180 * var(--u)); top: calc(108 * var(--u));
+  left: calc(180 * var(--u)); top: calc(118 * var(--u));
   width: calc(52 * var(--u));
-  border-radius: 0;
 }
 .stage[data-etat~="local-ouvert"] .tableau--amis .ami--psych { filter: brightness(1.08); }
 
-/* ── LES BACS À VINYLES — x:4-46, y:104-132 ──────────────────────────
-   Six bacs, classés, avec des intercalaires. Quelqu'un les range. */
+/* ── LES BACS À VINYLES — x:4-46, y:106-134 ──────────────────────────
+   Sprite `prop-bacs`. SIX bacs qui se comptent, et des intercalaires
+   pâles qui dépassent des disques : c'est la seule chose qui dise que
+   quelqu'un s'en occupe encore, et le texte le dit deux fois. */
 .tableau--amis .bacs-vinyles {
-  left: calc(4 * var(--u)); top: calc(104 * var(--u));
-  width: calc(42 * var(--u)); height: calc(28 * var(--u));
-  background:
-    repeating-linear-gradient(90deg, #2e2a22 0 calc(6 * var(--u)), #221e18 calc(6 * var(--u)) calc(7 * var(--u))),
-    #3a332a;
-  border: calc(1 * var(--u)) solid #12100c;
-  box-shadow: inset 0 calc(2 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.5);
+  left: calc(4 * var(--u)); top: calc(106 * var(--u));
+  width: calc(42 * var(--u));
 }
 
-/* ── LE PIED DE MICRO — x:160-176, y:44-100 ──────────────────────────
-   Une cible qui ne rend aucune fiche, et sans laquelle rien ne pèse.
-   Le gaffer à hauteur de main est le trait pâle. */
+/* ── LE PIED DE MICRO — x:160-176, y:60-116 ──────────────────────────
+   Sprite `prop-micro`. Une cible qui ne rend aucune fiche, et sans
+   laquelle rien ne pèse. LE CÂBLE EST LA MOITIÉ DU SUJET : un pied sans
+   câble est du matériel rangé ; avec son câble encore branché qui
+   traîne par terre, c'est quelqu'un qui va revenir. Le gaffer à hauteur
+   de main et la hauteur au feutre sont dans le sprite, eux aussi. */
 .tableau--amis .pied-micro {
-  left: calc(160 * var(--u)); top: calc(44 * var(--u));
-  width: calc(16 * var(--u)); height: calc(56 * var(--u));
-  background:
-    linear-gradient(90deg, transparent 0 calc(7 * var(--u)), #6a6258 calc(7 * var(--u)) calc(9 * var(--u)), transparent calc(9 * var(--u)) 100%);
-}
-/* La tête du micro. */
-.tableau--amis .pied-micro::before {
-  content: ''; position: absolute;
-  left: calc(5 * var(--u)); top: 0;
-  width: calc(6 * var(--u)); height: calc(9 * var(--u));
-  border-radius: 45% 45% 30% 30%;
-  background: linear-gradient(180deg, #8e857a 0%, #4a443c 100%);
-}
-/* Le gaffer, et la hauteur notée au feutre. */
-.tableau--amis .pied-micro::after {
-  content: ''; position: absolute;
-  left: calc(5 * var(--u)); top: calc(28 * var(--u));
-  width: calc(6 * var(--u)); height: calc(3 * var(--u));
-  background: #b9ae8e;
+  left: calc(160 * var(--u)); top: calc(60 * var(--u));
+  width: calc(16 * var(--u));
 }
 
 /* ── LE MOBILIER, SANS CIBLE ─────────────────────────────────────────
    Batterie, amplis, comptoir : du décor, donc libre de recouvrir. */
 .tableau--amis .batterie {
-  left: calc(60 * var(--u)); top: calc(98 * var(--u));
-  width: calc(32 * var(--u)); height: calc(22 * var(--u));
-  border-radius: 50% 50% 12% 12% / 40% 40% 10% 10%;
-  background: linear-gradient(180deg, #4a3c2c 0%, #2a2118 100%);
-  border: calc(1 * var(--u)) solid #14110c;
+  left: calc(60 * var(--u)); top: calc(104 * var(--u));
+  width: calc(32 * var(--u));
 }
-.tableau--amis .ampli {
-  background: linear-gradient(180deg, #33302a 0%, #1c1a16 100%);
-  border: calc(1 * var(--u)) solid #100e0b;
-  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(120, 110, 90, .12);
-}
-.tableau--amis .ampli--sol  { left: calc(96 * var(--u));  top: calc(100 * var(--u)); width: calc(28 * var(--u)); height: calc(18 * var(--u)); }
-.tableau--amis .ampli--mark { left: calc(176 * var(--u)); top: calc(86 * var(--u));  width: calc(26 * var(--u)); height: calc(20 * var(--u)); }
+.tableau--amis .ampli--sol  { left: calc(96 * var(--u));  top: calc(106 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--amis .ampli--mark { left: calc(176 * var(--u)); top: calc(102 * var(--u)); width: calc(28 * var(--u)); }
 .tableau--amis .comptoir {
-  left: calc(204 * var(--u)); top: calc(76 * var(--u));
-  width: calc(28 * var(--u)); height: calc(22 * var(--u));
-  background: linear-gradient(180deg, #463c2c 0%, #241d14 100%);
-  border: calc(1 * var(--u)) solid #12100b;
+  left: calc(204 * var(--u)); top: calc(96 * var(--u));
+  width: calc(28 * var(--u)); height: calc(24 * var(--u));
+  background: linear-gradient(180deg, #56492f 0%, #3a2f1e 22%, #241d14 100%);
+  border-top: calc(1 * var(--u)) solid #7a6642;
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.45);
 }
 
-/* ── LA CARTE DE VISITE — x:208-228, y:78-86 ─────────────────────────
-   Posée FACE EN L'AIR sur le comptoir, et c'est la moitié du propos :
-   on laisse une carte à l'endroit où on posait la monnaie. Lue, elle
-   cesse d'être un rectangle blanc et devient une signature. */
+/* ── LA CARTE DE VISITE — x:208-228, y:98-106 ────────────────────────
+   Sprite `prop-carte-tir`. Posée FACE EN L'AIR sur le comptoir, et
+   c'est la moitié du propos : on laisse une carte à l'endroit où on
+   posait la monnaie. **Deux lignes imprimées et rien d'autre** — pas de
+   société, pas de fonction, pas d'adresse : c'est ce vide-là qui en
+   fait une signature. Elle est à vingt unités du rideau, donc l'objet
+   le plus éclairé du tableau. */
 .tableau--amis .carte-tir {
-  left: calc(208 * var(--u)); top: calc(78 * var(--u));
-  width: calc(20 * var(--u)); height: calc(8 * var(--u));
-  background: #cdc6b4;
-  box-shadow: 0 calc(1 * var(--u)) 0 rgba(0,0,0,.45);
+  left: calc(208 * var(--u)); top: calc(98 * var(--u));
+  width: calc(20 * var(--u));
 }
 .stage[data-etat~="carte-vue"] .tableau--amis .carte-tir {
-  background: #e2dcc8;
-  box-shadow: 0 calc(1 * var(--u)) 0 rgba(0,0,0,.45), 0 0 0 calc(1 * var(--u)) rgba(140, 190, 210, .5);
+  box-shadow: 0 0 0 calc(1 * var(--u)) rgba(140, 190, 210, .5);
 }
 
-/* ── LE RIDEAU DE FER — x:236-254, y:104-140, la sortie ──────────────
+/* ── LE RIDEAU DE FER — x:236-254, y:100-140, la sortie ──────────────
    Bloqué à mi-hauteur : les lames en haut, le jour en bas. Le nom de
    classe évite `.rideau`, déjà pris par le rideau final du jeu
    (`engine.css`, z-index 70). */
 .tableau--amis .grille-fer {
-  left: calc(236 * var(--u)); top: calc(104 * var(--u));
-  width: calc(18 * var(--u)); height: calc(36 * var(--u));
+  left: calc(236 * var(--u)); top: calc(100 * var(--u));
+  width: calc(18 * var(--u)); height: calc(40 * var(--u));
   background:
-    repeating-linear-gradient(180deg, #4c4740 0 calc(2 * var(--u)), #33302a calc(2 * var(--u)) calc(4 * var(--u))) 0 0 / 100% calc(14 * var(--u)) no-repeat,
+    repeating-linear-gradient(180deg, #4c4740 0 calc(2 * var(--u)), #33302a calc(2 * var(--u)) calc(4 * var(--u))) 0 0 / 100% calc(16 * var(--u)) no-repeat,
     linear-gradient(180deg, rgba(226, 214, 176, .55) 0%, rgba(226, 214, 176, .18) 100%);
   border-left: calc(1 * var(--u)) solid #14120e;
 }
@@ -245,6 +260,5 @@
    `derive()` pose un palier sur trois. Rien de spectaculaire : la pièce
    s'éclaire d'un cran à mesure que quelqu'un accepte de parler, ce qui
    est aussi ce qui se passe pour de vrai. */
-.stage[data-etat~="local-muet"]       .tableau--amis .fond { filter: brightness(.92) saturate(.9); }
-.stage[data-etat~="local-ouvert"]     .tableau--amis .fond { filter: brightness(1.06); }
-.stage[data-etat~="nom-trouve"]       .tableau--amis .mur-affiches { border-color: #4a4136; }
+.stage[data-etat~="local-muet"]   .tableau--amis .fond { filter: brightness(.92) saturate(.9); }
+.stage[data-etat~="local-ouvert"] .tableau--amis .fond { filter: brightness(1.06); }

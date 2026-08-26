@@ -4,11 +4,16 @@
   premier tableau de l'ACTE IV, et le premier du jeu qui ne se joue pas
   la nuit du contrat.
 
-  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
-  `herwick.html`, `sarah.html`, `duke.html`, `squat.html` et
-  `tripot.html`. Mark, Psych, Nova et Nita n'ont pas de sprite : quatre
-  formes simples, pas de `sprite--*`, jusqu'à ce que l'atelier leur en
-  dessine un. Dette d'art assumée, notée dans `PLAN_EXECUTION.md`.
+  PASSE D'ART FAITE (chantier 23, 2ᵉ décor) : les quatre habitants ont
+  leur sprite depuis le lot 7, et le décor a le sien depuis ce lot — le
+  mur d'affiches et ses trente photos dont onze d'elle, les six bacs,
+  le pied de micro avec son câble, la batterie et son pied de caisse
+  claire VIDE, l'ampli, la carte de visite à deux lignes.
+
+  ET LE SOL EN EST UN, MAINTENANT : trois bandes au lieu de deux (mur,
+  plinthe, plancher), et des lignes de pieds vraies. Avant ce lot,
+  personne dans ce tableau ne touchait le sol — les pieds de Nita
+  s'arrêtaient dix-huit unités au-dessus de la ligne.
 
   PAS DE LESTER DANS CE DÉCOR, et c'est le fait de mise en scène du
   tableau : il est à McNeil, et l'équipe travaille pour lui sans l'avoir
@@ -33,38 +38,50 @@
 <div class="tableau tableau--amis">
 
   <div class="fond"></div>
+  <div class="plinthe"></div>
   <div class="sol"></div>
+
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--hercules"></div>
 
   <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
   <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
   <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
   <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
 
-  <!-- Le mur d'affiches, et les onze photos d'elle. -->
-  <div class="mur-affiches" data-hotspot="mur"></div>
+  <!-- Le mur d'affiches : quinze ans de couches, et par-dessus trente
+       photos punaisées à plat dont ONZE portent son visage. -->
+  <div class="mur-affiches sprite--prop-affiches" data-hotspot="mur"></div>
 
   <!-- NITA, debout près du mur, sa pile de tracts sous le bras. -->
+  <div class="ombre ombre--nita"></div>
   <div class="ami ami--nita sprite--prop-nita" data-hotspot="nita"></div>
 
-  <!-- Les bacs à vinyles — ce qui reste du magasin. -->
-  <div class="bacs-vinyles" data-hotspot="bacs"></div>
+  <!-- Les bacs à vinyles — ce qui reste du magasin. SIX, comptables,
+       avec leurs intercalaires écrits à la main. -->
+  <div class="bacs-vinyles sprite--prop-bacs" data-hotspot="bacs"></div>
 
-  <!-- Décor : la batterie sans caisse claire, et l'ampli posé au sol. -->
-  <div class="batterie"></div>
-  <div class="ampli ampli--sol"></div>
+  <!-- Décor : la batterie — et son pied de caisse claire resté vide —
+       puis l'ampli posé au sol. -->
+  <div class="batterie sprite--prop-batterie"></div>
+  <div class="ampli ampli--sol sprite--prop-ampli"></div>
 
   <!-- Le micro d'elle, encore sur son pied, encore branché. -->
-  <div class="pied-micro" data-hotspot="micro"></div>
+  <div class="pied-micro sprite--prop-micro" data-hotspot="micro"></div>
 
   <!-- MARK, assis sur le second ampli, la pochette vide entre les mains. -->
-  <div class="ampli ampli--mark"></div>
+  <div class="ampli ampli--mark sprite--prop-ampli"></div>
   <div class="ami ami--mark sprite--prop-mark" data-hotspot="mark"></div>
 
-  <!-- Le comptoir de l'ancien magasin — décor — et ce qu'on y a laissé. -->
+  <!-- Le comptoir de l'ancien magasin — décor — et ce qu'on y a laissé :
+       un nom qui n'est pas un nom, un code de comm, et rien d'autre. -->
   <div class="comptoir"></div>
-  <div class="carte-tir" data-hotspot="carte"></div>
+  <div class="carte-tir sprite--prop-carte-tir" data-hotspot="carte"></div>
 
   <!-- NOVA, adossée au montant du rideau, entre vous et la rue. -->
+  <div class="ombre ombre--nova"></div>
   <div class="ami ami--nova sprite--prop-nova" data-hotspot="nova"></div>
 
   <!-- PSYCH, allongé entre les amplis, au premier plan. -->
