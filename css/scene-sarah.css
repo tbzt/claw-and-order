@@ -30,13 +30,30 @@
 .tableau--sarah > * { position: absolute; }
 
 .tableau--sarah .fond {
-  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
-  background: linear-gradient(180deg, #26332b 0%, #1c2620 60%, #141c18 100%);
+  left: 0; top: 0; width: 100%; height: calc(104 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.06) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(24 * var(--u))),
+    linear-gradient(180deg, #2c3430 0%, #232a27 60%, #1b211e 100%);
+}
+.tableau--sarah .plinthe {
+  left: 0; top: calc(104 * var(--u)); width: 100%; height: calc(4 * var(--u));
+  background: linear-gradient(180deg, #46514a 0%, #232a26 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.45);
 }
 .tableau--sarah .sol {
-  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
-  background: repeating-linear-gradient(90deg, #33403a 0 calc(16 * var(--u)), #2c3832 calc(16 * var(--u)) calc(32 * var(--u)));
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+  left: 0; top: calc(108 * var(--u)); width: 100%; height: calc(36 * var(--u));
+  background: repeating-linear-gradient(90deg, #333c37 0 calc(18 * var(--u)), #2c3531 calc(18 * var(--u)) calc(36 * var(--u)));
+}
+
+/* LE NÉON DE COULOIR — la seule source, et elle est franche et froide :
+   un cabinet de quartier à six heures du matin n'a pas d'autre lumière
+   qu'un tube au plafond, et c'est ce qui rend les cernes de Sarah
+   visibles depuis l'autre bout de la pièce. */
+.tableau--sarah .neon {
+  left: 0; top: 0; width: 100%; height: calc(90 * var(--u));
+  background: linear-gradient(180deg, rgba(206, 226, 220, .10), transparent 72%);
+  pointer-events: none;
 }
 
 /* La cloison basse qui sépare les deux pièces — x:118-122, décor pur,
@@ -57,25 +74,45 @@
   background: rgba(150, 190, 175, .14);
   border: calc(1 * var(--u)) solid #14201a;
 }
-.tableau--sarah .chaise {
-  top: calc(92 * var(--u)); width: calc(14 * var(--u)); height: calc(16 * var(--u));
-  background: linear-gradient(180deg, #4a5a4e 0%, #2c3832 100%);
-  border: calc(1 * var(--u)) solid #14201a;
-  border-radius: 2px;
+/* ── LES TROIS CHAISES DÉPAREILLÉES — sprite `prop-chaises` ──────────
+   « Trois personnes attendent sur des chaises DÉPAREILLÉES. » Une seule
+   carte pour les trois, parce qu'elles doivent différer : trois assises
+   à trois hauteurs, un tube d'acier, un fauteuil de bureau au skaï
+   fendu, une chaise de cuisine en bois. C'est la seule carte du lot où
+   la répétition est INTERDITE — au tripot, deux tableaux plus loin,
+   elle est obligatoire, et pour la même raison : le texte le dit. */
+.tableau--sarah .chaises {
+  left: calc(8 * var(--u)); top: calc(88 * var(--u));
+  width: calc(68 * var(--u));
 }
-.tableau--sarah .chaise--1 { left: calc(12 * var(--u)); }
-.tableau--sarah .chaise--2 { left: calc(34 * var(--u)); }
-.tableau--sarah .chaise--3 { left: calc(56 * var(--u)); }
 
+/* ── LES TROIS QUI ATTENDENT — sprite `prop-anonyme-assis` ───────────
+   ⚠️ ELLES ÉTAIENT ENCORE DES LOSANGES. Le lot 7 avait refermé « la
+   dette des corps de PNJ » en balayant les règles `.pnj` ; celles-ci
+   s'appellent `.patient`, et le balayage les a manquées. Un balayage ne
+   vaut que ce que vaut son motif.
+
+   Elles portent toutes la même carte, en gris de silhouette : personne
+   dans cette salle ne sait qui sont les autres, et le texte le dit
+   (« aucune des trois ne sait qui vous êtes »). */
 .tableau--sarah .patient {
-  top: calc(76 * var(--u)); width: calc(12 * var(--u)); height: calc(18 * var(--u));
-  border-radius: 40% 40% 25% 25% / 55% 55% 20% 20%;
-  background: radial-gradient(65% 80% at 50% 40%, #9aa89e 0%, #6b7a70 45%, #3c4640 80%, transparent 100%);
-  opacity: .85;
+  top: calc(80 * var(--u)); width: calc(15 * var(--u));
 }
 .tableau--sarah .patient--1 { left: calc(13 * var(--u)); }
 .tableau--sarah .patient--2 { left: calc(35 * var(--u)); }
-.tableau--sarah .patient--3 { left: calc(57 * var(--u)); }
+.tableau--sarah .patient--3 { left: calc(57 * var(--u)); transform: scaleX(-1); }
+
+/* ── LA PENDULE QUE PERSONNE D'AUTRE NE REGARDE — x:80-92 ────────────
+   Sprite `prop-pendule`. « L'une d'elles patiente depuis quatre heures,
+   et elle le sait précisément — elle regarde une horloge que personne
+   d'autre ne regarde. » Elle est donc LISIBLE : cadran d'hôpital, et
+   SIX HEURES DIX, l'heure vraie du tableau. C'est la deuxième horloge
+   juste du jeu, après celle du bar à 23 h 04, et pour la même raison —
+   le joueur qui la lit doit lire ce que le narrateur lui a dit. */
+.tableau--sarah .pendule {
+  left: calc(80 * var(--u)); top: calc(14 * var(--u));
+  width: calc(12 * var(--u));
+}
 
 .tableau--sarah .salle-attente {
   left: calc(8 * var(--u)); top: calc(70 * var(--u));
@@ -91,20 +128,23 @@
    Remontées jusqu'à ce que les quatre boîtes finissent strictement
    au-dessus de `y:86` (le haut de `lester`) et `y:88` (le haut de
    `table`), vérifié par un test d'overlap pair à pair, pas par calcul. */
-.tableau--sarah .p-drakk    { width: calc(30 * var(--u)); left: calc(96 * var(--u));  top: calc(40 * var(--u)); }
-.tableau--sarah .p-trash    { width: calc(24 * var(--u)); left: calc(130 * var(--u)); top: calc(38 * var(--u)); }
-.tableau--sarah .p-rabbit   { width: calc(18 * var(--u)); left: calc(158 * var(--u)); top: calc(46 * var(--u)); }
-.tableau--sarah .p-hercules { width: calc(16 * var(--u)); left: calc(180 * var(--u)); top: calc(54 * var(--u)); }
+.tableau--sarah .p-drakk    { width: calc(30 * var(--u)); left: calc(96 * var(--u));  top: calc(85 * var(--u)); }
+.tableau--sarah .p-trash    { width: calc(24 * var(--u)); left: calc(158 * var(--u)); top: calc(87 * var(--u)); }
+.tableau--sarah .p-rabbit   { width: calc(18 * var(--u)); left: calc(184 * var(--u)); top: calc(92 * var(--u)); }
+.tableau--sarah .p-hercules { width: calc(16 * var(--u)); left: calc(204 * var(--u)); top: calc(101 * var(--u)); }
 
 /* Lester, près de la porte du cabinet — entre le couloir de l'équipe et
    la salle d'attente, mais hors des deux boîtes. */
-.tableau--sarah .p-lester { left: calc(94 * var(--u)); top: calc(86 * var(--u)); width: calc(22 * var(--u)); }
+.tableau--sarah .p-lester { left: calc(80 * var(--u)); top: calc(87 * var(--u)); width: calc(22 * var(--u)); }
 
 /* ── LE CABINET — x:184-256 ──────────────────────────────────────────── */
+/* Sprite `prop-autoclave`. « Un modèle qu'on ne fabrique plus,
+   entretenu à la main » : ce qui dit « réparé » n'est pas la rouille,
+   c'est LA PIÈCE DE RECHANGE QUI N'EST PAS DE LA MÊME COULEUR — un
+   tuyau de laiton sur un corps émaillé. */
 .tableau--sarah .autoclave {
   left: calc(188 * var(--u)); top: calc(14 * var(--u));
-  width: calc(16 * var(--u)); height: calc(26 * var(--u));
-  background: #3a463f; border: calc(1 * var(--u)) solid #14201a; border-radius: 2px;
+  width: calc(16 * var(--u));
 }
 
 .tableau--sarah .table-examen {
@@ -132,7 +172,7 @@
    d'Iris fait 48 × 82 px, soit 1,71. Le seul des losanges dont les
    proportions étaient déjà celles d'une figure. */
 .tableau--sarah .sarah {
-  left: calc(216 * var(--u)); top: calc(50 * var(--u));
+  left: calc(232 * var(--u)); top: calc(72 * var(--u));
   width: calc(20 * var(--u));
 }
 
@@ -142,3 +182,17 @@
   background: #2c3832;
   border-top: calc(1 * var(--u)) solid #4a5a4e;
 }
+
+/* Les ombres de contact (chantier 14) : ce tableau n'en avait aucune,
+   faute de sol où les poser. */
+.tableau--sarah .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.42), transparent 78%);
+  pointer-events: none;
+}
+.tableau--sarah .ombre--drakk    { left: calc(126 * var(--u)); top: calc(112 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--sarah .ombre--trash    { left: calc(159 * var(--u)); top: calc(113 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--sarah .ombre--rabbit   { left: calc(185 * var(--u)); top: calc(114 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--sarah .ombre--hercules { left: calc(205 * var(--u)); top: calc(113 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--sarah .ombre--sarah    { left: calc(233 * var(--u)); top: calc(110 * var(--u)); width: calc(18 * var(--u)); }

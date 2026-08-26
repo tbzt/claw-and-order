@@ -23,13 +23,20 @@
 .tableau--squat > * { position: absolute; }
 
 .tableau--squat .fond {
-  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
-  background: linear-gradient(180deg, #241f18 0%, #1a1712 55%, #120f0a 100%);
+  left: 0; top: 0; width: 100%; height: calc(104 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.08) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(19 * var(--u))),
+    linear-gradient(180deg, #2a2418 0%, #201b12 60%, #17130c 100%);
+}
+.tableau--squat .plinthe {
+  left: 0; top: calc(104 * var(--u)); width: 100%; height: calc(4 * var(--u));
+  background: linear-gradient(180deg, #45391f 0%, #221c10 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.5);
 }
 .tableau--squat .sol {
-  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
-  background: repeating-linear-gradient(90deg, #2c2620 0 calc(18 * var(--u)), #26211b calc(18 * var(--u)) calc(36 * var(--u)));
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+  left: 0; top: calc(108 * var(--u)); width: 100%; height: calc(36 * var(--u));
+  background: repeating-linear-gradient(90deg, #332a1c 0 calc(14 * var(--u)), #2c2417 calc(14 * var(--u)) calc(28 * var(--u)));
 }
 
 /* ── LA TRAPPE DE TOIT — x:8-38, y:4-30, le seul accès ────────────────── */
@@ -79,18 +86,23 @@
 }
 
 /* ── LE COULOIR DE L'ÉQUIPE — x:60-156, y:36-73 ──────────────────────── */
-.tableau--squat .p-trash    { width: calc(22 * var(--u)); left: calc(60 * var(--u));  top: calc(40 * var(--u)); }
-.tableau--squat .p-drakk    { width: calc(28 * var(--u)); left: calc(90 * var(--u));  top: calc(36 * var(--u)); }
-.tableau--squat .p-rabbit   { width: calc(16 * var(--u)); left: calc(122 * var(--u)); top: calc(46 * var(--u)); }
-.tableau--squat .p-hercules { width: calc(14 * var(--u)); left: calc(142 * var(--u)); top: calc(48 * var(--u)); }
+.tableau--squat .p-trash    { width: calc(22 * var(--u)); left: calc(60 * var(--u));  top: calc(90 * var(--u)); }
+.tableau--squat .p-drakk    { width: calc(28 * var(--u)); left: calc(90 * var(--u));  top: calc(88 * var(--u)); }
+.tableau--squat .p-rabbit   { width: calc(16 * var(--u)); left: calc(122 * var(--u)); top: calc(96 * var(--u)); }
+.tableau--squat .p-hercules { width: calc(14 * var(--u)); left: calc(142 * var(--u)); top: calc(104 * var(--u)); }
 
 /* ── L'AUTEL — x:98-136, y:102-140, le métier à tisser transformé ────── */
+/* Sprite `prop-autel`. « Un métier à tisser MUET, couvert de babioles
+   volées avec soin : une pièce de monnaie pliée en deux, trois clés qui
+   n'ouvrent plus rien, une dent de quelque chose. Rien n'est cher.
+   TOUT EST CHOISI. » Trois objets nommés, trois objets dessinés, et pas
+   un de plus : un autel encombré dirait « accumulation », et le vide
+   entre eux fait autant que les objets. Le métier est muet, donc ses
+   fils sont tendus et NUS — un ouvrage en cours dirait qu'on s'en sert
+   encore. */
 .tableau--squat .autel-metier {
-  left: calc(98 * var(--u)); top: calc(102 * var(--u));
-  width: calc(38 * var(--u)); height: calc(38 * var(--u));
-  background: linear-gradient(180deg, #4a3c24 0%, #2a2214 100%);
-  border: calc(1 * var(--u)) solid #16110a;
-  border-radius: 2px;
+  left: calc(98 * var(--u)); top: calc(64 * var(--u));
+  width: calc(38 * var(--u));
 }
 
 /* ── LA MALLE — x:142-184, y:100-118, où se lit le dossier ────────────── */
@@ -103,12 +115,15 @@
 }
 
 /* ── LE MIROIR — x:192-224, y:8-40, décor mural ───────────────────────── */
+/* Sprite `prop-miroir`. « Le tain s'écaille EN DENTELLE sur les bords,
+   mais LE CADRE EST DORÉ À LA FEUILLE, et personne n'a jamais retiré la
+   feuille pour la revendre. » Deux états dans un seul objet, et c'est
+   tout le personnage de Trash : la glace est fichue, l'or est intact.
+   Les écailles mordent depuis les bords par taches irrégulières —
+   jamais un grand aplat propre, qui dirait « cassé » et non « usé ». */
 .tableau--squat .miroir-cadre {
   left: calc(192 * var(--u)); top: calc(8 * var(--u));
-  width: calc(24 * var(--u)); height: calc(32 * var(--u));
-  background: radial-gradient(60% 70% at 50% 40%, #8a8060 0%, #4a4230 60%, #2a2418 100%);
-  border: calc(2 * var(--u)) solid #6a5828;
-  border-radius: 45% 45% 15% 15% / 55% 55% 10% 10%;
+  width: calc(24 * var(--u));
 }
 
 /* ── LE FAUTEUIL ÉVENTRÉ — x:188-226, y:88-114 ───────────────────────── */
@@ -121,7 +136,7 @@
 }
 
 /* Lester, à côté du fauteuil qu'il n'ose pas remplir tout à fait. */
-.tableau--squat .p-lester { left: calc(232 * var(--u)); top: calc(74 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--squat .p-lester { left: calc(232 * var(--u)); top: calc(90 * var(--u)); width: calc(20 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
 .stage[data-etat~="lester-ferme"]  .tableau--squat .p-lester { filter: saturate(.6) brightness(.85); }
@@ -138,3 +153,17 @@
 .stage[data-etat~="loge-brulee"] .tableau--squat .trappe-sortie {
   box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(150, 40, 40, .3);
 }
+
+/* Les ombres de contact (chantier 14) — et elles sont plus dures ici
+   qu'ailleurs : trois lampes nues suspendues au-dessus d'une pièce
+   basse ne diffusent rien du tout. */
+.tableau--squat .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.6), transparent 76%);
+  pointer-events: none;
+}
+.tableau--squat .ombre--drakk    { left: calc(50 * var(--u));  top: calc(110 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--squat .ombre--trash    { left: calc(80 * var(--u));  top: calc(111 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--squat .ombre--rabbit   { left: calc(112 * var(--u)); top: calc(112 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--squat .ombre--hercules { left: calc(143 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }

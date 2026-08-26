@@ -20,13 +20,30 @@
 .tableau--duke > * { position: absolute; }
 
 .tableau--duke .fond {
-  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
-  background: linear-gradient(180deg, #1e2024 0%, #17181c 60%, #101114 100%);
+  left: 0; top: 0; width: 100%; height: calc(104 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.10) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(26 * var(--u))),
+    linear-gradient(180deg, #24262c 0%, #1c1e23 60%, #15171b 100%);
+}
+.tableau--duke .plinthe {
+  left: 0; top: calc(104 * var(--u)); width: 100%; height: calc(4 * var(--u));
+  background: linear-gradient(180deg, #3a3d44 0%, #1b1d21 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.5);
 }
 .tableau--duke .sol {
-  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
-  background: repeating-linear-gradient(90deg, #26282c 0 calc(16 * var(--u)), #202226 calc(16 * var(--u)) calc(32 * var(--u)));
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+  left: 0; top: calc(108 * var(--u)); width: 100%; height: calc(36 * var(--u));
+  background: repeating-linear-gradient(90deg, #2a2c31 0 calc(20 * var(--u)), #24262b calc(20 * var(--u)) calc(40 * var(--u)));
+}
+
+/* LA LUEUR DES MONITEURS — la seule source d'un sous-sol sans fenêtre,
+   et elle est VERTE : quatre écrans braqués sur le même escalier
+   éclairent la pièce plus qu'ils ne la surveillent. */
+.tableau--duke .lueur-ecrans {
+  left: calc(120 * var(--u)); top: 0;
+  width: calc(120 * var(--u)); height: calc(110 * var(--u));
+  background: radial-gradient(ellipse at 30% 16%, rgba(120, 200, 160, .10), transparent 68%);
+  pointer-events: none;
 }
 
 /* ── L'ESCALIER — x:6-40, le seul chemin d'entrée ────────────────────── */
@@ -43,13 +60,16 @@
 /* Les gangers et le matelas — décor pur, sous l'escalier, jamais des
    cibles (une seule personne compte mécaniquement, désignée par le
    texte, pas par un sprite à part). */
+/* ── LES TROIS GANGERS — sprite `prop-anonyme` ───────────────────────
+   ⚠️ ILS ÉTAIENT ENCORE DES LOSANGES : le balayage du lot 7 cherchait
+   les règles `.pnj`, et celles-ci s'appellent `.ganger`. Ils portent
+   tous la même carte, en gris de silhouette — ce sont les hommes de
+   Duke, pas des personnages, et le texte ne leur donne pas un mot. */
 .tableau--duke .ganger {
-  top: calc(84 * var(--u)); width: calc(14 * var(--u)); height: calc(24 * var(--u));
-  border-radius: 30% 30% 20% 20% / 40% 40% 15% 15%;
-  background: radial-gradient(65% 80% at 50% 35%, #6a6e74 0%, #45484e 45%, #24262a 80%, transparent 100%);
+  top: calc(84 * var(--u)); width: calc(15 * var(--u));
 }
 .tableau--duke .ganger--1 { left: calc(6 * var(--u)); }
-.tableau--duke .ganger--2 { left: calc(22 * var(--u)); }
+.tableau--duke .ganger--2 { left: calc(22 * var(--u)); transform: scaleX(-1); }
 .tableau--duke .ganger--3 { left: calc(38 * var(--u)); }
 .tableau--duke .matelas {
   left: calc(4 * var(--u)); top: calc(108 * var(--u));
@@ -61,23 +81,33 @@
 .stage[data-etat~="ganger-touche"] .tableau--duke .ganger--3 { display: none; }
 
 /* ── LE COULOIR DE L'ÉQUIPE — x:52-144 ───────────────────────────────── */
-.tableau--duke .p-drakk    { width: calc(28 * var(--u)); left: calc(52 * var(--u));  top: calc(38 * var(--u)); }
-.tableau--duke .p-trash    { width: calc(22 * var(--u)); left: calc(84 * var(--u));  top: calc(40 * var(--u)); }
-.tableau--duke .p-rabbit   { width: calc(16 * var(--u)); left: calc(110 * var(--u)); top: calc(46 * var(--u)); }
-.tableau--duke .p-hercules { width: calc(14 * var(--u)); left: calc(130 * var(--u)); top: calc(50 * var(--u)); }
+.tableau--duke .p-drakk    { width: calc(28 * var(--u)); left: calc(52 * var(--u));  top: calc(88 * var(--u)); }
+.tableau--duke .p-trash    { width: calc(22 * var(--u)); left: calc(84 * var(--u));  top: calc(90 * var(--u)); }
+.tableau--duke .p-rabbit   { width: calc(16 * var(--u)); left: calc(110 * var(--u)); top: calc(96 * var(--u)); }
+.tableau--duke .p-hercules { width: calc(14 * var(--u)); left: calc(130 * var(--u)); top: calc(104 * var(--u)); }
 
 /* ── LE MUR DU FOND — armurerie et moniteurs, y:6-34 ─────────────────── */
+/* Sprite `prop-ratelier`. « PLUS DE FUSILS QUE DE PERSONNES DANS LA
+   PIÈCE » est un compte, et il se vérifie à l'écran : il y a neuf
+   personnes ici quand l'équipe arrive — quatre runners, Lester, Duke,
+   trois gangers — donc le râtelier en porte DIX. « Aucun décoratif » se
+   dessine par l'absence d'ornement et par une chose : ils sont tous
+   rangés de la même façon, bretelle enroulée pareil. C'est un homme qui
+   les range, pas une collection. */
 .tableau--duke .rateliers {
   left: calc(98 * var(--u)); top: calc(6 * var(--u));
-  width: calc(32 * var(--u)); height: calc(26 * var(--u));
-  background: linear-gradient(180deg, #3a3c40 0%, #24262a 100%);
-  border: calc(1 * var(--u)) solid #0e0f11;
+  width: calc(32 * var(--u));
 }
+/* Sprite `prop-moniteurs`. « Quatre écrans, tous braqués sur
+   l'escalier, sous des angles légèrement différents. AUCUN NE MONTRE
+   AUTRE CHOSE. » La répétition EST le sujet : quatre fois le même
+   escalier, décalé d'un ou deux pixels d'un écran à l'autre. Quatre
+   vues différentes du bâtiment seraient la lecture d'un homme prudent ;
+   celle-ci est la lecture d'un homme qui n'a peur que d'une seule
+   chose. */
 .tableau--duke .moniteurs-mur {
   left: calc(142 * var(--u)); top: calc(6 * var(--u));
-  width: calc(30 * var(--u)); height: calc(22 * var(--u));
-  background: #0c0d0f;
-  border: calc(1 * var(--u)) solid #34363a;
+  width: calc(30 * var(--u));
 }
 
 /* ── LA CAISSE DE MUNITIONS — x:110-160, où se lit le dossier ────────── */
@@ -110,7 +140,7 @@
 }
 
 /* Lester, contre le mur du fond, à l'écart de Duke et de son fauteuil. */
-.tableau--duke .p-lester { left: calc(214 * var(--u)); top: calc(84 * var(--u)); width: calc(22 * var(--u)); }
+.tableau--duke .p-lester { left: calc(214 * var(--u)); top: calc(76 * var(--u)); width: calc(22 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
 .stage[data-etat~="lester-ferme"]  .tableau--duke .p-lester { filter: saturate(.6) brightness(.85); }
@@ -124,3 +154,18 @@
   border-top: calc(1 * var(--u)) solid #46484c;
   border-left: calc(1 * var(--u)) solid #46484c;
 }
+
+/* Les ombres de contact (chantier 14). */
+.tableau--duke .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.55), transparent 78%);
+  pointer-events: none;
+}
+.tableau--duke .ombre--drakk    { left: calc(50 * var(--u));  top: calc(110 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--duke .ombre--trash    { left: calc(80 * var(--u));  top: calc(111 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--duke .ombre--rabbit   { left: calc(104 * var(--u)); top: calc(112 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--duke .ombre--hercules { left: calc(131 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--duke .ombre--g1       { left: calc(8 * var(--u));   top: calc(107 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--duke .ombre--g2       { left: calc(24 * var(--u));  top: calc(107 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--duke .ombre--g3       { left: calc(40 * var(--u));  top: calc(107 * var(--u)); width: calc(13 * var(--u)); }

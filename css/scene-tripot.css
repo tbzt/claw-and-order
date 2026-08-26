@@ -23,22 +23,43 @@
 .tableau--tripot > * { position: absolute; }
 
 .tableau--tripot .fond {
-  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
-  background: linear-gradient(180deg, #221d16 0%, #17140f 55%, #100e0a 100%);
+  left: 0; top: 0; width: 100%; height: calc(104 * var(--u));
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.55) 0%, transparent 55%),
+    linear-gradient(180deg, #241c14 0%, #1c160f 60%, #14100a 100%);
+}
+.tableau--tripot .plinthe {
+  left: 0; top: calc(104 * var(--u)); width: 100%; height: calc(4 * var(--u));
+  background: linear-gradient(180deg, #3e3220 0%, #1e1810 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.55);
 }
 .tableau--tripot .sol {
-  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
-  background: repeating-linear-gradient(90deg, #2a2318 0 calc(16 * var(--u)), #241f16 calc(16 * var(--u)) calc(32 * var(--u)));
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+  left: 0; top: calc(108 * var(--u)); width: 100%; height: calc(36 * var(--u));
+  background: repeating-linear-gradient(90deg, #2a2318 0 calc(16 * var(--u)), #241e14 calc(16 * var(--u)) calc(32 * var(--u)));
+}
+
+/* ⚠️ LA LAMPE BASSE, ET C'EST LE TEXTE QUI LA POSE : « une lampe basse
+   QUI NE MONTE PAS PLUS HAUT QUE LES ÉPAULES — personne ici ne veut
+   qu'on lise son visage. » C'est la seule source du tableau, elle est
+   au ras du tapis, et elle s'arrête sous les têtes. Aucune autre scène
+   du jeu n'a une lumière qui DÉCRIT une intention. */
+.tableau--tripot .lampe-basse {
+  left: calc(56 * var(--u)); top: calc(74 * var(--u));
+  width: calc(116 * var(--u)); height: calc(44 * var(--u));
+  background: radial-gradient(ellipse at 50% 60%, rgba(232, 196, 120, .22), transparent 66%);
+  pointer-events: none;
 }
 
 /* ── LE RÂTELIER DE JETONS — x:6-36, y:8-32 ──────────────────────────── */
+/* Sprite `prop-jetons`. « RIEN DE MARQUÉ, RIEN DE NUMÉROTÉ. Le genre
+   de jetons qui ne valent que ce que le Patron veut bien s'en
+   souvenir. » Dessiner l'absence d'une marque est plus dur qu'un
+   chiffre : il faut que le joueur VOIE qu'il n'y a rien dessus, donc
+   des jetons vus de face, assez grands pour qu'on attende une valeur au
+   milieu — et un centre uni. */
 .tableau--tripot .rateliers-jetons {
   left: calc(6 * var(--u)); top: calc(8 * var(--u));
-  width: calc(30 * var(--u)); height: calc(24 * var(--u));
-  background: linear-gradient(180deg, #3a3020 0%, #221c12 100%);
-  border: calc(1 * var(--u)) solid #0e0b07;
-  border-radius: 2px;
+  width: calc(30 * var(--u));
 }
 
 /* ── LE GUICHET DE CHANGE — x:60-116, y:8-28, où se lit le dossier ───── */
@@ -53,10 +74,10 @@
 }
 
 /* ── LE COULOIR DE L'ÉQUIPE — x:74-172, y:34-46 ──────────────────────── */
-.tableau--tripot .p-drakk    { width: calc(28 * var(--u)); left: calc(74 * var(--u));  top: calc(34 * var(--u)); }
-.tableau--tripot .p-trash    { width: calc(22 * var(--u)); left: calc(108 * var(--u)); top: calc(36 * var(--u)); }
-.tableau--tripot .p-rabbit   { width: calc(16 * var(--u)); left: calc(136 * var(--u)); top: calc(42 * var(--u)); }
-.tableau--tripot .p-hercules { width: calc(14 * var(--u)); left: calc(158 * var(--u)); top: calc(46 * var(--u)); }
+.tableau--tripot .p-drakk    { width: calc(28 * var(--u)); left: calc(74 * var(--u));  top: calc(88 * var(--u)); }
+.tableau--tripot .p-trash    { width: calc(22 * var(--u)); left: calc(124 * var(--u)); top: calc(90 * var(--u)); }
+.tableau--tripot .p-rabbit   { width: calc(16 * var(--u)); left: calc(150 * var(--u)); top: calc(96 * var(--u)); }
+.tableau--tripot .p-hercules { width: calc(14 * var(--u)); left: calc(170 * var(--u)); top: calc(104 * var(--u)); }
 
 /* Nuance quand Hercules est démasqué : rien de spectaculaire, juste un
    soupçon de retrait — il ne se tient plus tout à fait de la même façon. */
@@ -85,15 +106,22 @@
 /* Les cinq joueurs — décor pur, jamais des cibles (une seule chaise
    compte mécaniquement, désignée par le texte, pas par un sprite à
    part — même geste que les gangers de Duke). */
+/* ── LES CINQ JOUEURS — sprite `prop-anonyme-assis` ──────────────────
+   ⚠️ ILS ÉTAIENT ENCORE DES LOSANGES : le balayage du lot 7 cherchait
+   `.pnj`, ceux-ci s'appellent `.joueur`.
+
+   ET LA RÉPÉTITION EST ICI LA LECTURE JUSTE. Le bar avait appris à ne
+   jamais servir deux fois le même sprite côte à côte ; le texte demande
+   exactement l'inverse : « Cinq joueurs… RIEN NE DISTINGUE PERSONNE.
+   C'est probablement voulu. » Cinq fois la même carte, deux retournées,
+   et la lampe qui s'arrête sous leurs visages. */
 .tableau--tripot .joueur {
-  top: calc(72 * var(--u)); width: calc(12 * var(--u)); height: calc(20 * var(--u));
-  border-radius: 30% 30% 20% 20% / 40% 40% 15% 15%;
-  background: radial-gradient(65% 80% at 50% 35%, #6a5c48 0%, #423a2c 45%, #221e16 80%, transparent 100%);
+  top: calc(72 * var(--u)); width: calc(15 * var(--u));
 }
 .tableau--tripot .joueur--1 { left: calc(72 * var(--u)); }
-.tableau--tripot .joueur--2 { left: calc(94 * var(--u)); }
+.tableau--tripot .joueur--2 { left: calc(94 * var(--u)); transform: scaleX(-1); }
 .tableau--tripot .joueur--3 { left: calc(116 * var(--u)); }
-.tableau--tripot .joueur--4 { left: calc(138 * var(--u)); }
+.tableau--tripot .joueur--4 { left: calc(138 * var(--u)); transform: scaleX(-1); }
 .tableau--tripot .joueur--5 { left: calc(160 * var(--u)); }
 .stage[data-etat~="tripot-brule"] .tableau--tripot .joueur { opacity: .5; }
 
@@ -116,19 +144,22 @@
 }
 
 /* ── LESTER — x:224-244, à l'écart de la table ───────────────────────── */
-.tableau--tripot .p-lester { left: calc(224 * var(--u)); top: calc(80 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--tripot .p-lester { left: calc(224 * var(--u)); top: calc(90 * var(--u)); width: calc(20 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
 .stage[data-etat~="lester-ferme"]  .tableau--tripot .p-lester { filter: saturate(.6) brightness(.85); }
 .stage[data-etat~="lester-ouvert"] .tableau--tripot .p-lester { filter: saturate(1.15) brightness(1.05); }
 
 /* ── LE VIDEUR — x:6-26, y:60-100 ─────────────────────────────────────── */
+/* ── LE VIDEUR — sprite `prop-anonyme`, et lui aussi était un losange.
+   « Il ne bouge pas, ne parle pas, et n'a manifestement pas besoin de
+   faire l'un ou l'autre pour qu'on le remarque » : la même carte que
+   les joueurs, mais DEBOUT et plus grande. C'est l'échelle, et rien
+   d'autre, qui le rend remarquable — ce que le texte dit mot pour
+   mot. */
 .tableau--tripot .videur-forme {
-  left: calc(6 * var(--u)); top: calc(60 * var(--u));
-  width: calc(20 * var(--u)); height: calc(40 * var(--u));
-  border-radius: 30% 30% 15% 15% / 20% 20% 10% 10%;
-  background: linear-gradient(180deg, #302c28 0%, #18160f 100%);
-  border: calc(1 * var(--u)) solid #0a0906;
+  left: calc(6 * var(--u)); top: calc(62 * var(--u));
+  width: calc(26 * var(--u));
 }
 
 /* ── LA SORTIE — x:10-44, y:118-140, bas de tableau ──────────────────── */
@@ -142,3 +173,18 @@
 .stage[data-etat~="tripot-brule"] .tableau--tripot .porte-sans-enseigne {
   box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(150, 40, 40, .3);
 }
+
+/* Les ombres de contact (chantier 14). Sous la lampe basse elles sont
+   longues et molles : une source au ras du tapis ne fait pas d'ombre
+   nette. */
+.tableau--tripot .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.45), transparent 82%);
+  pointer-events: none;
+}
+.tableau--tripot .ombre--drakk    { left: calc(48 * var(--u));  top: calc(110 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--tripot .ombre--trash    { left: calc(125 * var(--u));  top: calc(111 * var(--u)); width: calc(22 * var(--u)); }
+.tableau--tripot .ombre--rabbit   { left: calc(151 * var(--u)); top: calc(112 * var(--u)); width: calc(17 * var(--u)); }
+.tableau--tripot .ombre--hercules { left: calc(171 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--tripot .ombre--videur   { left: calc(10 * var(--u));  top: calc(107 * var(--u)); width: calc(19 * var(--u)); }

@@ -2,12 +2,18 @@
    Chantier 36. Grille 256 x 144 (chantier 8), même --u que les autres
    tableaux.
 
-   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-tribunal-salle.css`
-   (chantier 20) : aucun dégradé de grain, aucun calque astral/tactique/
-   RA dessiné à la main, aucun sprite neuf pour Herwick (dette d'art
-   assumée — une forme, pas un personnage). Assez pour reconnaître un
-   rideau, un comptoir, une armoire, un fauteuil, et pour valider la
-   mécanique en jeu.
+   PASSE D'ART FAITE (chantier 23, 6ᵉ décor, lot des cinq planques).
+   Deux sprites neufs — la PILE DE MEUBLES et la COMTOISE ARRÊTÉE — et
+   un vrai sol. Ce que le texte promettait et que le décor ne montrait
+   pas : « des armoires, des horloges, des cadres vides, EMPILÉS
+   JUSQU'AU PLAFOND — les restes de quarante ans de deuils vendus à la
+   pièce », et une comtoise « arrêtée à une heure qui ne veut plus rien
+   dire ».
+
+   LA LUMIÈRE : une seule ampoule au-dessus du comptoir, à cinq heures
+   du matin, rideau baissé. Elle vient donc d'en haut et du CENTRE, et
+   les deux bouts de la pièce (la pile de gauche, celle de droite)
+   tombent dans le noir.
 
    DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À L'ŒIL : le rideau occupe la
    moitié droite du mur du fond, l'armoire/la vitrine la moitié gauche —
@@ -26,13 +32,31 @@
 .tableau--herwick > * { position: absolute; }
 
 .tableau--herwick .fond {
-  left: 0; top: 0; width: 100%; height: calc(112 * var(--u));
-  background: linear-gradient(180deg, #2e2418 0%, #241c14 60%, #1c150e 100%);
+  left: 0; top: 0; width: 100%; height: calc(104 * var(--u));
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.4) 0%, transparent 35%, transparent 65%, rgba(0,0,0,.4) 100%),
+    linear-gradient(180deg, #2e2418 0%, #241c14 60%, #1c150e 100%);
+}
+.tableau--herwick .plinthe {
+  left: 0; top: calc(104 * var(--u)); width: 100%; height: calc(4 * var(--u));
+  background: linear-gradient(180deg, #4a3a22 0%, #241c10 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.5);
 }
 .tableau--herwick .sol {
-  left: 0; top: calc(112 * var(--u)); width: 100%; height: calc(32 * var(--u));
-  background: repeating-linear-gradient(90deg, #3a2e1e 0 calc(16 * var(--u)), #332816 calc(16 * var(--u)) calc(32 * var(--u)));
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.4);
+  left: 0; top: calc(108 * var(--u)); width: 100%; height: calc(36 * var(--u));
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.45) 0%, transparent 40%, transparent 60%, rgba(0,0,0,.45) 100%),
+    repeating-linear-gradient(90deg, #3a2e1e 0 calc(16 * var(--u)), #332816 calc(16 * var(--u)) calc(32 * var(--u)));
+}
+
+/* L'AMPOULE DU COMPTOIR — la seule source, à cinq heures du matin et
+   rideau baissé. Elle n'est pas dessinée : on n'en voit que la flaque,
+   et le fait que les deux bouts de la pièce soient noirs. */
+.tableau--herwick .ampoule {
+  left: calc(70 * var(--u)); top: 0;
+  width: calc(130 * var(--u)); height: calc(120 * var(--u));
+  background: radial-gradient(ellipse at 50% 22%, rgba(232, 200, 140, .14), transparent 70%);
+  pointer-events: none;
 }
 
 /* La vitrine latérale et l'armoire — le mur GAUCHE, x:20-70. */
@@ -54,11 +78,14 @@
   left: calc(20 * var(--u)); top: calc(16 * var(--u));
 }
 
-/* L'horloge arrêtée, entre l'armoire et le rideau — x:78-94. */
+/* L'horloge arrêtée, entre l'armoire et le rideau — sprite
+   `prop-comtoise`. Ses aiguilles sont sur huit heures vingt-trois : « une
+   heure qui ne veut plus rien dire », donc surtout pas une heure ronde
+   et surtout pas l'heure du jeu. Le balancier est immobile ET DE
+   TRAVERS — au centre, il dirait « en marche ». */
 .tableau--herwick .horloge-arretee {
   left: calc(78 * var(--u)); top: calc(10 * var(--u));
-  width: calc(16 * var(--u)); height: calc(24 * var(--u));
-  background: #3a2e1e; border: calc(1 * var(--u)) solid #1c1712; border-radius: 2px;
+  width: calc(16 * var(--u));
 }
 
 /* Le rideau de fer — le mur DROIT, x:130-210 : partiellement baissé par
@@ -81,24 +108,39 @@
   box-shadow: none;
 }
 
-/* Le stock, deux piles disjointes des deux murs. */
-.tableau--herwick .meubles {
-  background: linear-gradient(180deg, #4a3c28 0%, #2e2416 100%);
-  border: calc(1 * var(--u)) solid #1c1712;
-}
-.tableau--herwick .meubles--a { left: calc(2 * var(--u)); top: calc(96 * var(--u)); width: calc(16 * var(--u)); height: calc(40 * var(--u)); }
-.tableau--herwick .meubles--b { left: calc(222 * var(--u)); top: calc(4 * var(--u)); width: calc(30 * var(--u)); height: calc(48 * var(--u)); }
+/* ── LES DEUX PILES DE MEUBLES — sprite `prop-meubles` ───────────────
+   « Empilés JUSQU'AU PLAFOND » : la carte sort du cadre par le haut,
+   parce qu'une pile qui s'arrête proprement dit « rangé » et non « il y
+   en a encore au-dessus ». Deux cadres VIDES sont glissés dedans —
+   c'est le détail qui fait mal, et il coûte deux pixels.
 
-/* Le comptoir et la caisse, au premier plan central — x:80-190. */
+   La même carte sert deux fois, à deux échelles : celle de droite est
+   plus près, donc plus grande. */
+.tableau--herwick .meubles--a { left: calc(2 * var(--u));   top: calc(76 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--herwick .meubles--b { left: calc(220 * var(--u)); top: calc(4 * var(--u));  width: calc(30 * var(--u)); }
+
+/* ── LE COMPTOIR ET LA CAISSE — x:96-186 ─────────────────────────────
+   ⚠️ LEURS DEUX CENTRES SONT PLACÉS DANS LE MÊME TROU DU COULOIR DE
+   L'ÉQUIPE, et c'est la seule façon de les garder cliquables tous les
+   deux. Deux cibles qui se recouvrent : seule la dernière du DOM gagne
+   au point commun — et la caisse, posée sur le comptoir, est
+   forcément la dernière. Le comptoir a donc été rétréci pour que SON
+   centre (141) tombe à droite de la caisse (130-144) et non dedans ;
+   et l'un comme l'autre tombent dans l'écart libre entre Trash (qui
+   s'arrête à 128) et White_Rabbit (qui commence à 146).
+
+   Trouvé au hit-test : la caisse était ENTIÈREMENT derrière
+   White_Rabbit, pas seulement son centre — un joueur n'aurait jamais pu
+   la cliquer. */
 .tableau--herwick .comptoir {
-  left: calc(80 * var(--u)); top: calc(96 * var(--u));
-  width: calc(110 * var(--u)); height: calc(20 * var(--u));
+  left: calc(96 * var(--u)); top: calc(96 * var(--u));
+  width: calc(90 * var(--u)); height: calc(20 * var(--u));
   background: linear-gradient(180deg, #6b5232 0%, #3f2f1c 100%);
   border-top: calc(1 * var(--u)) solid #8a6a3e;
   border-radius: 2px;
 }
 .tableau--herwick .caisse {
-  left: calc(150 * var(--u)); top: calc(86 * var(--u));
+  left: calc(130 * var(--u)); top: calc(86 * var(--u));
   width: calc(14 * var(--u)); height: calc(12 * var(--u));
   background: #2a2620;
   border: calc(1 * var(--u)) solid #14100c;
@@ -120,7 +162,7 @@
 /* Herwick — sprites depuis le chantier 23, dérivés du corps de Renfield
    (le seul homme âgé du jeu, et le modèle de son portrait). */
 .tableau--herwick .herwick {
-  left: calc(194 * var(--u)); top: calc(60 * var(--u));
+  left: calc(194 * var(--u)); top: calc(78 * var(--u));
   width: calc(24 * var(--u));
 }
 /* Blessé, il s'assoit. Rien ne le masque ici — c'est donc un vrai
@@ -153,17 +195,31 @@
   border: calc(1 * var(--u)) solid #2a1414;
   border-radius: 3px;
 }
-.tableau--herwick .p-lester { left: calc(226 * var(--u)); top: calc(56 * var(--u)); width: calc(26 * var(--u)); }
+.tableau--herwick .p-lester { left: calc(226 * var(--u)); top: calc(79 * var(--u)); width: calc(26 * var(--u)); }
+
+/* Les ombres de contact (chantier 14) : ce tableau n'en avait aucune,
+   faute de sol où les poser. */
+.tableau--herwick .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.5), transparent 78%);
+  pointer-events: none;
+}
+.tableau--herwick .ombre--drakk    { left: calc(60 * var(--u));  top: calc(110 * var(--u)); width: calc(32 * var(--u)); }
+.tableau--herwick .ombre--trash    { left: calc(101 * var(--u)); top: calc(111 * var(--u)); width: calc(24 * var(--u)); }
+.tableau--herwick .ombre--rabbit   { left: calc(147 * var(--u)); top: calc(112 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--herwick .ombre--hercules { left: calc(173 * var(--u)); top: calc(111 * var(--u)); width: calc(15 * var(--u)); }
+.tableau--herwick .ombre--herwick  { left: calc(196 * var(--u)); top: calc(93 * var(--u));  width: calc(20 * var(--u)); }
 
 /* L'équipe, sur la bande médiane x:58-176, sous le rideau et devant le
    comptoir — un couloir libre entre la colonne armoire (x:20-54) et
    Herwick (x:196+), choisi à la règle après plusieurs échecs de
    hit-test : aucun de ces quatre ne doit retomber sur le centre du
    comptoir, de la caisse ou de l'armoire, ni l'inverse. */
-.tableau--herwick .p-drakk    { width: calc(38 * var(--u)); left: calc(58 * var(--u));  top: calc(70 * var(--u)); }
-.tableau--herwick .p-trash    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(66 * var(--u)); }
-.tableau--herwick .p-rabbit   { width: calc(22 * var(--u)); left: calc(132 * var(--u)); top: calc(72 * var(--u)); }
-.tableau--herwick .p-hercules { width: calc(18 * var(--u)); left: calc(158 * var(--u)); top: calc(78 * var(--u)); }
+.tableau--herwick .p-drakk    { width: calc(38 * var(--u)); left: calc(58 * var(--u));  top: calc(66 * var(--u)); }
+.tableau--herwick .p-trash    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(72 * var(--u)); }
+.tableau--herwick .p-rabbit   { width: calc(22 * var(--u)); left: calc(146 * var(--u)); top: calc(76 * var(--u)); }
+.tableau--herwick .p-hercules { width: calc(18 * var(--u)); left: calc(172 * var(--u)); top: calc(86 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret que
    `scene-planque.css` : un filtre, pas une jauge. */
