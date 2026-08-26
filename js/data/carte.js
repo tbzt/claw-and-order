@@ -80,6 +80,7 @@
    (l'enregistrement chez Reginald Waters, §7.1 du plan). */
 
 import { etat, formateHeure, formateTour } from '../state.js'
+import { fiches } from './carnet.js'
 
 /* Le registre des nœuds. Même forme que `scenes.js` : ajouter un lieu,
    c'est ajouter une ligne — `x`/`y` (en unités d'art, 256 x 144) sont
@@ -212,15 +213,34 @@ const coutDe = (depuis, vers) => lieux[depuis]?.minutes?.[vers]
    dit ce que le HUD affichera dans deux secondes. */
 const prochainMoment = () => formateTour((etat.tour ?? 0) + 1)
 
+/* ══ CHANTIER 18 — LA CARTE-MÉMOIRE (L4, D2b) ═════════════════════════
+   « La carte se souvient, elle ne pointe pas » : un nœud déjà visité ne
+   clignote jamais — rien ne signale où aller ensuite — mais il rend
+   compte, en REGARDER, de ce qu'on y a appris. `etat.memoire` (state.js)
+   s'alimente tout seul : `classe()` note le lieu au moment même du gain
+   d'une fiche, donc aucune des fiches de `carnet.js` n'a eu besoin d'un
+   champ « lieu » écrit à la main. Un état des lieux, pas une consigne —
+   c'est pour ça que ce texte ne remplace la ligne de coût que sous
+   REGARDER : UTILISER (le trajet lui-même) continue de n'afficher que
+   ce qu'il en coûte d'y aller, jamais un rappel de ce qu'on y sait déjà. */
+const etatDesLieux = (id) => {
+  const titres = (etat.memoire[id] ?? []).map((f) => fiches[f]?.titre).filter(Boolean)
+  return titres.length
+    ? `${lieux[id].nom} — ${titres.length} fiche${titres.length > 1 ? 's' : ''}, ${titres.join(', ')}`
+    : `${lieux[id].nom} — rien à en tirer, pour l’instant.`
+}
+
 function noeud(id) {
   const enquete = lieux[id].acte === 4
 
   return {
-    nom: ({ depuis, heure }) => depuis === id
+    nom: ({ depuis, heure, verbe }) => depuis === id
       ? `${lieux[id].nom} — vous y êtes`
-      : enquete
-        ? `${lieux[id].nom} — un tour → ${prochainMoment()}`
-        : `${lieux[id].nom} — ${coutDe(depuis, id)} min → ${formateHeure(heure + coutDe(depuis, id))}`,
+      : verbe === 'regarder' && (etat.visites[id] ?? 0) > 0
+        ? etatDesLieux(id)
+        : enquete
+          ? `${lieux[id].nom} — un tour → ${prochainMoment()}`
+          : `${lieux[id].nom} — ${coutDe(depuis, id)} min → ${formateHeure(heure + coutDe(depuis, id))}`,
 
     regarder: ({ depuis }) => depuis === id
       ? { tous: `${lieux[id].nom}, ${lieux[id].ou}. C’est là que vous êtes déjà.` }

@@ -75,6 +75,15 @@ export const etat = {
      visite contredit L3 (« revenir doit changer quelque chose »), même
      si ce n'est que le texte d'ouverture qui change pour l'instant. */
   visites: {},
+  /* La carte-mémoire (chantier 18, `PLAN_CARTE_NAVIGATION.md` L4/D2b) :
+     « chaque nœud porte ce qu'on y a appris », jamais un signal d'où
+     aller. `{ bar: ['dossier-vide', …], … }` — quelles fiches ont été
+     apprises dans quel lieu. Alimenté tout seul par `classe()`, qui note
+     `etat.lieu` au moment du gain : aucune des ~40 fiches n'a eu besoin
+     d'un champ « lieu » écrit à la main, et un gain hors carte (le
+     goulet, une planque) s'enregistre sous une clé qu'aucun nœud ne
+     relira jamais — inoffensif. */
+  memoire: {},
 }
 
 export const a = (flag) => etat.flags.has(flag)
@@ -138,6 +147,10 @@ export function classe(...ids) {
   for (const f of ids) if (!etat.fiches.has(f)) {
     etat.fiches.add(f)
     etat.fichesNeuves.add(f)
+    /* La carte-mémoire (chantier 18) : cette fiche vient d'être apprise
+       ICI, `etat.lieu` au moment même du gain — jamais recalculé plus
+       tard, pour rester vrai même si le joueur a quitté le lieu depuis. */
+    if (etat.lieu) (etat.memoire[etat.lieu] ??= []).push(f)
     neuf = true
   }
   return neuf
@@ -157,7 +170,7 @@ export const sait = (fiche) => etat.fiches.has(fiche)
    `heure` et `depuis` sont arrivés avec la carte (chantier 13) : un lieu
    qui se ferme la nuit (chantier 17) doit pouvoir lire l'heure, et un
    nœud de la carte doit savoir d'où on l'atteint. */
-export const contexte = () => ({ a, tient, sait, astral: etat.astral, qui: etat.actif, heure: etat.heure, depuis: etat.depuis })
+export const contexte = () => ({ a, tient, sait, astral: etat.astral, qui: etat.actif, verbe: etat.verbe, heure: etat.heure, depuis: etat.depuis })
 
 /* ── SAUVEGARDE ──────────────────────────────────────────────────────
    Une seule automatique, en local. On ne sauvegarde qu'au repos — c'est
@@ -203,6 +216,7 @@ function instantane() {
       visites: etat.visites,
       depuis: etat.depuis,
       auteurDeductions: etat.auteurDeductions,
+      memoire: etat.memoire,
     },
   }
 }
@@ -263,6 +277,10 @@ export function restaure(donnees) {
      signature de recoupement, et un sceau sans teinte de runner
      retombe sur le cyan par défaut (CSS) — rien à refuser. */
   etat.auteurDeductions = d.auteurDeductions ?? {}
+  /* Même geste : une sauvegarde d'avant le chantier 18 n'a pas de
+     carte-mémoire, et un lieu sans souvenir retombe sur « rien appris
+     encore » — rien à refuser. */
+  etat.memoire = d.memoire ?? {}
 }
 
 /* ── ÉTATS GARDÉS (chantier 15) ──────────────────────────────────────
