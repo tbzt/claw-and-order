@@ -3,11 +3,19 @@
   Loveland. Chantier 27 (`PLAN_TRAME_ACTES_III_IV.md` § 7.1, rang 7 du
   § 10) — la troisième et dernière ancre de l'acte IV.
 
-  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même discipline que
-  `amis.html`, `appartement.html`, `herwick.html`, `sarah.html`,
-  `duke.html`, `squat.html` et `tripot.html`. Denny et Iris n'ont pas de
-  sprite : deux formes simples, jusqu'à ce que l'atelier leur en
-  dessine un. Dette d'art assumée, notée dans `PLAN_EXECUTION.md`.
+  PASSE D'ART FAITE (chantier 23, 4ᵉ décor). Cinq sprites, et le
+  tableau cesse de ranger trois ENDROITS DE LA PIÈCE en panneaux muraux :
+  la piste et l'alcôve sont posées sur le sol, le mur ne porte plus que
+  les flyers et l'ardoise.
+
+  CE QUE LA PROSE PROMETTAIT ET QUE LE DÉCOR NE MONTRAIT PAS : le coin
+  de mur d'où une photo a été DÉCOLLÉE AVEC SOIN (donc une trace plus
+  pâle, aux bords nets, les voisines intactes) ; les CHAISES MONTÉES SUR
+  LES TABLES ; et sur l'ardoise, la ligne du haut — « T. » — qui n'a
+  jamais de solde quand toutes les autres se terminent par un montant.
+
+  ET LE SOL EN EST UN, TROISIÈME FOIS : l'équipe s'arrêtait entre 100 et
+  109 quand le sol commençait à 114.
 
   PAS DE LESTER, PAS DE G5 : ce n'est pas une planque, c'est un lieu
   d'enquête de l'acte IV, comme `amis` et `appartement` avant lui —
@@ -20,35 +28,61 @@
   carte de visite sur le comptoir chez `amis.html` (« une chose du
   monde, une seule cible »).
 
-  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe
-  d'abord, Denny, Iris et le mobilier ensuite.
+  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici), et il a
+  changé avec la passe d'art : le décor de fond (flyers, piste, alcôve,
+  ardoise, porte) passe MAINTENANT AVANT l'équipe, parce que la piste et
+  l'alcôve sont posées au sol derrière elle. Denny, Iris et le comptoir
+  restent après, au premier plan.
 
-  DISPOSITION EN BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
-  cibles cliquables — même discipline que `scene-amis.css`. Bande du
-  haut (mur, piste, alcôve), bande médiane (ardoise), bande du bas
-  (porte, Denny, l'équipe, Iris) : deux cibles ne partagent jamais à la
-  fois une plage en x et une plage en y.
+  DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À LA MAIN : les onze cibles
+  reprises une par une dans le navigateur après recomposition, toutes
+  atteignables à leur centre.
+
+  ⚠️ ET LE MOBILIER NE VOLE JAMAIS UN CLIC. `engine.css` pose
+  `.decor { pointer-events: none }` et ne rend `auto` qu'aux
+  `[data-hotspot]` : un comptoir, un ampli, une plinthe peuvent
+  recouvrir ce qu'ils veulent. Seules deux CIBLES se disputent un point,
+  et c'est le dernier du DOM qui gagne — d'où le réordonnancement
+  ci-dessous, et rien de plus.
 
   Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
 -->
 <div class="tableau tableau--shameless">
 
   <div class="fond"></div>
+  <div class="plinthe"></div>
   <div class="sol"></div>
+  <div class="neon"></div>
 
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--hercules"></div>
+
+  <!-- Le mur de flyers, et le coin arraché. -->
+  <div class="mur-flyers sprite--prop-flyers" data-hotspot="mur"></div>
+
+  <!-- La piste vide et la régie DJ éteinte. -->
+  <div class="piste-dj sprite--prop-piste" data-hotspot="piste"></div>
+
+  <!-- L'alcôve du fond, dos au mur, face à la porte. -->
+  <div class="alcove sprite--prop-alcove" data-hotspot="alcove"></div>
+
+  <!-- La sortie : la porte noire, sans enseigne. Elle est DANS le mur,
+       donc avant Denny, qui se tient devant elle. -->
+  <div class="porte-noire sprite--prop-porte-noire" data-hotspot="porte"></div>
+
+  <!-- L'ÉQUIPE, dans la salle — APRÈS la piste et l'alcôve, qui sont
+       derrière elle depuis que ce ne sont plus des panneaux muraux.
+       L'ordre habituel du projet (l'équipe d'abord, le mobilier
+       ensuite) protège les cibles de mobilier d'un personnage debout
+       devant ; il s'inverse pour du mobilier POSÉ AU SOL derrière
+       l'équipe — trouvé au hit-test, la piste volait le centre de Drakk
+       et celui de Trash. -->
   <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
   <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
   <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
   <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
-
-  <!-- Le mur de flyers, et le coin arraché. -->
-  <div class="mur-flyers" data-hotspot="mur"></div>
-
-  <!-- La piste vide et la régie DJ éteinte. -->
-  <div class="piste-dj" data-hotspot="piste"></div>
-
-  <!-- L'alcôve du fond, dos au mur, face à la porte. -->
-  <div class="alcove" data-hotspot="alcove"></div>
 
   <!-- IRIS, derrière son comptoir — donc AVANT lui dans le DOM.
        Elle était placée après, ce que la feuille de style affirmait
@@ -60,12 +94,10 @@
 
   <!-- Le comptoir — décor — et l'ardoise accrochée au mur derrière. -->
   <div class="comptoir"></div>
-  <div class="ardoise" data-hotspot="ardoise"></div>
+  <div class="ardoise sprite--prop-ardoise" data-hotspot="ardoise"></div>
 
   <!-- DENNY, entre l'équipe et la porte. -->
+  <div class="ombre ombre--denny"></div>
   <div class="pnj pnj--denny sprite--prop-denny" data-hotspot="denny"></div>
-
-  <!-- La sortie : la porte noire, sans enseigne. -->
-  <div class="porte-noire" data-hotspot="porte"></div>
 
 </div>

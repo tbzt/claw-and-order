@@ -1,22 +1,36 @@
-/* ── TABLEAU 10 — LE SHAMELESS ────────────────────────────────────────
-   Chantier 27, la troisième ancre de l'acte IV. Grille 256 x 144
-   (chantier 8), même --u que les autres tableaux.
+/* ── TABLEAU 10 — LE SHAMELESS ───────────────────────────────────────
+   Un club sans enseigne, entre le concert et Loveland. Chantier 27 pour
+   la mécanique (la troisième ancre de l'acte IV), CHANTIER 23 pour la
+   passe d'art. Grille 256 x 144 (chantier 8).
 
-   PLACEHOLDER FONCTIONNEL. Même discipline que `scene-amis.css` et
-   `scene-appartement.css` : aucun sprite neuf pour Denny ou Iris. Assez
-   pour reconnaître un club sans prétention — un mur de flyers, une
-   piste vide, une alcôve, un comptoir avec son ardoise, une porte
-   noire — et pour valider les deux témoins en jeu.
+   CE QUI CHANGE. La feuille portait « PLACEHOLDER FONCTIONNEL » et,
+   surtout, elle rangeait TROIS ENDROITS DE LA PIÈCE EN PANNEAUX
+   MURAUX : le mur de flyers, la piste et l'alcôve occupaient tous les
+   trois la bande y:8-46, côte à côte, comme trois affiches. Une piste
+   de danse et une banquette ne sont pas accrochées au mur. Elles sont
+   maintenant POSÉES SUR LE SOL, base à 100, et le mur ne porte plus que
+   ce qui s'y accroche pour de vrai — les flyers et l'ardoise.
 
-   LA LUMIÈRE EST BASSE ET ARTIFICIELLE : ni le petit matin d'`amis`, ni
-   l'après-midi froid d'`appartement'. Un club fermé au public tourne
-   en éclairage de service, jamais éteint tout à fait.
+   ⚠️ ET LE SOL, TROISIÈME FOIS. `.sol` commençait à 114 et l'équipe
+   s'arrêtait entre 100 et 109 : elle flottait, comme au local de
+   répétition et à l'appartement. Trouvé d'office cette fois, avant de
+   dessiner — c'est ce que les deux lots précédents avaient appris.
 
-   DISPOSITION PAR BANDES DISJOINTES, VÉRIFIÉE À LA MAIN sur les onze
-   cibles cliquables avant tout test au navigateur — même discipline que
-   `scene-amis.css`. Les coordonnées de chaque cible sont écrites en
-   commentaire au-dessus d'elle. Le mobilier (comptoir) n'a pas de
-   `data-hotspot` : il peut donc recouvrir ce qu'il veut. */
+   LA LUMIÈRE, DÉCLARÉE ICI, ET IL N'Y EN A QU'UNE : le néon de service
+   derrière le comptoir. C'est un club qu'on nettoie avant l'ouverture ;
+   la seule lampe allumée est celle sous laquelle on recompte une
+   caisse. Tout s'éclaire donc PAR LA DROITE et FROID, et la moitié
+   gauche du tableau — les flyers, la porte, Denny — tombe dans le noir.
+   C'est aussi ce que le texte dit d'un videur qui garde une porte que
+   personne ne pousse. L'atelier a lu cette règle : voir
+   `retouches/club.py`.
+
+   L'ARDOISE EST UNE CIBLE À PART DU COMPTOIR (« une chose du monde, une
+   seule cible ») ; le comptoir reste du décor, sans `data-hotspot`,
+   comme celui du bar et celui du local.
+
+   DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À LA MAIN : les onze cibles
+   reprises une par une dans le navigateur après recomposition. */
 
 .tableau--shameless {
   position: absolute; inset: 0;
@@ -27,103 +41,97 @@
 .tableau--shameless > * { position: absolute; }
 
 .tableau--shameless .fond {
-  left: 0; top: 0; width: 100%; height: calc(114 * var(--u));
-  background: linear-gradient(180deg, #211a1c 0%, #1a1517 60%, #120e10 100%);
+  left: 0; top: 0; width: 100%; height: calc(96 * var(--u));
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.12) 55%, transparent 100%),
+    linear-gradient(180deg, #241c1e 0%, #1c1618 60%, #150f12 100%);
+}
+.tableau--shameless .plinthe {
+  left: 0; top: calc(96 * var(--u)); width: 100%; height: calc(4 * var(--u));
+  background: linear-gradient(180deg, #332426 0%, #170f11 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.6);
 }
 .tableau--shameless .sol {
-  left: 0; top: calc(114 * var(--u)); width: 100%; height: calc(30 * var(--u));
-  background: linear-gradient(180deg, #241c1e 0%, #171214 100%);
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(0,0,0,.5);
+  left: 0; top: calc(100 * var(--u)); width: 100%; height: calc(44 * var(--u));
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.15) 60%, transparent 100%),
+    repeating-linear-gradient(90deg, #241c1e 0 calc(13 * var(--u)), #1e1719 calc(13 * var(--u)) calc(26 * var(--u)));
+}
+
+/* LE NÉON DE SERVICE, derrière le comptoir — la seule source du
+   tableau, et celle que l'atelier a lue pour éclairer les cinq sprites.
+   Il n'est pas dessiné (il est au-dessus du cadre, sous une casquette) :
+   on n'en voit que la flaque, et le fait que tout le reste soit noir. */
+.tableau--shameless .neon {
+  left: calc(186 * var(--u)); top: 0;
+  width: calc(70 * var(--u)); height: calc(120 * var(--u));
+  background: radial-gradient(ellipse at 80% 30%, rgba(196, 214, 226, .13), transparent 72%);
+  pointer-events: none;
 }
 
 /* ── LE MUR DE FLYERS — x:8-64, y:8-46 ───────────────────────────────
-   Le coin arraché est un rectangle plus sombre : quelque chose manque,
-   et ça se voit avant même de regarder de près. */
+   Sprite `prop-flyers`. Douze polaroïds punaisés sur des années
+   d'affiches — et **il en manque un, à hauteur d'yeux**. Le placeholder
+   en faisait un carré plus SOMBRE ; c'est l'inverse : une photo décollée
+   laisse le mur que la fumée n'a pas atteint, donc une trace PLUS PÂLE,
+   aux bords nets, et les punaises des voisines encore droites autour.
+   C'est la pièce à conviction du tableau, et elle est dans la carte. */
 .tableau--shameless .mur-flyers {
   left: calc(8 * var(--u)); top: calc(8 * var(--u));
-  width: calc(56 * var(--u)); height: calc(38 * var(--u));
-  background:
-    repeating-linear-gradient(58deg, #4a2e34 0 calc(5 * var(--u)), #3c2429 calc(5 * var(--u)) calc(11 * var(--u))),
-    #2e1c20;
-  border: calc(1 * var(--u)) solid #100a0c;
-}
-.tableau--shameless .mur-flyers::after {
-  content: ''; position: absolute;
-  left: calc(30 * var(--u)); top: calc(10 * var(--u));
-  width: calc(12 * var(--u)); height: calc(12 * var(--u));
-  background: #1e1214;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.6);
+  width: calc(56 * var(--u));
 }
 
-/* ── LA PISTE ET LA RÉGIE — x:78-146, y:8-46 ─────────────────────────
-   Vide, chaises montées sur les tables au bord, régie éteinte. */
+/* ── LA PISTE, LA RÉGIE ET LES TABLES — x:66-150, base au sol ────────
+   Sprite `prop-piste`, une seule carte pour les trois choses : le
+   parquet vide, la régie éteinte, et **les chaises montées sur les
+   tables**, qui sont l'image du tableau — le ménage est fait pour une
+   soirée qui n'a pas encore commencé.
+
+   Une carte plutôt que trois éléments, et c'est un hit-test qui l'a
+   décidé : dans une pièce où Denny occupe tout le premier plan gauche,
+   trois cibles étroites finissaient par se faire voler leur centre. */
 .tableau--shameless .piste-dj {
-  left: calc(78 * var(--u)); top: calc(8 * var(--u));
-  width: calc(68 * var(--u)); height: calc(38 * var(--u));
-  background:
-    repeating-linear-gradient(90deg, #241a1c 0 calc(8 * var(--u)), #1c1416 calc(8 * var(--u)) calc(9 * var(--u))),
-    #221a1c;
-  border: calc(1 * var(--u)) solid #100a0c;
-}
-.tableau--shameless .piste-dj::after {
-  content: ''; position: absolute;
-  right: calc(4 * var(--u)); top: calc(4 * var(--u));
-  width: calc(16 * var(--u)); height: calc(10 * var(--u));
-  background: #171012;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.6);
+  left: calc(66 * var(--u)); top: calc(58 * var(--u));
+  width: calc(84 * var(--u));
 }
 
-/* ── L'ALCÔVE DU FOND — x:160-220, y:8-46 ────────────────────────────
-   Banquette dos au mur, face à la porte. `amant-trouve` la souligne
-   d'un filet froid une fois le recoupement fait — c'est la place d'où
-   on surveille qui entre. */
+/* ── L'ALCÔVE DU FOND — x:158-214, base au sol ───────────────────────
+   Sprite `prop-alcove`. Banquette en U, dos au mur, **face à la
+   porte** : « la vue donne exactement sur la porte, et sur rien
+   d'autre ». Vue de face et pas de profil — de profil, on ne verrait
+   pas ce qu'elle regarde. `amant-trouve` la souligne d'un filet froid
+   une fois le recoupement fait. */
 .tableau--shameless .alcove {
-  left: calc(160 * var(--u)); top: calc(8 * var(--u));
-  width: calc(60 * var(--u)); height: calc(38 * var(--u));
-  border-radius: 10% / 30%;
-  background: linear-gradient(180deg, #3a2228 0%, #22141a 100%);
-  border: calc(1 * var(--u)) solid #120a0e;
-  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(120, 70, 80, .12);
+  left: calc(158 * var(--u)); top: calc(58 * var(--u));
+  width: calc(56 * var(--u));
 }
 .stage[data-etat~="amant-trouve"] .tableau--shameless .alcove {
-  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(120, 70, 80, .12),
-              0 0 0 calc(1 * var(--u)) rgba(150, 190, 210, .4);
+  filter: drop-shadow(0 0 calc(1.5 * var(--u)) rgba(150, 190, 210, .55));
 }
 
-/* ── L'ARDOISE — x:168-202, y:50-66 ──────────────────────────────────
-   Accrochée au mur, au-dessus du comptoir. Le nom « T. » y reste
-   toujours lisible : ce n'est pas un état qui change à l'écran, la
-   scène n'a rien à y montrer de plus qu'au premier regard. */
+/* ── L'ARDOISE — x:212-246, y:20-38, sur le mur, en plein néon ───────
+   Sprite `prop-ardoise`. Des noms à la craie, des chiffres effacés au
+   coin d'un doigt et réécrits par-dessus — et **la ligne du haut, "T.",
+   qui n'a jamais de solde**. À cette taille on ne lit pas des lettres,
+   on lit des LONGUEURS : un nom court suivi de blanc, quand toutes les
+   lignes du dessous se terminent par un montant. Le vide au bout de la
+   première ligne est l'information. */
 .tableau--shameless .ardoise {
-  left: calc(168 * var(--u)); top: calc(50 * var(--u));
-  width: calc(34 * var(--u)); height: calc(16 * var(--u));
-  background: #171213;
-  border: calc(1 * var(--u)) solid #050303;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.05);
-}
-.tableau--shameless .ardoise::after {
-  content: ''; position: absolute;
-  left: calc(4 * var(--u)); top: calc(3 * var(--u));
-  width: calc(14 * var(--u)); height: calc(2 * var(--u));
-  background: rgba(226, 220, 200, .55);
+  left: calc(212 * var(--u)); top: calc(20 * var(--u));
+  width: calc(34 * var(--u));
 }
 
-/* ── LA PORTE NOIRE — x:4-26, y:74-140, la sortie ────────────────────
+/* ── LA PORTE NOIRE — x:4-26, y:60-126, la sortie ───────────────────
+   Sprite `prop-porte-noire`. « Elle se referme derrière vous SANS UN
+   BRUIT — elle est faite pour ça » : donc capitonnée, avec un
+   ferme-porte et un joint sur tout le pourtour, et pas une porte
+   d'appartement peinte en noir. Elle est à l'autre bout de la pièce du
+   néon : sa poignée de laiton usé est la seule chose qui s'y voie.
    Le nom de classe évite `.rideau`, déjà pris par le rideau final du
    jeu (`engine.css`, z-index 70). */
 .tableau--shameless .porte-noire {
-  left: calc(4 * var(--u)); top: calc(74 * var(--u));
-  width: calc(22 * var(--u)); height: calc(66 * var(--u));
-  background: linear-gradient(180deg, #1c1214 0%, #100a0b 100%);
-  border: calc(1 * var(--u)) solid #050303;
-  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(255,255,255,.04);
-}
-.tableau--shameless .porte-noire::after {
-  content: ''; position: absolute;
-  right: calc(3 * var(--u)); top: calc(30 * var(--u));
-  width: calc(2 * var(--u)); height: calc(6 * var(--u));
-  background: #6a5a40;
-  border-radius: 50%;
+  left: calc(4 * var(--u)); top: calc(60 * var(--u));
+  width: calc(22 * var(--u));
 }
 
 /* ── DENNY — y:78-140 ────────────────────────────────────────────────
@@ -163,8 +171,8 @@
 /* ── LE COMPTOIR, SANS CIBLE — x:196-252, y:96-124 ───────────────────
    Décor : il peut recouvrir Iris et l'ardoise à son gré. */
 .tableau--shameless .comptoir {
-  left: calc(196 * var(--u)); top: calc(96 * var(--u));
-  width: calc(56 * var(--u)); height: calc(28 * var(--u));
+  left: calc(204 * var(--u)); top: calc(100 * var(--u));
+  width: calc(52 * var(--u)); height: calc(28 * var(--u));
   background: linear-gradient(180deg, #2e2020 0%, #180f10 100%);
   border: calc(1 * var(--u)) solid #0a0505;
 }
@@ -172,10 +180,25 @@
 /* ── LE COULOIR DE L'ÉQUIPE — x:70-154, y:66-140 ─────────────────────
    Même geste qu'ailleurs : entrée par le bas, rangée du plus grand au
    plus petit sur une bande que rien d'autre n'occupe en x. */
-.tableau--shameless .p-drakk    { width: calc(28 * var(--u)); left: calc(70 * var(--u));  top: calc(66 * var(--u)); }
-.tableau--shameless .p-trash    { width: calc(20 * var(--u)); left: calc(100 * var(--u)); top: calc(76 * var(--u)); }
-.tableau--shameless .p-rabbit   { width: calc(16 * var(--u)); left: calc(122 * var(--u)); top: calc(82 * var(--u)); }
-.tableau--shameless .p-hercules { width: calc(14 * var(--u)); left: calc(140 * var(--u)); top: calc(86 * var(--u)); }
+.tableau--shameless .p-drakk    { width: calc(28 * var(--u)); left: calc(70 * var(--u));  top: calc(76 * var(--u)); }
+.tableau--shameless .p-trash    { width: calc(20 * var(--u)); left: calc(100 * var(--u)); top: calc(84 * var(--u)); }
+.tableau--shameless .p-rabbit   { width: calc(16 * var(--u)); left: calc(122 * var(--u)); top: calc(88 * var(--u)); }
+.tableau--shameless .p-hercules { width: calc(14 * var(--u)); left: calc(140 * var(--u)); top: calc(96 * var(--u)); }
+
+/* Les ombres de contact (chantier 14) : ce tableau n'en avait aucune,
+   faute de sol où les poser. Elles sont plus douces à gauche qu'à
+   droite — le néon est à droite, donc l'ombre y est plus nette. */
+.tableau--shameless .ombre {
+  height: calc(3 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.5), transparent 78%);
+  pointer-events: none;
+}
+.tableau--shameless .ombre--drakk    { left: calc(72 * var(--u));  top: calc(108 * var(--u)); width: calc(24 * var(--u)); }
+.tableau--shameless .ombre--trash    { left: calc(101 * var(--u)); top: calc(111 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--shameless .ombre--rabbit   { left: calc(123 * var(--u)); top: calc(113 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--shameless .ombre--hercules { left: calc(141 * var(--u)); top: calc(114 * var(--u)); width: calc(12 * var(--u)); }
+.tableau--shameless .ombre--denny    { left: calc(31 * var(--u)); top: calc(137 * var(--u)); width: calc(24 * var(--u)); }
 
 /* ── CE QUE LA PIÈCE A RENDU, RELISIBLE SANS LE CARNET ───────────────
    Même geste qu'`amis`/`appartement` : la salle s'éclaire d'un cran à
