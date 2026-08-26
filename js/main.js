@@ -35,12 +35,21 @@ const repriseAuto = $('repriseAuto')
 
    Chantier 23 : le compte a été fait, et il est net. Vingt
    interlocuteurs ont un arbre de dialogue dans `js/data/` ; cinq
-   seulement avaient un portrait. Les treize autres — `cisco`, `denny`,
-   `duke`, `herwick`, `iris`, `mark`, `nita`, `nova`, `patron`, `psych`,
-   `sarah`, `vedette` — parlent le panneau vide, ce qui n'est pas le
-   choix décrit ci-dessus mais une dette d'art. `waters` est le premier
-   comblé ; les douze autres se dérivent de la même façon (voir
-   `retouches/portrait-waters.py` dans l'atelier). */
+   seulement avaient un portrait.
+
+   Deux des quinze restants n'en veulent pas, et c'est la phrase
+   ci-dessus : `vedette` est la VHF sur le canal 16, `cisco` est « une
+   voix à la barre, comme la vedette sur le 16 » — son propre commentaire
+   dans `retour.js` le dit. La dette réelle était donc de ONZE.
+
+   Cinq sont comblés (`waters`, `herwick`, `duke`, `patron`, `sarah`).
+   Restent six : `denny`, `iris`, `mark`, `nita`, `nova`, `psych`. Ils se
+   dérivent d'un portrait existant, jamais dessinés de zéro — voir
+   `outils/visage.py` et `retouches/portraits-neufs.py` dans l'atelier.
+
+   `patron` gagne un nom en même temps qu'un visage : le commentaire de
+   `nomDuLocuteur`, plus bas, notait qu'il parlait sans nom faute d'être
+   dans `pnj` ou `contacts`. Une entrée ici le nomme aussi. */
 const VISAGES = {
   mccarthy: 'McCarthy',
   lester: 'Lester',
@@ -48,6 +57,10 @@ const VISAGES = {
   barman: 'Le barman',
   renfield: 'Renfield',
   waters: 'Reginald Waters',
+  herwick: 'Herwick Strauber',
+  duke: 'Duke',
+  patron: 'Le patron',
+  sarah: 'Sarah Carpenter',
 }
 
 function montrePortrait(qui) {
