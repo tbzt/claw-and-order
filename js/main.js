@@ -31,13 +31,23 @@ const gardees = $('gardees')
 const repriseAuto = $('repriseAuto')
 
 /* Qui a un visage. Un PNJ sans portrait parle quand même : la bulle
-   suffit, et on ne dessine pas un visage pour une voix de radio. */
+   suffit, et on ne dessine pas un visage pour une voix de radio.
+
+   Chantier 23 : le compte a été fait, et il est net. Vingt
+   interlocuteurs ont un arbre de dialogue dans `js/data/` ; cinq
+   seulement avaient un portrait. Les treize autres — `cisco`, `denny`,
+   `duke`, `herwick`, `iris`, `mark`, `nita`, `nova`, `patron`, `psych`,
+   `sarah`, `vedette` — parlent le panneau vide, ce qui n'est pas le
+   choix décrit ci-dessus mais une dette d'art. `waters` est le premier
+   comblé ; les douze autres se dérivent de la même façon (voir
+   `retouches/portrait-waters.py` dans l'atelier). */
 const VISAGES = {
   mccarthy: 'McCarthy',
   lester: 'Lester',
   gardien: 'Le gardien',
   barman: 'Le barman',
   renfield: 'Renfield',
+  waters: 'Reginald Waters',
 }
 
 function montrePortrait(qui) {
