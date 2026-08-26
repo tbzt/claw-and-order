@@ -117,19 +117,19 @@
    `vitre-brisee`/`impacts-mur` dans `scene-planque.css`). Posé à droite
    du comptoir, x:196-216 — clair du rideau (dessus, mur du fond) et du
    fauteuil (x:224+). */
+/* Herwick — sprites depuis le chantier 23, dérivés du corps de Renfield
+   (le seul homme âgé du jeu, et le modèle de son portrait). */
 .tableau--herwick .herwick {
-  left: calc(196 * var(--u)); top: calc(60 * var(--u));
-  width: calc(20 * var(--u)); height: calc(34 * var(--u));
-  border-radius: 40% 40% 25% 25% / 55% 55% 20% 20%;
+  left: calc(194 * var(--u)); top: calc(60 * var(--u));
+  width: calc(24 * var(--u));
 }
-.tableau--herwick .herwick--debout {
-  background: radial-gradient(65% 80% at 50% 40%, #d8b88a 0%, #a67f4e 45%, #5e4426 80%, transparent 100%);
-}
+/* Blessé, il s'assoit. Rien ne le masque ici — c'est donc un vrai
+   BUSTE, `prop-herwick-assis`, la carte debout recadrée à 64 lignes.
+   64 de large sur 64 de haut tombe exactement sur la boîte carrée de
+   24 × 24 u que le décor lui réserve. */
 .tableau--herwick .herwick--assis {
   left: calc(192 * var(--u)); top: calc(68 * var(--u));
-  width: calc(24 * var(--u)); height: calc(24 * var(--u));
-  border-radius: 30% 30% 40% 40% / 40% 40% 45% 45%;
-  background: radial-gradient(65% 80% at 50% 35%, #d8b88a 0%, #a67f4e 45%, #5e4426 80%, transparent 100%);
+  width: calc(24 * var(--u));
   display: none;
 }
 .stage[data-etat~="herwick-touche"] .tableau--herwick .herwick--debout { display: none; }

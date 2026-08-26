@@ -97,11 +97,13 @@
   border: calc(1 * var(--u)) solid #150c0c;
   border-radius: 3px;
 }
+/* Duke — sprite `prop-duke` (chantier 23), dérivé du corps de Lester,
+   le même ork que son portrait. « Le fauteuil défoncé qui lui sert de
+   trône » passe DEVANT lui dans le DOM : c'est lui qui coupe Duke à
+   mi-corps, et c'est ce qui rend un homme assis avec un sprite debout. */
 .tableau--duke .duke {
-  left: calc(174 * var(--u)); top: calc(58 * var(--u));
-  width: calc(22 * var(--u)); height: calc(34 * var(--u));
-  border-radius: 35% 35% 20% 20% / 50% 50% 20% 20%;
-  background: radial-gradient(65% 80% at 50% 40%, #c8a888 0%, #8a6448 45%, #48301e 80%, transparent 100%);
+  left: calc(173 * var(--u)); top: calc(58 * var(--u));
+  width: calc(24 * var(--u));
 }
 .stage[data-etat~="duke-paye"] .tableau--duke .duke {
   filter: brightness(1.08);

@@ -104,11 +104,15 @@
   background: linear-gradient(180deg, #3c3020 0%, #221a10 100%);
   border: calc(1 * var(--u)) solid #0e0b07;
 }
+/* Le patron — sprite `prop-patron` (chantier 23), dérivé du corps de
+   McCarthy. « Assis derrière une caisse » : un homme assis derrière un
+   meuble ne se dessine pas assis, on ne voit que le haut de lui. C'est
+   la CAISSE qui le coupe, et elle est passée devant lui dans le DOM
+   pour ça — un corps debout dont on masque le bas donne exactement la
+   silhouette voulue, sans qu'aucune pose ait été dessinée. */
 .tableau--tripot .patron {
-  left: calc(198 * var(--u)); top: calc(60 * var(--u));
-  width: calc(20 * var(--u)); height: calc(34 * var(--u));
-  border-radius: 35% 35% 20% 20% / 50% 50% 20% 20%;
-  background: radial-gradient(65% 80% at 50% 40%, #c8ac80 0%, #8a6c44 45%, #483a20 80%, transparent 100%);
+  left: calc(196 * var(--u)); top: calc(60 * var(--u));
+  width: calc(24 * var(--u));
 }
 
 /* ── LESTER — x:224-244, à l'écart de la table ───────────────────────── */
