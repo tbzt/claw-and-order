@@ -1,41 +1,64 @@
 <!--
-  Tableau 6 bis — LE TRIBUNAL, LE PARVIS. Chantier 20b.
+  Tableau 6 bis — LE TRIBUNAL, LE PARVIS. Chantier 20b pour la
+  mécanique, CHANTIER 23 pour l'art.
 
-  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ — même réserve que
-  `tribunal-salle.html`. Grille 256 x 144 (chantier 8).
+  Décor au texte : le palais de justice de Downtown à neuf heures moins
+  dix, deux Justice encapuchonnées penchées sur l'entrée et sans balance,
+  les détecteurs dans l'axe, des gardes que l'accréditation satisfait, et
+  McCarthy en civil qu'on n'avait pas revu depuis le bar.
+
+  ORDRE DU DOM : le fond, puis le creux de l'entrée et ce qu'on y voit,
+  puis ceux qui attendent, puis l'équipe qui arrive — et les jambages du
+  portique en dernier, parce qu'ils sont devant tout. Grille 256 x 144.
 -->
 <div class="tableau tableau--tribunal">
 
-  <div class="fond"></div>
-
-  <!-- Les deux Justice encapuchonnées, de part et d'autre de l'entrée. -->
-  <div class="colonne colonne--g"></div>
-  <div class="statue statue--g" data-hotspot="sculptures"></div>
-  <div class="colonne colonne--d"></div>
-  <div class="statue statue--d" data-hotspot="sculptures"></div>
-
-  <!-- La fenêtre du deuxième étage, le decoy. -->
+  <div class="ciel"></div>
+  <div class="facade"></div>
+  <div class="parvis"></div>
   <div class="fenetre-etage" data-hotspot="fenetre"></div>
+  <div class="corniche"></div>
 
-  <!-- Le hall, en arrière-plan — la rumeur du lieu. -->
-  <div class="galeries" data-hotspot="galeries"></div>
+  <!-- Les deux Justice encapuchonnées, de part et d'autre de l'entrée.
+       Même carte, la seconde retournée : elles se font face. -->
+  <div class="colonne colonne--g"></div>
+  <div class="statue statue--g sprite--prop-justice" data-hotspot="sculptures"></div>
+  <div class="colonne colonne--d"></div>
+  <div class="statue statue--d sprite--prop-justice" data-hotspot="sculptures"></div>
 
-  <!-- Les détecteurs, dans l'axe de l'entrée. -->
-  <div class="detecteurs" data-hotspot="detecteurs"></div>
+  <!-- L'entrée : le creux, les couloirs qu'on aperçoit, les deux
+       battants entrebâillés, et le portique de détection devant eux. -->
+  <div class="portail"></div>
+  <div class="galeries sprite--prop-galerie" data-hotspot="galeries"></div>
+  <div class="porte-salle porte-salle--g" data-hotspot="entree"></div>
+  <div class="porte-salle porte-salle--d" data-hotspot="entree"></div>
+  <div class="detecteur detecteur--g" data-hotspot="detecteurs"></div>
+  <div class="detecteur detecteur--d" data-hotspot="detecteurs"></div>
+  <div class="detecteur detecteur--haut" data-hotspot="detecteurs"></div>
 
-  <div class="garde garde--a" data-hotspot="gardes"></div>
-  <div class="garde garde--b" data-hotspot="gardes"></div>
-  <div class="garde garde--trouble" data-hotspot="garde-trouble"></div>
-
-  <div class="silhouette-mccarthy" data-hotspot="mccarthy"></div>
+  <!-- Ceux qui sont déjà là. Les trois gardes portent la MÊME carte :
+       « un garde parmi d'autres », dit le texte, et c'est Hercules qui
+       doit le distinguer, pas sa couleur. -->
+  <div class="ombre ombre--mccarthy"></div>
+  <div class="ombre ombre--garde-a"></div>
+  <div class="ombre ombre--garde-t"></div>
+  <div class="ombre ombre--garde-b"></div>
+  <div class="pnj p-mccarthy sprite--mccarthy" data-hotspot="mccarthy"></div>
+  <div class="pnj garde garde--a sprite--prop-garde" data-hotspot="gardes"></div>
+  <div class="pnj garde garde--trouble sprite--prop-garde" data-hotspot="garde-trouble"></div>
+  <div class="pnj garde garde--b sprite--prop-garde" data-hotspot="gardes"></div>
 
   <!-- L'équipe, en chemin vers la salle. -->
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--hercules"></div>
   <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
   <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
   <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
   <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
 
-  <!-- Les portes de la salle — vue rapprochée gratuite vers tribunal-salle. -->
-  <div class="portes-salle" data-hotspot="entree"></div>
+  <div class="jambage jambage--g"></div>
+  <div class="jambage jambage--d"></div>
 
 </div>

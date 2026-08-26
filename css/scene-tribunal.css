@@ -1,11 +1,32 @@
 /* ── TABLEAU 6 BIS — LE TRIBUNAL, LE PARVIS ───────────────────────────
-   Chantier 20b. Grille 256 x 144 (chantier 8), même --u que les autres
-   tableaux.
+   Chantier 20b pour la mécanique, CHANTIER 23 pour la passe d'art.
+   Grille 256 x 144 (chantier 8), même --u que les autres tableaux.
 
-   PLACEHOLDER FONCTIONNEL. Même réserve que scene-tribunal-salle.css :
-   pas de grain, pas de calques astral/tactique/RA — la lisibilité
-   d'abord, l'art dans un chantier à part. Palette pierre/marbre pour se
-   distinguer du bois de la salle, à défaut de détail. */
+   CE QUI CHANGE. La version d'avant s'annonçait « PLACEHOLDER
+   FONCTIONNEL, PAS UN PIXEL DESSINÉ » : un dégradé, deux barres pour
+   les colonnes, deux gélules grises pour les Justice, trois rectangles
+   bleus pour les gardes et un rectangle brun pour McCarthy — alors que
+   le sprite de McCarthy existe depuis le premier tableau du jeu.
+
+   LA LUMIÈRE, ET ELLE SE DÉCLARE ICI : c'est un extérieur à huit heures
+   cinquante, donc une bande de ciel en haut du cadre et RIEN d'autre.
+   Le jour tombe d'aplomb ; les figures et les statues prennent leur
+   arête claire par le haut, jamais par un flanc. (Règle du chantier 23 :
+   la source est dans le CSS de la scène, l'atelier la lit.)
+
+   LES TROIS GARDES SONT LE MÊME SPRITE, ET C'EST UNE CORRECTION. Le
+   placeholder donnait au troisième une couleur à lui (#3a3040 contre
+   #2b3d55) — il se voyait donc de loin, alors que le texte dit
+   exactement le contraire : « Un garde parmi d'autres », et il n'y a
+   que le sens du danger d'Hercules pour le distinguer (« Celui-là. Je
+   ne sais pas pourquoi. »). Un décor qui le désigne d'avance vend la
+   mèche à la place du personnage. Il porte donc la même carte que les
+   deux autres ; c'est la barre d'espace (chantier 42) qui le rend
+   trouvable, pas sa couleur.
+
+   CE QUE CE FICHIER NE FAIT TOUJOURS PAS : les trois calques de
+   lentille (astral / tactique / RA), absents des onze décors récents —
+   une dette de série, pas de ce tableau. */
 
 .tableau--tribunal {
   position: absolute;
@@ -16,74 +37,162 @@
 }
 .tableau--tribunal > * { position: absolute; }
 
-.tableau--tribunal .fond {
-  inset: 0;
-  background: linear-gradient(180deg, #26282f 0%, #2e3037 60%, #35373e 100%);
+/* ── LE CIEL, LA FAÇADE, LE PARVIS ───────────────────────────────────
+   Trois bandes : la source de lumière, le mur, le sol. */
+.tableau--tribunal .ciel {
+  left: 0; top: 0; width: 100%; height: calc(16 * var(--u));
+  background: linear-gradient(180deg, #6d7684 0%, #57606e 60%, #454d59 100%);
 }
-
-.tableau--tribunal .galeries {
-  left: 0; top: calc(118 * var(--u));
-  width: 100%; height: calc(22 * var(--u));
-  background: repeating-linear-gradient(
-    180deg, #2a2c33 0 calc(4 * var(--u)), #23252b calc(4 * var(--u)) calc(8 * var(--u))
-  );
+.tableau--tribunal .facade {
+  left: 0; top: calc(16 * var(--u)); width: 100%; height: calc(88 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.13) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(24 * var(--u))),
+    repeating-linear-gradient(180deg,
+      rgba(0,0,0,.13) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(12 * var(--u))),
+    linear-gradient(180deg, #3e4149 0%, #34373e 55%, #2b2e34 100%);
+}
+/* La corniche — sans elle, la façade est un aplat, et les statues ont
+   l'air collées dessus au lieu d'être posées sur quelque chose. */
+.tableau--tribunal .corniche {
+  left: 0; top: calc(52 * var(--u)); width: 100%; height: calc(6 * var(--u));
+  background: linear-gradient(180deg, #5a5e68 0%, #43464e 60%, #2a2c32 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.45);
+}
+.tableau--tribunal .parvis {
+  left: 0; top: calc(104 * var(--u)); width: 100%; height: calc(40 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      #33363d 0 calc(26 * var(--u)), #2d3037 calc(26 * var(--u)) calc(52 * var(--u))),
+    #303339;
+  box-shadow: inset 0 calc(1 * var(--u)) calc(4 * var(--u)) rgba(0,0,0,.4);
 }
 
 .tableau--tribunal .colonne {
-  top: calc(8 * var(--u)); width: calc(14 * var(--u)); height: calc(84 * var(--u));
-  background: linear-gradient(90deg, #4a4c54 0%, #63656d 50%, #4a4c54 100%);
+  top: calc(16 * var(--u)); width: calc(16 * var(--u)); height: calc(102 * var(--u));
+  background: linear-gradient(90deg, #3f424a 0%, #62656d 42%, #4a4d55 70%, #33363c 100%);
+  box-shadow: 0 calc(2 * var(--u)) calc(5 * var(--u)) rgba(0,0,0,.4);
 }
 .tableau--tribunal .colonne--g { left: calc(14 * var(--u)); }
-.tableau--tribunal .colonne--d { left: calc(228 * var(--u)); }
+.tableau--tribunal .colonne--d { left: calc(226 * var(--u)); }
 
+/* Les deux Justice — un vrai sprite, `prop-justice`, tracé pour ce lot.
+   La seconde est la même carte retournée : elles se font face au-dessus
+   de l'entrée, ce que deux copies identiques n'auraient pas fait. */
 .tableau--tribunal .statue {
-  top: calc(10 * var(--u)); width: calc(18 * var(--u)); height: calc(40 * var(--u));
-  background: linear-gradient(180deg, #6b6d75 0%, #52545c 100%);
-  border-radius: calc(9 * var(--u)) calc(9 * var(--u)) 2px 2px;
+  top: calc(16 * var(--u)); width: calc(18 * var(--u));
 }
-.tableau--tribunal .statue--g { left: calc(30 * var(--u)); }
-.tableau--tribunal .statue--d { left: calc(208 * var(--u)); }
+.tableau--tribunal .statue--g { left: calc(34 * var(--u)); }
+.tableau--tribunal .statue--d { left: calc(204 * var(--u)); transform: scaleX(-1); }
 
 .tableau--tribunal .fenetre-etage {
-  left: calc(188 * var(--u)); top: calc(16 * var(--u));
-  width: calc(36 * var(--u)); height: calc(24 * var(--u));
-  background: linear-gradient(180deg, #3a4048 0%, #23262c 100%);
-  border: calc(1 * var(--u)) solid #575b63;
+  left: calc(168 * var(--u)); top: calc(22 * var(--u));
+  width: calc(32 * var(--u)); height: calc(22 * var(--u));
+  background: linear-gradient(180deg, #495059 0%, #23262c 70%, #2e343c 100%);
+  border: calc(1 * var(--u)) solid #5c606a;
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(0,0,0,.35);
 }
 
-.tableau--tribunal .detecteurs {
-  left: calc(108 * var(--u)); top: calc(58 * var(--u));
-  width: calc(40 * var(--u)); height: calc(34 * var(--u));
-  background: transparent;
-  border: calc(2 * var(--u)) solid #7a828e;
-  border-bottom: none;
-  border-radius: calc(10 * var(--u)) calc(10 * var(--u)) 0 0;
+/* ── L'ENTRÉE ────────────────────────────────────────────────────────
+   Un creux sombre dans la façade, deux battants entrebâillés, et entre
+   eux la lumière du hall. C'est le seul endroit clair du tableau au
+   niveau du sol : c'est là qu'on va. */
+.tableau--tribunal .portail {
+  left: calc(92 * var(--u)); top: calc(38 * var(--u));
+  width: calc(72 * var(--u)); height: calc(66 * var(--u));
+  background: linear-gradient(180deg, #14161c 0%, #1d2129 55%, #262b33 100%);
+  box-shadow: inset 0 0 calc(6 * var(--u)) rgba(0,0,0,.7);
+}
+/* « Les couloirs se remplissent » — la même carte que la galerie de la
+   salle d'audience, en petit, aperçue par l'entrebâillement. Le décor
+   ne montrait rien de ces gens-là ; le texte en parle deux fois. */
+.tableau--tribunal .galeries {
+  left: calc(96 * var(--u)); top: calc(50 * var(--u));
+  width: calc(64 * var(--u));
+  opacity: .85;
+}
+.tableau--tribunal .porte-salle {
+  top: calc(38 * var(--u)); width: calc(24 * var(--u)); height: calc(66 * var(--u));
+  background: linear-gradient(180deg, #3a2f22 0%, #251d14 100%);
+  border-top: calc(1 * var(--u)) solid #574530;
+}
+.tableau--tribunal .porte-salle--g { left: calc(92 * var(--u)); border-right: calc(1 * var(--u)) solid #12100c; }
+.tableau--tribunal .porte-salle--d { left: calc(140 * var(--u)); border-left: calc(1 * var(--u)) solid #12100c; }
+
+/* Le portique de détection, planté dans l'entrebâillement, DEVANT les
+   battants. TROIS PIÈCES PLEINES, pas un cadre à fond transparent, et
+   c'est un hit-test qui l'a imposé : une boîte transparente capte le
+   clic sur toute sa surface, donc Drakk, qui passe devant elle, lui
+   volait son centre — la cible qui paie l'arme de Wilson (chantier 20b)
+   devenait un ruban de huit unités. Trois montants portent la même
+   cible, comme les deux Justice portent `sculptures` : il suffit que
+   l'un d'eux reste dégagé, et le linteau l'est toujours, au-dessus des
+   têtes. */
+.tableau--tribunal .detecteur {
+  background: linear-gradient(90deg, #5e6672 0%, #868e9a 45%, #4e5560 100%);
+  box-shadow: inset 0 0 0 calc(1 * var(--u)) rgba(0,0,0,.4);
+}
+.tableau--tribunal .detecteur--g { left: calc(106 * var(--u)); top: calc(66 * var(--u)); width: calc(6 * var(--u)); height: calc(38 * var(--u)); }
+.tableau--tribunal .detecteur--d { left: calc(144 * var(--u)); top: calc(66 * var(--u)); width: calc(6 * var(--u)); height: calc(38 * var(--u)); }
+.tableau--tribunal .detecteur--haut {
+  left: calc(106 * var(--u)); top: calc(66 * var(--u));
+  width: calc(44 * var(--u)); height: calc(6 * var(--u));
+  background: linear-gradient(180deg, #8c94a0 0%, #5a616c 100%);
+}
+/* La diode du portique : « un garde qui regarde l'écran plus que
+   vous » — l'écran est ici, et il veille. */
+.tableau--tribunal .detecteur--haut::after {
+  content: ''; position: absolute;
+  right: calc(3 * var(--u)); top: calc(2 * var(--u));
+  width: calc(2 * var(--u)); height: calc(2 * var(--u)); border-radius: 50%;
+  background: #6ee08a; box-shadow: 0 0 calc(3 * var(--u)) #6ee08a;
 }
 
-.tableau--tribunal .garde {
-  top: calc(94 * var(--u)); width: calc(16 * var(--u)); height: calc(24 * var(--u));
-  background: #2b3d55;
-  border-radius: 2px;
-}
-.tableau--tribunal .garde--a { left: calc(86 * var(--u)); }
-.tableau--tribunal .garde--b { left: calc(154 * var(--u)); }
-.tableau--tribunal .garde--trouble { left: calc(176 * var(--u)); background: #3a3040; }
+/* ── CEUX QUI SONT DÉJÀ LÀ ───────────────────────────────────────────
+   Ligne de pieds à 108 : ils sont derrière l'équipe, qui arrive et dont
+   les pieds tombent trente unités plus bas. La largeur suit les
+   proportions de la carte (64 × 90 px), jamais celle du rectangle qui
+   leur tenait lieu de corps. */
+.tableau--tribunal .garde { top: calc(83 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--tribunal .garde--a { left: calc(78 * var(--u)); }
+.tableau--tribunal .garde--b { left: calc(212 * var(--u)); transform: scaleX(-1); }
+.tableau--tribunal .garde--trouble { left: calc(186 * var(--u)); }
 
-.tableau--tribunal .silhouette-mccarthy {
-  left: calc(56 * var(--u)); top: calc(92 * var(--u));
-  width: calc(14 * var(--u)); height: calc(26 * var(--u));
-  background: #4a3a2a;
-  border-radius: 2px;
-}
+.tableau--tribunal .p-mccarthy { left: calc(52 * var(--u)); top: calc(80 * var(--u)); width: calc(20 * var(--u)); }
 
-.tableau--tribunal .p-drakk    { width: calc(46 * var(--u)); left: calc(96 * var(--u)); top: calc(86 * var(--u)); }
+/* ── L'ÉQUIPE, EN CHEMIN VERS LA SALLE ───────────────────────────────
+   Elle occupe la bande centrale, et aucun des quatre ne recouvre le
+   buste d'un garde : la cible `garde-trouble` n'a qu'un seul élément,
+   et si elle disparaît sous Hercules, le seul beat du « sens du
+   danger » hors de `retour` disparaît avec elle. */
+.tableau--tribunal .p-drakk    { width: calc(46 * var(--u)); left: calc(96 * var(--u));  top: calc(84 * var(--u)); }
 .tableau--tribunal .p-trash    { width: calc(34 * var(--u)); left: calc(134 * var(--u)); top: calc(90 * var(--u)); }
-.tableau--tribunal .p-rabbit   { width: calc(24 * var(--u)); left: calc(166 * var(--u)); top: calc(97 * var(--u)); }
-.tableau--tribunal .p-hercules { width: calc(20 * var(--u)); left: calc(190 * var(--u)); top: calc(105 * var(--u)); }
+.tableau--tribunal .p-rabbit   { width: calc(24 * var(--u)); left: calc(158 * var(--u)); top: calc(97 * var(--u)); }
+.tableau--tribunal .p-hercules { width: calc(20 * var(--u)); left: calc(176 * var(--u)); top: calc(105 * var(--u)); }
 
-.tableau--tribunal .portes-salle {
-  left: calc(100 * var(--u)); top: calc(128 * var(--u));
-  width: calc(56 * var(--u)); height: calc(14 * var(--u));
-  background: linear-gradient(180deg, #3d3226 0%, #2c2418 100%);
-  border-top: calc(1 * var(--u)) solid #59492f;
+.tableau--tribunal .ombre {
+  height: calc(4 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.5), transparent 78%);
+  pointer-events: none;
 }
+.tableau--tribunal .ombre--mccarthy { left: calc(54 * var(--u));  top: calc(106 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--tribunal .ombre--garde-a  { left: calc(80 * var(--u));  top: calc(106 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--tribunal .ombre--garde-b  { left: calc(214 * var(--u)); top: calc(106 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--tribunal .ombre--garde-t  { left: calc(188 * var(--u)); top: calc(106 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--tribunal .ombre--drakk    { left: calc(100 * var(--u)); top: calc(136 * var(--u)); width: calc(40 * var(--u)); }
+.tableau--tribunal .ombre--trash    { left: calc(138 * var(--u)); top: calc(136 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--tribunal .ombre--rabbit   { left: calc(161 * var(--u)); top: calc(135 * var(--u)); width: calc(19 * var(--u)); }
+.tableau--tribunal .ombre--hercules { left: calc(178 * var(--u)); top: calc(131 * var(--u)); width: calc(16 * var(--u)); }
+
+/* Le premier plan : les deux jambages du portique, au ras du cadre.
+   Même geste que les jambages du bar (chantier 14) — une élévation
+   frontale sans rien devant « se lit comme une séance
+   d'identification ». Ils ne portent aucune cible. */
+.tableau--tribunal .jambage {
+  top: 0; width: calc(12 * var(--u)); height: 100%;
+  background: linear-gradient(90deg, #16181d 0%, #101216 100%);
+  pointer-events: none;
+}
+.tableau--tribunal .jambage--g { left: 0; }
+.tableau--tribunal .jambage--d { right: 0; background: linear-gradient(90deg, #101216 0%, #16181d 100%); }

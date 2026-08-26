@@ -1,13 +1,36 @@
 /* ── TABLEAU 6 — LE TRIBUNAL, LA SALLE D'AUDIENCE ─────────────────────
-   Chantier 20, rang 1 : `depose()` et la barre, sans le parvis (20b) et
-   sans art dessiné. Grille 256 x 144 (chantier 8), même --u que les
-   autres tableaux.
+   Chantier 20 pour la mécanique (`depose()` et la barre), CHANTIER 23
+   pour ce qui suit : la passe d'art. Grille 256 x 144 (chantier 8),
+   même --u que les autres tableaux.
 
-   PLACEHOLDER FONCTIONNEL. Aucun dégradé de grain, aucun calque
-   astral/tactique/RA : ce tableau n'a pas encore eu sa passe d'art, et
-   ce n'est pas ce chantier qui la lui donne. Les formes ci-dessous ne
-   portent que la lisibilité — assez pour reconnaître un banc, deux
-   tables, un box et une barre, et pour valider `depose()` en jeu. */
+   CE QUI CHANGE, ET POURQUOI. La version d'avant s'annonçait
+   « PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ », et elle disait
+   vrai : un fond en dégradé, six rectangles, aucun sol, aucune
+   profondeur, aucune figure. Trois personnes que le texte NOMME —
+   le juge, Wú Chen, le procureur — n'étaient que le meuble devant
+   lequel elles se tiennent : la cible `defense` s'appelait « L'avocate
+   de la défense » et le joueur cliquait une table.
+
+   LA PROFONDEUR SE LIT MAINTENANT SUR LES LIGNES DE PIEDS, comme dans
+   les cinq tableaux du chantier 14 :
+
+       le juge (surélevé)        pieds cachés, banc à 78
+       Lester, dans son box      pieds 79
+       la barre des témoins      base 76
+       les deux tables           base 114, les avocats à 112
+       l'équipe, dans le prétoire pieds 123-124
+       la galerie                126-144, premier plan, de dos
+
+   LA LUMIÈRE A UNE SOURCE, et c'est elle qui décide de tout le reste
+   (règle du chantier 23) : deux rampes de plafond, `.plafonnier--a` et
+   `.plafonnier--b`. Pas de suspension latérale comme au bar — donc les
+   figures prennent leur liseré SUR L'ARÊTE DU HAUT, et c'est ce que
+   `retouches/palais.py` leur a posé.
+
+   CE QUE CE FICHIER NE FAIT TOUJOURS PAS : les trois calques de
+   lentille (astral / tactique / RA). Ils n'existent dans aucun des onze
+   décors récents — c'est une dette de série, pas une dette de ce
+   tableau, et elle se traitera d'un coup. */
 
 .tableau--tribunal-salle {
   position: absolute;
@@ -18,83 +41,193 @@
 }
 .tableau--tribunal-salle > * { position: absolute; }
 
-.tableau--tribunal-salle .fond {
-  inset: 0;
-  background: linear-gradient(180deg, #1b1e29 0%, #1b1e29 55%, #24272f 100%);
+/* ── LE VOLUME DE LA SALLE ───────────────────────────────────────────
+   Trois bandes, comme au bar : le mur, le lambris, le sol. Sans elles,
+   une élévation frontale n'a pas de ligne de sol, et tout ce qu'on y
+   pose flotte. */
+.tableau--tribunal-salle .mur {
+  left: 0; top: 0; width: 100%; height: calc(62 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.22) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(11 * var(--u))),
+    linear-gradient(180deg, #191b24 0%, #23262f 70%, #272a34 100%);
+}
+.tableau--tribunal-salle .lambris {
+  left: 0; top: calc(62 * var(--u)); width: 100%; height: calc(16 * var(--u));
+  background: linear-gradient(180deg, #3a3126 0%, #2b241a 100%);
+  border-top: calc(1 * var(--u)) solid #56482f;
+  box-shadow: inset 0 calc(-1 * var(--u)) 0 rgba(0,0,0,.5);
+}
+.tableau--tribunal-salle .sol {
+  left: 0; top: calc(78 * var(--u)); width: 100%; height: calc(66 * var(--u));
+  background:
+    repeating-linear-gradient(90deg,
+      #21232b 0 calc(21 * var(--u)), #1c1e26 calc(21 * var(--u)) calc(42 * var(--u))),
+    #1e2028;
 }
 
-/* Le banc du juge, au fond, surélevé. */
+/* Les deux rampes de plafond — la source, celle qui décide des lisérés
+   posés sur les figures dans l'atelier. Elles ne sont pas dessinées
+   (elles sont hors cadre, au plafond) : on n'en voit que la flaque. */
+.tableau--tribunal-salle .plafonnier {
+  top: 0; width: calc(96 * var(--u)); height: calc(52 * var(--u));
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(214, 206, 180, .12), transparent 70%);
+  pointer-events: none;
+}
+.tableau--tribunal-salle .plafonnier--a { left: calc(12 * var(--u)); }
+.tableau--tribunal-salle .plafonnier--b { left: calc(140 * var(--u)); }
+
+/* ── LE JUGE, ET SON BANC ────────────────────────────────────────────
+   Il PRÉCÈDE son banc dans le DOM : un homme assis derrière un meuble
+   ne se dessine pas assis (chantier 23, lot 7), le meuble le coupe. Le
+   banc étant surélevé, ce qui dépasse est la tête et les épaules — d'où
+   un vrai buste, `prop-juge`, recadré à 64 × 64 pour tomber pile sur la
+   boîte carrée de 30 × 30 u que le décor lui réserve.
+
+   LA CIBLE `juge` EST SUR LUI, plus sur le banc. C'est le même
+   déplacement que pour `defense`, `accusation` et `lester` : une
+   personne que le texte décrit ne se clique pas par son mobilier. */
+.tableau--tribunal-salle .juge {
+  left: calc(113 * var(--u)); top: calc(18 * var(--u));
+  width: calc(30 * var(--u));
+}
 .tableau--tribunal-salle .banc-juge {
-  left: calc(88 * var(--u)); top: calc(12 * var(--u));
-  width: calc(80 * var(--u)); height: calc(26 * var(--u));
-  background: linear-gradient(180deg, #4a3826 0%, #362818 100%);
-  border-bottom: calc(3 * var(--u)) solid #241a0f;
-  border-radius: 2px;
+  left: calc(86 * var(--u)); top: calc(42 * var(--u));
+  width: calc(84 * var(--u)); height: calc(36 * var(--u));
+  background: linear-gradient(180deg, #4a3826 0%, #33261a 55%, #241a10 100%);
+  border-top: calc(1 * var(--u)) solid #6b5335;
+  border-radius: 2px 2px 0 0;
+  box-shadow: 0 calc(1 * var(--u)) calc(4 * var(--u)) rgba(0,0,0,.5);
+}
+/* L'estrade sur laquelle le banc repose — c'est elle qui dit
+   « surélevé », et sans elle le banc a l'air posé par terre. */
+.tableau--tribunal-salle .estrade {
+  left: calc(80 * var(--u)); top: calc(74 * var(--u));
+  width: calc(96 * var(--u)); height: calc(8 * var(--u));
+  background: linear-gradient(180deg, #2c2418 0%, #201a11 100%);
 }
 
-/* La galerie, au premier plan — les rangées, jamais une cible fine. */
-.tableau--tribunal-salle .galerie {
-  left: 0; top: calc(122 * var(--u));
-  width: 100%; height: calc(20 * var(--u));
-  background: repeating-linear-gradient(
-    180deg, #23252e 0 calc(4 * var(--u)), #1b1d24 calc(4 * var(--u)) calc(8 * var(--u))
-  );
-}
-
-/* Le retour vers le parvis, sur le côté — distinct de la sortie
-   (`porte-tribunal`, premier plan centre) : l'un revient en arrière
-   gratuitement, l'autre referme la nuit. */
-.tableau--tribunal-salle .porte-laterale {
-  left: calc(4 * var(--u)); top: calc(120 * var(--u));
-  width: calc(16 * var(--u)); height: calc(20 * var(--u));
-  background: #2c2e38;
-  border-right: calc(1 * var(--u)) solid #4a4d5a;
-}
-
-.tableau--tribunal-salle .table {
-  top: calc(78 * var(--u)); height: calc(20 * var(--u));
-  background: linear-gradient(180deg, #3d3226 0%, #2c2418 100%);
-  border-top: calc(1 * var(--u)) solid #59492f;
-  border-radius: 2px;
-}
-.tableau--tribunal-salle .table--defense    { left: calc(22 * var(--u)); width: calc(52 * var(--u)); }
-.tableau--tribunal-salle .table--accusation { left: calc(182 * var(--u)); width: calc(52 * var(--u)); }
-
-/* Le box de Lester, entre le banc et la barre, contre le mur du fond. */
-.tableau--tribunal-salle .box-lester {
-  left: calc(20 * var(--u)); top: calc(44 * var(--u));
-  width: calc(40 * var(--u)); height: calc(22 * var(--u));
-  background: #20222b;
-  border: calc(1 * var(--u)) solid #3a3d49;
-  border-radius: 2px;
-}
+/* ── LESTER, AU BANC DES ACCUSÉS ─────────────────────────────────────
+   Même geste : il précède son box, qui le coupe à la poitrine. Avant ce
+   chantier il passait DEVANT lui, ses jambes dépassant sous un box de
+   22 u — la même erreur d'empilement qu'Iris devant son comptoir, et
+   invisible pour la même raison (une forme trop courte pour qu'on la
+   remarque). */
 .tableau--tribunal-salle .p-lester {
-  left: calc(22 * var(--u)); top: calc(32 * var(--u));
+  left: calc(16 * var(--u)); top: calc(34 * var(--u));
   width: calc(32 * var(--u));
 }
+.tableau--tribunal-salle .box-lester {
+  left: calc(10 * var(--u)); top: calc(56 * var(--u));
+  width: calc(48 * var(--u)); height: calc(24 * var(--u));
+  background: linear-gradient(180deg, #3a3024 0%, #241d14 100%);
+  border-top: calc(1 * var(--u)) solid #574530;
+  border-radius: 2px 2px 0 0;
+}
 
-/* La barre des témoins, seule dans l'allée centrale — c'est elle qui
-   compte ce soir. Traitement ambré : elle se distingue du reste du
-   décor, comme la barre de progrès du carnet. */
+/* ── LA BARRE DES TÉMOINS — c'est elle qui compte, ce soir ───────────
+   Traitement ambré, comme la barre de progrès du carnet : elle doit se
+   distinguer du bois du reste sans qu'on ait à l'expliquer. Vide, et
+   elle le reste : `depose()` ne s'y déclenche pas par un clic. */
 .tableau--tribunal-salle .barre-temoins {
-  left: calc(106 * var(--u)); top: calc(50 * var(--u));
-  width: calc(44 * var(--u)); height: calc(22 * var(--u));
+  left: calc(172 * var(--u)); top: calc(50 * var(--u));
+  width: calc(40 * var(--u)); height: calc(26 * var(--u));
   background: linear-gradient(180deg, #4a3d24 0%, #332a17 100%);
   border: calc(1 * var(--u)) solid #7a6534;
   border-radius: 2px;
   box-shadow: 0 0 calc(6 * var(--u)) rgba(200, 160, 70, .18);
 }
+/* Le micro qu'on n'a pas encore allumé — le texte le promet, le décor
+   ne le montrait pas. */
+.tableau--tribunal-salle .barre-temoins::after {
+  content: ''; position: absolute;
+  left: calc(18 * var(--u)); top: calc(-7 * var(--u));
+  width: calc(2 * var(--u)); height: calc(8 * var(--u));
+  background: #15161a;
+  box-shadow: calc(-1 * var(--u)) calc(-2 * var(--u)) 0 0 #15161a;
+}
 
-/* L'équipe, debout derrière la table de la défense. */
-.tableau--tribunal-salle .p-drakk    { width: calc(46 * var(--u)); left: calc(20 * var(--u));  top: calc(87 * var(--u)); }
-.tableau--tribunal-salle .p-trash    { width: calc(34 * var(--u)); left: calc(60 * var(--u)); top: calc(91 * var(--u)); }
-.tableau--tribunal-salle .p-rabbit   { width: calc(24 * var(--u)); left: calc(92 * var(--u)); top: calc(98 * var(--u)); }
-.tableau--tribunal-salle .p-hercules { width: calc(20 * var(--u)); left: calc(116 * var(--u)); top: calc(105 * var(--u)); }
+/* ── LES DEUX TABLES, ET LES DEUX QUI SE TIENNENT DERRIÈRE ───────────
+   Les tables ont un panneau plein jusqu'au sol : c'est ce qui permet
+   aux deux avocats d'être des corps DEBOUT dont on ne voit que le
+   buste, sans avoir à dessiner une pose assise. */
+.tableau--tribunal-salle .table {
+  top: calc(92 * var(--u)); height: calc(22 * var(--u));
+  background: linear-gradient(180deg, #4a3d2c 0%, #33291c 12%, #241d14 100%);
+  border-top: calc(1 * var(--u)) solid #6b5738;
+  border-radius: 2px 2px 0 0;
+}
+.tableau--tribunal-salle .table--defense    { left: calc(20 * var(--u)); width: calc(60 * var(--u)); }
+.tableau--tribunal-salle .table--accusation { left: calc(176 * var(--u)); width: calc(60 * var(--u)); }
 
-/* La sortie, au premier plan, sous la galerie. */
+/* Wú Chen — dérivée d'Iris, la seule silhouette de femme du jeu. */
+.tableau--tribunal-salle .avocate {
+  left: calc(38 * var(--u)); top: calc(68 * var(--u));
+  width: calc(26 * var(--u));
+}
+/* Le procureur — dérivé de Renfield, le seul corps d'homme d'âge mûr.
+   Il est plus loin du bord que Wú Chen n'est du sien : sa tête ne doit
+   pas retomber sur le centre de la barre des témoins, qui est la cible
+   la plus importante du tableau. */
+.tableau--tribunal-salle .procureur {
+  left: calc(198 * var(--u)); top: calc(66 * var(--u));
+  width: calc(33 * var(--u));
+}
+
+/* ── L'ÉQUIPE, DEBOUT DANS LE PRÉTOIRE ───────────────────────────────
+   Du côté de la défense, jamais du côté de l'accusation : leurs quatre
+   silhouettes tiennent entre le bord gauche du cadre et la table de
+   l'accusation, et aucune ne recouvre le buste d'un avocat. */
+.tableau--tribunal-salle .p-drakk    { width: calc(46 * var(--u)); left: calc(66 * var(--u));  top: calc(68 * var(--u)); }
+.tableau--tribunal-salle .p-trash    { width: calc(34 * var(--u)); left: calc(108 * var(--u)); top: calc(74 * var(--u)); }
+.tableau--tribunal-salle .p-rabbit   { width: calc(24 * var(--u)); left: calc(138 * var(--u)); top: calc(82 * var(--u)); }
+.tableau--tribunal-salle .p-hercules { width: calc(20 * var(--u)); left: calc(156 * var(--u)); top: calc(94 * var(--u)); }
+
+/* Les ombres de contact (chantier 14) : une ellipse sous chaque paire
+   de pieds posée sur le sol. Les avocats n'en ont pas — on ne voit pas
+   leurs pieds, et une ombre sans pieds est un trou dans le parquet. */
+.tableau--tribunal-salle .ombre {
+  height: calc(4 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,.55), transparent 78%);
+  pointer-events: none;
+}
+.tableau--tribunal-salle .ombre--drakk    { left: calc(70 * var(--u));  top: calc(121 * var(--u)); width: calc(40 * var(--u)); }
+.tableau--tribunal-salle .ombre--trash    { left: calc(112 * var(--u)); top: calc(121 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--tribunal-salle .ombre--rabbit   { left: calc(141 * var(--u)); top: calc(120 * var(--u)); width: calc(19 * var(--u)); }
+.tableau--tribunal-salle .ombre--hercules { left: calc(158 * var(--u)); top: calc(120 * var(--u)); width: calc(16 * var(--u)); }
+
+/* ── LA GALERIE — LE PREMIER PLAN QUI MANQUAIT ───────────────────────
+   « Personne, ici, n'est venu pour Lester. C'est bien le problème. »
+   Des DOS, en deux blocs, la même carte retournée pour le second : ce
+   qui reste entre les deux est l'allée centrale, et c'est par elle
+   qu'on sort. Le chantier 14 avait donné un premier plan aux cinq
+   tableaux d'origine ; celui-ci n'en avait jamais eu. */
+.tableau--tribunal-salle .galerie {
+  top: calc(126 * var(--u)); width: calc(104 * var(--u));
+}
+.tableau--tribunal-salle .galerie--g { left: 0; }
+.tableau--tribunal-salle .galerie--d { left: calc(152 * var(--u)); transform: scaleX(-1); }
+
+/* La sortie, au bout de l'allée. Elle referme la nuit (1ʳᵉ audience) ou
+   le dossier (2ᵉ) : elle est donc au premier plan, devant la galerie. */
 .tableau--tribunal-salle .porte-tribunal {
-  left: calc(108 * var(--u)); top: calc(136 * var(--u));
-  width: calc(40 * var(--u)); height: calc(8 * var(--u));
-  background: #2c2e38;
+  left: calc(108 * var(--u)); top: calc(130 * var(--u));
+  width: calc(40 * var(--u)); height: calc(14 * var(--u));
+  background: linear-gradient(180deg, #2f2a22 0%, #1b1812 100%);
+  border-top: calc(1 * var(--u)) solid #574530;
+}
+
+/* Le retour vers le parvis, sur le côté — distinct de la sortie :
+   l'un revient en arrière gratuitement, l'autre referme la nuit. Il est
+   dans le mur du fond à droite, là où une salle d'audience a sa porte
+   de service, et non plus au ras du cadre où il se confondait avec
+   elle. */
+.tableau--tribunal-salle .porte-laterale {
+  left: calc(234 * var(--u)); top: calc(54 * var(--u));
+  width: calc(20 * var(--u)); height: calc(38 * var(--u));
+  background: linear-gradient(90deg, #2a2e38 0%, #1e222a 100%);
+  border-left: calc(1 * var(--u)) solid #4a4d5a;
   border-top: calc(1 * var(--u)) solid #4a4d5a;
 }

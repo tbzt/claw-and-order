@@ -1,50 +1,69 @@
 <!--
-  Tableau 6 — LE TRIBUNAL, LA SALLE D'AUDIENCE. Chantier 20, rang 1
-  (`depose()` et la barre), sans le parvis (20b) et sans art dessiné.
+  Tableau 6 — LE TRIBUNAL, LA SALLE D'AUDIENCE. Chantier 20 pour la
+  mécanique (`depose()` et la barre), CHANTIER 23 pour l'art.
 
-  PLACEHOLDER FONCTIONNEL, PAS UN PIXEL DESSINÉ. Chaque tableau du jeu
-  jusqu'ici porte une passe d'art complète (dégradés, grain, calques
-  astral/tactique/RA) ; celle-ci n'existe pas encore pour ce tableau —
-  elle est son propre chantier, pas celui qu'on valide ce soir. Les
-  formes ci-dessous ne portent que ce qu'il faut pour lire la scène et
-  cliquer les bonnes cibles : un banc, deux tables, un box, une barre.
+  Décor au texte : un banc surélevé et le juge qui écoute, le box où
+  Lester attend en combinaison orange, deux tables de part et d'autre de
+  l'allée, la barre des témoins seule au milieu — et, de dos au premier
+  plan, une galerie qui n'est venue pour personne.
 
-  Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
+  ORDRE DU DOM, ET IL DIT LA PROFONDEUR : chaque personne PRÉCÈDE le
+  meuble qui la coupe (le juge son banc, Lester son box, les avocats
+  leur table), et la galerie passe en dernier parce qu'elle est devant
+  tout le monde. Grille 256 x 144 (chantier 8).
 -->
 <div class="tableau tableau--tribunal-salle">
 
-  <div class="fond"></div>
+  <div class="mur"></div>
+  <div class="lambris"></div>
+  <div class="sol"></div>
 
-  <!-- Le banc du juge, en fond de salle, surélevé. -->
-  <div class="banc-juge" data-hotspot="juge"></div>
+  <!-- Les deux rampes de plafond : la source de lumière du tableau,
+       celle qui a décidé du liseré des figures dans l'atelier. -->
+  <div class="plafonnier plafonnier--a"></div>
+  <div class="plafonnier plafonnier--b"></div>
 
-  <!-- La galerie, en arrière-plan : la rumeur du lieu, pas son contenu. -->
-  <div class="galerie" data-hotspot="galerie"></div>
+  <!-- Le juge, puis son banc, qui le coupe. La cible est sur LUI. -->
+  <div class="pnj juge sprite--prop-juge" data-hotspot="juge"></div>
+  <div class="banc-juge"></div>
+  <div class="estrade"></div>
 
   <!-- Le retour vers le parvis — gratuit, comme quai-voilier → quai. -->
   <div class="porte-laterale" data-hotspot="reculer"></div>
-
-  <!-- Les deux tables, de part et d'autre de l'allée centrale. -->
-  <div class="table table--defense" data-hotspot="defense"></div>
-  <div class="table table--accusation" data-hotspot="accusation"></div>
-
-  <!-- Le box de Lester, entre les deux, contre le mur du fond. -->
-  <div class="box-lester" data-hotspot="lester"></div>
-  <div class="sprite--lester p-lester"></div>
 
   <!-- La barre des témoins, seule dans l'allée — c'est elle qui compte
        ce soir. `depose()` ne s'y déclenche pas par un clic ici : voir
        le bouton dédié dans le carnet. -->
   <div class="barre-temoins" data-hotspot="barre"></div>
 
-  <!-- L'équipe, debout derrière la table de la défense — pas assise,
-       elle n'est pas partie au procès. -->
+  <!-- Lester, puis le box qui le coupe à la poitrine. -->
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+  <div class="box-lester"></div>
+
+  <!-- Les deux avocats, chacun derrière sa table. Le texte les nomme
+       depuis le chantier 20 ; jusqu'ici on cliquait le meuble. -->
+  <div class="pnj avocate sprite--prop-avocate" data-hotspot="defense"></div>
+  <div class="table table--defense"></div>
+  <div class="pnj procureur sprite--prop-procureur" data-hotspot="accusation"></div>
+  <div class="table table--accusation"></div>
+
+  <!-- L'équipe, debout du côté de la défense — pas assise, elle n'est
+       pas partie au procès. -->
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--hercules"></div>
   <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
   <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
   <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
   <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
 
-  <!-- La sortie, au premier plan. -->
+  <!-- La galerie, de dos, au premier plan : deux blocs et l'allée entre
+       eux. La même carte, retournée pour le second. -->
+  <div class="galerie galerie--g sprite--prop-galerie" data-hotspot="galerie"></div>
+  <div class="galerie galerie--d sprite--prop-galerie" data-hotspot="galerie"></div>
+
+  <!-- La sortie, au bout de l'allée. -->
   <div class="porte-tribunal" data-hotspot="sortir"></div>
 
 </div>
