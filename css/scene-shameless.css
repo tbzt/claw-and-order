@@ -126,14 +126,21 @@
   border-radius: 50%;
 }
 
-/* ── DENNY — x:30-58, y:78-140 ───────────────────────────────────────
+/* ── DENNY — y:78-140 ────────────────────────────────────────────────
    Large, immobile, bras croisés. Il regarde la rue (donc la sortie),
-   pas l'équipe — la silhouette est tournée d'un quart vers la porte. */
+   pas l'équipe.
+
+   Chantier 23 : il avait un losange, il a un sprite (`prop-denny`,
+   dérivé du corps de McCarthy — le seul ork adulte du jeu). La HAUTEUR
+   et la LIGNE DE PIEDS du losange sont conservées telles quelles : ce
+   sont elles qui portent la composition, un PNJ de premier plan
+   descendant plus bas que l'équipe. La largeur, elle, suit désormais
+   les proportions de la figure (64 × 90 px, donc 44 u pour 62 u de
+   haut) au lieu des 26 u du losange, qui n'étaient l'avis de personne —
+   `left` se recentre d'autant, sur le même axe qu'avant. */
 .tableau--shameless .pnj--denny {
-  left: calc(30 * var(--u)); top: calc(78 * var(--u));
-  width: calc(26 * var(--u)); height: calc(62 * var(--u));
-  border-radius: 30% 30% 14% 14% / 40% 40% 12% 12%;
-  background: radial-gradient(64% 76% at 46% 30%, #8a7062 0%, #5c463c 48%, #2c201a 82%, transparent 100%);
+  left: calc(21 * var(--u)); top: calc(78 * var(--u));
+  width: calc(44 * var(--u));
 }
 .stage[data-etat~="denny-parle"] .tableau--shameless .pnj--denny { filter: brightness(1.06); }
 

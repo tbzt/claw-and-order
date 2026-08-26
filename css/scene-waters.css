@@ -112,11 +112,14 @@
 /* ── WATERS — x:34-64, y:78-140 ──────────────────────────────────────
    Casquette, cardigan, écouteurs au cou — une silhouette qui ne bouge
    pas beaucoup. */
+/* Chantier 23 : sprite `prop-waters`, dérivé du corps de Renfield — le
+   même modèle que son portrait, donc le visage et le corps viennent du
+   même endroit. Hauteur et ligne de pieds du losange conservées, largeur
+   rendue aux proportions de la figure (44 u au lieu de 28), `left`
+   recentré sur le même axe. */
 .tableau--waters .pnj--waters {
-  left: calc(34 * var(--u)); top: calc(78 * var(--u));
-  width: calc(28 * var(--u)); height: calc(62 * var(--u));
-  border-radius: 26% 26% 12% 12% / 36% 36% 10% 10%;
-  background: radial-gradient(64% 76% at 46% 28%, #a08858 0%, #6a5638 48%, #362a1a 82%, transparent 100%);
+  left: calc(26 * var(--u)); top: calc(78 * var(--u));
+  width: calc(44 * var(--u));
 }
 .stage[data-etat~="waters-convaincu"] .tableau--waters .pnj--waters { filter: brightness(1.08); }
 .stage[data-etat~="waters-vexe"]     .tableau--waters .pnj--waters { filter: saturate(.5) brightness(.78); }
