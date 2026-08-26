@@ -35,6 +35,42 @@ export const bar = {
        'Au nom de « McCarthy », le barman troll relève à peine les yeux de son comptoir et pointe le menton vers le fond, en grognant.',
        'À l’écart, attablé seul, un vieil ork attend. Il est visiblement nerveux.'],
 
+  /* ── LES QUATRE REGARDS ───────────────────────────────────────────
+     Écrit le 2026-08-27. Le tableau qui OUVRE le jeu était l'un des deux
+     seuls (avec `tribunal-salle`) à porter ses trois calques de lentille
+     — depuis le premier jour, ici — et à ne rien dire quand on change de
+     runner : le décor se colorait, et c'était tout. C'est précisément le
+     défaut que le backlog appelle « le bar enseigne mal ».
+
+     QUATRE ENTRÉES, PAS DEUX, et c'est le seul endroit où ça se
+     justifie ainsi : ce tableau n'a pas à donner quatre informations, il
+     a à démontrer qu'il y a quatre regards. Un runner qui ne dirait rien
+     au premier essai enseignerait le contraire.
+
+     ET AUCUNE NE DIT CE QU'UN HOTSPOT DIRA MIEUX. La lecture tactique
+     s'arrête juste avant la ligne de tir (c'est `ligne-de-tir` qui la
+     donne, et qui paie `sait-ligne`), et l'astrale ne décrit pas l'aura
+     de McCarthy (c'est `mccarthy` qui la porte). Une vue cadre la salle ;
+     elle ne vide pas les cibles de leur récompense. */
+  vues: {
+    physique: [
+      'Trente personnes dans cette salle portent une étoile, et une seule a choisi la table où la lumière ne va pas.',
+      '« On ne donne pas rendez-vous dans un bar à flics pour se cacher. On y donne rendez-vous pour que ce soit NOUS qu’on remarque, et pas lui. C’est bien joué, et ça ne me rassure pas. »',
+    ],
+    astrale: [
+      'Trente auras, et la même fatigue dans toutes — un uniforme qu’ils garderaient en dessous et qu’ils ont fini par ne plus sentir. Le troll, derrière son comptoir, est le seul qui soit entier.',
+      '« Personne ici n’a peur, personne ici n’est en colère. C’est une salle de gens qui n’attendent plus rien de leur nuit. Et une seule table, au fond, attend encore. »',
+    ],
+    ra: [
+      'Vingt icônes flottent dans cette salle. Dix-huit sont de la réclame que personne n’a demandée ; les deux qui restent sont posées exactement au milieu.',
+      '« Non, on ne filtre pas. Personne ne filtre — c’est le Sixième Monde, pas un salon. On apprend à lire vite et à se méfier de ce qui clignote le plus fort. Tout le métier tient là-dedans. »',
+    ],
+    tactique: [
+      'Une porte. Un comptoir assez long pour s’y mettre à couvert. Quatre silhouettes dont il faudra savoir laquelle bouge en premier.',
+      '« Une auberge, une seule issue, des habitués armés, et rien d’anormal nulle part. C’est exactement ce qui me gêne. Laissez-moi regarder de plus près. »',
+    ],
+  },
+
   hotspots: {
 
     /* Les quatre équipiers, catalogue commun (js/data/equipiers.js).

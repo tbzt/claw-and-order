@@ -69,6 +69,37 @@ export const tribunalSalle = {
         'Le dossier de l’accusation tient sur trois pages. Personne, dans la salle, ne semble y croire tout à fait.',
       ],
 
+  /* ── LES QUATRE REGARDS ───────────────────────────────────────────
+     Écrit le 2026-08-27, en même temps que ceux du bar : c'étaient les
+     deux seuls tableaux entiers du jeu à porter trois calques de
+     lentille et pas une ligne à dire quand on change de regard. Les
+     calques datent du 14ᵉ lot du chantier 23 ; ces quatre entrées les
+     mettent en mots.
+
+     ⚠️ CE BLOC N'AJOUTE AUCUN ÉTAT VISUEL. `vues:` est lu par
+     `selectionne()` (`main.js`) et ne touche ni `etat.visuels` ni
+     `data-etat` — ce tableau n'en a toujours aucun, et la bascule de la
+     fiche du rôle au marteau reste due (voir le bas de
+     `css/scene-tribunal-salle.css` et le backlog du plan). */
+  vues: {
+    physique: [
+      'Trois pages de dossier d’un côté, une avocate de l’autre, et entre les deux un garçon en combinaison orange à qui personne n’a rien demandé.',
+      '« Il n’y a pas d’argent dans cette pièce. Première fois de la nuit. Ça veut dire qu’on n’achètera personne — donc il va falloir leur donner quelque chose de vrai, et ce n’est pas l’outil que je sais tenir. »',
+    ],
+    astrale: [
+      'Personne, dans cette salle, n’a peur pour soi. La seule chose qui ait laissé quelque chose ici, c’est le pupitre au milieu de l’allée : un à un, pendant des années, et ça s’y est empilé exactement comme au portique du parvis.',
+      '« Et derrière nous, la galerie ne sent rien du tout. Ce n’est pas de l’hostilité, c’est une salle d’attente. Ils attendent leur affaire à eux ; celle du gamin est juste ce qu’il y a avant. »',
+    ],
+    ra: [
+      'Cinq icônes, aucune réclame — un palais de justice ne loue pas de mètre carré de réalité augmentée. La transcription tourne en direct et n’est signée par personne ; le micro de la barre n’est pas encore allumé.',
+      '« Trois pages au dossier de l’accusation, deux déjà tournées sur son terminal. Il aura fini de le lire avant que le juge ait fini de l’écouter. »',
+    ],
+    tactique: [
+      'Deux issues, des tables assez lourdes pour arrêter quelque chose, une estrade qui domine toute la salle. Tout ce qu’il faut pour tenir une pièce.',
+      '« Et rien à y tenir. C’est un donjon où l’on gagne en parlant. Je n’en avais jamais vu, et je n’ai aucune idée de la façon dont on y protège quelqu’un. »',
+    ],
+  },
+
   hotspots: {
 
     juge: {
