@@ -42,10 +42,12 @@ const repriseAuto = $('repriseAuto')
    voix à la barre, comme la vedette sur le 16 » — son propre commentaire
    dans `retour.js` le dit. La dette réelle était donc de ONZE.
 
-   Cinq sont comblés (`waters`, `herwick`, `duke`, `patron`, `sarah`).
-   Restent six : `denny`, `iris`, `mark`, `nita`, `nova`, `psych`. Ils se
-   dérivent d'un portrait existant, jamais dessinés de zéro — voir
-   `outils/visage.py` et `retouches/portraits-neufs.py` dans l'atelier.
+   LA DETTE EST REFERMÉE : les onze sont comblés. Tout interlocuteur qui
+   n'est pas une voix de radio a maintenant un visage. Aucun n'a été
+   dessiné de zéro — chacun DÉRIVE d'un portrait existant, ce qui est la
+   seule façon de tenir la direction artistique sur seize visages. Voir
+   `outils/visage.py`, `retouches/portraits-neufs.py` et
+   `retouches/portraits-derniers.py` dans l'atelier.
 
    `patron` gagne un nom en même temps qu'un visage : le commentaire de
    `nomDuLocuteur`, plus bas, notait qu'il parlait sans nom faute d'être
@@ -61,6 +63,12 @@ const VISAGES = {
   duke: 'Duke',
   patron: 'Le patron',
   sarah: 'Sarah Carpenter',
+  denny: 'Denny',
+  iris: 'Iris',
+  mark: 'Mark',
+  nita: 'Nita',
+  nova: 'Nova',
+  psych: 'Psych',
 }
 
 function montrePortrait(qui) {
