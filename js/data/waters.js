@@ -222,27 +222,23 @@ export const waters = {
             fiches: ['enregistrement-recupere'],
           }
 
-        /* LA ROUTE TECHNIQUE : seule White_Rabbit sait faire, et le
-           prix se paie sur l'objet lui-même — pas sur une personne,
+        /* LA ROUTE TECHNIQUE : seule White_Rabbit sait faire. Depuis le
+           chantier 47, cliquer ici ne résout plus rien tout seul — ça
+           lance le plongeon. La résolution (les deux issues, la même
+           décharge) vit maintenant dans `matrice-waters.js`, avec un
+           lieu où se jouer ; ce hotspot ne fait plus que l'introduire.
+           Le prix se paie sur l'objet lui-même — pas sur une personne,
            comme au reste des planques (§4.3 du plan des planques),
            mais sur ce que la nuit devait rapporter. */
         if (qui === 'rabbit')
           return {
             tous: a('waters-vexe')
               ? ['Waters se jette presque devant la porte de la salle de montage. « Non — pas comme ça, pas — » Trop tard.',
-                 'White_Rabbit est déjà dans le verrou. La bombe matricielle fait exactement ce pour quoi il l’avait payée : une décharge qui remonte dans son deck au moment précis où le coffre cède.',
-                 { texte: 'Elle retire la main d’un coup, une brûlure superficielle au poignet, et le boîtier de commlink à l’intérieur qui clignote une fois avant de se taire.',
-                   visuel: 'bombe-declenchee' },
-                 ['waters', '« Vous venez de casser ce que je gardais depuis six mois. Sortez. Prenez-le, et sortez. »']]
-              : ['White_Rabbit s’agenouille devant le verrou sans attendre d’y être invitée. Waters ne dit rien — il regarde ailleurs, ce qui est sa façon à lui de ne pas regarder.',
-                 'La bombe matricielle fait exactement ce pour quoi il l’avait payée : une décharge qui remonte dans son deck au moment précis où le coffre cède.',
-                 { texte: 'Elle retire la main d’un coup, une brûlure superficielle au poignet, et le boîtier de commlink à l’intérieur qui clignote une fois avant de se taire.',
-                   visuel: 'bombe-declenchee' },
-                 ['waters', '« … Je l’aurais peut-être donné, vous savez. Personne ne me l’a jamais demandé gentiment. »']],
-            rabbit: '« C’est fait. La moitié d’un fichier chiffré vaut mieux qu’un fichier entier qu’on n’a pas — mais c’est bien la moitié, pas plus. »',
-            hercules: '« On a le coffre. On n’a pas eu besoin de l’homme. C’est le genre de victoire qui laisse un goût, et pas le bon. »',
-            flags: ['bombe-declenchee', 'enregistrement-recupere'],
-            fiches: ['enregistrement-recupere'],
+                 'White_Rabbit est déjà dans le verrou.']
+              : ['White_Rabbit s’agenouille devant le verrou sans attendre d’y être invité. Waters ne dit rien — il regarde ailleurs, ce qui est sa façon à lui de ne pas regarder.',
+                 'Le lien se pose, net, et la salle de montage cesse d’être ce qui compte.'],
+            rabbit: '« Je reviens. »',
+            va: 'matrice-waters',
           }
 
         return {

@@ -1,0 +1,67 @@
+/* ── LA MATRICE DE WATERS, DE L'AUTRE CÔTÉ DU VERROU ─────────────────
+   Chantier 47. Même grille 256 x 144 que les autres tableaux
+   (chantier 8), même famille que `scene-greffe-cellule.css` — un
+   second espace, un seul état, une teinte posée en dur sur le
+   tableau. Mais pas la même famille de forme : l'astral de la cellule
+   est rond, ça dérive ; la Matrice est anguleuse, ça se superpose en
+   couches — « une géométrie de refus », dit `matrice-waters.js`. */
+
+.tableau--matrice-waters {
+  position: absolute; inset: 0;
+  --u: calc(100cqw / 256);
+  image-rendering: pixelated;
+  background: #04060c;
+}
+.tableau--matrice-waters > * { position: absolute; }
+
+.tableau--matrice-waters .fond {
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: radial-gradient(120% 90% at 50% 42%, #0a1622 0%, #060a12 55%, #030408 100%);
+}
+
+/* Une grille, pas un décor — le seul repère spatial de cet endroit,
+   parce qu'il n'y a rien d'autre à quoi accrocher l'œil. */
+.tableau--matrice-waters .grille {
+  left: 0; top: 0; width: 100%; height: 100%;
+  background:
+    repeating-linear-gradient(90deg, rgba(90,200,255,.06) 0 1px, transparent 1px calc(16 * var(--u))),
+    repeating-linear-gradient(180deg, rgba(90,200,255,.06) 0 1px, transparent 1px calc(16 * var(--u)));
+}
+
+/* Les trois couches du verrou : chacune un losange, chacune un peu
+   plus petite et un peu plus vive — « une géométrie de refus, disposée
+   en couches », dit le texte, pas une seule paroi mais trois. Elles ne
+   dérivent pas comme l'astral : elles PULSENT, au même rythme, la
+   respiration d'une chose qui attend. */
+.tableau--matrice-waters .couche {
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border: calc(1 * var(--u)) solid rgba(90,200,255,.55);
+  box-shadow: 0 0 calc(6 * var(--u)) rgba(90,200,255,.18);
+  animation: matrice-respire 3.6s ease-in-out infinite;
+}
+.tableau--matrice-waters .couche--1 { width: calc(150 * var(--u)); height: calc(150 * var(--u)); opacity: .35; animation-delay: 0s; }
+.tableau--matrice-waters .couche--2 { width: calc(104 * var(--u)); height: calc(104 * var(--u)); opacity: .55; animation-delay: -1.2s; }
+.tableau--matrice-waters .couche--3 { width: calc(58  * var(--u)); height: calc(58  * var(--u)); opacity: .8;  animation-delay: -2.4s; }
+@keyframes matrice-respire {
+  0%, 100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+  50%      { transform: translate(-50%, -50%) rotate(45deg) scale(1.04); }
+}
+
+/* Le verrou lui-même : le cœur des trois losanges, ce qu'on force. */
+.tableau--matrice-waters .verrou {
+  left: calc(108 * var(--u)); top: calc(52 * var(--u));
+  width: calc(40 * var(--u)); height: calc(40 * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(200,240,255,.9), rgba(90,200,255,.35) 55%, transparent 80%);
+  box-shadow: 0 0 calc(10 * var(--u)) rgba(90,200,255,.5);
+}
+
+/* Le retour, dessiné (règle 2) — même geste que `seuil-retour` à la
+   cellule, mais cyan : ce n'est pas un lien astral, c'est une ligne. */
+.tableau--matrice-waters .seuil-retour {
+  left: 0; top: calc(126 * var(--u)); width: 100%; height: calc(18 * var(--u));
+  background:
+    linear-gradient(0deg, rgba(90,200,255,.26) 0 calc(1 * var(--u)), transparent calc(1 * var(--u))),
+    radial-gradient(160% 140% at 50% 130%, rgba(90,200,255,.14), transparent 70%);
+}
