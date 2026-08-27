@@ -9,7 +9,11 @@ export const etat = {
   objetActif: null,
   astral: false,
   flags: new Set(),
-  inventaire: [],
+  /* Les quatre capacités des fiches (chantier 46, le portique) : sur eux
+     depuis le début de la nuit, pas ramassées en jeu — contrairement à
+     ce qu'on trouve sur Wilson. C'est pour ça qu'elles démarrent déjà
+     dans l'inventaire plutôt que d'être données par une scène. */
+  inventaire: ['epees', 'focus', 'deck', 'kit'],
   visuels: new Set(),
   /* Le carnet. `fiches` est ce qu'on sait ; `ficheActive` est celle
      qu'on tient en main pour la frotter contre une autre.

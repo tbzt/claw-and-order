@@ -17,6 +17,14 @@ export const objets = {
   passe:     { nom: 'Passe des amarres',     icone: 'passe' },
   creditube: { nom: 'Créditube — 2 000 ¥',   icone: 'tube' },
   arme:      { nom: 'Arme de poing',         icone: 'arme' },
+  /* Chantier 46, le portique. Ce que les quatre fiches portent depuis le
+     début de la nuit — pas un ramassage, une donnée de personnage — et
+     qu'aucune scène ne matérialisait avant le tribunal. Voir
+     PLAN_LE_PORTIQUE.md § 1. */
+  epees:     { nom: 'Les deux épées de Drakk',        icone: 'epees' },
+  focus:     { nom: 'Le focus de maintien de Trash',  icone: 'focus' },
+  deck:      { nom: 'Le deck de White_Rabbit',        icone: 'deck' },
+  kit:       { nom: 'Le kit d’effraction d’Hercules', icone: 'kit' },
   /* Ce qui s'achète au Claw & Order. C'est White_Rabbit qui paie —
      décision T5 de TRAME.md : aucun compteur d'argent, une action de
      dialogue, et une réplique qui coûte autre chose que des nuyens. */
