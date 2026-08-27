@@ -59,6 +59,19 @@ export const tribunalSalle = {
      une fois `enquete-close` posé par `carte.js`. */
   get acte() { return a('enquete-close') ? 4 : undefined },
 
+  /* `charge()` VIDE `etat.visuels` à chaque entrée : sans ce bloc, un
+     aller-retour par le parvis (`reculer` → `tribunal`, puis `entree` →
+     ici) effacerait la fiche retournée. C'est le seul chemin de retour
+     possible entre la récusation et la sortie, et il est ouvert.
+
+     ⚠️ ET IL EST FERMÉ À LA 2ᵉ AUDIENCE, ce qui est tout l'intérêt de la
+     garde `!a('enquete-close')`. Trois jours plus tard, l'audience est
+     bel et bien EN COURS ; laisser la fiche annoncer « repoussée »
+     pendant que le juge écoute aurait été pire que de ne rien afficher.
+     `enquete-close` est posé par `carte.js` et c'est la condition d'entrée
+     de la seconde audience (voir le getter `acte` juste en dessous). */
+  entree: ({ a }) => a('recusation-dite') && !a('enquete-close') ? ['recusation-dite'] : [],
+
   ouverture: (ctx, visite) => visite > 1
     ? [ctx.a('renfield-retourne')
         ? 'La même salle, trois jours plus tard. Lester est encore au banc, mais il se tient autrement — quelqu’un lui a déjà dit qu’un vieil homme parlait, en ce moment même, à des parents qui ne savaient pas encore avoir un fils à pleurer.'
@@ -257,6 +270,11 @@ export const tribunalSalle = {
           titre: '« On le remet à l’abri. »',
           quand: ({ a }) => !a('recusation-dite'),
           flags: ['recusation-dite', 'recuse-abri'],
+          /* Le VISUEL en plus du drapeau, jamais l'un sans l'autre :
+             `data-etat` lit `etat.visuels`, pas `etat.flags`, et c'est lui
+             que `scene-tribunal-salle.css` interroge pour retourner la fiche
+             du rôle. `choisit()` (`main.js`) honore `sujet.visuels`. */
+          visuels: ['recusation-dite'],
           fin: true,
           texte: ['« … D’accord. » Un silence, puis : « Je préviens McNeil. Un nouveau passeur, ce soir. »',
                   '« Vous savez ce que vous ouvrez, en disant ça ? »'],
@@ -266,6 +284,11 @@ export const tribunalSalle = {
           titre: '« Le contrat est rempli. On s’arrête là. »',
           quand: ({ a }) => !a('recusation-dite'),
           flags: ['recusation-dite', 'recuse-contrat'],
+          /* Le VISUEL en plus du drapeau, jamais l'un sans l'autre :
+             `data-etat` lit `etat.visuels`, pas `etat.flags`, et c'est lui
+             que `scene-tribunal-salle.css` interroge pour retourner la fiche
+             du rôle. `choisit()` (`main.js`) honore `sujet.visuels`. */
+          visuels: ['recusation-dite'],
           fin: true,
           texte: ['« … Très bien. » Il ne discute pas. « Il sera vivant à dix heures. C’est ce qu’on vous a payés à faire. »',
                   'Il raccroche avant vous.'],

@@ -319,33 +319,34 @@
 .tableau--tribunal-salle .ora--micro   { left: calc(164 * var(--u)); top: calc(34 * var(--u)); width: calc(68 * var(--u));  animation: ora-flotte 6.9s ease-in-out infinite reverse; }
 .tableau--tribunal-salle .ora--dossier { left: calc(172 * var(--u)); top: calc(82 * var(--u)); width: calc(82 * var(--u));  animation: ora-flotte 5.2s ease-in-out infinite; }
 
-/* ⚠️ CE QU'ON N'A PAS PU FAIRE ICI, ET POURQUOI C'EST ÉCRIT PLUTÔT QUE
-   TENTÉ. La fiche du rôle devrait basculer sur « AUDIENCE REPOUSSÉE »
-   quand le marteau tombe, comme la caméra de la laverie bascule sur
-   « BOUCLE » quand Rabbit l'aveugle. Le CSS de cette bascule a été écrit,
-   vérifié au navigateur (il marche), puis RETIRÉ — parce qu'il ne se
-   déclencherait jamais en jeu.
+/* LE MARTEAU TOMBE, ET LA FICHE SUIT. Même geste que la caméra aveuglée
+   de la laverie : c'est `data-etat` qui réécrit le texte, jamais la
+   réaction qui touche au DOM. Sans ça, la RA continuerait d'annoncer une
+   audience en cours pendant que McCarthy décroche son commlink.
 
-   La raison est dans les données, pas ici : `data-etat` n'est pas la
-   liste des flags, c'est `etat.visuels` réuni à ce que rend `derive()`
-   (`main.js`, `stage.dataset.etat = [...etat.visuels, ...derives]`), et
-   `tribunal-salle.js` ne déclare AUCUNE des quatre sources possibles —
-   ni `entree()`, ni `derive()`, ni `visuels:`, ni `visuel:`. Son
-   `data-etat` est donc vide en permanence, et la règle aurait été du
-   code mort déguisé en fonctionnalité.
+   ⚠️ CETTE RÈGLE A ÉTÉ ÉCRITE, RETIRÉE, PUIS REMISE — et le détour vaut
+   d'être noté. Elle a d'abord été retirée parce qu'elle était morte :
+   `data-etat` vaut `etat.visuels` réuni à `derive()`, et
+   `tribunal-salle.js` ne déclarait AUCUNE des quatre sources. Les quatre
+   lignes manquantes existent depuis ; la règle est vivante.
 
-   ⚠️ IL N'EST PAS LE SEUL, et la première rédaction de ce commentaire
-   disait le contraire sans l'avoir compté. Relevé sur les 19 scènes :
-   `bar`, `tribunal`, `tribunal-salle` et `greffe-cellule` sont dans ce
-   cas. Aucune des quatre n'a de sélecteur `data-etat~="…"` dans sa
-   feuille — donc aucune règle morte nulle part, et c'était bien le seul
-   point à vérifier.
+   CE QUI LA NOURRIT, exactement : les deux SUJETS DE DIALOGUE de
+   McCarthy (`abri` et `contrat`) posent `visuels: ['recusation-dite']` à
+   côté de leur `flags:` — `choisit()` honore `sujet.visuels`. Ce n'est
+   PAS `sortir.utiliser` qui pose le drapeau, contrairement à ce que la
+   première rédaction de ce commentaire affirmait : elle ouvre le
+   dialogue, et c'est la réponse du joueur qui tranche.
 
-   CE QU'IL FAUDRAIT, si on veut la bascule (quatre lignes, dans
-   `js/data/tribunal-salle.js`, sur le patron exact de `herwick.js`) :
-   `visuels: ['recusation-dite']` sur les DEUX réactions qui posent déjà
-   le flag (`sortir.utiliser`, branches `recuse-abri` et
-   `recuse-contrat`), et un `entree: ({ a }) => a('recusation-dite') ?
-   ['recusation-dite'] : []` pour que ça survive à un retour du parvis.
-   C'est une modification de données de l'acte III, pas d'un calque —
-   d'où la note plutôt que le commit. */
+   ET LA 2ᵉ AUDIENCE NE LA VOIT PAS : l'`entree()` du tableau garde
+   `!a('enquete-close')`, sinon la fiche annoncerait « repoussée » trois
+   jours plus tard, pendant une audience qui, elle, a bien lieu. */
+.stage[data-etat~="recusation-dite"] .tableau--tribunal-salle .ora--role {
+  border-color: rgba(255,120,90,.9);
+  background: rgba(74,24,16,.62);
+  color: rgba(255,178,150,.95);
+  font-size: 0;
+}
+.stage[data-etat~="recusation-dite"] .tableau--tribunal-salle .ora--role::before {
+  content: "RÔLE DU JOUR · SALLE 4 · AUDIENCE REPOUSSÉE";
+  font-size: calc(4 * var(--u));
+}
