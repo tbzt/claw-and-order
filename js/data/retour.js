@@ -467,7 +467,7 @@ export const retour = {
           if (a('abordage-transpondeur')) return 'Il ment déjà. Une fois par nuit, c’est le tarif.'
           if (qui !== 'rabbit')
             return { tous: 'Il faudrait rentrer dans le boîtier, et il faut un deck pour ça.',
-                     hercules: '« C’est le sien, ce rayon. Toujours. »' }
+                     hercules: '« Encore lui. On ne demande jamais à quelqu’un d’autre. »' }
           return { tous: ['White_Rabbit rentre une seconde fois dans le même boîtier. Ça prend moins de temps qu’avant : il connaît déjà la serrure.',
                           'CHALUTIER — GIG HARBOR — ÉMET, encore.'],
                    rabbit: ['« Deux fois dans la même nuit, sur le même boîtier. Ce n’est plus discret, c’est comptable. »',

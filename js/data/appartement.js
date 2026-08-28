@@ -467,7 +467,7 @@ export const appartement = {
 
         if (qui !== 'rabbit')
           return { tous: 'Il faudrait un deck, et savoir chez qui frapper.',
-                   hercules: '« Ce n’est pas mon rayon. Je peux appeler quelqu’un ; elle, elle peut entrer. »',
+                   hercules: '« Ce n’est pas mon rayon. Je peux appeler quelqu’un ; lui, il peut entrer. »',
                    trash: '« Ce monde-là n’est pas le mien. Le mien ne garde pas d’archives. »',
                    drakk: ['« Je sais forcer une porte. »', '« Pas un livre de comptes qui vit dans l’air. »'] }
 
