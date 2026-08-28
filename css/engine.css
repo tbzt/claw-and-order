@@ -976,10 +976,13 @@ body {
 
 /* La quatrième lentille : celle de Drakk. Ni magie ni Matrice — une
    carte de jeu de rôle posée sur le réel. Le décor perd ses couleurs et
-   devient un plan, parce que c'est comme ça qu'il le lit. */
-.stage[data-vue="tactique"] .decor { filter: saturate(.18) contrast(1.28) brightness(.86); }
-.stage[data-vue="tactique"] .calque--tactique { opacity: 1; }
-.stage[data-vue="tactique"] .calque--tactique [data-hotspot] { pointer-events: auto; }
+   devient un plan, parce que c'est comme ça qu'il le lit.
+   `materielle` (int. 6, ancien `tactique`) est la valeur de `data-vue` ;
+   `.calque--tactique` est un autre espace de noms, un nom de classe de
+   calque, et ne se renomme pas avec elle. */
+.stage[data-vue="materielle"] .decor { filter: saturate(.18) contrast(1.28) brightness(.86); }
+.stage[data-vue="materielle"] .calque--tactique { opacity: 1; }
+.stage[data-vue="materielle"] .calque--tactique [data-hotspot] { pointer-events: auto; }
 
 /* LE point qui casse tout si on l'oublie : engine.css rend cliquable
    tout [data-hotspot] du décor. Les cibles de calque doivent donc être
@@ -989,7 +992,7 @@ body {
 .calque [data-hotspot] { pointer-events: none; }
 .stage[data-vue="astrale"] .calque--astral [data-hotspot],
 .stage[data-vue="ra"]      .calque--ra [data-hotspot],
-.stage[data-vue="tactique"] .calque--tactique [data-hotspot] { pointer-events: auto; }
+.stage[data-vue="materielle"] .calque--tactique [data-hotspot] { pointer-events: auto; }
 
 /* Le quadrillage. Fin, doré, discret : c'est un fond de carte, pas un
    effet. Il s'arrête au bas du plateau, comme une table de jeu. */

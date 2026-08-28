@@ -93,7 +93,7 @@ export const shameless = {
   },
 
   vues: {
-    physique: [
+    sociale: [
       'Un bar, une piste vide, une régie DJ éteinte dans un coin. Rien de luxueux — du contreplaqué peint en noir, des banquettes reprisées au gaffer.',
       '« Un décor de pauvre pour des gens qui ont de l’argent une fois par semaine. »',
       '« Ça se voit aux détails qu’on n’a pas payés. J’ai tenu une salle comme ça, autrefois. Pas longtemps. »',
@@ -108,7 +108,7 @@ export const shameless = {
       '« Le brouilleur est artisanal, et il bave. »',
       '« C’est ça qu’ils vendent. L’alcool, c’est pour la facture. »',
     ],
-    tactique: [
+    materielle: [
       'Une entrée, une sortie, et une arrière-salle qu’on n’a pas vue s’ouvrir. Un videur qui a l’œil sur la rue plus que sur la salle.',
       '« On ne se planque pas ici. On y passe. »',
       '« Le videur regarde la rue, pas la salle. C’est un endroit d’où on part. »',

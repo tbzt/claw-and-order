@@ -145,7 +145,7 @@ export const amis = {
   },
 
   vues: {
-    physique: [
+    sociale: [
       'Quatre personnes, quatre façons de ne pas être ailleurs. Aucune ne s’est levée quand vous êtes entrés, et aucune ne vous a quittés des yeux.',
       '« Personne ici n’a intérêt à nous parler, et personne n’a envie qu’on s’en aille. »',
       '« C’est une bonne position. Je ne sais pas encore de quoi. »',
@@ -160,7 +160,7 @@ export const amis = {
       '« Le local est mort côté réseau. »',
       '« Sauf un truc, là-bas. Il attend qu’on le lise. »',
     ],
-    tactique: [
+    materielle: [
       'Une seule ouverture, le rideau de fer. Pas de seconde issue, pas de fenêtre.',
       '« Un donjon à une porte. »',
       '« Ça va, tant que personne ne sait qu’on est dedans. »',

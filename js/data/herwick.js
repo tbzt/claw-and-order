@@ -117,7 +117,7 @@ export const herwick = {
   },
 
   vues: {
-    physique: [
+    sociale: [
       'Quarante ans de meubles empilés jusqu’au plafond, et pas un seul prix affiché.',
       '« Ce fauteuil-là vaut plus que ce qu’on nous paie cette nuit. »',
       '« Il est encore là. Personne n’a réussi à l’acheter, ou personne n’a voulu le vendre — dans une boutique pareille ce n’est pas la même chose. »',
@@ -132,7 +132,7 @@ export const herwick = {
       '« Il paie ses fournisseurs à des horaires bizarres. C’est juste vieux. »',
       '« Mais ça bavarde. Cette nuit, ça ne devrait pas. »',
     ],
-    tactique: [
+    materielle: [
       'Un rideau de fer à moitié baissé, une seule allée entre les piles de meubles, et une porte de service à l’arrière que personne n’a proposé de montrer.',
       '« Encombré, c’est mieux que vide. »',
       '« Cent obstacles pour nous. Cent pour celui qui nous chercherait. »',

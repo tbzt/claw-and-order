@@ -50,7 +50,7 @@ export const quai = {
 
   /* Première bascule vers chaque lentille : on ne l'annonce qu'une fois. */
   vues: {
-    physique: ['Cinquante bateaux, une jetée déserte à cette heure, et un carré de lumière au bout du ponton : une cabane de gardien, ou quelqu’un qui n’arrive pas à dormir.',
+    sociale: ['Cinquante bateaux, une jetée déserte à cette heure, et un carré de lumière au bout du ponton : une cabane de gardien, ou quelqu’un qui n’arrive pas à dormir.',
                '« Il y a toujours quelqu’un qui ne dort pas sur un port. »',
                '« Trouvons-le avant la Star. »'],
     astrale: ['Le plan astral, ici, est calme. Trop. L’eau avale les traces plus vite que la terre.',
@@ -58,7 +58,7 @@ export const quai = {
     ra: ['La RA du port s’allume d’un coup : balises d’amarrage, numéros de coque, publicités pour un ponton privé, trois offres de crédit.',
          '« Personne ne filtre rien dans ce port. C’est illisible. »',
          '« Tant mieux. Pour l’instant. »'],
-    tactique: ['Une jetée, un ponton, cinquante embarcations qui se touchent presque — et un seul chemin sec pour rejoindre le voilier.',
+    materielle: ['Une jetée, un ponton, cinquante embarcations qui se touchent presque — et un seul chemin sec pour rejoindre le voilier.',
                '« Rien pour se cacher, des deux côtés. »',
                '« Sauf du côté de l’eau. Je ne sais pas lire l’eau. »'],
   },

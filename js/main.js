@@ -439,7 +439,10 @@ function joue(idCible) {
 /* La lentille suit le runner : pas de bouton de vision séparé. On
    sélectionne Trash, on voit l'astral ; White_Rabbit, on voit la RA.
    C'est ce qui rend la règle 10 tangible au lieu d'être une idée. */
-const VUES = { hercules: 'physique', trash: 'astrale', rabbit: 'ra', drakk: 'tactique' }
+/* `physique` → `sociale`, `tactique` → `materielle` (int. 6, audit reroute
+   § IV.6) : les deux anciens noms ne décrivaient plus ce qui est écrit
+   dessous, et orientaient l'auteur vers la mauvaise question. */
+const VUES = { hercules: 'sociale', trash: 'astrale', rabbit: 'ra', drakk: 'materielle' }
 
 /* « J'AI PAS FINI. »
    Basculer de runner pendant qu'une réplique se déroule était refusé en
@@ -504,13 +507,11 @@ function montreChoix() {
   for (const sujet of sujetsVisibles(dialogue)) {
     const bouton = document.createElement('button')
     const verrouille = estVerrouille(sujet)
-    /* La convention `« … » (Trash)` existe déjà sur la moitié des sujets :
-       on ne la double pas, on ne l'ajoute que là où le titre ne nomme pas
-       déjà le runner qui le tient. */
-    const nomActeur = verrouille ? equipe[sujet.acteur].nom : null
-    bouton.textContent = nomActeur && !sujet.titre.includes(nomActeur)
-      ? `${sujet.titre} (${nomActeur})`
-      : sujet.titre
+    /* Arbitrage du 28 août (audit reroute, int. 5) : l'étiquette
+       `(Nom)` ne protégeait de rien — cliquer sur un sujet verrouillé
+       refuse déjà (`refuseSujet()`, règle 11), dans la voix du runner
+       actif. Le joueur apprend la règle en jouant, pas en la lisant. */
+    bouton.textContent = sujet.titre
     if (estEpuise(sujet)) bouton.classList.add('est-epuise')
     if (verrouille) bouton.classList.add('est-verrouille')
     bouton.addEventListener('click', (e) => {
@@ -1569,6 +1570,18 @@ const BILAN = [
   ['camera-aveugle',    'Une caméra municipale a filmé un plafond pendant deux heures.'],
   /* La récusation, chantier 20. */
   ['aveu-guilde',       'Vous avez avoué, à la barre, avoir soudoyé votre propre témoin. Le juge a arrêté de prendre des notes à ce moment précis.'],
+  /* Arbitrage du 28 août (audit reroute § IV.1) : la note du juge cesse
+     d'être un chiffre en tête de bilan et devient une phrase à sa place,
+     ici, au tribunal. Le compteur `etat.credibilite` reste : il cesse
+     seulement d'être montré. N'apparaît que si on a vraiment plaidé au
+     moins une fois — sans `depose:*`, « le juge » n'existe pour
+     personne. */
+  [() => [...etat.flags].some(f => f.startsWith('depose:')),
+   () => etat.credibilite <= 2
+     ? 'Le juge a écouté. Il a pris deux notes, et pas au moment où vous l’espériez.'
+     : etat.credibilite <= 5
+       ? 'Il vous a suivi une bonne partie du chemin. Pas jusqu’au bout.'
+       : 'Il n’a pas eu besoin qu’on lui répète.'],
   /* Neuf heures à la laverie. Le tir part toujours ; le bilan dit ce que
      la pièce lui a donné à lire. */
   ['laverie-manquee',   'Deux trous dans le carrelage d’une laverie, à un mètre de personne. La pièce était noire, chaude et aveugle.'],
@@ -1678,14 +1691,9 @@ function tombeRideau() {
           : a('goulet-passe')
             ? 'Neuf heures moins le quart. Il sera vivant à dix heures. C’était le contrat.'
             : 'La nuit s’arrête ici — pour l’instant.'
-  const lignes = BILAN.filter(([f]) => a(f)).map(([, t]) => t)
-  /* Arbitrage 4 (`ARBITRAGES_2026-08-27.md`) : `etat.credibilite` existait
-     déjà en entier — initialisé, alimenté par 7 `registre: 'tient'` et 2
-     `'retourne'` dans `tribunal-salle.js`, plafonné, sauvegardé — sauf la
-     lecture. Ne s'affiche que si on a vraiment plaidé au moins une fois
-     (un `depose:*` posé) : sans ça, « le juge » n'existe pour personne. */
-  if ([...etat.flags].some(f => f.startsWith('depose:')))
-    lignes.unshift(`Le juge vous a suivi sur ${etat.credibilite} point${etat.credibilite === 1 ? '' : 's'} sur 7.`)
+  const lignes = BILAN
+    .filter(([f]) => typeof f === 'function' ? f() : a(f))
+    .map(([, t]) => typeof t === 'function' ? t() : t)
   $('rideauBilan').textContent = lignes.length
     ? lignes.join('\n')
     : 'Rien ne vous suit. C’est plus rare que ça n’en a l’air.'

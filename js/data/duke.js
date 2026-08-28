@@ -87,7 +87,7 @@ export const duke = {
   },
 
   vues: {
-    physique: [
+    sociale: [
       'Huit personnes qui n’ont pas rangé leurs armes en vous voyant entrer. Sept d’entre elles se taisent.',
       '« Ici, on ne charme personne. On paie, et on se tait au bon moment. Je sais faire les deux, cette nuit je préférerais ne faire que le premier. »',
     ],
@@ -101,7 +101,7 @@ export const duke = {
       '« Duke ne surveille qu’une porte. »',
       '« Il n’a jamais eu besoin d’en surveiller deux. »',
     ],
-    tactique: [
+    materielle: [
       'Pas une fenêtre, un escalier, une porte blindée : ce sous-sol n’a qu’une sortie, et huit personnes armées la tiennent avec vous à l’intérieur.',
       '« Une seule issue, et ce sont eux qui la tiennent. »',
       '« Si ça tourne mal ici, ça tourne mal pour nous. »',

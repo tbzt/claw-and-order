@@ -38,7 +38,7 @@ export const greffe = {
       ],
 
   vues: {
-    physique: ['Un guichet, un homme seul derrière, et une pancarte « PAS DE SERVICE APRÈS MINUIT » que personne n’a retirée depuis des années.',
+    sociale: ['Un guichet, un homme seul derrière, et une pancarte « PAS DE SERVICE APRÈS MINUIT » que personne n’a retirée depuis des années.',
                '« Il est seul, il est fatigué, et il n’a personne à qui rendre des comptes avant sept heures. »',
                '« C’est un homme, pas une porte. »'],
     astrale: ['Le lieu est propre, au sens astral : rien n’est passé ici depuis longtemps.',
@@ -46,7 +46,7 @@ export const greffe = {
     ra: ['Le réseau interne est cloisonné, mais le guichet public ne l’est pas.',
          '« Le registre des mouvements est consultable. »',
          '« Consultable, donc modifiable. »'],
-    tactique: ['Une vitre à l’épreuve, un comptoir en U, une seule porte entre le hall et le couloir des cellules. Personne ici n’a jamais eu à la défendre.',
+    materielle: ['Une vitre à l’épreuve, un comptoir en U, une seule porte entre le hall et le couloir des cellules. Personne ici n’a jamais eu à la défendre.',
                '« Un donjon sans monstre. »',
                '« Ce qui va nous coûter cher ici, c’est le registre. »'],
   },

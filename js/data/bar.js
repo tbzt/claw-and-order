@@ -53,7 +53,7 @@ export const bar = {
      de McCarthy (c'est `mccarthy` qui la porte). Une vue cadre la salle ;
      elle ne vide pas les cibles de leur récompense. */
   vues: {
-    physique: [
+    sociale: [
       'Trente personnes dans cette salle portent une étoile, et une seule a choisi la table où la lumière ne va pas.',
       '« On ne donne pas rendez-vous dans un bar à flics pour se cacher. On y donne rendez-vous pour qu’on remarque les quatre types qui entrent, et pas celui qui attend. »',
       '« C’est ce que j’aurais fait. Je dis ça comme un compliment, remarquez. Je ne sais pas encore si c’en est un. »',
@@ -68,7 +68,7 @@ export const bar = {
       '« Non, je ne filtre pas. Personne ne filtre. »',
       '« On apprend. »',
     ],
-    tactique: [
+    materielle: [
       'Une porte. Un comptoir assez long pour s’y mettre à couvert. Quatre silhouettes dont il faudra savoir laquelle bouge en premier.',
       '« Une seule issue. Des habitués, et au moins six armes que je peux voir d’ici. »',
       '« Rien d’anormal. Je vais quand même regarder de plus près. »',

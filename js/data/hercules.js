@@ -109,7 +109,7 @@ export const tripot = {
   },
 
   vues: {
-    physique: [
+    sociale: [
       'Il connaît cette salle par cœur : la table du fond triche, celle de la fenêtre paie comptant, et le patron ne regarde jamais deux fois le même visage.',
       '« Rien n’a changé. »',
       '« J’aurais préféré que quelque chose ait changé. »',
@@ -124,7 +124,7 @@ export const tripot = {
       '« Rien à pirater. »',
       '« Rien de connecté. C’est efficace. »',
     ],
-    tactique: [
+    materielle: [
       'Une salle sans fenêtre, une seule porte, cinq tables et plus de chaises que de joueurs assis dessus.',
       '« Une salle sans fenêtre, et une porte. »',
       '« J’en ai lu cent comme ça. Aucune n’avait de seconde sortie. »',

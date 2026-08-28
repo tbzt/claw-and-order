@@ -14,6 +14,8 @@
    le palais, accrédité — le mandat et le contrat ont déjà ouvert la
    porte, ce tableau ne fait que le raconter. */
 
+import { equipiers } from './equipiers.js'
+
 export const tribunal = {
   markup: 'scenes/tribunal.html',
 
@@ -23,6 +25,9 @@ export const tribunal = {
   ],
 
   hotspots: {
+
+    /* Les quatre équipiers, catalogue commun (js/data/equipiers.js). */
+    ...equipiers('tribunal'),
 
     sculptures: {
       nom: 'Les deux Justice',
@@ -186,7 +191,7 @@ export const tribunal = {
   },
 
   vues: {
-    physique: ['Des dizaines de gens en costume qui n’ont pas dormi non plus, chacun avec un dossier sous le bras et personne pour le regarder deux fois.',
+    sociale: ['Des dizaines de gens en costume qui n’ont pas dormi non plus, chacun avec un dossier sous le bras et personne pour le regarder deux fois.',
                '« Ce matin, le meilleur déguisement c’est d’avoir l’air aussi fatigué qu’eux. »',
                '« Ça tombe bien. Je n’ai rien eu à préparer. »'],
     ra: ['La RA du palais est presque vide — des balises d’orientation, un flux d’audiences. Une exception, au plafond : une caméra araignée qui ne devrait pas être là, une patte repliée contre une poutre.',
@@ -194,7 +199,7 @@ export const tribunal = {
     astrale: ['Le plan astral d’un tribunal ne devrait pas avoir peur. Celui-ci, si — un courant froid qui descend du couloir du fond, comme si quelque chose venait d’y passer vite.',
               '« Ce n’est pas hanté. »',
               '« Trop de gens ont eu peur au même endroit. »'],
-    tactique: ['Angles de tir, sorties, lignes de vue.',
+    materielle: ['Angles de tir, sorties, lignes de vue.',
                '« Une seule sortie civilisée. »',
                '« Je le note. Je n’accuse personne. »'],
   },

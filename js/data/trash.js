@@ -113,7 +113,7 @@ export const squat = {
   },
 
   vues: {
-    physique: [
+    sociale: [
       'Un fauteuil qui a coûté plus cher, neuf, que tout ce que Trash possède aujourd’hui, et un métier à tisser reconverti en autel.',
       '« Personne n’achète des meubles pareils pour les entasser dans un dernier étage muré. »',
       '« Il ne les a pas achetés. Je ne dis pas qu’il les a volés non plus. »',
@@ -128,7 +128,7 @@ export const squat = {
       '« Un branchement volé sur l’atelier du dessous. »',
       '« Ça se voit, si on sait où chercher. »',
     ],
-    tactique: [
+    materielle: [
       'Un dernier étage aux trois quarts muré, un seul escalier de service, et une porte qui n’a jamais été pensée pour tenir.',
       '« Une tour sans donjon. »',
       '« Celle-là, on la défend en partant à temps. »',

@@ -142,7 +142,7 @@ export const appartement = {
   },
 
   vues: {
-    physique: [
+    sociale: [
       'Une pièce que personne n’a rangée et que personne n’a fouillée.',
       '« Trois jours. Un studio à Loveland vide pendant trois jours, avec la porte ouverte, et rien n’a disparu. »',
       '« Un quartier qui laisse ça tranquille, c’est un quartier qui a peur. Ou qui respecte. Je ne sais pas encore. »',
@@ -155,7 +155,7 @@ export const appartement = {
       'Deux rubans de scellés, un lecteur mural sur le palier, et une pile de courrier qui clignote doucement parce que personne ne l’a accusée réception.',
       '« La pièce est morte côté réseau. La cage d’escalier, pas du tout. »',
     ],
-    tactique: [
+    materielle: [
       'Une pièce, une porte, une fenêtre sur rue. Pas de seconde issue.',
       '« Celui qui est entré ici savait qu’il n’aurait pas à repartir en courant. »',
     ],

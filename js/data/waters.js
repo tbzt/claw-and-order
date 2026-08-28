@@ -108,7 +108,7 @@ export const waters = {
   ],
 
   vues: {
-    physique: [
+    sociale: [
       'Une console de mixage qui a dû coûter cher il y a vingt ans, un mur de disques encadrés dont la moitié ne sont sans doute même pas d’or, et une cabine vitrée qui n’a pas vu de musicien depuis un moment.',
       '« Il vit là-dedans plus qu’il n’y travaille. »',
       '« La poussière est partout, sauf sur ce qui compte pour lui. On apprend beaucoup d’un homme en regardant ce qu’il essuie. »',
@@ -123,7 +123,7 @@ export const waters = {
       '« Ça, c’est payé cher. Le reste tourne sur du matériel des années 2060. »',
       '« Il a mis toutes ses économies sur une seule porte. »',
     ],
-    tactique: [
+    materielle: [
       'Une entrée, un fond de salle sans autre issue visible, et un homme seul qui n’a manifestement jamais eu à défendre cet endroit contre personne.',
       '« Aucune ligne de tir à couvrir. »',
       '« Ce qu’il y a de dangereux ici est enfermé dans un mur. »',

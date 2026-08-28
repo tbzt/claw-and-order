@@ -49,6 +49,7 @@
      ici par une conséquence narrative précise, pas un chiffre affiché). */
 
 import { a } from '../state.js'
+import { equipiers } from './equipiers.js'
 
 export const tribunalSalle = {
   markup: 'scenes/tribunal-salle.html',
@@ -95,7 +96,7 @@ export const tribunalSalle = {
      fiche du rôle au marteau reste due (voir le bas de
      `css/scene-tribunal-salle.css` et le backlog du plan). */
   vues: {
-    physique: [
+    sociale: [
       'Trois pages de dossier d’un côté, une avocate de l’autre, et entre les deux un garçon en combinaison orange à qui personne n’a rien demandé.',
       '« Il n’y a pas d’argent dans cette pièce. Première fois de la nuit. »',
       '« On n’achètera personne. Il va falloir leur donner quelque chose de vrai, et ce n’est pas l’outil que je sais tenir. »',
@@ -110,7 +111,7 @@ export const tribunalSalle = {
       '« Trois pages au dossier de l’accusation. Deux déjà tournées sur son terminal. »',
       '« Il aura fini avant le juge. »',
     ],
-    tactique: [
+    materielle: [
       'Deux issues, des tables assez lourdes pour arrêter quelque chose, une estrade qui domine toute la salle. Tout ce qu’il faut pour tenir une pièce.',
       '« Et rien à y tenir. »',
       '« Un donjon où l’on gagne en parlant. Je n’ai aucune idée de la façon dont on y protège quelqu’un. »',
@@ -118,6 +119,9 @@ export const tribunalSalle = {
   },
 
   hotspots: {
+
+    /* Les quatre équipiers, catalogue commun (js/data/equipiers.js). */
+    ...equipiers('tribunal-salle'),
 
     juge: {
       nom: 'Le juge',

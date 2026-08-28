@@ -51,7 +51,7 @@ export const sarah = {
   ],
 
   vues: {
-    physique: [
+    sociale: [
       'Trois chaises, trois inconnus qui attendent depuis des heures et qui ne poseront aucune question — dans une clinique de rue, ne pas regarder est la politesse de base.',
       '« Personne ici ne nous demandera qui on est. »',
       '« Ce silence-là coûte cher ailleurs. Ici il est gratuit, et j’aimerais mieux le payer. »',
@@ -66,7 +66,7 @@ export const sarah = {
       '« Ça bavarde. Pour elle, pas contre nous. »',
       '« Je laisse. »',
     ],
-    tactique: [
+    materielle: [
       'Deux pièces, une porte entre les deux, une table d’examen qui ne protégerait de rien.',
       '« On ne tient pas un siège dans une infirmerie. »',
       '« On y vient pour repartir vite. »',
