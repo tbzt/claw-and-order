@@ -2,7 +2,7 @@
    Ce fichier ne connaît aucun contenu — il ne sait que faire tourner
    une scène qu'on lui donne. */
 
-import { etat, a, pose, donne, retire, marque, classe, sait, contexte, avance, formateHeure, avanceTour, formateTour,
+import { etat, a, pose, donne, retire, tient, marque, classe, sait, contexte, avance, formateHeure, avanceTour, formateTour,
          sauvegarde, sauvegardeLisible, effaceSauvegarde, restaure, ficheslues,
          sauvegardesGardees, garde, gardeeParId, oublieGardee } from './state.js'
 import { scenes, depart } from './data/scenes.js'
@@ -26,6 +26,7 @@ const rideau = $('rideau')
 const carnet = $('carnet')
 const reseau = $('reseau')
 const sacoche = $('sacoche')
+const equipeFiches = $('equipeFiches')
 const portrait = $('portrait')
 const journal = $('journal')
 const gardees = $('gardees')
@@ -474,7 +475,12 @@ function rale() {
 
 function selectionne(idRunner) {
   if (occupe) return rale()
-  if (etat.actif === idRunner) return
+  /* Recliquer celui qu'on joue déjà ouvre les fiches. Ce clic était un
+     `return` sec depuis toujours, et le HUD n'a pas la place d'un
+     septième bouton (12 px de marge à 1024 — voir l'en-tête de `.hud`).
+     Un geste mort qui devient un geste utile coûte moins cher qu'un
+     bouton qui pousse l'équipe hors du cadre. */
+  if (etat.actif === idRunner) return basculeEquipe()
   etat.actif = idRunner
   etat.astral = VUES[idRunner] === 'astrale'
   rafraichit()
@@ -1019,16 +1025,131 @@ function rendSacocheTable() {
   }
 }
 
+/* Ce que la SACOCHE montre : ce qu'on a ramassé cette nuit. L'équipement
+   personnel (`a:`) n'y est plus — il est sur la fiche de son
+   propriétaire, où il n'a jamais cessé d'être. Rien n'a bougé dans
+   `etat.inventaire` pour autant : le portique lit `tient()` et retire,
+   et ses deux branches écrites — traverser avec, ou le tendre soi-même —
+   valent trop cher pour être cassées par une question de rangement.
+   C'est la présentation qui se sépare, pas l'état. */
+const dansLaSacoche = () => etat.inventaire.filter((id) => objets[id] && !objets[id].a)
+
 function rendSacoche() {
   const etal = $('sacocheEtal')
   etal.replaceChildren()
-  for (const id of etat.inventaire) {
-    if (!objets[id]) continue
-    etal.append(creeJetonObjet(id, etat.objetActif === id))
-  }
-  const n = etat.inventaire.length
+  for (const id of dansLaSacoche()) etal.append(creeJetonObjet(id, etat.objetActif === id))
+  const n = dansLaSacoche().length
   $('sacocheProgres').textContent = n === 0 ? 'vide' : `${n} objet${n > 1 ? 's' : ''}`
   rendSacocheTable()
+}
+
+/* ══ LES FICHES D'ÉQUIPE (le panneau d’équipe) ═══════════════════════════════
+   Quatre cartes de front, jamais un étal : il n'y a que quatre fiches,
+   et la comparaison EST le propos (DOCTRINE — LES QUATRE REGARDS § 15).
+
+   Ce panneau MONTRE, il n'active rien — le § 9 interdit l'arbre de
+   compétences, et il n'y a donc aucun bouton de capacité ici. La seule
+   chose cliquable est l'équipement, et c'est le geste de la sacoche,
+   pas un pouvoir : on le prend en main pour le tendre à quelqu'un. */
+
+const materielDe = (idRunner) =>
+  Object.keys(objets).find((id) => objets[id].a === idRunner)
+
+function basculeEquipe() {
+  const ouvert = equipeFiches.hidden
+  equipeFiches.hidden = !ouvert
+  if (ouvert) rendEquipe()
+  rafraichit()
+}
+
+function creeBloc(titre, ...contenu) {
+  const b = document.createElement('div')
+  const t = document.createElement('p')
+  t.className = 'eq-bloc__titre'
+  t.textContent = titre
+  b.append(t, ...contenu)
+  return b
+}
+
+function creeLigne(classe, texte) {
+  const p = document.createElement('p')
+  p.className = classe
+  /* `portrait` s'écrit en une ou plusieurs phrases ; les tableaux se
+     rendent en un seul paragraphe, l'aération vient du CSS. */
+  p.textContent = Array.isArray(texte) ? texte.join(' ') : texte
+  return p
+}
+
+/* L'équipement sur sa fiche. Cliquable tant qu'on l'a — même geste que
+   le jeton de la sacoche : on le prend, le panneau se referme, la cible
+   est derrière. Saisi au portique, il reste écrit et barré : une
+   conséquence ajoute, elle ne retire jamais (règle 19). */
+function creeMateriel(idObjet) {
+  const o = objets[idObjet]
+  const porte = tient(idObjet)
+  const b = document.createElement('button')
+  b.className = 'eq-materiel'
+  b.classList.toggle('est-parti', !porte)
+  b.classList.toggle('est-actif', etat.objetActif === idObjet)
+  b.disabled = !porte
+  b.innerHTML = '<span class="jeton__icone"></span><span><span class="eq-materiel__nom"></span><span class="eq-materiel__ou"></span></span>'
+  b.querySelector('.jeton__icone').innerHTML = `<span class="objet__${o.icone}"></span>`
+  b.querySelector('.eq-materiel__nom').textContent = o.nom
+  b.querySelector('.eq-materiel__ou').textContent = porte ? o.ou : 'plus sur lui'
+  b.title = porte ? `${o.nom} — prendre en main` : `${o.nom} — laissé au portique`
+  if (porte) b.addEventListener('click', (e) => {
+    e.stopPropagation()
+    if (etat.objetActif === idObjet) {
+      etat.objetActif = null
+      rendEquipe()
+      return rafraichit()
+    }
+    etat.objetActif = idObjet
+    basculeEquipe()
+  })
+  return b
+}
+
+function rendEquipe() {
+  const rangee = $('equipeRangee')
+  rangee.replaceChildren()
+  for (const [id, r] of Object.entries(equipe)) {
+    const f = document.createElement('div')
+    f.className = 'eq-fiche'
+    f.dataset.runner = id
+    f.classList.toggle('est-actif', etat.actif === id)
+    const nom = document.createElement('p')
+    nom.className = 'eq-fiche__nom'
+    nom.textContent = r.nom
+    const etatCivil = document.createElement('p')
+    etatCivil.className = 'eq-fiche__etat'
+    etatCivil.textContent = [r.metatype, r.role].filter(Boolean).join(' · ')
+    f.append(nom, etatCivil)
+
+    const idMateriel = materielDe(id)
+    if (idMateriel) f.append(creeMateriel(idMateriel))
+
+    if (r.attentif) f.append(creeBloc('Ce à quoi il est attentif', creeLigne('eq-attentif', r.attentif)))
+
+    if (r.comportements?.length) {
+      const puces = document.createElement('div')
+      puces.className = 'eq-puces'
+      for (const c of r.comportements) {
+        const p = document.createElement('span')
+        p.className = 'eq-puce'
+        p.textContent = c
+        puces.append(p)
+      }
+      f.append(creeBloc('Comportements', puces))
+    }
+
+    if (r.portrait) f.append(creeBloc('Ce qui le définit', creeLigne('eq-portrait', r.portrait)))
+    /* Une seule des quatre répliques canoniques, tirée au sort à
+       l'ouverture : les quatre d'affilée feraient une liste de
+       citations, une seule fait entendre quelqu'un. */
+    if (r.repliques?.length) f.append(creeLigne('eq-replique', pioche(r.repliques)))
+    rangee.append(f)
+  }
 }
 
 function basculeReseau() {
@@ -1310,6 +1431,7 @@ function rafraichit() {
   if (!journal.hidden) rendJournal()
   if (!reseau.hidden) rendReseau()
   if (!sacoche.hidden) rendSacoche()
+  if (!equipeFiches.hidden) rendEquipe()
   /* Hors cible, le curseur ne promet rien : il reprend sa forme neutre,
      ou celle du verbe forcé s'il y en a un. Sur une cible,
      `ecritEtiquette()` le repose sur le verbe résolu. */
@@ -1335,7 +1457,7 @@ function rendMain() {
   const id = etat.objetActif
   const tient = Boolean(id && objets[id])
   b.classList.toggle('est-vide', !tient)
-  $('sacocheCompte').textContent = String(etat.inventaire.length)
+  $('sacocheCompte').textContent = String(dansLaSacoche().length)
   b.title = tient ? `${objets[id].nom} — ouvrir la sacoche (S)` : 'Sacoche (S)'
   if (!tient) return
   const icone = document.createElement('span')
@@ -1638,7 +1760,7 @@ function brancheStage() {
   stage.addEventListener('pointerleave', () => { curseur.hidden = true; survolee = null; ecritEtiquette() })
 
   stage.addEventListener('click', (e) => {
-    if (!carnet.hidden || !journal.hidden || !reseau.hidden || !gardees.hidden || !sacoche.hidden) return
+    if (!carnet.hidden || !journal.hidden || !reseau.hidden || !gardees.hidden || !sacoche.hidden || !equipeFiches.hidden) return
     if (occupe) return suivante()
     if (dialogue) return
     const cible = e.target.closest('[data-hotspot]')
@@ -1698,6 +1820,12 @@ function brancheHud() {
     rendSacoche()
     rafraichit()
   })
+  equipeFiches.addEventListener('click', () => {
+    if (!etat.objetActif) return
+    etat.objetActif = null
+    rendEquipe()
+    rafraichit()
+  })
   /* La main OUVRE, toujours — qu'elle soit pleine ou vide. Elle a
      porté un temps le second métier « reposer ce qu'on tient », et deux
      métiers sur un bouton en font un qu'on n'ose plus cliquer. Reposer
@@ -1728,6 +1856,7 @@ function brancheHud() {
       else if (!reseau.hidden) basculeReseau()
       else if (!gardees.hidden) basculeGardees()
       else if (!sacoche.hidden) basculeSacoche()
+      else if (!equipeFiches.hidden) basculeEquipe()
       else rafraichit()
     }
     if (e.key === 'c' || e.key === 'C') basculeCarnet()
@@ -1735,6 +1864,7 @@ function brancheHud() {
     if (e.key === 'r' || e.key === 'R') basculeReseau()
     if (e.key === 'g' || e.key === 'G') basculeGardees()
     if (e.key === 's' || e.key === 'S') basculeSacoche()
+    if (e.key === 'e' || e.key === 'E') basculeEquipe()
     if (e.key === 'a' || e.key === 'A') changeAllure()
     /* LES CHIFFRES ONT DEUX MÉTIERS, et les deux modes s'excluent : dans
        un dialogue ils désignent une réplique, hors dialogue ils forcent

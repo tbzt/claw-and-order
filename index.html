@@ -160,6 +160,30 @@
         </div>
       </div>
 
+      <!-- LES FICHES D'ÉQUIPE (le panneau d’équipe). Quatre cartes de front, et
+           pas d'étal : il n'y a que quatre fiches, pour toujours.
+           Sélectionner pour lire coûterait un geste qui n'achète rien,
+           et surtout la comparaison EST le propos — « qu'est-ce que
+           j'aurais vu si j'avais été quelqu'un d'autre ? »
+           (DOCTRINE — LES QUATRE REGARDS, § 15). Les quatre côte à côte
+           font de cette question la lecture par défaut.
+
+           Aucun bouton n'active rien : le § 9 interdit l'arbre de
+           compétences. On lit qui ils sont ; on change de runner au HUD
+           comme avant.
+
+           PAS DE BOUTON NEUF AU HUD non plus — il ne reste que 12 px de
+           marge à 1024 de large (voir l'en-tête de `.hud`), et un
+           septième bouton le ferait passer à deux rangs. Le panneau
+           s'ouvre à la touche E, ou en recliquant le runner DÉJÀ actif :
+           ce clic-là ne faisait rien du tout jusqu'ici. -->
+      <div class="carnet equipe-fiches" id="equipeFiches" hidden>
+        <p class="carnet__titre">L’équipe
+          <span class="carnet__progres">Quatre façons d’être attentif — pas quatre clés.</span>
+        </p>
+        <div class="equipe-fiches__rangee" id="equipeRangee"></div>
+      </div>
+
       <div class="rideau" id="rideau" hidden>
         <p class="rideau__titre">FIN DU PROTOTYPE</p>
         <p class="rideau__ligne" id="rideauLigne"></p>
@@ -224,10 +248,10 @@
       </button>
 
       <div class="equipe" id="equipe" role="group" aria-label="L’équipe">
-        <button class="runner est-actif" data-runner="hercules" data-vue="physique">Hercules</button>
-        <button class="runner" data-runner="trash"    data-vue="astrale">Trash</button>
-        <button class="runner" data-runner="rabbit"   data-vue="ra">White_Rabbit</button>
-        <button class="runner" data-runner="drakk"    data-vue="tactique">Drakk</button>
+        <button class="runner est-actif" data-runner="hercules" data-vue="physique" title="Hercules — recliquer pour sa fiche (E)">Hercules</button>
+        <button class="runner" data-runner="trash"    data-vue="astrale"  title="Trash — recliquer pour sa fiche (E)">Trash</button>
+        <button class="runner" data-runner="rabbit"   data-vue="ra"       title="White_Rabbit — recliquer pour sa fiche (E)">White_Rabbit</button>
+        <button class="runner" data-runner="drakk"    data-vue="tactique" title="Drakk — recliquer pour sa fiche (E)">Drakk</button>
       </div>
     </div>
 

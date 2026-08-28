@@ -1609,6 +1609,134 @@ body {
 .sacoche__ligne[data-qui="rabbit"]   { color: var(--voix-rabbit); }
 .sacoche__ligne[data-qui="drakk"]    { color: var(--voix-drakk); }
 
+/* ══ LES FICHES D'ÉQUIPE (le panneau d’équipe) ═══════════════════════════════
+   Quatre cartes de front. Elles empruntent `.carnet` pour le chrome du
+   panneau et n'ajoutent que la rangée et la carte.
+
+   Mesuré avant de figer les tailles : au plateau le plus étroit du jeu
+   (983 px de large, fenêtre 1024), les cartes font 492 px de haut pour
+   326 à 343 px de contenu — 150 px de marge, rien ne défile. C'est ce
+   qui a tranché A contre l'étal + table : le volume n'était pas un
+   argument, il n'y en avait qu'un, la comparaison. */
+.equipe-fiches__rangee {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2cqw;
+  min-height: 0;
+}
+
+.eq-fiche {
+  display: flex;
+  flex-direction: column;
+  gap: .9cqh;
+  padding: 1.4cqh 1.1cqw;
+  min-height: 0;
+  overflow-y: auto;
+  background: #0b0d15;
+  border: 1px solid #1b1f2e;
+  border-left: .28cqw solid var(--voix);
+  border-radius: 2px;
+}
+/* La carte du runner qu'on joue en ce moment se distingue — c'est la
+   seule information de cet écran qui change d'un instant à l'autre. */
+.eq-fiche.est-actif { background: color-mix(in srgb, var(--voix) 8%, #0b0d15); }
+.eq-fiche[data-runner="hercules"] { --voix: var(--voix-hercules); }
+.eq-fiche[data-runner="trash"]    { --voix: var(--voix-trash); }
+.eq-fiche[data-runner="rabbit"]   { --voix: var(--voix-rabbit); }
+.eq-fiche[data-runner="drakk"]    { --voix: var(--voix-drakk); }
+
+.eq-fiche__nom {
+  font-family: var(--mono);
+  font-size: 1.32cqw;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--voix);
+}
+.eq-fiche__etat {
+  font-family: var(--mono);
+  font-size: .92cqw;
+  letter-spacing: .06em;
+  color: #4b5468;
+}
+
+/* L'ÉQUIPEMENT PERSONNEL, à sa place. Il n'est plus rangé dans la
+   sacoche avec une bouteille achetée et un passe pris sur un mort : il
+   est sur la fiche de son propriétaire. Il reste dans `etat.inventaire`
+   — le portique lit `tient()` et retire, et ses deux branches (traverser
+   avec, ou le tendre soi-même) valent trop cher pour être cassées par
+   une question de rangement. Ce qui change est la PRÉSENTATION : la
+   sacoche montre ce qu'on a ramassé, la fiche ce qu'on portait déjà. */
+.eq-materiel {
+  display: flex;
+  align-items: center;
+  gap: .7cqw;
+  padding: .8cqh .7cqw;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: color-mix(in srgb, var(--voix) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--voix) 26%, transparent);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color .14s, background .14s;
+}
+.eq-materiel:hover { border-color: var(--voix); background: color-mix(in srgb, var(--voix) 14%, transparent); }
+.eq-materiel.est-actif {
+  border-color: var(--ambre);
+  box-shadow: 0 0 .7cqw color-mix(in srgb, var(--ambre) 40%, transparent);
+}
+/* Saisi au portique : la ligne reste, barrée. Une conséquence ajoute,
+   elle ne retire jamais (règle 19) — on doit pouvoir lire ce qu'on a
+   perdu, et où. */
+.eq-materiel.est-parti { opacity: .42; cursor: default; }
+.eq-materiel.est-parti:hover { border-color: color-mix(in srgb, var(--voix) 26%, transparent); background: color-mix(in srgb, var(--voix) 7%, transparent); }
+.eq-materiel.est-parti .eq-materiel__nom { text-decoration: line-through; }
+
+.eq-materiel__nom { font-size: 1.02cqw; line-height: 1.3; color: var(--craie); }
+.eq-materiel__ou {
+  font-family: var(--mono);
+  font-size: .78cqw;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--voix);
+  opacity: .85;
+  margin-top: .2cqh;
+}
+.eq-fiche .jeton__icone { width: 3.2cqw; height: 3.2cqw; }
+
+.eq-bloc__titre {
+  font-family: var(--mono);
+  font-size: .76cqw;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #4b5468;
+}
+.eq-puces { display: flex; flex-wrap: wrap; gap: .3cqw; margin-top: .45cqh; }
+.eq-puce {
+  font-family: var(--mono);
+  font-size: .78cqw;
+  letter-spacing: .04em;
+  padding: .28cqh .45cqw;
+  color: var(--craie);
+  background: #10131d;
+  border: 1px solid color-mix(in srgb, var(--voix) 30%, #232838);
+  border-radius: 2px;
+}
+
+/* `attentif` est en craie — c'est du présent, ce qu'il remarque là,
+   maintenant. `portrait` est en ardoise — c'est du passé, ce qui l'a
+   fait. La réplique est dans sa voix, comme partout ailleurs. */
+.eq-attentif { font-size: 1cqw; line-height: 1.45; color: var(--craie); margin-top: .45cqh; }
+.eq-portrait { font-size: 1cqw; line-height: 1.5; color: var(--ardoise); margin-top: .45cqh; }
+.eq-replique {
+  font-size: 1cqw;
+  line-height: 1.45;
+  color: var(--voix);
+  padding-left: .6cqw;
+  border-left: 1px solid color-mix(in srgb, var(--voix) 40%, transparent);
+}
+
 /* La carte de la table porte le liseré de provenance, comme le jeton. */
 .carnet__fiche[data-source="bar"]     { border-left-color: var(--source-bar); }
 .carnet__fiche[data-source="quai"]    { border-left-color: var(--source-quai); }
