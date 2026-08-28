@@ -273,8 +273,8 @@ const TABLEAUX = {
   /* Le sous-sol de Duke, chantier 37 : même raccord, quatrième décor. */
   duke: {
     rabbit: {
-      vu: ‘Il ne s’assoit pas non plus. Il reste debout, entre Duke et l’escalier, comme si sa place était déjà décidée depuis longtemps dans cette pièce.’,
-      trash: ‘« Son aura change, ici. Moins de gêne qu’ailleurs. Il est chez des gens qui ne lui demandent pas d’expliquer qui il est. »’,
+      vu: 'Il ne s’assoit pas non plus. Il reste debout, entre Duke et l’escalier, comme si sa place était déjà décidée depuis longtemps dans cette pièce.',
+      trash: '« Son aura change, ici. Moins de gêne qu’ailleurs. Il est chez des gens qui ne lui demandent pas d’expliquer qui il est. »',
     },
     drakk: {
       vu: 'Il compte les issues et les armes de la pièce, par réflexe de troll des rues, et s’arrête en réalisant que huit personnes font déjà ce calcul pour lui.',
