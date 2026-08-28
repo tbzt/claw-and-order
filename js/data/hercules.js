@@ -160,7 +160,7 @@ export const tripot = {
                '« Il regarde des adultes mentir et dire la vérité dans la même pièce, et il essaie de faire la différence. »']
             : ['« Son aura est serrée sur elle-même, comme au bateau. »',
                '« Il est assis dans une pièce où tout le monde triche un peu, et il n’a encore triché avec personne. »'],
-        rabbit: '« Vingt ans, et il vient de voir un adulte se faire démasquer devant lui sans que le monde s’arrête. C’est peut-être la leçon la plus utile de la nuit. »',
+        rabbit: '« Dix-huit ans, et il vient de voir un adulte se faire démasquer devant lui sans que le monde s’arrête. C’est peut-être la leçon la plus utile de la nuit. »',
         drakk: '« Il compte les cartes qu’on abat, pas celles qu’on garde. Un bon réflexe de joueur, pour un garçon qui n’a jamais eu de main correcte. »',
       }),
       parler: { texte: [], dialogue: 'lester' },

@@ -172,7 +172,7 @@ export const retour = {
 
     /* ══ LESTER ═══════════════════════════════════════════════════════
        Son sprite existait depuis le début du projet et n'avait jamais
-       été à l'écran. Il a vingt ans et il en paraît seize. */
+       été à l'écran. Il a dix-huit ans et il en paraît seize. */
     lester: {
       nom: 'Lester',
       regarder: {
@@ -180,7 +180,7 @@ export const retour = {
                'Combinaison de détention, deux tailles trop grande. Il tient ses coudes.'],
         hercules: '« Il n’a pas demandé où on allait. Un gamin qui ne demande pas, c’est un gamin qui a déjà été déplacé plusieurs fois. »',
         trash: '« Son aura est petite. Serrée sur elle-même, comme quelqu’un qui essaie de prendre moins de place. »',
-        rabbit: ['« Vingt ans. Ork. Aucun SIN, donc aucune existence, donc aucun avocat commis d’office avant l’ORC. »',
+        rabbit: ['« Dix-huit ans. Ork. Aucun SIN, donc aucune existence, donc aucun avocat commis d’office avant l’ORC. »',
                  '« … »',
                  '« Nous, les orks, … non. Rien. »'],
         drakk: '« Il ne demande rien et il ne remercie pas. Un otage bien élevé. Ça me déplaît. »',

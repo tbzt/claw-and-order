@@ -106,7 +106,7 @@ export const greffe = {
       regarder: {
         tous: ['Il sort du sas en clignant des yeux — la lumière du couloir est la première chose vive qu’il voit depuis longtemps.',
                'Combinaison de détention, deux tailles trop grande. Il compte les quatre visages devant lui, un par un.'],
-        hercules: '« Vingt ans. Et il compte les gens avant de compter les issues. J’aurais fait pareil. »',
+        hercules: '« Dix-huit ans. Et il compte les gens avant de compter les issues. J’aurais fait pareil. »',
         trash: '« Son aura est petite, serrée sur elle-même. Elle vient de comprendre qu’elle a le droit d’occuper un peu plus de place. »',
         rabbit: '« Aucun SIN. Officiellement, il n’existe pas. On vient de faire sortir quelqu’un qui n’existe pas. »',
         drakk: ['« Il ne remercie pas. »', '« Il vérifie d’abord qu’on n’a pas besoin d’un autre otage. »'],
@@ -166,7 +166,7 @@ export const greffe = {
         }
         if (!a('lester-arrive'))
           return { tous: ['Le sas s’ouvre en deux temps, avec le bruit d’un frigo qu’on débranche.',
-                          'On vous amène Lester. Il a l’air d’avoir vingt ans, et d’en avoir seize.',
+                          'On vous amène Lester. Il a l’air d’avoir dix-huit ans, et d’en avoir seize.',
                           'Il ne demande pas qui vous êtes. Il regarde la porte derrière vous, celle par laquelle on repart.'],
                    flags: ['lester-arrive'], visuels: ['lester-arrive'] }
         return { tous: 'Le voilier est au ponton, la pluie n’a pas cessé, et Tacoma est de l’autre côté du détroit.',

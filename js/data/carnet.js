@@ -483,7 +483,7 @@ export const deductions = [
     dit: {
       tous: 'Les deux fiches tiennent debout séparément. Posées l’une sur l’autre, elles cessent de parler de Teresa.',
       hercules: ['« Ce n’est pas un dossier bâclé. Un dossier bâclé, ça manque de pièces. »', '« Celui-là a les pièces. Il les a rangées ailleurs. »'],
-      trash: '« Ils ont su avant nous, avant lui, avant tout le monde. Et ils ont mis un gamin de vingt ans dans une navette. »',
+      trash: '« Ils ont su avant nous, avant lui, avant tout le monde. Et ils ont mis un gamin de dix-huit ans dans une navette. »',
       rabbit: ['« Deux relevés, un journal, trois jours. »', '« Sa preuve était consultable par n’importe qui. Il fallait un numéro de contrat à quatre chiffres. »'],
       drakk: ['« Ils n’ont pas manqué le coupable. »', '« Ils ont écrit un autre nom à la place. »'],
     },

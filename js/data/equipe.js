@@ -372,11 +372,11 @@ export const pnj = {
   lester: {
     nom: 'Lester',
     metatype: 'ork',
-    taille: 1.90,        // → 45 px. Il a vingt ans et il en paraît seize.
+    taille: 1.90,        // → 45 px. Il a dix-huit ans et il en paraît seize.
     motsCles: [
       'Ork sans SIN',
-      'Loveland, puis la rue de Redmond',
-      'Vingt ans, accusé de meurtre',
+      'Loveland, à Puyallup. La rue, depuis toujours',
+      'Dix-huit ans, accusé de meurtre',
       'Train de vie : aucun',
       'Client de l’ORC malgré lui',
     ],

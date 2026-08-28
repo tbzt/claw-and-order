@@ -1933,7 +1933,7 @@ function tombeRideau() {
         : 'Vous êtes remontés vers Downtown à peu près comme vous en étiez partis. Personne n’a rien prouvé à personne — et ça a suffi à personne.')
     : a('appart-quitte')
     ? (a('su:lester-innocent')
-        ? 'Ils savaient. Depuis le premier jour, ils savaient, et ils ont mis un gamin de vingt ans dans une navette de huit heures. Il reste à le prouver devant quelqu’un.'
+        ? 'Ils savaient. Depuis le premier jour, ils savaient, et ils ont mis un gamin de dix-huit ans dans une navette de huit heures. Il reste à le prouver devant quelqu’un.'
         : 'Une pièce et demie au-dessus d’un pressing, vide depuis trois jours. Vous en ressortez avec l’odeur du détachant et pas grand-chose d’autre.')
     : a('local-quitte')
     ? (a('su:hayden')

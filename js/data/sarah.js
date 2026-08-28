@@ -88,7 +88,7 @@ export const sarah = {
           : ['Assis près de la porte du cabinet, le bras contre lui, à regarder les trois inconnus de la salle d’attente comme s’il cherchait à savoir lequel d’entre eux est le plus fatigué.',
              'C’est la première fois de la nuit qu’il est dans une pièce où quelqu’un d’autre attend aussi.'],
         hercules: '« Un gamin qui compte les gens plus fatigués que lui. Il en trouve toujours un. Ça devrait le rassurer et ça ne le rassure jamais. »',
-        rabbit: '« Vingt ans, et personne ne lui avait jamais proposé une vraie attelle avant ce soir. »',
+        rabbit: '« Dix-huit ans, et personne ne lui avait jamais proposé une vraie attelle avant ce soir. »',
         drakk: ['« Il regarde les trois autres, un par un. »', '« Il essaie de savoir combien comptent plus que lui. »'],
       }),
       parler: { tous: '« On repart bientôt. » Il hoche la tête et ne dit rien de plus.' },

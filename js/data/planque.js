@@ -240,7 +240,7 @@ export const planque = {
               : ['« Son aura est serrée sur elle-même. Exactement comme au bateau, et il est descendu du bateau il y a une heure. »',
                  '« Il est assis avec nous et il n’est avec personne. »',
                  '« Si on le laisse comme ça, il ira au tribunal et il se taira. »'],
-        rabbit: '« Vingt ans. Il a passé plus de temps enfermé cette semaine que moi de toute ma vie, et j’ai grandi dans une tour. »',
+        rabbit: '« Dix-huit ans. Il a passé plus de temps enfermé cette semaine que moi de toute ma vie, et j’ai grandi dans une tour. »',
         drakk: '« Il ne dort pas alors qu’il pourrait. C’est un homme qui monte encore la garde tout seul. »',
       }),
       parler: { texte: [], dialogue: 'lester' },
@@ -419,7 +419,7 @@ export const planque = {
       regarder: ({ a }) => ({
         tous: ['Six heures cinq. Trois heures cinquante-cinq avant l’audience.',
                'C’est la première fois de la nuit qu’il reste plus de temps qu’il n’en faut.'],
-        hercules: '« Trois heures pour convaincre un gamin de vingt ans que le monde n’est pas exactement ce qu’il croit. Il a raison, en plus. »',
+        hercules: '« Trois heures pour convaincre un gamin de dix-huit ans que le monde n’est pas exactement ce qu’il croit. Il a raison, en plus. »',
         trash: a('trash-epuise')
           ? '« Trois heures. Je vais dormir vingt minutes. Réveillez-moi si l’eau revient. »'
           : '« Trois heures. C’est long quand on n’a rien à faire et court quand on a quelqu’un à écouter. »',

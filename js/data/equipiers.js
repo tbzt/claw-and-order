@@ -355,7 +355,7 @@ const TABLEAUX = {
       ],
       dit: ({ a }) =>
         a("sait-famille")
-          ? "« Une fille du Tír, morte à Redmond, et sa famille qui veut que ça se taise. »"
+          ? "« Une fille du Tír, morte à Loveland, et sa famille qui veut que ça se taise. »"
           : "« Il a peur, ce vieux. Pas de nous. »",
     },
 

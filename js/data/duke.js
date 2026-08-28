@@ -137,7 +137,7 @@ export const duke = {
                '« Il regarde huit personnes armées défendre sa vie et il essaie de comprendre ce que ça dit de la sienne. »']
             : ['« Son aura est serrée sur elle-même, comme au bateau. »',
                '« Il est dans la pièce la plus armée de la nuit et c’est peut-être celle où il se sent le moins en sécurité. »'],
-        rabbit: '« Vingt ans, et il regarde huit personnes qui lui ressemblent plus que nous, sur le papier. Ça doit faire une drôle de nuit. »',
+        rabbit: '« Dix-huit ans, et il regarde huit personnes qui lui ressemblent plus que nous, sur le papier. Ça doit faire une drôle de nuit. »',
         drakk: '« Il compte les épées de la salle du trône. C’est un réflexe de survie que je reconnais. »',
       }),
       parler: { texte: [], dialogue: 'lester' },

@@ -169,7 +169,7 @@ export const squat = {
                '« Il est assis dans le seul endroit du monde qui soit vraiment à moi, et il ne le sait pas encore. »']
             : ['« Son aura est serrée sur elle-même, comme au bateau. »',
                '« Je lui ai ouvert ma porte. Il ne sait pas encore ce que ça veut dire, ici. »'],
-        rabbit: '« Vingt ans, et il vient d’atterrir dans le seul endroit de la nuit qui n’appartient à personne d’autre qu’à celui qui l’a ouvert. »',
+        rabbit: '« Dix-huit ans, et il vient d’atterrir dans le seul endroit de la nuit qui n’appartient à personne d’autre qu’à celui qui l’a ouvert. »',
         drakk: '« Il compte les issues sans qu’on le lui apprenne. C’est un réflexe qu’un gamin ne devrait pas avoir à cet âge. »',
       }),
       parler: { texte: [], dialogue: 'lester' },

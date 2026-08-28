@@ -163,7 +163,7 @@ export const herwick = {
                '« Il attend de voir ce qu’on fait de cette pièce, et de l’homme qui nous l’a ouverte. »']
             : ['« Son aura est serrée sur elle-même, comme au bateau. »',
                '« Il regarde un homme saigner pour lui et il ne sait pas quoi en faire. Moi non plus, pour être honnête. »'],
-        rabbit: '« Vingt ans, et il n’a jamais été assis dans une pièce qui vaut aussi cher que sa peine. »',
+        rabbit: '« Dix-huit ans, et il n’a jamais été assis dans une pièce qui vaut aussi cher que sa peine. »',
         drakk: '« Il ne dort pas. Il regarde Herwick comme s’il essayait de comprendre pourquoi un inconnu saigne pour lui. »',
       }),
       parler: { texte: [], dialogue: 'lester' },
@@ -320,7 +320,7 @@ export const herwick = {
       nom: 'Une horloge comtoise, arrêtée',
       regarder: {
         tous: 'Arrêtée depuis des années, à une heure qui ne veut plus rien dire. Ce n’est pas elle qui donne l’heure ici — c’est le téléphone de White_Rabbit.',
-        hercules: '« Trois heures pour convaincre un gamin de vingt ans, dans la boutique de l’homme qui saigne pour lui. Il a raison d’avoir peur, en plus. »',
+        hercules: '« Trois heures pour convaincre un gamin de dix-huit ans, dans la boutique de l’homme qui saigne pour lui. Il a raison d’avoir peur, en plus. »',
         drakk: '« Elle s’est arrêtée un jour précis, et Herwick ne l’a jamais fait réparer. Certains hommes gardent leurs cicatrices visibles. »',
       },
       utiliser: 'La remonter ne dirait toujours pas l’heure qu’il faut. Autant la laisser se taire.',

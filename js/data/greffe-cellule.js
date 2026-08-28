@@ -57,7 +57,7 @@ export const greffeCellule = {
       regarder: ({ qui }) => qui !== 'trash'
         ? 'Tu ne vois que le mur du guichet, et Trash devant, immobile.'
         : { tous: 'Un lit vissé, un lavabo, une lumière au plafond qui ne s’éteint jamais.',
-            trash: '« Rien n’y a laissé de trace. Vingt ans, et cette pièce n’a pas de mémoire. »' },
+            trash: '« Rien n’y a laissé de trace. Dix-huit ans, et cette pièce n’a pas de mémoire. »' },
       utiliser: 'Un décor qu’on ne touche pas, qu’on soit là ou pas.',
     },
 

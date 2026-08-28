@@ -564,7 +564,7 @@ export const bar = {
                     ['mccarthy', '« Buvez quelque chose. C’est ma tournée, et c’est la seule chose que je peux vous offrir. »']],
           },
         },
-        /* Un ork de vingt ans, une elfe du Tír, et quatre métatypes
+        /* Un ork de dix-huit ans, une elfe du Tír, et quatre métatypes
            autour de la table : nain, elfe, troll, et un humain qui se
            fait passer pour un ork. Personne n'entend cette phrase de la
            même place. Aucun ne le DIT — c'est le sujet `ork` qui le dit,
@@ -581,11 +581,19 @@ export const bar = {
           quand: ({ a }) => a('sait-le-job'),
           flags: ['sait-gamin'],
           texte: {
-            tous: ['« Lester. Vingt ans. Ork. Ramassé dans une descente à Redmond. »',
-                   '« On l’accuse du meurtre de Teresa Banks. Une elfe du Tír. Le genre de nom qui fait bouger des gens. »'],
+            /* Le scénario, chronologie J+5 : « EN POURSUIVANT Lester
+               Bird, deux agents de la Lone Star trouvent le corps de
+               Teresa. » Ils lui couraient après pour des puces trouvées
+               sur un mort — ce n'est pas lui qu'on a trouvé près d'un
+               corps, c'est le corps qu'on a trouvé en courant après lui.
+               C'est tout le hasard du montage, et le jeu en avait fait
+               une descente de police à Redmond. */
+            tous: ['« Lester. Dix-huit ans. Ork, sans SIN, de Loveland. »',
+                   '« Deux de nos agents lui couraient après pour une histoire de puces. C’est en le poursuivant qu’ils sont tombés sur le corps. »',
+                   '« Alors on l’accuse du meurtre de Teresa Banks. Une elfe du Tír. Le genre de nom qui fait bouger des gens. »'],
             /* Le nain compte les places dans la salle avant de compter
                l'argent. Ce n'est pas de la compassion, c'est un devis. */
-            hercules: ['« Un ork de vingt ans et une elfe du Tír. Devant un juge, la moitié du travail est déjà faite. »',
+            hercules: ['« Un ork de dix-huit ans et une elfe du Tír. Devant un juge, la moitié du travail est déjà faite. »',
                        ['mccarthy', '« Les trois quarts. »']],
             /* L'elfe entend le mot Tír. Il ne s'en explique pas : sa
                vraie question, c'est le sujet `tir`, plus loin, et elle
@@ -596,7 +604,7 @@ export const bar = {
             /* Il commence sa phrase, et il ne la finit pas. C'est écrit
                sur sa fiche mot pour mot, et c'est ici que ça coûte le
                plus cher : le sujet `ork` n'est pas encore ouvert. */
-            rabbit: ['« Vingt ans, ramassé dans une descente. Nous, les orks, on … »',
+            rabbit: ['« Dix-huit ans, et ils lui couraient après pour des puces. Nous, les orks, on … »',
                      '« … »',
                      '« Non. Rien. Continuez. »'],
             /* Le troll ne commente pas le métatype. Il demande combien
