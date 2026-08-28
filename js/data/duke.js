@@ -88,20 +88,23 @@ export const duke = {
 
   vues: {
     physique: [
-      'Huit personnes qui n’ont pas rangé leurs armes en vous voyant entrer, et une seule qui a le droit de parler la première — ça se voit à qui se tait.',
+      'Huit personnes qui n’ont pas rangé leurs armes en vous voyant entrer. Sept d’entre elles se taisent.',
       '« Ici, on ne charme personne. On paie, et on se tait au bon moment. Je sais faire les deux, cette nuit je préférerais ne faire que le premier. »',
     ],
     astrale: [
       'Huit auras armées, serrées dans une pièce sans issue rapide — chacune prête depuis si longtemps qu’elle ne le remarque plus elle-même.',
-      '« Ce n’est pas de la colère. C’est de la routine. Ça devrait me rassurer, et je crois que c’est pire. »',
+      '« De l’habitude. »',
+      '« J’aurais préféré de la colère. »',
     ],
     ra: [
-      'Quatre caméras, toutes tournées vers l’escalier — le seul chemin d’entrée, ce qui explique pourquoi personne ici ne s’inquiète d’une fenêtre qu’il n’y a pas.',
-      '« Duke ne surveille qu’une seule porte. C’est soit de la confiance dans ses murs, soit il n’a jamais eu besoin d’en surveiller une seconde. »',
+      'Quatre caméras, toutes tournées vers l’escalier. Il n’y a pas de fenêtre.',
+      '« Duke ne surveille qu’une porte. »',
+      '« Il n’a jamais eu besoin d’en surveiller deux. »',
     ],
     tactique: [
       'Pas une fenêtre, un escalier, une porte blindée : ce sous-sol n’a qu’une sortie, et huit personnes armées la tiennent avec vous à l’intérieur.',
-      '« Une seule issue, compagnon, et elle est déjà tenue par eux. Si le fer doit chanter ici, il chantera pour eux, pas pour nous. »',
+      '« Une seule issue, et ce sont eux qui la tiennent. »',
+      '« Si ça tourne mal ici, ça tourne mal pour nous. »',
     ],
   },
 
@@ -161,7 +164,7 @@ export const duke = {
         hercules: a('duke-paye')
           ? '« Un homme d’affaires, au fond. Le produit change, la politesse commerciale reste identique. Je peux travailler avec ce genre de logique. »'
           : '« Il ne va rien nous offrir avant qu’on ait posé quelque chose sur la table. Ce n’est pas de l’hostilité, c’est un tarif. »',
-        trash: '« Son aura ne bouge pas d’un millimètre. Ce n’est pas du calme. C’est un homme qui a déjà décidé de toutes les issues possibles de cette conversation avant qu’elle commence. »',
+        trash: ['« Son aura ne bouge pas d’un millimètre. Ce n’est pas du calme. »', '« Il a déjà décidé comment finit cette conversation. »'],
         rabbit: '« Il m’a jamais fait crédit, même quand j’avais rien à offrir d’autre que du temps. Il a raison de ne pas commencer ce soir. »',
         drakk: '« Un seigneur de guerre sans couronne, qui n’a besoin d’aucun trône pour qu’on sache où s’adresser. »',
       }),
@@ -304,7 +307,8 @@ export const duke = {
                      '« Je vais leur dire. Pas ce qu’ils veulent entendre — ce qui s’est passé. »',
                      'Il regarde une dernière fois l’escalier, et le matelas où on a recouché un gars qui a son âge.',
                      '« S’ils demandent qui m’a protégé cette nuit, je dirai la vérité. Toute la vérité, pas juste la partie qui vous arrange. »'],
-              hercules: '« Voilà quelqu’un qui vient de décider quelque chose tout seul. C’est plus rare que ça n’en a l’air. »',
+              hercules: ['« Voilà quelqu’un qui vient de décider quelque chose tout seul. »',
+                         '« Avec huit types armés dans la pièce. Je ne sais pas si c’est du courage ou s’il ne les a pas comptés. »'],
               flags: ['lester-temoigne'], fiches: ['lester-temoigne'], va: 'tribunal' }
           : { tous: [...commun,
                      'Il ne dit rien. Il sort le premier, la tête basse.',

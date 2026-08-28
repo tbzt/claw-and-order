@@ -143,20 +143,21 @@ export const appartement = {
 
   vues: {
     physique: [
-      'Une pièce que personne n’a rangée et que personne n’a fouillée. Les deux à la fois, c’est rare — ça veut dire qu’on est venu chercher une chose précise et qu’on est reparti avec.',
-      '« Trois jours. Un studio à Loveland vide pendant trois jours, avec la porte ouverte, et rien n’a disparu. Ça, c’est un quartier qui a peur de quelque chose. »',
+      'Une pièce que personne n’a rangée et que personne n’a fouillée.',
+      '« Trois jours. Un studio à Loveland vide pendant trois jours, avec la porte ouverte, et rien n’a disparu. »',
+      '« Un quartier qui laisse ça tranquille, c’est un quartier qui a peur. Ou qui respecte. Je ne sais pas encore. »',
     ],
     astrale: [
       'Il reste de la peur, en couche mince, à hauteur d’homme, et elle est vieille de trois jours. Rien d’autre. Personne n’est repassé assez longtemps pour laisser quoi que ce soit.',
-      '« Elle est morte ici. Je ne peux pas le prouver, et je n’ai aucun doute. »',
+      '« Elle est morte ici. »',
     ],
     ra: [
       'Deux rubans de scellés, un lecteur mural sur le palier, et une pile de courrier qui clignote doucement parce que personne ne l’a accusée réception.',
-      '« Cette pièce est morte côté réseau, et la cage d’escalier ne l’est pas du tout. C’est dehors qu’il faut regarder. »',
+      '« La pièce est morte côté réseau. La cage d’escalier, pas du tout. »',
     ],
     tactique: [
-      'Une pièce, une porte, une fenêtre sur rue. Pas de seconde issue. Celui qui est entré ici savait qu’il n’aurait pas à repartir en courant.',
-      '« On ne choisit pas cet endroit pour tuer quelqu’un. On y tue quelqu’un parce qu’on y était déjà. »',
+      'Une pièce, une porte, une fenêtre sur rue. Pas de seconde issue.',
+      '« Celui qui est entré ici savait qu’il n’aurait pas à repartir en courant. »',
     ],
   },
 
@@ -175,9 +176,9 @@ export const appartement = {
         : { tous: ['Les deux rubans de RA portent leur horodatage de pose, en petit, dans le coin : le matin du premier jour.',
                    'Un scellé de la Star journalise chaque rupture. Celui-ci n’en a aucune — ce qui veut dire que depuis qu’ils l’ont posé, personne du service n’est revenu. Pas une fois en trois jours.'],
             hercules: '« Trois jours sans repasser sur une scène de crime. Ce n’est pas de la négligence, ça. La négligence, ça revient une fois pour la forme. »',
-            trash: '« Ils ont fermé la porte et ils ont cessé d’y penser le même jour. Je connais ce geste : c’est celui qu’on fait sur quelqu’un dont on a décidé qu’il ne comptait pas. »',
+            trash: ['« Ils ont fermé la porte et ils ont cessé d’y penser le même jour. »', '« Je connais ce geste-là. »'],
             rabbit: '« Aucune rupture au journal du scellé. Zéro. Ils ont posé ça et ils sont partis pour de bon. »',
-            drakk: '« Le sceau est intact. Nul n’est revenu lever le corps du regard. »',
+            drakk: '« Le scellé est intact. Personne n’est revenu. »',
             flags: ['rubans-intacts'],
             fiches: ['rubans-intacts'] },
       utiliser: ({ a }) => ({
@@ -232,10 +233,11 @@ export const appartement = {
                    'Sur le montant de la tête de lit, une poudre grise, appliquée au pinceau, en aplats réguliers. Personne ne l’a essuyée.'],
             hercules: ['« Ça, c’est un relevé. Un vrai, fait par des techniciens payés à l’heure. »',
                        '« On ne relève pas les empreintes d’un lieu où il ne s’est rien passé. Et on ne PART pas avec les draps si on ne compte pas les analyser. »',
-                       '« Donc quelque part, il y a un rapport. Et il n’est pas au dossier. »'],
-            trash: '« Il n’y a pas de sang. Il n’y en a jamais eu : on ne saigne pas quand on est étranglé. C’est pour ça que la pièce a l’air normale, et c’est pour ça qu’elle ne l’est pas. »',
+                       '« Donc quelque part, il y a un rapport. Et il n’est pas au dossier. »',
+                       '« Quelqu’un l’a rangé ailleurs. Je n’aime pas ce mot-là, “ailleurs”. »'],
+            trash: ['« Il n’y a pas de sang. Il n’y en a jamais eu. »', '« On ne saigne pas quand on est étranglé. »'],
             rabbit: '« Poudre à empreintes, scellés RA, draps emportés sous sachet. C’est une procédure complète. Il existe un numéro de scène pour cet endroit, et il n’apparaît nulle part. »',
-            drakk: '« Ils ont emporté le linceul et laissé la couche. C’est qu’ils savaient ce qu’ils cherchaient dessus. »',
+            drakk: ['« Ils ont emporté les draps et laissé le lit. »', '« Ils savaient ce qu’ils cherchaient dessus. »'],
             flags: ['draps-emportes'],
             fiches: ['draps-emportes'] },
       utiliser: {
@@ -255,11 +257,12 @@ export const appartement = {
         : { tous: ['Un placard de salle de bain, vingt centimètres de large : du paracétamol, une plaquette de contraceptifs, du dentifrice.',
                    'Et un rasoir de sûreté en acier massif, une seconde brosse à dents, et un flacon sans étiquette contenant six gélules blanches.'],
             hercules: ['« Le rasoir vaut plus cher que tout le reste de la pièce. On ne l’achète pas, on se le fait offrir. »',
-                       '« Il ne dormait pas ici. Il se RASAIT ici. Ce n’est pas la même chose et c’est beaucoup plus intime. »'],
+                       '« Il ne dormait pas ici. Il se RASAIT ici. »',
+                       '« Ce n’est pas la même chose. »'],
             trash: ['« Le flacon n’est pas une ordonnance. Ce sont des stimulants, et pas ceux qu’on trouve en pharmacie. »',
                     '« Chez moi, on appelle ça “tenir son rang”. Ça se prend le soir, avant de sortir, quand on doit être brillant. »'],
-            rabbit: '« Pas d’étiquette, pas de code-barres, pas de traçabilité. Ce n’est pas illégal, c’est mieux que ça : c’est invisible. »',
-            drakk: '« Deux brosses à dents. Toute une histoire d’amour tient dans ce détail, et personne ne l’a versée au dossier. »',
+            rabbit: ['« Pas d’étiquette, pas de code-barres, pas de traçabilité. »', '« Ce n’est même pas illégal. »'],
+            drakk: ['« Deux brosses à dents. »', '« Ce n’est pas au dossier. »'],
             flags: ['affaires-homme'],
             fiches: ['affaires-homme'] },
       utiliser: {
@@ -282,9 +285,10 @@ export const appartement = {
                    'Il manque le dessus : ce qu’on met en dernier, le matin du départ.'],
             hercules: '« Elle ne fuyait pas. On ne plie pas ses affaires quand on fuit. Elle PARTAIT — elle avait une date. »',
             trash: ['« Il n’y a rien de sentimental dedans. Pas une photo, pas un objet. »',
-                    '« Elle ne partait pas en voyage. Elle partait pour de bon, et elle savait qu’il ne fallait rien emporter qui puisse la faire reconnaître. »'],
-            rabbit: '« Pas de commlink dans la trousse. Elle comptait en changer. C’est la première chose qu’on fait quand on veut ne plus être suivi, et c’est la dernière qu’on ose. »',
-            drakk: '« Le baluchon du départ, bouclé aux trois quarts. Il ne manque que le courage, et il en manque toujours. »',
+                    '« Elle ne partait pas en voyage. Elle partait pour de bon. »',
+                    '« Elle savait qu’il ne fallait rien emporter. »'],
+            rabbit: ['« Pas de commlink dans la trousse. Elle comptait en changer. »', '« C’est la première chose qu’on fait quand on veut ne plus être suivi. »'],
+            drakk: ['« Le sac du départ, bouclé aux trois quarts. »', '« Il manque toujours le dernier quart. »'],
             flags: ['valise-faite'],
             fiches: ['valise-faite'] },
       utiliser: {
@@ -302,11 +306,11 @@ export const appartement = {
             rabbit: '« Je l’ai. Je peux travailler avec ça. »' }
         : { tous: ['Une pile de courrier papier — un immeuble de Loveland, personne n’a de boîte matricielle ici — glissée sous la porte et poussée en tas contre le mur.',
                    'Des publicités, une relance du pressing du dessous, et une facture trimestrielle : PUYALLUP LOCKWORKS — MAINTENANCE ACCÈS IMMEUBLE — CONTRAT 4471-B.'],
-            hercules: '« Un prestataire de serrures qui facture au trimestre. Donc il archive. Personne ne facture un service qu’il ne peut pas prouver. »',
-            trash: '« Trois jours de courrier. Personne n’est venu le ramasser, pas même le propriétaire. Il sait ce qui s’est passé ici, et il attend que ça se tasse. »',
+            hercules: ['« Un prestataire de serrures qui facture au trimestre. Donc il archive. »', '« Personne ne facture un service qu’il ne peut pas prouver. J’ai essayé, à une époque. »'],
+            trash: ['« Trois jours de courrier. Personne n’est venu le ramasser, pas même le propriétaire. »', '« Il attend que ça se tasse. »'],
             rabbit: ['« Contrat 4471-B. C’est une clé, ça. »',
                      '« Les journaux d’accès de l’immeuble ne sont pas dans la serrure : ils sont chez eux, avec une référence de contrat en guise d’index. »'],
-            drakk: '« Un parchemin de comptes, oublié au seuil. C’est toujours dans les comptes que les royaumes se trahissent. »',
+            drakk: ['« Une facture, oubliée sur le seuil. »', '« C’est toujours par les comptes que ça se sait. »'],
             flags: ['bail-numero'] },
       utiliser: {
         tous: 'Tu remues la pile. Rien d’autre que des factures et du papier commercial — sa vie ne passait pas par là.',
@@ -334,7 +338,7 @@ export const appartement = {
             rabbit: ['« Modèle à journal. Il horodate chaque ouverture depuis la rue, avec le porteur. »',
                      '« Sauf qu’il ne GARDE rien : il pousse tout chez le prestataire, une fois par jour, et il oublie. »',
                      '« Ce qui veut dire que les trois jours qui nous intéressent sont archivés quelque part, chez quelqu’un que personne n’a jamais pensé à interroger. »'],
-            drakk: '« Le portier de la tour tient un registre, et il ne le garde pas par-devers lui. Il l’envoie au château. »',
+            drakk: ['« Le portier tient un registre. »', '« Il ne le garde pas. Il l’envoie ailleurs. »'],
             /* Pas de `visuels` en double : `derive()` allume le
                boîtier à partir du drapeau. Une seule source pour un
                même état — la faute avait été faite ici et se relisait
@@ -349,7 +353,7 @@ export const appartement = {
           return { tous: 'Il faudrait un deck, et savoir chez qui frapper.',
                    hercules: '« Ce n’est pas mon rayon. Je peux appeler quelqu’un ; elle, elle peut entrer. »',
                    trash: '« Ce monde-là n’est pas le mien. Le mien ne garde pas d’archives. »',
-                   drakk: '« Je sais forcer une porte. Pas un livre de comptes qui vit dans l’air. »' }
+                   drakk: ['« Je sais forcer une porte. »', '« Pas un livre de comptes qui vit dans l’air. »'] }
 
         if (!a('maglock-lu'))
           return { tous: [],
@@ -387,7 +391,7 @@ export const appartement = {
                'Ils ont séché depuis longtemps. Personne n’est venu les ranger.'],
         hercules: '« Deux couverts, lavés. Ils ont dîné ici, et ils ont fait la vaisselle ensemble. On ne fait pas la vaisselle avec quelqu’un qu’on va tuer. »',
         trash: '« … Non. Pas tout de suite. On ne le décide pas en montant l’escalier, ce genre de chose. »',
-        rabbit: '« Deux verres. J’aimerais qu’il y en ait trois, parce que trois voudrait dire une fête, et deux ne veut dire qu’une seule chose. »',
+        rabbit: ['« Deux verres. »', '« J’aimerais qu’il y en ait trois. »'],
         drakk: '« Le dernier repas. Dans les histoires, on le raconte toujours après. Nous, nous arrivons par le mauvais bout. »',
       },
       utiliser: {
@@ -404,9 +408,9 @@ export const appartement = {
              'Sur le trottoir d’en face, quelqu’un est adossé à un mur depuis un moment, et ne fait rien de particulier.']
           : ['La rue, deux étages plus bas, et l’enseigne du pressing qui grésille en plein jour. Loveland en après-midi ressemble à Loveland la nuit, avec plus de détails qu’on préférerait ne pas voir.',
              'À deux rues d’ici, le taudis où on l’a retrouvée. On voit le toit.'],
-        hercules: '« Deux rues. Ils ont porté un corps sur deux rues, en pleine nuit, dans un quartier où tout le monde regarde par la fenêtre. Et personne n’a rien vu. »',
-        trash: '« Personne n’a rien vu parce que tout le monde a très bien vu. Ce n’est pas la même chose, et ça ne se dit pas à un flic. »',
-        rabbit: '« Aucune caméra municipale dans cette rue. Trois caméras privées, toutes tournées vers leur propre porte. On ne surveille pas Loveland : on s’y protège. »',
+        hercules: ['« Deux rues. Ils ont porté un corps sur deux rues, en pleine nuit, dans un quartier où tout le monde regarde par la fenêtre. »', '« Et personne n’a rien vu. Ça se paie, un silence pareil, et je ne vois pas qui aurait les moyens. »'],
+        trash: ['« Tout le monde a très bien vu. »', '« Ça ne se dit pas à un flic. »'],
+        rabbit: ['« Aucune caméra municipale dans cette rue. »', '« Trois caméras privées, toutes tournées vers leur propre porte. »'],
         drakk: '« Deux rues. Le trajet le plus court entre où elle est morte et où on a voulu qu’elle meure. »',
       }),
       utiliser: {

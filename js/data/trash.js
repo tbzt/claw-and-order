@@ -114,20 +114,24 @@ export const squat = {
 
   vues: {
     physique: [
-      'Un fauteuil qui a coûté plus cher, neuf, que tout ce que Trash possède aujourd’hui, et un métier à tisser reconverti en autel — quelqu’un a sauvé ces meubles-là, pas volé.',
-      '« Il ne les a pas achetés. Personne n’achète des meubles pareils pour les entasser dans un dernier étage muré. »',
+      'Un fauteuil qui a coûté plus cher, neuf, que tout ce que Trash possède aujourd’hui, et un métier à tisser reconverti en autel.',
+      '« Personne n’achète des meubles pareils pour les entasser dans un dernier étage muré. »',
+      '« Il ne les a pas achetés. Je ne dis pas qu’il les a volés non plus. »',
     ],
     astrale: [
       'La loge est PRÉPARÉE — accordée à celui qui l’a montée. Elle tient chaud à l’aura de Trash comme un vêtement porté longtemps.',
-      '« Je vois ce qui approche mieux que je ne verrais un homme dans la rue. C’est ma maison, ici. Rien n’y entre sans que je le sente d’abord. »',
+      '« C’est ma maison, ici. »',
+      '« Rien n’y entre sans que je le sente. »',
     ],
     ra: [
       'Une seule icône, mal cachée : un branchement volé sur la ligne de l’atelier du dessous, qui alimente trois lampes et rien d’officiel.',
-      '« Il n’y a pas d’adresse à trouver sur un réseau. Ça, en revanche, ça se voit — si on sait où chercher, et je sais où chercher. »',
+      '« Un branchement volé sur l’atelier du dessous. »',
+      '« Ça se voit, si on sait où chercher. »',
     ],
     tactique: [
       'Un dernier étage aux trois quarts muré, un seul escalier de service, et une porte qui n’a jamais été pensée pour tenir.',
-      '« Une tour sans donjon, compagnon. On la défend en la quittant à temps, pas en y mourant. »',
+      '« Une tour sans donjon. »',
+      '« Celle-là, on la défend en partant à temps. »',
     ],
   },
 
@@ -194,7 +198,7 @@ export const squat = {
                'Rien n’est cher. Tout est choisi.'],
         trash: '« Il aime les objets sans valeur qui ont une histoire. Ça nous ressemble, à tous les deux. »',
         drakk: '« Un autel de bric et de broc à un esprit farceur. Je respecte la cohérence. »',
-        rabbit: '« Rien de connecté là-dessus. C’est le seul endroit de la nuit où je n’ai littéralement rien à pirater. »',
+        rabbit: ['« Rien de connecté là-dessus. »', '« Premier endroit de la nuit où je n’ai rien à faire. »'],
         hercules: '« Un noble du Tír qui prie devant une dent trouvée dans une poubelle. Il y a une leçon là-dedans que je préfère ne pas creuser trop fort. »',
       }),
       parler: ({ a, qui }) => {
@@ -207,7 +211,7 @@ export const squat = {
       },
       utiliser: {
         tous: 'Tu ne touches pas à l’autel d’un autre. Même chapardé, même à moitié en broc.',
-        drakk: '« Un homme d’honneur ne pille pas le sanctuaire d’un compagnon. »',
+        drakk: '« On ne fouille pas chez quelqu’un qui nous a ouvert. »',
       },
     },
 
@@ -314,7 +318,7 @@ export const squat = {
       nom: 'Un miroir piqué de rouille',
       regarder: {
         tous: 'Le tain s’écaille en dentelle sur les bords, mais le cadre est doré à la feuille, et personne n’a jamais retiré la feuille pour la revendre.',
-        hercules: '« Il pourrait vendre ce cadre et manger un mois. Il ne l’a jamais fait. Ce n’est pas de la naïveté, c’est un principe, et je le respecte sans le comprendre. »',
+        hercules: ['« Il pourrait vendre ce cadre et manger un mois. Il ne l’a jamais fait. »', '« Ce n’est pas de la naïveté. Je respecte, et je ne comprends pas. »'],
         trash: '« On peut tout perdre, sauf son raffinement. Celui-là, je l’ai gardé en entier. »',
       },
       utiliser: 'Tu ne touches pas au seul luxe que Trash se soit gardé.',
@@ -382,7 +386,8 @@ export const squat = {
                      '« Je vais leur dire. Pas ce qu’ils veulent entendre — ce qui s’est passé. »',
                      'Il regarde une dernière fois la trappe, et l’homme qui vient de perdre le seul endroit qui était à lui.',
                      '« S’ils demandent qui m’a protégé cette nuit, je dirai la vérité. Toute la vérité, pas juste la partie qui vous arrange. »'],
-              hercules: '« Voilà quelqu’un qui vient de décider quelque chose tout seul. C’est plus rare que ça n’en a l’air. »',
+              hercules: ['« Voilà quelqu’un qui vient de décider quelque chose tout seul. »',
+                         '« Dans une pièce où quelqu’un se cache depuis des années. Il n’a pas dû trouver ça encourageant. »'],
               flags: ['lester-temoigne'], fiches: ['lester-temoigne'], va: 'tribunal' }
           : { tous: [...commun,
                      'Il ne dit rien. Il sort le premier, la tête basse.',

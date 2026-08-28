@@ -30,10 +30,10 @@ export const bar = {
      pour un gain nul. Voir `PLAN_EXECUTION.md`, chantier 19. */
   ouverture: (ctx, visite) => visite > 1
     ? ['Vous repoussez la porte battante du Claw & Order. La salle n’a pas changé — l’heure, elle, a tourné.']
-    : ['Le Claw & Order, Downtown, 23 h. Un vieux bar dans son jus — un bar à flics-à-louer, relativement méta-friendly, ce qui explique qu’on vous laisse entrer.',
+    : ['Le Claw & Order, Downtown, 23 h. Un vieux bar dans son jus — un bar à flics-à-louer, relativement méta-friendly.',
        'Quelques clients éparpillés jouent aux fléchettes. Certains portent encore l’uniforme doré. Les fléchettes s’arrêtent en même temps que les conversations.',
        'Au nom de « McCarthy », le barman troll relève à peine les yeux de son comptoir et pointe le menton vers le fond, en grognant.',
-       'À l’écart, attablé seul, un vieil ork attend. Il est visiblement nerveux.'],
+       'À l’écart, attablé seul, un vieil ork attend. Il regarde la porte chaque fois qu’elle bat.'],
 
   /* ── LES QUATRE REGARDS ───────────────────────────────────────────
      Écrit le 2026-08-27. Le tableau qui OUVRE le jeu était l'un des deux
@@ -55,19 +55,23 @@ export const bar = {
   vues: {
     physique: [
       'Trente personnes dans cette salle portent une étoile, et une seule a choisi la table où la lumière ne va pas.',
-      '« On ne donne pas rendez-vous dans un bar à flics pour se cacher. On y donne rendez-vous pour que ce soit NOUS qu’on remarque, et pas lui. C’est bien joué, et ça ne me rassure pas. »',
+      '« On ne donne pas rendez-vous dans un bar à flics pour se cacher. On y donne rendez-vous pour qu’on remarque les quatre types qui entrent, et pas celui qui attend. »',
+      '« C’est ce que j’aurais fait. Je dis ça comme un compliment, remarquez. Je ne sais pas encore si c’en est un. »',
     ],
     astrale: [
       'Trente auras, et la même fatigue dans toutes — un uniforme qu’ils garderaient en dessous et qu’ils ont fini par ne plus sentir. Le troll, derrière son comptoir, est le seul qui soit entier.',
-      '« Personne ici n’a peur, personne ici n’est en colère. C’est une salle de gens qui n’attendent plus rien de leur nuit. Et une seule table, au fond, attend encore. »',
+      '« Ils se ressemblent tous. »',
+      '« Sauf celui du fond. »',
     ],
     ra: [
       'Vingt icônes flottent dans cette salle. Dix-huit sont de la réclame que personne n’a demandée ; les deux qui restent sont posées exactement au milieu.',
-      '« Non, on ne filtre pas. Personne ne filtre — c’est le Sixième Monde, pas un salon. On apprend à lire vite et à se méfier de ce qui clignote le plus fort. Tout le métier tient là-dedans. »',
+      '« Non, je ne filtre pas. Personne ne filtre. »',
+      '« On apprend. »',
     ],
     tactique: [
       'Une porte. Un comptoir assez long pour s’y mettre à couvert. Quatre silhouettes dont il faudra savoir laquelle bouge en premier.',
-      '« Une auberge, une seule issue, des habitués armés, et rien d’anormal nulle part. C’est exactement ce qui me gêne. Laissez-moi regarder de plus près. »',
+      '« Une seule issue. Des habitués, et au moins six armes que je peux voir d’ici. »',
+      '« Rien d’anormal. Je vais quand même regarder de plus près. »',
     ],
   },
 
@@ -84,15 +88,17 @@ export const bar = {
       nom: 'Le vieil ork',
       regarder: ({ a }) => a('parle:mccarthy')
         ? { tous: 'Inspecteur James McCarthy, brigade criminelle. Trente-quatre ans de maison, et il paie ce soir avec son propre créditube.',
-            hercules: '« Costume correct, montre bon marché, addition qu’il réglera lui-même. Il n’a pas de budget. Il a un problème. »' }
+            hercules: ['« Costume correct, montre bon marché, et il va régler l’addition lui-même. »',
+                       '« Il n’a pas de budget. Ce qui veut dire que personne ne lui a dit de venir. Je devrais m’en réjouir. »'] }
         : { tous: ['Gabardine, col relevé à l’intérieur — il n’a pas prévu de rester.',
                    'Une étoile Lone Star à la ceinture, tournée vers l’intérieur. Il ne la montre pas.'],
             hercules: '« Il a choisi la table la plus mal éclairée de la salle. Ça, c’est quelqu’un qui a déjà réfléchi à qui pourrait entrer. »',
-            trash: ['« Son aura est effilochée. Il ne dort pas, et pas depuis avant-hier. »',
-                    '« Mais elle est droite. Il a peur, il n’a pas honte. »',
-                    '« Ce n’est pas un homme qui nous vend. C’est un homme qui n’a plus personne à qui demander. »'],
-            rabbit: '« Un vieil ork. Voilà. C’est ça que tout le monde voit avant d’entendre ce qu’il dit. »',
-            drakk: '« Un homme seul qui engage des mercenaires dans une auberge. Dans mon livre, c’est toujours ainsi que ça commence. »' },
+            trash: ['« Son aura est effilochée. Il ne dort pas depuis deux jours. »',
+                    '« Elle est droite, par contre. »'],
+            rabbit: ['« Un vieil ork. »',
+                     '« C’est ce que les gens voient. Je sais comment ça marche. »'],
+            drakk: ['« Un homme seul qui engage des mercenaires dans une auberge. »',
+                    '« C’est le début d’à peu près tous les livres que j’ai lus. »'] },
       parler: { texte: [], dialogue: 'mccarthy' },
       utiliser: 'On ne bouscule pas un flic dans un bar à flics.',
     },
@@ -103,9 +109,9 @@ export const bar = {
         tous: ['Des photos usées, punaisées en désordre : les collègues tombés pour l’Étoile.',
                'Certaines sont là depuis si longtemps que le tirage a viré au jaune. Personne ne les remplace, et personne ne les enlève.'],
         hercules: '« Trente-quatre ans de maison. Il en a punaisé quelques-unes lui-même, j’imagine. »',
-        trash: '« Personne ne les regarde. C’est ça qui me gêne. Pas les photos. »',
-        rabbit: ['« Aucune n’est numérisée. Pas de copie, pas de sauvegarde, rien. »',
-                 '« Le jour où ce mur brûle, ils meurent une deuxième fois. »'],
+        trash: '« Personne ne les regarde. »',
+        rabbit: ['« Aucune n’est numérisée. Pas de copie, rien. »',
+                 '« Si ce mur brûle, il ne reste rien. »'],
         drakk: '« Le mur des compagnons tombés. Toutes les guildes en ont un. Celui-ci est mal tenu. »',
       },
       utiliser: 'Tu ne touches pas à ça. Pas ici, pas ce soir.',
@@ -115,9 +121,10 @@ export const bar = {
       nom: 'Le barman troll',
       regarder: {
         tous: 'Il essuie le même endroit du comptoir depuis que vous êtes entrés. C’est sa façon de dire qu’il vous a vus et qu’il s’en accommode.',
-        hercules: '« Il ne nous servira pas et il ne nous jettera pas. C’est exactement le service que je demande. »',
-        trash: '« Il nous a jaugés en une seconde, puis il a arrêté d’y penser. J’aimerais savoir faire ça. »',
-        rabbit: '« Un troll qui tient un bar à flics. Il a dû en avaler, des choses, pour avoir le droit d’être là. »',
+        hercules: ['« Il ne nous servira pas, et il ne nous jettera pas non plus. »',
+                   '« C’est déjà une position. On peut travailler avec ça. »'],
+        trash: '« Il nous a jaugés, puis il a arrêté d’y penser. »',
+        rabbit: ['« Un troll qui tient un bar à flics. »', '« Il a dû en avaler. »'],
         drakk: '« L’aubergiste. On salue toujours l’aubergiste. »',
       },
       parler: { texte: [], dialogue: 'barman' },
@@ -130,8 +137,8 @@ export const bar = {
         tous: ['Quatre, dont deux en uniforme doré. Ils ont repris leur partie, mais moins fort qu’avant.',
                'L’un d’eux vise depuis un moment sans lancer. Il attend de voir à quelle table vous allez.'],
         hercules: '« Celui de gauche a une dette de jeu. Ça se voit à la façon dont il compte les points des autres. »',
-        trash: '« Ils jouent, et personne ne s’amuse. »',
-        rabbit: '« Il n’a pas lancé depuis qu’on est entrés. Un bras armé qui ne se détend pas, ça finit toujours par se détendre. »',
+        trash: '« Personne ne s’amuse. »',
+        rabbit: '« Il n’a pas lancé depuis qu’on est entrés. »',
         drakk: '« Des lanceurs. Deux portent les couleurs de la garde. »',
       },
       parler: 'Ce n’est pas le moment, et ce ne sera jamais le moment.',
@@ -146,13 +153,14 @@ export const bar = {
       regarder: ({ a }) => a('sait-le-job')
         ? { tous: ['Vingt-trois heures passées. Elle avance de quatre minutes et personne ne l’a jamais réglée.',
                    'Onze heures avant l’audience. Tu viens de faire le calcul sans le vouloir, et tu le referas toute la nuit.'],
-            hercules: '« Onze heures. J’ai connu des délais plus courts. Jamais pour moins cher. »',
-            trash: '« C’est le temps qu’il reste au gamin. Dit comme ça, ça ne fait pas beaucoup. »',
-            rabbit: '« Quatre minutes d’avance sur la grille, et jamais resynchronisée. Personne ici n’a envie d’être à l’heure. »',
-            drakk: '« Le sablier tourne. Il tourne toujours. »' }
+            hercules: ['« Onze heures. J’ai connu plus court. »',
+                       '« Jamais pour ce prix-là, ceci dit. Je ne sais pas encore si c’est bon signe. »'],
+            trash: '« C’est le temps qu’il reste au gamin. »',
+            rabbit: '« Quatre minutes d’avance. Jamais resynchronisée. »',
+            drakk: '« Onze heures. C’est peu, pour un voyage et un procès. »' }
         : { tous: 'Vingt-trois heures passées. Elle avance de quatre minutes et personne ne l’a jamais réglée.',
-            rabbit: '« Quatre minutes d’avance sur la grille, et jamais resynchronisée. Personne ici n’a envie d’être à l’heure. »',
-            drakk: '« Le sablier tourne. Il tourne toujours. »' },
+            rabbit: '« Quatre minutes d’avance. Jamais resynchronisée. »',
+            drakk: '« Elle avance, et personne ne la règle. »' },
       utiliser: 'La régler ne ferait pas gagner une minute.',
     },
 
@@ -160,12 +168,13 @@ export const bar = {
       nom: 'Les tasses vides',
       regarder: ({ a }) => a('parle:mccarthy')
         ? { tous: 'Trois. À une par heure, il a commencé à téléphoner vers vingt heures.',
-            rabbit: '« Six appels, trois tasses. Il a passé la soirée à se faire raccrocher au nez. »' }
+            rabbit: ['« Six appels, trois tasses. »',
+                     '« Il s’est fait raccrocher au nez toute la soirée. »'] }
         : { tous: ['Trois tasses vides devant un homme seul. Il n’a pas commandé d’alcool.',
                    'C’est la première chose qui te dit qu’il n’est pas là pour se détendre.'],
             hercules: '« Trois cafés à ce prix-là, pour lui, c’est déjà une dépense. »',
-            trash: '« Il veut rester lucide. Un homme qui a peur commande autre chose. »',
-            drakk: '« Trois potions d’éveil. Voilà quelqu’un qui se prépare. »' },
+            trash: '« Il veut rester lucide. »',
+            drakk: '« Trois cafés. Il attend depuis trois heures, alors. »' },
       utiliser: 'Ce ne sont pas tes tasses.',
     },
 
@@ -178,10 +187,12 @@ export const bar = {
       regarder: {
         tous: ['Un créditube posé bien à plat près de son coude, déjà sorti. Ce n’est pas un modèle de service : c’est un tube personnel, usé aux angles.',
                'Il ne l’a pas encore poussé vers vous. Il attend de savoir combien il va devoir en enlever.'],
-        hercules: '« Personnel. Pas de logo de service, pas de plafond corpo. Cet homme va nous payer avec ce qu’il n’aura plus. »',
+        hercules: ['« Personnel. Pas de logo de service, pas de plafond corpo. »',
+                   '« Il va nous payer avec son propre argent. Je n’aime pas ça, et je vais le prendre quand même. »'],
         trash: '« Il l’a sorti avant qu’on arrive. Il a répété la scène tout seul. »',
-        rabbit: '« Aucun jeton d’organisme derrière. C’est sa vie qui est dedans, pas un budget. »',
-        drakk: '« Une bourse posée sur la table avant même le marchandage. Voilà quelqu’un qui n’a jamais négocié. »',
+        rabbit: '« Aucun jeton d’organisme derrière. C’est son compte à lui. »',
+        drakk: ['« Il a posé la bourse avant le marchandage. »',
+                '« Ça ne se fait pas. Il ne doit pas le savoir. »'],
       },
       utiliser: 'Il n’est pas à toi, et il n’est pas encore à toi.',
     },
@@ -201,10 +212,9 @@ export const bar = {
       sortie: 'carte',
       regarder: {
         tous: 'La porte battante par laquelle vous êtes entrés. Derrière, il pleut sur Downtown et il est bientôt minuit.',
-        rabbit: '« Pas de lecteur, pas de serrure connectée. Ça s’ouvre à la main, comme au siècle dernier. »',
-        drakk: ['« Notre monture attend dehors. »',
-                '« Une seule issue franche. Douze pas. »',
-                '« Retenez-la. Ça servira, ou ça ne servira pas, mais on ne le sait qu’après. »'],
+        rabbit: '« Pas de lecteur, pas de serrure connectée. Ça s’ouvre à la main. »',
+        drakk: ['« Une seule issue. Douze pas. »',
+                '« Retenez le chiffre. »'],
       },
       /* `sait-ligne` était posé par la lecture tactique de Drakk et
          RELU NULLE PART dans tout le jeu — audit du 22/08 : le seul
@@ -241,7 +251,8 @@ export const bar = {
         tous: ['Le rang des alcools sérieux, celui du haut. Personne n’y touche : ici on boit ce qui est en bas.',
                'Trois étiquettes sont retournées. Le genre de détail qui veut dire qu’on ne sert plus certaines maisons.'],
         hercules: '« J’ai bu la moitié de cette étagère à Las Vegas. Je la dois encore, d’ailleurs. »',
-        drakk: '« Des philtres. Trois sont retournés : signe de deuil, ou signe de dette. »',
+        drakk: ['« Trois étiquettes retournées. »',
+                '« Chez nous ça voulait dire une dette. Ici je ne sais pas. »'],
       },
       utiliser: 'Le barman te suit du regard depuis que tu es entré. Non.',
     },
@@ -253,9 +264,12 @@ export const bar = {
       regarder: ({ a }) => ({
         tous: 'Zinc rayé, verni par quarante ans de coudes. On y a gravé des matricules, et quelqu’un en a barré plusieurs.',
         hercules: a('sait-gamin')
-          ? '« Quarante ans de coudes. Il y a plus d’histoire là-dessus que dans le dossier du gamin. »'
-          : '« Quarante ans de coudes. Ce zinc a vu passer plus de vérités que n’importe quel interrogatoire. »',
-        rabbit: '« Des matricules gravés, et des matricules barrés. Personne n’a jamais pensé à effacer. Ici, on n’efface pas : on raye. »',
+          ? ['« Quarante ans de coudes. »',
+             '« Il s’est dit plus de choses ici que dans tout le dossier du gamin. Et je n’ai pas encore lu le dossier. »']
+          : ['« Quarante ans de coudes. »',
+             '« Les gens parlent plus au comptoir qu’en salle d’interrogatoire. Je ne dis pas ça au hasard. »'],
+        rabbit: ['« Des matricules gravés. Certains barrés. »',
+                 '« Personne n’a effacé. »'],
         drakk: '« La table du maître des lieux. On n’y pose pas les coudes sans y avoir été invité. »',
       }),
       utiliser: 'Tu n’es pas venu boire.',
@@ -287,9 +301,9 @@ export const bar = {
       nom: 'Une ligne rouge',
       regarder: {
         tous: 'Une bande rouge relie les deux joueurs de fléchettes à la porte de la rue.',
-        drakk: ['« Ces deux-là sont entre nous et la sortie depuis que nous sommes entrés. »',
-                '« Je ne dis pas qu’ils y sont pour quelque chose. Je dis qu’ils y sont. »',
-                '« Un bon maître de jeu ne place jamais deux hostiles sur la ligne de retraite par hasard. Mais la vie n’est pas un bon maître de jeu. »'],
+        drakk: ['« Ces deux-là sont entre nous et la sortie depuis qu’on est entrés. »',
+                '« Je ne sais pas si c’est exprès. »',
+                '« À ma table, ça l’aurait été. »'],
         flags: ['sait-ligne'],
       },
       utiliser: {
@@ -302,13 +316,13 @@ export const bar = {
       nom: 'Le commlink de McCarthy',
       regarder: {
         tous: 'Son commlink est posé face contre table, mais il diffuse encore son état.',
-        rabbit: ['« Six appels en deux heures, six numéros différents, tous très courts. »',
-                 '« Il n’a pas monté une opération. Il a cherché quelqu’un qui dise oui, et il a raclé jusqu’en bas. »',
+        rabbit: ['« Six appels en deux heures. Six numéros, tous très courts. »',
+                 '« Il a cherché quelqu’un qui dise oui. »',
                  '« On est le fond de la liste. »'],
       },
       utiliser: {
         tous: 'Dans un bar à flics ? Non.',
-        rabbit: '« Je peux. Je ne devrais pas. Je peux quand même. »',
+        rabbit: ['« Je peux le faire. »', '« Je ne devrais pas. »'],
       },
     },
 
@@ -316,9 +330,9 @@ export const bar = {
       nom: 'Le nœud du bar',
       regarder: {
         tous: 'L’icône publique du Claw & Order flotte au-dessus du comptoir, dorée, mal tenue.',
-        rabbit: ['« Nœud ouvert, pas de filtre, pas de journal de connexion. »',
-                 '« Ce qui veut dire que si quelqu’un a écouté ce qu’on vient de se dire, personne ne le saura jamais. »',
-                 '« Y compris nous. »'],
+        rabbit: ['« Nœud ouvert. Pas de filtre, pas de journal. »',
+                 '« Si quelqu’un nous a écoutés, personne ne le saura. »',
+                 '« Nous non plus. »'],
       },
       utiliser: {
         tous: 'Il faudrait un deck, et une raison.',
@@ -330,10 +344,11 @@ export const bar = {
       nom: 'La salle',
       regarder: {
         tous: 'Des flics en fin de service, quelques-uns en début. Personne ne parle fort. Un bar à flics à 23 h, c’est plus calme qu’une bibliothèque.',
-        hercules: '« Que des gens qui savent ce que vaut un contrat. La négociation va être honnête. C’est le pire cas de figure. »',
-        trash: '« Personne ne parle fort, et tout le monde écoute. Ce n’est pas du calme, c’est de l’attention. »',
-        rabbit: '« Trente commlinks, tous en mode discret. Le réseau le plus poli de Seattle. »',
-        drakk: '« Une salle commune. Peu de rires. Mauvaise auberge. »',
+        hercules: ['« Que des gens qui savent ce que vaut un contrat. La négociation va être honnête. »',
+                   '« C’est embêtant. Je suis meilleur quand elle ne l’est pas. »'],
+        trash: '« Tout le monde écoute. »',
+        rabbit: '« Trente commlinks, tous en mode discret. »',
+        drakk: '« Une salle commune. Peu de rires. »',
       },
       utiliser: 'On ne réarrange pas un bar à flics. On y reste discret, ou on en sort.',
     },

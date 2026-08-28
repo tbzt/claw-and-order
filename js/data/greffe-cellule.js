@@ -41,7 +41,7 @@ export const greffeCellule = {
                    'Il ne dort pas. Il compte les fissures du plafond, ou fait semblant d’en avoir besoin.',
                    'Seul. Pas d’autre présence dans le couloir, aucun garde posté à la porte.'],
             trash: ['« Il va bien. Personne ne l’a touché. »',
-                    '« Ce n’est pas rien, cette nuit-là — et il ne le sait pas encore. »'] },
+                    '« Ce n’est pas rien, cette nuit-là. Il ne le sait pas encore. »'] },
       utiliser: {
         tous: 'On ne touche pas ce qu’on ne fait que regarder.',
         trash: '« Une présence, ça se garde discrète. Je regarde, je ne me pose pas. »',

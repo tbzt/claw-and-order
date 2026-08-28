@@ -97,19 +97,23 @@ export const tribunalSalle = {
   vues: {
     physique: [
       'Trois pages de dossier d’un côté, une avocate de l’autre, et entre les deux un garçon en combinaison orange à qui personne n’a rien demandé.',
-      '« Il n’y a pas d’argent dans cette pièce. Première fois de la nuit. Ça veut dire qu’on n’achètera personne — donc il va falloir leur donner quelque chose de vrai, et ce n’est pas l’outil que je sais tenir. »',
+      '« Il n’y a pas d’argent dans cette pièce. Première fois de la nuit. »',
+      '« On n’achètera personne. Il va falloir leur donner quelque chose de vrai, et ce n’est pas l’outil que je sais tenir. »',
     ],
     astrale: [
       'Personne, dans cette salle, n’a peur pour soi. La seule chose qui ait laissé quelque chose ici, c’est le pupitre au milieu de l’allée : un à un, pendant des années, et ça s’y est empilé exactement comme au portique du parvis.',
-      '« Et derrière nous, la galerie ne sent rien du tout. Ce n’est pas de l’hostilité, c’est une salle d’attente. Ils attendent leur affaire à eux ; celle du gamin est juste ce qu’il y a avant. »',
+      '« Derrière nous, la galerie ne sent rien du tout. »',
+      '« Ils attendent leur affaire à eux. Celle du gamin est ce qu’il y a avant. »',
     ],
     ra: [
       'Cinq icônes, aucune réclame — un palais de justice ne loue pas de mètre carré de réalité augmentée. La transcription tourne en direct et n’est signée par personne ; le micro de la barre n’est pas encore allumé.',
-      '« Trois pages au dossier de l’accusation, deux déjà tournées sur son terminal. Il aura fini de le lire avant que le juge ait fini de l’écouter. »',
+      '« Trois pages au dossier de l’accusation. Deux déjà tournées sur son terminal. »',
+      '« Il aura fini avant le juge. »',
     ],
     tactique: [
       'Deux issues, des tables assez lourdes pour arrêter quelque chose, une estrade qui domine toute la salle. Tout ce qu’il faut pour tenir une pièce.',
-      '« Et rien à y tenir. C’est un donjon où l’on gagne en parlant. Je n’en avais jamais vu, et je n’ai aucune idée de la façon dont on y protège quelqu’un. »',
+      '« Et rien à y tenir. »',
+      '« Un donjon où l’on gagne en parlant. Je n’ai aucune idée de la façon dont on y protège quelqu’un. »',
     ],
   },
 
@@ -129,7 +133,7 @@ export const tribunalSalle = {
       nom: 'L’avocate de la défense',
       regarder: {
         tous: 'Wú Chen. C’est elle qui a fait verser le rapport d’autopsie au dossier — la seule pièce qui ne va pas dans le sens de l’accusation.',
-        trash: '« Elle se bat avec ce qu’on lui donne. On peut lui donner mieux. »',
+        trash: '« Elle se bat avec ce qu’on lui donne. »',
       },
     },
 
@@ -138,7 +142,7 @@ export const tribunalSalle = {
       regarder: {
         tous: ['Il lit son propre dossier comme s’il le découvrait. Trois pages, et il en a déjà tourné deux.',
                'Ce n’est pas un homme qui veut gagner. C’est un homme qui veut que ce soit fini.'],
-        rabbit: '« Le manque de conviction est mesurable. Le sien est élevé. »',
+        rabbit: '« Il a relu sa déposition deux fois avant de la dire. »',
       },
     },
 
@@ -354,9 +358,9 @@ export const tribunalSalle = {
         dit: {
           tous: 'Tu déposes le rapport d’autopsie sur le pupitre. Le juge le lit deux fois, plus lentement la seconde.',
           hercules: '« Un elfe a étranglé cette fille. Mon client est un ork. Ce n’est pas un détail, Votre Honneur — c’est une contradiction. »',
-          trash: '« Les mains ne mentent pas, même quand tout le reste ment. »',
+          trash: '« Regardez ses mains. »',
           rabbit: '« Le rapport est formel. Personne ne l’avait contesté parce que personne ne l’avait lu. »',
-          drakk: '« Le rapport dit une chose, l’accusation en dit une autre. L’un des deux se trompe, et ce n’est pas le rapport. »',
+          drakk: ['« Le rapport dit une chose. L’accusation en dit une autre. »', '« Le rapport a été écrit par quelqu’un qui regardait le corps. »'],
         },
       },
       'registre-anterieur': {
@@ -364,9 +368,9 @@ export const tribunalSalle = {
         dit: {
           tous: 'Tu poses le registre du greffe. L’heure du transfert y est antérieure à l’arrestation elle-même, et personne ne l’a corrigée depuis.',
           hercules: '« Quelqu’un a écrit la fin avant qu’on écrive le début, Votre Honneur. Ce n’est pas une preuve contre mon client. C’en est une contre le dossier. »',
-          trash: '« Un registre ne ment pas sur une date. Il n’a aucune raison de le faire. »',
+          trash: '« La date est dans le registre. »',
           rabbit: '« L’horodatage se vérifie en deux clics. Je vous invite à les faire. »',
-          drakk: '« Le piège était tendu avant l’entrée dans la taverne. Voici l’acte de naissance. »',
+          drakk: ['« Le piège était tendu avant qu’il entre. »', '« Voilà quand. »'],
         },
       },
       'pas-de-proces': {
@@ -374,9 +378,9 @@ export const tribunalSalle = {
         dit: {
           tous: 'Tu déposes le rapprochement lui-même : un dossier vide, un transfert déjà verrouillé avant qu’il n’existe. Le juge relit les deux pièces côte à côte.',
           hercules: '« On ne cherche pas à le faire condamner, Votre Honneur. On cherche à ce qu’il n’y ait pas d’audience du tout. Vous êtes en train d’assister à l’échec de ce plan. »',
-          trash: '« Personne ne veut sa mort par un jury. Quelqu’un veut sa mort avant le jury. »',
-          rabbit: '« Deux systèmes ne devraient jamais raconter la même histoire par accident. Ceux-là, si. »',
-          drakk: '« La fosse était creusée sur le chemin, avant même le gibet. »',
+          trash: '« Quelqu’un ne veut pas qu’il arrive jusqu’au jury. »',
+          rabbit: '« Deux systèmes séparés. La même heure, à la seconde près. »',
+          drakk: '« Ils savaient où ça finirait avant de commencer. »',
         },
       },
       guilde: {
@@ -404,9 +408,9 @@ export const tribunalSalle = {
         dit: {
           tous: 'Tu déposes le journal du maglock, à côté de ce que la Lone Star a relevé et jamais versé. Le juge lit les deux pièces dans l’ordre, puis les relit dans l’autre sens.',
           hercules: '« La Lone Star savait, Votre Honneur. Avant nous, avant lui, avant vous. Elle a choisi d’écrire un autre nom à la place. »',
-          trash: '« Ils ont eu la vérité entre les mains. Ils ont préféré la ranger. »',
-          rabbit: '« Un journal d’accès, un relevé d’ADN, trois jours de silence entre les deux. Ce n’est pas une négligence. C’est un choix, horodaté deux fois. »',
-          drakk: '« Ils avaient la carte du coupable depuis le début. Ils ont joué celle du plus proche. »',
+          trash: ['« Ils l’ont eue entre les mains. »', '« Ils l’ont rangée. »'],
+          rabbit: ['« Un journal d’accès, un relevé d’ADN, trois jours de silence entre les deux. »', '« Horodaté deux fois. »'],
+          drakk: ['« Ils savaient qui c’était depuis le début. »', '« Ils ont pris le plus proche. »'],
         },
       },
       'amant-secret': {
@@ -414,8 +418,8 @@ export const tribunalSalle = {
         dit: {
           tous: 'Tu déposes ce que le Shameless a rendu : une voiture qui ne se garait jamais deux fois au même endroit, un commlink coupé avant chaque rendez-vous. Le juge fronce les sourcils — pour la première fois, pas contre Lester.',
           hercules: '« Elle protégeait quelqu’un, Votre Honneur. Ce n’était pas mon client. »',
-          trash: '« Un protocole, pas une habitude. Quelqu’un le lui avait appris. »',
-          rabbit: '« Une prudence excessive pour une liaison ordinaire. La discrétion avait un prix, et ce n’est pas elle qui le payait. »',
+          trash: '« Quelqu’un le lui avait appris. »',
+          rabbit: ['« Beaucoup de prudence, pour une liaison ordinaire. »', '« Ce n’est pas elle qui payait la discrétion. »'],
           drakk: '« Elle portait le secret de quelqu’un d’autre. Voilà un motif que personne n’avait cherché. »',
         },
       },
@@ -426,9 +430,9 @@ export const tribunalSalle = {
             ? 'Tu déposes ce qu’il en reste — une bande abîmée, à moitié lisible, mais sa voix y est encore. Le juge demande qu’on l’écoute en chambre, pas en pleine salle.'
             : 'Tu déposes l’enregistrement, intact. Quatre titres, et elle qui parle entre les prises — une voix que ce dossier n’avait jamais portée.',
           hercules: '« Ce n’est pas une preuve, Votre Honneur. C’est elle. Personne, ici, ne l’avait encore entendue. »',
-          trash: '« On ne dépose pas ça pour gagner un procès. On le dépose parce qu’elle n’est pas qu’un dossier. »',
-          rabbit: '« Authentifié, non modifié. Et il dit une chose que trois pages d’accusation ne disaient pas : elle avait une voix. »',
-          drakk: '« Elle parle encore, entre deux prises. C’est plus que ce dossier ne lui avait laissé depuis trois jours. »',
+          trash: ['« Je ne dépose pas ça pour gagner le procès. »', '« Elle chantait. Il fallait que quelqu’un l’entende ici. »'],
+          rabbit: ['« Authentifié, non modifié. »', '« Il y a sa voix dessus. Ce n’est pas dans les trois pages. »'],
+          drakk: '« Elle parle encore, entre deux prises. »',
         },
       }),
       hayden: (ctx) => ctx.a('chimera-avance')
@@ -438,9 +442,9 @@ export const tribunalSalle = {
             dit: {
               tous: 'Tu prononces le nom — Hayden Telestrian — et tu attends le témoin qui devait le confirmer. Il ne vient pas. Quelqu’un lui a parlé avant vous.',
               hercules: '« On avait un nom, Votre Honneur. On n’a plus que ça, à présent. »',
-              trash: '« Il a eu peur plus vite que nous n’avons été discrets. »',
-              rabbit: '« Le témoin s’est rétracté ce matin. Ce n’est pas une coïncidence. C’est un délai. »',
-              drakk: '« Le nom tient toujours. La bouche qui devait le porter s’est refermée. »',
+              trash: '« Il a eu peur. On n’a pas été assez rapides. »',
+              rabbit: ['« Le témoin s’est rétracté ce matin. »', '« Quelqu’un a gagné du temps. »'],
+              drakk: ['« Le nom tient toujours. »', '« C’est la bouche qui devait le dire qui manque. »'],
             },
           }
         : {
@@ -450,7 +454,7 @@ export const tribunalSalle = {
               tous: 'Tu déposes le nom, et ce qui le tient debout : un prénom mal écrit, un nom de famille que tout le Tír connaît, et personne dans cette salle pour le contredire.',
               hercules: '« Hayden Telestrian, Votre Honneur. Ce n’est plus une rumeur — c’est un nom, avec une adresse derrière. »',
               trash: '« Je connais cette famille. Je sais ce qu’elle fait, d’habitude, de ce qui la gêne. Cette fois, elle n’a pas eu le temps. »',
-              rabbit: '« Deux témoins indépendants, une faute d’orthographe qui prouve l’un et confirme l’autre. C’est amplement suffisant. »',
+              rabbit: '« Deux témoins indépendants. La même faute d’orthographe. »',
               drakk: '« Nous avions le nom depuis Loveland. La salle l’a, enfin. »',
             },
           },

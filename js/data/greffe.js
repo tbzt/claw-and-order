@@ -38,14 +38,17 @@ export const greffe = {
       ],
 
   vues: {
-    physique: ['Un guichet, un homme seul derrière, et une pancarte « PAS DE SERVICE APRÈS MINUIT » que personne n’a retirée depuis des années. Ce n’est pas un poste qu’on occupe par vocation.',
-               '« Il est seul, il est fatigué, et il n’a personne à qui rendre des comptes avant sept heures. C’est un homme, pas une porte. »'],
+    physique: ['Un guichet, un homme seul derrière, et une pancarte « PAS DE SERVICE APRÈS MINUIT » que personne n’a retirée depuis des années.',
+               '« Il est seul, il est fatigué, et il n’a personne à qui rendre des comptes avant sept heures. »',
+               '« C’est un homme, pas une porte. »'],
     astrale: ['Le lieu est propre, au sens astral : rien n’est passé ici depuis longtemps.',
               '« Sauf lui. Regarde-le. »'],
     ra: ['Le réseau interne est cloisonné, mais le guichet public ne l’est pas.',
-         '« Le registre des mouvements est consultable. Consultable, ça veut dire modifiable. »'],
+         '« Le registre des mouvements est consultable. »',
+         '« Consultable, donc modifiable. »'],
     tactique: ['Une vitre à l’épreuve, un comptoir en U, une seule porte entre le hall et le couloir des cellules. Personne ici n’a jamais eu à la défendre.',
-               '« Un donjon sans monstre, compagnon. Le vrai piège, ce sera le registre, pas la lame. »'],
+               '« Un donjon sans monstre. »',
+               '« Ce qui va nous coûter cher ici, c’est le registre. »'],
   },
 
   hotspots: {
@@ -83,8 +86,8 @@ export const greffe = {
       regarder: {
         tous: ['Uniforme de l’administration pénitentiaire, brassard, et une tasse à côté du clavier.',
                'Il a trente-cinq ans et l’air d’en avoir cinquante à cette heure-ci.'],
-        hercules: '« Il ne nous déteste pas. Il ne veut simplement pas d’ennuis. Ce n’est pas la même serrure. »',
-        drakk: '« Un seul défenseur, et une porte double derrière lui. Le rapport de force n’est pas où on croit : c’est lui qui tient le pont. »',
+        hercules: ['« Il ne nous déteste pas. Il ne veut pas d’ennuis. »', '« Ce n’est pas la même serrure, et je préfère largement celle-là. »'],
+        drakk: ['« Un seul défenseur, et une porte double derrière lui. »', '« C’est lui qui tient le pont. »'],
       },
       parler: ({ a }) => a('sas-ouvert')
         ? 'Il ne lève plus les yeux. Il a déjà fait son geste.'
@@ -106,7 +109,7 @@ export const greffe = {
         hercules: '« Vingt ans. Et il compte les gens avant de compter les issues. J’aurais fait pareil. »',
         trash: '« Son aura est petite, serrée sur elle-même. Elle vient de comprendre qu’elle a le droit d’occuper un peu plus de place. »',
         rabbit: '« Aucun SIN. Officiellement, il n’existe pas. On vient de faire sortir quelqu’un qui n’existe pas. »',
-        drakk: '« Un otage qu’on libère ne remercie jamais tout de suite. Il vérifie d’abord qu’on n’en a pas besoin d’un autre. »',
+        drakk: ['« Il ne remercie pas. »', '« Il vérifie d’abord qu’on n’a pas besoin d’un autre otage. »'],
       },
       parler: ({ a }) => a('parle:lester-greffe')
         ? '« … » Il n’a plus rien à ajouter, pas ici.'
@@ -138,7 +141,7 @@ export const greffe = {
       sortie: true,
       regarder: {
         tous: 'Deux battants blindés, un verrou électromagnétique de chaque côté, et une vitre longue comme une main.',
-        drakk: '« Verrou double. Il ne cède ni à l’épaule ni au levier. Celui-là s’ouvre par la parole ou pas du tout. »',
+        drakk: ['« Verrou double. Il ne cède ni à l’épaule ni au levier. »', '« Celui-là s’ouvre par la parole. »'],
         rabbit: '« Commandé depuis le poste, pas depuis le réseau. Je ne peux pas l’ouvrir d’ici. »',
         /* La lentille annonce, la main exécute (PLAN_CAPACITES § 2) : la
            projection astrale n'est atteignable qu'après avoir été montrée
@@ -175,7 +178,7 @@ export const greffe = {
       nom: 'Le banc',
       regarder: {
         tous: 'Un banc de bois vissé au sol, poli par des années de gens qui attendaient de mauvaises nouvelles.',
-        trash: '« Beaucoup de peur est passée là. Vieille, tassée. Ce n’est pas de la trace, c’est du dépôt. »',
+        trash: ['« Beaucoup de peur est passée là. Vieille, tassée. »', '« Ce n’est plus de la trace. »'],
       },
       utiliser: '« On s’assoit quand on a réussi », dit quelqu’un, et personne ne s’assoit.',
     },

@@ -123,11 +123,11 @@ export const lectureDossier = (surface, ambiance = null) => ({ a }) => a('dossie
              'TROIS — page deux, section identité : TERESA BANKS, dernier domicile connu, 2214 South Sheridan, Loveland, au-dessus d’un pressing. C’est écrit en haut de la page, comme sur tous les dossiers du monde.',
              'QUATRE — et cette adresse ne reparaît jamais. Pas une photo, pas un relevé, pas un procès-verbal de transport. Elle est écrite une fois, et personne n’a poussé la porte.'],
       hercules: ['« Trente ans d’administration. Une adresse en page deux et rien en face dans les pièces, ce n’est pas un dossier bâclé. »',
-                 '« Un dossier bâclé, ça oublie l’adresse. Celui-là l’écrit, et s’arrête là. C’est un dossier ARBITRÉ. »'],
+                 ['« Un dossier bâclé, ça oublie l’adresse. Celui-là l’écrit, et s’arrête là. »', '« Ça n’a pas été bâclé. Ça a été arbitré. »']],
       trash: '« Il y a un endroit dans cette histoire où quelqu’un est mort, et personne n’a poussé sa porte. Elle est écrite là, cette porte. Ça me gêne physiquement. »',
       rabbit: ['« Trois jours de procédure, zéro pièce matérielle sur le lieu du décès. »',
                '« Et l’adresse y est depuis le début. Ils n’ont pas oublié d’y aller. Ils ont décidé de ne pas y aller. »'],
-      drakk: '« On a désigné un coupable, puis on a bâti la carte autour de lui — et l’on a laissé dessus le seul chemin qui n’y mène pas. »',
+      drakk: ['« On a désigné un coupable, puis on a construit le reste autour. »', '« Et on a laissé dedans le seul chemin qui n’y mène pas. »'],
       flags: ['dossier-lu'],
       fiches: ['corps-loveland', 'crime-crapuleux', 'adresse-teresa', 'appart-hors-dossier'],
     }
@@ -189,13 +189,15 @@ export const planque = {
 
   vues: {
     physique: ['Des machines qui tournent pour personne, une lumière de supermarché, et le genre d’endroit où on ne retient jamais un visage.',
-               '« C’est le meilleur décor du monde pour ne pas exister une heure ou deux. C’est aussi pour ça que je ne l’aurais pas choisi, moi — mais on ne m’a pas demandé. »'],
+               '« C’est le meilleur décor du monde pour ne pas exister une heure ou deux. »',
+               '« Je ne l’aurais pas choisi, moi. On ne m’a pas demandé, remarquez. »'],
     astrale: ['Une laverie ouverte la nuit est un lieu sans mémoire : des milliers de gens y ont passé une heure sans rien y vivre.',
               '« C’est plat. Complètement plat. Sauf lui. »'],
     ra: ['Quatre icônes, dont trois qui essaient de vous vendre du séchage.',
          '« La quatrième ne devrait pas être là. »'],
     tactique: ['Une vitrine sur toute la façade, des cloisons plus fines que des rideaux, et pas un recoin qui ne se voie pas de la rue.',
-               '« Nulle muraille ici, compagnon. Une lame passerait ces murs comme du papier — je préfère ne pas savoir ce que ferait autre chose. »'],
+               '« Ces cloisons ne tiendraient pas un coup d’épaule. »',
+               '« Je préfère ne pas penser au reste. »'],
   },
 
   hotspots: {
@@ -274,7 +276,7 @@ export const planque = {
         tous: ['Une porte vitrée qui donne sur le trottoir. Le tribunal est à trente minutes, à Downtown, angle de la 5e.',
                'Il est six heures. On peut partir quand on veut, et c’est le problème : il faut savoir quand.'],
         drakk: '« Unique issue. Je l’ai en visuel depuis que nous sommes entrés et je ne l’ai pas lâchée. »',
-        hercules: '« Trop tôt, on attend dehors sous la pluie. Trop tard, on court. Il n’y a pas de bonne heure, il y a une moins mauvaise. »',
+        hercules: ['« Trop tôt, on attend dehors sous la pluie. Trop tard, on court. »', '« Il n’y a pas de bonne heure. »'],
       },
       utiliser: ({ a }) => {
         /* ══ NEUF HEURES ═══════════════════════════════════════════════
@@ -314,7 +316,7 @@ export const planque = {
                             'Il n’a pas visé large. Il a visé juste, à l’endroit où il croyait qu’on était — et on n’y était pas depuis un moment.',
                             'Puis plus rien. Un toit quelque part, une seule fenêtre de tir, et une équipe qui ne se laisse plus lire.'],
                      drakk: '« Il avait un plan de la pièce. Il n’avait plus la pièce. »',
-                     hercules: '« On ne l’a pas empêché de tirer. On l’a empêché de savoir sur quoi. C’est tout ce qu’on peut faire à cette distance. »',
+                     hercules: ['« On ne l’a pas empêché de tirer. On l’a empêché de savoir sur quoi. »', '« À cette distance, c’est tout ce qu’on pouvait. Je me le répète depuis dix minutes. »'],
                      trash: '« Il est déjà en train de descendre l’escalier. Il ne ressent toujours rien. »',
                      rabbit: '« Il a tiré sur la dernière image qu’il avait. Elle datait de deux heures. »',
                      flags: ['attaque-laverie', 'laverie-manquee'],
@@ -363,7 +365,8 @@ export const planque = {
                      '« Je vais leur dire. Pas ce qu’ils veulent entendre — ce qui s’est passé. »',
                      '« Si vous êtes encore là quand je sortirai, je vous paierai un truc. J’aurai rien pour payer, mais je vous le paierai. »',
                      'Il pousse la porte le premier.'],
-              hercules: '« Voilà quelqu’un qui vient de décider quelque chose tout seul. C’est plus rare que ça n’en a l’air. »',
+              hercules: ['« Voilà quelqu’un qui vient de décider quelque chose tout seul. »',
+                         '« Dans une laverie, à sept heures du matin. On choisit rarement l’endroit. »'],
               flags: ['lester-temoigne'], fiches: ['lester-temoigne'], va: 'tribunal' }
           : { tous: [...commun,
                      'Il ne dit rien. Il attend qu’on ouvre la porte et il sort derrière Drakk.',
@@ -383,7 +386,7 @@ export const planque = {
         hercules: '« Deux heures à tuer avec un bruit de machine. J’ai passé des nuits pires, et pas beaucoup. »',
         trash: '« Ça tourne, ça tourne, ça ne va nulle part. Je vois l’image, merci, je m’en serais passé. »',
         rabbit: '« Cycle 3, quarante et une minutes restantes. Quelqu’un reviendra. Espérons pas maintenant. »',
-        drakk: '« Six coffres qui grondent. Une salle de forge sans forgeron. »',
+        drakk: ['« Six machines qui grondent. »', '« Personne pour les surveiller. »'],
       },
       /* SIX SOURCES DE CHALEUR. Le scénario source fait rater le tireur
          à cause d'une cigarette allumée, qui gêne sa lunette thermique.
@@ -420,7 +423,7 @@ export const planque = {
         trash: a('trash-epuise')
           ? '« Trois heures. Je vais dormir vingt minutes. Réveillez-moi si l’eau revient. »'
           : '« Trois heures. C’est long quand on n’a rien à faire et court quand on a quelqu’un à écouter. »',
-        drakk: '« La veille avant la bataille. C’est toujours le meilleur moment, et personne ne le sait jamais sur le coup. »',
+        drakk: ['« La veille avant la bataille. »', '« C’est toujours le meilleur moment. Personne ne le sait sur le coup. »'],
       }),
       utiliser: 'La régler ne raccourcirait rien. Autant la laisser dire la vérité.',
     },
@@ -462,7 +465,7 @@ export const planque = {
                       '« Le seul couvert est le mur de machines, et il est du mauvais côté. »',
                       '« Je ne dis pas qu’on nous cherche ici. Je dis que si on nous cherche, on nous trouve. »'],
               rabbit: '« Trois caméras dans la rue, dont deux municipales. La troisième est celle d’ici, et elle regarde dehors. »',
-              hercules: '« Personne ne cherche cinq personnes dans une laverie. On cherche cinq personnes qui se cachent. »' }
+              hercules: ['« Personne ne cherche cinq personnes dans une laverie. »', '« On cherche cinq personnes qui se cachent. »'] }
       },
       utiliser: ({ a }) => a('attaque-laverie')
         ? { tous: 'On ne touche pas à du verre feuilleté qui tient encore. Il tombera tout seul, et pas sur nous.',
@@ -477,7 +480,7 @@ export const planque = {
             trash: '« Elle est partie avec le néon, comme je l’avais dit. C’est agréable, une fois de temps en temps. »' }
         : { tous: 'Vue de l’intérieur, l’enseigne rouge se lit à l’envers et bat un peu. LAV’O’MATIC.',
             trash: '« Elle bat au même rythme que le néon du fond. Ils sont sur le même circuit. Tout ici est sur le même circuit. »',
-            drakk: '« Une bannière rouge. De mauvais augure, mais je commence à croire que je dis ça de tout. »' },
+            drakk: ['« Une enseigne rouge. »', '« Mauvais signe. Je commence à croire que je dis ça de tout. »'] },
       utiliser: 'On ne redresse pas une enseigne depuis l’intérieur.',
     },
 
@@ -502,8 +505,8 @@ export const planque = {
       regarder: {
         tous: 'RÈGLEMENT — NE PAS DORMIR SUR PLACE — NE PAS LAISSER LE LINGE SANS SURVEILLANCE — MERCI.',
         rabbit: '« Ne pas dormir sur place. Écrit à la main, et récemment. »',
-        trash: '« Quelqu’un a eu besoin d’écrire ça. C’est plus triste que le règlement. »',
-        drakk: '« Un édit. Trois lois, dont deux nous concernent. »',
+        trash: '« Quelqu’un a eu besoin d’écrire ça. »',
+        drakk: '« Un règlement. Trois lignes, dont deux nous concernent. »',
       },
       utiliser: 'Tu ne corriges pas le règlement d’une laverie à six heures du matin.',
     },
@@ -549,7 +552,7 @@ export const planque = {
       regarder: {
         tous: 'Trois chaises en plastique orange vissées à une barre. Lester est sur celle du bout.',
         drakk: '« Il a pris la place du bout. On ne peut le prendre que d’un côté. »',
-        trash: '« Il n’a pas choisi de s’asseoir loin de nous. Il a choisi de s’asseoir loin de la vitre. Ce n’est pas pareil. »',
+        trash: ['« Il ne s’est pas assis loin de nous. »', '« Il s’est assis loin de la vitre. »'],
       },
       utiliser: {
         tous: 'Tu t’assois. Ça fait du bien et ça ne dure pas.',
@@ -583,7 +586,7 @@ export const planque = {
           tous: ['Drakk tend le bras sans se hausser sur la pointe des pieds, prend le tube à pleine main et le dévisse d’un quart de tour.',
                  'Les trois néons s’éteignent ensemble. Dehors, l’enseigne rouge meurt en même temps.',
                  'La pièce devient un trou noir avec une rue éclairée au fond. Personne ne dit rien pendant un moment.'],
-          drakk: '« Nous étions dans une vitrine. Nous sommes maintenant dans une embuscade. C’est la même pièce et ce n’est pas le même endroit. »',
+          drakk: ['« On était dans une vitrine. »', '« On est dans une embuscade. Même pièce. »'],
           trash: '« Voilà. Merci. Je n’avais plus d’ombres qui bougent. »',
           flags: ['lumiere-coupee'],
           visuels: ['lumiere-coupee'],
@@ -615,9 +618,9 @@ export const planque = {
       },
       utiliser: ({ a, qui }) => {
         if (a('vu-reseau-laverie')) return 'Toujours le même nœud. Il n’a rien de plus à donner.'
-        if (qui !== ‘rabbit’)
-          return { tous: ‘Il faudrait un deck, et une raison d’y entrer.’,
-                   hercules: ‘« Laisse-le faire. C’est son rayon. »’ }
+        if (qui !== 'rabbit')
+          return { tous: 'Il faudrait un deck, et une raison d’y entrer.',
+                   hercules: '« Laisse-le faire. C’est son rayon. »' }
         return { tous: ['White_Rabbit se glisse dans le nœud de paiement, par acquit de conscience.',
                         'Des lessives, des pièces, un abonnement résilié en mars. Rien qui ressemble à un problème.'],
                  rabbit: '« Ce nœud-là dit la vérité : cet endroit ne cache rien. C’est même reposant. »',

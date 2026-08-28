@@ -95,19 +95,23 @@ export const shameless = {
   vues: {
     physique: [
       'Un bar, une piste vide, une régie DJ éteinte dans un coin. Rien de luxueux — du contreplaqué peint en noir, des banquettes reprisées au gaffer.',
-      '« C’est un décor de pauvre pour des gens qui ont de l’argent une fois par semaine. Ça se sent dans les détails qu’on n’a pas payés. »',
+      '« Un décor de pauvre pour des gens qui ont de l’argent une fois par semaine. »',
+      '« Ça se voit aux détails qu’on n’a pas payés. J’ai tenu une salle comme ça, autrefois. Pas longtemps. »',
     ],
     astrale: [
-      'Beaucoup de monde est passé ici sans jamais y être vraiment. C’est une aura de salle d’attente, empilée nuit après nuit — des gens qui patientaient jusqu’à ce que quelqu’un d’autre arrive.',
-      '« Personne ne vient ici pour ce lieu. Tout le monde vient ici pour quelqu’un qui va arriver. »',
+      'Beaucoup de monde est passé ici sans jamais y être vraiment. Une aura de salle d’attente, empilée nuit après nuit.',
+      '« Personne ne vient ici pour l’endroit. »',
+      '« Ils attendent quelqu’un. »',
     ],
     ra: [
       'Aucune caméra, aucun tag commercial, un brouilleur artisanal au-dessus du bar qui bave un peu sur les fréquences voisines.',
-      '« La discrétion, ici, c’est le produit. Le reste — l’alcool, la musique — c’est juste ce qu’on facture pour la vendre légalement. »',
+      '« Le brouilleur est artisanal, et il bave. »',
+      '« C’est ça qu’ils vendent. L’alcool, c’est pour la facture. »',
     ],
     tactique: [
       'Une entrée, une sortie, et une arrière-salle qu’on n’a pas vue s’ouvrir. Un videur qui a l’œil sur la rue plus que sur la salle.',
-      '« On ne planque pas ici. On y passe, on en ressort. C’est construit pour ça, pas pour tenir un siège. »',
+      '« On ne se planque pas ici. On y passe. »',
+      '« Le videur regarde la rue, pas la salle. C’est un endroit d’où on part. »',
     ],
   },
 
@@ -205,7 +209,7 @@ export const shameless = {
           : ['Une banquette dans l’angle le plus sombre de la salle, en velours élimé, dos au mur.',
              'Le cuir est plus tassé à cet endroit précis qu’ailleurs. Quelqu’un s’y asseyait souvent, et toujours de la même façon.'],
         hercules: '« La meilleure place de la maison, et personne ne la réserve jamais officiellement. Ça se garde autrement, une place comme ça. »',
-        trash: '« Il reste quelque chose ici. Pas beaucoup — de l’attente, surtout. Elle a passé plus de temps à espérer qu’à parler, sur cette banquette. »',
+        trash: ['« Il reste quelque chose ici. Pas beaucoup. De l’attente. »', '« Elle a passé plus de temps à espérer qu’à parler, sur cette banquette. »'],
         rabbit: '« Angle mort des deux seules caméras de la rue, à travers la vitrine. On ne choisit pas cette place par goût du velours. »',
         drakk: '« Le siège du guetteur, dans toute bonne taverne. On y voit la porte, on n’y est vu par personne d’autre. »',
       }),
@@ -305,7 +309,7 @@ export const shameless = {
           id: 'motif',
           titre: '« On cherche pas à entrer. On cherche une fille qui venait ici. »',
           texte: ['Il vous regarde vraiment, cette fois.',
-                  '« Ça change tout, ça. Ou rien. Ça dépend de la fille. »'],
+                  '« Ça dépend de la fille. »'],
         },
         {
           id: 'voiture',
@@ -315,7 +319,8 @@ export const shameless = {
           texte: ['Il hausse enfin les épaules, et pour la première fois il a l’air presque intéressé.',
                   '« Une bagnole. Une vraie, une corpo, vitres teintées, qui vient se garer en double file devant CHEZ MOI. Une fois par semaine, toujours à la même heure. »',
                   '« Personne d’autre dans ce quartier roule là-dedans sans dette. J’ai jamais vu le visage du chauffeur — la fille montait dedans, et c’est tout. »',
-                  '« On remarque ce genre de truc. C’est le métier. »'],
+                  '« On remarque ce genre de truc. »',
+            '« Après, ce qu’il y avait dedans, j’en sais rien. J’ai jamais regardé de près. On regarde pas de près, ici. »'],
         },
         {
           id: 'depuis-quand',

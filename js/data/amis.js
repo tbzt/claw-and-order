@@ -147,19 +147,23 @@ export const amis = {
   vues: {
     physique: [
       'Quatre personnes, quatre façons de ne pas être ailleurs. Aucune ne s’est levée quand vous êtes entrés, et aucune ne vous a quittés des yeux.',
-      '« Personne ici n’a intérêt à nous parler, et personne ici n’a envie qu’on s’en aille. C’est la meilleure position de départ que j’aie eue de la semaine. »',
+      '« Personne ici n’a intérêt à nous parler, et personne n’a envie qu’on s’en aille. »',
+      '« C’est une bonne position. Je ne sais pas encore de quoi. »',
     ],
     astrale: [
-      'La pièce est saturée. Pas de la fille — de ce que quatre personnes ont laissé dedans à force d’y revenir sans savoir quoi y faire.',
-      '« C’est un deuil qui n’a pas de place où aller, alors il reste ici. Chez moi on appelait ça une veillée. Elle dure depuis trois jours. »',
+      'La pièce est saturée. Quatre personnes y reviennent depuis trois jours sans savoir quoi y faire, et ça s’est déposé.',
+      '« Chez moi on appelait ça une veillée. »',
+      '« Celle-là dure depuis trois jours. »',
     ],
     ra: [
       'Aucun tag commercial, aucune balise. Un seul objet émet dans cette pièce, et c’est une carte de visite posée sur un comptoir.',
-      '« Le local est mort côté réseau. Sauf un truc, là-bas, qui attend qu’on le lise. Ce n’est jamais un hasard, un objet qui attend. »',
+      '« Le local est mort côté réseau. »',
+      '« Sauf un truc, là-bas. Il attend qu’on le lise. »',
     ],
     tactique: [
-      'Une seule ouverture, le rideau de fer. Pas de seconde issue, pas de fenêtre — un ancien magasin, c’est fait pour qu’on entre par devant.',
-      '« Un donjon à une porte. Ce n’est pas dangereux tant que personne ne sait qu’on y est. »',
+      'Une seule ouverture, le rideau de fer. Pas de seconde issue, pas de fenêtre.',
+      '« Un donjon à une porte. »',
+      '« Ça va, tant que personne ne sait qu’on est dedans. »',
     ],
   },
 
@@ -186,8 +190,8 @@ export const amis = {
         hercules: a('mark-ferme')
           ? '« J’ai fait ça pendant trente ans et je viens de le rater sur un gamin de dix-neuf ans. Il n’avait pas de prix, et je lui en ai demandé un. »'
           : '« Il n’a rien à vendre et il le sait. Ce sont les seuls à qui je n’ai jamais rien pu acheter. »',
-        trash: '« Son aura est entière et elle penche toute d’un côté. Il est amoureux de quelqu’un qui n’est plus là pour le savoir, et il compte le rester. »',
-        rabbit: '« Zéro empreinte. Pas de profil, pas de fil, rien. À dix-neuf ans, en 2081, ça veut dire qu’il vit dans une seule pièce et qu’il n’en sort pas. »',
+        trash: ['« Son aura est entière, et elle penche toute d’un côté. »', '« Il compte rester comme ça. »'],
+        rabbit: ['« Zéro empreinte. Pas de profil, pas de fil, rien. »', '« À dix-neuf ans, en 2081. Il vit dans une seule pièce. »'],
         drakk: '« Le jeune homme qui garde la relique et ne dit pas qu’il l’a. J’ai écrit ce personnage. Je ne pensais pas le rencontrer. »',
       }),
       parler: ({ a }) => a('mark-ferme')
@@ -229,12 +233,12 @@ export const amis = {
              'Il parle de la troisième prise comme d’un endroit où il habiterait encore.']
           : ['Allongé par terre entre les deux amplis, un bras sur les yeux. Il n’a pas bougé depuis que vous êtes entrés, et il n’a pas dormi non plus.',
              'Il a l’âge qu’on veut lui donner. Ce n’est pas un compliment.'],
-        hercules: '« Il a un prix, il le dit lui-même, et il est bas. Ça devrait m’arranger, et pour une fois ça ne m’arrange pas du tout. »',
+        hercules: ['« Il a un prix, il le dit lui-même, et il est bas. »', '« D’habitude ça m’arrange. »'],
         trash: a('psych-paye')
           ? '« Son aura s’est allumée quand il a parlé d’elle, pas quand il a pris l’argent. On s’est trompés d’entrée. »'
           : '« Il y a un trou dans son aura, à l’endroit exact où on met ce qu’on prend. Et le reste tient debout. Le reste tient même très bien. »',
         rabbit: '« Trois cliniques de désintox dans son historique, toutes payées par la même association. Quelqu’un a essayé, plusieurs fois. »',
-        drakk: '« Le barde. Toujours le plus abîmé de la compagnie, et toujours celui qui se souvient de la chanson exacte. »',
+        drakk: ['« Le barde. »', '« Toujours le plus abîmé, et toujours celui qui se souvient de la chanson exacte. »'],
       }),
       parler: { texte: [], dialogue: 'psych', flags: ['tir-prevenu'] },
       utiliser: 'On ne secoue pas quelqu’un qui vous parle déjà.',
@@ -248,9 +252,9 @@ export const amis = {
                      ['psych', '« … Vous êtes les premiers à venir pour elle. Les autres, ils venaient pour la bande. »'],
                      'Ça, il l’a dit gratuitement.'],
               hercules: '« Deux mille pour huit secondes. C’est le meilleur tarif de ma carrière et je n’en suis pas fier une seconde. »',
-              trash: '« Il aurait parlé sans ça. Je le sais parce que je l’ai vu s’allumer en la nommant, pas en prenant le tube. »',
-              rabbit: '« Transaction conclue. Aucune contrepartie exigée, aucune condition. C’est le contraire d’une négociation : c’est quelqu’un qui n’a jamais appris à en avoir une. »',
-              drakk: '« Nous avons payé pour une chose qui nous était offerte. C’est une manière de voler à l’envers. »',
+              trash: ['« Il aurait parlé sans ça. »', '« Il s’est allumé quand on l’a nommée. Pas quand on a sorti le tube. »'],
+              rabbit: ['« Transaction conclue. Aucune contrepartie, aucune condition. »', '« Il n’a jamais appris à négocier. »'],
+              drakk: '« Nous avons payé pour une chose qui nous était offerte. »',
               retire: ['creditube'],
               flags: ['psych-paye'],
               fiches: ['enregistrement-waters'] },
@@ -273,7 +277,7 @@ export const amis = {
              'Depuis qu’elle a parlé, elle regarde la rue au lieu de vous regarder, vous.']
           : ['Une orke d’une vingtaine d’années, adossée au montant du rideau de fer. Elle s’est placée entre vous et la sortie sans en avoir l’air, et elle l’a fait par réflexe.',
              'Elle vous a comptés en entrant. Quatre. Elle n’a pas eu besoin de regarder deux fois.'],
-        hercules: '« Elle tient la porte d’un local vide. Ça ne s’apprend pas, ça se garde — elle a fait ça pour de vrai, ailleurs, et pas il y a longtemps. »',
+        hercules: ['« Elle tient la porte d’un local vide. »', '« Elle a fait ça pour de vrai, ailleurs. Pas il y a longtemps. »'],
         trash: '« Elle est en rupture avec quelque chose. Je reconnais la forme que ça donne à une aura : c’est la mienne, en plus récent. »',
         rabbit: a('dette-duke') || a('conf-duke') || a('choix-duke')
           ? '« Halloweener, deux ans, sortie propre — ce qui n’existe pas. Sauf si quelqu’un a couvert la sortie. Je connais un type qui fait ça. »'
@@ -306,11 +310,11 @@ export const amis = {
              'Un fétiche d’ours pend à sa ceinture, côté mur. Elle l’a tourné de l’autre côté quand vous avez esquivé.']
           : ['Debout près du mur d’affiches, une pile de tracts sous le bras — la seule de la pièce qui soit venue ce matin pour faire quelque chose plutôt que pour être quelque part.',
              'Un fétiche d’ours à la ceinture, usé jusqu’au poil. Elle vous a jaugés en trois secondes et elle n’a pas caché qu’elle le faisait.'],
-        hercules: '« Elle a une question à poser et elle attend de la poser. Je fais le même métier qu’elle avec moins de conviction, alors je vais la laisser commencer. »',
+        hercules: ['« Elle a une question à poser et elle attend de la poser. »', '« Je fais le même métier qu’elle avec moins de conviction. Je vais la laisser commencer, ça m’évitera de me tromper le premier. »'],
         trash: a('orc-contact')
           ? '« Une chamane de l’Ours dans une permanence associative. Elle fait avec son don ce que ma famille m’a appris à en faire : rien pour soi. »'
           : '« Éveillée. Ours — c’est le totem des gens qui protègent, et c’est le seul que personne ne prend par ambition. Elle sait que je l’ai vue. »',
-        rabbit: '« Permanente ORC, dix ans de dossiers publics, zéro condamnation, quatorze plaintes déposées contre la Lone Star. C’est une carrière, ça. »',
+        rabbit: '« Permanente ORC, dix ans de dossiers publics, zéro condamnation, quatorze plaintes déposées contre la Lone Star. »',
         drakk: '« La prêtresse. Elle demandera pour quel dieu on se bat avant de nous soigner, et elle aura raison de demander. »',
       }),
       parler: { texte: [], dialogue: 'nita', flags: ['tir-prevenu'] },
@@ -333,7 +337,7 @@ export const amis = {
       regarder: {
         tous: ['Un pied de micro au milieu de la pièce, le micro encore dessus, le câble encore branché. Personne ne l’a rangé.',
                'Il y a un morceau de gaffer sur le pied, à hauteur de main, avec une hauteur notée au feutre. C’est sa hauteur à elle.'],
-        hercules: '« Personne ne l’a touché en trois jours. Dans une pièce où quatre personnes dorment. Ça vous dit tout ce qu’il faut savoir sur elle et sur eux. »',
+        hercules: '« Personne ne l’a touché en trois jours. Dans une pièce où quatre personnes dorment. »',
         trash: ['« C’est le seul objet de la pièce qui n’a pas de deuil dessus. »',
                 '« Il a gardé autre chose. Je ne vais pas vous dire quoi, ce n’est pas à moi. »'],
         rabbit: '« Micro dynamique, quarante ans d’âge, réparé trois fois à la main. Personne n’a chanté là-dedans avec un correcteur de voix. »',
@@ -355,9 +359,9 @@ export const amis = {
                  ? 'Elle est sur onze d’entre elles. Mark a compté — il vous l’a dit sans qu’on le lui demande.'
                  : 'Elle est sur onze d’entre elles. Quelqu’un les a rassemblées au même endroit du mur, récemment.'],
         hercules: '« Un local de répétition qui affiche encore les groupes du quartier. Il n’y en a plus beaucoup à Loveland. Il n’y en a peut-être plus qu’un. »',
-        trash: '« Il y a des mains partout sur ce mur, en couches. C’est un des rares endroits de cette ville où plusieurs générations ont touché la même chose sans se battre. »',
+        trash: ['« Il y a des mains partout sur ce mur, en couches. »', '« Plusieurs générations, et personne ne s’est battu. »'],
         rabbit: '« Aucune de ces affiches n’a de code. Elles annoncent des dates qu’il fallait connaître pour savoir qu’elles existaient. »',
-        drakk: '« La tapisserie de la salle commune. On y lit toute l’histoire de la maison, si on sait dans quel ordre décoller les couches. »',
+        drakk: ['« La tapisserie de la salle commune. »', '« On la lit en décollant les couches dans le bon ordre. »'],
       }),
       utiliser: {
         tous: 'Tu ne décolles rien de ce mur. Il n’y a pas d’ordre dans lequel ça se ferait poliment.',
@@ -377,10 +381,10 @@ export const amis = {
         : { tous: ['Une carte de visite, posée face en l’air sur le comptoir de l’ancien magasin, à l’endroit exact où on posait la monnaie.',
                    'Un nom qui n’est pas un nom, un code de comm, et rien d’autre. Pas de société, pas de fonction, pas d’adresse.',
                    'Elle est propre. Elle n’a pas passé trois jours sur ce comptoir — deux, au plus.'],
-            hercules: '« On laisse une carte quand on veut être rappelé. On la laisse FACE EN L’AIR quand on veut surtout qu’elle soit vue. C’est une signature, ça. »',
-            trash: '« Du papier. Du vrai papier, chez des elfes du Tír. Ce n’est pas de la discrétion, c’est de la politesse — et c’est cent fois pire. »',
-            rabbit: '« Code de comm à usage unique, encore actif. Ils n’ont pas fini leur passage : ils l’ont mis en pause. »',
-            drakk: '« Le héraut est venu, il a laissé son sceau, et il repassera. C’est la façon la plus civilisée d’annoncer un siège. »',
+            hercules: ['« On laisse une carte quand on veut être rappelé. »', '« On la laisse FACE EN L’AIR quand on veut qu’elle soit vue. »'],
+            trash: ['« Du papier. Du vrai papier, chez des elfes du Tír. »', '« Ce n’est pas de la discrétion. C’est de la politesse. »'],
+            rabbit: ['« Code de comm à usage unique, encore actif. »', '« Ils n’ont pas fini. »'],
+            drakk: ['« Quelqu’un est venu, il a laissé sa marque, et il repassera. »', '« C’est poli. Ça reste un siège. »'],
             /* Pas de `visuels` en double : `derive()` allume le
                contour de la carte à partir du drapeau, et une seule
                source pour un même état vaut mieux que deux. */
@@ -397,7 +401,7 @@ export const amis = {
       regarder: {
         tous: ['Le stock que personne n’a racheté quand le magasin a fermé. Six bacs, classés par genre, avec des intercalaires écrits à la main.',
                'Quelqu’un continue de les remettre en ordre. Régulièrement.'],
-        hercules: '« Il y a pour trois mille de collection là-dedans et personne n’y a touché en deux ans. Dans ce quartier. C’est une information sur les gens, pas sur les disques. »',
+        hercules: '« Il y a pour trois mille de collection là-dedans et personne n’y a touché en deux ans. Dans ce quartier. »',
         trash: '« On garde les choses parce qu’elles ont servi à quelqu’un. Je fais pareil. C’est même à peu près tout ce que je fais. »',
         rabbit: '« Support physique, lecture analogique, aucune copie. Chaque écoute abîme la chose écoutée. Je ne comprends pas et j’aimerais comprendre. »',
         drakk: ['« Ah. »',

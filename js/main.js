@@ -475,9 +475,19 @@ function selectionne(idRunner) {
      invisible au moment précis où elle compte. */
   if (dialogue) return montreChoix()
 
+  /* UN REGARD PAR TABLEAU, PAS UN PAR RUNNER. Le drapeau s'appelait
+     `vue:trash` — sans le nom du lieu. Les drapeaux traversent les
+     tableaux et ne se retirent jamais : la première bascule sur Trash,
+     où qu'elle ait lieu, consommait donc le regard astral POUR TOUTE LA
+     PARTIE. Seize tableaux × quatre regards = 64 blocs écrits ; un
+     joueur en voyait quatre.
+
+     Le lieu entre dans la clé. Une vieille sauvegarde peut encore
+     porter des `vue:trash` : ils ne correspondent plus à rien et
+     n'empêchent plus rien — pas de bump de version pour ça. */
   const decouverte = scene.vues?.[VUES[idRunner]]
-  if (decouverte && !a(`vue:${idRunner}`)) {
-    pose(`vue:${idRunner}`)
+  if (decouverte && !a(`vue:${etat.lieu}:${idRunner}`)) {
+    pose(`vue:${etat.lieu}:${idRunner}`)
     dis(decouverte, idRunner)
   }
 }

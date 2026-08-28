@@ -142,13 +142,17 @@ export const retour = {
 
   vues: {
     physique: ['Des lumières éparses sur les deux rives, et pas une âme sur le pont d’à côté à cette heure — s’il y a quelqu’un qui regarde, il ne veut pas qu’on le voie regarder.',
-               '« Personne ne nous salue. Sur l’eau, ça veut dire qu’on est seuls, ou que tout le monde fait semblant de l’être. »'],
+               '« Personne ne nous salue. »',
+               '« Sur l’eau ça veut dire qu’on est seuls. Ou que tout le monde fait semblant. Je n’ai jamais su trancher. »'],
     astrale: ['L’eau n’a pas de mémoire. Ce qui flotte dessus en a.',
-              '« Le gamin a peur, et il a raison. Mais il y a plus froid que lui, droit devant. »'],
+              '« Le gamin a peur. »',
+              '« Il y a plus froid que lui, droit devant. »'],
     ra: ['Le large est propre. Pas de réclame, pas de spam, quatre icônes en tout.',
-         '« C’est la première fois de la nuit que je vois clair. Et c’est exactement le problème : nous aussi, on se voit. »'],
+         '« Première fois de la nuit que je vois clair. »',
+         '« Nous aussi, on se voit. »'],
     tactique: ['Un pont ouvert, un bastingage bas, et pas un pouce de couvert entre la cabine et l’eau.',
-               '« Nulle muraille sur ce pont, compagnon. Qui nous cherche nous verra avant que nous le voyions, lui. »'],
+               '« Pas un pouce de couvert sur ce pont. »',
+               '« On sera vus les premiers. »'],
   },
 
   hotspots: {
@@ -263,7 +267,7 @@ export const retour = {
                        ? '« Il n’avait plus de quoi accoster. On ne monte pas à bord les mains vides. »'
                        : '« Il a compris avant de comprendre pourquoi. C’est déjà ça. »',
                      ...(routes.includes('abordage-vhf')
-                       ? { hercules: '« Une patrouille qui répond, ça change une nuit entière. »' }
+                       ? { hercules: ['« Une patrouille qui répond, ça change une nuit entière. »', '« Notez le nom du type. On ne sait jamais à qui on devra quelque chose. »'] }
                        : {}),
                      flags: ['abordage-passe'],
                      fiches: ['abordage-repousse'],
@@ -360,7 +364,7 @@ export const retour = {
                         '« C’est rien », dit-il, ce qui est faux, et personne ne le corrige.',
                         { texte: 'Trois cents mètres plus loin, la terre s’écarte. Tacoma est devant.',
                           visuel: 'goulet-passe' }],
-                 hercules: '« On aurait dû le mettre derrière quelque chose. C’est ma faute et je la retiens. »',
+                 hercules: ['« On aurait dû le mettre derrière quelque chose. »', '« C’est ma faute. Je la retiens, et je vous préviens que je vais la répéter plusieurs fois cette nuit. »'],
                  drakk: '« J’ai vu le poste. Je n’ai pas donné l’ordre. C’est pire que de ne pas voir. »',
                  flags: ['goulet-passe', 'lester-blesse'],
                  fiches: ['toralf-vise-lester'],
@@ -389,7 +393,7 @@ export const retour = {
       parler: { texte: [], dialogue: 'vedette' },
       utiliser: {
         tous: 'Elle est à deux cents mètres. On ne l’atteint pas d’ici.',
-        drakk: '« Trop loin pour la lame, trop près pour l’oubli. »',
+        drakk: '« Trop loin pour la lame. Trop près pour dormir. »',
       },
       objets: {
         /* Le contrat couvre le transfert — SAUF si on a réécrit l'ordre.
@@ -405,7 +409,7 @@ export const retour = {
           : { tous: ['Tu brandis le contrat. Le projecteur s’attarde dessus.',
                      '« Prestation de sécurité indépendante, contresignée brigade criminelle. Bon transfert. »',
                      'La vedette met la barre à gauche et rentre dans la pluie.'],
-              hercules: '« Voilà. Du papier. Il n’y a jamais rien eu de plus dangereux qu’un homme avec le bon papier. »',
+              hercules: ['« Voilà. Du papier. »', '« Je n’ai jamais rien eu de plus dangereux dans les mains. »'],
               flags: ['vedette-reglee'], visuels: ['vedette-partie'] },
         arme: 'On ne sort pas une arme devant une patrouille de police. Jamais, et surtout pas cette nuit.',
       },
@@ -447,8 +451,8 @@ export const retour = {
           if (qui !== 'rabbit')
             return { tous: 'Il faudrait rentrer dans le boîtier, et il faut un deck pour ça.',
                      hercules: '« C’est le sien, ce rayon. Toujours. »' }
-          return { tous: [‘White_Rabbit rentre une seconde fois dans le même boîtier. Ça prend moins de temps qu’avant : il connaît déjà la serrure.’,
-                          ‘CHALUTIER — GIG HARBOR — ÉMET, encore.’],
+          return { tous: ['White_Rabbit rentre une seconde fois dans le même boîtier. Ça prend moins de temps qu’avant : il connaît déjà la serrure.',
+                          'CHALUTIER — GIG HARBOR — ÉMET, encore.'],
                    rabbit: ['« Deux fois dans la même nuit, sur le même boîtier. Ce n’est plus discret, c’est comptable. »',
                             '« Quelqu’un, quelque part, additionne mes passages. Ce ne sera pas gratuit plus tard. »'],
                    flags: ['abordage-transpondeur'] }
@@ -462,7 +466,7 @@ export const retour = {
         return { tous: ['White_Rabbit pose deux doigts sur son deck et ne bouge plus pendant quarante secondes.',
                         'La fiche clignote une fois. CHALUTIER — GIG HARBOR — ÉMET.',
                         'Le nom du mort a disparu de la nuit.'],
-                 rabbit: '« Ce n’est pas propre. C’est le mot juste : ce n’est pas PROPRE. Mais ils ne cherchent plus nous. »',
+                 rabbit: ['« Ce n’est pas propre. »', '« Mais ils ne nous cherchent plus. »'],
                  flags: ['muet'], visuels: ['muet'] }
       },
     },
@@ -605,7 +609,7 @@ export const retour = {
           return { tous: ['Drakk prend Lester par le col sans un mot et le pose de l’autre côté du rouf.',
                           'Puis il désigne le pont à chacun, dans l’ordre, et personne ne discute.',
                           'On ne voit plus rien du goulet. C’est exactement l’idée.'],
-                   drakk: '« Le mur entre vous et la colline. Toujours. C’est la première chose qu’on apprend et la première qu’on oublie. »',
+                   drakk: ['« Le mur entre vous et la colline. Toujours. »', '« On l’apprend le premier jour. On l’oublie le deuxième. »'],
                    flags: ['abri'], visuels: ['abri'] }
 
         /* ══ SAVOIR OÙ SUFFIT ══════════════════════════════════════════
@@ -625,7 +629,7 @@ export const retour = {
           return { tous: ['Personne n’a d’ordre à donner : on sait d’où ça viendra, et ça suffit.',
                           'Lester est déplacé de deux mètres, sans discussion, et le rouf se retrouve entre la colline et lui.',
                           'Tout le monde se range du même côté que lui.'],
-                   hercules: '« Ce n’est pas du commandement. C’est de la géométrie. »',
+                   hercules: '« Ce n’est pas du commandement. C’est de la place à prendre. »',
                    trash: '« Je n’aime pas savoir des choses pareilles. Je préfère quand même les savoir. »',
                    rabbit: '« Une ligne de tir, c’est une droite. Il suffit de ne pas être dessus. »',
                    flags: ['abri'], visuels: ['abri'] }
@@ -681,7 +685,7 @@ export const retour = {
                         'Il ne récite rien. Il demande, en sperethiel, et il attend.',
                         'La coque cesse de taper. Le sillage se referme derrière elle comme si personne n’était passé.'],
                  trash: ['« Elle veut bien nous cacher. Pas nous porter — nous cacher. »',
-                         '« C’est plus que ce que je demandais et beaucoup moins que ce que je voulais. »'],
+                         '« C’est plus que ce que je demandais. »'],
                  flags: ['esprit-demande', 'vedette-reglee'], visuels: ['vedette-partie'] }
       },
       utiliser: {
@@ -696,7 +700,8 @@ export const retour = {
         tous: 'Sur la pointe de gauche, une tache violette et calme. Pas une aura : un creux.',
         trash: ['« Quelqu’un attend là-haut et ne ressent rien. Ni peur, ni ennui, ni impatience. »',
                 '« J’ai vu ça une fois sur le pont du passeur. C’est la même absence. »',
-                '« Ce n’est pas un monstre. C’est un homme qui a arrêté d’en être un pendant qu’il travaille. »'],
+                '« Ce n’est pas un monstre. »',
+                '« C’est quelqu’un qui travaille. »'],
         flags: ['sait-ou'],
       },
       utiliser: {
@@ -814,7 +819,7 @@ export const retour = {
         tous: ['Une lueur orange au ras de l’eau, encore loin. Sodium, pluie, et deux grues qui ne dorment jamais.',
                'Cinq heures. L’audience est à dix.'],
         hercules: '« Cinq heures pour tenir un homme en vie dans une ville qui préfère qu’il meure. C’est jouable. J’ai eu pire. »',
-        trash: '« C’est là qu’on va se cacher. On se cache toujours dans ce qui brille. »',
+        trash: ['« C’est là qu’on va se cacher. »', '« Dans ce qui brille. Ça marche mieux qu’on ne croit. »'],
       },
       /* Un sujet par runner, et une seule règle : proposer est ouvert à
          tous, trancher reste à l'auteur de la proposition (chantier 38,
@@ -990,7 +995,8 @@ export const retour = {
           id: 'wilson',
           titre: '« Vous connaissiez Wilson ? »',
           texte: ['« Assez pour savoir qu’il prenait des à-côtés que je ne prends pas. »',
-                  '« Vous voyez où ça l’a mené. »'],
+                  '« Pour le reste, non. On se saluait au ponton. »',
+                  '« Je saurais même pas vous dire s’il avait de la famille. »'],
         },
         {
           id: 'contact',

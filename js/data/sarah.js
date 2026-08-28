@@ -53,19 +53,23 @@ export const sarah = {
   vues: {
     physique: [
       'Trois chaises, trois inconnus qui attendent depuis des heures et qui ne poseront aucune question — dans une clinique de rue, ne pas regarder est la politesse de base.',
-      '« Personne ici ne nous demandera qui on est. C’est le genre de silence qui coûte cher ailleurs, et ici il est gratuit. »',
+      '« Personne ici ne nous demandera qui on est. »',
+      '« Ce silence-là coûte cher ailleurs. Ici il est gratuit, et j’aimerais mieux le payer. »',
     ],
     astrale: [
       'Ici, pas de meuble pour cacher une aura : rien qu’une pièce nue, et de la peur qui s’est accumulée dedans depuis des années, une nuit après l’autre.',
-      '« Je vois tout, cette fois. C’est presque pire. La salle d’attente d’une clinique de rue, à l’astral, c’est juste de la peur empilée, en rangs, comme des chaises. »',
+      '« Je vois tout, cette fois. »',
+      '« C’est de la peur, empilée en rangs. »',
     ],
     ra: [
-      'Un vieux terminal de dossiers patients, sur le bureau du fond, qui synchronise ses fiches vers un serveur d’assurance-maladie une fois par nuit — le genre de service que Sarah ne peut pas se permettre de couper, parce que c’est lui qui la paie.',
-      '« Ça bavarde, mais ça bavarde pour elle, pas contre nous. Je laisse. »',
+      'Un vieux terminal de dossiers patients, sur le bureau du fond, qui synchronise ses fiches vers un serveur d’assurance-maladie une fois par nuit.',
+      '« Ça bavarde. Pour elle, pas contre nous. »',
+      '« Je laisse. »',
     ],
     tactique: [
       'Deux pièces, une porte entre les deux, une table d’examen qui ne protégerait de rien.',
-      '« Nul rempart dans une infirmerie, compagnon. On n’y vient pas pour tenir un siège — on y vient pour repartir vite. »',
+      '« On ne tient pas un siège dans une infirmerie. »',
+      '« On y vient pour repartir vite. »',
     ],
   },
 
@@ -85,7 +89,7 @@ export const sarah = {
              'C’est la première fois de la nuit qu’il est dans une pièce où quelqu’un d’autre attend aussi.'],
         hercules: '« Un gamin qui compte les gens plus fatigués que lui. Il en trouve toujours un. Ça devrait le rassurer et ça ne le rassure jamais. »',
         rabbit: '« Vingt ans, et personne ne lui avait jamais proposé une vraie attelle avant ce soir. »',
-        drakk: '« Il regarde les trois autres comme un compagnon compte les rangs ennemis. Il essaie de savoir combien d’entre eux comptent plus que lui, dans cette histoire. »',
+        drakk: ['« Il regarde les trois autres, un par un. »', '« Il essaie de savoir combien comptent plus que lui. »'],
       }),
       parler: { tous: '« On repart bientôt. » Il hoche la tête et ne dit rien de plus.' },
       utiliser: 'Non. Il a passé la nuit à être déplacé par des mains.',

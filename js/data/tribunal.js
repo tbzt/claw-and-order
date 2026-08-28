@@ -28,7 +28,7 @@ export const tribunal = {
       nom: 'Les deux Justice',
       regarder: {
         tous: 'Deux figures encapuchonnées penchées sur l’entrée. Ni l’une ni l’autre ne tient de balance — celle-là a été volée il y a longtemps, et personne ne l’a remplacée.',
-        drakk: '« Des idoles sans regard. Ma déesse en aurait honte. »',
+        drakk: '« Des statues sans yeux. Je n’ai jamais compris pourquoi on fait ça. »',
       },
     },
 
@@ -60,20 +60,20 @@ export const tribunal = {
       nom: 'Les détecteurs',
       regarder: {
         tous: 'Un cadre métallique, et un garde qui regarde l’écran plus que vous.',
-        rabbit: '« Détection de masse ferreuse. Standard. Pas de quoi s’inquiéter — sauf raison de s’inquiéter. »',
+        rabbit: ['« Détection de masse ferreuse. Standard. »', '« Vous avez une raison de vous inquiéter ? »'],
       },
       utiliser: ({ tient }) => {
         if (tient('arme')) return {
           tous: ['L’arme de Wilson pèse dans une poche depuis le quai. Personne ne l’a mentionnée jusqu’ici — le détecteur, lui, ne l’oubliera pas.',
                  'Un garde tend la main sans un mot. Vous la laissez en dépôt.'],
           drakk: '« Une lame ne sonne pas. Un P-au poing, si. Il fallait choisir avant d’arriver. »',
-          hercules: '« On la récupérera en sortant. Ou pas. On verra ce qui compte le plus, en sortant. »',
+          hercules: '« On la récupérera en sortant. Ou pas. On verra à ce moment-là. »',
           flags: ['arme-saisie'], retire: ['arme'],
         }
         if (tient('epees')) return {
           tous: ['Le cadre sonne avant même que Drakk ne soit passé dessous.',
                  'Un garde tend la main, presque désolé pour lui.'],
-          drakk: '« Une lame ne chante pas au fer, d’habitude. Celle-ci vient de me trahir deux fois. »',
+          drakk: ['« Elle a sonné. »', '« Deux fois. Je ne comprends pas ce qu’elle a dedans. »'],
           flags: ['epees-saisies'], retire: ['epees'],
         }
         if (tient('focus')) return {
@@ -115,7 +115,7 @@ export const tribunal = {
         }),
         deck: () => ({
           tous: 'White_Rabbit tend son deck des deux mains, comme on tend quelque chose de vivant. Le garde le glisse dans un casier numéroté.',
-          rabbit: '« Traite-le bien. Il te le rendra pas — mais moi si je dois revenir. »',
+          rabbit: '« Traite-le bien. Moi je vais devoir revenir. »',
           flags: ['deck-laisse'], retire: ['deck'],
         }),
         kit: () => ({
@@ -131,11 +131,11 @@ export const tribunal = {
       nom: 'Une fenêtre du deuxième étage',
       regarder: {
         tous: 'Entrouverte, donnant sur un couloir de service visiblement peu surveillé.',
-        drakk: '« Une entrée qu’on ne vous montre pas d’habitude. Ça se remarque, une porte qu’on oublie de fermer. »',
+        drakk: ['« Une entrée qu’on ne montre pas d’habitude. »', '« Quelqu’un a oublié de la fermer. »'],
       },
       utiliser: {
         tous: 'Non. Vous avez un mandat, une accréditation, et une audience dans quelques minutes. Ce n’est pas ce genre de travail.',
-        hercules: '« On est de son côté aujourd’hui. Entrons par où on nous attend. »',
+        hercules: ['« On est de son côté aujourd’hui. Entrons par où on nous attend. »', '« C’est la première fois de ma vie que je dis cette phrase, et je voudrais qu’on le note quelque part. »'],
       },
     },
 
@@ -165,7 +165,7 @@ export const tribunal = {
       nom: 'Un garde, près de la porte',
       regarder: ({ qui }) => qui === 'hercules'
         ? { tous: 'Il vous regarde un peu trop longtemps.',
-            hercules: '« Celui-là. Je ne sais pas pourquoi. Alan Jones, une mauvaise nuit, ou juste un uniforme mal coupé — je ne le saurai pas avant qu’il soit trop tard. »' }
+            hercules: ['« Celui-là. Je ne sais pas pourquoi. »', '« Alan Jones, une mauvaise nuit, un uniforme mal coupé. Je ne le saurai pas avant qu’il soit trop tard, et ça m’agace depuis trente ans. »'] }
         : 'Un garde parmi d’autres.',
     },
 
@@ -187,13 +187,16 @@ export const tribunal = {
 
   vues: {
     physique: ['Des dizaines de gens en costume qui n’ont pas dormi non plus, chacun avec un dossier sous le bras et personne pour le regarder deux fois.',
-               '« Le meilleur déguisement du monde, ce matin, c’est d’avoir l’air aussi fatigué qu’eux. »'],
+               '« Ce matin, le meilleur déguisement c’est d’avoir l’air aussi fatigué qu’eux. »',
+               '« Ça tombe bien. Je n’ai rien eu à préparer. »'],
     ra: ['La RA du palais est presque vide — des balises d’orientation, un flux d’audiences. Une exception, au plafond : une caméra araignée qui ne devrait pas être là, une patte repliée contre une poutre.',
          '« Elle ne bouge pas. Elle regarde quand même. »'],
     astrale: ['Le plan astral d’un tribunal ne devrait pas avoir peur. Celui-ci, si — un courant froid qui descend du couloir du fond, comme si quelque chose venait d’y passer vite.',
-              '« Ce n’est pas hanté. C’est juste que trop de monde, ici, a eu peur au même endroit. »'],
-    tactique: ['Angles de tir, sorties, lignes de vue : Drakk lit la salle comme un champ de bataille qu’elle n’est pas censée être.',
-               '« Une seule sortie civilisée. C’est une donnée, pas une accusation. »'],
+              '« Ce n’est pas hanté. »',
+              '« Trop de gens ont eu peur au même endroit. »'],
+    tactique: ['Angles de tir, sorties, lignes de vue.',
+               '« Une seule sortie civilisée. »',
+               '« Je le note. Je n’accuse personne. »'],
   },
 
   dialogues: {},

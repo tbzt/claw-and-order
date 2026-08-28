@@ -77,12 +77,13 @@ export const quaiVoilier = {
       regarder: {
         tous: ['Deux plaies, pas une de plus. Pas de coupures de défense sur les mains.',
                'Il n’a pas eu le temps de comprendre qu’il se passait quelque chose.'],
-        drakk: '« Deux coups. Placés. Celui qui a fait ça n’a pas frappé fort, il a frappé juste. Ce n’est pas de la colère, c’est du métier. »',
+        drakk: ['« Deux coups. Placés. »', '« Il n’a pas frappé fort. Il a frappé juste. »'],
         trash: ['« Il y a deux empreintes ici. La sienne, surprise, et l’autre. »',
-                '« L’autre est calme. Aucune émotion, pas même du dégoût. C’est ça qui me fait peur, pas le sang. »'],
+                '« L’autre est calme. Aucune émotion, pas même du dégoût. »',
+                '« Ce n’est pas le sang qui me fait peur. »'],
         rabbit: ['« Son commlink n’émet plus. Dernière connexion il y a cinquante-deux minutes, puis plus rien, et pas de déconnexion propre. »',
                  '« Il est dans l’eau. Ça veut dire que ça s’est passé vite. »'],
-        hercules: '« Il attendait quelqu’un. Il n’a pas verrouillé son écoutille. Un type qui fait ce métier ne laisse pas sa porte ouverte pour n’importe qui. »',
+        hercules: ['« Il attendait quelqu’un. Il n’a pas verrouillé son écoutille. »', '« Un type qui fait ce métier ne laisse pas sa porte ouverte pour n’importe qui. Donc il connaissait la personne, ou il croyait la connaître. »'],
       },
       utiliser: ({ a, qui }) => {
         if (a('corps-fouille')) return 'Tu as pris ce qu’il y avait à prendre. Le reste lui appartient.'
@@ -129,12 +130,13 @@ export const quaiVoilier = {
       regarder: ({ a, qui }) => ({
         tous: ['Le capot du compartiment est de travers, comme si on l’avait refermé à la hâte.',
                'En dessous : un moteur d’appoint, des durites, et un boîtier d’allumage.'],
-        rabbit: ['« Le nœud du bateau me remonte un défaut d’allumage. Sauf que ce n’est pas une panne : c’est une coupure, et elle est franche. »',
+        rabbit: ['« Le nœud du bateau me remonte un défaut d’allumage. »',
+                 '« Ce n’est pas une panne. C’est une coupure, et elle est franche. »',
                  '« Et elle est INACHEVÉE. Il restait deux fils à faire, et il ne les a pas faits. »'],
         hercules: a('sait-inacheve')
           ? '« Le vieux a dit qu’il était reparti comme s’il avait fini. Il n’avait pas fini. Cherchez ce qui est encore entier. »'
           : '« Un moteur cassé. Voilà, j’ai contribué. »',
-        drakk: '« On a tranché là-dedans. Avec la même lame que le passeur, je parierais mon destrier. »',
+        drakk: ['« On a tranché là-dedans. »', '« La même lame que sur le passeur, je crois. »'],
         trash: '« Rien à voir avec la magie. Celui qui a fait ça n’en a pas besoin. »',
         /* Deux vraies routes : lire le nœud en RA, OU savoir par le
            pêcheur qu'il est reparti sans finir — auquel cas n'importe

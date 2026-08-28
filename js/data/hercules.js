@@ -111,19 +111,23 @@ export const tripot = {
   vues: {
     physique: [
       'Il connaît cette salle par cœur : la table du fond triche, celle de la fenêtre paie comptant, et le patron ne regarde jamais deux fois le même visage.',
-      '« Rien n’a changé. Ça devrait me rassurer. Ça ne me rassure pas. »',
+      '« Rien n’a changé. »',
+      '« J’aurais préféré que quelque chose ait changé. »',
     ],
     astrale: [
       'Cinq auras penchées sur des cartes, et une sixième, plus froide, qui ne joue pas pour l’argent posé sur le tapis.',
-      '« Elle est là depuis avant nous. Elle attendait quelqu’un, et je crois que c’est nous. »',
+      '« Elle est là depuis avant nous. »',
+      '« Elle attendait quelqu’un. »',
     ],
     ra: [
-      'Aucun signal. Pas une caméra, pas un lecteur, pas un tag — le genre d’endroit qui existe exprès pour ne rien laisser à lire.',
-      '« Rien à pirater ici. C’est la sécurité la plus efficace que j’aie jamais vue : ne rien connecter du tout. »',
+      'Aucun signal. Pas une caméra, pas un lecteur, pas un tag.',
+      '« Rien à pirater. »',
+      '« Rien de connecté. C’est efficace. »',
     ],
     tactique: [
       'Une salle sans fenêtre, une seule porte, cinq tables et plus de chaises que de joueurs assis dessus.',
-      '« Un repaire sans lumière du jour, compagnon. J’en ai vu cent, dans cent tavernes. Aucun n’avait de seconde sortie. »',
+      '« Une salle sans fenêtre, et une porte. »',
+      '« J’en ai lu cent comme ça. Aucune n’avait de seconde sortie. »',
     ],
   },
 
@@ -320,7 +324,8 @@ export const tripot = {
                      '« Je vais leur dire. Pas ce qu’ils veulent entendre — ce qui s’est passé. »',
                      'Il regarde une dernière fois la table, et l’homme qui vient d’apprendre qui était vraiment Hercules.',
                      '« S’ils demandent qui m’a protégé cette nuit, je dirai la vérité. Toute la vérité, pas juste la partie qui vous arrange. »'],
-              hercules: '« Voilà quelqu’un qui vient de décider quelque chose tout seul. C’est plus rare que ça n’en a l’air. »',
+              hercules: ['« Voilà quelqu’un qui vient de décider quelque chose tout seul. »',
+                         '« Dans ma salle. Il y a des gens qui viennent ici depuis vingt ans et qui n’ont jamais fait ça. »'],
               flags: ['lester-temoigne'], fiches: ['lester-temoigne'], va: 'tribunal' }
           : { tous: [...commun,
                      'Il ne dit rien. Il sort le premier, la tête basse.',

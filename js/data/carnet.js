@@ -367,10 +367,10 @@ export const deductions = [
     },
     dit: {
       tous: 'Les deux fiches se répondent, et la réponse est pire que les questions.',
-      hercules: '« On nous paie pour livrer un témoin. Pas pour sauver un innocent. Le vieux ne s’en est peut-être pas encore aperçu. »',
-      trash: '« Personne ne veut le condamner. On veut qu’il se taise. Ce n’est pas la même chose et c’est beaucoup plus simple. »',
-      rabbit: '« Un dossier vide et un transfert verrouillé. Ce n’est pas une erreur judiciaire, c’est une suppression planifiée. »',
-      drakk: '« On n’a pas dressé de gibet. On a creusé une fosse sur le chemin. »',
+      hercules: ['« On nous paie pour livrer un témoin. Pas pour sauver un innocent. »', '« Le vieux ne s’en est peut-être pas encore aperçu. Moi si, et ça m’ennuie beaucoup plus que je ne l’aurais cru. »'],
+      trash: ['« Personne ne veut le condamner. »', '« On veut qu’il se taise. »'],
+      rabbit: ['« Un dossier vide et un transfert verrouillé. »', '« Ce n’est pas une erreur. C’est planifié. »'],
+      drakk: '« Ils n’ont pas construit un procès. Ils ont préparé un accident. »',
     },
   },
   {
@@ -386,9 +386,9 @@ export const deductions = [
     dit: {
       tous: 'Tu poses les deux fiches l’une sur l’autre, et la nuit change de forme.',
       hercules: '« Deux tueurs. Donc deux factures. Donc deux personnes qui ont payé, et elles ne se connaissent peut-être même pas. »',
-      trash: '« L’un a étranglé — c’est de la colère. L’autre a placé deux coups — c’est un tarif. Ce ne sont pas les mêmes mains. »',
+      trash: ['« L’un a étranglé. L’autre a placé deux coups. »', '« Ce ne sont pas les mêmes mains. »'],
       rabbit: '« Le premier a tué une fille. Le second nettoie derrière. Ils ne travaillent pas pour la même raison. »',
-      drakk: '« Deux lames dans la même nuit et aucune ne se connaît. Voilà une intrigue de haute cour. »',
+      drakk: ['« Deux lames dans la même nuit, et aucune ne connaît l’autre. »', '« Ça, c’est de la haute cour. »'],
     },
   },
   {
@@ -403,7 +403,7 @@ export const deductions = [
       tous: 'Les deux fiches se posent l’une sur l’autre sans forcer.',
       hercules: '« Un plan de rechange, ça se paie d’avance. Quelqu’un a acheté ce type AVANT de savoir s’il en aurait besoin. »',
       trash: '« On ne prépare pas deux morts pour le même homme si on doute de le vouloir mort. »',
-      rabbit: '« Redondance. C’est un mot d’architecte. Ils ont architecturé sa mort. »',
+      rabbit: ['« Redondance. »', '« C’est le mot qu’on emploie quand on prévoit qu’une pièce lâche. »'],
       drakk: '« Deux lames pour une gorge. C’est l’aveu d’une grande peur. »',
     },
   },
@@ -446,9 +446,9 @@ export const deductions = [
     },
     dit: {
       tous: 'Deux moitiés de nom, et personne dans cette pièce ne les avait jamais mises côte à côte.',
-      hercules: '« Haiden. Hayden. Elle l’a écrit comme elle l’entendait. Voilà pourquoi personne ne l’a jamais trouvé : il n’était mal orthographié que sur le seul papier qui le portait. »',
+      hercules: ['« Haiden. Hayden. Elle l’a écrit comme elle l’entendait. »', '« Il n’était mal orthographié que sur le seul papier qui le portait. Personne n’a jamais pensé à chercher à l’oreille. »'],
       trash: '« Je connais cette famille. Pas cet homme — la famille. Et je sais exactement ce qu’elle fait de ce qui la gêne, parce que la mienne faisait pareil. »',
-      rabbit: '« Une faute de frappe a protégé un homme pendant trois jours. Aucun chiffrement au monde n’a jamais fait aussi bien. »',
+      rabbit: ['« Une faute de frappe a protégé un homme pendant trois jours. »', '« Je n’ai jamais fait aussi bien. »'],
       drakk: '« Nous avions le nom depuis le début. Il était écrit dans la mauvaise langue, voilà tout. »',
     },
   },
@@ -470,10 +470,10 @@ export const deductions = [
     },
     dit: {
       tous: 'Les deux fiches tiennent debout séparément. Posées l’une sur l’autre, elles cessent de parler de Teresa.',
-      hercules: '« Ce n’est pas un dossier bâclé. Un dossier bâclé, ça manque de pièces. Celui-là a les pièces et les a rangées ailleurs. Ça s’appelle autrement. »',
+      hercules: ['« Ce n’est pas un dossier bâclé. Un dossier bâclé, ça manque de pièces. »', '« Celui-là a les pièces. Il les a rangées ailleurs. »'],
       trash: '« Ils ont su avant nous, avant lui, avant tout le monde. Et ils ont mis un gamin de vingt ans dans une navette. »',
-      rabbit: '« Deux relevés, un journal, trois jours. La preuve de son innocence était consultable par n’importe qui, moyennant un numéro de contrat à quatre chiffres. »',
-      drakk: '« Ils n’ont pas manqué le coupable. Ils ont choisi un autre nom, et ils l’ont écrit à la place. »',
+      rabbit: ['« Deux relevés, un journal, trois jours. »', '« Sa preuve était consultable par n’importe qui. Il fallait un numéro de contrat à quatre chiffres. »'],
+      drakk: ['« Ils n’ont pas manqué le coupable. »', '« Ils ont écrit un autre nom à la place. »'],
     },
   },
 
@@ -495,10 +495,10 @@ export const deductions = [
     },
     dit: {
       tous: 'Les deux fiches se répondent, et aucune des deux ne dit un nom — mais elles disent qu’il y en a un à trouver.',
-      hercules: '« Une voiture de ce prix, dans ce quartier-là, une fois par semaine ? C’est pas de la discrétion. C’est une habitude qu’on a les moyens de se payer. »',
-      trash: '« Elle coupait le fil elle-même, pour lui. Je connais cette forme de loyauté. Elle finit rarement bien pour celle qui la porte. »',
-      rabbit: '« Éteindre un commlink avant un rendez-vous, ce n’est pas de la prudence amateur. C’est un protocole. Quelqu’un le lui a appris, ou quelqu’un le lui a imposé. »',
-      drakk: '« Elle gardait le secret d’un autre, au prix du sien. C’est le sacrifice le plus commun de toutes les histoires, et le moins souvent raconté depuis son point de vue à elle. »',
+      hercules: ['« Une voiture de ce prix, dans ce quartier-là, une fois par semaine ? »', '« Ce n’est pas de la discrétion. C’est une habitude. »'],
+      trash: ['« Elle coupait le fil elle-même, pour lui. »', '« Je connais cette forme de loyauté. »'],
+      rabbit: ['« Éteindre un commlink avant un rendez-vous, ce n’est pas de la prudence amateur. C’est un protocole. »', '« Quelqu’un le lui a appris. Ou imposé. »'],
+      drakk: ['« Elle gardait le secret d’un autre, au prix du sien. »', '« On raconte souvent cette histoire. Jamais de son côté à elle. »'],
     },
   },
 ]

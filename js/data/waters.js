@@ -110,19 +110,23 @@ export const waters = {
   vues: {
     physique: [
       'Une console de mixage qui a dû coûter cher il y a vingt ans, un mur de disques encadrés dont la moitié ne sont sans doute même pas d’or, et une cabine vitrée qui n’a pas vu de musicien depuis un moment.',
-      '« Il vit là-dedans plus qu’il n’y travaille. Ça se sent à la poussière — elle est partout, sauf sur ce qui compte pour lui. »',
+      '« Il vit là-dedans plus qu’il n’y travaille. »',
+      '« La poussière est partout, sauf sur ce qui compte pour lui. On apprend beaucoup d’un homme en regardant ce qu’il essuie. »',
     ],
     astrale: [
-      'Une pièce saturée de petites vanités empilées, année après année — chaque disque encadré est une preuve qu’il exhibe à quelqu’un qui n’est jamais là pour la voir.',
-      '« Il est seul depuis longtemps, et il a fini par préférer les enregistrements aux gens. Un enregistrement, au moins, ne s’en va jamais sans prévenir. »',
+      'Une pièce saturée de petites vanités empilées, année après année. Chaque disque encadré est accroché face à la porte.',
+      '« Il est seul depuis longtemps. »',
+      '« Il a fini par préférer les enregistrements. »',
     ],
     ra: [
       'Un réseau domestique modeste, et une seule icône qui détonne : un verrou électronique, sur le mur du fond, avec une signature de sécurité bien plus lourde que le reste du studio.',
-      '« Ça, c’est payé cher. Le reste de cette baraque tourne sur du matériel des années 2060, et là, d’un coup, du dernier cri. Il a mis toutes ses économies sur une seule porte. »',
+      '« Ça, c’est payé cher. Le reste tourne sur du matériel des années 2060. »',
+      '« Il a mis toutes ses économies sur une seule porte. »',
     ],
     tactique: [
       'Une entrée, un fond de salle sans autre issue visible, et un homme seul qui n’a manifestement jamais eu à défendre cet endroit contre personne.',
-      '« Aucune ligne de tir à couvrir. Le seul danger ici, c’est électronique, et il est enfermé dans un mur. »',
+      '« Aucune ligne de tir à couvrir. »',
+      '« Ce qu’il y a de dangereux ici est enfermé dans un mur. »',
     ],
   },
 
@@ -217,7 +221,7 @@ export const waters = {
                    'Il vous le tend. Ce n’est pas un objet précieux à regarder — c’est un commlink comme il s’en vend cent par jour. C’est tout ce qu’il contient qui ne l’est pas.',
                    ['waters', '« Quatre titres. Elle chantait, entre les prises. Prenez-en soin. »']],
             hercules: '« Voilà quelqu’un qui vient de se faire confiance à lui-même plus qu’à personne d’autre dans cette pièce. Ça ne s’achète pas. Je viens de le vérifier deux fois cette nuit. »',
-            drakk: '« Le gardien remet lui-même la clé. C’est la seule fin honorable d’une garde : la choisir. »',
+            drakk: ['« Le gardien remet lui-même la clé. »', '« Personne ne la lui a prise. »'],
             flags: ['enregistrement-recupere'],
             fiches: ['enregistrement-recupere'],
           }
@@ -269,7 +273,7 @@ export const waters = {
                'Des centaines d’heures de prises ratées, de silences entre deux chansons, de voix qui ne savaient pas qu’on les gardait. Il garde tout. Psych ne mentait pas.'],
         hercules: '« Une vie entière rangée par date plutôt que par nom. Ça devrait me sembler pratique. Ça me semble surtout très seul. »',
         trash: '« Il y a plus de gens vivants là-dedans, en un sens, que dans le reste de cette pièce. Ce ne sont que des voix, mais ce sont des voix qu’il a choisi de ne jamais laisser partir. »',
-        rabbit: '« Aucun de ces disques n’est indexé nulle part en ligne. C’est la meilleure sécurité qui existe : ne jamais rien mettre où on pourrait le chercher. »',
+        rabbit: ['« Aucun de ces disques n’est indexé nulle part en ligne. »', '« Il n’a jamais rien mis là où on pourrait le chercher. »'],
       },
       utiliser: 'Il y a des centaines d’heures là-dedans, et vous n’en cherchez qu’une. Fouiller au hasard ne trouverait rien qu’un refus de Waters ne trouve pas plus vite.',
     },

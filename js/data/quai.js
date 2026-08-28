@@ -51,14 +51,16 @@ export const quai = {
   /* Première bascule vers chaque lentille : on ne l'annonce qu'une fois. */
   vues: {
     physique: ['Cinquante bateaux, une jetée déserte à cette heure, et un carré de lumière au bout du ponton : une cabane de gardien, ou quelqu’un qui n’arrive pas à dormir.',
-               '« Il y a toujours quelqu’un qui ne dort pas sur un port, à cette heure. Trouvons-le avant que la Star ne le trouve. »'],
+               '« Il y a toujours quelqu’un qui ne dort pas sur un port. »',
+               '« Trouvons-le avant la Star. »'],
     astrale: ['Le plan astral, ici, est calme. Trop. L’eau avale les traces plus vite que la terre.',
               '« Il reste quelque chose sur le bateau. Fais-moi monter. »'],
     ra: ['La RA du port s’allume d’un coup : balises d’amarrage, numéros de coque, publicités pour un ponton privé, trois offres de crédit.',
-         '« Personne ne filtre rien dans ce port. C’est illisible, et c’est parfait. »',
-         '« Le jour où il faudra lire au milieu de ça, il faudra autre chose que de la bonne volonté. »'],
+         '« Personne ne filtre rien dans ce port. C’est illisible. »',
+         '« Tant mieux. Pour l’instant. »'],
     tactique: ['Une jetée, un ponton, cinquante embarcations qui se touchent presque — et un seul chemin sec pour rejoindre le voilier.',
-               '« Nul rempart, nulle embuscade possible ici, compagnon — sauf celle qui viendrait de l’eau elle-même. »'],
+               '« Rien pour se cacher, des deux côtés. »',
+               '« Sauf du côté de l’eau. Je ne sais pas lire l’eau. »'],
   },
 
   hotspots: {
@@ -76,7 +78,7 @@ export const quai = {
       regarder: {
         tous: ['Un huit mètres fatigué, amarré au bout de la jetée. Les voiles sont ferlées mais les taquets sont libérés : quelqu’un s’apprêtait à partir.',
                'Aucune lumière à bord.'],
-        drakk: '« Nulle sentinelle sur le pont. C’est mauvais signe, ou c’est un piège. Dans les deux cas j’y vais devant. »',
+        drakk: ['« Personne sur le pont. »', '« Mauvais signe, ou piège. Dans les deux cas j’y vais devant. »'],
         rabbit: '« Sa balise d’amarrage émet encore. Immatriculé au nom d’un Wilson, W. Et il se fait appeler l’Amiral dans son propre profil public. »',
         trash: '« Il y a une trace là-dessus. Pas fraîche de dix minutes, fraîche d’une heure. »',
       },
@@ -111,10 +113,10 @@ export const quai = {
       regarder: {
         tous: ['Trente mètres plus loin sur la jetée, un vieil humain pêche dans le noir. Il n’a pas de seau.',
                'Il vous a vus arriver et il a décidé de ne pas vous voir.'],
-        hercules: '« Il n’a pas de seau, donc il ne pêche pas. Il est là pour être là. Celui-là a vu quelque chose. »',
+        hercules: ['« Il n’a pas de seau, donc il ne pêche pas. Il est là pour être là. »', '« Celui-là a vu quelque chose. Laissez-moi trente secondes, et ne le regardez pas tous les quatre en même temps. »'],
         rabbit: '« Commlink éteint. Volontairement. À cette heure-ci, dans ce port, c’est un choix. »',
         drakk: '« Une sentinelle qui feint la pêche. Vieux stratagème. »',
-        trash: '« Il a peur de nous, et il reste. Donc il a plus peur d’autre chose. »',
+        trash: ['« Il a peur de nous, et il reste. »', '« Il a plus peur d’autre chose. »'],
       },
 
       /* Deux clés, et il faut les deux : le BON RUNNER pour qu'il
@@ -143,13 +145,13 @@ export const quai = {
           if (a('pecheur-parle')) return 'Il a déjà été payé. Il a une conscience, à sa manière.'
           if (!a('pecheur-amorce'))
             return { tous: 'Tu lui tends un créditube sans avoir dit un mot. Il ne le prend pas.',
-                     hercules: '« On ne paie pas avant d’avoir demandé. Ça vexe. »' }
+                     hercules: ['« On ne paie pas avant d’avoir demandé. Ça vexe. »', '« Et un homme vexé, ça coûte le double. Je le sais, je facture pareil. »'] }
           return {
             tous: ['Le créditube disparaît dans une poche cirée.',
                    '« Un grand type. Blond, une tête de plus que tout le monde. Il est monté sur le bateau vers onze heures. »',
                    '« Il est ressorti quand la vedette de la Star est passée. Pas couru. Marché. Comme s’il avait fini. »',
                    '« Et il est parti par le talus, pas par la route. »'],
-            hercules: '« Il n’avait pas fini. C’est toute la différence, et c’est la nôtre. »',
+            hercules: '« Il n’avait pas fini. »',
             flags: ['pecheur-parle', 'sait-toralf', 'sait-inacheve'],
             fiches: ['grand-blond', 'travail-inacheve'],
             retire: ['creditube'],
@@ -204,7 +206,8 @@ export const quai = {
       regarder: ({ qui }) => ({
         tous: 'En haut à droite, un rectangle rouge cerne un angle du talus, au-dessus du parking.',
         drakk: ['« Là. Un archer posté là voit toute la jetée, et personne ne le voit. »',
-                '« Il n’y est pas. Mais il y a été, ou il y sera. C’est le seul endroit qui vaille. »',
+                '« Il n’y est pas. »',
+                '« Il y a été, ou il y sera. C’est le seul endroit qui vaille. »',
                 '« Quand on ne sait pas où est l’ennemi, on regarde où on se mettrait. »'],
         flags: qui === 'drakk' ? ['sait-perchoir'] : undefined,
       }),
@@ -221,7 +224,7 @@ export const quai = {
         tous: 'Une tache qui n’est pas du sang. Elle est posée par-dessus, et elle s’efface plus lentement.',
         trash: ['« C’est lui. Il est resté à peu près quatre minutes à bord, pas plus. »',
                 '« Et regarde la jetée : sa piste va jusqu’ici, et elle REVIENT. Elle ne court pas au retour. »',
-                '« Un homme qui s’enfuit ne marche pas. Celui-là croyait avoir terminé. »'],
+                '« Celui-là croyait avoir terminé. »'],
         fiches: ['travail-inacheve'],
       },
       utiliser: 'On ne touche pas à un résidu astral. On le lit, et on s’en va.',
@@ -267,7 +270,7 @@ export const quai = {
                    hercules: '« Laissons-la à celle qui sait lire ça. »' }
         return { tous: ['White_Rabbit interroge le registre au-delà de ce qu’il affiche.',
                         'Rien. Onze ans de propriété sans un seul incident, pas même une amende de mouillage.'],
-                 rabbit: '« Un homme sans dossier, ça n’existe pas. Ça veut dire que le sien a été nettoyé, ou qu’il n’a jamais rien fait qui mérite d’être noté. Je ne sais pas laquelle des deux m’inquiète le plus. »',
+                 rabbit: ['« Un homme sans dossier, ça n’existe pas. »', '« Nettoyé, ou jamais rien fait. Je ne sais pas laquelle des deux m’inquiète le plus. »'],
                  flags: ['vu-immat'] }
       },
     },
@@ -281,7 +284,7 @@ export const quai = {
       },
       utiliser: {
         tous: 'Éteint, ça ne se pirate pas. Il n’y a rien à attraper.',
-        rabbit: '« Je peux réveiller une machine qui dort. Pas une qu’on a éteinte à la main. Celui qui a fait ça savait ce qu’il faisait. »',
+        rabbit: ['« Je peux réveiller une machine qui dort. Pas une qu’on a éteinte à la main. »', '« Celui qui a fait ça savait. »'],
       },
     },
 

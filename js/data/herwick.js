@@ -118,20 +118,24 @@ export const herwick = {
 
   vues: {
     physique: [
-      'Quarante ans de meubles empilés jusqu’au plafond, et pas un seul prix affiché — dans ce genre de boutique, on négocie tout, y compris l’endroit où on s’assoit.',
-      '« Ce fauteuil-là vaut plus que ce qu’on nous paie cette nuit. Personne ne le vend, et c’est bien pour ça qu’il est encore là. »',
+      'Quarante ans de meubles empilés jusqu’au plafond, et pas un seul prix affiché.',
+      '« Ce fauteuil-là vaut plus que ce qu’on nous paie cette nuit. »',
+      '« Il est encore là. Personne n’a réussi à l’acheter, ou personne n’a voulu le vendre — dans une boutique pareille ce n’est pas la même chose. »',
     ],
     astrale: [
       'Quarante ans de meubles vendus, rachetés, hérités, abandonnés : des milliers de deuils qui se sont arrêtés ici un moment avant de repartir.',
-      '« C’est saturé. Je ne trouve pas son aura à lui là-dedans. Je ne trouve personne — c’est la première fois de la nuit que je vois moins que ce qu’il y a. »',
+      '« C’est saturé. Je ne trouve pas son aura là-dedans. »',
+      '« Je ne trouve personne. »',
     ],
     ra: [
       'Une seule icône, au-dessus de la caisse : un terminal qui pousse ses paiements vers un serveur de comptabilité, à heure fixe, toutes les nuits depuis vingt ans.',
-      '« Il paie ses fournisseurs à des horaires bizarres. Ce n’est pas louche, c’est juste vieux. Mais ça bavarde, et cette nuit ça ne devrait pas. »',
+      '« Il paie ses fournisseurs à des horaires bizarres. C’est juste vieux. »',
+      '« Mais ça bavarde. Cette nuit, ça ne devrait pas. »',
     ],
     tactique: [
       'Un rideau de fer à moitié baissé, une seule allée entre les piles de meubles, et une porte de service à l’arrière que personne n’a proposé de montrer.',
-      '« Une échoppe encombrée vaut mieux qu’une salle vide, compagnon : cent embûches pour nous, cent pour qui nous chercherait. »',
+      '« Encombré, c’est mieux que vide. »',
+      '« Cent obstacles pour nous. Cent pour celui qui nous chercherait. »',
     ],
   },
 
@@ -188,7 +192,7 @@ export const herwick = {
             tous: ['Un nain d’un âge indéfini, rideau de fer à moitié baissé derrière lui, qui range des objets qui n’ont pas besoin d’être rangés.',
                    'Il regarde la rue toutes les cinq minutes. Il ne s’est pas recouché depuis que vous êtes entrés.'],
             hercules: '« Un homme seul, tiré du lit à cinq heures pour héberger cinq inconnus et un fugitif, et qui fait du thé. Je connais le prix de ce genre de politesse : il est en train de le payer d’avance. »',
-            trash: '« Son aura ne tient pas en place. Ce n’est pas de la peur. C’est quelqu’un qui a déjà décidé de rester, et qui n’aime pas ce que ça va lui coûter. »',
+            trash: ['« Son aura ne tient pas en place. Ce n’est pas de la peur. »', '« Il a décidé de rester. Il n’aime pas ce que ça va coûter. »'],
             rabbit: '« Il n’a pas de caméra dans sa propre boutique. Un antiquaire, sans caméra. Ça devrait me rassurer et ça ne me rassure pas. »',
             drakk: '« Le même homme, quarante ans plus tard, dans la même arrière-boutique. Il m’a ouvert cette porte une fois. Ce soir, c’est moi qui frappe. »',
           },
@@ -240,15 +244,15 @@ export const herwick = {
       }),
       utiliser: ({ a, qui }) => {
         if (a('caisse-coupee')) return { tous: 'Éteint. Il n’a plus rien à dire à personne.' }
-        if (qui !== ‘rabbit’)
-          return { tous: ‘Il faudrait un deck, et savoir dans quoi on entre.’,
-                   hercules: ‘« Laisse-le faire. C’est son rayon, et je préfère que ce soit lui plutôt que moi qui tâtonne. »’ }
+        if (qui !== 'rabbit')
+          return { tous: 'Il faudrait un deck, et savoir dans quoi on entre.',
+                   hercules: '« Laisse-le faire. C’est son rayon, et je préfère que ce soit lui plutôt que moi qui tâtonne. »' }
         return {
-          tous: [‘White_Rabbit se glisse dans le petit réseau du terminal, coupe la synchronisation nocturne, et referme derrière lui.’,
-                 ‘Rien ne clignote plus. Une boutique fermée, sur les registres, exactement comme elle devrait l’être à cette heure.’],
-          rabbit: ‘« Voilà. Aux yeux de qui que ce soit qui regarde de loin, cette caisse dort. »’,
-          flags: [‘caisse-coupee’],
-          visuels: [‘caisse-coupee’],
+          tous: ['White_Rabbit se glisse dans le petit réseau du terminal, coupe la synchronisation nocturne, et referme derrière lui.',
+                 'Rien ne clignote plus. Une boutique fermée, sur les registres, exactement comme elle devrait l’être à cette heure.'],
+          rabbit: '« Voilà. Aux yeux de qui que ce soit qui regarde de loin, cette caisse dort. »',
+          flags: ['caisse-coupee'],
+          visuels: ['caisse-coupee'],
         }
       },
     },
@@ -364,7 +368,7 @@ export const herwick = {
                               visuel: 'herwick-touche' },
                             'Personne d’autre n’a bougé, parce que personne d’autre n’était visible depuis la rue. Le tireur n’avait que lui.'],
                      drakk: '« Il avait une pièce à lire. Nous ne la lui avions pas laissée. Il n’a eu que celui qui restait debout. »',
-                     rabbit: '« Une seule cible offerte, et c’était la sienne. Ce n’est pas de la chance, c’est de l’arithmétique. »',
+                     rabbit: ['« Une seule cible offerte, et c’était la sienne. »', '« Ce n’est pas de la chance. »'],
                      flags: ['herwick-touche'],
                      fiches: ['tir-herwick'] }
           return { tous: [...debout,
@@ -393,7 +397,8 @@ export const herwick = {
                      '« Je vais leur dire. Pas ce qu’ils veulent entendre — ce qui s’est passé. »',
                      'Il regarde une dernière fois la boutique, et l’homme assis dedans.',
                      '« Si vous êtes encore là quand je sortirai, je lui rachèterai quelque chose. J’aurai rien pour payer, mais je lui rachèterai quelque chose. »'],
-              hercules: '« Voilà quelqu’un qui vient de décider quelque chose tout seul. C’est plus rare que ça n’en a l’air. »',
+              hercules: ['« Voilà quelqu’un qui vient de décider quelque chose tout seul. »',
+                         '« Après ce qu’il vient de voir. Je ne sais pas si je l’aurais fait à son âge. Je ne l’ai pas fait à son âge. »'],
               flags: ['lester-temoigne'], fiches: ['lester-temoigne'], va: 'tribunal' }
           : { tous: [...commun,
                      'Il ne dit rien. Il sort le premier, la tête basse.',
