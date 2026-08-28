@@ -100,7 +100,10 @@
     <div class="grille-tac"></div>
     <div class="issue issue--allee"></div>
     <div class="cote cote--allee">ISSUE — L’ALLÉE</div>
-    <div class="issue issue--laterale"></div>
+    <!-- R4 : l'issue de l'allée est déjà `sortir` dans le décor ; la
+         latérale, non — c'est la porte par laquelle on emmène Lester
+         quand c'est fini, et personne d'autre ne la regarde. -->
+    <div class="issue issue--laterale" data-hotspot="issue-laterale"></div>
     <div class="cote cote--laterale">ISSUE LATÉRALE</div>
     <div class="couvert couvert--banc"></div>
     <div class="cote cote--hauteur">POSITION HAUTE</div>
@@ -128,7 +131,13 @@
        `css/scene-tribunal-salle.css`. -->
   <div class="calque calque--ra">
     <div class="ora ora--role">RÔLE DU JOUR · SALLE 4 · AUDIENCE EN COURS</div>
-    <div class="ora ora--greffe">TRANSCRIPTION · EN DIRECT · NON SIGNÉE</div>
+    <!-- R4 : la première cible de calque de ce tableau. Elle est libre
+         parce que rien, dans le décor, n'est le greffe — la
+         transcription n'existe qu'en RA. Les quatre autres fiches
+         désignent des choses qui ont déjà leur cible (le micro est la
+         barre, le dossier est l'accusation) : une chose du monde, une
+         seule cible. -->
+    <div class="ora ora--greffe" data-hotspot="transcription">TRANSCRIPTION · EN DIRECT · NON SIGNÉE</div>
     <div class="ora ora--banc">TERMINAL DU BANC · SAISIE EN COURS</div>
     <div class="ora ora--micro">BARRE · MICRO EN ATTENTE</div>
     <div class="ora ora--dossier">ACCUSATION · 3 P. · 2 TOURNÉES</div>

@@ -123,14 +123,64 @@ export const tribunalSalle = {
     /* Les quatre équipiers, catalogue commun (js/data/equipiers.js). */
     ...equipiers('tribunal-salle'),
 
+    /* ══ LES CIBLES DE CALQUE — R4, premier des onze décors ══════════
+       Mesuré le 2026-08-28 : onze décors portaient 218 éléments de
+       calque et **zéro** cible. Celui-ci en gagne deux, pas trois, et
+       le manquant est un constat, pas un oubli : **les six éléments du
+       calque astral désignent tous une chose qui a déjà sa cible dans
+       le décor** — le pupitre est `barre`, les quatre auras sont leurs
+       quatre personnes, l'indifférence est `galerie`. La règle « une
+       chose du monde, une seule cible » interdit de les doubler ; ce
+       que l'astral a à dire ici se dit donc dans la voix de Trash sur
+       ces cibles-là, où elle est déjà écrite.
+
+       Comme toute cible de calque, elles ne sont atteignables que par
+       leur runner : `tous` + une voix, jamais quatre. */
+    transcription: {
+      nom: 'La transcription',
+      principal: 'regarder',
+      regarder: {
+        tous: 'La transcription défile en direct au-dessus du banc du greffe, ligne à ligne, à trois mots de retard sur ce qui se dit.',
+        rabbit: ['« Elle tourne, elle horodate, et elle n’est signée par personne. »',
+                 '« Ce qui se dit ici n’existera vraiment que quand quelqu’un aura mis son nom en bas. Pour l’instant, c’est du texte. »'],
+        flags: ['transcription-vue'],
+      },
+      utiliser: {
+        tous: 'Elle défile, et rien de ce qu’on ferait ne la ferait défiler autrement.',
+        rabbit: '« Je pourrais y écrire une ligne. Je ne vais pas faire ça. »',
+      },
+    },
+
+    'issue-laterale': {
+      nom: 'L’issue latérale',
+      principal: 'regarder',
+      regarder: {
+        tous: 'Une porte basse derrière l’estrade, sans poignée de ce côté-ci. Elle ne mène pas dehors.',
+        drakk: ['« Celle-là ne sert qu’une fois, et pas à nous. »',
+                '« C’est par là qu’ils l’emmèneront, si ça se passe mal. »'],
+      },
+      utiliser: {
+        tous: 'Elle n’a pas de poignée de ce côté. C’est le principe.',
+        drakk: '« On ne force pas une porte devant un juge. »',
+      },
+    },
+
     juge: {
       nom: 'Le juge',
-      regarder: {
+      /* R4 : `transcription-vue` se paie ici. La ligne « il n'a encore
+         rien signé » était dans le texte depuis le premier jour ; elle
+         attendait quelqu'un qui sache ce que « signé » veut dire dans
+         cette salle. White_Rabbit n'avait aucune voix sur le juge — il
+         en gagne une, et seulement une fois qu'il a lu la transcription. */
+      regarder: ({ a }) => ({
         tous: ['Il écoute. C’est tout ce qu’il fait, et c’est énorme : personne d’autre dans cette salle n’a pris la peine.',
                'Il n’a encore rien signé.'],
         hercules: '« Un juge qui prend des notes est un juge qui doute. Il en prend beaucoup. »',
         drakk: '« Voilà un homme qui pèse, et qui ne l’a pas encore montré. »',
-      },
+        ...(a('transcription-vue')
+          ? { rabbit: '« Tout ce qui se dit ici attend sa signature à lui. C’est le seul endroit du dossier où quelqu’un assume ce qu’il écrit. »' }
+          : {}),
+      }),
     },
 
     defense: {
