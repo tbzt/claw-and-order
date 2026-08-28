@@ -258,6 +258,16 @@ export const tribunalSalle = {
                    dialogue: 'verdict' }
         if (verite) return { tous: texteVerite, flags: ['denouement-verite'], fin: true }
         if (tractation) return { tous: texteTractation, flags: ['denouement-tractation'], fin: true }
+
+        /* Le geste en deux temps, motif déjà écrit trois fois (le sas,
+           la porte de la laverie, la récusation) : la défaite reste
+           possible, mais elle devient décidée plutôt que subie en un
+           clic. `sortie-annoncee` est transitoire — relu ici seulement,
+           pas de ligne de bilan : il raconte une hésitation, pas un
+           fait. */
+        if (!a('sortie-annoncee'))
+          return { tous: 'Le juge attend. Vous n’avez rien posé sur ce pupitre qui change son dossier.',
+                   flags: ['sortie-annoncee'] }
         return { tous: texteEchec, flags: ['denouement-echec'], fin: true }
       },
     },
