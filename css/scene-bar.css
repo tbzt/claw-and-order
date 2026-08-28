@@ -94,7 +94,19 @@
    au fond, l'équipe devant le comptoir.                              */
 
 /* — au mur — */
-.tableau--bar .cible { left: calc(62 * var(--u));  top: calc(34 * var(--u)); width: calc(22 * var(--u)); }
+/* La cible était à 3,84 m du sol : son centre tombait en y=42 quand la
+   ligne de pose est à 133, soit deux fois la hauteur d'un homme. Rien ne
+   le disait tant que les joueurs étaient des enfants collés à la table —
+   c'est en leur rendant leur taille que le mur a montré son défaut.
+   Une cible se pose le CENTRE À 1,73 M, c'est réglementaire et c'est le
+   seul repère qu'un joueur vérifie à l'œil. 1,73 m × 23,7 u/m = 41
+   unités au-dessus des pieds, donc un centre en y=92 ; l'encre de la
+   carte occupe les lignes 2 à 29, soit 1 à 15 unités sous le haut de la
+   boîte, ce qui met la boîte à 84.
+   Elle glisse aussi de 62 à 64 : à hauteur de tête, elle n'est plus
+   au-dessus des deux hommes mais ENTRE eux, et la fléchette du lanceur
+   arrive à son bord gauche. Le guetteur recule d'autant (voir `.c2`). */
+.tableau--bar .cible { left: calc(64 * var(--u));  top: calc(84 * var(--u)); width: calc(22 * var(--u)); }
 .tableau--bar .horloge { left: calc(35 * var(--u));  top: calc(8 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--bar .photos { left: calc(173 * var(--u)); top: calc(54 * var(--u)); width: calc(22 * var(--u)); }
 .tableau--bar .affiche { background: #45403a; box-shadow: 0 0 0 calc(1 * var(--u)) #1a1210; }
@@ -112,7 +124,24 @@
 }
 
 /* — le comptoir — */
-.tableau--bar .bouteilles { left: calc(154 * var(--u)); top: calc(20 * var(--u)); width: calc(88 * var(--u)); }
+/* Les bouteilles étaient à ÉCHELLE UN : 88 unités pour une carte de 88
+   pixels, quand tout le reste du décor est à la demi (`verres` 68 -> 34,
+   `barman` 60 -> 30, `tabouret` 36 -> 18). Elles faisaient donc le double
+   de leur taille — 1,30 m de haut au canon de 23,7 u/m — et leur pied
+   tombait six unités SOUS l'étagère au lieu de se poser dessus. Vues de
+   la salle, elles pendaient au-dessus du bar sans rien pour les tenir
+   (retour de playtest).
+
+   À la demi-échelle, l'encre de la carte occupe les lignes 1 à 31, soit
+   0,5 à 16 unités sous le haut de la boîte : pour que le cul des
+   bouteilles touche l'étagère (y=42), la boîte commence à 26. Deux
+   groupes de 44 remplissent l'arrière-bar que le groupe géant occupait ;
+   le second est retourné pour que les étiquettes ne se répètent pas, et
+   porte la même cible — le moteur pose ses écouteurs sur
+   `[data-hotspot]`, pas sur un élément unique. */
+.tableau--bar .bouteilles { top: calc(26 * var(--u)); width: calc(44 * var(--u)); }
+.tableau--bar .bouteilles--a { left: calc(158 * var(--u)); }
+.tableau--bar .bouteilles--b { left: calc(202 * var(--u)); transform: scaleX(-1); }
 .tableau--bar .verres { left: calc(201 * var(--u)); top: calc(76 * var(--u)); width: calc(34 * var(--u)); }
 .tableau--bar .barman { left: calc(212 * var(--u)); top: calc(62 * var(--u)); width: calc(30 * var(--u)); }
 .tableau--bar .tabouret { width: calc(18 * var(--u)); }
@@ -122,27 +151,55 @@
 .tableau--bar .t2 { left: calc(169 * var(--u)); top: calc(94 * var(--u)); }
 
 /* — le coin fléchettes : les joueurs sont À CÔTÉ de la cible, pas dessous — */
+/* Ils étaient hors canon, et le défaut venait de la CARTE, pas d'ici :
+   `prop-client` faisait 60 lignes dont 50 de corps, soit 25 unités à la
+   demi-échelle du tableau — 1,05 m au canon (23,7 u/m), deux flics en
+   uniforme dessinés à hauteur d'enfant. À côté de McCarthy (ork, 45) et
+   sur la même ligne de pieds qu'eux, ils passaient pour des enfants ; et
+   la table de McCarthy leur coupait la hanche (elle allait jusqu'à 62,
+   ils commençaient à 57).
+   Les grossir ICI aurait donné à ces deux-là un grain 36 % plus gros que
+   le reste du tableau — le bar est le seul décor entièrement à la demi.
+   Les deux cartes ont donc été rallongées (atelier,
+   `retouches/flechettes-taille.py`) : 90 et 84 lignes, 80 de corps comme
+   White_Rabbit. La largeur ne bouge pas — c'est la hauteur qui manquait.
+   Les deux `top` diffèrent parce que les cartes n'ont pas la même marge
+   au-dessus de la tête : celle du lanceur porte son bras levé. Les pieds
+   des deux tombent à 133, la ligne de pose du tableau. */
 .tableau--bar .client { width: calc(22 * var(--u)); }
-.tableau--bar .c1 { left: calc(57 * var(--u));  top: calc(105 * var(--u)); }
-.tableau--bar .c2 { left: calc(80 * var(--u));  top: calc(105 * var(--u)); }
+.tableau--bar .c1 { left: calc(48 * var(--u)); top: calc(88 * var(--u)); }
+.tableau--bar .c2 { left: calc(84 * var(--u)); top: calc(91 * var(--u)); }
 
 /* — McCarthy, à l'écart, tout à gauche — */
+/* La table faisait 58 x 24 unités : 2,45 m de long sur 1,03 m de haut,
+   pour un homme assis seul. Elle coupait McCarthy à 108, c'est-à-dire à
+   la taille — pas « les jambes », comme le décor le prétend — et elle
+   mordait sur le coin fléchettes. À 36 x 19 (1,52 m sur 0,80 m, une
+   table de bar), son plateau tombe à 114, sous la hanche : il lui coupe
+   bien les jambes, et il rend son buste au tableau. Le bas reste à 133,
+   la ligne de pose du sol. */
 .tableau--bar .table-mccarthy {
-  left: calc(4 * var(--u)); top: calc(108 * var(--u));
-  width: calc(58 * var(--u)); height: calc(24 * var(--u));
+  left: calc(8 * var(--u)); top: calc(114 * var(--u));
+  width: calc(36 * var(--u)); height: calc(19 * var(--u));
   background: linear-gradient(#4a3323 0 calc(4 * var(--u)), #2e2016 calc(4 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #14100c;
 }
-.tableau--bar .tasses { left: calc(10 * var(--u)); top: calc(98 * var(--u)); width: calc(26 * var(--u)); }
+/* Les tasses flottaient à dix unités au-dessus du plateau, en travers de
+   sa poitrine : elles cachaient le seul personnage que la scène demande
+   qu'on regarde. L'encre de la carte va des lignes 2 à 17, soit 1 à 9
+   unités à la demi-échelle : posée à 105, elle touche le plateau (114).
+   Elles sont maintenant DEVANT lui sur la table, à hauteur de mains —
+   trois tasses vides, c'est le temps qu'il a attendu. */
+.tableau--bar .tasses { left: calc(8 * var(--u)); top: calc(105 * var(--u)); width: calc(26 * var(--u)); }
 
 /* Son créditube personnel, déjà sorti, à côté de son coude. Il paie de
    sa poche : c'est écrit dans son dialogue, et maintenant ça se voit. */
 .tableau--bar .creditube {
-  left: calc(35 * var(--u)); top: calc(105 * var(--u));
-  width: calc(14 * var(--u)); height: calc(4 * var(--u));
+  left: calc(35 * var(--u)); top: calc(110 * var(--u));
+  width: calc(9 * var(--u)); height: calc(4 * var(--u));
   background: linear-gradient(180deg, #4a5266 0 calc(1 * var(--u)), #2a303f calc(1 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #14100c,
-              inset calc(-3 * var(--u)) 0 0 rgba(255,178,87,.75);
+              inset calc(-2 * var(--u)) 0 0 rgba(255,178,87,.75);
 }
 .tableau--bar .p-mccarthy { width: calc(32 * var(--u)); left: calc(14 * var(--u)); top: calc(88 * var(--u)); }
 
@@ -221,8 +278,8 @@
   background: radial-gradient(ellipse, rgba(8,6,10,.55) 0%, rgba(8,6,10,0) 72%);
   opacity: var(--profondeur, 1);
 }
-.tableau--bar .ombre--c1 { left: calc(59 * var(--u));  top: calc(131 * var(--u)); width: calc(18 * var(--u)); }
-.tableau--bar .ombre--c2 { left: calc(82 * var(--u)); top: calc(131 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--bar .ombre--c1 { left: calc(50 * var(--u)); top: calc(131 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--bar .ombre--c2 { left: calc(85 * var(--u)); top: calc(131 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--bar .ombre--mccarthy { left: calc(15 * var(--u));  top: calc(131 * var(--u)); width: calc(28 * var(--u)); }
 /* Chaque ombre suit sa propre ligne de pieds : c'est elle qui rend la
    profondeur crédible quand les bases diffèrent. */
@@ -235,7 +292,7 @@
 .tableau--bar .ombre--t1 { left: calc(153 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
 .tableau--bar .ombre--t2 { left: calc(170 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
 .tableau--bar .ombre--verres { left: calc(201 * var(--u)); top: calc(87 * var(--u)); width: calc(34 * var(--u)); height: calc(1 * var(--u)); }
-.tableau--bar .ombre--bouteilles { left: calc(154 * var(--u)); top: calc(41 * var(--u)); width: calc(88 * var(--u)); height: calc(1 * var(--u)); }
+.tableau--bar .ombre--bouteilles { left: calc(160 * var(--u)); top: calc(42 * var(--u)); width: calc(84 * var(--u)); height: calc(1 * var(--u)); }
 
 /* Les suspensions. Le tableau avait deux flaques de lumière et AUCUNE
    source : la lampe était dessinée depuis longtemps et posée nulle part.
@@ -273,12 +330,12 @@
   animation: aura-bat 7.4s ease-in-out infinite;
 }
 .tableau--bar .aura--c1, .tableau--bar .aura--c2 {
-  top: calc(98 * var(--u)); width: calc(34 * var(--u)); height: calc(44 * var(--u));
+  top: calc(88 * var(--u)); width: calc(30 * var(--u)); height: calc(48 * var(--u));
   background: radial-gradient(closest-side, rgba(120,170,255,.24), transparent 66%);
   animation: aura-bat 6.1s ease-in-out infinite;
 }
-.tableau--bar .aura--c1 { left: calc(53 * var(--u)); }
-.tableau--bar .aura--c2 { left: calc(75 * var(--u)); animation-delay: 1.4s; }
+.tableau--bar .aura--c1 { left: calc(44 * var(--u)); }
+.tableau--bar .aura--c2 { left: calc(79 * var(--u)); animation-delay: 1.4s; }
 
 /* ── Calque RA : les ORA, et le BRUIT ───────────────────────────────
    Règle 7 : la RA est saturée de réclame, et ce bruit EST du contenu.
@@ -341,8 +398,8 @@
   height: calc(7 * var(--u)); font-size: calc(3 * var(--u)); line-height: calc(5 * var(--u));
   border-color: rgba(255,196,90,.55); background: rgba(58,44,14,.5); color: rgba(255,206,132,.7);
 }
-.tableau--bar .b1 { left: calc(54 * var(--u));  top: calc(96 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--bar .b2 { left: calc(79 * var(--u));  top: calc(90 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--bar .b1 { left: calc(50 * var(--u));  top: calc(98 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--bar .b2 { left: calc(84 * var(--u));  top: calc(104 * var(--u)); width: calc(28 * var(--u)); }
 .tableau--bar .b3 { left: calc(212 * var(--u)); top: calc(48 * var(--u));  width: calc(28 * var(--u)); }
 
 /* ── L'entrée de la rue, au premier plan ──────────────────────────────
@@ -377,17 +434,23 @@
    le premier plan et mord sur Hercules — c'est ce contraste devant/derrière
    qui donne la profondeur, pas les jambages (qui ne font qu'encadrer). */
 .tableau--bar .avant { position: absolute; z-index: 5; pointer-events: none; }
+/* Il mordait Hercules de 130 à 140, soit un tiers de lui : le plus petit
+   des quatre disparaissait du bassin aux pieds derrière ce que le
+   playtest a lu comme « une table ». Reculé à 224 et descendu à 132, il
+   ne prend plus que sa botte droite — le contraste devant/derrière tient
+   encore, et le nain reste entier. */
 .tableau--bar .avant--comptoir {
-  left: calc(214 * var(--u)); top: calc(130 * var(--u));
-  width: calc(42 * var(--u)); height: calc(14 * var(--u));
+  left: calc(224 * var(--u)); top: calc(132 * var(--u));
+  width: calc(32 * var(--u)); height: calc(12 * var(--u));
   background: linear-gradient(180deg,
     #6b4a2c 0 calc(2 * var(--u)), #3d2a1c calc(2 * var(--u)) calc(8 * var(--u)), #2a1c13 calc(8 * var(--u)));
   box-shadow: 0 0 0 calc(1 * var(--u)) #1a1210;
 }
 
-/* Le commlink de McCarthy : posé sur sa table, il diffuse encore. */
+/* Le commlink de McCarthy : posé sur sa table, il diffuse encore. Le
+   plateau est descendu à 114 ; l'étiquette le suit, sinon elle flotte. */
 .tableau--bar .ora--commlink {
-  left: calc(40 * var(--u)); top: calc(96 * var(--u));
+  left: calc(40 * var(--u)); top: calc(102 * var(--u));
   width: calc(24 * var(--u)); height: calc(12 * var(--u));
   border-color: rgba(255,196,90,.85); background: rgba(80,60,15,.5);
   box-shadow: 0 0 calc(4 * var(--u)) rgba(255,196,90,.45);
@@ -415,12 +478,12 @@
    posés à l'œil : `p-drakk` est à 122, `p-hercules` à 211 ; le centre
    du groupe tombe vers 168, à hauteur 112. */
 .tableau--bar .lien--flechettes-a {
-  left: calc(66 * var(--u)); top: calc(131 * var(--u));
-  width: calc(104 * var(--u)); transform: rotate(-11deg);
+  left: calc(56 * var(--u)); top: calc(131 * var(--u));
+  width: calc(110 * var(--u)); transform: rotate(-11deg);
 }
 .tableau--bar .lien--flechettes-b {
-  left: calc(89 * var(--u)); top: calc(131 * var(--u));
-  width: calc(82 * var(--u)); transform: rotate(-14deg);
+  left: calc(94 * var(--u)); top: calc(131 * var(--u));
+  width: calc(76 * var(--u)); transform: rotate(-14deg);
   animation-delay: .9s;
 }
 .tableau--bar .lien--paie {
@@ -439,8 +502,8 @@
 .tableau--bar .issue--fond { left: calc(101 * var(--u)); top: calc(62 * var(--u)); width: calc(26 * var(--u)); height: calc(56 * var(--u)); }
 .tableau--bar .cote--fond { left: calc(98 * var(--u)); top: calc(52 * var(--u)); }
 .tableau--bar .jeton { width: calc(26 * var(--u)); height: calc(9 * var(--u)); }
-.tableau--bar .j1 { left: calc(56 * var(--u));  top: calc(129 * var(--u)); }
-.tableau--bar .j2 { left: calc(79 * var(--u));  top: calc(129 * var(--u)); animation-delay: .7s; }
+.tableau--bar .j1 { left: calc(46 * var(--u));  top: calc(129 * var(--u)); }
+.tableau--bar .j2 { left: calc(81 * var(--u));  top: calc(129 * var(--u)); animation-delay: .7s; }
 .tableau--bar .j3 { left: calc(214 * var(--u)); top: calc(84 * var(--u)); animation-delay: 1.4s; }
 .tableau--bar .j-mcc { left: calc(12 * var(--u)); top: calc(129 * var(--u)); animation-delay: 2.1s; }
 /* La ligne entre les joueurs de fléchettes et la porte de la rue : ils

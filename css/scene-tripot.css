@@ -159,16 +159,34 @@
 .stage[data-etat~="lester-ferme"]  .tableau--tripot .p-lester { filter: saturate(.6) brightness(.85); }
 .stage[data-etat~="lester-ouvert"] .tableau--tripot .p-lester { filter: saturate(1.15) brightness(1.05); }
 
-/* ── LE VIDEUR — x:6-26, y:60-100 ─────────────────────────────────────── */
+/* ── LE VIDEUR — x:10-28, y:90-118 ────────────────────────────────────── */
 /* ── LE VIDEUR — sprite `prop-anonyme`, et lui aussi était un losange.
    « Il ne bouge pas, ne parle pas, et n'a manifestement pas besoin de
    faire l'un ou l'autre pour qu'on le remarque » : la même carte que
    les joueurs, mais DEBOUT et plus grande. C'est l'échelle, et rien
-   d'autre, qui le rend remarquable — ce que le texte dit mot pour
-   mot. */
+   d'autre, qui le rend remarquable — ce que le texte dit mot pour mot.
+
+   ⚠️ MAIS « PLUS GRANDE » AVAIT ÉTÉ MESURÉ CONTRE LES JOUEURS ASSIS,
+   PAS CONTRE L'ÉQUIPE. À 26 unités de large il faisait 39,7 unités de
+   haut, debout à y=102 — donc DERRIÈRE Drakk, qui pose à y=122 et ne
+   fait que 31,7 unités pour ses 2,36 m de troll. Une figure plus loin
+   ne peut pas être dessinée plus grande qu'une figure plus près : même
+   à 2,50 m et à la distance de Drakk, il plafonnerait à 33,6 unités.
+   Le texte ne demande rien de tel — Rabbit dit de lui « aucun implant
+   visible, juste du muscle et de la patience », pas qu'il dépasse le
+   troll de l'équipe.
+
+   À 18 unités il en fait 27,5 de haut, soit 1,96 m à l'échelle locale
+   (Lester, le runner le plus proche en profondeur, donne 14,6 u/m) :
+   l'homme le plus massif de la salle après Drakk, et deux fois les
+   joueurs assis (17,8 u). Ses pieds descendent de 102 à 118, ce qui le
+   remet sur la même relation à son ombre que les quatre autres (elles
+   sont toutes posées une douzaine d'unités au-dessus des pieds dans ce
+   tableau) — et le met enfin près de la porte qu'il garde, qui commence
+   en y=118. */
 .tableau--tripot .videur-forme {
-  left: calc(6 * var(--u)); top: calc(62 * var(--u));
-  width: calc(26 * var(--u));
+  left: calc(10 * var(--u)); top: calc(90 * var(--u));
+  width: calc(18 * var(--u));
 }
 
 /* ── LA SORTIE — x:10-44, y:118-140, bas de tableau ──────────────────── */
@@ -196,7 +214,7 @@
 .tableau--tripot .ombre--trash    { left: calc(125 * var(--u));  top: calc(111 * var(--u)); width: calc(22 * var(--u)); }
 .tableau--tripot .ombre--rabbit   { left: calc(151 * var(--u)); top: calc(112 * var(--u)); width: calc(17 * var(--u)); }
 .tableau--tripot .ombre--hercules { left: calc(171 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }
-.tableau--tripot .ombre--videur   { left: calc(10 * var(--u));  top: calc(107 * var(--u)); width: calc(19 * var(--u)); }
+.tableau--tripot .ombre--videur   { left: calc(12 * var(--u));  top: calc(107 * var(--u)); width: calc(14 * var(--u)); }
 
 /* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
    Le vocabulaire commun est dans `engine.css` ; ici, le tripot. */
