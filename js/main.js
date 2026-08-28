@@ -954,6 +954,7 @@ function appelle(idContact) {
     if (!a('chimera-alerte')) pose('chimera-alerte')
     else if (!a('chimera-avance')) pose('chimera-avance')
   }
+  const pari = a('chimera-alerte') && !a('pari-dit')
 
   if (!appel) {
     avance(5)
@@ -976,6 +977,10 @@ function appelle(idContact) {
   rafraichit()
   const lignes = enLignes(dejaSu ? appel.dejaLigne : appel.ligne, idContact)
   const suite = appel.reaction ? enLignes(appel.reaction, c.runner) : []
+  if (pari) {
+    pose('pari-dit')
+    lignes.unshift(...enLignes(['trash', '« Chaque fois qu’on décroche, quelqu’un d’autre l’apprend. Je ne dis pas de ne pas appeler. Je dis de le savoir. »'], 'trash'))
+  }
   return dis([...lignes, ...suite], idContact, () => rafraichit())
 }
 
