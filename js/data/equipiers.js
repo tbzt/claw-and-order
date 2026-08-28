@@ -488,6 +488,66 @@ const TABLEAUX = {
     },
   },
 
+  /* ══ LE TRIBUNAL, chantier 65 — deux décors, une seule idée ═════════
+     Les deux seuls tableaux du jeu où l'équipe était à l'écran sans
+     être branchée : huit cibles dans le markup, aucune clé en face, et
+     quatre runners qui répondaient par un refus générique là où ils
+     répondent partout ailleurs.
+
+     Le partage entre les deux décors n'est pas décoratif. Sur le
+     PARVIS, l'équipe arrive par la porte, accréditée, et le seul
+     travail de la scène est de se faire regarder : ce sont donc les
+     deux CORPS qui n'ont rien à faire là à neuf heures du matin qui
+     portent l'entrée — le troll en tenue de taverne et l'elfe en trois
+     épaisseurs. Dans la SALLE, ce sont les deux OUTILS que la pièce
+     annule : Hercules ne peut pas parler dans le seul endroit de la
+     nuit où tout se décide en paroles, et le deck de White_Rabbit est
+     resté au portique vingt minutes plus tôt. */
+  tribunal: {
+    drakk: {
+      vu: "Il baisse la tête en passant sous le portail, qui est bien assez haut pour lui.",
+      hercules: [
+        "« Il se baisse sous tout. Les portes, les auvents, les gens qui parlent fort. »",
+        "« Aujourd’hui c’est nous qui avons les papiers, et il se comporte encore comme si on nous laissait entrer par erreur. »",
+      ],
+    },
+
+    trash: {
+      vu: "Il s’efface contre le mur pour laisser passer trois personnes qui ne le voient pas, et il reste effacé un moment après qu’elles sont passées.",
+      drakk: "« Il laisse passer tout le monde. On va être en retard. »",
+    },
+  },
+
+  /* La conséquence du portique voyage jusqu'ici (`deck-saisi` /
+     `deck-laisse`, `tribunal.js`) : elle n'ajoute rien à la salle, elle
+     change ce que Rabbit fait de ses mains. La ligne de Drakk lit ses
+     PROPRES drapeaux plutôt que ceux de Rabbit — on peut tendre son
+     deck au comptoir en gardant ses épées, et « à moi aussi » serait
+     alors faux. */
+  "tribunal-salle": {
+    hercules: {
+      vu: "Il reste debout du côté de la défense, les mains dans le dos. Il n’a parlé à personne depuis qu’on est entrés, et personne n’est venu lui parler.",
+      rabbit: ["« Il peut pas parler, ici. »", "« J’aime bien. »"],
+    },
+
+    rabbit: {
+      vu: ({ a }) =>
+        a("deck-saisi") || a("deck-laisse")
+          ? "Il n’a rien dans les mains. Il les ouvre et les referme pendant qu’on s’installe, puis finit par croiser les bras."
+          : "Il garde le deck contre lui sans l’allumer, et regarde le juge comme les autres.",
+      /* Le catalogue vient de dire « Il dort avec son deck. Moi aussi,
+         avec mes dés. » : la ligne du tableau s'ajoute DERRIÈRE, donc
+         ni les dés ni « moi aussi » ne peuvent y resservir. */
+      drakk: ({ a }) => {
+        if (!(a("deck-saisi") || a("deck-laisse")))
+          return "« Il ne l’ouvre pas une seule fois. »"
+        return a("epees-saisies") || a("epees-laissees")
+          ? ["« Ils le lui ont pris à l’entrée. »", "« Je regarde ses mains depuis tout à l’heure. »"]
+          : ["« Ils le lui ont pris à l’entrée. »", "« Pas mes épées. Je ne sais pas pourquoi. »"]
+      },
+    },
+  },
+
   /* Le local de répétition, chantier 28 : le premier décor de l'acte IV,
      et le premier où PERSONNE n'est l'hôte. Les cinq décors de planque
      avaient chacun le leur (Drakk chez Herwick, Trash à la loge,
