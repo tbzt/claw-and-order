@@ -156,10 +156,18 @@ export const tribunal = {
     /* Le decoy que le jeu doit refuser en voix — pas une vraie option. */
     fenetre: {
       nom: 'Une fenêtre du deuxième étage',
-      regarder: {
-        tous: 'Entrouverte, donnant sur un couloir de service visiblement peu surveillé.',
+      /* R4 : `araignee-vue` se paie ici — le markup du calque RA le
+         demandait déjà en toutes lettres, « deux lentilles, deux
+         lectures, le même mètre carré ». Drakk trouve la fenêtre trop
+         commodément ouverte ; l'araignée est vissée juste dessous. Ni
+         l'un ni l'autre n'en conclut quoi que ce soit. */
+      regarder: ({ a }) => ({
+        tous: a('araignee-vue')
+          ? ['Entrouverte, donnant sur un couloir de service visiblement peu surveillé.',
+             'Six mètres plus bas, sous l’appui, la caméra que personne n’a déclarée.']
+          : 'Entrouverte, donnant sur un couloir de service visiblement peu surveillé.',
         drakk: ['« Une entrée qu’on ne montre pas d’habitude. »', '« Quelqu’un a oublié de la fermer. »'],
-      },
+      }),
       utiliser: {
         tous: 'Non. Vous avez un mandat, une accréditation, et une audience dans quelques minutes. Ce n’est pas ce genre de travail.',
         hercules: ['« On est de son côté aujourd’hui. Entrons par où on nous attend. »', '« C’est la première fois de ma vie que je dis cette phrase, et je voudrais qu’on le note quelque part. »'],
@@ -188,12 +196,62 @@ export const tribunal = {
        `retour.js`/`planque.js` : câblé en dur sur `qui === 'hercules'`,
        pas sur une lecture de `signature` (que rien, nulle part dans le
        moteur, ne lit — voir `equipe.js`). */
+    /* ══ LES CIBLES DE CALQUE — R4, troisième des onze décors ════════
+       Deux cibles, et le calque TACTIQUE n'en reçoit aucune : sa propre
+       note de `scenes/tribunal.html` dit pourquoi, et c'est une
+       décision d'auteur, pas un oubli — « la lentille de Drakk les
+       DÉSIGNE au lieu de les redoubler ». On ne la défait pas.
+
+       Les deux qui restent brossent le même homme sans jamais
+       l'atteindre. `garde-trouble` doit rester **jamais résolu** (plan
+       § 5.2) : rien ici ne le nomme, ne le confirme, ni ne le relie à
+       quoi que ce soit. Deux inquiétudes de plus, de deux plans
+       différents — doctrine des quatre regards § 10, « aucune ligne ne
+       dit : voici la vérité ». */
+    courant: {
+      nom: 'Le courant froid',
+      principal: 'regarder',
+      regarder: {
+        tous: 'Il descend du couloir du fond, à hauteur de poitrine, et il est plus froid que l’air du parvis.',
+        trash: ['« Ce n’est pas la peur des gens d’ici. Celle-là est en bas, au ras du sol, et elle a mis des années à s’empiler. »',
+                '« Ça, c’est récent, c’est passé vite, et ça ne s’est pas arrêté pour regarder qui attendait dehors. »',
+                '« Je ne saurai pas vous dire quoi. Le couloir du fond mène au dépôt. »'],
+        flags: ['courant-lu'],
+      },
+      utiliser: {
+        tous: 'Il n’y a rien à saisir. C’est un courant d’air qui n’en est pas un.',
+        trash: '« On ne retient pas ça. On le laisse descendre. »',
+      },
+    },
+
+    araignee: {
+      nom: 'La caméra araignée',
+      principal: 'regarder',
+      regarder: {
+        tous: 'Au plafond du porche, une patte repliée contre une poutre. Elle ne bouge pas. Elle regarde quand même.',
+        rabbit: ['« Pas d’immatriculation, pas de propriétaire déclaré, et un flux qui sort du bâtiment. »',
+                 '« Elle est posée sous la fenêtre du deuxième. Quelqu’un a choisi cet angle-là, et ce n’est pas le palais. »',
+                 '« Je peux la voir. Je ne peux pas savoir qui la regarde. »'],
+        flags: ['araignee-vue'],
+      },
+      utiliser: {
+        tous: 'Elle est à six mètres, au plafond, devant trente personnes et deux portiques.',
+        rabbit: '« Si je la touche, celui qui la relève saura qu’on l’a vue. Non. »',
+      },
+    },
+
     'garde-trouble': {
       nom: 'Un garde, près de la porte',
-      regarder: ({ qui }) => qui === 'hercules'
+      /* R4 : `courant-lu` se paie ici. Trash remarque le même homme
+         qu'Hercules, pour une raison qui n'a rien à voir — et lui non
+         plus ne conclut rien. La cible reste sans résolution. */
+      regarder: ({ qui, a }) => qui === 'hercules'
         ? { tous: 'Il vous regarde un peu trop longtemps.',
             hercules: ['« Celui-là. Je ne sais pas pourquoi. »', '« Alan Jones, une mauvaise nuit, un uniforme mal coupé. Je ne le saurai pas avant qu’il soit trop tard, et ça m’agace depuis trente ans. »'] }
-        : 'Un garde parmi d’autres.',
+        : qui === 'trash' && a('courant-lu')
+          ? { tous: 'Il vous regarde un peu trop longtemps.',
+              trash: ['« Il sort du couloir du fond. »', '« Il n’a rien fait. Il a juste la même température que ce qui en descend. »'] }
+          : 'Un garde parmi d’autres.',
     },
 
     /* Vue rapprochée gratuite vers `tribunal-salle` (chantier 25, même
