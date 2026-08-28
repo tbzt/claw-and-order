@@ -4,10 +4,18 @@
   après Herwick (chantier 36).
 
   PASSE D'ART FAITE (chantier 23, lot des cinq planques). Sarah a son
-  sprite depuis le lot 7 ; les trois patients l'ont depuis celui-ci — ils
-  étaient encore des losanges, parce que le balayage du lot 7 cherchait
-  les règles `.pnj` et qu'ils s'appellent `.patient`. Les chaises
-  dépareillées, la pendule à six heures dix et l'autoclave sont neufs.
+  sprite depuis le lot 7 ; les chaises dépareillées, la pendule à six
+  heures dix et l'autoclave datent de là.
+
+  PASSE DE GÉOMÉTRIE (chantier 76) — cinq défauts relevés en jeu, tous
+  de la même famille : une chose posée nulle part. Sarah et l'autoclave
+  flottaient, les trois qui attendent flottaient au-dessus de leurs
+  chaises, la porte était peinte à plat sur le sol, et les cinq ombres
+  de contact tombaient de six à neuf unités au-dessus des pieds qu'elles
+  étaient censées poser. Les trois qui attendent portent désormais
+  `prop-patient`, dessiné pour ce tableau : `prop-anonyme-assis` reste
+  au tripot, où les cinq joueurs sont coupés à mi-corps par la table et
+  où la répétition est voulue.
 
   DEUX PIÈCES, UN SEUL TABLEAU : la salle d'attente (gauche, trois
   chaises) et le cabinet (droite, table d'examen, autoclave, bureau),
@@ -48,12 +56,15 @@
        cible : elle dit « deux pièces » sans en imposer une seconde. -->
   <div class="cloison"></div>
 
-  <!-- LA SALLE D'ATTENTE, à gauche : trois chaises, trois patients
-       (décor), la fenêtre sur la supérette. -->
+  <!-- LA SALLE D'ATTENTE : trois chaises, trois patients (décor), la
+       fenêtre sur la supérette. Elle commence à x:22, après la porte —
+       et pas plus loin que x:76, parce que Lester est à x:80 et que les
+       chaises passent APRÈS lui dans le DOM : un pixel de plus et le
+       mobilier lui monterait dessus. -->
   <div class="chaises sprite--prop-chaises"></div>
-  <div class="patient patient--1 sprite--prop-anonyme-assis"></div>
-  <div class="patient patient--2 sprite--prop-anonyme-assis"></div>
-  <div class="patient patient--3 sprite--prop-anonyme-assis"></div>
+  <div class="patient patient--1 sprite--prop-patient"></div>
+  <div class="patient patient--2 sprite--prop-patient"></div>
+  <div class="patient patient--3 sprite--prop-patient"></div>
   <div class="salle-attente" data-hotspot="salle"></div>
   <div class="fenetre" data-hotspot="fenetre"></div>
 
@@ -65,7 +76,10 @@
   <!-- Sarah — dette d'art assumée : une forme, pas un sprite. -->
   <div class="sarah sprite--prop-sarah" data-hotspot="sarah"></div>
 
-  <!-- La sortie, au premier plan : la porte vers l'escalier de service. -->
+  <!-- La sortie — sur le mur de gauche, debout sur la ligne de sol du
+       fond (y:108), là où la salle d'attente s'arrête. Elle était posée
+       à plat DANS le sol (y:118-142) : à cette place, une porte n'est
+       plus une porte, c'est une trappe. -->
   <div class="porte-cabinet" data-hotspot="porte"></div>
 
 

@@ -25,13 +25,35 @@
 
    DEUX PIÈCES, DISPOSITION PAR BANDES DISJOINTES — même leçon que le
    chantier 36 (« deux zones disjointes, pour qu'aucune ne puisse avaler
-   le centre cliquable de l'autre »), étendue à trois bandes ici : la
-   salle d'attente (x:6-90), le couloir de l'équipe (x:96-206, séparé de
-   la salle par la cloison), le cabinet (x:184-256). Les chaises et les
-   patients de la salle d'attente ne sont PAS des cibles : `.salle-attente`
-   est un survol transparent posé PAR-DESSUS eux dans le DOM, qui capte
-   le clic sans rien cacher visuellement — le même geste qu'ailleurs
-   pour une cible faite de plusieurs pièces de décor. */
+   le centre cliquable de l'autre »), étendue à quatre bandes ici : la
+   porte (x:2-18), la salle d'attente (x:22-76), le couloir de l'équipe
+   (x:96-206, séparé de la salle par la cloison), le cabinet (x:184-256).
+   Les chaises et les patients de la salle d'attente ne sont PAS des
+   cibles : `.salle-attente` est un survol transparent posé PAR-DESSUS
+   eux dans le DOM, qui capte le clic sans rien cacher visuellement — le
+   même geste qu'ailleurs pour une cible faite de plusieurs pièces de
+   décor.
+
+   ══ LE CANON DU TABLEAU (chantier 76) ═══════════════════════════════
+   Relevé au navigateur, pas à l'œil : Trash (1,90 m) fait 33,9 unités
+   d'encre, Rabbit (1,75) en fait 30,7, Hercules (1,20) en fait 22,4.
+   Les trois tombent sur **17,8 UNITÉS PAR MÈTRE**, et c'est le canon
+   d'ici — le bar est à 23,7, ce tableau est simplement vu de plus loin.
+
+   ET IL Y A DEUX LIGNES DE SOL, pas une. Le mur rejoint le sol en
+   **y:108** : c'est là que se posent les choses adossées au fond (les
+   chaises, la porte, le pied du bureau à deux unités près). L'équipe,
+   elle, se tient un pas plus près et ses pieds tombent entre **117 et
+   124** — Lester 117, Drakk 120, Trash 121, Rabbit 123, Hercules 123.
+   Toute chose ajoutée ici doit dire à laquelle des deux elle appartient ;
+   c'est faute de l'avoir dit que quatre éléments flottaient.
+
+   ⚠️ CE QUI RESTE FAUX ET N'A PAS ÉTÉ TOUCHÉ : Drakk mesure 34,6 unités
+   d'encre pour 2,50 m, soit 13,8 u/m — le troll fait la taille de l'elfe.
+   Le défaut vient de sa CARTE (104 lignes de corps là où le canon d'art
+   en demande 118), pas de cette feuille : le corriger ici lui donnerait
+   un grain de 26 % plus gros que ses voisins. Lester a le même défaut,
+   plus léger (15,6 u/m). À traiter à l'atelier, avec les cartes. */
 
 .tableau--sarah {
   position: absolute; inset: 0;
@@ -93,26 +115,46 @@
    fendu, une chaise de cuisine en bois. C'est la seule carte du lot où
    la répétition est INTERDITE — au tripot, deux tableaux plus loin,
    elle est obligatoire, et pour la même raison : le texte le dit. */
+/* Elles commencent maintenant à x:22, après la porte, et tiennent en 54
+   unités au lieu de 68 : la carte fait 136 x 40, donc 54 de large lui
+   donne 15,9 de haut, soit 0,89 m — la hauteur d'une chaise à dossier.
+   À 68 elles en faisaient 1,12 m, et les trois qui attendent avaient
+   l'air d'enfants dessus. Leur bas reste à 108, la ligne de sol du
+   fond : elles sont adossées au mur, et elles n'ont pas bougé de là. */
 .tableau--sarah .chaises {
-  left: calc(8 * var(--u)); top: calc(88 * var(--u));
-  width: calc(68 * var(--u));
+  left: calc(22 * var(--u)); top: calc(92 * var(--u));
+  width: calc(54 * var(--u));
 }
 
-/* ── LES TROIS QUI ATTENDENT — sprite `prop-anonyme-assis` ───────────
-   ⚠️ ELLES ÉTAIENT ENCORE DES LOSANGES. Le lot 7 avait refermé « la
-   dette des corps de PNJ » en balayant les règles `.pnj` ; celles-ci
-   s'appellent `.patient`, et le balayage les a manquées. Un balayage ne
-   vaut que ce que vaut son motif.
+/* ── LES TROIS QUI ATTENDENT — sprite `prop-patient` ─────────────────
+   Elles portaient `prop-anonyme-assis`, qui n'a jamais été dessiné pour
+   être vu en entier : au tripot, la table les coupe à mi-corps et il n'y
+   a rien à lire sous le plateau. Ici la salle est nue, et la carte
+   montrait ce qu'elle était — une tête sur une caisse rayée et deux
+   moignons. Elle flottait en plus de neuf unités au-dessus de l'assise
+   de sa chaise, faute d'avoir la bonne hauteur (18,7 unités pour un
+   assis, quand le canon en demande 22,3).
+
+   `prop-patient` est dessiné contre `prop-chaises`, pas dans le vide :
+   son bas est la ligne de sol des chaises et sa hanche tombe sur leur
+   assise. 13 unités de large lui donnent 22,8 d'encre, soit 1,28 m —
+   la hauteur d'un adulte assis au canon du tableau.
 
    Elles portent toutes la même carte, en gris de silhouette : personne
    dans cette salle ne sait qui sont les autres, et le texte le dit
-   (« aucune des trois ne sait qui vous êtes »). */
+   (« aucune des trois ne sait qui vous êtes »). LE RETOURNEMENT DE LA
+   TROISIÈME CESSE D'ÊTRE DÉCORATIF : la carte regarde vers la gauche,
+   donc retournée elle regarde la pendule — et c'est le texte du tableau
+   qui le demande, « elle regarde une horloge que personne d'autre ne
+   regarde ». Les `left` centrent le buste sur le dossier de sa chaise,
+   pas la boîte sur la chaise : la cuisse sort devant, la boîte est donc
+   décalée. */
 .tableau--sarah .patient {
-  top: calc(80 * var(--u)); width: calc(15 * var(--u));
+  top: calc(85 * var(--u)); width: calc(13 * var(--u));
 }
-.tableau--sarah .patient--1 { left: calc(13 * var(--u)); }
-.tableau--sarah .patient--2 { left: calc(35 * var(--u)); }
-.tableau--sarah .patient--3 { left: calc(57 * var(--u)); transform: scaleX(-1); }
+.tableau--sarah .patient--1 { left: calc(23 * var(--u)); }
+.tableau--sarah .patient--2 { left: calc(41 * var(--u)); }
+.tableau--sarah .patient--3 { left: calc(62 * var(--u)); transform: scaleX(-1); }
 
 /* ── LA PENDULE QUE PERSONNE D'AUTRE NE REGARDE — x:80-92 ────────────
    Sprite `prop-pendule`. « L'une d'elles patiente depuis quatre heures,
@@ -127,8 +169,8 @@
 }
 
 .tableau--sarah .salle-attente {
-  left: calc(8 * var(--u)); top: calc(70 * var(--u));
-  width: calc(68 * var(--u)); height: calc(42 * var(--u));
+  left: calc(22 * var(--u)); top: calc(82 * var(--u));
+  width: calc(54 * var(--u)); height: calc(28 * var(--u));
   background: transparent;
 }
 
@@ -153,10 +195,26 @@
 /* Sprite `prop-autoclave`. « Un modèle qu'on ne fabrique plus,
    entretenu à la main » : ce qui dit « réparé » n'est pas la rouille,
    c'est LA PIÈCE DE RECHANGE QUI N'EST PAS DE LA MÊME COULEUR — un
-   tuyau de laiton sur un corps émaillé. */
+   tuyau de laiton sur un corps émaillé.
+
+   IL ÉTAIT ACCROCHÉ AU MUR en y:14-40, à 3,8 mètres du sol et sans rien
+   dessous. Une pendule tient à cette hauteur, une fenêtre aussi ; une
+   machine de vingt kilos, non — et le retour de jeu dit « l'autoclave
+   vole ».
+
+   IL NE POUVAIT PAS DESCENDRE AU SOL, et ce n'est pas un renoncement,
+   c'est une mesure : au ras du cabinet, les seules bandes libres sont
+   x:184-202 et x:204-220, et Rabbit et Hercules s'y tiennent debout.
+   Posé là il aurait été couvert à quatre-vingt-dix pour cent, ce qui
+   est le bug muet du 13ᵉ lot (la caisse de Herwick, entièrement derrière
+   White_Rabbit, jamais cliquable). Il se pose donc SUR LE BUREAU, dans
+   la seule trouée du fond — x:220-232, entre l'épaule d'Hercules et
+   Sarah — et son pied touche le plateau (y:92). À 12 unités de large il
+   fait 0,97 m de haut : un stérilisateur de paillasse, ce que sa carte a
+   toujours dessiné. */
 .tableau--sarah .autoclave {
-  left: calc(188 * var(--u)); top: calc(14 * var(--u));
-  width: calc(16 * var(--u));
+  left: calc(220 * var(--u)); top: calc(74 * var(--u));
+  width: calc(12 * var(--u));
 }
 
 .tableau--sarah .table-examen {
@@ -179,42 +237,82 @@
    d'Iris (la seule silhouette de femme du jeu). Elle ne change pas
    d'état depuis le chantier 39 : plus de tir, plus de posture à changer.
 
-   SA GÉOMÉTRIE NE BOUGE PAS D'UNE UNITÉ, et c'est une coïncidence utile :
+   SA LARGEUR NE BOUGE PAS D'UNE UNITÉ, et c'est une coïncidence utile :
    le losange faisait 20 × 34 u, soit un rapport de 1,70, et la carte
    d'Iris fait 48 × 82 px, soit 1,71. Le seul des losanges dont les
-   proportions étaient déjà celles d'une figure. */
+   proportions étaient déjà celles d'une figure.
+
+   SA HAUTEUR, ELLE, ÉTAIT FAUSSE : posée en y:72, ses pieds tombaient en
+   106,2 — soit DEUX UNITÉS AU-DESSUS de la ligne où le mur rejoint le
+   sol, donc sur le mur, et quatre unités au-dessus de sa propre ombre.
+   Elle descend à 84, ce qui met ses pieds en 118 : devant son bureau
+   (dont le pied est à 110, contre le fond) et un pas derrière l'équipe
+   (117-124). C'est la place que la scène lui donne — elle vient
+   d'ouvrir, elle a désigné la pièce du fond, elle n'est pas assise. */
 .tableau--sarah .sarah {
-  left: calc(232 * var(--u)); top: calc(72 * var(--u));
+  left: calc(232 * var(--u)); top: calc(84 * var(--u));
   width: calc(20 * var(--u));
 }
 
+/* ── LA SORTIE, SUR LE MUR DE GAUCHE — x:2-18, y:72-108 ──────────────
+   Elle était un rectangle de 22 x 24 posé en y:118-142, c'est-à-dire
+   ENTIÈREMENT DANS LA BANDE DE SOL : rien ne la distinguait d'une
+   trappe ou d'une flaque sombre, et le retour de jeu la dit « au sol,
+   donc illisible ». Le markup l'annonçait « au premier plan » — une
+   porte vue de derrière la caméra ne se dessine pas, elle se déduit,
+   et à cette résolution elle ne se déduit pas.
+
+   Elle se pose donc sur la ligne de sol du fond (y:108) et monte le
+   mur : 16 x 36 unités, soit 0,90 x 2,02 m au canon du tableau — les
+   proportions d'une porte, qui sont exactement ce qu'un joueur vérifie
+   à l'œil sans le savoir. Trois choses la disent en plus de sa forme :
+   le dormant clair sur trois côtés, la BARRE de poignée à hauteur de
+   main (1,10 m du sol, y:88), et la plaque de propreté du bas — celle
+   qu'on pousse du pied quand on a les mains prises, ce qui est l'état
+   permanent de quiconque franchit cette porte-là. */
 .tableau--sarah .porte-cabinet {
-  left: calc(4 * var(--u)); top: calc(118 * var(--u));
-  width: calc(22 * var(--u)); height: calc(24 * var(--u));
-  background: #2c3832;
-  border-top: calc(1 * var(--u)) solid #4a5a4e;
+  left: calc(2 * var(--u)); top: calc(72 * var(--u));
+  width: calc(16 * var(--u)); height: calc(36 * var(--u));
+  background:
+    linear-gradient(#9aa79e 0 0) calc(11 * var(--u)) calc(16 * var(--u)) / calc(3 * var(--u)) calc(5 * var(--u)) no-repeat,
+    linear-gradient(#39463f 0 0) 0 calc(28 * var(--u)) / 100% calc(6 * var(--u)) no-repeat,
+    linear-gradient(180deg, #3e4c44 0%, #232c27 100%);
+  box-shadow:
+    inset calc(1 * var(--u)) calc(1 * var(--u)) 0 0 #5a6a5e,
+    inset calc(-1 * var(--u)) 0 0 0 #5a6a5e,
+    0 0 0 calc(1 * var(--u)) #14201a;
 }
 
 /* Les ombres de contact (chantier 14) : ce tableau n'en avait aucune,
-   faute de sol où les poser. */
+   faute de sol où les poser.
+
+   ⚠️ ELLES NE POSAIENT RIEN. Mesuré au chantier 76 : le centre de chaque
+   ombre tombait de 6 à 9 unités AU-DESSUS des pieds qu'elle prétendait
+   ancrer, et celle de Drakk était carrément à côté de lui — x:126-154
+   quand il occupe x:96-126. Une ombre décalée est pire qu'une ombre
+   absente : elle donne au regard une ligne de sol fausse, et c'est
+   contre elle qu'on lit ensuite tout le reste comme flottant. La règle,
+   relevée sur les onze autres décors : LE CENTRE DE L'OMBRE EST LA
+   LIGNE DE PIEDS, donc `top` = pieds − 1,5 (la moitié de sa hauteur). */
 .tableau--sarah .ombre {
   height: calc(3 * var(--u));
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(0,0,0,.42), transparent 78%);
   pointer-events: none;
 }
-.tableau--sarah .ombre--drakk    { left: calc(126 * var(--u)); top: calc(112 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--sarah .ombre--trash    { left: calc(159 * var(--u)); top: calc(113 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--sarah .ombre--rabbit   { left: calc(185 * var(--u)); top: calc(114 * var(--u)); width: calc(16 * var(--u)); }
-.tableau--sarah .ombre--hercules { left: calc(205 * var(--u)); top: calc(113 * var(--u)); width: calc(14 * var(--u)); }
-.tableau--sarah .ombre--sarah    { left: calc(233 * var(--u)); top: calc(110 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--sarah .ombre--drakk    { left: calc(97 * var(--u));  top: calc(118 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--sarah .ombre--trash    { left: calc(159 * var(--u)); top: calc(119 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--sarah .ombre--rabbit   { left: calc(185 * var(--u)); top: calc(121 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--sarah .ombre--hercules { left: calc(205 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--sarah .ombre--sarah    { left: calc(233 * var(--u)); top: calc(117 * var(--u)); width: calc(18 * var(--u)); }
 
 /* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
    Le vocabulaire commun est dans `engine.css` ; ici, le cabinet. */
 
 /* ── Astral ──────────────────────────────────────────────────────────
    LA PEUR EN RANGS. Un `repeating-linear-gradient` VERTICAL calé sur le
-   pas des chaises (22 unités, x 13 / 35 / 57) : trois colonnes, une par
+   pas des chaises (19 unités, colonnes centrées en x 28,5 / 47,5 / 66,5,
+   les trois bustes après le recul de la salle) : trois colonnes, une par
    siège, et dans chacune des couches horizontales — une par nuit. Deux
    trames croisées, donc, et c'est la seule façon de dessiner « empilée,
    en rangs, comme des chaises » sans l'écrire.
@@ -222,11 +320,11 @@
    Elles montent du siège et s'arrêtent : la peur d'une salle d'attente
    n'a jamais dépassé la hauteur d'une tête assise. */
 .tableau--sarah .peur-rangs {
-  left: calc(6 * var(--u)); top: calc(40 * var(--u));
-  width: calc(72 * var(--u)); height: calc(56 * var(--u));
+  left: calc(22 * var(--u)); top: calc(44 * var(--u));
+  width: calc(57 * var(--u)); height: calc(56 * var(--u));
   background:
     repeating-linear-gradient(180deg, rgba(160,150,200,.18) 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(4 * var(--u))),
-    repeating-linear-gradient(90deg,  rgba(160,150,200,.22) 0 calc(15 * var(--u)), transparent calc(15 * var(--u)) calc(22 * var(--u)));
+    repeating-linear-gradient(90deg,  rgba(160,150,200,.22) 0 calc(13 * var(--u)), transparent calc(13 * var(--u)) calc(19 * var(--u)));
   background-blend-mode: multiply;
   mix-blend-mode: screen;
   filter: blur(calc(1.5 * var(--u)));
@@ -237,29 +335,29 @@
 /* Cinq auras, aucune qui en recouvre une autre : « je vois tout, cette
    fois. C'est presque pire. » */
 .tableau--sarah .aura--patient {
-  top: calc(74 * var(--u)); width: calc(24 * var(--u)); height: calc(34 * var(--u));
+  top: calc(82 * var(--u)); width: calc(20 * var(--u)); height: calc(30 * var(--u));
   background: radial-gradient(closest-side, rgba(150,170,220,.24), transparent 68%);
 }
-.tableau--sarah .ap1 { left: calc(9 * var(--u));  animation: aura-bat 5.2s ease-in-out infinite; }
-.tableau--sarah .ap2 { left: calc(31 * var(--u)); animation: aura-bat 6.4s ease-in-out infinite; }
-.tableau--sarah .ap3 { left: calc(53 * var(--u)); animation: aura-bat 7.1s ease-in-out infinite; }
+.tableau--sarah .ap1 { left: calc(19 * var(--u)); animation: aura-bat 5.2s ease-in-out infinite; }
+.tableau--sarah .ap2 { left: calc(37 * var(--u)); animation: aura-bat 6.4s ease-in-out infinite; }
+.tableau--sarah .ap3 { left: calc(58 * var(--u)); animation: aura-bat 7.1s ease-in-out infinite; }
 .tableau--sarah .aura--lester {
   left: calc(74 * var(--u)); top: calc(80 * var(--u)); width: calc(36 * var(--u)); height: calc(40 * var(--u));
   background: radial-gradient(closest-side, rgba(255,196,120,.28), transparent 70%);
   animation: aura-bat 4.4s ease-in-out infinite;
 }
 .tableau--sarah .aura--sarah {
-  left: calc(222 * var(--u)); top: calc(66 * var(--u)); width: calc(34 * var(--u)); height: calc(44 * var(--u));
+  left: calc(222 * var(--u)); top: calc(78 * var(--u)); width: calc(34 * var(--u)); height: calc(44 * var(--u));
   background: radial-gradient(closest-side, rgba(120,220,180,.26), transparent 68%);
   animation: aura-bat 8.2s ease-in-out infinite;
 }
 
 /* ── Tactique ────────────────────────────────────────────────────── */
 .tableau--sarah .issue--porte {
-  left: calc(2 * var(--u)); top: calc(116 * var(--u));
-  width: calc(26 * var(--u)); height: calc(28 * var(--u));
+  left: calc(0 * var(--u)); top: calc(70 * var(--u));
+  width: calc(20 * var(--u)); height: calc(40 * var(--u));
 }
-.tableau--sarah .cote--porte { left: calc(4 * var(--u)); top: calc(108 * var(--u)); }
+.tableau--sarah .cote--porte { left: calc(2 * var(--u)); top: calc(112 * var(--u)); }
 .tableau--sarah .menace--fenetre {
   left: calc(4 * var(--u)); top: calc(8 * var(--u));
   width: calc(30 * var(--u)); height: calc(34 * var(--u));
@@ -272,12 +370,12 @@
 .tableau--sarah .cote--couvert { left: calc(128 * var(--u)); top: calc(79 * var(--u)); }
 .tableau--sarah .cote--deux    { left: calc(96 * var(--u)); top: calc(126 * var(--u)); }
 .tableau--sarah .jeton { width: calc(22 * var(--u)); height: calc(8 * var(--u)); }
-.tableau--sarah .j-sarah  { left: calc(231 * var(--u)); top: calc(106 * var(--u)); }
+.tableau--sarah .j-sarah  { left: calc(231 * var(--u)); top: calc(114 * var(--u)); }
 .tableau--sarah .j-lester { left: calc(80 * var(--u));  top: calc(108 * var(--u)); }
-.tableau--sarah .j-pat { top: calc(104 * var(--u)); width: calc(18 * var(--u)); }
-.tableau--sarah .jp1 { left: calc(12 * var(--u)); }
-.tableau--sarah .jp2 { left: calc(34 * var(--u)); }
-.tableau--sarah .jp3 { left: calc(56 * var(--u)); }
+.tableau--sarah .j-pat { top: calc(104 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--sarah .jp1 { left: calc(22 * var(--u)); }
+.tableau--sarah .jp2 { left: calc(40 * var(--u)); }
+.tableau--sarah .jp3 { left: calc(61 * var(--u)); }
 
 /* ── RA ──────────────────────────────────────────────────────────── */
 .tableau--sarah .ora--dossiers {

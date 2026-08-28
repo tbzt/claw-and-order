@@ -231,7 +231,7 @@ export const sarah = {
                   '« Elle est venue ici. Deux fois, cet automne. »',
                   '« Elle voulait savoir comment on disparaît proprement — des papiers, un nom qu’on ne peut pas retracer. Je lui ai dit que je ne faisais pas ça. »',
                   '« Elle est repartie avant que je puisse lui demander de qui elle se cachait. »',
-                  '« Je n’ai jamais reparlé d’elle avec personne. Le dossier ne le dit sûrement pas non plus. »'],
+                  '« Je n’ai jamais reparlé d’elle avec personne. On ne me l’a jamais demandé. »'],
         },
         {
           id: 'autopsie',
