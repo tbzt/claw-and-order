@@ -104,7 +104,7 @@ export const equipe = {
        dans un scénario où les médias s'emparent de l'affaire — et Elton
        Hutchinson, avocat (chantier 32). Réseau 4 : il est le
        personnage-réseau de l'équipe, et de loin. */
-    /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (le panneau d’équipe) ───────────
+    /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (chantier 70) ───────────
        `attentif` reformule le § 2 de `DOCTRINE — LES QUATRE REGARDS` :
        non pas ce que le runner PEUT faire, mais ce qu'il remarque parce
        qu'il regarde le monde comme ça. Le § 9 interdit l'arbre de
@@ -116,9 +116,9 @@ export const equipe = {
        lit pas, tranché au comité du 2026-08-27, et ça ne change pas.
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
-    attentif: 'Les rapports de force. Qui commande, qui doit quelque chose à qui, qui fait semblant de ne pas avoir peur.',
+    attentif: 'Il sait au bout d’une minute qui, dans une pièce, doit quelque chose à quelqu’un d’autre. Ce qui ne se joue pas entre des gens ne l’intéresse pas beaucoup.',
     portrait: ['Il est Éveillé et ne l’annonce pas. Son sens du danger ne nomme jamais la menace : il dit qu’une pièce lui déplaît, sans pouvoir dire laquelle des choses qui s’y trouvent.',
-               'Il déteste ça à peu près autant qu’il s’y fie.'],
+               'Il le signale quand même, à chaque fois, et à chaque fois il a l’air de s’excuser.'],
     signature: 'sens-du-danger',
   },
 
@@ -191,7 +191,7 @@ export const equipe = {
     },
     /* Esprit mentor Raton laveur : farceur, chapardeur, curieux. Il doit
        se DESSINER comme un raton laveur, pas comme une orbe abstraite. */
-    /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (le panneau d’équipe) ───────────
+    /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (chantier 70) ───────────
        `attentif` reformule le § 2 de `DOCTRINE — LES QUATRE REGARDS` :
        non pas ce que le runner PEUT faire, mais ce qu'il remarque parce
        qu'il regarde le monde comme ça. Le § 9 interdit l'arbre de
@@ -203,9 +203,8 @@ export const equipe = {
        lit pas, tranché au comité du 2026-08-27, et ça ne change pas.
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
-    attentif: 'Ce qui est là sans y être. Les traces, les attachements, ce qu’un geste laisse derrière lui une fois le geste fini.',
-    portrait: ['Raton laveur l’a réveillé à seize ans, pendant qu’il coulait. Il a laissé à sa sœur la place qu’on lui gardait au Conseil des Princes, et il ne touche plus à l’argent de la famille.',
-               'Il n’a jamais dit que c’était une bonne chose. Il ne dit pas non plus le contraire.'],
+    attentif: 'Ce qu’un geste laisse derrière lui une fois le geste fini. Il le voit mieux que ce qu’il a devant les yeux, et ça lui a déjà coûté.',
+    portrait: 'Raton laveur l’a réveillé à seize ans, pendant qu’il coulait. Il a laissé à sa sœur la place qu’on lui gardait au Conseil des Princes, et il ne touche plus à l’argent de la famille.',
     signature: 'raton-laveur',
   },
 
@@ -280,7 +279,7 @@ export const equipe = {
         '« Ça, c’est à quelqu’un d’autre de le formuler. Change de main. »',
       ],
     },
-    /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (le panneau d’équipe) ───────────
+    /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (chantier 70) ───────────
        `attentif` reformule le § 2 de `DOCTRINE — LES QUATRE REGARDS` :
        non pas ce que le runner PEUT faire, mais ce qu'il remarque parce
        qu'il regarde le monde comme ça. Le § 9 interdit l'arbre de
@@ -292,7 +291,7 @@ export const equipe = {
        lit pas, tranché au comité du 2026-08-27, et ça ne change pas.
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
-    attentif: 'Les systèmes d’information. Ce que le réseau garde, ce qu’il journalise, ce que personne n’a pensé à refermer.',
+    attentif: 'Les horodatages, les journaux, une porte qu’on a oublié de refermer. Une pièce pleine de gens, en revanche, il ne sait pas la lire.',
     portrait: ['Humain. Il se présente en ork depuis assez longtemps pour que plus personne ne vérifie, et il commence encore des phrases par « Nous, les orks » sans jamais les finir.',
                'Personne dans l’équipe ne lui a demandé pourquoi.'],
     signature: 'poseur-ork',
@@ -374,7 +373,7 @@ export const equipe = {
     },
     /* Sa réplique 3 est la RÈGLE 9 dite par un personnage : c'est Drakk
        qui demande à White_Rabbit de regarder avant qu'il force. */
-    /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (le panneau d’équipe) ───────────
+    /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (chantier 70) ───────────
        `attentif` reformule le § 2 de `DOCTRINE — LES QUATRE REGARDS` :
        non pas ce que le runner PEUT faire, mais ce qu'il remarque parce
        qu'il regarde le monde comme ça. Le § 9 interdit l'arbre de
@@ -386,7 +385,7 @@ export const equipe = {
        lit pas, tranché au comité du 2026-08-27, et ça ne change pas.
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
-    attentif: 'La matière et son fonctionnement. Comment la chose tient, par où elle cède, ce qu’elle a coûté à fabriquer.',
+    attentif: 'Comment la chose est faite, et par où elle cède. Il regarde les gens de la même façon, ce qui marche moins bien.',
     portrait: ['Il joue une partie que personne d’autre ne voit, et il en applique les règles pour de vrai.',
                'Une bouteille partagée sur un pont devient un serment ; que les autres l’aient compris ou non ne change rien à ce qu’il fera ensuite.'],
     signature: 'guilde',

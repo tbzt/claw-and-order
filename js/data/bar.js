@@ -376,7 +376,7 @@ export const bar = {
 
     salle: {
       nom: 'La salle',
-      /* Chantier 65. Le filtre s'achète ici, et c'est ici qu'on
+      /* Chantier 69. Le filtre s'achète ici, et c'est ici qu'on
          comprend ce qu'il fait — dans la seule salle du jeu où « ce que
          la Star a marqué elle-même » désigne les gens attablés. Du
          texte seul : on apprend l'outil, on ne gagne rien avec. */

@@ -292,7 +292,7 @@ export const fiches = {
     texte: 'Le lit est nu et la poudre à empreintes est encore sur la tête de lit. La Lone Star a fait un relevé complet dans un appartement qui, officiellement, n’est pas le lieu du crime. Le rapport existe. Il n’est pas au dossier de Lester.',
     ou: 'L’appartement de Teresa',
   },
-  /* Chantier 65. Elle ne s'obtient QU'AVEC le filtre d'ORA, acheté au
+  /* Chantier 69. Elle ne s'obtient QU'AVEC le filtre d'ORA, acheté au
      bar, et elle est la seule chose du jeu qui en dépende. Rabbit dit
      au lit qu'« il existe un numéro de scène pour cet endroit, et il
      n'apparaît nulle part » : la phrase était écrite depuis le

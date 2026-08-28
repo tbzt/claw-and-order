@@ -921,7 +921,7 @@ function depose(idFiche) {
    runner (§5 du plan) — appeler exige qu'il soit actif, et le bouton
    le dit avant que le joueur ait à le découvrir en échouant. */
 
-/* ══ LA SACOCHE (chantier 65) ════════════════════════════════════════
+/* ══ LA SACOCHE (chantier 67) ════════════════════════════════════════
    Le sixième panneau, et le seul qui remplace quelque chose au lieu de
    s'ajouter. Il reprend le patron du carnet sans y toucher : `.carnet`
    pour la mise en page, `.jeton` pour l'étal, `carnet__fiche` pour la
@@ -1043,7 +1043,7 @@ function rendSacoche() {
   rendSacocheTable()
 }
 
-/* ══ LES FICHES D'ÉQUIPE (le panneau d’équipe) ═══════════════════════════════
+/* ══ LES FICHES D'ÉQUIPE (chantier 70) ═══════════════════════════════
    Quatre cartes de front, jamais un étal : il n'y a que quatre fiches,
    et la comparaison EST le propos (DOCTRINE — LES QUATRE REGARDS § 15).
 
@@ -1129,7 +1129,7 @@ function rendEquipe() {
     const idMateriel = materielDe(id)
     if (idMateriel) f.append(creeMateriel(idMateriel))
 
-    if (r.attentif) f.append(creeBloc('Ce à quoi il est attentif', creeLigne('eq-attentif', r.attentif)))
+    if (r.attentif) f.append(creeBloc('Ce qu’il remarque', creeLigne('eq-attentif', r.attentif)))
 
     if (r.comportements?.length) {
       const puces = document.createElement('div')
@@ -1143,7 +1143,7 @@ function rendEquipe() {
       f.append(creeBloc('Comportements', puces))
     }
 
-    if (r.portrait) f.append(creeBloc('Ce qui le définit', creeLigne('eq-portrait', r.portrait)))
+    if (r.portrait) f.append(creeBloc('Ce qu’on sait de lui', creeLigne('eq-portrait', r.portrait)))
     /* Une seule des quatre répliques canoniques, tirée au sort à
        l'ouverture : les quatre d'affilée feraient une liste de
        citations, une seule fait entendre quelqu'un. */
@@ -1605,7 +1605,7 @@ function verifieScene() {
   }
 }
 
-/* Garde-fou du catalogue d'objets (chantier 65). La sacoche LIT
+/* Garde-fou du catalogue d'objets (chantier 67). La sacoche LIT
    `ou` et `regarder` : un objet qui n'en porte pas s'affiche en carte
    vide, ce qui ressemble à un panneau cassé plutôt qu'à un objet
    incomplet. Rien d'autre n'est contrôlé ici — savoir si un objet SERT

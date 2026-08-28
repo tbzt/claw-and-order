@@ -422,7 +422,7 @@ body {
    pouvoir lire. À douze objets il en réclamait 570 et n'en obtenait
    jamais autant.
 
-   CHANTIER 65 : la sacoche est sortie du HUD. Elle est un panneau
+   CHANTIER 67 : la sacoche est sortie du HUD. Elle est un panneau
    (`.sacoche`), et il ne reste ici que `.main` — un emplacement, celui
    de l'objet qu'on tient. Plus rien dans cette barre ne grandit avec
    l'inventaire, donc la cause du débord n'existe plus.
@@ -457,7 +457,7 @@ body {
 
 /* LA MAIN. Un emplacement, jamais deux : ce qu'on tient — et le seul
    bouton de la sacoche. `flex: 0 0 auto` comme tout le reste de cette
-   barre : c'est ce que le chantier 65 est venu chercher.
+   barre : c'est ce que le chantier 67 est venu chercher.
 
    Vide, elle reste visible : un creux hachuré dit « il n'y a rien
    dedans » là où une absence ne dirait rien. Pleine, elle s'allume à
@@ -1576,7 +1576,7 @@ body {
 .carnet__aide.est-refus { color: var(--ambre); animation: bulle-entre .2s ease-out; }
 .carnet__vide { font-size: 1.3cqw; color: #4b5468; font-style: italic; }
 
-/* ── LA SACOCHE (chantier 65) ─────────────────────────────────────────
+/* ── LA SACOCHE (chantier 67) ─────────────────────────────────────────
    Elle emprunte `.carnet` en entier — panneau, étal, table, jetons — et
    n'ajoute que ce qu'un objet a de plus qu'une fiche : une icône, et
    quatre voix au lieu d'un texte. */
@@ -1609,7 +1609,7 @@ body {
 .sacoche__ligne[data-qui="rabbit"]   { color: var(--voix-rabbit); }
 .sacoche__ligne[data-qui="drakk"]    { color: var(--voix-drakk); }
 
-/* ══ LES FICHES D'ÉQUIPE (le panneau d’équipe) ═══════════════════════════════
+/* ══ LES FICHES D'ÉQUIPE (chantier 70) ═══════════════════════════════
    Quatre cartes de front. Elles empruntent `.carnet` pour le chrome du
    panneau et n'ajoutent que la rangée et la carte.
 

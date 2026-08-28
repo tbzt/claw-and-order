@@ -5,7 +5,7 @@
    objet, jamais partagée : le joueur qui tend « quelque chose » au pêcheur
    doit savoir ce qu'il tend sans avoir à survoler.
 
-   ── LA SACOCHE (chantier 65) ──────────────────────────────────────────
+   ── LA SACOCHE (chantier 67) ──────────────────────────────────────────
    `ou` et `regarder` sont neufs, et ils sont la moitié du chantier. Un
    objet portait `nom` et `icone` : deux champs, contre les trois d'une
    fiche du carnet — plus l'étal, la table de lecture et le compteur.

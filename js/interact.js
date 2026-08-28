@@ -160,7 +160,7 @@ export function resous(scene, idCible) {
        d'un refus dans la voix du runner — levait donc une TypeError au
        clic, et le joueur voyait un objet qui ne fait rien.
 
-       Mesuré au moment de la trouver (chantier 65) : 23 des 54 règles
+       Mesuré au moment de la trouver (chantier 67) : 23 des 54 règles
        objet × cible du jeu étaient dans ce cas, soit 43 %. C'est une
        bonne part de « les objets ne servent pas à grand-chose » — le
        contenu était écrit, il n'était pas atteignable. */

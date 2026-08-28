@@ -139,7 +139,7 @@
         <p class="carnet__aide" id="reseauAide">Pose une fiche sur un contact.</p>
       </div>
 
-      <!-- La sacoche (chantier 65). L'inventaire était le bloc DÉSIGNÉ
+      <!-- La sacoche (chantier 67). L'inventaire était le bloc DÉSIGNÉ
            PERDANT du HUD : seul `flex: 1 1 0` au milieu de `flex: 0 0
            auto`, il cédait sa largeur à tous les autres et défilait. À
            douze objets il en réclamait 570 et n'en obtenait jamais
@@ -160,7 +160,7 @@
         </div>
       </div>
 
-      <!-- LES FICHES D'ÉQUIPE (le panneau d’équipe). Quatre cartes de front, et
+      <!-- LES FICHES D'ÉQUIPE (chantier 70). Quatre cartes de front, et
            pas d'étal : il n'y a que quatre fiches, pour toujours.
            Sélectionner pour lire coûterait un geste qui n'achète rien,
            et surtout la comparaison EST le propos — « qu'est-ce que
@@ -178,9 +178,12 @@
            s'ouvre à la touche E, ou en recliquant le runner DÉJÀ actif :
            ce clic-là ne faisait rien du tout jusqu'ici. -->
       <div class="carnet equipe-fiches" id="equipeFiches" hidden>
-        <p class="carnet__titre">L’équipe
-          <span class="carnet__progres">Quatre façons d’être attentif — pas quatre clés.</span>
-        </p>
+        <!-- Pas de sous-titre. Il y en avait un — « Quatre façons d'être
+             attentif, pas quatre clés » — et c'était le § 15 de la
+             doctrine récité au joueur. Un panneau n'a pas à expliquer sa
+             propre intention (Boussole § 2) : les quatre fiches côte à
+             côte le font, ou elles ne le font pas. -->
+        <p class="carnet__titre">L’équipe</p>
         <div class="equipe-fiches__rangee" id="equipeRangee"></div>
       </div>
 

@@ -208,7 +208,7 @@ export const appartement = {
             drakk: '« Le scellé est intact. Personne n’est revenu. »',
             flags: ['rubans-intacts'],
             fiches: ['rubans-intacts'] },
-      /* Chantier 65 — LE PAIEMENT DU FILTRE. Rabbit dit au lit qu'« il
+      /* Chantier 69 — LE PAIEMENT DU FILTRE. Rabbit dit au lit qu'« il
          existe un numéro de scène pour cet endroit, et il n'apparaît
          nulle part ». C'est vrai de l'affichage public ; ça ne l'est pas
          de la couche de service, et le filtre est justement une couche
