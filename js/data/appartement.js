@@ -505,6 +505,68 @@ export const appartement = {
       },
     },
 
+    /* ══ LES CIBLES DE CALQUE — R4, second des onze décors ═══════════
+       Trois créneaux libres ici, un par lentille — mieux qu'à la salle
+       d'audience, où le calque astral doublait entièrement le décor.
+       Les autres éléments doublent `porte`, `fenetre`, `lit`, `maglock`
+       et `courrier` : une chose du monde, une seule cible.
+
+       DEUX FAITS VIENNENT DU SCÉNARIO SOURCE (p. 22-29) et n'avaient
+       jamais servi ici : **Renfield a déplacé le corps lui-même, EN
+       INVISIBILITÉ**, deux heures et demie après la mort ; et **le
+       voisinage n'a « rien vu, rien entendu »**. Le premier ne peut se
+       percevoir que sur le plan astral ; le second ne se contredit que
+       dans la Matrice. Aucun des deux ne nomme personne — l'astral ne
+       donne pas de nom (doctrine des quatre regards § 6), et Rabbit ne
+       lit qu'un nœud présent AUJOURD'HUI, pas cette nuit-là. */
+    peur: {
+      nom: 'Ce qui reste dans la pièce',
+      principal: 'regarder',
+      regarder: ({ a }) => ({
+        tous: 'À hauteur d’homme, en couche mince, quelque chose de vieux de trois jours et que rien n’a dérangé depuis.',
+        trash: a('trace-chaman')
+          ? '« C’est toujours là. Ça ne s’en ira pas avant longtemps. »'
+          : ['« La peur est à elle, et elle est courte. Ça n’a pas duré. »',
+             '« Mais il y a autre chose par-dessus, et ce n’est pas de la peur. Quelqu’un a travaillé ici, après. »',
+             '« Quelqu’un qui savait se rendre difficile à voir. Je ne peux pas vous dire qui, ni même quoi. Seulement que ça demande de l’entraînement. »'],
+        ...(a('trace-chaman') ? {} : { flags: ['trace-chaman'] }),
+      }),
+      utiliser: {
+        tous: 'Il n’y a rien à prendre. Ce n’est pas de la matière.',
+        trash: '« On ne ramasse pas ça. On le laisse finir de partir. »',
+      },
+    },
+
+    approche: {
+      nom: 'Les voies d’accès',
+      principal: 'regarder',
+      regarder: {
+        tous: 'Une porte, une fenêtre à deux étages du sol, et rien d’autre. Pas d’escalier de secours de ce côté de l’immeuble.',
+        drakk: ['« Par la fenêtre, il faudrait du matériel et deux hommes. Personne n’a fait ça. »',
+                '« Donc il est entré par la porte. Soit elle lui a ouvert, soit il avait de quoi. »',
+                '« Dans les deux cas, la porte s’en souvient. »'],
+      },
+      utiliser: {
+        tous: 'Il n’y a rien à ouvrir de plus. C’est bien le problème.',
+        drakk: '« J’ai compté. Compter suffit. »',
+      },
+    },
+
+    voisin: {
+      nom: 'Le nœud du 4B',
+      principal: 'regarder',
+      regarder: {
+        tous: 'Sur le palier, la fiche d’un logement voisin flotte au ras de la porte : le 4B, et son nœud domestique répond.',
+        rabbit: ['« Il est allumé, et il l’est en permanence. Ce genre de nœud ne s’éteint jamais. »',
+                 '« Ce qui ne me dit rien du tout sur cette nuit-là. Je vois qu’il y a quelqu’un aujourd’hui, c’est tout. »'],
+        flags: ['voisin-present'],
+      },
+      utiliser: {
+        tous: 'Ce n’est pas le vôtre. Et il n’y a rien dedans qui vous regarde.',
+        rabbit: '« Je pourrais. Ça se verrait, et pour rien. »',
+      },
+    },
+
     /* ══ LA CUISINE — la cible qui ne rend rien, et sans laquelle le
        tableau n'est qu'une procédure ══════════════════════════════════ */
     cuisine: {
@@ -531,9 +593,20 @@ export const appartement = {
              'Sur le trottoir d’en face, quelqu’un est adossé à un mur depuis un moment, et ne fait rien de particulier.']
           : ['La rue, deux étages plus bas, et l’enseigne du pressing qui grésille en plein jour. Loveland en après-midi ressemble à Loveland la nuit, avec plus de détails qu’on préférerait ne pas voir.',
              'À deux rues d’ici, le taudis où on l’a retrouvée. On voit le toit.'],
-        hercules: ['« Deux rues. Ils ont porté un corps sur deux rues, en pleine nuit, dans un quartier où tout le monde regarde par la fenêtre. »', '« Et personne n’a rien vu. Ça se paie, un silence pareil, et je ne vois pas qui aurait les moyens. »'],
+        /* R4 : les deux cibles de calque se paient ici, sur la seule
+           réplique du tableau qui pose la question qu'elles éclairent —
+           « personne n'a rien vu ». `trace-chaman` y répond, et déplace
+           le mystère : ce n'est plus un silence acheté. */
+        hercules: a('trace-chaman')
+          ? ['« Deux rues. Ils ont porté un corps sur deux rues, en pleine nuit, dans un quartier où tout le monde regarde par la fenêtre. »',
+             '« Et personne n’a rien vu. Si Trash a raison, ce n’était pas à acheter. Il suffisait de ne pas être là pour les yeux qui regardaient. »']
+          : ['« Deux rues. Ils ont porté un corps sur deux rues, en pleine nuit, dans un quartier où tout le monde regarde par la fenêtre. »',
+             '« Et personne n’a rien vu. Ça se paie, un silence pareil, et je ne vois pas qui aurait les moyens. »'],
         trash: ['« Tout le monde a très bien vu. »', '« Ça ne se dit pas à un flic. »'],
-        rabbit: ['« Aucune caméra municipale dans cette rue. »', '« Trois caméras privées, toutes tournées vers leur propre porte. »'],
+        rabbit: a('voisin-present')
+          ? ['« Aucune caméra municipale dans cette rue. »',
+             '« Et un nœud domestique allumé en permanence à six mètres de sa porte. Personne n’est allé le voir non plus. »']
+          : ['« Aucune caméra municipale dans cette rue. »', '« Trois caméras privées, toutes tournées vers leur propre porte. »'],
         drakk: '« Deux rues. Le trajet le plus court entre où elle est morte et où on a voulu qu’elle meure. »',
       }),
       utiliser: {

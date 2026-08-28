@@ -94,7 +94,9 @@
        La bande s'arrête au chambranle : la peur est dans la PIÈCE. La
        cage d'escalier, elle, appartient à la lentille de Rabbit. -->
   <div class="calque calque--astral">
-    <div class="peur-mince"></div>
+    <!-- R4 : libre, et c'est le seul élément astral du jeu qui ne double
+         aucune cible du décor — la pièce elle-même n'en est pas une. -->
+    <div class="peur-mince" data-hotspot="peur"></div>
   </div>
 
   <!-- ── Ce que Drakk voit, et lui seul ───────────────────────────
@@ -112,7 +114,10 @@
     <div class="cote cote--fenetre">EXPOSÉ — RUE</div>
     <div class="couvert couvert--lit"></div>
     <div class="cote cote--couvert">COUVERT — LE LIT</div>
-    <div class="cote cote--approche">AUCUNE VOIE D’APPROCHE</div>
+    <!-- R4 : les trois autres marqueurs tactiques doublent `porte`,
+         `fenetre` et `lit`. Celui-ci ne double rien — ce n'est pas une
+         chose de la pièce, c'est la conclusion qu'on en tire. -->
+    <div class="cote cote--approche" data-hotspot="approche">AUCUNE VOIE D’APPROCHE</div>
   </div>
 
   <!-- ── Ce que White_Rabbit voit, et lui seul ────────────────────
@@ -133,7 +138,10 @@
     <div class="ora ora--scelle">SCELLÉ LS · RUPTURES : 0</div>
     <div class="ora ora--lecteur">LOCKWORKS · JOURNAL</div>
     <div class="ora ora--courrier">3 J · NON ACCUSÉS RÉCEPTION</div>
-    <div class="ora ora--palier op1">4B · PRÉSENT</div>
+    <!-- R4 : le scellé, le lecteur et le courrier ont déjà leur cible
+         dans le décor. Le palier, non — et c'est là que se trouve la
+         seule fiche du tableau qui parle de quelqu'un de vivant. -->
+    <div class="ora ora--palier op1" data-hotspot="voisin">4B · PRÉSENT</div>
     <div class="ora ora--palier op2">LIVRAISON · 4 MIN</div>
     <div class="ora ora--palier op3">IMMEUBLE · NŒUD PUBLIC</div>
     <div class="ora ora--palier op4">SOYCAF PRO · -20 %</div>
