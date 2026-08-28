@@ -292,6 +292,20 @@ body {
 }
 .choix button.est-epuise { color: #4b5468; }
 
+/* LE RANG DE LA RÉPLIQUE — le chiffre qui la joue au clavier.
+   Assez lisible pour qu'on l'essaie, assez éteint pour qu'on lise la
+   question avant le numéro. Il s'aligne sur une largeur fixe : sans
+   ça, les titres démarreraient sur une colonne différente selon le
+   chiffre, et la liste se lirait en escalier. */
+.choix__rang {
+  display: inline-block;
+  width: 1.6cqw;
+  color: #4b5468;
+  transition: color .12s;
+}
+.choix button:hover .choix__rang { color: var(--cyan); }
+.choix button.est-verrouille .choix__rang { color: #394054; }
+
 /* Niveau 2 de la lisibilité (chantier 38) : visible, pas ouvert — l'italique
    dit « ce n'est pas à moi » avant même le clic, et le survol reste sourd
    là où les sujets ouverts s'éclairent au cyan. */
@@ -396,27 +410,38 @@ body {
 /* ── HUD ─────────────────────────────────────────────────── */
 
 /* LE HUD NE DÉBORDE JAMAIS.
-   Il débordait : les six blocs ont une largeur minimale de 1 386 px une
-   fois la sacoche à sept objets, pour un `.jeu` qui vaut 1 189 px sur une
-   fenêtre de 1400x900. Aucun bloc n'acceptait de se comprimer — la
-   sacoche non plus, ses objets font 2,6 rem chacun — donc le sélecteur
-   d'équipe était poussé hors du cadre, et les noms des runners sortaient
-   de la page. Ça n'apparaissait qu'au tableau 2, quand la sacoche passe
-   à quatre objets : le débord est exactement (largeur exigée − .jeu).
+   Il débordait : les six blocs exigeaient 1 386 px une fois la sacoche à
+   sept objets, pour un `.jeu` qui vaut 1 189 px sur une fenêtre de
+   1400x900. Le sélecteur d'équipe était poussé hors du cadre, et les
+   noms des runners sortaient de la page.
 
-   Trois règles, dans cet ordre :
+   La parade d'alors : la sacoche absorbait le manque de place et
+   défilait, « la seule partie qui grandit sans limite, donc la seule
+   qui doit céder ». Elle a tenu, et elle a coûté cher — le bloc qu'on
+   traite en variable d'ajustement est celui qu'on finit par ne plus
+   pouvoir lire. À douze objets il en réclamait 570 et n'en obtenait
+   jamais autant.
+
+   CHANTIER 65 : la sacoche est sortie du HUD. Elle est un panneau
+   (`.sacoche`), et il ne reste ici que `.main` — un emplacement, celui
+   de l'objet qu'on tient. Plus rien dans cette barre ne grandit avec
+   l'inventaire, donc la cause du débord n'existe plus.
+
+   Deux règles suffisent maintenant :
      1. les COMMANDES ne se compriment pas — ce sont elles qu'on vise ;
-     2. la SACOCHE absorbe tout le manque de place et défile — c'est la
-        seule partie qui grandit sans limite, donc la seule qui doit céder ;
-     3. la typographie se met à l'échelle du HUD (`cqw`), avec un plancher
-        en `rem` pour rester lisible.
+     2. la typographie se met à l'échelle du HUD (`cqw`), avec un
+        plancher en `rem` pour rester lisible.
    Et `flex-wrap` en dernier recours : deux rangs valent mieux qu'un
    texte hors cadre. */
 .hud {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: clamp(.4rem, 1.05cqw, 1rem);
+  /* 1,05cqw valait 13,44 px et le HUD en réclamait 4,1 de trop une fois
+     la sacoche à douze — mesuré à 1024 de large. Le gap est le seul
+     levier qui ne coûte aucun texte : à 0,85cqw il rend 17,9 px sur les
+     sept intervalles, et la barre repasse à un rang avec de la marge. */
+  gap: clamp(.4rem, .85cqw, 1rem);
   padding: .55rem .8rem;
   background: linear-gradient(#0b0b14, #07070e);
   border: 1px solid #191d29;
@@ -424,72 +449,77 @@ body {
   container-type: inline-size;
 }
 
-/* 1. Les commandes gardent leur taille. */
-.verbes, .equipe { flex: 0 0 auto; }
+/* 1. Les commandes gardent leur taille.
+   `.verbes` a disparu du HUD avec ses trois boutons — le verbe se déduit
+   de la cible, et le forçage vit au clavier. La règle ne garde que
+   l'équipe. */
+.equipe { flex: 0 0 auto; }
 
-.verbes { display: flex; gap: .3rem; }
+/* LA MAIN. Un emplacement, jamais deux : ce qu'on tient — et le seul
+   bouton de la sacoche. `flex: 0 0 auto` comme tout le reste de cette
+   barre : c'est ce que le chantier 65 est venu chercher.
 
-.verbe {
-  font-family: var(--mono);
-  font-size: clamp(.66rem, 1.15cqw, .8rem);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  padding: .5rem clamp(.48rem, 1.1cqw, .85rem);
-  color: var(--ardoise);
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: color .14s, border-color .14s, background .14s;
-}
-.verbe:hover { color: var(--craie); }
-.verbe.est-actif {
-  color: var(--cyan);
-  border-color: color-mix(in srgb, var(--cyan) 40%, transparent);
-  background: color-mix(in srgb, var(--cyan) 8%, transparent);
-}
-
-/* 2. La sacoche cède, et défile. `min-width: 0` est la clé : sans lui,
-   la largeur minimale automatique d'un conteneur flex est celle de son
-   contenu, et sept objets de 2,6 rem refusent de tenir dans moins de
-   346 px — c'est ce refus qui poussait l'équipe hors du cadre. */
-.inventaire {
-  flex: 1 1 0;
-  min-width: 0;
+   Vide, elle reste visible : un creux hachuré dit « il n'y a rien
+   dedans » là où une absence ne dirait rien. Pleine, elle s'allume à
+   l'ambre — la couleur du « quelque chose est en main », celle du
+   curseur `porte-objet` et du jeton tenu au carnet. */
+.main {
   display: flex;
-  gap: .4rem;
-  min-height: 2.6rem;
-  padding-left: clamp(.4rem, 1cqw, 1rem);
-  border-left: 1px solid #191d29;
   align-items: center;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: thin;
-  scrollbar-color: #2b3145 transparent;
-}
-.inventaire:empty::after {
-  content: "sacoche vide";
-  font-family: var(--mono);
-  font-size: .72rem;
-  color: #3d4457;
-  letter-spacing: .08em;
-}
-
-.objet {
-  position: relative;
+  gap: .35rem;
   flex: 0 0 auto;
-  width: 2.6rem; height: 2.6rem;
-  background: linear-gradient(150deg, #1a2030, #10131d);
+  height: 2.6rem;
+  padding: 0 .4rem 0 .25rem;
+  background: transparent;
   border: 1px solid #2b3145;
   border-radius: 2px;
   cursor: pointer;
   transition: border-color .14s, transform .14s, box-shadow .14s;
 }
-.objet:hover { transform: translateY(-2px); border-color: var(--ardoise); }
-.objet.est-actif {
+.main:hover { transform: translateY(-2px); border-color: var(--ardoise); }
+.main[aria-pressed="true"] { border-color: var(--cyan); }
+.main:not(.est-vide) {
   border-color: var(--ambre);
   box-shadow: 0 0 .7rem color-mix(in srgb, var(--ambre) 45%, transparent);
+}
+/* Le creux de la main au HUD : plus petit que dans le panneau, et
+   hachuré quand il ne porte rien. */
+.main .jeton__icone { width: 2rem; height: 2rem; }
+.main.est-vide .jeton__icone {
+  background: repeating-linear-gradient(135deg, #0d1019 0 4px, #10131d 4px 8px);
+  border-style: dashed;
+}
+
+/* Combien d'objets dans la sacoche. Même grammaire que le compteur du
+   carnet — le bouton dit ce qu'il y a derrière avant qu'on l'ouvre.
+
+   LARGEUR FIXE, DEUX CHIFFRES. Sans elle, la main s'élargit de 5 px en
+   passant de 9 à 10 objets, et le HUD bascule sur deux rangs EN COURS
+   DE PARTIE — le décor se réduit d'un coup, au milieu d'une scène, pour
+   un objet ramassé. Une barre qui change de hauteur toute seule est pire
+   que celle qui déborde : on ne sait pas ce qu'on a fait. */
+.main__compte {
+  font-family: var(--mono);
+  font-size: clamp(.6rem, 1cqw, .72rem);
+  letter-spacing: .06em;
+  color: var(--ardoise);
+  min-width: 1.5em;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.main:not(.est-vide) .main__compte { color: var(--ambre); }
+
+/* Le porte-icône. Trois endroits montrent la même icône dessinée — la
+   main, le jeton de la sacoche, sa table — et les trois doivent offrir
+   à `.objet__*` le même cadre positionné qu'offrait l'ancien bouton
+   d'inventaire. Un seul contrat, trois porteurs. */
+.jeton__icone {
+  position: relative;
+  flex: 0 0 auto;
+  width: 2.2rem; height: 2.2rem;
+  background: linear-gradient(150deg, #1a2030, #10131d);
+  border: 1px solid #2b3145;
+  border-radius: 2px;
 }
 
 /* ── Icônes d'objet : dessinées, elles aussi ─────────────────────────
@@ -497,7 +527,7 @@ body {
    qui tend « quelque chose » au pêcheur sans savoir quoi.
    La clé vient de `icone` dans js/data/objets.js. */
 
-.objet > span {
+.jeton__icone > span {
   position: absolute;
   inset: 22% 18%;
   border-radius: 1px;
@@ -1392,6 +1422,11 @@ body {
 .jeton[data-source="detroit"]     { border-left-color: var(--source-detroit); }
 .jeton[data-source="planque"]     { border-left-color: var(--source-planque); }
 .jeton[data-source="recoupement"] { border-left-color: var(--teinte-recoupement, var(--cyan)); }
+/* La sacoche range par PROVENANCE, comme le carnet — sauf les quatre du
+   portique, qui ne viennent pas d'un lieu mais de quelqu'un. Leur liseré
+   prend la voix de leur propriétaire : on lit « ça, c'est à Drakk »
+   avant d'avoir lu le nom. */
+.jeton[data-source="equipe"] { border-left-color: var(--teinte-equipe, var(--ardoise)); }
 
 /* La fiche tenue prime sur la couleur de sa source — c'est elle qui
    commande le geste en cours, pas d'où elle vient. Placée APRÈS les
@@ -1540,6 +1575,47 @@ body {
 }
 .carnet__aide.est-refus { color: var(--ambre); animation: bulle-entre .2s ease-out; }
 .carnet__vide { font-size: 1.3cqw; color: #4b5468; font-style: italic; }
+
+/* ── LA SACOCHE (chantier 65) ─────────────────────────────────────────
+   Elle emprunte `.carnet` en entier — panneau, étal, table, jetons — et
+   n'ajoute que ce qu'un objet a de plus qu'une fiche : une icône, et
+   quatre voix au lieu d'un texte. */
+
+/* L'étal de la sacoche compte douze cases au maximum contre vingt-quatre
+   fiches : des colonnes plus larges, parce qu'un nom d'objet tient sur
+   une ligne et qu'une icône a besoin de place. */
+.sacoche .carnet__etal { grid-template-columns: repeat(auto-fill, minmax(15cqw, 1fr)); }
+
+.jeton--objet { align-items: center; gap: .7cqw; }
+.jeton--objet .jeton__titre { font-size: 1.05cqw; }
+
+/* Le porte-icône du panneau : plus grand qu'au HUD, c'est ici qu'on
+   REGARDE. Les proportions restent celles de `.main` — le dessin des
+   `.objet__*` est calé dessus. */
+.sacoche .jeton__icone { width: 3cqw; height: 3cqw; }
+.carnet__fiche .jeton__icone { width: 3.6cqw; height: 3.6cqw; }
+
+/* Les lignes de la table. `tous` parle en récit, la clé du runner est
+   sa voix — les mêmes couleurs que les bulles et le journal, pour que
+   « qui dit ça » ne s'apprenne qu'une fois. */
+.sacoche__lignes { display: flex; flex-direction: column; gap: .6cqh; }
+.sacoche__ligne {
+  font-size: 1.15cqw;
+  line-height: 1.5;
+  color: var(--craie);
+}
+.sacoche__ligne[data-qui="hercules"] { color: var(--voix-hercules); }
+.sacoche__ligne[data-qui="trash"]    { color: var(--voix-trash); }
+.sacoche__ligne[data-qui="rabbit"]   { color: var(--voix-rabbit); }
+.sacoche__ligne[data-qui="drakk"]    { color: var(--voix-drakk); }
+
+/* La carte de la table porte le liseré de provenance, comme le jeton. */
+.carnet__fiche[data-source="bar"]     { border-left-color: var(--source-bar); }
+.carnet__fiche[data-source="quai"]    { border-left-color: var(--source-quai); }
+.carnet__fiche[data-source="greffe"]  { border-left-color: var(--source-greffe); }
+.carnet__fiche[data-source="detroit"] { border-left-color: var(--source-detroit); }
+.carnet__fiche[data-source="planque"] { border-left-color: var(--source-planque); }
+.carnet__fiche[data-source="equipe"]  { border-left-color: var(--teinte-equipe, var(--ardoise)); }
 
 /* La barre (chantier 20). Troisième cible du même geste que le carnet
    et le réseau — n'apparaît que dans le tableau qui l'expose. */

@@ -4,7 +4,11 @@
    du moteur se contente de lire ça. */
 
 export const etat = {
-  verbe: 'regarder',
+  /* `null` = automatique, et c'est l'état normal : le clic gauche joue le
+     verbe principal de la cible, le clic droit regarde. Un verbe nommé
+     ici est un FORÇAGE, choisi au HUD, et il tient jusqu'à ce qu'on le
+     relâche. Voir `verbePrincipal()` dans interact.js. */
+  verbe: null,
   actif: 'hercules',      // le runner sélectionné — c'est lui qui agit
   objetActif: null,
   astral: false,
@@ -206,7 +210,6 @@ function instantane() {
     tour: etat.tour,
     etat: {
       lieu: etat.lieu,
-      verbe: etat.verbe,
       actif: etat.actif,
       inventaire: etat.inventaire,
       flags: [...etat.flags],
@@ -254,8 +257,13 @@ export function effaceSauvegarde() {
 export function restaure(donnees) {
   const d = donnees.etat
   etat.lieu = d.lieu
-  etat.verbe = d.verbe
   etat.actif = d.actif
+  /* Le verbe forcé rejoint `objetActif` chez les transitoires : c'est
+     une intention d'un instant, pas un état du monde. Le restaurer
+     rouvrirait la partie coincée en forçage — et toute sauvegarde
+     d'avant le clic contextuel en porte un en dur. On repart en
+     automatique, qui est l'état normal. */
+  etat.verbe = null
   etat.objetActif = null
   etat.inventaire = d.inventaire
   etat.flags = new Set(d.flags)

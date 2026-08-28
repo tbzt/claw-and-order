@@ -84,6 +84,11 @@ export const quaiVoilier = {
 
     corps: {
       nom: 'Wilson',
+      /* Le défaut du moteur donnerait `parler` — et `parler` vaut « Non. »
+         ici, tandis que `utiliser` est la fouille qui rend le passe, le
+         créditube et l'arme. On ne parle pas à un mort ; on le fouille,
+         et c'est Drakk qui le fait avec des égards. */
+      principal: 'utiliser',
       regarder: {
         tous: ['Deux plaies, pas une de plus. Pas de coupures de défense sur les mains.',
                'Il n’a pas eu le temps de comprendre qu’il se passait quelque chose.'],
@@ -251,6 +256,13 @@ export const quaiVoilier = {
 
     vigie: {
       nom: 'L’avant du bateau',
+      /* L'une des deux seules cibles du jeu dont les deux verbes sont
+         vivants — et ils s'ENCHAÎNENT : on poste Trash à l'étrave
+         (`utiliser`), et c'est seulement une fois penché sur l'eau qu'il
+         peut demander à l'esprit (`parler`, qui refuse d'ici avant ça).
+         Écrit comme une séquence, le clic gauche seul joue les deux dans
+         l'ordre, sans que le joueur ait à choisir un verbe. */
+      principal: ({ a }) => (a('poste-vigie') ? 'parler' : 'utiliser'),
       regarder: {
         tous: ['Devant l’étrave, le chenal est balisé — mal. Deux feux sur trois sont éteints, et il y a des casiers partout.',
                'Quelqu’un devra dire ce qui arrive, parce que le boîtier ne voit que la carte.'],

@@ -104,6 +104,46 @@ function normalise(brut, parDefaut = 'recit') {
   return { ...brut, texte: enLignes(brut.texte, brut.qui ?? parDefaut) }
 }
 
+/* ── LE VERBE PRINCIPAL ───────────────────────────────────────────────
+   Choisir « utiliser » ou « parler » au HUD coûtait un aller-retour de
+   souris, et ce choix n'existait presque jamais. Compté sur les 246
+   cibles du jeu qui portent au moins un verbe : 33 en portent deux, et
+   sur ces 33, VINGT-NEUF ont un `utiliser` qui n'est que du texte — un
+   refus dans la voix du runner (règle 11). Deux cibles seulement ont les
+   deux verbes vivants et différents au même instant.
+
+   Le clic gauche joue donc le verbe principal de la cible, et le clic
+   droit continue de regarder. Plus de trajet vers le bas de l'écran
+   entre deux gestes.
+
+   PAR DÉFAUT : `parler` s'il existe, sinon `utiliser`. C'est le bon
+   choix partout où `utiliser` n'est qu'un refus — l'immense majorité,
+   les quatre équipiers compris (« On ne se fouille pas entre nous »).
+
+   `principal:` renverse ce défaut là où l'auteur le sait mieux, et
+   s'écrit comme le reste : une chaîne, ou une fonction du contexte
+   quand les deux gestes s'ENCHAÎNENT. C'est le cas des deux seules
+   cibles à vrai conflit — poster Trash à l'étrave PUIS lui faire appeler
+   l'esprit, parler à Cisco PUIS prendre la barre. Écrite ainsi, la
+   séquence se joue au clic gauche seul.
+
+   ET `regarder` EN DERNIER RECOURS, pour les neuf cibles du jeu qui ne
+   portent que lui. Tomber sur `utiliser` là où l'auteur n'a rien écrit
+   rendrait le bark générique de `refus.utiliser` — alors qu'il existe
+   une description, et qu'elle est tout ce que cette cible a. Un refus
+   ÉCRIT est du contenu et se garde ; un refus par défaut n'en est pas. */
+export function verbePrincipal(scene, idCible, ctx) {
+  const cible = scene.hotspots?.[idCible]
+  if (!cible) return 'utiliser'
+  const declare = typeof cible.principal === 'function' ? cible.principal(ctx) : cible.principal
+  if (declare) return declare
+  if (cible.parler) return 'parler'
+  return cible.utiliser ? 'utiliser' : 'regarder'
+}
+
+/* `etat.verbe` vaut `null` tant que le joueur n'a rien imposé au HUD —
+   c'est l'état normal. Un verbe choisi au HUD le remplit et prend le pas
+   sur le principal, pour les rares fois où on veut l'autre geste. */
 export function resous(scene, idCible) {
   const cible = scene.hotspots[idCible]
   if (!cible) return { texte: enLignes('…') }
@@ -112,12 +152,27 @@ export function resous(scene, idCible) {
 
   if (etat.objetActif) {
     const regle = cible.objets?.[etat.objetActif]
-    return regle ? normalise(dedouble(regle(ctx), etat.actif)) : refuse('objet')
+    if (!regle) return refuse('objet')
+    /* MÊME CONTRAT QUE LES VERBES, et il ne l'était pas. Cette ligne
+       appelait `regle(ctx)` sans regarder si c'en était une, alors que
+       la branche des verbes, six lignes plus bas, teste `typeof`. Une
+       règle d'objet écrite en chaîne — la forme la plus courante, celle
+       d'un refus dans la voix du runner — levait donc une TypeError au
+       clic, et le joueur voyait un objet qui ne fait rien.
+
+       Mesuré au moment de la trouver (chantier 65) : 23 des 54 règles
+       objet × cible du jeu étaient dans ce cas, soit 43 %. C'est une
+       bonne part de « les objets ne servent pas à grand-chose » — le
+       contenu était écrit, il n'était pas atteignable. */
+    return normalise(dedouble(typeof regle === 'function' ? regle(ctx) : regle, etat.actif))
   }
 
-  const regle = cible[etat.verbe]
-  if (!regle) return refuse(etat.verbe)
-  return normalise(dedouble(typeof regle === 'function' ? regle(ctx) : regle, etat.actif))
+  const verbe = etat.verbe ?? verbePrincipal(scene, idCible, ctx)
+  const regle = cible[verbe]
+  if (!regle) return refuse(verbe)
+  /* Une règle qui lit `ctx.verbe` (la carte, pour son étiquette) doit
+     voir le verbe RÉSOLU, pas le `null` de l'état automatique. */
+  return normalise(dedouble(typeof regle === 'function' ? regle({ ...ctx, verbe }) : regle, etat.actif))
 }
 
 /* `nom` est presque toujours une chaîne — sauf sur la carte (chantier

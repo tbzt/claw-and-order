@@ -139,6 +139,27 @@
         <p class="carnet__aide" id="reseauAide">Pose une fiche sur un contact.</p>
       </div>
 
+      <!-- La sacoche (chantier 65). L'inventaire était le bloc DÉSIGNÉ
+           PERDANT du HUD : seul `flex: 1 1 0` au milieu de `flex: 0 0
+           auto`, il cédait sa largeur à tous les autres et défilait. À
+           douze objets il en réclamait 570 et n'en obtenait jamais
+           autant. Il devient le sixième panneau, sur le patron du
+           carnet — l'étal montre ce qu'on porte, la table dit ce que
+           c'est et d'où ça vient. Prendre un objet REFERME le panneau :
+           la cible qu'on vise est derrière. -->
+      <div class="carnet sacoche" id="sacoche" hidden>
+        <p class="carnet__titre">Sacoche
+          <span class="carnet__progres" id="sacocheProgres"></span>
+        </p>
+        <div class="carnet__corps">
+          <div class="carnet__etal" id="sacocheEtal"></div>
+          <div class="carnet__table">
+            <div class="carnet__fiche carnet__fiche--tenue" id="sacocheDetail"></div>
+            <p class="carnet__aide" id="sacocheAide">Survole un objet pour le regarder.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="rideau" id="rideau" hidden>
         <p class="rideau__titre">FIN DU PROTOTYPE</p>
         <p class="rideau__ligne" id="rideauLigne"></p>
@@ -160,11 +181,10 @@
     </div>
 
     <div class="hud">
-      <div class="verbes" id="verbes" role="group" aria-label="Actions">
-        <button class="verbe est-actif" data-verbe="regarder">Regarder</button>
-        <button class="verbe" data-verbe="utiliser">Utiliser</button>
-        <button class="verbe" data-verbe="parler">Parler</button>
-      </div>
+      <!-- Les trois verbes ont quitté le HUD : le clic gauche joue le verbe
+           principal de la cible, le clic droit regarde. Le forçage survit au
+           clavier (1, 2, 3 hors dialogue) pour les rares gestes que le
+           contextuel ne montre plus. Voir `verbePrincipal()`, js/interact.js. -->
 
       <button class="bouton-allure" id="boutonAllure" title="Cadence du texte (A)">
         <span class="bouton-allure__jauge" id="allureJauge"></span>
@@ -190,7 +210,18 @@
 
       <button class="bouton-carnet" id="boutonGardees" aria-pressed="false" title="États gardés (G)">États gardés</button>
 
-      <div class="inventaire" id="inventaire" aria-label="Inventaire"></div>
+      <!-- LA MAIN. Tout ce qui reste de l'inventaire au HUD, et le seul
+           bouton de la sacoche : un emplacement qui montre ce qu'on
+           tient, un compteur qui dit ce qui reste dedans, et un clic qui
+           ouvre le panneau. Un bouton NOMMÉ à côté d'elle a été essayé —
+           il coûtait un second rang au HUD (105 px contre 61, mesuré à
+           1024 de large), pour un geste que la main faisait déjà. Elle
+           ne grandit pas avec l'inventaire : la cause du débord d'avant
+           n'existe plus. Reposer se fait à Échap, ou dans le vide. -->
+      <button class="main" id="main" aria-pressed="false" title="Sacoche (S)">
+        <span class="jeton__icone" id="mainIcone"></span>
+        <span class="main__compte" id="sacocheCompte" title="Objets portés">0</span>
+      </button>
 
       <div class="equipe" id="equipe" role="group" aria-label="L’équipe">
         <button class="runner est-actif" data-runner="hercules" data-vue="physique">Hercules</button>

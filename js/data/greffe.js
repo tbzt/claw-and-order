@@ -291,23 +291,84 @@ export const greffe = {
       accueil: ['« C’est fermé. Le greffe rouvre à sept heures. »'],
       retour: ['« Toujours là. »'],
       sujets: [
+        /* Quatre façons de glisser un papier sous une vitre de huit
+           centimètres. Le gardien lit le même feuillet et rend la même
+           réponse — c'est un mur — mais il ne regarde pas la même
+           personne, et c'est ça qu'on voit. */
         {
           id: 'mandat',
-          titre: '(Présenter le mandat de transfert.)',
+          titre: {
+            tous: '(Présenter le mandat de transfert.)',
+            hercules: '(Poser le mandat sur le plateau, sans se presser.)',
+            trash: '(Glisser le mandat sous la vitre.)',
+            rabbit: '(Présenter le mandat, et regarder son écran pendant qu’il lit.)',
+            drakk: '(Présenter le mandat de transfert.)',
+          },
           quand: ({ a, tient }) => tient('mandat') && !a('sas-ouvert'),
           flags: ['mandat-presente'],
-          texte: ['Il fait tourner le plateau, prend le feuillet, le lit deux fois.',
-                  '« Il est bon. Signé McCarthy, brigade criminelle. »',
-                  '« Mais le mouvement est enregistré à huit heures. Par la navette. »',
-                  '« Alors revenez à huit heures. »'],
+          texte: {
+            tous: ['Il fait tourner le plateau, prend le feuillet, le lit deux fois.',
+                   '« Il est bon. Signé McCarthy, brigade criminelle. »',
+                   '« Mais le mouvement est enregistré à huit heures. Par la navette. »',
+                   '« Alors revenez à huit heures. »'],
+            hercules: ['« Vous l’avez lu deux fois. »',
+                       ['gardien', '« Je lis tout deux fois. »'],
+                       '« Bien sûr. »'],
+            trash: [['gardien', '« Restez derrière la ligne jaune. »']],
+            /* Il ne pirate rien : il regarde un écran à l'envers à
+               travers une vitre, ce que n'importe qui peut faire. Ce
+               qu'il en tire est petit, et c'est déjà quelque chose. */
+            rabbit: ['« Sa ligne est déjà remplie. Il l’a pas tapée ce soir. »',
+                     ['gardien', '« Regardez pas mon écran. »'],
+                     '« Je regarde le mur derrière. »'],
+            drakk: [['gardien', '« Reculez d’un pas, vous. »'],
+                    'Drakk recule d’un pas.',
+                    ['gardien', '« Voilà. »']],
+          },
         },
+        /* AUCUNE VARIANTE NE DOIT OUVRIR LE SAS. Deux sujets exclusifs
+           le font déjà — `couverture` pour Hercules, `menacer` pour
+           Drakk — et le premier demande d'avoir appris quelque chose sur
+           cet homme. Ici, les quatre échouent : Hercules tente l'angle
+           faible et se le fait renvoyer (c'est ce qui lui donne l'idée
+           du bon), Drakk pousse un peu et s'arrête tout seul. */
         {
           id: 'urgence',
-          titre: '« Il ne doit pas monter dans cette navette. »',
+          titre: {
+            tous: '« Il ne doit pas monter dans cette navette. »',
+            hercules: '« Vous savez ce qui arrive aux gens qu’on transfère à huit heures ? »',
+            trash: '« Vous êtes seul ici toute la nuit ? »',
+            rabbit: '« Cette ligne à huit heures, elle est datée de quand ? »',
+            drakk: '« Il ne doit pas monter dans cette navette. »',
+          },
           quand: ({ a }) => a('mandat-presente') && !a('sas-ouvert'),
-          texte: ['« Je sais pas ce que vous racontez et je veux pas le savoir. »',
-                  '« Moi j’ai un registre. Le registre dit huit heures. »',
-                  '« Qui l’a écrit, cette ligne ? Elle était là quand j’ai pris mon service. Je regarde pas qui signe. »'],
+          texte: {
+            tous: ['« Je sais pas ce que vous racontez et je veux pas le savoir. »',
+                   '« Moi j’ai un registre. Le registre dit huit heures. »',
+                   '« Qui l’a écrit, cette ligne ? Elle était là quand j’ai pris mon service. Je regarde pas qui signe. »'],
+            /* Il attaque par la peur du gamin. Mauvais angle : ce n'est
+               pas le gamin qui inquiète le gardien, c'est lui-même. Le
+               gardien le lui dit sans le savoir, et Hercules l'entend. */
+            hercules: [['gardien', '« Il leur arrive ce qui est écrit sur le registre. »'],
+                       '« Et si c’était mal écrit ? »',
+                       ['gardien', '« Alors c’est pas moi qui l’ai mal écrit. »'],
+                       '« … Ah. »'],
+            /* Trash ne plaide pas. Il demande à l'homme s'il est seul,
+               et l'homme répond à côté — ce qui est une réponse. */
+            trash: [['gardien', '« Y a une relève à six heures. »'],
+                    '« Ce n’est pas ce que j’ai demandé. »',
+                    ['gardien', '« Je sais. »'],
+                    'Il se remet à son écran, et il ne le regarde pas.'],
+            rabbit: [['gardien', '« J’en sais rien. »'],
+                     '« Vous pouvez le voir. C’est marqué à côté. »',
+                     ['gardien', '« Je vais rien regarder du tout. »'],
+                     '« Non. Vous allez pas. »'],
+            /* Il monte d'un cran et redescend seul : sa vraie tentative
+               est un autre sujet, et il le sait sans se le formuler. */
+            drakk: ['« Vous tenez une porte. C’est un poste honorable. »',
+                    ['gardien', '« C’est un poste payé. »'],
+                    '« … Oui. »'],
+          },
         },
         {
           id: 'couverture',

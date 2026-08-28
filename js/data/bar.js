@@ -464,13 +464,44 @@ export const bar = {
                   'Il regarde le fond de la salle, puis efface trois lignes de son ardoise avec le pouce.',
                   '« Vous lui direz pas. »'],
         },
+        /* Le barman parle le moins possible — « Quoi. », « Encore. » —
+           et c'est exactement pour ça que les quatre voix se voient ici :
+           ce qu'il consent à ajouter change, et il n'ajoute jamais long.
+           Aucune variante ne reprend ce que la cible `photos` dit déjà
+           dans le décor : ce serait la même information deux fois. */
         {
           id: 'photos-barman',
-          titre: '« Les photos, au-dessus. »',
-          texte: ['« Elles étaient là avant moi. »',
-                  '« J’ai demandé une fois si on les enlevait un jour. On m’a répondu que non. »',
-                  'Il reprend son chiffon.',
-                  '« Leurs noms, je les connais pas. Personne me les a dits et j’ai jamais demandé. »'],
+          titre: {
+            tous: '« Les photos, au-dessus. »',
+            hercules: '« Elles sont à vous, les photos ? »',
+            trash: '« Les photos. »',
+            rabbit: '« Vous les remplacez quand elles jaunissent ? »',
+            drakk: '« Qui les a mises là ? »',
+          },
+          texte: {
+            tous: ['« Elles étaient là avant moi. »',
+                   '« J’ai demandé une fois si on les enlevait un jour. On m’a répondu que non. »',
+                   'Il reprend son chiffon.',
+                   '« Leurs noms, je les connais pas. Personne me les a dits et j’ai jamais demandé. »'],
+            /* Hercules essaie de le faire parler. Ça ne marche pas, et
+               il ne se vexe pas : il encaisse et il continuera plus
+               tard. C'est un métier. */
+            hercules: [['barman', '« Rien est à moi ici. »'],
+                       '« Le comptoir non plus ? »',
+                       ['barman', '« Le chiffon. »']],
+            trash: [['barman', '« Vous les regardez depuis que vous êtes entré. »'],
+                    '« Oui. »',
+                    ['barman', '« Mmh. »']],
+            rabbit: [['barman', '« Non. »']],
+            /* Deux trolls, et l'un des deux tient le bar d'un métier qui
+               ne l'a jamais compté dedans. Drakk pose la question sans
+               savoir ce qu'elle remue ; le barman répond court, comme à
+               tout le monde, et il en dit une de plus quand même. */
+            drakk: [['barman', '« Des flics. »'],
+                    '« Vous en avez une, vous, quelque part ? »',
+                    ['barman', '« … »'],
+                    ['barman', '« Non. On met pas les nôtres au mur. »']],
+          },
         },
         {
           id: 'partir-barman',
@@ -487,41 +518,167 @@ export const bar = {
                 '« C’est pas grave. Moi, j’ai que ça. Asseyez-vous. »'],
       retour: ['« Autre chose ? »'],
       sujets: [
+        /* ── LA PREMIÈRE QUESTION DU JEU ───────────────────────────────
+           Quatre façons de l'ouvrir, et McCarthy n'entend pas la même
+           dans chacune. Le contenu ne bouge pas — transfert, McNeil, dix
+           heures — mais ce qu'on lui a demandé, si.
+
+           Aucune variante ne lâche ce qu'un autre sujet fait payer : ni
+           le nom du gamin (`gamin`), ni le dossier vide (`dossier`), ni
+           Wilson (`passeur`). */
         {
           id: 'job',
-          titre: '« On nous a parlé d’un boulot légal. »',
+          titre: {
+            tous: '« On nous a parlé d’un boulot légal. »',
+            hercules: '« On nous a parlé d’un boulot légal. C’est assez rare pour qu’on demande où est le reste. »',
+            trash: '« Vous nous avez fait venir. »',
+            rabbit: '« Légal, ça veut dire quoi ? Contrat, SIN, paye ? »',
+            drakk: '« Qu’est-ce qu’on fait, et contre qui ? »',
+          },
           flags: ['sait-le-job'],
-          texte: ['« Un transfert. Un gamin à McNeil, il passe devant le juge demain à dix heures. »',
-                  '« Vous allez le chercher, vous me le ramenez, et vous le gardez en vie jusqu’à l’audience. »',
-                  '« C’est tout. C’est déjà beaucoup. »'],
+          texte: {
+            tous: ['« Un transfert. Un gamin à McNeil, il passe devant le juge demain à dix heures. »',
+                   '« Vous allez le chercher, vous me le ramenez, et vous le gardez en vie jusqu’à l’audience. »',
+                   '« C’est tout. C’est déjà beaucoup. »'],
+            /* Il ne mord pas à l'ouverture d'Hercules. Il ne la relève
+               même pas tout de suite : il répond, puis il y revient une
+               phrase trop tard, ce qui est pire. */
+            hercules: [['mccarthy', '« Le reste, vous le trouverez tout seuls. Vous êtes payés pour ça. »'],
+                       '« … »',
+                       ['mccarthy', '« Vous avez demandé où était le reste avant de demander combien. Je note. »']],
+            /* Trash n'a rien demandé. McCarthy remplit — il a dit
+               lui-même qu'il n'avait que ça, du temps. */
+            trash: [['mccarthy', '« Vous parlez pas beaucoup. »'],
+                    ['mccarthy', '« Tant mieux. J’ai pas envie de me faire vendre quelque chose ce soir. »']],
+            /* La question de Rabbit est administrative ; la réponse
+               aussi, et elle ouvre exactement une porte : le contrat. */
+            rabbit: [['mccarthy', '« Contrat Lone Star, SIN à jour, paye virée à la fin. Tout ce qu’il y a de plus propre. »'],
+                     ['rabbit', '« Propre pour vous, ou propre pour nous ? »'],
+                     ['mccarthy', '« Pour les deux. C’est bien ça qui devrait vous inquiéter. »']],
+            /* « Contre qui » est la seule chose qu'il ne peut pas dire —
+               et c'est le scénario entier. Il ne le formule pas comme un
+               mystère : il liste ce qu'il sait, et s'arrête. */
+            drakk: [['mccarthy', '« Contre personne. Vous allez chercher un gamin dans une prison et vous le posez devant un juge. »'],
+                    ['drakk', '« Alors pourquoi vous payez quatre épées ? »'],
+                    ['mccarthy', '« … »'],
+                    ['mccarthy', '« Buvez quelque chose. C’est ma tournée, et c’est la seule chose que je peux vous offrir. »']],
+          },
         },
+        /* Un ork de vingt ans, une elfe du Tír, et quatre métatypes
+           autour de la table : nain, elfe, troll, et un humain qui se
+           fait passer pour un ork. Personne n'entend cette phrase de la
+           même place. Aucun ne le DIT — c'est le sujet `ork` qui le dit,
+           et il appartient à Rabbit seul. */
         {
           id: 'gamin',
-          titre: '« Quel gamin ? »',
+          titre: {
+            tous: '« Quel gamin ? »',
+            hercules: '« Quel gamin ? Il a un nom ? »',
+            trash: '« Il a quel âge ? »',
+            rabbit: '« Il s’appelle comment ? »',
+            drakk: '« Il a fait quelque chose ? »',
+          },
           quand: ({ a }) => a('sait-le-job'),
           flags: ['sait-gamin'],
-          texte: ['« Lester. Vingt ans. Ork. Ramassé dans une descente à Redmond. »',
-                  '« On l’accuse du meurtre de Teresa Banks. Une elfe du Tír. Le genre de nom qui fait bouger des gens. »'],
+          texte: {
+            tous: ['« Lester. Vingt ans. Ork. Ramassé dans une descente à Redmond. »',
+                   '« On l’accuse du meurtre de Teresa Banks. Une elfe du Tír. Le genre de nom qui fait bouger des gens. »'],
+            /* Le nain compte les places dans la salle avant de compter
+               l'argent. Ce n'est pas de la compassion, c'est un devis. */
+            hercules: ['« Un ork de vingt ans et une elfe du Tír. Devant un juge, la moitié du travail est déjà faite. »',
+                       ['mccarthy', '« Les trois quarts. »']],
+            /* L'elfe entend le mot Tír. Il ne s'en explique pas : sa
+               vraie question, c'est le sujet `tir`, plus loin, et elle
+               lui appartient. Ici il rend juste la place à McCarthy. */
+            trash: ['« Le Tír. »',
+                    ['mccarthy', '« Vous connaissez ? »'],
+                    '« De réputation. »'],
+            /* Il commence sa phrase, et il ne la finit pas. C'est écrit
+               sur sa fiche mot pour mot, et c'est ici que ça coûte le
+               plus cher : le sujet `ork` n'est pas encore ouvert. */
+            rabbit: ['« Vingt ans, ramassé dans une descente. Nous, les orks, on … »',
+                     '« … »',
+                     '« Non. Rien. Continuez. »'],
+            /* Le troll ne commente pas le métatype. Il demande combien
+               de personnes ont pu entrer dans la pièce — c'est sa
+               manière d'aimer quelqu'un qu'il ne connaît pas. */
+            drakk: ['« Une descente, c’est vingt personnes qui entrent en même temps. »',
+                    '« Comment on sait que c’est lui qu’ils cherchaient ? »',
+                    ['mccarthy', '« On le sait pas. »']],
+          },
         },
         {
           id: 'dossier',
-          titre: '« Et il l’a tuée ? »',
+          titre: {
+            tous: '« Et il l’a tuée ? »',
+            hercules: '« Et il l’a tuée ? »',
+            trash: '« Qu’est-ce qu’il y a dans le dossier ? »',
+            rabbit: '« Vous avez des preuves, ou vous avez un ork ? »',
+            drakk: '« Il l’a tuée, oui ou non ? »',
+          },
           quand: ({ a }) => a('sait-gamin'),
           flags: ['sait-dossier-vide'],
           fiches: ['dossier-vide', 'elfe-autopsie'],
-          texte: ['« L’autopsie dit que le dernier à l’avoir touchée était un elfe. On n’a pas une trace de lui sur elle. »',
-                  '« Le dossier est vide. Je le sais. Ça n’a jamais arrêté personne. »',
-                  '« Et non, j’ai pas dit “parce qu’il est ork”. J’ai pas besoin de le dire. »',
-                  '« Qui l’a vidé, ce dossier ? J’ai pas réussi à le savoir. Trente-quatre ans de maison, et j’ai pas réussi. »'],
+          texte: {
+            tous: ['« L’autopsie dit que le dernier à l’avoir touchée était un elfe. On n’a pas une trace de lui sur elle. »',
+                   '« Le dossier est vide. Je le sais. Ça n’a jamais arrêté personne. »',
+                   '« Et non, j’ai pas dit “parce qu’il est ork”. J’ai pas besoin de le dire. »',
+                   '« Qui l’a vidé, ce dossier ? J’ai pas réussi à le savoir. Trente-quatre ans de maison, et j’ai pas réussi. »'],
+            /* LA TROISIÈME VOIX. Hercules pose la question, et c'est
+               Rabbit qui répond — il a entendu « parce qu'il est ork »
+               et il ne s'est pas commandé. Il se rattrape sur du
+               technique, ce qui est exactement sa façon de reculer.
+               Hercules, lui, ne relève pas : ça se voit assez. */
+            hercules: [['rabbit', '« Vous avez pas eu besoin de le dire, non. »'],
+                       ['rabbit', '« … Le rapport d’autopsie, il est signé ? »'],
+                       ['mccarthy', '« Il est signé. »'],
+                       '« On regardera par qui. »'],
+            trash: ['« Un elfe l’a touchée en dernier, et vous jugez un ork. »',
+                    ['mccarthy', '« Vous l’avez dit mieux que moi. »'],
+                    '« Je l’ai dit plus court. Ce n’est pas pareil. »'],
+            /* Il a posé la question frontalement, et McCarthy la lui
+               rend. Il n'a pas de réponse à ça — personne n'en a. */
+            rabbit: [['mccarthy', '« J’ai un ork. »'],
+                     ['mccarthy', '« Vous vouliez que je le dise ? Voilà, je l’ai dit. »'],
+                     '« … »'],
+            /* Drakk voulait oui ou non. Il n'obtient ni l'un ni l'autre,
+               et il le prend au pied de la lettre, comme toujours. */
+            drakk: [['mccarthy', '« Je sais pas. »'],
+                    '« Alors on ne ramène pas un coupable. On ramène quelqu’un qu’on accuse. »',
+                    ['mccarthy', '« C’est la même chose pour tout le monde sauf pour vous et moi. »']],
+          },
         },
         {
           id: 'pourquoi',
-          titre: '« Pourquoi nous, et pas la Star ? »',
+          titre: {
+            tous: '« Pourquoi nous, et pas la Star ? »',
+            hercules: '« Vous avez trois mille hommes. Pourquoi quatre inconnus ? »',
+            trash: '« Vous ne faites pas confiance à vos collègues. »',
+            rabbit: '« Vous payez de votre poche. Ça veut dire que personne n’a validé. »',
+            drakk: '« Vous n’avez pas d’hommes à vous ? »',
+          },
           quand: ({ a }) => a('sait-dossier-vide'),
           fiches: ['navette-huit-heures'],
-          texte: ['« Parce que si je le fais transférer par la navette de huit heures, il arrive pas. »',
-                  '« Il aura un accident, ou un remords subit. J’ai déjà lu le rapport, je peux vous le réciter. »',
-                  '« Qui l’écrira, ce rapport ? Je sais pas. C’est ça qui m’empêche de dormir, pas le reste. »'],
+          texte: {
+            tous: ['« Parce que si je le fais transférer par la navette de huit heures, il arrive pas. »',
+                   '« Il aura un accident, ou un remords subit. J’ai déjà lu le rapport, je peux vous le réciter. »',
+                   '« Qui l’écrira, ce rapport ? Je sais pas. C’est ça qui m’empêche de dormir, pas le reste. »'],
+            hercules: ['« Quatre inconnus qui coûtent moins cher qu’un procès. Je comprends le calcul. »',
+                       ['mccarthy', '« Vous coûtez plus cher qu’un procès. C’est bien le problème. »']],
+            /* Trash a dit tout haut ce que McCarthy n'a pas dit, et il
+               ne s'en excuse pas. Sa politesse est là-dedans : il pose
+               le fait et il laisse l'autre en faire ce qu'il veut. */
+            trash: [['mccarthy', '« Non. »'],
+                    ['mccarthy', '« Pas à tous. Ce serait plus simple. »']],
+            rabbit: [['mccarthy', '« Personne a validé. »'],
+                     '« Et si ça tourne mal, on a signé un contrat avec un homme qui n’avait pas le droit de le signer. »',
+                     ['mccarthy', '« Le contrat est bon. C’est moi qui suis en dehors. »']],
+            /* Il répond à la question posée, pas à celle d'en dessous.
+               Trois heures du matin, c'est une réponse d'homme fatigué. */
+            drakk: [['mccarthy', '« J’en ai. Je sais pas lesquels. »'],
+                    '« C’est le pire endroit où être. »',
+                    ['mccarthy', '« Oui. »']],
+          },
         },
         /* D14 — LA VICTIME.
            Son nom apparaissait UNE FOIS en trois tableaux, comme un
@@ -530,22 +687,83 @@ export const bar = {
            Ce sujet est le seul endroit du jeu où quelqu'un demande. */
         {
           id: 'teresa',
-          titre: '« Et elle ? Teresa Banks. »',
+          /* Quatre entrées sur la même morte, et aucune ne demande la
+             même chose : qui va faire du bruit, elle, son dossier, qui
+             la pleure. Le fond de la réponse ne change pas — c'est le
+             seul endroit du jeu où quelqu'un demande, et McCarthy lève
+             les yeux dans les quatre cas. Ce qui change, c'est ce qu'il
+             ajoute, et ce que le runner en fait. */
+          titre: {
+            tous: '« Et elle ? Teresa Banks. »',
+            hercules: '« Teresa Banks. Elle a de la famille qui va faire du bruit ? »',
+            trash: '« Et elle ? »',
+            rabbit: '« Vous avez un dossier sur elle, ou juste sur le gamin ? »',
+            drakk: '« Qui la pleure ? »',
+          },
           quand: ({ a }) => a('sait-gamin'),
           flags: ['sait-teresa'],
           fiches: ['teresa'],
-          texte: ['Il lève les yeux. C’est la première fois depuis que vous êtes assis.',
-                  '« … »',
-                  '« Vingt-deux ans. Étranglée. Elle avait un SIN Telestrian et une adresse à Bellevue qu’elle n’habitait plus. »',
-                  '« Trois jours que je suis dessus. Vous êtes les premiers à poser la question. »',
-                  '« Ça ne lui fait ni chaud ni froid, remarquez. Mais je le note. »'],
+          texte: {
+            tous: ['Il lève les yeux. C’est la première fois depuis que vous êtes assis.',
+                   '« … »',
+                   '« Vingt-deux ans. Étranglée. Elle avait un SIN Telestrian et une adresse à Bellevue qu’elle n’habitait plus. »',
+                   '« Trois jours que je suis dessus. Vous êtes les premiers à poser la question. »',
+                   '« Ça ne lui fait ni chaud ni froid, remarquez. Mais je le note. »'],
+            /* Il a demandé qui ferait du bruit. La réponse est : personne.
+               Hercules encaisse en se taisant — c'est le seul endroit du
+               bar où il n'a rien à placer, et ça se voit d'autant plus
+               qu'il n'arrête pas ailleurs. */
+            hercules: [['mccarthy', '« Une mère à Tacoma. Je l’ai appelée mardi. Elle a pas rappelé. »'],
+                       '« … »',
+                       '« D’accord. »'],
+            trash: [['mccarthy', '« C’est tout ce que vous demandez ? »'],
+                    '« Oui. »',
+                    ['mccarthy', '« Mmh. »']],
+            /* Il propose un service parce qu'il ne sait pas quoi faire
+               d'autre de ce qu'il vient d'entendre. */
+            rabbit: [['mccarthy', '« Sur elle, j’ai quatre pages. Sur le gamin, j’en ai soixante. »'],
+                     '« Son SIN a servi après sa mort ? »',
+                     ['mccarthy', '« J’ai pas regardé. »'],
+                     '« Faudra regarder. »'],
+            /* Drakk pose la question à laquelle personne n'a de réponse,
+               et il ne se rend pas compte de ce qu'il vient de faire. Il
+               enchaîne sur du concret, ce qui est exactement sa manière. */
+            drakk: [['mccarthy', '« Je sais pas. »'],
+                    ['mccarthy', '« C’est une vraie réponse, remarquez. Je sais pas. »'],
+                    '« Alors il faudra le savoir avant demain dix heures. »',
+                    ['mccarthy', '« Non. Vous, vous avez le gamin à ramener. Moi j’ai elle. »']],
+          },
         },
         {
           id: 'contrat',
-          titre: '« Vous parliez d’un contrat. »',
+          titre: {
+            tous: '« Vous parliez d’un contrat. »',
+            hercules: '« Vous parliez d’un contrat. Montrez. »',
+            trash: '« Il faudra donner des noms ? »',
+            rabbit: '« Un SIN. Lequel d’entre nous ? »',
+            drakk: '« On signe quoi, exactement ? »',
+          },
           quand: ({ a }) => a('sait-le-job'),
-          texte: ['« Prestation de sécurité indépendante. Signé Lone Star, en bonne et due forme. »',
-                  '« Il me faut un SIN qui passe au juridique et à la paye. Un seul suffit. Je serai pas regardant — je sais très bien pourquoi je paye. »'],
+          texte: {
+            tous: ['« Prestation de sécurité indépendante. Signé Lone Star, en bonne et due forme. »',
+                   '« Il me faut un SIN qui passe au juridique et à la paye. Un seul suffit. Je serai pas regardant — je sais très bien pourquoi je paye. »'],
+            hercules: ['« “Pas regardant”. Notez que c’est vous qui l’avez dit. »',
+                       ['mccarthy', '« Notez ce que vous voulez. »']],
+            /* Un SIN, pour Trash, c'est un nom qu'il a quitté. Il ne
+               l'explique pas, et il ne se propose pas non plus. */
+            trash: ['« Un nom, oui. »',
+                    '« Pas le mien. »',
+                    ['mccarthy', '« Un seul suffit. J’ai dit. »']],
+            /* C'est SA question, et c'est celle qu'il ne peut pas poser
+               jusqu'au bout : son SIN à lui dit humain. */
+            rabbit: [['mccarthy', '« Celui qui passe. Je regarde pas la photo. »'],
+                     '« … »',
+                     '« D’accord. »'],
+            drakk: [['mccarthy', '« Que vous escortez un prisonnier pour le compte de la Lone Star, entre minuit et dix heures. »'],
+                    '« Et ce qui se passe entre les deux ? »',
+                    ['mccarthy', '« Le contrat en parle pas. »'],
+                    '« Bien. »'],
+          },
         },
         {
           id: 'argent',
@@ -561,19 +779,69 @@ export const bar = {
         },
         {
           id: 'passeur',
-          titre: '« McNeil, c’est une île. »',
+          /* La même île, quatre inquiétudes. Hercules veut savoir à qui
+             il aura affaire, Trash sait déjà que ça se paiera, Rabbit
+             pense au bateau comme à une machine, Drakk compte les
+             sorties. Le dernier prépare le quai sans rien en dire. */
+          titre: {
+            tous: '« McNeil, c’est une île. »',
+            hercules: '« McNeil, c’est une île. On y va comment, et avec qui ? »',
+            trash: '« Il y a quelqu’un pour nous faire traverser ? »',
+            rabbit: '« Une île. Donc un bateau, donc un propriétaire. »',
+            drakk: '« Une île. On entre par où, on ressort par où ? »',
+          },
           quand: ({ a }) => a('sait-le-job'),
-          texte: ['« Un passeur. Wilson. Il attend sur un quai à Tacoma, au Sunnyside Beach Park. »',
-                  '« Il est déjà payé, alors discutez pas. Et il essaie de se faire appeler l’Amiral. Ça marche pas, mais il essaie. »',
-                  '« Est-ce qu’il est fiable ? Aucune idée. Il est disponible. À trois heures du matin, c’est le même mot. »'],
+          texte: {
+            tous: ['« Un passeur. Wilson. Il attend sur un quai à Tacoma, au Sunnyside Beach Park. »',
+                   '« Il est déjà payé, alors discutez pas. Et il essaie de se faire appeler l’Amiral. Ça marche pas, mais il essaie. »',
+                   '« Est-ce qu’il est fiable ? Aucune idée. Il est disponible. À trois heures du matin, c’est le même mot. »'],
+            hercules: ['« “Disponible”. J’aime pas ce mot dans cette phrase. »',
+                       ['mccarthy', '« Moi non plus. C’est le seul que j’avais. »']],
+            /* Il ne commente pas. Il range l'information et il attend —
+               et sa question suivante n'est pas sur le passeur. */
+            trash: ['« Il sait ce qu’il transporte ? »',
+                    ['mccarthy', '« Il sait qu’il transporte. »']],
+            rabbit: ['« Wilson comment ? »',
+                     ['mccarthy', '« Wilson tout court, pour vous. »'],
+                     '« Mmh. »'],
+            /* Drakk pose la question tactique, et McCarthy n'a pas la
+               réponse — il n'a jamais fait ça, il l'a dit lui-même deux
+               sujets plus loin. */
+            drakk: ['« Et si le bateau n’est pas là au retour ? »',
+                    ['mccarthy', '« Alors vous serez sur une île avec un prisonnier et six heures devant vous. »'],
+                    ['mccarthy', '« Faites qu’il soit là. »']],
+          },
         },
         {
           id: 'mandat',
-          titre: '« Et à McNeil, on entre comment ? »',
+          titre: {
+            tous: '« Et à McNeil, on entre comment ? »',
+            hercules: '« On entre comment, et on parle à qui ? »',
+            trash: '« Ils vont nous le donner sans discuter ? »',
+            rabbit: '« Le mandat, il est dans quel système ? »',
+            drakk: '« On entre comment ? »',
+          },
           quand: ({ a }) => a('sait-le-job'),
-          texte: ['« Avec le mandat de transfert. Vous le présentez, ils vous le sortent. C’est légal, je vous rappelle. »',
-                  '« Après, vous vous planquez, et vous êtes au tribunal de Downtown à dix heures. Spring Street, à l’angle de la 5e. »',
-                  '« Où vous planquer, ça je sais pas. J’ai jamais eu à me cacher de mes propres collègues. »'],
+          texte: {
+            tous: ['« Avec le mandat de transfert. Vous le présentez, ils vous le sortent. C’est légal, je vous rappelle. »',
+                   '« Après, vous vous planquez, et vous êtes au tribunal de Downtown à dix heures. Spring Street, à l’angle de la 5e. »',
+                   '« Où vous planquer, ça je sais pas. J’ai jamais eu à me cacher de mes propres collègues. »'],
+            hercules: ['« Un gardien de nuit qui a envie de rentrer chez lui, ça se travaille. »',
+                       ['mccarthy', '« Travaillez ce que vous voulez. Sortez avec le gamin. »']],
+            trash: ['« Et s’ils discutent ? »',
+                    ['mccarthy', '« Alors quelqu’un leur aura passé un coup de fil avant vous. »'],
+                    '« Mmh. »'],
+            /* Rabbit pose la seule question qui vaille pour lui, et la
+               réponse est mauvaise : le mandat est traçable. Il ne s'en
+               plaint pas, il le range. */
+            rabbit: [['mccarthy', '« Dans le leur. Je l’ai déposé ce soir, avec mon code. »'],
+                     '« Donc on saura quand on l’aura présenté, et qui l’a déposé. »',
+                     ['mccarthy', '« Oui. »'],
+                     ['mccarthy', '« Je fais pas ça en cachette. Je fais ça vite. »']],
+            drakk: ['« Par la porte, alors. »',
+                    ['mccarthy', '« Par la porte. »'],
+                    '« J’aime mieux ça. »'],
+          },
         },
         {
           id: 'accepter',

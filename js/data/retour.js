@@ -222,6 +222,17 @@ export const retour = {
          chantier 28) : jamais une seule chaîne fixe, donc `true`
          générique (§3.3 du plan). */
       sortie: true,
+      /* L'autre cible à deux verbes vivants, et la plus coûteuse à se
+         tromper : `utiliser` LANCE la traversée (`va:`), qui ferme le
+         tableau. Un clic gauche qui partirait droit dessus enterrerait
+         Cisco — il n'est joignable QUE par cette cible, et il porte un
+         contact du réseau (`cisco-contact`).
+
+         Tant qu'on ne lui a pas parlé, le clic gauche parle donc ; après
+         (`parle:cisco`, posé par `ouvreDialogue`), il barre. Avant la
+         récusation il n'y a personne à la barre, et `utiliser` est le
+         seul geste qui existe. */
+      principal: ({ a }) => (a('recuse-abri') && !a('parle:cisco') ? 'parler' : 'utiliser'),
       regarder: ({ a }) => ({
         tous: a('recuse-abri')
           ? ['Cisco tient la barre, capuche rabattue, et regarde le chenal comme s’il l’avait déjà traversé cent fois — ce qui est sans doute vrai.',
@@ -875,33 +886,119 @@ export const retour = {
                 '« Vous êtes payés combien pour me sortir ? »'],
       retour: ['« Ouais. »'],
       sujets: [
+        /* Il a demandé combien on est payés. C'est sa première phrase et
+           ce n'est pas une question d'argent : il cherche à savoir ce
+           qu'il vaut pour quelqu'un. Les quatre répondent à côté, et
+           chacun à un côté différent. */
         {
           id: 'combien',
-          titre: '« Assez pour aller jusqu’au bout. »',
+          titre: {
+            tous: '« Assez pour aller jusqu’au bout. »',
+            hercules: '« Assez pour aller jusqu’au bout. »',
+            trash: '« Ce n’est pas la bonne question. »',
+            rabbit: '« Pas assez. »',
+            drakk: '« Je sais pas le chiffre. On a serré la main. »',
+          },
           flags: ['lester-parle'],
-          texte: ['« C’est ce qu’a dit l’avocat. »',
-                  '« Le premier, pas la dame de chez STV. Le premier, il a dit qu’il irait jusqu’au bout et il est parti au bout de six minutes. »',
-                  '« J’ai compté. »'],
+          texte: {
+            tous: ['« C’est ce qu’a dit l’avocat. »',
+                   '« Le premier, pas la dame de chez STV. Le premier, il a dit qu’il irait jusqu’au bout et il est parti au bout de six minutes. »',
+                   '« J’ai compté. »'],
+            /* Le seul des quatre qui parlerait vraiment argent avec lui,
+               et il choisit de ne pas mentir sur ce point-là. */
+            hercules: ['« Six minutes, c’est un homme qui savait déjà qu’il partait. »',
+                       ['lester', '« Ouais. »'],
+                       '« Nous, on est payés d’avance. C’est plus difficile à quitter. »'],
+            trash: [['lester', '« C’est quoi, la bonne question ? »'],
+                    '« Je ne sais pas encore. »',
+                    ['lester', '« Mmh. »']],
+            rabbit: ['« Pas assez pour quatre, en tout cas. »',
+                     ['lester', '« Alors pourquoi vous êtes venus. »'],
+                     '« … »'],
+            /* Drakk répond littéralement, et sans le vouloir il dit la
+               seule chose que Lester n'a jamais eue de personne. */
+            drakk: [['lester', '« Vous savez pas combien on vous paie ? »'],
+                    '« Non. »',
+                    ['lester', '« … »']],
+          },
         },
         {
           id: 'ou',
-          titre: '« On te ramène au tribunal. Vivant. »',
+          titre: {
+            tous: '« On te ramène au tribunal. Vivant. »',
+            hercules: '« On te ramène au tribunal. Vivant. »',
+            trash: '« Tu seras à l’heure, et entier. »',
+            rabbit: '« Dix heures, Spring Street. C’est tout ce qu’on a à faire. »',
+            drakk: '« Personne te touche d’ici là. »',
+          },
           quand: ({ a }) => a('lester-parle'),
-          texte: ['« Vivant. »',
-                  '« Personne m’avait encore dit ce mot-là dans cet ordre-là. »'],
+          texte: {
+            tous: ['« Vivant. »',
+                   '« Personne m’avait encore dit ce mot-là dans cet ordre-là. »'],
+            hercules: ['« C’est dans le contrat. Je l’ai lu. »',
+                       ['lester', '« Y a un contrat. »'],
+                       '« Il y a toujours un contrat. C’est la bonne nouvelle. »'],
+            trash: [['lester', '« Entier, ça se dit d’une chose qu’on a cassée. »'],
+                    '« Oui. »'],
+            rabbit: [['lester', '« Vous comptez les heures, vous aussi. »'],
+                     '« C’est le métier. »',
+                     ['lester', '« Moi c’est pas le métier. »']],
+            /* Une promesse que Drakk n'est pas sûr de pouvoir tenir, et
+               qu'il fait quand même. Il ne la commente pas. */
+            drakk: [['lester', '« Vous pouvez pas dire ça. »'],
+                    '« Je viens de le dire. »'],
+          },
         },
         /* RAPPEL de `sait-teresa` (planté au tableau 1). C'est le
            troisième point de la chaîne : on plante, on RAPPELLE, on paie
            — et le paiement est à la contre-enquête. */
+        /* Le seul endroit du jeu où on demande à Lester qui elle était.
+           Trash est elfe, comme elle, et Lester le voit — c'est la seule
+           variante où quelqu'un d'autre que lui a quelque chose à
+           perdre dans la question. */
         {
           id: 'teresa',
-          titre: '« Teresa Banks. Tu la connaissais ? »',
+          titre: {
+            tous: '« Teresa Banks. Tu la connaissais ? »',
+            hercules: '« Teresa Banks. Tu la connaissais ? »',
+            trash: '« Parle-moi d’elle. »',
+            rabbit: '« Vous vous parliez ? Vraiment parler, je veux dire. »',
+            drakk: '« Elle était comment ? »',
+          },
           quand: ({ a }) => a('sait-teresa') && a('lester-parle'),
           flags: ['lester-teresa'],
-          texte: ['Long silence. La pluie fait tout le bruit.',
-                  '« Elle dormait deux étages au-dessus. Elle descendait fumer parce qu’en haut ça tirait. »',
-                  '« On s’est parlé quatre fois. Peut-être cinq. »',
-                  '« Personne m’a demandé ça non plus. Ils m’ont demandé où j’étais. Jamais qui elle était. »'],
+          texte: {
+            tous: ['Long silence. La pluie fait tout le bruit.',
+                   '« Vous êtes les deuxièmes à dire son nom devant moi. »',
+                   '« Le premier, c’était le vieux flic. Il l’a dit une fois, à voix basse, en relisant son dossier. Il croyait que je dormais. »',
+                   '« Tout le monde dit “la victime”. C’est plus court. »'],
+            hercules: ['« Personne te l’a demandé en trois jours. Ça, ça se dit à la barre. »',
+                       ['lester', '« Ça change quoi. »'],
+                       '« Ça change qui tu es dans la phrase. »'],
+            /* IL NE LA CONNAISSAIT PAS, ET IL N'A RIEN VU. Il s'est
+               trouvé au mauvais endroit au mauvais moment : Hayden la
+               tue chez elle, Renfield dépose le corps dans un taudis de
+               sa rue. Le seul lien entre eux est une adresse.
+
+               Ne rien lui faire affirmer de plus — ni un souvenir
+               d'elle, ni la découverte du corps. Ce qu'il peut dire de
+               cette nuit-là appartient au sujet `loveland`, à la
+               planque, et il n'y dit que ce qu'un voisin sait : que
+               personne ne va jamais là. */
+            trash: [['lester', '« Vous êtes elfe. »'],
+                    '« Oui. »',
+                    ['lester', '« Elle était du Tír, ils ont dit. Vous aussi ? »'],
+                    '« Non. »',
+                    ['lester', '« … Je saurais même pas vous dire sa tête. »']],
+            rabbit: [['lester', '« Je lui ai jamais parlé. »'],
+                     '« Alors ils ont quoi, exactement, pour vous relier ? »',
+                     ['lester', '« Une rue. »'],
+                     '« … »'],
+            drakk: [['lester', '« Je la connaissais pas. »'],
+                    '« Alors tu ne peux rien dire d’elle demain. »',
+                    ['lester', '« Non. »'],
+                    '« C’est embêtant. C’est vrai, mais c’est embêtant. »'],
+          },
         },
         {
           id: 'mccarthy',
@@ -925,11 +1022,34 @@ export const retour = {
         },
         {
           id: 'blesse',
-          titre: '« Montre ce bras. »',
+          titre: {
+            tous: '« Montre ce bras. »',
+            hercules: '« Montre ce bras. »',
+            trash: '« Ton bras. »',
+            rabbit: '« Ça, il faudra que ça se voie demain. »',
+            drakk: '« Montre. »',
+          },
           quand: ({ a }) => a('lester-blesse'),
-          texte: ['Il ne montre pas. Il tourne l’épaule pour qu’on voie sans qu’il ait à bouger.',
-                  '« Ça saigne moins que ça en a l’air. »',
-                  '« J’ai eu pire en tombant d’un mur. »'],
+          texte: {
+            tous: ['Il ne montre pas. Il tourne l’épaule pour qu’on voie sans qu’il ait à bouger.',
+                   '« Ça saigne moins que ça en a l’air. »',
+                   '« J’ai eu pire en tombant d’un mur. »'],
+            hercules: ['« Garde-le comme ça demain. Manche relevée. »',
+                       ['lester', '« Pourquoi. »'],
+                       '« Parce que personne regarde un dossier. Tout le monde regarde un bras. »'],
+            trash: ['« Ça ira. »',
+                    ['lester', '« Vous avez rien fait. »'],
+                    '« Non. »'],
+            /* Il pense au tribunal avant de penser au bras, et il
+               s'entend le dire. Il ne se reprend pas. */
+            rabbit: [['lester', '« Vous voulez que je saigne devant le juge ? »'],
+                     '« … Je veux qu’on voie d’où tu sors. »',
+                     ['lester', '« Ouais. Ben ça se voit. »']],
+            drakk: ['Drakk regarde le bras trois secondes de plus qu’il ne faut.',
+                    '« Un mur, c’est pas ça. »',
+                    ['lester', '« Non. »'],
+                    '« D’accord. »'],
+          },
         },
         {
           id: 'silence',

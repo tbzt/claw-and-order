@@ -7,9 +7,9 @@ import { etat, a, pose, donne, retire, marque, classe, sait, contexte, avance, f
          sauvegardesGardees, garde, gardeeParId, oublieGardee } from './state.js'
 import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
-import { resous, nomDe, enLignes } from './interact.js'
+import { resous, nomDe, enLignes, verbePrincipal } from './interact.js'
 import { equipe, pnj } from './data/equipe.js'
-import { sujetsVisibles, estEpuise, estVerrouille, retiens, entree } from './dialogue.js'
+import { sujetsVisibles, estEpuise, estVerrouille, retiens, entree, titreDe, texteDe } from './dialogue.js'
 import { eveille, entre } from './ambiance.js'
 import { fiches, deductions, refus as refusCarnet, presque } from './data/carnet.js'
 import { contacts, appels, refus as refusReseau } from './data/reseau.js'
@@ -25,6 +25,7 @@ const boiteChoix = $('choix')
 const rideau = $('rideau')
 const carnet = $('carnet')
 const reseau = $('reseau')
+const sacoche = $('sacoche')
 const portrait = $('portrait')
 const journal = $('journal')
 const gardees = $('gardees')
@@ -144,6 +145,11 @@ let ficheAppelActive = null
    portent pas de `data-hotspot`, et le carnet peut être ouvert par
    dessus n'importe quel tableau sans se mélanger à son décor. */
 let survoleeFiche = null
+/* L'objet survolé dans l'étal de la sacoche. Même métier que
+   `survoleeFiche` pour le carnet : peindre la table sans rien prendre.
+   Regarder un objet ne coûte donc aucun geste — c'était le reproche,
+   et c'est la réponse. */
+let survoleObjet = null
 
 /* ── Chargement d'un tableau ─────────────────────────────────
    Le moteur ne connaît aucun décor : il en charge un par son nom, vide
@@ -266,6 +272,7 @@ function proposeReprise(donnees) {
 async function demarre() {
   brancheHud()
   brancheStage()
+  verifieObjets()
   verifieCarnet()
   verifieReseau()
   verifieBarre()
@@ -502,16 +509,34 @@ function ouvreDialogue(idPnj) {
   dis(entree(dialogue, idPnj), dialogue.qui, montreChoix)
 }
 
+/* Les sujets réellement offerts, dans l'ordre où ils s'affichent — donc
+   dans l'ordre où les chiffres les désignent. Un épuisé se retire, sauf
+   s'il ferme le dialogue (voir l'en-tête de `dialogue.js`). */
+function sujetsOfferts() {
+  return sujetsVisibles(dialogue).filter((s) => s.fin || !estEpuise(s))
+}
+
 function montreChoix() {
   boiteChoix.replaceChildren()
-  for (const sujet of sujetsVisibles(dialogue)) {
+  const offerts = sujetsOfferts()
+  offerts.forEach((sujet, i) => {
     const bouton = document.createElement('button')
     const verrouille = estVerrouille(sujet)
     /* Arbitrage du 28 août (audit reroute, int. 5) : l'étiquette
        `(Nom)` ne protégeait de rien — cliquer sur un sujet verrouillé
        refuse déjà (`refuseSujet()`, règle 11), dans la voix du runner
        actif. Le joueur apprend la règle en jouant, pas en la lisant. */
-    bouton.textContent = sujet.titre
+    /* Le rang s'affiche jusqu'à 9 — au-delà, le chiffre n'existe pas et
+       promettre un raccourci qui ne répond pas est pire que se taire.
+       Sept arbres sur vingt-six dépassent neuf sujets à l'ouverture ;
+       ils fondent dès que les premiers sont dits. */
+    if (i < 9) {
+      const rang = document.createElement('span')
+      rang.className = 'choix__rang'
+      rang.textContent = String(i + 1)
+      bouton.append(rang)
+    }
+    bouton.append(document.createTextNode(titreDe(sujet)))
     if (estEpuise(sujet)) bouton.classList.add('est-epuise')
     if (verrouille) bouton.classList.add('est-verrouille')
     bouton.addEventListener('click', (e) => {
@@ -520,7 +545,7 @@ function montreChoix() {
       choisit(sujet)
     })
     boiteChoix.append(bouton)
-  }
+  })
   boiteChoix.hidden = false
   rafraichit()
 }
@@ -537,6 +562,19 @@ function refuseSujet() {
 
 function choisit(sujet) {
   boiteChoix.hidden = true
+  /* LA QUESTION AU JOURNAL, avant la réponse. C'est ce qui autorise à
+     retirer un sujet dit : sans elle, le journal gardait « ce qu'on vous
+     a répondu » sans jamais « ce que vous aviez demandé », et cacher la
+     ligne aurait effacé la seule trace de la question. Elle est dite par
+     le runner actif — c'est lui qui la pose, et la voix par laquelle il
+     la pose est maintenant la sienne. */
+  /* La question ET la réponse se résolvent AVANT `retiens()` : le sujet
+     peut poser des drapeaux, et une réponse écrite en fonction du
+     contexte doit voir le monde tel qu'il était quand on a demandé, pas
+     tel que sa propre question vient de le rendre. */
+  const question = titreDe(sujet)
+  const reponse = texteDe(sujet, dialogue.qui)
+  journalise(etat.actif, question)
   retiens(sujet)
 
   if (sujet.objets) donne(...sujet.objets)
@@ -552,10 +590,10 @@ function choisit(sujet) {
   const qui = dialogue.qui
   if (sujet.fin) {
     dialogue = null
-    dis(sujet.texte ?? [], qui, sujet.va ? () => charge(sujet.va) : null)
+    dis(reponse ?? [], qui, sujet.va ? () => charge(sujet.va) : null)
     return
   }
-  dis(sujet.texte, qui, montreChoix)
+  dis(reponse, qui, montreChoix)
 }
 
 
@@ -877,6 +915,116 @@ function depose(idFiche) {
    runner (§5 du plan) — appeler exige qu'il soit actif, et le bouton
    le dit avant que le joueur ait à le découvrir en échouant. */
 
+/* ══ LA SACOCHE (chantier 65) ════════════════════════════════════════
+   Le sixième panneau, et le seul qui remplace quelque chose au lieu de
+   s'ajouter. Il reprend le patron du carnet sans y toucher : `.carnet`
+   pour la mise en page, `.jeton` pour l'étal, `carnet__fiche` pour la
+   table. Ce qui change tient en une ligne — un jeton de carnet se PREND
+   pour être frotté à un autre, un jeton de sacoche se prend pour être
+   tendu à quelque chose QUI EST DERRIÈRE LE PANNEAU. Il le referme
+   donc, ce que le carnet n'a jamais eu à faire. */
+
+/* Un objet peut appartenir à quelqu'un (`a:`) — les quatre du portique.
+   Sa provenance n'est alors pas un lieu mais une personne, et son
+   liseré prend la voix de son propriétaire plutôt qu'une teinte de
+   lieu. Les huit autres se rangent par où on les a eus, avec la même
+   fonction que les fiches. */
+const sourceObjet = (o) => (o.a ? 'equipe' : sourceDe(o.ou))
+
+/* `regarder` d'un objet a la forme d'un `regarder` de cible. Une chaîne
+   nue reste légale — elle vaut `tous`, et rien pour les quatre voix. */
+const regardDe = (o) => (typeof o.regarder === 'string' ? { tous: o.regarder } : o.regarder ?? {})
+
+function basculeSacoche() {
+  const ouvert = sacoche.hidden
+  sacoche.hidden = !ouvert
+  survoleObjet = null
+  $('main').setAttribute('aria-pressed', String(ouvert))
+  if (ouvert) rendSacoche()
+  rafraichit()
+}
+
+/* Le jeton d'un objet : son icône, son nom, son liseré de provenance.
+   Survoler peint la table ; cliquer prend — et referme. */
+function creeJetonObjet(id, active) {
+  const o = objets[id]
+  const b = document.createElement('button')
+  b.className = 'jeton jeton--objet'
+  b.dataset.source = sourceObjet(o)
+  if (o.a) b.style.setProperty('--teinte-equipe', `var(--voix-${o.a})`)
+  b.classList.toggle('est-active', active)
+  b.innerHTML = '<span class="jeton__icone"></span><span class="jeton__titre"></span>'
+  b.querySelector('.jeton__icone').innerHTML = `<span class="objet__${o.icone}"></span>`
+  b.querySelector('.jeton__titre').textContent = o.nom
+  b.addEventListener('mouseenter', () => { survoleObjet = id; rendSacocheTable() })
+  b.addEventListener('mouseleave', () => {
+    if (survoleObjet !== id) return
+    survoleObjet = null
+    rendSacocheTable()
+  })
+  b.addEventListener('click', (e) => {
+    e.stopPropagation()
+    /* Reposer ce qu'on tenait déjà : on reste dans la sacoche, il n'y a
+       rien à viser. Prendre autre chose : on sort, parce que la cible
+       est dans le décor. */
+    if (etat.objetActif === id) {
+      etat.objetActif = null
+      rendSacoche()
+      return rafraichit()
+    }
+    etat.objetActif = id
+    basculeSacoche()
+  })
+  return b
+}
+
+/* La table de lecture. Elle montre ce qu'on SURVOLE, à défaut ce qu'on
+   tient — un objet qu'on vient de prendre reste donc lisible le temps
+   que le panneau se referme, et la table n'est jamais vide sans raison. */
+function rendSacocheTable() {
+  const el = $('sacocheDetail')
+  const id = survoleObjet ?? etat.objetActif
+  el.classList.toggle('est-vide', !id)
+  /* Même précaution que `remplitDetail()` : la table est un élément
+     persistant, une teinte posée en ligne survivrait au rendu suivant. */
+  el.style.removeProperty('--teinte-equipe')
+  el.removeAttribute('data-source')
+  if (!id || !objets[id]) {
+    el.innerHTML = '<p class="carnet__vide">Survole un objet pour le regarder.</p>'
+    return
+  }
+  const o = objets[id]
+  el.dataset.source = sourceObjet(o)
+  if (o.a) el.style.setProperty('--teinte-equipe', `var(--voix-${o.a})`)
+  el.innerHTML = '<div class="fiche__entete"><span class="jeton__icone"></span><span class="fiche__ou"></span></div><p class="fiche__titre"></p><div class="sacoche__lignes"></div>'
+  el.querySelector('.jeton__icone').innerHTML = `<span class="objet__${o.icone}"></span>`
+  el.querySelector('.fiche__ou').textContent = o.ou
+  el.querySelector('.fiche__titre').textContent = o.nom
+  const lignes = el.querySelector('.sacoche__lignes')
+  /* `resousTexte()` — le même résolveur que les déductions du carnet :
+     `tous` est la caméra, la clé du runner actif est sa voix. Changer de
+     runner sacoche ouverte change donc ce qu'on lit, et c'est le but. */
+  for (const ligne of resousTexte(regardDe(o))) {
+    const p = document.createElement('p')
+    p.className = 'sacoche__ligne'
+    p.dataset.qui = ligne.qui
+    p.textContent = ligne.texte
+    lignes.append(p)
+  }
+}
+
+function rendSacoche() {
+  const etal = $('sacocheEtal')
+  etal.replaceChildren()
+  for (const id of etat.inventaire) {
+    if (!objets[id]) continue
+    etal.append(creeJetonObjet(id, etat.objetActif === id))
+  }
+  const n = etat.inventaire.length
+  $('sacocheProgres').textContent = n === 0 ? 'vide' : `${n} objet${n > 1 ? 's' : ''}`
+  rendSacocheTable()
+}
+
 function basculeReseau() {
   const ouvert = reseau.hidden
   reseau.hidden = !ouvert
@@ -1124,9 +1272,6 @@ function rafraichit() {
   stage.dataset.etat = [...etat.visuels, ...derives].join(' ')
   stage.classList.toggle('est-occupe', occupe || Boolean(dialogue))
 
-  for (const bouton of document.querySelectorAll('.verbe'))
-    bouton.classList.toggle('est-actif', !etat.objetActif && bouton.dataset.verbe === etat.verbe)
-
   /* Le décor doit savoir QUI agit, pas seulement quelle lentille est
      ouverte : c'est ce qui rend la règle 10 tangible dans le cadre au
      lieu de sous le cadre. Le CSS s'accroche aux classes `p-<runner>`,
@@ -1137,7 +1282,7 @@ function rafraichit() {
   for (const bouton of document.querySelectorAll('.runner'))
     bouton.classList.toggle('est-actif', bouton.dataset.runner === etat.actif)
 
-  rendInventaire()
+  rendMain()
   /* D8 : l'horloge de la nuit cède la place au registre en tours dès
      que l'acte IV commence. Le `title` suit — « L'heure, cette nuit »
      posé en dur dans index.html deviendrait faux le premier matin. */
@@ -1158,7 +1303,11 @@ function rafraichit() {
   if (!carnet.hidden) rendCarnet()
   if (!journal.hidden) rendJournal()
   if (!reseau.hidden) rendReseau()
-  curseur.dataset.verbe = etat.verbe
+  if (!sacoche.hidden) rendSacoche()
+  /* Hors cible, le curseur ne promet rien : il reprend sa forme neutre,
+     ou celle du verbe forcé s'il y en a un. Sur une cible,
+     `ecritEtiquette()` le repose sur le verbe résolu. */
+  curseur.dataset.verbe = etat.verbe ?? ''
   /* Le geste du carnet est celui de l'inventaire (chantier 21, §3.3 du
      plan) : une fiche tenue allume le même curseur ambré qu'un objet
      porté — un seul signal visuel pour « quelque chose est en main »,
@@ -1169,23 +1318,23 @@ function rafraichit() {
   if (estAuRepos()) sauvegarde()
 }
 
-function rendInventaire() {
-  const boite = $('inventaire')
-  boite.replaceChildren()
-  for (const id of etat.inventaire) {
-    const bouton = document.createElement('button')
-    bouton.className = 'objet'
-    bouton.title = objets[id].nom
-    bouton.classList.toggle('est-actif', etat.objetActif === id)
-    const icone = document.createElement('span')
-    icone.className = `objet__${objets[id].icone}`
-    bouton.append(icone)
-    bouton.addEventListener('click', () => {
-      etat.objetActif = etat.objetActif === id ? null : id
-      rafraichit()
-    })
-    boite.append(bouton)
-  }
+/* LA MAIN. Ce qui reste de l'inventaire au HUD : un emplacement, celui
+   de l'objet qu'on tient. Il ne grandit pas avec la sacoche, donc il ne
+   pousse plus le sélecteur d'équipe hors du cadre — c'était le débord
+   mesuré dans l'en-tête de `.hud`, et il n'a plus de cause. */
+function rendMain() {
+  const b = $('main')
+  const creux = $('mainIcone')
+  creux.replaceChildren()
+  const id = etat.objetActif
+  const tient = Boolean(id && objets[id])
+  b.classList.toggle('est-vide', !tient)
+  $('sacocheCompte').textContent = String(etat.inventaire.length)
+  b.title = tient ? `${objets[id].nom} — ouvrir la sacoche (S)` : 'Sacoche (S)'
+  if (!tient) return
+  const icone = document.createElement('span')
+  icone.className = `objet__${objets[id].icone}`
+  creux.append(icone)
 }
 
 function ecritEtiquette() {
@@ -1213,7 +1362,15 @@ function ecritEtiquette() {
     curseur.classList.remove('est-sur-cible', 'est-sortie')
     return
   }
-  const nom = nomDe(scene, survolee, contexte())
+  /* L'étiquette et la forme du curseur annoncent ce que le CLIC GAUCHE
+     va faire — sans forçage au HUD, le verbe principal de la cible. Sans
+     ça le geste devient une devinette, et le contextuel ne vaut mieux
+     que le HUD que s'il se lit avant de cliquer. La bulle de « parler »
+     apparaît donc en survolant quelqu'un, sans rien avoir choisi. */
+  const ctx = contexte()
+  const verbe = etat.verbe ?? verbePrincipal(scene, survolee, ctx)
+  curseur.dataset.verbe = verbe
+  const nom = nomDe(scene, survolee, { ...ctx, verbe })
   /* Chantier 42, `PLAN_LISIBILITE.md` §3.2-3.3 : `sortie` est une donnée
      posée par l'auteur de la cible, pas une déduction du moteur (`va:`
      est rendu par la réaction, souvent sous condition). Une cible qui
@@ -1227,7 +1384,7 @@ function ecritEtiquette() {
   curseur.classList.toggle('est-sortie', enSortie)
   if (etat.objetActif) {
     etiquette.innerHTML = `<em>${objets[etat.objetActif].nom}</em> sur ${nom}`
-  } else if (enSortie && etat.verbe === 'utiliser') {
+  } else if (enSortie && verbe === 'utiliser') {
     /* La destination ne se dit que si elle est CONNUE (une chaîne fixe,
        pas `true`) et déjà VISITÉE — sinon on nomme la porte, pas ce
        qu'elle cache (§3.3, point 3 : « on ne divulgue pas la carte »). */
@@ -1236,7 +1393,7 @@ function ecritEtiquette() {
       ? `sortir · vers ${NOMS_LIEUX[dest] ?? dest}`
       : `sortir · ${nom}`
   } else {
-    etiquette.innerHTML = `${etat.verbe} · ${nom}`
+    etiquette.innerHTML = `${verbe} · ${nom}`
   }
   etiquette.hidden = false
   curseur.classList.add('est-sur-cible')
@@ -1303,6 +1460,38 @@ function verifieScene() {
       if (cle in h) console.error(`[${scene.markup}] ${nom} : « ${cle} » doit être DANS regarder/utiliser/parler, pas à côté.`)
     if (Array.isArray(h.objets))
       console.error(`[${scene.markup}] ${nom} : « objets » en TABLEAU est une liste de dons — elle va DANS la réaction. Une carte objet × cible s'écrit en objet.`)
+    /* Une clé d'objet mal orthographiée ne casse rien : elle n'est
+       jamais trouvée, et `resous()` rend le refus générique de la
+       règle 11. Le joueur reçoit un bark là où on avait écrit une
+       réaction, et rien ne le dit — le même bug silencieux que
+       `verifieCarnet()` traque du côté des fiches. */
+    else for (const id of Object.keys(h.objets ?? {}))
+      if (!(id in objets)) console.error(`[${scene.markup}] ${nom} : objet inconnu — « ${id} ».`)
+    /* `principal` désigne le verbe du clic gauche. S'il nomme un verbe
+       que la cible ne porte pas, le clic ne rend plus qu'un refus
+       générique là où on avait écrit une réaction — et rien ne le dit.
+       Une fonction ne se contrôle qu'à l'usage : on ne l'appelle pas au
+       chargement, elle lit un état qui n'existe pas encore. */
+    if (typeof h.principal === 'string' && !(h.principal in h))
+      console.error(`[${scene.markup}] ${nom} : « principal: '${h.principal}' » désigne un verbe que cette cible ne porte pas.`)
+  }
+}
+
+/* Garde-fou du catalogue d'objets (chantier 65). La sacoche LIT
+   `ou` et `regarder` : un objet qui n'en porte pas s'affiche en carte
+   vide, ce qui ressemble à un panneau cassé plutôt qu'à un objet
+   incomplet. Rien d'autre n'est contrôlé ici — savoir si un objet SERT
+   demande de voir les `tient()` dans les corps de fonction, que le
+   chargement ne peut pas lire. Cette mesure-là se fait à l'atelier, pas
+   dans la console : un garde-fou qui crie à tort sur du code juste
+   apprend à ne plus le lire. */
+function verifieObjets() {
+  for (const [id, o] of Object.entries(objets)) {
+    if (!o.nom) console.error(`[objets] « ${id} » n'a pas de nom.`)
+    if (!o.icone) console.error(`[objets] « ${id} » n'a pas d'icône.`)
+    if (!o.ou) console.error(`[objets] « ${id} » n'a pas de provenance (« ou »).`)
+    if (!o.regarder) console.error(`[objets] « ${id} » n'a rien à montrer quand on le regarde.`)
+    if (o.a && !(o.a in equipe)) console.error(`[objets] « ${id} » appartient à un runner inconnu — ${o.a}.`)
   }
 }
 
@@ -1443,7 +1632,7 @@ function brancheStage() {
   stage.addEventListener('pointerleave', () => { curseur.hidden = true; survolee = null; ecritEtiquette() })
 
   stage.addEventListener('click', (e) => {
-    if (!carnet.hidden || !journal.hidden || !reseau.hidden || !gardees.hidden) return
+    if (!carnet.hidden || !journal.hidden || !reseau.hidden || !gardees.hidden || !sacoche.hidden) return
     if (occupe) return suivante()
     if (dialogue) return
     const cible = e.target.closest('[data-hotspot]')
@@ -1451,6 +1640,8 @@ function brancheStage() {
       if (etat.objetActif) { etat.objetActif = null; rafraichit() }
       return
     }
+    /* Le verbe se résout dans `resous()` : sans forçage au HUD, c'est le
+       verbe principal de la cible. Rien à imposer ici. */
     joue(cible.dataset.hotspot)
   })
 
@@ -1471,14 +1662,6 @@ function brancheStage() {
 }
 
 function brancheHud() {
-  for (const bouton of document.querySelectorAll('.verbe')) {
-    bouton.addEventListener('click', () => {
-      etat.verbe = bouton.dataset.verbe
-      etat.objetActif = null
-      rafraichit()
-    })
-  }
-
   for (const bouton of document.querySelectorAll('.runner'))
     bouton.addEventListener('click', () => selectionne(bouton.dataset.runner))
   /* « Rejouer » repartait d'un `location.reload()` qui rechargeait tout
@@ -1501,6 +1684,20 @@ function brancheHud() {
     $('carnetAide').classList.remove('est-refus')
     rafraichit()
   })
+  /* Clic dans le vide de la sacoche : repose l'objet sans fermer, le
+     même geste qu'au carnet. Les jetons stoppent leur propagation. */
+  sacoche.addEventListener('click', () => {
+    if (!etat.objetActif) return
+    etat.objetActif = null
+    rendSacoche()
+    rafraichit()
+  })
+  /* La main OUVRE, toujours — qu'elle soit pleine ou vide. Elle a
+     porté un temps le second métier « reposer ce qu'on tient », et deux
+     métiers sur un bouton en font un qu'on n'ose plus cliquer. Reposer
+     a déjà trois gestes qui ne servent qu'à ça : Échap, le vide du
+     décor, et le jeton qu'on repose dans le panneau. */
+  $('main').addEventListener('click', basculeSacoche)
   $('boutonJournal').addEventListener('click', basculeJournal)
   $('boutonReseau').addEventListener('click', basculeReseau)
   $('boutonGardees').addEventListener('click', basculeGardees)
@@ -1517,20 +1714,46 @@ function brancheHud() {
   addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       etat.objetActif = null
+      /* Échap repose ce qu'on a en main — un objet, une fiche, et
+         maintenant un verbe forcé. La même touche pour « laisse tomber ». */
+      etat.verbe = null
       if (!carnet.hidden) basculeCarnet()
       else if (!journal.hidden) basculeJournal()
       else if (!reseau.hidden) basculeReseau()
       else if (!gardees.hidden) basculeGardees()
+      else if (!sacoche.hidden) basculeSacoche()
       else rafraichit()
     }
     if (e.key === 'c' || e.key === 'C') basculeCarnet()
     if (e.key === 'j' || e.key === 'J') basculeJournal()
     if (e.key === 'r' || e.key === 'R') basculeReseau()
     if (e.key === 'g' || e.key === 'G') basculeGardees()
+    if (e.key === 's' || e.key === 'S') basculeSacoche()
     if (e.key === 'a' || e.key === 'A') changeAllure()
-    if (e.key === '1') { etat.verbe = 'regarder'; etat.objetActif = null; rafraichit() }
-    if (e.key === '2') { etat.verbe = 'utiliser'; etat.objetActif = null; rafraichit() }
-    if (e.key === '3') { etat.verbe = 'parler';   etat.objetActif = null; rafraichit() }
+    /* LES CHIFFRES ONT DEUX MÉTIERS, et les deux modes s'excluent : dans
+       un dialogue ils désignent une réplique, hors dialogue ils forcent
+       un verbe. Le dialogue passe en premier — c'est là qu'on a les
+       mains sur les chiffres, et un forçage de verbe n'y sert à rien. */
+    const chiffre = Number(e.key)
+    if (dialogue && chiffre >= 1 && chiffre <= 9) {
+      /* Le `return` vaut pour TOUT le temps du dialogue, pas seulement
+         quand la liste est à l'écran : entre deux répliques la boîte est
+         masquée une seconde, et un chiffre tapé là forçait un verbe en
+         douce — un mode changé sans que rien ne le dise, découvert en
+         vérifiant ceci dans le navigateur. On est en conversation ; les
+         chiffres n'y ont qu'un métier, et sinon ils ne font rien. */
+      if (boiteChoix.hidden) return
+      const sujet = sujetsOfferts()[chiffre - 1]
+      if (sujet) {
+        e.preventDefault()
+        if (estVerrouille(sujet)) refuseSujet()
+        else { boiteChoix.hidden = true; choisit(sujet) }
+      }
+      return
+    }
+    /* Même bascule qu'au bouton : la touche déjà tenue relâche. */
+    const force = { 1: 'regarder', 2: 'utiliser', 3: 'parler' }[e.key]
+    if (force) { etat.verbe = etat.verbe === force ? null : force; etat.objetActif = null; rafraichit() }
     /* Chiffres = verbes, F1-F4 = runners. Le clavier fait tout. */
     const rangs = ['hercules', 'trash', 'rabbit', 'drakk']
     const f = e.key.match(/^F([1-4])$/)

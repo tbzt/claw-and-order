@@ -86,6 +86,21 @@ horloge: {
 },
 ```
 
+Le **clic gauche joue le verbe principal** de la cible, le clic droit regarde.
+Le principal se déduit sans rien écrire : `parler` s'il existe, sinon
+`utiliser`, sinon `regarder`. On ne pose `principal:` que pour renverser ce
+défaut — et il accepte une fonction quand les deux gestes s'enchaînent :
+
+```js
+principal: ({ a }) => (a('poste-vigie') ? 'parler' : 'utiliser'),
+```
+
+Trois cibles du jeu en portent un. C'est mesuré : sur les 245 cibles qui ont un
+verbe, 33 en ont deux, et 29 de ces 33 ont un `utiliser` qui n'est qu'un refus
+écrit. Le choix n'existait presque jamais — mais là où il existe, il coûte cher
+de se tromper. Un `principal:` en chaîne qui nomme un verbe absent est crié au
+chargement.
+
 Quatre conventions, non négociables, chacune payée par un bug réel :
 
 **`flags`, `objets`, `retire`, `visuels` vont DANS la réaction**, jamais à côté
