@@ -213,9 +213,9 @@ export const tribunal = {
       principal: 'regarder',
       regarder: {
         tous: 'Il descend du couloir du fond, à hauteur de poitrine, et il est plus froid que l’air du parvis.',
-        trash: ['« Ce n’est pas la peur des gens d’ici. Celle-là est en bas, au ras du sol, et elle a mis des années à s’empiler. »',
-                '« Ça, c’est récent, c’est passé vite, et ça ne s’est pas arrêté pour regarder qui attendait dehors. »',
-                '« Je ne saurai pas vous dire quoi. Le couloir du fond mène au dépôt. »'],
+        trash: ['« La peur du lieu est en bas, au ras du sol. Elle a mis des années. »',
+                '« Ça, c’est récent. Et c’est passé vite. »',
+                '« Le couloir du fond mène au dépôt. Je ne vous dirai pas mieux. »'],
         flags: ['courant-lu'],
       },
       utiliser: {
@@ -229,9 +229,9 @@ export const tribunal = {
       principal: 'regarder',
       regarder: {
         tous: 'Au plafond du porche, une patte repliée contre une poutre. Elle ne bouge pas. Elle regarde quand même.',
-        rabbit: ['« Pas d’immatriculation, pas de propriétaire déclaré, et un flux qui sort du bâtiment. »',
-                 '« Elle est posée sous la fenêtre du deuxième. Quelqu’un a choisi cet angle-là, et ce n’est pas le palais. »',
-                 '« Je peux la voir. Je ne peux pas savoir qui la regarde. »'],
+        rabbit: ['« Pas d’immatriculation, pas de propriétaire déclaré. »',
+                 '« Le flux sort du bâtiment. Il va quelque part. »',
+                 '« Où, je ne sais pas. Il faudrait — non, laisse. »'],
         flags: ['araignee-vue'],
       },
       utiliser: {
@@ -250,7 +250,10 @@ export const tribunal = {
             hercules: ['« Celui-là. Je ne sais pas pourquoi. »', '« Alan Jones, une mauvaise nuit, un uniforme mal coupé. Je ne le saurai pas avant qu’il soit trop tard, et ça m’agace depuis trente ans. »'] }
         : qui === 'trash' && a('courant-lu')
           ? { tous: 'Il vous regarde un peu trop longtemps.',
-              trash: ['« Il sort du couloir du fond. »', '« Il n’a rien fait. Il a juste la même température que ce qui en descend. »'] }
+              /* Une seule ligne, et il s'arrête là. « Plus il est touché,
+                 moins il parle » — il constate d'où l'homme sort, il ne
+                 dit pas ce que ça veut dire, parce qu'il n'en sait rien. */
+              trash: '« Il sort du couloir du fond. »' }
           : 'Un garde parmi d’autres.',
     },
 

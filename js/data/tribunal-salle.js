@@ -142,7 +142,7 @@ export const tribunalSalle = {
       regarder: {
         tous: 'La transcription défile en direct au-dessus du banc du greffe, ligne à ligne, à trois mots de retard sur ce qui se dit.',
         rabbit: ['« Elle tourne, elle horodate, et elle n’est signée par personne. »',
-                 '« Ce qui se dit ici n’existera vraiment que quand quelqu’un aura mis son nom en bas. Pour l’instant, c’est du texte. »'],
+                 '« Personne n’a mis son nom en bas. Pas encore, en tout cas — »'],
         flags: ['transcription-vue'],
       },
       utiliser: {
@@ -156,8 +156,8 @@ export const tribunalSalle = {
       principal: 'regarder',
       regarder: {
         tous: 'Une porte basse derrière l’estrade, sans poignée de ce côté-ci. Elle ne mène pas dehors.',
-        drakk: ['« Celle-là ne sert qu’une fois, et pas à nous. »',
-                '« C’est par là qu’ils l’emmèneront, si ça se passe mal. »'],
+        drakk: ['« Pas de poignée, pas de serrure visible, et elle s’ouvre de l’autre côté. »',
+                '« Celle-là ne sert qu’une fois, et pas à nous. C’est par là qu’ils l’emmèneront. »'],
       },
       utiliser: {
         tous: 'Elle n’a pas de poignée de ce côté. C’est le principe.',

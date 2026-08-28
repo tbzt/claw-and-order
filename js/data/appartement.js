@@ -526,9 +526,9 @@ export const appartement = {
         tous: 'À hauteur d’homme, en couche mince, quelque chose de vieux de trois jours et que rien n’a dérangé depuis.',
         trash: a('trace-chaman')
           ? '« C’est toujours là. Ça ne s’en ira pas avant longtemps. »'
-          : ['« La peur est à elle, et elle est courte. Ça n’a pas duré. »',
-             '« Mais il y a autre chose par-dessus, et ce n’est pas de la peur. Quelqu’un a travaillé ici, après. »',
-             '« Quelqu’un qui savait se rendre difficile à voir. Je ne peux pas vous dire qui, ni même quoi. Seulement que ça demande de l’entraînement. »'],
+          : ['« La peur est à elle. Elle est courte. »',
+             '« Il y a autre chose par-dessus. Ce n’est pas de la peur. »',
+             '« Quelqu’un est resté ici après elle, et il ne voulait pas être vu. »'],
         ...(a('trace-chaman') ? {} : { flags: ['trace-chaman'] }),
       }),
       utiliser: {
@@ -542,9 +542,11 @@ export const appartement = {
       principal: 'regarder',
       regarder: {
         tous: 'Une porte, une fenêtre à deux étages du sol, et rien d’autre. Pas d’escalier de secours de ce côté de l’immeuble.',
-        drakk: ['« Par la fenêtre, il faudrait du matériel et deux hommes. Personne n’a fait ça. »',
-                '« Donc il est entré par la porte. Soit elle lui a ouvert, soit il avait de quoi. »',
-                '« Dans les deux cas, la porte s’en souvient. »'],
+        /* Pas de chute (cible < 5 %) : il constate, dans l'ordre, et la
+           dernière ligne est un fait, pas une formule. */
+        drakk: ['« Par la fenêtre, il faudrait du matériel, deux hommes, et une rue vide. »',
+                '« Personne n’a fait ça. Il est entré par la porte, comme quelqu’un qu’on attend. »',
+                '« Le lecteur du hall note tous ceux qui entrent. »'],
       },
       utiliser: {
         tous: 'Il n’y a rien à ouvrir de plus. C’est bien le problème.',
@@ -557,8 +559,8 @@ export const appartement = {
       principal: 'regarder',
       regarder: {
         tous: 'Sur le palier, la fiche d’un logement voisin flotte au ras de la porte : le 4B, et son nœud domestique répond.',
-        rabbit: ['« Il est allumé, et il l’est en permanence. Ce genre de nœud ne s’éteint jamais. »',
-                 '« Ce qui ne me dit rien du tout sur cette nuit-là. Je vois qu’il y a quelqu’un aujourd’hui, c’est tout. »'],
+        rabbit: ['« Le nœud du 4B répond. Ce genre-là ne s’éteint jamais. »',
+                 '« Ça ne dit rien de cette nuit-là. »'],
         flags: ['voisin-present'],
       },
       utiliser: {
