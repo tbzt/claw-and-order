@@ -116,8 +116,8 @@ export const equipe = {
        lit pas, tranché au comité du 2026-08-27, et ça ne change pas.
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
-    attentif: 'Qui doit de l’argent à qui, dans une pièce, il le voit en une minute. Le reste l’ennuie assez vite.',
-    portrait: 'Il est Éveillé, et il n’en parle pas. Ça ne lui sert qu’à une chose : sentir qu’une pièce ne va pas, sans savoir ce qui ne va pas dedans. Il le dit quand même, et il a l’air de s’en excuser.',
+    attentif: 'Qui doit de l’argent à qui, qui se force à sourire — dans une pièce, il le voit en une minute. Le reste l’ennuie assez vite.',
+    portrait: 'Il est Éveillé et n’en parle pas : un sens du danger qui prévient sans jamais dire de quoi. Ancien de l’administration Saito, tombé pour corruption — il était coupable, et il raconte l’histoire autrement. Il doit de l’argent à quelqu’un en permanence.',
     signature: 'sens-du-danger',
   },
 
@@ -203,7 +203,7 @@ export const equipe = {
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
     attentif: 'Ce qui reste dans une pièce quand tout le monde en est sorti. Il regarde souvent à côté de ce qu’on lui montre.',
-    portrait: 'Raton laveur l’a réveillé à seize ans, pendant qu’il coulait. Il a laissé à sa sœur la place qu’on lui gardait au Conseil des Princes, et il ne touche plus à l’argent de la famille.',
+    portrait: 'Raton laveur l’a réveillé à seize ans, alors qu’il sombrait. Il a laissé à sa sœur Saoirse la place qu’on lui gardait au Conseil des Princes, et il ne touche plus à l’argent de la famille.',
     signature: 'raton-laveur',
   },
 
@@ -290,7 +290,7 @@ export const equipe = {
        lit pas, tranché au comité du 2026-08-27, et ça ne change pas.
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
-    attentif: 'Les horodatages, les journaux, une porte qu’on a oublié de fermer. Avec les gens il est beaucoup moins bon, et il le sait.',
+    attentif: 'Les horodatages, les journaux d’accès, un nœud resté ouvert. Avec les gens il est beaucoup moins bon, et il le sait.',
     portrait: ['Humain. Il se présente en ork depuis assez longtemps pour que plus personne ne vérifie, et il commence encore des phrases par « Nous, les orks » sans jamais les finir.',
                'Personne dans l’équipe ne lui a demandé pourquoi.'],
     signature: 'poseur-ork',
