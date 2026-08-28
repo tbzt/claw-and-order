@@ -1645,11 +1645,15 @@ const BILAN = [
   /* D9, tranché le 2026-08-25 (rang 10, `PLAN_TRAME_ACTES_III_IV.md`
      §10) : le front Chimera, symétrique à celui du Tír (`tir-prevenu`/
      `tir-retour`), avance quand on appelle un contact pendant l'acte IV.
-     `chimera-avance` seul suffit ici : sa vraie conséquence — le
-     témoignage sur Hayden qui se rétracte à la barre — se lit déjà dans
-     le dialogue de la 2ᵉ audience (`tribunal-salle.js`). */
+     `chimera-avance` seul suffisait ici : sa conséquence à la barre se
+     lit déjà dans le dialogue de la 2ᵉ audience (`tribunal-salle.js`). */
   ['chimera-alerte', 'Un premier appel, pendant l’enquête. Quelque part, quelqu’un a noté qui posait la question.'],
   ['chimera-avance', 'Un second appel, et cette fois l’information a voyagé plus vite que vous.'],
+  /* Chantier 48.b (`hayden-conteste`, posé `tribunal-salle.js:445` dans
+     la branche `chimera-avance` de la réponse `hayden`) : le drapeau
+     lui-même n'était relu par rien — la salle l'entend une fois, le
+     bilan n'en gardait pas trace. */
+  ['hayden-conteste', 'Le témoin qui devait confirmer le nom n’est jamais entré dans la salle. Quelqu’un lui avait parlé avant vous.'],
 ]
 
 function tombeRideau() {
