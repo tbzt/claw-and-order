@@ -291,8 +291,7 @@ export const equipe = {
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
     attentif: 'Les horodatages, les journaux d’accès, un nœud resté ouvert. Avec les gens il est beaucoup moins bon, et il le sait.',
-    portrait: ['Humain. Il se présente en ork depuis assez longtemps pour que plus personne ne vérifie, et il commence encore des phrases par « Nous, les orks » sans jamais les finir.',
-               'Personne dans l’équipe ne lui a demandé pourquoi.'],
+    portrait: 'Humain. Orphelin riche et seul, il a trouvé dans l’Underground des gens qui s’aimaient comme des frères, et il a payé les opérations pour en être. Le résultat passe, avec des cicatrices. Il commence encore des phrases par « Nous, les orks » sans jamais les finir.',
     signature: 'poseur-ork',
   },
 
