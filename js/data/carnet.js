@@ -48,7 +48,7 @@ export const fiches = {
   },
   'famille-tir': {
     titre: 'Une famille du Tír veut que ça se taise',
-    texte: 'Trash connaît la chanson de l’intérieur : chez lui, ce qui gêne ne se règle pas, ça s’efface.',
+    texte: 'Trash connaît la chanson de l’intérieur. Il n’a pas dit comment.',
     ou: 'Trash, au Claw & Order',
   },
 
@@ -60,14 +60,14 @@ export const fiches = {
   },
   'travail-inacheve': {
     titre: 'Il croyait avoir fini',
-    texte: 'Deux fils entiers dans le compartiment moteur, et une piste astrale qui revient au pas. Un homme qui s’enfuit ne marche pas.',
+    texte: 'Deux fils entiers dans le compartiment moteur, et une piste astrale qui revient au pas.',
     ou: 'Le quai, Sunnyside Beach Park',
   },
 
   /* ── Ce que le goulet apprend ─────────────────────────────────── */
   'toralf-vise-lester': {
     titre: 'Il visait le gamin',
-    texte: 'Deux tirs au goulet, à hauteur d’épaule, sur la place exacte où Lester était assis. Ce n’est pas le bateau qu’on voulait arrêter.',
+    texte: 'Deux tirs au goulet, à hauteur d’épaule, sur la place exacte où Lester était assis.',
     ou: 'Le goulet, au retour',
   },
 
@@ -112,12 +112,12 @@ export const fiches = {
      dise, parce que ce n'est pas au dossier de le dire. */
   'corps-loveland': {
     titre: 'Le corps était à Loveland',
-    texte: 'Retrouvé dans un taudis, à deux rues de là où Lester dormait. Toute la géographie de l’accusation tient dans cette distance-là.',
+    texte: 'Retrouvé dans un taudis, à deux rues de là où Lester dormait.',
     ou: 'Le dossier, à la planque',
   },
   'crime-crapuleux': {
     titre: 'Un crime sans mobile',
-    texte: 'L’accusation a décrété une agression de rue : elle aurait erré là par hasard. C’est commode — ça ne supprime pas le mobile, ça supprime la question du mobile.',
+    texte: 'L’accusation a décrété une agression de rue : elle aurait erré là par hasard. Aucun mobile n’est cherché nulle part dans le dossier.',
     ou: 'Le dossier, à la planque',
   },
   /* L'ADRESSE EST DANS LE DOSSIER (corrigé le 2026-08-25, sur la
@@ -133,12 +133,12 @@ export const fiches = {
      dit que personne n'y est allé. C'est la seconde qui accuse. */
   'adresse-teresa': {
     titre: 'Elle habitait à deux rues',
-    texte: 'TERESA BANKS — dernier domicile connu : 2214 South Sheridan, Loveland, au-dessus d’un pressing. En page deux du dossier, section identité, en haut de la page, comme sur tous les dossiers du monde. À deux rues du taudis où on l’a retrouvée.',
+    texte: 'TERESA BANKS — dernier domicile connu : 2214 South Sheridan, Loveland, au-dessus d’un pressing. En page deux du dossier, section identité. À deux rues du taudis où on l’a retrouvée.',
     ou: 'Le dossier, à la planque',
   },
   'appart-hors-dossier': {
     titre: 'Personne n’a jamais poussé la porte',
-    texte: 'Son adresse est écrite une fois, en page deux, et elle ne reparaît plus jamais : pas une photo, pas un relevé, pas un procès-verbal de transport. Officiellement, ce n’est pas le lieu du crime — donc officiellement, il n’y avait rien à y voir. Il a suffi de ne pas y aller.',
+    texte: 'Son adresse est écrite une fois, en page deux, et elle ne reparaît plus jamais : pas une photo, pas un relevé, pas un procès-verbal de transport. Personne n’y est allé.',
     ou: 'Le dossier, à la planque',
   },
 
@@ -150,7 +150,7 @@ export const fiches = {
      nommait « la laverie » au mot près. */
   'tir-herwick': {
     titre: 'Ils ont su, jusque dans l’arrière-boutique',
-    texte: 'Un rideau de fer, une adresse que personne n’avait notée nulle part, et un tir à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
+    texte: 'Un rideau de fer baissé, une adresse que Herwick n’a jamais donnée à personne, et un tir à huit heures quarante quand même. La boutique n’est référencée nulle part sous son nom.',
     ou: 'Chez Herwick, à huit heures quarante',
   },
   /* CE QUE HERWICK GARDE, ET QU'AUCUN DOSSIER NE PORTE (revu le
@@ -165,7 +165,7 @@ export const fiches = {
      commlink quand l'équipe ressort de chez Teresa. */
   'appart-teresa': {
     titre: 'Le bail est au nom de personne',
-    texte: 'Le studio est loué depuis huit mois, cash, à un nom qui n’existe pas — et ce n’est pas elle qui payait. La patronne du pressing encaisse pour le propriétaire et n’a jamais posé de question : c’est le service qu’on lui achète en même temps que le loyer.',
+    texte: 'Le studio est loué depuis huit mois, cash, à un nom qui n’existe pas — et ce n’est pas elle qui payait. La patronne du pressing encaisse pour le propriétaire et n’a jamais posé de question.',
     ou: 'Herwick Strauber, à l’arrière-boutique',
   },
 
@@ -187,7 +187,7 @@ export const fiches = {
      tir… alors quelqu'un entre », PLAN_PLANQUES.md § 3.4). */
   'tir-duke': {
     titre: 'Ils ont su, jusque dans le sous-sol',
-    texte: 'Un escalier, une adresse que personne n’avait notée nulle part, et quelqu’un qui tente d’entrer à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
+    texte: 'Un escalier, huit hommes armés à l’intérieur, et quelqu’un qui tente d’entrer quand même à huit heures quarante. Duke jure que personne de chez lui n’a parlé.',
     ou: 'Chez Duke, à huit heures quarante',
   },
   /* Le prix qui se paie avant (garde-fou § 4.3 du plan) : Toralf nommé,
@@ -205,7 +205,7 @@ export const fiches = {
      ligne de tir, un préavis », PLAN_PLANQUES.md § 3.4). */
   'tir-squat': {
     titre: 'Ils ont su, jusque dans la loge',
-    texte: 'Une trappe sans adresse, un branchement volé, et quelqu’un qui force quand même le passage à huit heures quarante. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
+    texte: 'Une trappe sans adresse, un branchement volé sur l’atelier du dessous, et quelqu’un qui force quand même le passage à huit heures quarante. Ce lieu n’existe sur aucun registre.',
     ou: 'Chez Trash, à huit heures quarante',
   },
   /* Le gain propre à ce décor (garde-fou § 4.3 du plan) : pas une
@@ -225,7 +225,7 @@ export const fiches = {
      PLAN_PLANQUES.md § 3.5). */
   'tir-tripot': {
     titre: 'Ils ont su, jusque dans le tripot',
-    texte: 'Une porte sans enseigne, une adresse que personne n’avait notée nulle part, et quelqu’un déjà assis à la table qui passe à l’action à huit heures quarante quand même. Personne ne vous a suivis depuis Tacoma — quelqu’un vous a trouvés autrement.',
+    texte: 'Une porte sans enseigne, et quelqu’un déjà assis à la table qui passe à l’action à huit heures quarante. Il était là avant vous : il n’a pas eu à vous suivre.',
     ou: 'Au tripot, à huit heures quarante',
   },
   /* Le gain propre à ce décor (garde-fou § 4.3 du plan) : pas une
@@ -234,7 +234,7 @@ export const fiches = {
      pour regarder ailleurs. */
   'tripot-embauche': {
     titre: 'Il paie cash, et jamais deux fois le même visage',
-    texte: 'Un professionnel, pas un habitué — payé à l’avance pour qu’on regarde ailleurs. Ce n’est pas un nom. C’est une méthode, et elle dit qu’il y en a plus d’un sur ce contrat.',
+    texte: 'Un professionnel, pas un habitué — payé à l’avance pour qu’on regarde ailleurs. Le Patron n’a jamais vu deux fois le même visage.',
     ou: 'Le Patron, au tripot',
   },
 
@@ -266,7 +266,7 @@ export const fiches = {
   },
   'elfes-du-tir': {
     titre: 'Ils sont passés avant vous',
-    texte: 'Trois elfes, polis, deux jours plus tôt. Ils ont posé exactement les mêmes questions que vous, et ils ont laissé une carte de visite — le genre de geste qu’on fait quand on compte revenir.',
+    texte: 'Trois elfes, polis, deux jours plus tôt. Ils ont posé exactement les mêmes questions que vous, et ils ont laissé une carte de visite sur le comptoir. Personne n’a osé la jeter.',
     ou: 'Nova, au local de répétition',
   },
 
@@ -284,7 +284,7 @@ export const fiches = {
      — et qui coûte une trace. */
   'rubans-intacts': {
     titre: 'Personne n’est repassé',
-    texte: 'Les scellés de RA portent leur horodatage de pose et pas une seule rupture depuis. Trois jours, et aucun enquêteur n’a rouvert cette porte. On ne ferme pas une scène de crime le jour où on la trouve — sauf quand on a déjà décidé de ce qu’on écrirait dedans.',
+    texte: 'Les scellés de RA portent leur horodatage de pose et pas une seule rupture depuis. Trois jours, et aucun enquêteur n’a rouvert cette porte.',
     ou: 'L’appartement de Teresa',
   },
   'draps-emportes': {
@@ -294,12 +294,12 @@ export const fiches = {
   },
   'affaires-homme': {
     titre: 'Il vivait ici à moitié',
-    texte: 'Un rasoir en acier massif qui vaut plus cher que la pièce, une seconde brosse à dents, et six gélules blanches dans un flacon sans étiquette. Il ne dormait pas là : il s’y rasait, et il s’y préparait à être brillant ailleurs.',
+    texte: 'Un rasoir en acier massif qui vaut plus cher que la pièce, une seconde brosse à dents, et six gélules blanches dans un flacon sans étiquette. Aucun vêtement d’homme dans l’armoire.',
     ou: 'L’appartement de Teresa',
   },
   'valise-faite': {
     titre: 'Elle partait',
-    texte: 'Une valise cabine à moitié faite sous le lit, les vêtements pliés et pas jetés, la trousse déjà fermée. Rien de sentimental dedans, pas une photo. Ce n’était pas un voyage : c’était un départ, et il avait une date.',
+    texte: 'Une valise cabine à moitié faite sous le lit, les vêtements pliés et pas jetés, la trousse déjà fermée. Rien de sentimental dedans, pas une photo.',
     ou: 'L’appartement de Teresa',
   },
   'maglock-journal': {
@@ -323,7 +323,7 @@ export const fiches = {
   },
   'commlink-coupe': {
     titre: 'Elle l’éteignait elle-même',
-    texte: 'Chaque fois qu’elle sortait retrouver quelqu’un, elle coupait son commlink au comptoir, devant témoin. « Pas pour moi », elle a dit une fois. « Pour lui. » Elle protégeait un nom, pas sa propre trace.',
+    texte: 'Chaque fois qu’elle sortait retrouver quelqu’un, elle coupait son commlink au comptoir, devant témoin. « Pas pour moi », elle a dit une fois. « Pour lui. »',
     ou: 'Iris, au bar du Shameless',
   },
 

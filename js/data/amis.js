@@ -548,7 +548,8 @@ export const amis = {
           quand: ({ a }) => a('carte-vue'),
           texte: ['« Ouais. Ils ont été gentils. »',
                   '« C’est ça qui m’a fait peur, en fait. Ils étaient gentils et ils sont restés une heure. »',
-                  '« Ils ont demandé si elle enregistrait quelque part. Ils ont demandé que ça. »'],
+                  '« Ils ont demandé si elle enregistrait quelque part. Ils ont demandé que ça. »',
+                  '« Pourquoi un enregistrement ? J’en sais rien. J’y pense depuis deux jours. »'],
         },
         {
           id: 'assez',
@@ -600,7 +601,8 @@ export const amis = {
           quand: ({ a }) => a('psych-paye') || a('psych-ecoute'),
           texte: ['« Moi ? Non. Il m’aime pas. »',
                   '« Il aime personne, en fait. Il a un coffre dans la salle de montage et il croit que personne le sait. Tout le monde le sait. »',
-                  '« Faites attention avec sa matrice. Il a mis un truc dessus. Il l’a payé cher, il l’a dit à tout le monde, il était très fier. »'],
+                  '« Faites attention avec sa matrice. Il a mis un truc dessus. Il l’a payé cher, il l’a dit à tout le monde, il était très fier. »',
+                  '« C’est quoi, le truc ? Aucune idée. Moi les machines… »'],
         },
         {
           id: 'assez',
@@ -641,7 +643,8 @@ export const amis = {
                   '« Deux heures. Ils ont pas menacé, ils ont pas payé. Ils ont juste demandé, très poliment, et à la fin t’avais tout dit. »',
                   'Elle se ferme une seconde.',
                   '« J’ai rien dit. J’ai juste répondu. C’est pas pareil non plus. »',
-                  '« Ils cherchaient un enregistrement. C’est le seul truc qu’ils ont demandé deux fois. »'],
+                  '« Ils cherchaient un enregistrement. C’est le seul truc qu’ils ont demandé deux fois. »',
+                  '« Je sais pas ce qu’il y a dessus. Je sais même pas s’il existe. »'],
         },
         {
           id: 'duke',
@@ -736,7 +739,8 @@ export const amis = {
           texte: ['« Je sais. J’étais là. »',
                   '« Ils m’ont demandé pour qui je travaillais, exactement comme je viens de le faire. J’ai répondu. »',
                   'Un temps.',
-                  '« Ils ont pas aimé la réponse. Eux non plus ils l’ont pas dit. »'],
+                  '« Ils ont pas aimé la réponse. Eux non plus ils l’ont pas dit. »',
+                  '« Qui les envoyait ? Aucune idée. Et croyez-moi, j’ai cherché. »'],
         },
         {
           id: 'assez',

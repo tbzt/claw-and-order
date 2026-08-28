@@ -411,7 +411,8 @@ export const bar = {
           titre: '« Les photos, au-dessus. »',
           texte: ['« Elles étaient là avant moi. »',
                   '« J’ai demandé une fois si on les enlevait un jour. On m’a répondu que non. »',
-                  'Il reprend son chiffon.'],
+                  'Il reprend son chiffon.',
+                  '« Leurs noms, je les connais pas. Personne me les a dits et j’ai jamais demandé. »'],
         },
         {
           id: 'partir-barman',
@@ -452,7 +453,8 @@ export const bar = {
           fiches: ['dossier-vide', 'elfe-autopsie'],
           texte: ['« L’autopsie dit que le dernier à l’avoir touchée était un elfe. On n’a pas une trace de lui sur elle. »',
                   '« Le dossier est vide. Je le sais. Ça n’a jamais arrêté personne. »',
-                  '« Et non, j’ai pas dit “parce qu’il est ork”. J’ai pas besoin de le dire. »'],
+                  '« Et non, j’ai pas dit “parce qu’il est ork”. J’ai pas besoin de le dire. »',
+                  '« Qui l’a vidé, ce dossier ? J’ai pas réussi à le savoir. Trente-quatre ans de maison, et j’ai pas réussi. »'],
         },
         {
           id: 'pourquoi',
@@ -460,7 +462,8 @@ export const bar = {
           quand: ({ a }) => a('sait-dossier-vide'),
           fiches: ['navette-huit-heures'],
           texte: ['« Parce que si je le fais transférer par la navette de huit heures, il arrive pas. »',
-                  '« Il aura un accident, ou un remords subit. J’ai déjà lu le rapport, je peux vous le réciter. »'],
+                  '« Il aura un accident, ou un remords subit. J’ai déjà lu le rapport, je peux vous le réciter. »',
+                  '« Qui l’écrira, ce rapport ? Je sais pas. C’est ça qui m’empêche de dormir, pas le reste. »'],
         },
         /* D14 — LA VICTIME.
            Son nom apparaissait UNE FOIS en trois tableaux, comme un
@@ -503,14 +506,16 @@ export const bar = {
           titre: '« McNeil, c’est une île. »',
           quand: ({ a }) => a('sait-le-job'),
           texte: ['« Un passeur. Wilson. Il attend sur un quai à Tacoma, au Sunnyside Beach Park. »',
-                  '« Il est déjà payé, alors discutez pas. Et il essaie de se faire appeler l’Amiral. Ça marche pas, mais il essaie. »'],
+                  '« Il est déjà payé, alors discutez pas. Et il essaie de se faire appeler l’Amiral. Ça marche pas, mais il essaie. »',
+                  '« Est-ce qu’il est fiable ? Aucune idée. Il est disponible. À trois heures du matin, c’est le même mot. »'],
         },
         {
           id: 'mandat',
           titre: '« Et à McNeil, on entre comment ? »',
           quand: ({ a }) => a('sait-le-job'),
           texte: ['« Avec le mandat de transfert. Vous le présentez, ils vous le sortent. C’est légal, je vous rappelle. »',
-                  '« Après, vous vous planquez, et vous êtes au tribunal de Downtown à dix heures. Spring Street, à l’angle de la 5e. »'],
+                  '« Après, vous vous planquez, et vous êtes au tribunal de Downtown à dix heures. Spring Street, à l’angle de la 5e. »',
+                  '« Où vous planquer, ça je sais pas. J’ai jamais eu à me cacher de mes propres collègues. »'],
         },
         {
           id: 'accepter',

@@ -306,7 +306,8 @@ export const greffe = {
           titre: '« Il ne doit pas monter dans cette navette. »',
           quand: ({ a }) => a('mandat-presente') && !a('sas-ouvert'),
           texte: ['« Je sais pas ce que vous racontez et je veux pas le savoir. »',
-                  '« Moi j’ai un registre. Le registre dit huit heures. »'],
+                  '« Moi j’ai un registre. Le registre dit huit heures. »',
+                  '« Qui l’a écrit, cette ligne ? Elle était là quand j’ai pris mon service. Je regarde pas qui signe. »'],
         },
         {
           id: 'couverture',
