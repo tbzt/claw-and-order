@@ -270,7 +270,14 @@ export const tribunalSalle = {
     mccarthy: {
       qui: 'mccarthy',
       accueil: ['« Le juge s’est récusé. Ne me demandez pas pourquoi, je ne le sais pas encore. »',
-                '« L’audience est repoussée. De plusieurs jours. Ce qui veut dire qu’on a le temps — et qu’on n’a plus le choix de s’en servir. »'],
+                '« L’audience est repoussée. De plusieurs jours. Ce qui veut dire qu’on a le temps — et qu’on n’a plus le choix de s’en servir. »',
+                /* Chantier 48.c (`PLAN_NOEUDS_DE_CHAOS` § E0) : le sujet
+                   `contrat` reste un choix à l'aveugle sans cette ligne —
+                   McCarthy annonçait la récusation, jamais ce qu'elle
+                   ouvrait. Les deux sujets ne changent pas : `contrat`
+                   referme (`fin: true`, `sortir.utiliser`), `abri`
+                   continue (`va: 'retour'`). */
+                '« Vous le renvoyez à McNeil, le contrat est rempli, et vous rentrez. Ou vous cherchez qui a fait ça, et je paie les jours. »'],
       retour: ['« L’audience est repoussée. C’est tout ce que je sais de plus que tout à l’heure. »'],
       sujets: [
         {
