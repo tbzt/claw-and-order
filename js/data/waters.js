@@ -1,7 +1,22 @@
 /* ============================================================
-   TABLEAU 11 — WATERS SOUND. Un studio d'enregistrement de quartier, à
-   Puyallup, entre une teinturerie et un armurier fermé depuis des
-   années.
+   TABLEAU 11 — WATERS SOUND. Un studio de simsens SEMI-PRO, à Puyallup,
+   entre une teinturerie et un armurier fermé depuis des années — et à
+   quelques blocs de l'appartement de Teresa.
+
+   Le scénario est net sur ce qui s'y tourne et sur ce qu'est Reginald
+   Waters : « un petit studio de simsens semi-pro à Puyallup où la scène
+   a été tournée », dont le patron est l'un des participants, « fièrement
+   crédité sous le nom de Male Stud Number 3 ». Ce n'était pas un studio
+   de musique et il n'est pas un musicien.
+
+   LE JEU EST EXPLICITE ET NE MONTRE RIEN. On lit son pseudonyme sur son
+   mur, il en parle sans gêne, le plateau est décrit comme un décor de
+   chambre vide qu'on a passé à la serpillière. Aucune image, jamais.
+
+   ET IL N'EST PAS EN DEUIL. Il a compris qu'une morte vaut plus cher
+   qu'une vivante et il compte s'en servir ; ce qui le retient est qu'il
+   commence à avoir peur d'être dans la pièce quand on comptera les
+   noms. C'est ça qu'on retourne, jamais sa dignité.
 
    CHANTIER 43 — `PLAN_TRAME_ACTES_III_IV.md` § 7.1, RANG 8 DU § 10.
    Quatrième lieu de l'acte IV, après le local (28), l'appartement (26)
@@ -14,7 +29,7 @@
    ══ LA PRÉMISSE, VÉRIFIÉE AVANT D'ÉCRIRE UNE LIGNE ═══════════════════
    Le tableau n'improvise rien : `amis.js` a posé la fiche
    `enregistrement-waters` (Psych, contre un créditube OU gratuitement
-   en parlant chant) et un sujet entier, `waters` (chez Psych), qui
+   en parlant d'elle) et un sujet entier, `waters` (chez Psych), qui
    annonce déjà les trois éléments du § 7.1 :
 
      « Il a un coffre dans la salle de montage… tout le monde le sait. »
@@ -33,24 +48,27 @@
 
    ══ CE QUE WATERS EST, ET CE QU'IL N'EST PAS ═════════════════════════
    Ni un deuil (Herwick, Iris) ni une loyauté (Mark) ni une cause
-   (Nita) : Psych l'a déjà dit — « il aime personne, en fait ». Un
-   collectionneur paranoïaque et vaniteux, qui protège moins Teresa que
-   sa propre réputation de coffre-fort. La faute qui le ferme n'est donc
-   PAS payer (à l'inverse de Mark/Iris, un quatrième « ne payez pas »
-   aurait été une répétition) : c'est l'INSULTER en le traitant comme un
-   fourgueur qu'on achète, quand ce qu'il veut, c'est qu'on reconnaisse
-   ce qu'il a fait. Trois routes, une seule ferme les deux autres :
+   (Nita). Psych dit « il aime personne, en fait » : il a raison sur le
+   fond et tort sur la raison, et le tableau le démontre en pire.
 
-     `troisieme-prise`  (si `sait('enregistrement-waters')`) — utiliser
-                        exactement le détail que Psych a donné en plus,
-                        gratuitement, en répondant à SA question. Une
-                        récompense pour avoir écouté jusqu'au bout.
-     `metier` (Trash)   — lire sa solitude plutôt que son coffre. Une
-                        route de secours qui ne demande rien de plus
-                        que d'avoir emmené Trash.
-     `creditube`        — la faute. Ferme les deux routes ci-dessus pour
-                        de bon (`waters-vexe`), sans fermer le tableau :
-                        il reste la voie technique, plus chère.
+   Waters garde l'enregistrement parce qu'il vaut plus cher depuis
+   qu'elle est morte, et il le sait. Ce qui le fait céder n'est donc
+   jamais un hommage — c'est le calcul qui bascule. Trois routes, et une
+   seule ferme les deux autres :
+
+     `trace`   (si `sait('enregistrement-waters')`) — les elfes du Tír
+               sont déjà passés et reviendront ; tant qu'il l'a, ils ont
+               une raison de revenir chez lui. Se défaire de la chose,
+               c'est du ménage, et il le dit comme ça.
+     `dessus` (Trash) — lui rappeler qu'il FIGURE dessus, sous son
+               pseudonyme encadré au mur. Il ne l'avait pas pensé dans
+               cet ordre-là ; maintenant si.
+     `creditube` — la faute, et elle a changé de nature. Il ne s'en
+               vexe pas : il empoche, et il ouvre les enchères. On lui a
+               appris qu'on payait, et il ne redescendra plus. Le drapeau
+               garde son nom (`waters-vexe`) parce que des sauvegardes le
+               portent, mais ce n'est plus une vexation — c'est un prix
+               plancher. Il reste la voie technique, plus chère.
 
    ══ LE COFFRE — DEUX ROUTES, MÊME PRIX, PAS LA MÊME QUALITÉ ══════════
    Encore une fois « ce qui se choisit, ce n'est pas SI on obtient »
@@ -91,10 +109,10 @@ export const waters = {
       : ['La casquette est toujours vissée sur le crâne, les bras toujours croisés. Rien n’a changé, et c’est mauvais signe : ça veut dire qu’il a eu tout ce temps pour se convaincre qu’il avait raison de refuser.',
          'OBJECTIF — reprendre ce qu’on n’a pas obtenu la première fois.'],
   ] : [
-    'Un studio d’enregistrement de quartier, coincé entre une teinturerie et un armurier fermé depuis des années. L’enseigne dit WATERS SOUND — le S final a lâché il y a longtemps, et personne n’a jamais payé pour le remplacer.',
+    'Un local sans vitrine, coincé entre une teinturerie et un armurier fermé depuis des années. L’enseigne dit WATERS SOUND — le S final a lâché il y a longtemps, et personne n’a jamais payé pour le remplacer. Ce qu’on tourne là-dedans n’a pas besoin d’enseigne.',
     ['waters', '« Psych a appelé. Il a dit que des gens viendraient poser des questions sur une fille. Il a pas dit lesquelles, ni combien. »'],
-    'Reginald Waters ne s’écarte pas encore de la porte — casquette usée, cardigan élimé sur une chemise autrefois repassée, une paire de gros écouteurs en permanence autour du cou, comme un stéthoscope qu’il aurait cessé d’utiliser sur des vivants.',
-    'OBJECTIF — repartir avec ce qu’il garde. Il ne le donnera à personne qui le lui demande mal.',
+    'Reginald Waters ne s’écarte pas encore de la porte — casquette usée, cardigan élimé, l’air d’avoir dormi ici. Il regarde vos mains avant vos visages, et il a déjà commencé à compter.',
+    'OBJECTIF — repartir avec ce qu’il garde. Il ne le donnera pas par bonté : il faut qu’il ait plus peur de l’avoir que de le perdre.',
   ],
 
   /* Comme aux trois lieux précédents : tout se décide PENDANT la
@@ -109,12 +127,12 @@ export const waters = {
 
   vues: {
     sociale: [
-      'Une console de mixage qui a dû coûter cher il y a vingt ans, un mur de disques encadrés dont la moitié ne sont sans doute même pas d’or, et une cabine vitrée qui n’a pas vu de musicien depuis un moment.',
+      'Un banc de montage racheté d’occasion, un mur de jaquettes encadrées, et au fond, derrière une vitre, une chambre montée pour qu’on la prenne en photo — pas pour qu’on y dorme.',
       '« Il vit là-dedans plus qu’il n’y travaille. »',
       '« La poussière est partout, sauf sur ce qui compte pour lui. On apprend beaucoup d’un homme en regardant ce qu’il essuie. »',
     ],
     astrale: [
-      'Une pièce saturée de petites vanités empilées, année après année. Chaque disque encadré est accroché face à la porte.',
+      'Une pièce saturée de petites vanités empilées, année après année. Chaque jaquette encadrée est accrochée face à la porte, à hauteur d’œil.',
       '« Il est seul depuis longtemps. »',
       '« Il a fini par préférer les enregistrements. »',
     ],
@@ -149,14 +167,23 @@ export const waters = {
           : a('waters-convaincu')
             ? ['Il a arrêté de croiser les bras. Ce n’est pas de la confiance — c’est de la résignation, avec une pointe de quelque chose qui ressemble presque à du soulagement.',
                'Personne, avant vous, ne lui avait demandé de PARLER de ce qu’il gardait. Seulement de le rendre.']
-            : ['Un homme d’une soixantaine d’années, casquette vissée, cardigan élimé, une paire d’écouteurs autour du cou qu’il ne retire jamais — même pour dormir, à en juger par leur usure.',
-               'Il vous regarde comme on regarde un client qui n’a pas de rendez-vous : avec l’attention polie de quelqu’un qui a déjà décidé de refuser.'],
+            : ['Un homme d’une soixantaine d’années, casquette vissée, cardigan élimé, l’air d’avoir dormi ici. Il s’écarte de la porte de quinze centimètres et pas d’un de plus.',
+               'Il vous jauge en descendant, des chaussures aux mains, et il calcule. Ça ne prend pas longtemps et ça ne se cache pas.'],
+        /* IL N'A PAS DE DIGNITÉ À BLESSER, ET C'EST LE SUJET. Ce qui le
+           tient n'est ni le deuil ni le métier : c'est qu'il a compris
+           tout seul qu'une fille morte vaut plus cher qu'une fille
+           vivante, et qu'il a peur d'être le prochain nom sur la liste
+           de quelqu'un. Les quatre le lisent, chacun par son bout. */
         hercules: a('waters-vexe')
-          ? '« Je viens de perdre trente ans de métier sur une seule phrase. Cet homme ne voulait pas d’argent. J’ai insisté quand même. »'
-          : '« Un homme qui n’a jamais vendu ce qu’il a de plus précieux, et qui en meurt d’envie qu’on le lui demande bien. Ça, je sais faire. »',
-        trash: '« Son aura est toute repliée sur elle-même, comme celle d’un homme qui vit seul depuis si longtemps qu’il a oublié le son de sa propre voix quand elle n’explique rien à personne. »',
-        rabbit: '« Zéro trace en ligne à son nom depuis quinze ans. Un type qui a arrêté d’exister pour tout le monde sauf pour ceux qui viennent frapper à sa porte. »',
-        drakk: '« Le gardien du trésor qui n’a plus de compagnie à impressionner. Il continue de le garder quand même — certains serments ne demandent pas de témoin. »',
+          ? '« Je lui ai montré l’argent trop tôt. Maintenant il sait qu’on en a, et il va compter à voix haute. »'
+          : ['« Il a déjà mis un prix dessus. Il l’avait avant qu’on frappe. »',
+             '« Ce qui m’intéresse, c’est qu’il ait quand même l’air de mal dormir. »'],
+        trash: ['« Il n’est pas en deuil. Je cherche, il n’y en a pas. »',
+                '« Ce qu’il y a à la place, c’est de l’excitation et de la peur, et les deux tirent sur la même corde. »'],
+        rabbit: ['« Zéro trace en ligne à son nom depuis quinze ans, et trois productions où il s’est distribué lui-même. »',
+                 '« Il est dessus. S’il vend, il se vend avec. Je ne sais pas encore s’il l’a compris. »'],
+        drakk: ['« Il garde le trésor et il fait partie du trésor. »',
+                '« Je ne sais pas quel nom donner à ça. Chez nous il n’y en avait pas. »'],
       }),
       parler: ({ a }) => {
         if (a('enregistrement-recupere'))
@@ -173,14 +200,23 @@ export const waters = {
             return { tous: 'Il ne le regarde même pas. « C’est réglé, ça, ou ça l’est plus. »' }
           if (a('waters-vexe'))
             return { tous: 'Il ne le regarde toujours pas. « J’ai rien de plus à vous dire, et vous n’avez rien de plus à m’offrir. »' }
+          /* L'ARGENT NE LE VEXE PAS : IL LUI DONNE LE PRIX PLANCHER.
+             C'est l'inverse exact de Mark et d'Iris, et c'est pour ça
+             que la faute est ici la même en apparence et opposée en
+             nature. On ne l'a pas insulté — on lui a appris qu'on payait,
+             et il ne redescendra plus. `waters-vexe` garde son nom : des
+             sauvegardes le portent, et c'est toujours la route fermée. */
           return {
-            tous: ['Tu poses le créditube sur la console, entre les deux VU-mètres.',
-                   'Il le regarde une seconde de trop, et quelque chose se ferme dans son visage — pas de la colère, quelque chose de plus vieux.',
-                   ['waters', '« … Vous croyez que je fais ça pour l’argent. »'],
-                   ['waters', '« Trente ans que je mets ce que les gens ont de plus vrai dans une boîte, et vous croyez que c’est un tarif. »'],
-                   'Il repousse le tube sans le toucher, et retourne s’asseoir face à sa console, dos à vous.'],
-            hercules: '« Reprends ça. Range-le, tout de suite — j’aurais dû le voir venir. »',
-            trash: '« Ce n’était jamais une histoire d’argent. On vient de le lui prouver de la pire façon. »',
+            tous: ['Tu poses le créditube sur le banc de montage.',
+                   'Il ne le repousse pas. Il le prend, le retourne, lit le solde, et le garde à la main pendant tout le reste de la conversation.',
+                   ['waters', '« Deux mille. »'],
+                   ['waters', '« C’est un bon début. C’est même un très bon début, pour quelqu’un qui vient d’arriver. »'],
+                   'Il sourit pour la première fois. C’était une enchère, et vous venez de l’ouvrir tout seuls.'],
+            hercules: ['« … J’ai ouvert. »',
+                       '« Règle numéro un, et je viens de la casser devant vous : on ne montre jamais le premier chiffre. »'],
+            trash: '« Il ne voulait pas d’argent tout à l’heure. Maintenant il en veut, et c’est nous qui le lui avons appris. »',
+            rabbit: '« Il n’a même pas fait semblant d’hésiter. »',
+            drakk: '« Nous venons d’acheter le droit de payer plus cher. »',
             flags: ['waters-vexe'],
           }
         },
@@ -219,7 +255,7 @@ export const waters = {
                    'Le coffre s’ouvre sur un boîtier de commlink tout simple, encore dans son emballage d’origine entamé, jamais connecté à rien.',
                    ['waters', '« Elle me l’a apporté neuf. Elle a dit : “Comme ça, il n’existe nulle part sauf ici.” Elle avait raison. »'],
                    'Il vous le tend. Ce n’est pas un objet précieux à regarder — c’est un commlink comme il s’en vend cent par jour. C’est tout ce qu’il contient qui ne l’est pas.',
-                   ['waters', '« Quatre titres. Elle chantait, entre les prises. Prenez-en soin. »']],
+                   ['waters', '« Tout est dessus, rien n’est monté. Vous en faites ce que vous voulez — moi je l’ai plus. »']],
             hercules: '« Voilà quelqu’un qui vient de se faire confiance à lui-même plus qu’à personne d’autre dans cette pièce. Ça ne s’achète pas. Je viens de le vérifier deux fois cette nuit. »',
             drakk: ['« Le gardien remet lui-même la clé. »', '« Personne ne la lui a prise. »'],
             flags: ['enregistrement-recupere'],
@@ -253,54 +289,77 @@ export const waters = {
     },
 
     /* ══ LA CONSOLE — décor, texture matricielle pour Rabbit ═════════ */
-    console: {
-      nom: 'La console de mixage',
+    /* ══ LE BANC DE MONTAGE ═══════════════════════════════════════════
+       Le scénario : « un petit studio de simsens semi-pro à Puyallup où
+       la scène a été tournée ». Semi-pro veut dire ce qu'il veut dire —
+       du matériel de seconde main dans un local entre une teinturerie
+       et un armurier fermé. On dit ce que c'est ; on ne montre rien. */
+    montage: {
+      nom: 'Le banc de montage',
       regarder: {
-        tous: ['Des dizaines de curseurs usés à l’endroit exact où une main revient sans cesse. Vingt ans de matériel qui a plus servi qu’il n’a jamais rapporté.',
-               'Un cendrier plein, jamais vidé, à côté d’un casque qui ne quitte jamais son crochet — celui autour du cou de Waters est son seul, son vrai casque.'],
-        hercules: '« Ce matériel a coûté une fortune il y a vingt ans et n’en vaut plus rien aujourd’hui. Il ne l’a jamais changé. Certains hommes gardent leurs outils comme d’autres gardent des photos. »',
-        rabbit: '« Rien de connecté là-dedans, à part le strict nécessaire. Un studio entier qui a choisi de rester hors ligne, curseur par curseur. »',
-        drakk: '« Un autel à un dieu qui n’écoute plus. Il continue de faire les offrandes. »',
+        tous: ['Un fauteuil éventré devant un banc de montage simsens de seconde main, deux couronnes de trodes posées dessus, dont une réparée au ruban.',
+               'Un cendrier plein, jamais vidé. Les commandes sont usées à l’endroit exact où une main revient sans cesse.'],
+        hercules: ['« Du matériel semi-pro racheté d’occasion, dans un local qu’il ne chauffe pas. Ce type ne gagne pas d’argent. »',
+                   '« Ce qui rend beaucoup plus intéressant ce qu’il attend de nous. »'],
+        trash: ['« Il y a des restes sur ces trodes. Pas des souvenirs — des sensations, mises là par des gens qui n’étaient pas contents d’y être. »',
+                '« Je ne toucherai pas ça. »'],
+        rabbit: ['« Banc de montage sensoriel, entrée directe. Ce qu’on enregistre là-dedans, ce n’est pas de l’image : c’est ce que la personne a senti. »',
+                 '« Et ça se copie exactement comme le reste. »'],
+        drakk: '« Un siège, deux couronnes, et de quoi mettre dans la tête d’un inconnu ce qu’un autre a vécu. Je préfère les livres. »',
       },
       utiliser: 'Tu ne touches pas au matériel de quelqu’un d’autre — encore moins celui-là.',
     },
 
-    /* ══ L'ARCHIVE — « il garde tout », dit littéralement (Psych) ═════ */
+    /* ══ LE CATALOGUE — « il garde tout », dit littéralement (Psych) ══ */
     archive: {
-      nom: 'Les rayonnages de bandes',
+      nom: 'Le catalogue',
       regarder: {
-        tous: ['Des étagères entières de bandes et de disques durs, étiquetés à la main, par date — pas par nom d’artiste. Waters classe par jour, jamais par personne.',
-               'Des centaines d’heures de prises ratées, de silences entre deux chansons, de voix qui ne savaient pas qu’on les gardait. Il garde tout. Psych ne mentait pas.'],
-        hercules: '« Une vie entière rangée par date plutôt que par nom. Ça devrait me sembler pratique. Ça me semble surtout très seul. »',
-        trash: '« Il y a plus de gens vivants là-dedans, en un sens, que dans le reste de cette pièce. Ce ne sont que des voix, mais ce sont des voix qu’il a choisi de ne jamais laisser partir. »',
-        rabbit: ['« Aucun de ces disques n’est indexé nulle part en ligne. »', '« Il n’a jamais rien mis là où on pourrait le chercher. »'],
+        tous: ['Des rayonnages de puces en boîtiers plastique, étiquetés à la main, par date — pas par titre. Waters classe par jour de tournage.',
+               'Les jaquettes sont sous film. Les titres se passent de commentaire, et personne dans la pièce n’a envie d’en lire un deuxième.'],
+        hercules: '« Quinze ans de production rangés par date. Il sait exactement ce qu’il a et où c’est. Ça, ce n’est pas un collectionneur : c’est un stock. »',
+        trash: ['« Il y a des gens là-dedans qui ne savaient pas ce qu’ils vendaient. »',
+                '« On s’en va d’ici dès qu’on a ce qu’on est venus chercher. »'],
+        rabbit: ['« Rien n’est indexé en ligne. Aucun de ces titres n’existe sur la Matrice sous ce nom-là. »',
+                 '« Il ne vend pas au public. Il vend à des gens qui savent où frapper. »'],
       },
-      utiliser: 'Il y a des centaines d’heures là-dedans, et vous n’en cherchez qu’une. Fouiller au hasard ne trouverait rien qu’un refus de Waters ne trouve pas plus vite.',
+      utiliser: 'Il y a quinze ans de tournages là-dedans, et vous n’en cherchez qu’un. Fouiller au hasard ne trouverait rien qu’un refus de Waters ne trouve pas plus vite.',
     },
 
-    /* ══ LE MUR DE DISQUES — son ego, exposé ══════════════════════════ */
+    /* ══ LE MUR — son ego, et l'aveu qu'il ne voit pas comme un aveu ══
+       C'est ici que le jeu est FRANC : le scénario dit qu'il figure sur
+       l'enregistrement de Teresa, « fièrement crédité sous le nom de
+       Male Stud Number 3 ». On le lit sur son mur, avant même de lui
+       parler — et rien n'est montré. */
     murs: {
-      nom: 'Le mur de disques encadrés',
+      nom: 'Le mur encadré',
       regarder: {
-        tous: ['Une douzaine de disques encadrés, certains dorés, la plupart de groupes que personne dans la pièce n’a jamais entendu nommer.',
-               'Une photo, plus petite que les autres, glissée dans un coin du cadre le plus visible : un homme plus jeune, une guitare, une scène. Ce n’est pas un client. C’est lui.'],
-        hercules: '« Un mur entier de preuves qu’il a réussi quelque chose, et une seule photo, minuscule, de la fois où il a essayé d’être celui qu’on encadre. Je connais ce mur-là. Le mien tiendrait sur un timbre. »',
-        trash: '« Il a arrêté de jouer et il a commencé à enregistrer les autres. Ce mur n’est pas de la fierté. C’est un deuil qu’il a appris à accrocher au lieu de le pleurer. »',
-        drakk: '« Le barde qui a rangé son instrument pour devenir le scribe de tous les autres bardes. Il en existe dans chaque taverne. Je ne les ai jamais trouvés heureux. »',
+        tous: ['Une douzaine de jaquettes encadrées, derrière verre, alignées avec soin. Des productions maison, tirées à peu d’exemplaires.',
+               'Sur trois d’entre elles, la même ligne au bas de la distribution, en petits caractères : MALE STUD NUMBER 3. C’est le seul nom du mur qui revienne, et c’est le sien.'],
+        hercules: ['« Il s’est encadré lui-même, sous un pseudonyme, et il l’a accroché à hauteur d’œil pour les visiteurs. »',
+                   '« Cet homme n’a honte de rien. C’est une information, et elle va nous servir. »'],
+        trash: '« Il regarde ce mur tous les jours. Ce n’est pas une pièce où l’on cache quelque chose : c’est une pièce où l’on expose. »',
+        rabbit: ['« Trois productions sur douze où il s’est distribué lui-même. »',
+                 '« Il est DESSUS. Sur celle qu’on vient chercher aussi, probablement. »'],
+        drakk: '« Il a écrit son nom de guerre sous ses propres exploits, et il l’a mis sous verre. J’ai connu des seigneurs de guerre plus discrets. »',
       },
       utiliser: 'Tu ne décroches rien. Ce mur est la seule chose de la pièce qu’il regarde encore avec plaisir.',
     },
 
-    /* ══ LA CABINE — vitrée, vide, texture ═══════════════════════════ */
-    cabine: {
-      nom: 'La cabine d’enregistrement',
+    /* ══ LE PLATEAU — vide, froid, et c'est tout ce qu'on en voit ═════
+       Rien n'est montré, jamais : la pièce dit ce qui s'y fait par ses
+       meubles et par le ménage, pas par une image. */
+    plateau: {
+      nom: 'Le plateau',
       regarder: {
-        tous: ['Une petite cabine vitrée, insonorisée, un pied de micro sans micro dessus. La mousse acoustique aux murs a jauni par plaques.',
-               'Personne n’a chanté là-dedans depuis un moment. La poussière sur le pied de micro le confirme mieux que Waters ne le dirait.'],
-        trash: '« C’est ici qu’elle s’asseyait, entre deux prises, à lui parler de tout sauf de la chanson. Il n’a jamais retiré le tabouret. »',
-        rabbit: '« Isolée du réseau, comme le reste. Une cabine qui n’enregistre que ce qui s’y dit à voix haute, jamais ce qui en sort par un câble. »',
+        tous: ['Au fond, derrière une vitre, une pièce meublée pour ressembler à une chambre : un lit, deux lampes sur pied, un fauteuil qui ne va avec rien.',
+               'Tout est propre. Les draps sont tirés, le sol a été passé, et rien là-dedans n’a l’air d’avoir servi à quelqu’un qui y habitait.'],
+        hercules: '« Une chambre montée par quelqu’un qui n’a jamais dormi dedans. Tout est à quarante centimètres de là où ça devrait être. »',
+        trash: ['« Il y a beaucoup de monde passé par cette pièce, et presque personne n’en est reparti content. »',
+                '« Je préfère regarder ailleurs, si ça ne vous fait rien. »'],
+        rabbit: '« Hors réseau, comme le reste. Ce qui se tourne là-dedans ne sort d’ici que dans la main de quelqu’un. »',
+        drakk: '« Un décor de chambre, sans personne pour l’habiter. C’est plus triste qu’un champ de bataille, et je pèse ce que je dis. »',
       },
-      utiliser: 'Tu entres une seconde. Le silence, là-dedans, est un silence différent de celui du reste de la pièce — plus épais, plus volontaire.',
+      utiliser: 'Tu n’as aucune raison d’entrer là-dedans, et trois de ne pas le faire.',
     },
 
     /* ══ LA PORTE — la sortie, sans gate (comme au local, à
@@ -342,38 +401,45 @@ export const waters = {
                   '« Y a trois jours, trois elfes sont passés. Polis. Ils ont posé les mêmes questions que vous, dans le même ordre, et j’ai rien aimé du tout. »',
                   '« J’ai rien dit. Mais j’ai commencé à mieux fermer ma porte. »'],
         },
+        /* CE QUI L'OUVRE N'EST PLUS UN HOMMAGE, C'EST LA PEUR. Il tient
+           l'enregistrement parce qu'il compte le monnayer maintenant
+           qu'elle est morte — et il dort mal parce qu'il commence à
+           comprendre ce que ça fait de lui. Deux routes, et aucune n'est
+           de la gentillesse : lui mettre le Tír sous les yeux, ou lui
+           rappeler qu'il est DESSUS. */
         {
-          id: 'troisieme-prise',
-          titre: '« La troisième prise. C’est toujours la bonne, avec elle. »',
+          id: 'trace',
+          titre: '« Les elfes reviendront, et ils savent où c’est. »',
           quand: ({ sait, a }) => sait('enregistrement-waters') && !a('waters-convaincu') && !a('waters-vexe') && !a('enregistrement-recupere'),
           flags: ['waters-convaincu'],
-          texte: ['Il se fige, une demi-seconde de trop pour que ce soit anodin.',
-                  '« … Qui vous a dit ça. »',
-                  '« Personne dit jamais ça. Les gens demandent le nom, l’adresse, ce qu’elle a dit. Personne demande jamais COMMENT elle chantait. »',
-                  'Il retire enfin les écouteurs de son cou, comme s’ils venaient de devenir inutiles.',
-                  '« Vous êtes les premiers en trois jours à me parler d’elle plutôt que de ce que je peux vous donner. »',
-                  '« D’accord. Venez. »'],
+          texte: ['Il arrête de sourire.',
+                  '« Ils sont déjà venus. Trois. Polis. »',
+                  '« Ils ont pas demandé à acheter. Ça, c’est ce qui m’a pas plu. Les gens qui achètent, tu sais ce qu’ils veulent. »',
+                  'Il regarde la porte du fond, puis vous, puis la porte du fond.',
+                  '« … Si je vous le donne, je l’ai plus. Si je l’ai plus, y a plus de raison de revenir ici. »',
+                  '« C’est pas un cadeau que je vous fais. C’est du ménage. Venez. »'],
         },
         {
-          id: 'metier',
-          titre: '« Vous ne les gardez pas pour l’argent. Vous les gardez parce que personne d’autre ne le fera. » (Trash)',
+          id: 'dessus',
+          titre: '« Vous êtes dessus. Male Stud Number 3. » (Trash)',
           acteur: 'trash',
           quand: ({ a }) => !a('waters-convaincu') && !a('waters-vexe') && !a('enregistrement-recupere'),
           flags: ['waters-convaincu'],
           texte: ['Trash ne dit rien d’autre. Il ne pose pas de question — il constate, et il attend.',
                   'Waters met un long moment avant de répondre.',
-                  '« … J’ai arrêté de jouer à vingt-huit ans. J’étais pas mauvais. J’étais pas assez bon non plus, et la différence, ça vous ronge lentement. »',
-                  '« Alors j’enregistre ceux qui essaient encore. C’est pas de la charité. C’est la seule chose qui me reste qui ressemble à en faire partie. »',
-                  '« Elle, elle avait ce que j’ai jamais eu. Je vais pas laisser des elfes polis décider ce qu’il en reste. »',
-                  '« Venez. »'],
+                  '« C’est encadré sur le mur, hein. C’est pas un secret. »',
+                  '« … Sauf que là, la fille est morte, et que la moitié de Seattle va vouloir savoir qui était dans la pièce. »',
+                  'Il pose enfin le créditube, ou la casquette, ou ce qu’il tenait.',
+                  '« J’avais pas pensé à ça dans cet ordre-là. Venez. »'],
         },
         {
           id: 'apres',
-          titre: '« Pourquoi vous, et pas les autres ? »',
+          titre: '« Pourquoi nous, et pas les elfes ? »',
           quand: ({ a }) => a('waters-convaincu') || a('enregistrement-recupere'),
-          texte: ['« Y en a eu deux, avant vous — pas les elfes, avant eux. Ils m’ont proposé de l’argent direct, sans un mot pour elle. J’ai rien donné. »',
-                  '« Vous, vous avez fini par demander la bonne chose. C’est déjà plus que ce que la plupart des gens pensent à faire. »',
-                  'Il hausse les épaules, presque gêné de l’avoir dit à voix haute.'],
+          texte: ['« Parce que vous, vous repartez avec. Eux, ils repartaient avec ET ils revenaient. »',
+                  '« Y a un môme en taule pour ça, il paraît. Un ork. »',
+                  'Il hausse les épaules.',
+                  '« Ça me fait rien. Mais si ça peut le sortir, ça me fait rien non plus. »'],
         },
         {
           id: 'assez',

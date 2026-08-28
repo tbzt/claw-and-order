@@ -1,6 +1,12 @@
 /* ============================================================
-   TABLEAU 8 — LE LOCAL DE RÉPÉTITION. Les amis de Teresa Banks.
-   Trois jours après la récusation, un matin, à Loveland.
+   TABLEAU 8 — CHEZ MARK, À RENTON. Les amis de Teresa Banks.
+   Trois jours après la récusation, un matin.
+
+   Le tableau se jouait dans un local de répétition, et Teresa y était
+   chanteuse : les deux sont faux. Le scénario (p. 22) donne quatre
+   spectateurs qui étaient AVEC ELLE au concert de Cerberus & Erebus à
+   l'Underworld 93, et une fille qui est montée sur scène pour DANSER.
+   Le lieu de la veillée est donc chez le seul qui ne peut plus sortir.
 
    CHANTIER 28 — `PLAN_TRAME_ACTES_III_IV.md` § 7.3, RANG 5 DU § 10 :
    « le plus proche de la thèse, donc le premier de l'acte IV — pas le
@@ -38,14 +44,14 @@
             tentation vénale revient ici, et elle a un goût amer »).
             L'amertume n'est pas une punition : c'est qu'il aurait parlé
             gratuitement à qui l'aurait interrogé sur la musique — le
-            sujet `chantait` est ouvert dès la première seconde, et il
+            sujet `dansait` est ouvert dès la première seconde, et il
             donne la même fiche. On ne s'en veut qu'après, et seulement
             si on a payé d'abord. C'est exactement ce que le plan
             demandait, et ce n'est pas jouable autrement.
      NOVA   elle a été interrogée par les runners du Tír et ne le dit
             pas spontanément. Deux raisons de faire confiance, et deux
             seulement : avoir LU la carte qu'ils ont laissée (`carte-vue`,
-            au comptoir), ou porter un nom de gang qu'elle reconnaît —
+            sur la table), ou porter un nom de gang qu'elle reconnaît —
             Duke, et c'est White_Rabbit qui le porte (sujet à `acteur`,
             visible-mais-verrouillé pour les trois autres, chantier 38).
      NITA   elle donne, mais elle veut savoir pour qui. Deux sujets
@@ -101,16 +107,29 @@ export const amis = {
      changé de personnes. */
   ouverture: ({ a }, visite) => visite > 1 ? [
     ...(a('tir-retour')
-      ? ['Le rideau de fer est toujours à mi-hauteur. Dedans, ils sont trois au lieu de quatre, et personne ne dit qui manque.',
+      ? ['La porte du studio est entrouverte, comme la première fois. Dedans, ils sont trois au lieu de quatre, et personne ne dit qui manque.',
          'Nita range ses tracts dans un carton. Elle ne les trie plus.',
          '« Ils sont revenus. Après vous. Ils ont demandé ce que vous aviez demandé, dans le même ordre. »']
-      : ['Le rideau de fer est toujours à mi-hauteur, et ils sont toujours quatre. Rien n’a bougé — dans une pièce comme celle-ci, c’est la meilleure nouvelle possible.',
-         'Le micro est toujours sur son pied. Personne ne l’a rangé cette fois non plus.']),
+      : ['La porte est entrouverte, comme la première fois, et ils sont toujours quatre. Rien n’a bougé — chez quelqu’un qui ne sort plus, c’est la meilleure nouvelle possible.',
+         'L’écran tourne toujours en boucle. Personne ne l’a arrêté cette fois non plus.']),
     'OBJECTIF — reprendre ce qu’on n’a pas pris la première fois.',
   ] : [
     'Trois jours que l’audience est repoussée. En trois jours, le nom de Teresa Banks n’est apparu dans aucun journal, sur aucun fil, dans aucune conversation qui ne soit pas la vôtre.',
-    'Le local est un ancien magasin de disques dont le rideau de fer ne redescend plus. Deux amplis, une batterie à qui il manque la caisse claire, et des bacs encore pleins d’un stock que personne n’a racheté.',
-    'Quatre personnes sont là dedans à dix heures du matin. Aucune n’a d’autre endroit où porter ça.',
+    /* CHEZ MARK, PAS DANS UN LOCAL DE RÉPÉTITION. Le scénario ne donne
+       pas de lieu de rendez-vous : il donne quatre personnes très
+       dépareillées — une gangeuse Novarich de Bellevue, un graphiste de
+       Renton, un obsédé de la piste de danse, une naine chamane
+       permanente de l'ORC — qui n'ont en commun que d'avoir été au même
+       concert avec elle. Rien ne les réunit dans une salle.
+
+       Ce qui les réunit, c'est Mark : « à peine 19 ans, c'est le plus
+       jeune des amis de Teresa et probablement le plus amoureux d'elle
+       […] Il a le cœur brisé par sa mort et il a fait une dépression,
+       dont il sort tout juste. » Il ne sort plus, alors ce sont les
+       trois autres qui viennent. C'est une veillée, et elle a lieu chez
+       celui qui ne peut pas la quitter. */
+    'Un studio au quatrième, à Renton, au-dessus d’une imprimerie qui tourne encore. Une pièce, un lit qu’on ne replie plus, une table à dessin repoussée contre le mur, et des piles de tirages que personne n’a livrés.',
+    'Trois d’entre eux sont venus ce matin. Le quatrième habite là et n’en est pas sorti depuis trois jours.',
     a('lester-temoigne')
       ? 'Lester est à McNeil, et il attend une seconde audience en sachant déjà ce qu’il va dire. C’est la première fois de l’affaire que vous travaillez sans l’avoir sur les bras.'
       : 'Lester est à McNeil, sous clé, en attendant une seconde audience. C’est la première fois de l’affaire que vous travaillez sans l’avoir sur les bras.',
@@ -151,18 +170,18 @@ export const amis = {
       '« C’est une bonne position. Je ne sais pas encore de quoi. »',
     ],
     astrale: [
-      'La pièce est saturée. Quatre personnes y reviennent depuis trois jours sans savoir quoi y faire, et ça s’est déposé.',
+      'La pièce est saturée. Trois personnes y reviennent depuis trois jours, et une n’en est pas sortie ; ça s’est déposé sur les murs.',
       '« Chez moi on appelait ça une veillée. »',
-      '« Celle-là dure depuis trois jours. »',
+      '« Celle-là dure depuis trois jours, et elle a lieu chez le seul qui ne peut pas rentrer chez lui. »',
     ],
     ra: [
-      'Aucun tag commercial, aucune balise. Un seul objet émet dans cette pièce, et c’est une carte de visite posée sur un comptoir.',
-      '« Le local est mort côté réseau. »',
+      'Un écran qui repasse la même boucle, quatre commlinks en veille, et une carte de visite posée sur la table à dessin. C’est elle, la seule chose qui émette encore.',
+      '« La pièce est morte côté réseau. »',
       '« Sauf un truc, là-bas. Il attend qu’on le lise. »',
     ],
     materielle: [
-      'Une seule ouverture, le rideau de fer. Pas de seconde issue, pas de fenêtre.',
-      '« Un donjon à une porte. »',
+      'Un quatrième étage, une porte, une fenêtre qui donne sur une cour. L’escalier est la seule façon d’entrer et la seule de sortir.',
+      '« Un donjon à une porte, et quatre étages de marches. »',
       '« Ça va, tant que personne ne sait qu’on est dedans. »',
     ],
   },
@@ -180,12 +199,12 @@ export const amis = {
       nom: 'Mark',
       regarder: ({ a }) => ({
         tous: a('mark-ferme')
-          ? ['Il tient toujours la pochette de disque vide, et il la tient maintenant entre vous et lui.',
+          ? ['Il tient toujours le tirage, et il le tient maintenant entre vous et lui.',
              'Dix-neuf ans, et il vient d’apprendre en une seconde à quoi ressemble quelqu’un qui met un prix sur elle.']
           : a('mark-convaincu')
-            ? ['Assis sur l’ampli, une pochette de disque vide entre les mains. Il n’a pas arrêté de parler d’elle depuis qu’on a commencé, et il n’a pas l’air d’avoir fini.',
+            ? ['Assis au bord du lit défait, un tirage entre les mains. Il n’a pas arrêté de parler d’elle depuis qu’on a commencé, et il n’a pas l’air d’avoir fini.',
                'C’est le seul de la pièce qui la conjugue encore au présent de temps en temps, et qui se reprend chaque fois.']
-            : ['Assis sur l’ampli, dix-neuf ans, une pochette de disque vide entre les mains. Il la tient comme on tient quelque chose qui n’a plus de contenu.',
+            : ['Assis au bord du lit défait, dix-neuf ans, un tirage entre les mains — une image arrêtée du concert, sortie de son imprimante et refaite trop de fois. Il la tient comme on tient une chose qu’on a déjà usée.',
                'Il vous a regardés entrer sans bouger. Ce n’est pas du courage : il n’a simplement nulle part où aller.'],
         hercules: a('mark-ferme')
           ? '« J’ai fait ça pendant trente ans et je viens de le rater sur un gamin de dix-neuf ans. Il n’avait pas de prix, et je lui en ai demandé un. »'
@@ -198,15 +217,15 @@ export const amis = {
         ? { tous: 'Il ne lève pas les yeux. La conversation est finie depuis qu’elle a eu un prix.',
             hercules: '« Non. Celle-là, je l’ai fermée moi-même. »' }
         : { texte: [], dialogue: 'mark', flags: ['tir-prevenu'] },
-      utiliser: 'Non. C’est un gamin assis sur un ampli, pas une porte.',
+      utiliser: 'Non. C’est un gamin assis au bord de son lit, pas une porte.',
       objets: {
         /* LA MÊME FAUTE QU'À LA PLANQUE, AU MÊME PRIX. `conf-perdue`
            coûte deux points de confiance à Lester ; ici, ça coûte la
            moitié d'un nom. Irrécupérable, et c'est le sujet du jeu. */
         creditube: ({ a }) => a('mark-ferme')
           ? { tous: 'Il l’a déjà vu. Une fois suffit largement.' }
-          : { tous: ['Tu poses le créditube sur l’ampli, à côté de lui. Deux mille, et personne n’a besoin de dire pour quoi.',
-                     'Il le regarde longtemps. Puis il regarde la pochette vide entre ses mains, et il comprend qu’on vient de mettre les deux sur la même table.',
+          : { tous: ['Tu poses le créditube sur le lit, à côté de lui. Deux mille, et personne n’a besoin de dire pour quoi.',
+                     'Il le regarde longtemps. Puis il regarde le tirage entre ses mains, et il comprend qu’on vient de mettre les deux sur la même table.',
                      ['mark', '« … Vous êtes venus l’acheter, elle. »'],
                      'Il ne crie pas. Il se lève, il va s’asseoir plus loin, et c’est fini.'],
               hercules: '« Reprends ça. Reprends ça tout de suite. »',
@@ -221,7 +240,7 @@ export const amis = {
 
     /* ══ PSYCH — la tentation vénale, et son goût amer ═══════════════
        DEUX ROUTES VERS LA MÊME FICHE, et c'est tout le dispositif : le
-       créditube (immédiat, évident, efficace) et le sujet `chantait`
+       créditube (immédiat, évident, efficace) et le sujet `dansait`
        (gratuit, ouvert dès la première seconde, à condition de poser une
        question sur elle plutôt que sur ce qu'on cherche). Payer marche.
        C'est en repartant qu'on apprend que ce n'était pas nécessaire. */
@@ -229,9 +248,9 @@ export const amis = {
       nom: 'Psych',
       regarder: ({ a }) => ({
         tous: a('psych-paye') || a('psych-ecoute')
-          ? ['Allongé par terre entre les deux amplis, les mains derrière la tête, il a rouvert les yeux au milieu de sa propre phrase et il l’a reprise au même mot.',
-             'Il parle de la troisième prise comme d’un endroit où il habiterait encore.']
-          : ['Allongé par terre entre les deux amplis, un bras sur les yeux. Il n’a pas bougé depuis que vous êtes entrés, et il n’a pas dormi non plus.',
+          ? ['Allongé par terre entre le lit et la table à dessin, les mains derrière la tête, il a rouvert les yeux au milieu de sa propre phrase et il l’a reprise au même mot.',
+             'Il parle de ces dix secondes sur la scène comme d’un endroit où il habiterait encore.']
+          : ['Allongé par terre entre le lit et la table à dessin, un bras sur les yeux. Il n’a pas bougé depuis que vous êtes entrés, et il n’a pas dormi non plus.',
              'Il a l’âge qu’on veut lui donner. Ce n’est pas un compliment.'],
         hercules: ['« Il a un prix, il le dit lui-même, et il est bas. »', '« D’habitude ça m’arrange. »'],
         trash: a('psych-paye')
@@ -246,8 +265,8 @@ export const amis = {
         creditube: ({ a }) => a('psych-paye') || a('psych-ecoute')
           ? { tous: 'Il a déjà dit ce qu’il savait. Lui donner ça maintenant ne serait plus un achat — ce serait autre chose, et personne dans la pièce n’a envie de savoir quoi.' }
           : { tous: ['Le créditube change de main sans que personne ait eu à formuler la question. C’est la transaction la plus propre de toute l’affaire.',
-                     ['psych', '« Waters. Reginald Waters, studio à Puyallup. Quatre titres, elle en a fait quatre. »'],
-                     ['psych', '« Il garde tout. Les prises ratées aussi. Elle parlait, entre les prises. »'],
+                     ['psych', '« Waters. Reginald Waters, un studio à Puyallup, à deux rues de chez elle. C’est là qu’elle a tourné son truc. »'],
+                     ['psych', '« Les elfes cherchaient ça. Moi j’ai rien dit, mais ils avaient pas besoin de moi. »'],
                      'Il l’a dit en huit secondes. Il n’a pas hésité, il n’a pas négocié, il n’a même pas eu l’air de trouver ça désagréable.',
                      ['psych', '« … Vous êtes les premiers à venir pour elle. Les autres, ils venaient pour la bande. »'],
                      'Ça, il l’a dit gratuitement.'],
@@ -273,11 +292,11 @@ export const amis = {
       nom: 'Nova',
       regarder: ({ a }) => ({
         tous: a('nova-parle')
-          ? ['Adossée au montant du rideau de fer, à l’endroit exact où elle se mettait quand le groupe jouait. Elle tient encore la porte de quelque chose qui n’existe plus.',
-             'Depuis qu’elle a parlé, elle regarde la rue au lieu de vous regarder, vous.']
-          : ['Une orke d’une vingtaine d’années, adossée au montant du rideau de fer. Elle s’est placée entre vous et la sortie sans en avoir l’air, et elle l’a fait par réflexe.',
+          ? ['Adossée au chambranle, dans l’entrebâillement, exactement comme elle se tenait à l’entrée de la fosse ce soir-là. Elle garde encore une porte qui ne protège plus personne.',
+             'Depuis qu’elle a parlé, elle regarde la cage d’escalier au lieu de vous regarder, vous.']
+          : ['Une orke d’une vingtaine d’années, adossée au chambranle de la porte. Elle s’est placée entre vous et l’escalier sans en avoir l’air, et elle l’a fait par réflexe.',
              'Elle vous a comptés en entrant. Quatre. Elle n’a pas eu besoin de regarder deux fois.'],
-        hercules: ['« Elle tient la porte d’un local vide. »', '« Elle a fait ça pour de vrai, ailleurs. Pas il y a longtemps. »'],
+        hercules: ['« Elle garde une porte dans un studio où il n’y a plus rien à garder. »', '« Elle a fait ça pour de vrai, ailleurs. Pas il y a longtemps. »'],
         trash: '« Elle est en rupture avec quelque chose. Je reconnais la forme que ça donne à une aura : c’est la mienne, en plus récent. »',
         rabbit: a('dette-duke') || a('conf-duke') || a('choix-duke')
           ? '« Halloweener, deux ans, sortie propre — ce qui n’existe pas. Sauf si quelqu’un a couvert la sortie. Je connais un type qui fait ça. »'
@@ -285,7 +304,7 @@ export const amis = {
         drakk: '« La garde du corps qui n’a plus de corps à garder. Elle n’a pas déposé les armes : personne ne lui a dit que la quête était finie. »',
       }),
       parler: { texte: [], dialogue: 'nova', flags: ['tir-prevenu'] },
-      utiliser: 'Non. Elle est adossée à la seule sortie de la pièce, et elle le sait mieux que vous.',
+      utiliser: 'Non. Elle est adossée à la seule sortie du quatrième étage, et elle le sait mieux que vous.',
       objets: {
         creditube: ({ a }) => a('nova-parle')
           ? { tous: 'Elle regarde le tube, puis vous. « Gardez ça pour des gens qui n’ont rien dit. »' }
@@ -306,9 +325,9 @@ export const amis = {
       nom: 'Nita',
       regarder: ({ a }) => ({
         tous: a('nita-ferme')
-          ? ['Elle s’est remise à trier les affiches du mur, méthodiquement, et elle ne s’arrêtera plus. Elle a posé une question et elle n’a pas eu de réponse ; pour elle, c’en était une.',
+          ? ['Elle s’est remise à trier les tirages contre le mur, méthodiquement, et elle ne s’arrêtera plus. Elle a posé une question et elle n’a pas eu de réponse ; pour elle, c’en était une.',
              'Un fétiche d’ours pend à sa ceinture, côté mur. Elle l’a tourné de l’autre côté quand vous avez esquivé.']
-          : ['Debout près du mur d’affiches, une pile de tracts sous le bras — la seule de la pièce qui soit venue ce matin pour faire quelque chose plutôt que pour être quelque part.',
+          : ['Debout près du mur, une pile de tracts sous le bras — la seule de la pièce qui soit venue ce matin pour faire quelque chose plutôt que pour être quelque part.',
              'Un fétiche d’ours à la ceinture, usé jusqu’au poil. Elle vous a jaugés en trois secondes et elle n’a pas caché qu’elle le faisait.'],
         hercules: ['« Elle a une question à poser et elle attend de la poser. »', '« Je fais le même métier qu’elle avec moins de conviction. Je vais la laisser commencer, ça m’évitera de me tromper le premier. »'],
         trash: a('orc-contact')
@@ -332,39 +351,58 @@ export const amis = {
        aucune fiche ═══════════════════════════════════════════════════
        Une cible qui ne sert à rien mécaniquement et sans laquelle le
        reste ne pèse pas. C'est ici que la pièce dit de qui on parle. */
-    micro: {
-      nom: 'Le micro',
+    /* ══ L'ÉCRAN — la dernière fois qu'ils l'ont vue ══════════════════
+       Ce que le scénario donne, au mot près : quatre heures avant sa
+       mort, Teresa est au concert de Cerberus & Erebus à l'Underworld
+       93 avec ces quatre-là ; elle monte sur scène POUR DANSER, « ceci
+       a fait son effet sur la foule comme le groupe », et elle poste
+       elle-même ses selfies. Elle ne chante pas, elle n'a pas de
+       groupe, il n'y a pas de local de répétition.
+
+       Ces images existent donc publiquement, et Mark les repasse depuis
+       trois jours. C'est l'objet de deuil de la pièce, et il est vrai. */
+    ecran: {
+      nom: 'L’écran',
       regarder: {
-        tous: ['Un pied de micro au milieu de la pièce, le micro encore dessus, le câble encore branché. Personne ne l’a rangé.',
-               'Il y a un morceau de gaffer sur le pied, à hauteur de main, avec une hauteur notée au feutre. C’est sa hauteur à elle.'],
-        hercules: '« Personne ne l’a touché en trois jours. Dans une pièce où quatre personnes dorment. »',
-        trash: ['« C’est le seul objet de la pièce qui n’a pas de deuil dessus. »',
-                '« Il a gardé autre chose. Je ne vais pas vous dire quoi, ce n’est pas à moi. »'],
-        rabbit: '« Micro dynamique, quarante ans d’âge, réparé trois fois à la main. Personne n’a chanté là-dedans avec un correcteur de voix. »',
-        drakk: '« On ne déplace pas l’épée du compagnon tombé. On la laisse là où elle est tombée, et on continue de s’asseoir autour. »',
+        tous: ['Un écran posé à même le sol, contre le mur, qui repasse en boucle une captation de concert prise depuis la fosse. Quelqu’un l’a lancée et personne ne l’a arrêtée.',
+               'À trois minutes vingt, une fille monte sur scène et se met à danser. Le groupe la laisse faire. La salle s’occupe d’elle plus que de la musique, et elle le sait très bien.'],
+        hercules: ['« Ça tourne en boucle. Ça veut dire que personne, dans cette pièce, n’a osé aller l’éteindre. »',
+                   '« Il y a des gens qui reprennent le deuil au début à chaque fois. »'],
+        trash: ['« Elle savait exactement où était la lumière. »',
+                '« Ce n’est pas de l’insouciance. On ne monte pas là-dessus sans avoir décidé quelque chose. »'],
+        rabbit: ['« Captation publique, diffusée le soir même, jamais retirée. Elle est dessus, et ses propres images aussi — elle les a postées elle-même. »',
+                 '« Tout le monde pouvait la voir ce soir-là. C’est le contraire d’une fille qui se cache. »'],
+        drakk: '« Quatre heures avant. Ils regardent les quatre dernières heures en boucle, comme si en la regardant assez fort on pouvait la faire descendre de cette scène. »',
       },
       utiliser: {
-        tous: ['Tu tends la main vers le pied de micro, et quatre personnes tournent la tête en même temps sans qu’aucune n’ait dit un mot.',
+        tous: ['Tu tends la main vers l’écran, et quatre personnes tournent la tête en même temps sans qu’aucune n’ait dit un mot.',
                'Tu la retires.'],
         drakk: '« Non. Pas celui-là. »',
       },
     },
 
     /* ══ LE MUR D'AFFICHES — le lieu, et ce qu'il était ══════════════ */
+    /* ══ LE MUR — son métier, et ce qu'il en a fait depuis trois jours ══
+       Mark est graphiste (« il vit de piges de graphiste auprès de
+       différentes petites boîtes »), enfant d'artistes. Le mur était à
+       lui bien avant elle : c'est son mur de travail. Ce qui a changé,
+       c'est ce qu'il y a punaisé par-dessus. */
     mur: {
-      nom: 'Le mur d’affiches',
+      nom: 'Le mur, au-dessus de la table',
       regarder: ({ a }) => ({
-        tous: ['Quinze ans d’affiches de concerts collées les unes sur les autres, et par-dessus, punaisées à plat, une trentaine de photos.',
+        tous: ['Des années de travail punaisé les unes sur les autres — maquettes, essais de lettrage, épreuves annotées au feutre rouge par des gens qui ne payaient pas cher.',
                a('mark-convaincu')
-                 ? 'Elle est sur onze d’entre elles. Mark a compté — il vous l’a dit sans qu’on le lui demande.'
-                 : 'Elle est sur onze d’entre elles. Quelqu’un les a rassemblées au même endroit du mur, récemment.'],
-        hercules: '« Un local de répétition qui affiche encore les groupes du quartier. Il n’y en a plus beaucoup à Loveland. Il n’y en a peut-être plus qu’un. »',
-        trash: ['« Il y a des mains partout sur ce mur, en couches. »', '« Plusieurs générations, et personne ne s’est battu. »'],
-        rabbit: '« Aucune de ces affiches n’a de code. Elles annoncent des dates qu’il fallait connaître pour savoir qu’elles existaient. »',
+                 ? 'Par-dessus, à plat, une trentaine d’images tirées de la captation. Elle est sur onze d’entre elles. Mark a compté — il vous l’a dit sans qu’on le lui demande.'
+                 : 'Par-dessus, à plat, une trentaine d’images tirées de la captation. Elle est sur onze d’entre elles, et quelqu’un les a punaisées récemment, toutes au même endroit.'],
+        hercules: ['« Il a arrêté un plan sur elle trente fois et il les a toutes tirées. »',
+                   '« Ce n’est pas un mur de deuil. C’est un mur de recherche. Il cherche encore quelque chose là-dedans. »'],
+        trash: ['« Les vieilles couches sont froides. Les trente du dessus sont brûlantes, et elles ont toutes trois jours. »',
+                '« Il a fait ça en une nuit. »'],
+        rabbit: '« Toutes tirées de la même captation publique, image par image. Il n’a rien piraté : il a regardé ce que tout le monde pouvait voir, plus longtemps que tout le monde. »',
         drakk: ['« La tapisserie de la salle commune. »', '« On la lit en décollant les couches dans le bon ordre. »'],
       }),
       utiliser: {
-        tous: 'Tu ne décolles rien de ce mur. Il n’y a pas d’ordre dans lequel ça se ferait poliment.',
+        tous: 'Tu ne décroches rien de ce mur. Il n’y a pas d’ordre dans lequel ça se ferait poliment.',
       },
     },
 
@@ -374,13 +412,13 @@ export const amis = {
        confiance à Nova — donc la seule que le joueur puisse obtenir
        sans avoir joué White_Rabbit ni choisi Duke à la traversée. */
     carte: {
-      nom: 'La carte, sur le comptoir',
+      nom: 'La carte, sur la table',
       regarder: ({ a }) => a('carte-vue')
         ? { tous: 'Toujours là, toujours face en l’air. Personne dans cette pièce ne l’a retournée, et personne ne l’a jetée non plus.',
             rabbit: '« Le code répond encore. Ils attendent qu’on appelle. »' }
-        : { tous: ['Une carte de visite, posée face en l’air sur le comptoir de l’ancien magasin, à l’endroit exact où on posait la monnaie.',
+        : { tous: ['Une carte de visite, posée face en l’air sur la table à dessin, bien à plat sur une épreuve que personne ne finira.',
                    'Un nom qui n’est pas un nom, un code de comm, et rien d’autre. Pas de société, pas de fonction, pas d’adresse.',
-                   'Elle est propre. Elle n’a pas passé trois jours sur ce comptoir — deux, au plus.'],
+                   'Elle est propre. Elle n’a pas passé trois jours sur cette table — deux, au plus.'],
             hercules: ['« On laisse une carte quand on veut être rappelé. »', '« On la laisse FACE EN L’AIR quand on veut qu’elle soit vue. »'],
             trash: ['« Du papier. Du vrai papier, chez des elfes du Tír. »', '« Ce n’est pas de la discrétion. C’est de la politesse. »'],
             rabbit: ['« Code de comm à usage unique, encore actif. »', '« Ils n’ont pas fini. »'],
@@ -395,21 +433,24 @@ export const amis = {
         : { tous: 'De loin, c’est un rectangle blanc sur un comptoir. Il faudrait la regarder pour savoir ce que c’est.' },
     },
 
-    /* ══ LES BACS À VINYLES — le décor qui parle des quatre runners ══ */
-    bacs: {
-      nom: 'Les bacs à vinyles',
+    /* ══ LES TIRAGES — le travail qui s'est arrêté net ════════════════
+       Ce que « il sort tout juste d'une dépression » donne à voir sans
+       qu'on ait à le dire : des commandes finies, jamais livrées. */
+    tirages: {
+      nom: 'Les piles de tirages',
       regarder: {
-        tous: ['Le stock que personne n’a racheté quand le magasin a fermé. Six bacs, classés par genre, avec des intercalaires écrits à la main.',
-               'Quelqu’un continue de les remettre en ordre. Régulièrement.'],
-        hercules: '« Il y a pour trois mille de collection là-dedans et personne n’y a touché en deux ans. Dans ce quartier. »',
-        trash: '« On garde les choses parce qu’elles ont servi à quelqu’un. Je fais pareil. C’est même à peu près tout ce que je fais. »',
-        rabbit: '« Support physique, lecture analogique, aucune copie. Chaque écoute abîme la chose écoutée. Je ne comprends pas et j’aimerais comprendre. »',
+        tous: ['Contre le mur, des piles de tirages sous film plastique, étiquetées au nom de petites boîtes de Renton. Des commandes finies.',
+               'La plus récente est datée du lendemain de sa mort. Après, plus rien — et personne n’est venu chercher les précédentes.'],
+        hercules: ['« Il y a trois semaines de facturation par terre, et il n’a appelé personne. »',
+                   '« Un type de dix-neuf ans qui vit de piges et qui ne relance pas ses clients. Ça, ça dit tout. »'],
+        trash: '« Il a continué à travailler deux jours. Puis il s’est arrêté au milieu, et ça se voit à l’endroit exact où la pile devient droite. »',
+        rabbit: '« Support physique, livraison à la main, aucune trace en ligne. Il travaille comme son père devait travailler. »',
         drakk: ['« Ah. »',
                 '« Ah. »',
                 'Il faut le rappeler deux fois.'],
       },
       utiliser: {
-        tous: 'Tu remets un intercalaire droit. C’est à peu près tout ce qu’on peut faire pour cette pièce.',
+        tous: 'Tu remets une pile d’aplomb. C’est à peu près tout ce qu’on peut faire pour cette pièce.',
         drakk: '« Je vais avoir besoin d’une heure. »',
       },
     },
@@ -422,25 +463,25 @@ export const amis = {
        réécrira autour de ces trois nœuds-là, pas des cinq d'origine
        (D11). Le présage du Tír, lui, tombe dès maintenant : il est la
        seule chose que ce tableau doive au § 7.4. */
-    grille: {
-      nom: 'Le rideau de fer',
+    palier: {
+      nom: 'La porte, sur le palier',
       sortie: 'carte',
       regarder: ({ a }) => ({
         tous: a('tir-prevenu')
-          ? ['Le rideau de fer est resté à mi-hauteur depuis que vous êtes entrés. Dehors, la rue est la même qu’à l’arrivée.',
+          ? ['La porte est restée entrouverte depuis que vous êtes entrés. En bas, par la fenêtre de la cage, la rue est la même qu’à l’arrivée.',
              'Sauf une voiture, garée en face, qui n’y était pas.']
-          : ['Le rideau de fer est bloqué à mi-hauteur — pas cassé : personne n’a jamais eu de raison de le redescendre.',
-             'Dehors, Loveland à dix heures du matin, ce qui ressemble beaucoup à Loveland à toute heure.'],
+          : ['La porte n’a pas de serrure qui ferme — pas cassée : personne n’a jamais eu de raison de la fermer.',
+             'Quatre étages plus bas, l’imprimerie tourne, et Renton à dix heures du matin ressemble beaucoup à Renton à toute heure.'],
         rabbit: a('tir-prevenu')
           ? '« Immatriculation neutre. Trop neutre. Ce n’est pas une plaque, c’est une absence de plaque. »'
-          : '« Rue morte. Deux caméras municipales, toutes les deux tournées vers le carrefour. Personne ne regarde cette porte. »',
-        drakk: '« Une seule issue. En sortant, on saura tout de suite si quelqu’un nous attendait. »',
+          : '« Rue morte. Deux caméras municipales, toutes les deux tournées vers le carrefour. Personne ne regarde cette entrée. »',
+        drakk: '« Une seule issue, et quatre étages pour la descendre. En sortant, on saura tout de suite si quelqu’un nous attendait. »',
       }),
       utiliser: ({ a }) => ({
         tous: [
           ...(a('su:hayden')
             ? ['Vous ressortez avec un nom. Trois jours que l’affaire existe, et c’est la première chose qu’elle rend.']
-            : ['Vous ressortez du local. Le rideau de fer reste à mi-hauteur derrière vous : personne, ici, ne verrouille quoi que ce soit.']),
+            : ['Vous redescendez les quatre étages. La porte reste entrouverte derrière vous : personne, ici, ne verrouille quoi que ce soit.']),
           ...(a('tir-prevenu')
             ? [{ texte: 'La voiture d’en face démarre au moment où vous atteignez le trottoir. Elle ne vous suit pas : elle part dans l’autre sens, sans se presser.',
                  visuel: 'tir-dehors' },
@@ -451,7 +492,7 @@ export const amis = {
           ? '« Un prénom mal écrit et un nom de famille. Vingt ans de métier et c’est toujours comme ça que ça tombe. »'
           : '« On a frappé à la bonne porte. On n’a pas posé les bonnes questions. Ça arrive, et ça ne se rattrape pas le même jour. »',
         ...(a('tir-prevenu')
-          ? { trash: '« Ils repasseront ici. Chez ces quatre-là. Et ce sera de notre fait. »' }
+          ? { trash: '« Ils repasseront ici. Chez ce gamin-là, qui ne sort plus. Et ce sera de notre fait. »' }
           : {}),
         /* Ce que le rideau relit pour savoir OÙ la partie s'est
            arrêtée : la nuit du contrat s'arrêtait à l'abordage, elle
@@ -465,7 +506,7 @@ export const amis = {
            brancherait — troisième fois que le jeu paie cette dette-là,
            après `tribunal-salle.js` (chantier 4) et `retour.js`
            (chantier 28), et toujours de la même façon. */
-        flags: ['local-quitte'],
+        flags: ['local-quitte'],   /* nom d'origine gardé : des sauvegardes le portent */
         /* CHANTIER 17 RÉÉCRIT : ce n'est plus l'appartement en dur.
            Il y a maintenant deux lieux d'enquête et une sortie, donc
            un choix, donc une carte. Troisième fois que cette ligne
@@ -506,9 +547,9 @@ export const amis = {
           flags: ['mark-convaincu'],
           texte: ['Il lève les yeux pour la première fois.',
                   '« … Personne me l’a demandé. Trois jours. Personne. »',
-                  '« Elle chantait pas fort. Tout le monde croit qu’il faut chanter fort. Elle, elle chantait comme si t’étais assis à côté d’elle, même quand y avait cent personnes. »',
+                  '« Elle parlait pas fort. Tout le monde croit qu’il faut parler fort pour qu’on t’écoute. Elle, elle parlait comme si t’étais assis à côté d’elle, même quand y avait cent personnes autour. »',
                   '« Elle bossait au pressing en bas de chez elle. Elle disait que c’était bien parce que ça sentait le propre. »',
-                  '« Elle montait sur scène ici, et elle en redescendait jamais pareille : plus elle avait peur, plus elle en rajoutait — un tatouage neuf, une phrase gueulée entre deux morceaux. Tout Loveland savait qui elle était, ça. »',
+                  '« Elle est montée sur la scène, à l’Underworld, l’autre soir. Personne lui avait rien demandé. C’est ça qu’elle faisait quand elle avait peur : elle en rajoutait, un tatouage neuf, une idée en l’air, monter là où on la voit. »',
                   'Il parle pendant deux minutes sans s’arrêter. Personne ne l’interrompt.',
                   '« … Et depuis l’automne elle était bizarre. Contente-bizarre. Elle disparaissait des soirs, et elle revenait avec des trucs qu’elle pouvait pas se payer. »',
                   '« J’ai rien dit. J’étais pas jaloux. » Il s’arrête. « Si. Un peu. »'],
@@ -561,7 +602,7 @@ export const amis = {
     },
 
     /* ══ PSYCH ═══════════════════════════════════════════════════════
-       `chantait` est ouvert dès la première seconde et rend exactement
+       `dansait` est ouvert dès la première seconde et rend exactement
        la même fiche que le créditube. Le tableau ne dit jamais que ce
        sujet existe ; il ne le cache pas non plus. Toute la mécanique du
        « goût amer » tient dans cet écart-là. */
@@ -572,18 +613,31 @@ export const amis = {
       retour: ['« … Ouais. Vas-y. »'],
       sujets: [
         {
-          id: 'chantait',
-          titre: '« Comment elle chantait ? »',
+          /* LA MÊME LEÇON, SUR LE BON FAIT. Le principe du sujet ne
+             bouge pas — on l'obtient en demandant pour ELLE, jamais
+             pour la bande — mais elle ne chantait pas : elle est montée
+             danser sur la scène d'un concert qui n'était pas le sien,
+             et Psych était dans la fosse (« il est sur la piste de
+             danse ou à un concert la plupart du temps »).
+
+             Il sait pour l'enregistrement parce que les elfes du Tír
+             sont passés le lui demander — le scénario le dit : « il se
+             souvient également qu'ils cherchaient un enregistrement que
+             Teresa aurait fait ». */
+          id: 'dansait',
+          titre: '« Comment elle dansait ? »',
           quand: ({ a }) => !a('psych-paye') && !a('psych-ecoute'),
           flags: ['psych-ecoute'],
           fiches: ['enregistrement-waters'],
           texte: ['Il se redresse sur un coude. C’est le plus grand mouvement qu’il ait fait de la matinée.',
                   '« … Personne me demande jamais ça. »',
-                  '« Elle chantait juste. Pas “juste” comme dans les notes — juste comme dans : au bon endroit. Tu sais quand tu poses un truc et que c’est exactement là qu’il devait être ? »',
-                  '« La troisième prise. C’est toujours la troisième qui est bonne, avec elle. La première elle a peur, la deuxième elle réfléchit, la troisième elle oublie qu’on enregistre. »',
+                  '« Elle dansait juste. Pas “juste” comme dans en rythme — juste comme dans : au bon endroit. Tu sais quand tu poses un truc et que c’est exactement là qu’il devait être ? »',
+                  '« Elle est montée sur la scène, ce soir-là. Personne lui avait rien demandé, le groupe l’a laissée faire, et au bout de dix secondes toute la salle regardait plus qu’elle. »',
+                  '« C’est pas de la frime. C’est quelqu’un qui décide qu’on va la voir. »',
                   'Il s’arrête net. Il vient de dire quelque chose qu’il n’avait pas prévu de dire.',
-                  '« … Waters. Reginald Waters, à Puyallup. Quatre titres. Il garde tout, ce type. Les prises ratées, les silences, tout. »',
-                  '« Elle parlait, entre les prises. Elle parlait beaucoup. »'],
+                  '« … Les elfes, ils m’ont demandé ça aussi. Enfin non. Eux ils demandaient un enregistrement qu’elle aurait fait. »',
+                  '« Waters. Reginald Waters, un studio à Puyallup, à deux rues de chez elle. C’est là qu’elle l’a tourné. »',
+                  '« Il garde tout, ce type. Tout ce qui rentre chez lui, il le garde. »'],
         },
         {
           id: 'apres-paye',
@@ -665,8 +719,8 @@ export const amis = {
           titre: '« Tu tiens encore la porte. »',
           quand: ({ a }) => a('nova-parle'),
           texte: ['« Faut bien que quelqu’un le fasse. »',
-                  '« Quand elle chantait, je tenais la porte. Y avait rien à garder, c’était un local pourri. Mais elle aimait bien savoir que quelqu’un tenait la porte. »',
-                  '« Elle se cachait pas, elle. Un nouveau tatouage, une nouvelle idée, un nouveau coup de tête — elle gueulait tout ça sur cette scène-là, devant tout le monde. Personne pouvait dire qu’il savait pas. »',
+                  '« Quand elle est montée sur cette scène, je me suis mise devant, en bas. Y avait rien à garder, c’était un concert. Mais elle aimait bien savoir que quelqu’un était placé. »',
+                  '« Elle se cachait pas, elle. Un nouveau tatouage, une nouvelle idée, un nouveau coup de tête — elle le mettait devant tout le monde, et sur ses propres images en plus. Personne pouvait dire qu’il savait pas. »',
                   'Elle se remet en place, épaule contre le montant.',
                   '« Alors je la tiens. »'],
         },
@@ -704,7 +758,7 @@ export const amis = {
                   'Elle décroise les bras.',
                   '« Elle voyait quelqu’un. Depuis l’automne. Quelqu’un de la maison Telestrian, et haut — assez haut pour qu’elle dise jamais le nom de famille. »',
                   '« Elle me l’a dit une fois, un soir, et elle a passé la semaine suivante à faire comme si elle l’avait pas dit. »',
-                  '« Elle avait rien d’une fille qui se cache, remarquez. Sur scène, dans la rue, elle gueulait ce qu’elle pensait, elle montrait ce qu’elle voulait montrer. Sa vie était devant tout le monde. »',
+                  '« Elle avait rien d’une fille qui se cache, remarquez. Elle disait ce qu’elle pensait, elle montrait ce qu’elle voulait montrer, et elle le postait elle-même. Sa vie était devant tout le monde. »',
                   '« C’est ça, le pire. Personne avait besoin de creuser. Il aurait juste fallu regarder. »',
                   '« J’ai rien pu en faire. Je suis permanente d’une association, pas enquêtrice. J’ai un dossier par mois où un ork prend la place d’un elfe et je gagne un dossier sur dix. »'],
         },

@@ -5,7 +5,7 @@
 
    CE QUI CHANGE. La feuille portait « PLACEHOLDER FONCTIONNEL » : des
    dégradés pour les affiches, une rayure pour les bacs, un trait pour
-   le pied de micro, une gélule pour la batterie. Or **la prose de ce
+   l'écran posé au sol, une gélule pour le lit. Or **la prose de ce
    tableau COMPTE des choses** — onze photos sur trente, six bacs, une
    caisse claire qui manque, un câble encore branché, deux lignes sur
    une carte de visite et rien d'autre — et aucune n'était montrée. Six
@@ -23,7 +23,7 @@
        l'équipe, au fond          100-103
        Nita, contre le mur        108
        Nova, contre le rideau     112
-       Mark, assis sur l'ampli    109 (l'ampli à 120)
+       Mark, au bord du lit      109 (le lit à 92)
        les bacs, au premier plan  134
        Psych, allongé devant      118-142
 
@@ -32,12 +32,12 @@
    par le bas à DROITE. Elle est aussi INÉGALE — elle s'éteint sur
    74 unités — donc chaque prop a reçu sa dose selon son abscisse, à
    l'atelier : les bacs et les affiches (x 4) n'en ont qu'un frottement,
-   la carte sur le comptoir (x 208) est l'objet le plus clair du jeu.
+   la carte sur la table à dessin (x 208) est l'objet le plus clair du jeu.
 
    DISPOSITION VÉRIFIÉE PAR HIT-TEST, PAS À LA MAIN : les treize cibles
    ont été reprises une par une dans le navigateur (`elementFromPoint`
    au centre géométrique) après recomposition. Le mobilier sans
-   `data-hotspot` (comptoir, amplis, batterie) peut recouvrir ce qu'il
+   `data-hotspot` (la table, le lit) peut recouvrir ce qu'il
    veut. */
 
 .tableau--amis {
@@ -142,7 +142,7 @@
    de côté quand elle se ferme, donc un ÉTAT, et un état n'entre pas
    dans un sprite fixe. */
 .tableau--amis .ami--nita {
-  left: calc(4 * var(--u)); top: calc(58 * var(--u));
+  left: calc(4 * var(--u)); top: calc(70 * var(--u));
   width: calc(29 * var(--u));
 }
 .tableau--amis .ami--nita::after {
@@ -155,7 +155,7 @@
 .stage[data-etat~="nita-ferme"] .tableau--amis .ami--nita { filter: saturate(.55) brightness(.86); }
 .stage[data-etat~="nita-ferme"] .tableau--amis .ami--nita::after { right: auto; left: calc(-2 * var(--u)); }
 
-/* MARK — assis sur le second ampli. Le seul sprite du décor dont la
+/* MARK — assis au bord du lit. Le seul sprite du décor dont la
    POSE a dû être dessinée, parce que rien ne passe devant lui. La
    pochette vide reste un `::after` : elle remonte quand il se ferme. */
 .tableau--amis .ami--mark {
@@ -183,8 +183,13 @@
    SPRITE DU JEU QUI NE DÉRIVE DE RIEN. La boîte fait 52 × 24 u
    (rapport 0,46) et la carte 104 × 48 (0,46). */
 .tableau--amis .ami--psych {
-  left: calc(180 * var(--u)); top: calc(118 * var(--u));
-  width: calc(52 * var(--u));
+  /* ASSIS, PLUS COUCHÉ. La carte est passée de 104 × 48 (un corps à
+     l'horizontale, qu'on lisait comme un mort) à 48 × 48. À l'échelle
+     de Mark — 64 px d'art pour 35 u — 48 px valent 26 u, et le sprite
+     étant carré il fait 26 u de haut : la moitié d'un personnage
+     debout, ce qui est la taille de quelqu'un par terre. */
+  left: calc(178 * var(--u)); top: calc(98 * var(--u));
+  width: calc(26 * var(--u));
 }
 .stage[data-etat~="local-ouvert"] .tableau--amis .ami--psych { filter: brightness(1.08); }
 
@@ -192,7 +197,7 @@
    Sprite `prop-bacs`. SIX bacs qui se comptent, et des intercalaires
    pâles qui dépassent des disques : c'est la seule chose qui dise que
    quelqu'un s'en occupe encore, et le texte le dit deux fois. */
-.tableau--amis .bacs-vinyles {
+.tableau--amis .tirages {
   left: calc(4 * var(--u)); top: calc(106 * var(--u));
   width: calc(42 * var(--u));
 }
@@ -203,20 +208,23 @@
    câble est du matériel rangé ; avec son câble encore branché qui
    traîne par terre, c'est quelqu'un qui va revenir. Le gaffer à hauteur
    de main et la hauteur au feutre sont dans le sprite, eux aussi. */
-.tableau--amis .pied-micro {
-  left: calc(160 * var(--u)); top: calc(60 * var(--u));
-  width: calc(16 * var(--u));
+.tableau--amis .ecran {
+  /* POSÉ À MÊME LE SOL, contre le mur du fond — pas accroché. C'est ce
+     que la prose dit, et c'est ce qui fait qu'on s'assoit par terre
+     devant. Le pied de micro tenait debout à hauteur de tête ; un écran
+     qu'on n'a jamais rangé est au niveau des genoux. */
+  left: calc(150 * var(--u)); top: calc(88 * var(--u));
+  width: calc(30 * var(--u));
 }
 
 /* ── LE MOBILIER, SANS CIBLE ─────────────────────────────────────────
-   Batterie, amplis, comptoir : du décor, donc libre de recouvrir. */
-.tableau--amis .batterie {
-  left: calc(60 * var(--u)); top: calc(104 * var(--u));
-  width: calc(32 * var(--u));
+   Le lit, la table à dessin : du décor, donc libre de recouvrir. */
+.tableau--amis .lit {
+  left: calc(60 * var(--u));
+  top: calc(92 * var(--u));
+  width: calc(80 * var(--u));
 }
-.tableau--amis .ampli--sol  { left: calc(96 * var(--u));  top: calc(106 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--amis .ampli--mark { left: calc(176 * var(--u)); top: calc(102 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--amis .comptoir {
+.tableau--amis .table-dessin {
   left: calc(204 * var(--u)); top: calc(96 * var(--u));
   width: calc(28 * var(--u)); height: calc(24 * var(--u));
   background: linear-gradient(180deg, #56492f 0%, #3a2f1e 22%, #241d14 100%);
@@ -225,7 +233,7 @@
 }
 
 /* ── LA CARTE DE VISITE — x:208-228, y:98-106 ────────────────────────
-   Sprite `prop-carte-tir`. Posée FACE EN L'AIR sur le comptoir, et
+   Sprite `prop-carte-tir`. Posée FACE EN L'AIR sur la table, et
    c'est la moitié du propos : on laisse une carte à l'endroit où on
    posait la monnaie. **Deux lignes imprimées et rien d'autre** — pas de
    société, pas de fonction, pas d'adresse : c'est ce vide-là qui en
@@ -243,16 +251,20 @@
    Bloqué à mi-hauteur : les lames en haut, le jour en bas. Le nom de
    classe évite `.rideau`, déjà pris par le rideau final du jeu
    (`engine.css`, z-index 70). */
-.tableau--amis .grille-fer {
-  left: calc(236 * var(--u)); top: calc(100 * var(--u));
-  width: calc(18 * var(--u)); height: calc(40 * var(--u));
+.tableau--amis .porte-palier {
+  left: calc(236 * var(--u)); top: calc(88 * var(--u));
+  width: calc(18 * var(--u)); height: calc(52 * var(--u));
+  /* Le battant, puis le rai de la cage d'escalier dans l'entrebâillement :
+     la lumière vient de la GAUCHE de la fente, côté palier, et c'est le
+     seul jour de la pièce qui ne soit pas la fenêtre de cour. */
   background:
-    repeating-linear-gradient(180deg, #4c4740 0 calc(2 * var(--u)), #33302a calc(2 * var(--u)) calc(4 * var(--u))) 0 0 / 100% calc(16 * var(--u)) no-repeat,
-    linear-gradient(180deg, rgba(226, 214, 176, .55) 0%, rgba(226, 214, 176, .18) 100%);
+    linear-gradient(90deg, rgba(226, 214, 176, .50) 0 calc(4 * var(--u)), transparent calc(4 * var(--u))),
+    linear-gradient(180deg, #4c4740 0%, #33302a 100%);
   border-left: calc(1 * var(--u)) solid #14120e;
+  border-right: calc(1 * var(--u)) solid #14120e;
 }
 /* Le présage du Tír : la voiture d'en face, vue par l'ouverture. */
-.stage[data-etat~="tir-dehors"] .tableau--amis .grille-fer {
+.stage[data-etat~="tir-dehors"] .tableau--amis .porte-palier {
   box-shadow: inset 0 0 0 calc(2 * var(--u)) rgba(150, 60, 50, .35);
 }
 
@@ -312,7 +324,7 @@
   width: calc(22 * var(--u)); height: calc(44 * var(--u));
 }
 .tableau--amis .cote--grille { left: calc(166 * var(--u)); top: calc(90 * var(--u)); }
-.tableau--amis .couvert--comptoir { left: calc(203 * var(--u)); top: calc(95 * var(--u)); width: calc(30 * var(--u)); height: calc(26 * var(--u)); }
+.tableau--amis .couvert--table { left: calc(203 * var(--u)); top: calc(95 * var(--u)); width: calc(30 * var(--u)); height: calc(26 * var(--u)); }
 .tableau--amis .couvert--bacs     { left: calc(3 * var(--u));   top: calc(105 * var(--u)); width: calc(44 * var(--u)); height: calc(24 * var(--u)); }
 .tableau--amis .cote--couvert { left: calc(6 * var(--u));  top: calc(98 * var(--u)); }
 .tableau--amis .cote--donjon  { left: calc(56 * var(--u)); top: calc(130 * var(--u)); }
@@ -328,7 +340,7 @@
   width: calc(92 * var(--u)); height: calc(8 * var(--u));
   animation: ora-flotte 6.2s ease-in-out infinite;
 }
-/* Le fil descend de la fiche jusqu'au comptoir, à l'endroit exact où la
+/* Le fil descend de la fiche jusqu'à la table, à l'endroit exact où la
    carte est posée face en l'air (x 208-228, y 98). Sans lui, la seule
    fiche du tableau flotte sans rien désigner. */
 .tableau--amis .fil-carte {

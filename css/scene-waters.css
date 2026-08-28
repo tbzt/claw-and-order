@@ -74,7 +74,7 @@
 
    Elle a des PIEDS, et ils touchent le sol : c'est un meuble, pas un
    panneau accroché au mur. */
-.tableau--waters .console {
+.tableau--waters .montage {
   left: calc(30 * var(--u)); top: calc(50 * var(--u));
   width: calc(62 * var(--u));
 }
@@ -115,7 +115,7 @@
    c'est elle, et rien d'autre, qui dit qu'il manque quelque chose —
    troisième fois du chantier qu'une absence se montre par ce qui la
    tenait, après la main de la Justice et le pied de caisse claire. */
-.tableau--waters .cabine {
+.tableau--waters .plateau {
   left: calc(30 * var(--u)); top: calc(6 * var(--u));
   width: calc(62 * var(--u));
 }
