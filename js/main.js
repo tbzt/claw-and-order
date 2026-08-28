@@ -1095,7 +1095,12 @@ function creeMateriel(idObjet) {
   b.innerHTML = '<span class="jeton__icone"></span><span><span class="eq-materiel__nom"></span><span class="eq-materiel__ou"></span></span>'
   b.querySelector('.jeton__icone').innerHTML = `<span class="objet__${o.icone}"></span>`
   b.querySelector('.eq-materiel__nom').textContent = o.nom
-  b.querySelector('.eq-materiel__ou').textContent = porte ? o.ou : 'plus sur lui'
+  /* PAS DE PROVENANCE ICI. Le `ou` des objets a été écrit pour la
+     sacoche, où « à Drakk » est l'information utile. Sur la fiche de
+     Drakk, sous « Les deux épées de Drakk », le nom revenait trois fois
+     en quatre lignes. La ligne ne sert plus qu'à dire ce qui a changé —
+     donc elle ne s'écrit que quand quelque chose a changé. */
+  b.querySelector('.eq-materiel__ou').textContent = porte ? '' : 'laissé au portique'
   b.title = porte ? `${o.nom} — prendre en main` : `${o.nom} — laissé au portique`
   if (porte) b.addEventListener('click', (e) => {
     e.stopPropagation()
