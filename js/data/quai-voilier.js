@@ -62,11 +62,21 @@ export const quaiVoilier = {
         : { tous: ['L’écoutille est entrouverte de deux doigts. À l’intérieur, il fait plus noir que dehors.',
                    'Ça sent le gasoil, le renfermé, et autre chose.'],
             trash: '« N’ouvre pas tout de suite. Laisse-moi regarder d’abord. »' },
+      /* Chantier 64 (§ IV.8 de l'audit reroute) : le premier fait de
+         l'enquête entière était muet pour les quatre — quatre lectures
+         du même corps, pas quatre informations de plus. Trash devine
+         un délai qu'il ne peut pas chiffrer (Rabbit le fera, un peu
+         plus loin, sur `corps.regarder`) : une lecture incomplète,
+         pas fausse. */
       utiliser: ({ a }) => a('corps-vu')
         ? 'Tu redescends. Rien n’a changé, et ça ne changera pas.'
         : {
             tous: ['Tu écartes l’écoutille. Wilson est étendu sur le plancher de sa cabine, dans une mare qui a eu le temps de s’étaler.',
                    'Il tenait son commlink. Il ne le tient plus.'],
+            hercules: '« Doucement. On regarde avant de toucher — personne ne bouge rien tant qu’on n’a pas tout vu. »',
+            trash: '« On est en retard. »',
+            rabbit: '« Son commlink — s’il émet encore, ça nous dira depuis quand. »',
+            drakk: '« Un mort. Ce n’était pas dans le contrat, mais ça s’en approche. »',
             flags: ['corps-vu'],
             visuels: ['cabine-ouverte'],
           },
@@ -90,9 +100,16 @@ export const quaiVoilier = {
         if (qui !== 'drakk')
           return { tous: 'Il est coincé entre la couchette et la table, et il pèse son poids. Tu n’y arriveras pas seul.',
                    hercules: '« Drakk. C’est un travail pour quelqu’un qui a des bras. »' }
+        /* Chantier 64 : la fouille elle-même, pas seulement le corps
+           (§ IV.8) — les mêmes trois objets, quatre lectures. Rabbit
+           pose une hypothèse qu'il ne peut pas vérifier d'ici : reste
+           ouverte, exprès. */
         return {
           tous: ['Drakk le dégage de la couchette avec une douceur qui surprend tout le monde, y compris lui.',
                  'Dans la veste : un passe des amarres, un créditube de deux mille, et une arme de poing qu’il n’a pas sortie.'],
+          hercules: '« Un passe, du liquide, une arme jamais tirée. Le kit d’un homme qui travaillait, pas d’un homme qui se battait. »',
+          trash: '« On prend ce qu’il faut. Pas plus. »',
+          rabbit: '« Une arme jamais enregistrée à son nom, je crois — il faudrait un accès qu’on n’a pas ici pour vérifier. »',
           drakk: '« Repose en paix, Amiral. Ta traversée sera achevée. »',
           objets: ['passe', 'creditube', 'arme'],
           flags: ['corps-fouille'],

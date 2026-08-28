@@ -454,6 +454,10 @@ export const appartement = {
                    rabbit: ['« Puyallup Lockworks archive les journaux de la moitié de Loveland. »',
                             '« Sans référence de contrat, je cherche trois jours dans huit mille immeubles. Il me faut le numéro, et il traîne forcément quelque part ici. »'] }
 
+        /* Chantier 64 : le journal du maglock n'avait qu'une voix
+           (§ IV.8). Hercules suppose une entente entre les deux
+           porteurs que le journal ne prouve pas — une lecture
+           incomplète, pas corrigée ici. */
         return {
           tous: ['White_Rabbit s’assoit par terre, dos au mur du palier, et ne bouge plus pendant deux minutes.',
                  { texte: 'Puyallup Lockworks. Contrat 4471-B. Trois jours de journal, dans un tiroir que personne n’a jamais eu de raison d’ouvrir.',
@@ -463,8 +467,11 @@ export const appartement = {
                  '« 23:58 — une troisième, encore un autre porteur. Et puis les deux ressortent à 00:26, à une minute d’intervalle. »',
                  'Personne ne dit rien pendant un moment.',
                  '« Deux hommes sont entrés chez elle après sa mort, et ils sont repartis ensemble. »'],
+          hercules: '« Deux porteurs différents, une seule sortie ensemble. Ils ne se sont pas croisés par hasard — ils étaient d’accord. »',
+          trash: '« Ils sont revenus ensemble. Personne ne fait ça par accident. »',
           rabbit: ['« Et ça, c’est dans une archive commerciale, en clair, depuis trois jours. »',
                    '« Personne n’est allé le chercher. Personne. »'],
+          drakk: '« Une minute d’écart à la sortie. Ça se planifie. Ça ne s’improvise pas. »',
           flags: ['maglock-journal', 'trace-archive'],
           fiches: ['maglock-journal'],
         }

@@ -146,12 +146,19 @@ export const quai = {
           if (!a('pecheur-amorce'))
             return { tous: 'Tu lui tends un créditube sans avoir dit un mot. Il ne le prend pas.',
                      hercules: ['« On ne paie pas avant d’avoir demandé. Ça vexe. »', '« Et un homme vexé, ça coûte le double. Je le sais, je facture pareil. »'] }
+          /* Chantier 64 : le seul témoignage direct de la nuit, et il
+             n'avait qu'une voix (§ IV.8). Rabbit tire de la coïncidence
+             plus qu'elle ne porte — une lecture fausse, pas confirmée
+             ailleurs, laissée telle quelle. */
           return {
             tous: ['Le créditube disparaît dans une poche cirée.',
                    '« Un grand type. Blond, une tête de plus que tout le monde. Il est monté sur le bateau vers onze heures. »',
                    '« Il est ressorti quand la vedette de la Star est passée. Pas couru. Marché. Comme s’il avait fini. »',
                    '« Et il est parti par le talus, pas par la route. »'],
             hercules: '« Il n’avait pas fini. »',
+            trash: '« Il a eu peur en le disant. Pas de nous. »',
+            rabbit: '« La vedette passe toujours à la même heure. Il le savait — il a réglé son départ dessus. »',
+            drakk: '« Le talus, pas la route. Un homme qui a préparé sa sortie avant même d’entrer. »',
             flags: ['pecheur-parle', 'sait-toralf', 'sait-inacheve'],
             fiches: ['grand-blond', 'travail-inacheve'],
             retire: ['creditube'],
@@ -268,9 +275,17 @@ export const quai = {
         if (qui !== 'rabbit')
           return { tous: 'Il faudrait un deck pour aller au-delà de ce qui flotte.',
                    hercules: '« Laissons-la à celle qui sait lire ça. »' }
+        /* Chantier 64 : le doute de Rabbit (« nettoyé, ou jamais rien
+           fait ») restait sans contradicteur. Drakk le prend au pied
+           de la lettre — un dossier vide veut dire un homme prudent —
+           et c'est exactement la lecture que Rabbit venait d'écarter :
+           incomplète, laissée telle quelle. */
         return { tous: ['White_Rabbit interroge le registre au-delà de ce qu’il affiche.',
                         'Rien. Onze ans de propriété sans un seul incident, pas même une amende de mouillage.'],
+                 hercules: '« Onze ans sans un accroc. Ou il ne connaissait personne d’assez important pour lui en causer un. »',
+                 trash: '« Un dossier trop propre pour un métier pareil. »',
                  rabbit: ['« Un homme sans dossier, ça n’existe pas. »', '« Nettoyé, ou jamais rien fait. Je ne sais pas laquelle des deux m’inquiète le plus. »'],
+                 drakk: '« Onze ans sans incident. Voilà un homme prudent. »',
                  flags: ['vu-immat'] }
       },
     },
