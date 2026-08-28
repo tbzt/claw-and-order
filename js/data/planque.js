@@ -188,10 +188,14 @@ export const planque = {
   },
 
   vues: {
+    physique: ['Des machines qui tournent pour personne, une lumière de supermarché, et le genre d’endroit où on ne retient jamais un visage.',
+               '« C’est le meilleur décor du monde pour ne pas exister une heure ou deux. C’est aussi pour ça que je ne l’aurais pas choisi, moi — mais on ne m’a pas demandé. »'],
     astrale: ['Une laverie ouverte la nuit est un lieu sans mémoire : des milliers de gens y ont passé une heure sans rien y vivre.',
               '« C’est plat. Complètement plat. Sauf lui. »'],
     ra: ['Quatre icônes, dont trois qui essaient de vous vendre du séchage.',
          '« La quatrième ne devrait pas être là. »'],
+    tactique: ['Une vitrine sur toute la façade, des cloisons plus fines que des rideaux, et pas un recoin qui ne se voie pas de la rue.',
+               '« Nulle muraille ici, compagnon. Une lame passerait ces murs comme du papier — je préfère ne pas savoir ce que ferait autre chose. »'],
   },
 
   hotspots: {

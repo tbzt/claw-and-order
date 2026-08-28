@@ -141,10 +141,14 @@ export const retour = {
   ],
 
   vues: {
+    physique: ['Des lumières éparses sur les deux rives, et pas une âme sur le pont d’à côté à cette heure — s’il y a quelqu’un qui regarde, il ne veut pas qu’on le voie regarder.',
+               '« Personne ne nous salue. Sur l’eau, ça veut dire qu’on est seuls, ou que tout le monde fait semblant de l’être. »'],
     astrale: ['L’eau n’a pas de mémoire. Ce qui flotte dessus en a.',
               '« Le gamin a peur, et il a raison. Mais il y a plus froid que lui, droit devant. »'],
     ra: ['Le large est propre. Pas de réclame, pas de spam, quatre icônes en tout.',
          '« C’est la première fois de la nuit que je vois clair. Et c’est exactement le problème : nous aussi, on se voit. »'],
+    tactique: ['Un pont ouvert, un bastingage bas, et pas un pouce de couvert entre la cabine et l’eau.',
+               '« Nulle muraille sur ce pont, compagnon. Qui nous cherche nous verra avant que nous le voyions, lui. »'],
   },
 
   hotspots: {

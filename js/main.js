@@ -1669,6 +1669,13 @@ function tombeRideau() {
             ? 'Neuf heures moins le quart. Il sera vivant à dix heures. C’était le contrat.'
             : 'La nuit s’arrête ici — pour l’instant.'
   const lignes = BILAN.filter(([f]) => a(f)).map(([, t]) => t)
+  /* Arbitrage 4 (`ARBITRAGES_2026-08-27.md`) : `etat.credibilite` existait
+     déjà en entier — initialisé, alimenté par 7 `registre: 'tient'` et 2
+     `'retourne'` dans `tribunal-salle.js`, plafonné, sauvegardé — sauf la
+     lecture. Ne s'affiche que si on a vraiment plaidé au moins une fois
+     (un `depose:*` posé) : sans ça, « le juge » n'existe pour personne. */
+  if ([...etat.flags].some(f => f.startsWith('depose:')))
+    lignes.unshift(`Le juge vous a suivi sur ${etat.credibilite} point${etat.credibilite === 1 ? '' : 's'} sur 7.`)
   $('rideauBilan').textContent = lignes.length
     ? lignes.join('\n')
     : 'Rien ne vous suit. C’est plus rare que ça n’en a l’air.'

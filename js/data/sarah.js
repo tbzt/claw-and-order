@@ -51,6 +51,10 @@ export const sarah = {
   ],
 
   vues: {
+    physique: [
+      'Trois chaises, trois inconnus qui attendent depuis des heures et qui ne poseront aucune question — dans une clinique de rue, ne pas regarder est la politesse de base.',
+      '« Personne ici ne nous demandera qui on est. C’est le genre de silence qui coûte cher ailleurs, et ici il est gratuit. »',
+    ],
     astrale: [
       'Ici, pas de meuble pour cacher une aura : rien qu’une pièce nue, et de la peur qui s’est accumulée dedans depuis des années, une nuit après l’autre.',
       '« Je vois tout, cette fois. C’est presque pire. La salle d’attente d’une clinique de rue, à l’astral, c’est juste de la peur empilée, en rangs, comme des chaises. »',
@@ -58,6 +62,10 @@ export const sarah = {
     ra: [
       'Un vieux terminal de dossiers patients, sur le bureau du fond, qui synchronise ses fiches vers un serveur d’assurance-maladie une fois par nuit — le genre de service que Sarah ne peut pas se permettre de couper, parce que c’est lui qui la paie.',
       '« Ça bavarde, mais ça bavarde pour elle, pas contre nous. Je laisse. »',
+    ],
+    tactique: [
+      'Deux pièces, une porte entre les deux, une table d’examen qui ne protégerait de rien.',
+      '« Nul rempart dans une infirmerie, compagnon. On n’y vient pas pour tenir un siège — on y vient pour repartir vite. »',
     ],
   },
 

@@ -109,6 +109,10 @@ export const tripot = {
   },
 
   vues: {
+    physique: [
+      'Il connaît cette salle par cœur : la table du fond triche, celle de la fenêtre paie comptant, et le patron ne regarde jamais deux fois le même visage.',
+      '« Rien n’a changé. Ça devrait me rassurer. Ça ne me rassure pas. »',
+    ],
     astrale: [
       'Cinq auras penchées sur des cartes, et une sixième, plus froide, qui ne joue pas pour l’argent posé sur le tapis.',
       '« Elle est là depuis avant nous. Elle attendait quelqu’un, et je crois que c’est nous. »',
@@ -116,6 +120,10 @@ export const tripot = {
     ra: [
       'Aucun signal. Pas une caméra, pas un lecteur, pas un tag — le genre d’endroit qui existe exprès pour ne rien laisser à lire.',
       '« Rien à pirater ici. C’est la sécurité la plus efficace que j’aie jamais vue : ne rien connecter du tout. »',
+    ],
+    tactique: [
+      'Une salle sans fenêtre, une seule porte, cinq tables et plus de chaises que de joueurs assis dessus.',
+      '« Un repaire sans lumière du jour, compagnon. J’en ai vu cent, dans cent tavernes. Aucun n’avait de seconde sortie. »',
     ],
   },
 

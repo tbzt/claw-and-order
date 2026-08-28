@@ -186,6 +186,8 @@ export const tribunal = {
   },
 
   vues: {
+    physique: ['Des dizaines de gens en costume qui n’ont pas dormi non plus, chacun avec un dossier sous le bras et personne pour le regarder deux fois.',
+               '« Le meilleur déguisement du monde, ce matin, c’est d’avoir l’air aussi fatigué qu’eux. »'],
     ra: ['La RA du palais est presque vide — des balises d’orientation, un flux d’audiences. Une exception, au plafond : une caméra araignée qui ne devrait pas être là, une patte repliée contre une poutre.',
          '« Elle ne bouge pas. Elle regarde quand même. »'],
     astrale: ['Le plan astral d’un tribunal ne devrait pas avoir peur. Celui-ci, si — un courant froid qui descend du couloir du fond, comme si quelque chose venait d’y passer vite.',

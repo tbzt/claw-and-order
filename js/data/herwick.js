@@ -117,6 +117,10 @@ export const herwick = {
   },
 
   vues: {
+    physique: [
+      'Quarante ans de meubles empilés jusqu’au plafond, et pas un seul prix affiché — dans ce genre de boutique, on négocie tout, y compris l’endroit où on s’assoit.',
+      '« Ce fauteuil-là vaut plus que ce qu’on nous paie cette nuit. Personne ne le vend, et c’est bien pour ça qu’il est encore là. »',
+    ],
     astrale: [
       'Quarante ans de meubles vendus, rachetés, hérités, abandonnés : des milliers de deuils qui se sont arrêtés ici un moment avant de repartir.',
       '« C’est saturé. Je ne trouve pas son aura à lui là-dedans. Je ne trouve personne — c’est la première fois de la nuit que je vois moins que ce qu’il y a. »',
@@ -124,6 +128,10 @@ export const herwick = {
     ra: [
       'Une seule icône, au-dessus de la caisse : un terminal qui pousse ses paiements vers un serveur de comptabilité, à heure fixe, toutes les nuits depuis vingt ans.',
       '« Il paie ses fournisseurs à des horaires bizarres. Ce n’est pas louche, c’est juste vieux. Mais ça bavarde, et cette nuit ça ne devrait pas. »',
+    ],
+    tactique: [
+      'Un rideau de fer à moitié baissé, une seule allée entre les piles de meubles, et une porte de service à l’arrière que personne n’a proposé de montrer.',
+      '« Une échoppe encombrée vaut mieux qu’une salle vide, compagnon : cent embûches pour nous, cent pour qui nous chercherait. »',
     ],
   },
 

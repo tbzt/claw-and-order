@@ -87,6 +87,10 @@ export const duke = {
   },
 
   vues: {
+    physique: [
+      'Huit personnes qui n’ont pas rangé leurs armes en vous voyant entrer, et une seule qui a le droit de parler la première — ça se voit à qui se tait.',
+      '« Ici, on ne charme personne. On paie, et on se tait au bon moment. Je sais faire les deux, cette nuit je préférerais ne faire que le premier. »',
+    ],
     astrale: [
       'Huit auras armées, serrées dans une pièce sans issue rapide — chacune prête depuis si longtemps qu’elle ne le remarque plus elle-même.',
       '« Ce n’est pas de la colère. C’est de la routine. Ça devrait me rassurer, et je crois que c’est pire. »',
@@ -94,6 +98,10 @@ export const duke = {
     ra: [
       'Quatre caméras, toutes tournées vers l’escalier — le seul chemin d’entrée, ce qui explique pourquoi personne ici ne s’inquiète d’une fenêtre qu’il n’y a pas.',
       '« Duke ne surveille qu’une seule porte. C’est soit de la confiance dans ses murs, soit il n’a jamais eu besoin d’en surveiller une seconde. »',
+    ],
+    tactique: [
+      'Pas une fenêtre, un escalier, une porte blindée : ce sous-sol n’a qu’une sortie, et huit personnes armées la tiennent avec vous à l’intérieur.',
+      '« Une seule issue, compagnon, et elle est déjà tenue par eux. Si le fer doit chanter ici, il chantera pour eux, pas pour nous. »',
     ],
   },
 

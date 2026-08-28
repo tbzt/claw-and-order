@@ -113,6 +113,10 @@ export const squat = {
   },
 
   vues: {
+    physique: [
+      'Un fauteuil qui a coûté plus cher, neuf, que tout ce que Trash possède aujourd’hui, et un métier à tisser reconverti en autel — quelqu’un a sauvé ces meubles-là, pas volé.',
+      '« Il ne les a pas achetés. Personne n’achète des meubles pareils pour les entasser dans un dernier étage muré. »',
+    ],
     astrale: [
       'La loge est PRÉPARÉE — accordée à celui qui l’a montée. Elle tient chaud à l’aura de Trash comme un vêtement porté longtemps.',
       '« Je vois ce qui approche mieux que je ne verrais un homme dans la rue. C’est ma maison, ici. Rien n’y entre sans que je le sente d’abord. »',
@@ -120,6 +124,10 @@ export const squat = {
     ra: [
       'Une seule icône, mal cachée : un branchement volé sur la ligne de l’atelier du dessous, qui alimente trois lampes et rien d’officiel.',
       '« Il n’y a pas d’adresse à trouver sur un réseau. Ça, en revanche, ça se voit — si on sait où chercher, et je sais où chercher. »',
+    ],
+    tactique: [
+      'Un dernier étage aux trois quarts muré, un seul escalier de service, et une porte qui n’a jamais été pensée pour tenir.',
+      '« Une tour sans donjon, compagnon. On la défend en la quittant à temps, pas en y mourant. »',
     ],
   },
 
