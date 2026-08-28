@@ -208,6 +208,33 @@ export const appartement = {
             drakk: '« Le scellé est intact. Personne n’est revenu. »',
             flags: ['rubans-intacts'],
             fiches: ['rubans-intacts'] },
+      /* Chantier 65 — LE PAIEMENT DU FILTRE. Rabbit dit au lit qu'« il
+         existe un numéro de scène pour cet endroit, et il n'apparaît
+         nulle part ». C'est vrai de l'affichage public ; ça ne l'est pas
+         de la couche de service, et le filtre est justement une couche
+         de service laissée en gage par un flic qui n'est jamais revenu.
+
+         Le scellé se lit donc deux fois : à l'œil, il n'a pas été rompu
+         (`rubans-intacts`) ; au filtre, il est RATTACHÉ AILLEURS. La
+         seconde lecture ne remplace pas la première — règle 10, une
+         lentille ajoute. Et elle n'ouvre rien : elle donne un nom à ce
+         que le dossier ne nomme pas (règle 12). */
+      objets: {
+        filtre: ({ a }) => a('numero-de-scene')
+          ? { tous: 'L’identifiant est toujours là, toujours vivant, toujours rattaché à une affaire qui n’est pas la vôtre.',
+              rabbit: '« Il n’a pas bougé. C’est bien ça le problème. »' }
+          : { tous: ['Les deux rubans changent. Sous l’horodatage que tout le monde peut lire, une seconde ligne s’allume — celle que le service se réserve.',
+                     'Un identifiant de scène, et à côté, un état : ouvert.',
+                     'Ce scellé n’a jamais été refermé. Il n’est simplement rattaché à aucune des pièces que McCarthy vous a mises entre les mains.'],
+              rabbit: ['« Voilà le numéro. »',
+                       '« Il existe, il est vivant, et il pointe vers autre chose que Lester Kane. »',
+                       '« J’ai acheté ça quarante nuyens à un barman. »'],
+              hercules: '« Une scène ouverte que personne ne travaille. Ce n’est pas une enquête au ralenti, ça. C’est une enquête qu’on garde au chaud. »',
+              trash: '« Ils n’ont pas classé l’affaire. Ils l’ont mise de côté, ce qui demande de décider deux fois. »',
+              drakk: '« La porte est scellée pour une raison qui n’est pas la nôtre. »',
+              flags: ['numero-de-scene'],
+              fiches: ['numero-de-scene'] },
+      },
       utiliser: ({ a, sait }) => {
         const sortieStudio = a('su:lester-innocent')
           ? 'Vous ressortez avec ce que la Lone Star avait trouvé le premier jour, et qu’elle a rangé dans un tiroir.'

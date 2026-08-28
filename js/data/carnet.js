@@ -292,6 +292,18 @@ export const fiches = {
     texte: 'Le lit est nu et la poudre à empreintes est encore sur la tête de lit. La Lone Star a fait un relevé complet dans un appartement qui, officiellement, n’est pas le lieu du crime. Le rapport existe. Il n’est pas au dossier de Lester.',
     ou: 'L’appartement de Teresa',
   },
+  /* Chantier 65. Elle ne s'obtient QU'AVEC le filtre d'ORA, acheté au
+     bar, et elle est la seule chose du jeu qui en dépende. Rabbit dit
+     au lit qu'« il existe un numéro de scène pour cet endroit, et il
+     n'apparaît nulle part » : la phrase était écrite depuis le
+     chantier 36 et rien ne la relevait. Le filtre la relève. Elle
+     n'ouvre aucune porte (règle 12) — elle nomme ce que le dossier
+     de Lester ne nomme pas. */
+  'numero-de-scene': {
+    titre: 'La scène est ouverte ailleurs',
+    texte: 'Le scellé porte un identifiant de service que l’affichage public ne rend pas. Il est vivant, il est rattaché à une autre affaire que celle de Lester, et il n’a pas été clos.',
+    ou: 'L’appartement de Teresa',
+  },
   'affaires-homme': {
     titre: 'Il vivait ici à moitié',
     texte: 'Un rasoir en acier massif qui vaut plus cher que la pièce, une seconde brosse à dents, et six gélules blanches dans un flacon sans étiquette. Aucun vêtement d’homme dans l’armoire.',

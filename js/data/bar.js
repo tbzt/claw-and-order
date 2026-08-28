@@ -376,6 +376,20 @@ export const bar = {
 
     salle: {
       nom: 'La salle',
+      /* Chantier 65. Le filtre s'achète ici, et c'est ici qu'on
+         comprend ce qu'il fait — dans la seule salle du jeu où « ce que
+         la Star a marqué elle-même » désigne les gens attablés. Du
+         texte seul : on apprend l'outil, on ne gagne rien avec. */
+      objets: {
+        filtre: {
+          tous: ['La salle s’éteint à moitié. Les enseignes, les menus, les icônes de commlink — tout ce qui voulait être vu disparaît d’un coup.',
+                 'Ce qui reste allumé, ce sont les gens. Une petite marque de service au-dessus de neuf d’entre eux, en jaune terne. Les neuf qui sont encore en poste.'],
+          rabbit: ['« Neuf. Sur trente. »', '« Et ils ne savent pas qu’ils la portent. »'],
+          hercules: '« Range ça. Si l’un des neuf sait lire dans l’autre sens, on a fini notre nuit. »',
+          trash: '« Tu vois qui est de service. Eux voient un homme qui regarde la salle sans rien commander. »',
+          drakk: '« Neuf gardes en service, vingt et un au repos. C’est une information utile et je n’aime pas la manière dont on l’a eue. »',
+        },
+      },
       /* R1 : `sait-regards` (la cible du calque social) se paie ici.
          La salle ne change pas — c'est ce qu'on en sait qui change, et
          seulement pour celui qui l'a vu. Les trois autres voix restent
