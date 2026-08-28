@@ -1561,11 +1561,20 @@ const BILAN = [
      qui n'avait rien fait. Ce qui compte n'est pas qui a donné l'ordre,
      c'est que quelqu'un ait su où regarder. */
   ['toralf-manque',     'Deux impacts dans le rouf, et personne devant. Quelqu’un avait su où regarder.'],
-  ['star-nous-connait', 'La Lone Star a votre numéro de coque et l’heure exacte. Ça se paiera.'],
+  /* Nœud 2, chantier 50 : la ligne couvrait la seule cause vedette
+     (`vedette.objets.contrat`, `retour.js`). Le portique peut désormais
+     poser le même drapeau (l'arme de Wilson, `tribunal.js`) — reformulée
+     pour couvrir les deux causes, pas doublée. */
+  ['star-nous-connait', 'La Lone Star a de quoi vous relier au mort du Sunnyside — son bateau, ou son arme. Ça se paiera.'],
   /* Nœud 4, chantier 49. Échec rétrospectif : personne ne l'a senti au
      quai, c'est tout le point du nœud (`PLAN_NOEUDS_DE_CHAOS_FICHES`
      § II). */
   ['pecheur-a-vu', 'Le pêcheur du quai vous a regardés partir sans un mot. Le mot, il l’a gardé pour Cisco.'],
+  /* Nœud 2, chantier 50 : deux orphelins branchés. Le geste propre reste
+     propre — le garde prend le dépôt sans le scanner ; le clic nu se
+     paie, et le numéro de série se lit d'un coup d'œil. */
+  ['arme-laissee', 'Vous avez tendu l’arme de Wilson avant qu’on ait à la demander. Personne ne l’a scannée.'],
+  ['arme-saisie',  'Le détecteur a trouvé l’arme de Wilson dans une poche. Le garde l’a prise sans discuter — mais il a lu le numéro avant vous.'],
   ['trace-matricielle', 'Un ordre de transfert porte une heure que personne n’a signée.'],
   ['esprit-demande',    'Quelque chose vous a suivis jusqu’à Tacoma sans rien demander. Ça aussi, ça se paie.'],
   ['lester-teresa',     'Vous savez comment elle s’appelait, et lui aussi. Vous êtes les seuls.'],

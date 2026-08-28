@@ -487,15 +487,17 @@ export const retour = {
       },
       utiliser: ({ a, qui }) => {
         /* ══ L'ABORDAGE — appeler la patrouille sur ses propres agresseurs
-           Impossible si `star-nous-connait` (§6 du plan) : la dernière
-           fois qu'Hercules a parlé à la Star sur ce canal, c'était pour
-           avouer un mensonge (`vedette.objets.contrat`, premier passage).
+           Impossible si `star-nous-connait` (§6 du plan). Deux causes
+           depuis le chantier 50 (nœud 2) : le mensonge du premier passage
+           (`vedette.objets.contrat`) ou l'arme de Wilson lue au portique
+           (`tribunal.js`, `armeAuPortique()`) — la ligne ne nomme plus
+           laquelle, les deux relient l'équipe au mort du Sunnyside.
            On ne rappelle pas ensuite pour demander un service. */
         if (a('recuse-abri')) {
           if (a('abordage-vhf')) return 'Ils savent déjà. Répéter n’avancerait rien.'
           if (a('star-nous-connait'))
-            return { tous: 'Le canal 16 attend une réponse. La dernière fois qu’on leur a parlé sur ce canal, on avouait un mensonge.',
-                     hercules: '« Ils ont mon numéro de coque et un motif de me trouver suspect. Je ne vais pas leur demander une faveur en plus. »' }
+            return { tous: 'Le canal 16 attend une réponse. La Lone Star a déjà de quoi vous relier au mort du Sunnyside.',
+                     hercules: '« Ils ont un motif de nous trouver suspects. Je ne vais pas leur demander une faveur en plus. »' }
           if (qui !== 'hercules')
             return { tous: 'Il faudrait une voix qui sait faire peur poliment. Ce n’est pas la tienne, pas cette fois.',
                      trash: '« On m’entendrait mentir sur l’urgence. »',

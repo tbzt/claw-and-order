@@ -16,6 +16,28 @@
 
 import { equipiers } from './equipiers.js'
 
+/* Nœud 2 (`PLAN_NOEUDS_DE_CHAOS_FICHES` § II) : le portique est une
+   FRONTIÈRE, pas un bouton. Mesuré le 2026-08-28 : pousser les portes
+   sans avoir touché aux détecteurs faisait entrer l'équipe armée dans
+   une salle d'audience — inventaire intact, zéro drapeau. Le
+   commentaire d'origine de `detecteurs` promettait pourtant
+   « automatique, le portique n'oublie pas » : c'était une intention,
+   jamais un câblage. Étroit — l'arme SEULE : le cadre détaille, il ne
+   fauche pas d'un coup. Une seule fabrique, deux sites de pose
+   (`detecteurs.utiliser` et `entree.utiliser`) : la dette que l'audit
+   d'architecture nommait « le patron a voyagé quatre fois » ne
+   s'applique pas ici. */
+const armeAuPortique = () => ({
+  tous: ['L’arme de Wilson pèse dans une poche depuis le quai. Personne ne l’a mentionnée jusqu’ici — le détecteur, lui, ne l’oubliera pas.',
+         'Un garde tend la main sans un mot. Vous la laissez en dépôt.',
+         'Il passe le numéro de série au scanner, et s’arrête une seconde de trop.'],
+  drakk: '« Une lame ne sonne pas. Un P-au poing, si. Il fallait choisir avant d’arriver. »',
+  hercules: '« On la récupérera en sortant. Ou pas. On verra à ce moment-là. »',
+  rabbit: '« Ce numéro est enregistré. Sur un homme mort hier soir, sur une jetée de Tacoma. »',
+  flags: ['arme-saisie', 'star-nous-connait'],
+  retire: ['arme'],
+})
+
 export const tribunal = {
   markup: 'scenes/tribunal.html',
 
@@ -60,7 +82,13 @@ export const tribunal = {
        on désigne l'objet dans l'inventaire et on le tend soi-même, avant
        que le cadre n'ait sonné — un choix, pas une fatalité (§1, « on le
        laisse — ou on tente »). Les deux retirent l'objet ; seule la
-       voix et le flag disent lequel des deux a eu lieu. */
+       voix et le flag disent lequel des deux a eu lieu.
+
+       Chantier 50 (nœud 2) : « automatique » ne l'était pas — pousser
+       les portes de `entree` sans avoir cliqué ce cadre laissait
+       entrer l'équipe armée sans un drapeau. `entree.utiliser` appelle
+       maintenant la même fabrique, `armeAuPortique()` : le portique
+       n'oublie plus, qu'on le clique ou qu'on le traverse. */
     detecteurs: {
       nom: 'Les détecteurs',
       regarder: {
@@ -68,13 +96,7 @@ export const tribunal = {
         rabbit: ['« Détection de masse ferreuse. Standard. »', '« Vous avez une raison de vous inquiéter ? »'],
       },
       utiliser: ({ tient }) => {
-        if (tient('arme')) return {
-          tous: ['L’arme de Wilson pèse dans une poche depuis le quai. Personne ne l’a mentionnée jusqu’ici — le détecteur, lui, ne l’oubliera pas.',
-                 'Un garde tend la main sans un mot. Vous la laissez en dépôt.'],
-          drakk: '« Une lame ne sonne pas. Un P-au poing, si. Il fallait choisir avant d’arriver. »',
-          hercules: '« On la récupérera en sortant. Ou pas. On verra à ce moment-là. »',
-          flags: ['arme-saisie'], retire: ['arme'],
-        }
+        if (tient('arme')) return armeAuPortique()
         if (tient('epees')) return {
           tous: ['Le cadre sonne avant même que Drakk ne soit passé dessous.',
                  'Un garde tend la main, presque désolé pour lui.'],
@@ -183,10 +205,9 @@ export const tribunal = {
       regarder: {
         tous: 'Deux battants de bois sombre, déjà entrebâillés. On entend la salle avant de la voir.',
       },
-      utiliser: {
-        tous: 'Vous poussez les portes.',
-        va: 'tribunal-salle',
-      },
+      utiliser: ({ tient }) => tient('arme')
+        ? { ...armeAuPortique(), va: 'tribunal-salle' }
+        : { tous: 'Vous poussez les portes.', va: 'tribunal-salle' },
     },
   },
 
