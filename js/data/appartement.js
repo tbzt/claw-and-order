@@ -227,7 +227,7 @@ export const appartement = {
                      'Un identifiant de scène, et à côté, un état : ouvert.',
                      'Ce scellé n’a jamais été refermé. Il n’est simplement rattaché à aucune des pièces que McCarthy vous a mises entre les mains.'],
               rabbit: ['« Voilà le numéro. »',
-                       '« Il existe, il est vivant, et il pointe vers autre chose que Lester Kane. »',
+                       '« Il existe, il est vivant, et il pointe vers autre chose que Lester Bird. »',
                        '« J’ai acheté ça quarante nuyens à un barman. »'],
               hercules: '« Une scène ouverte que personne ne travaille. Ce n’est pas une enquête au ralenti, ça. C’est une enquête qu’on garde au chaud. »',
               trash: '« Ils n’ont pas classé l’affaire. Ils l’ont mise de côté, ce qui demande de décider deux fois. »',

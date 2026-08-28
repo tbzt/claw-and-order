@@ -931,9 +931,15 @@ function depose(idFiche) {
    fonction que les fiches. */
 const sourceObjet = (o) => (o.a ? 'equipe' : sourceDe(o.ou))
 
-/* `regarder` d'un objet a la forme d'un `regarder` de cible. Une chaîne
-   nue reste légale — elle vaut `tous`, et rien pour les quatre voix. */
-const regardDe = (o) => (typeof o.regarder === 'string' ? { tous: o.regarder } : o.regarder ?? {})
+/* `regarder` d'un objet a la forme d'un `regarder` de cible, et les
+   trois mêmes écritures : une chaîne (elle vaut `tous`), une carte de
+   voix, ou une FONCTION du contexte quand ce qu'on voit dépend de ce
+   qu'on sait. Le dossier s'en sert — sa page de garde se lit toujours,
+   sa masse change de sens une fois qu'on l'a vraiment lu. */
+const regardDe = (o) => {
+  const brut = typeof o.regarder === 'function' ? o.regarder(contexte()) : o.regarder
+  return typeof brut === 'string' ? { tous: brut } : brut ?? {}
+}
 
 function basculeSacoche() {
   const ouvert = sacoche.hidden

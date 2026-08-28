@@ -41,7 +41,7 @@ export const objets = {
     icone: 'mandat',
     ou: 'McCarthy, au Claw & Order',
     regarder: {
-      tous: 'Un formulaire du Département, tamponné deux fois, avec le nom de Lester Kane et un numéro d’écrou. C’est ce papier-là qui fait sortir un homme d’une cellule.',
+      tous: 'Un formulaire du Département, tamponné deux fois, avec le nom de Lester Bird et un numéro d’écrou. C’est ce papier-là qui fait sortir un homme d’une cellule.',
       rabbit: '« Le numéro d’écrou est bon. Je l’ai vérifié deux fois, parce que la première fois je n’y croyais pas. »',
     },
   },
@@ -51,16 +51,47 @@ export const objets = {
      collent pas. Le jeu donnait le contrat et le mandat, et gardait le
      seul des trois qui raconte quelque chose.
      Voir PLAN_TRAME_ACTES_III_IV § 4. */
+  /* LA PAGE DE GARDE SE LIT DEBOUT, le reste demande une table.
+
+     Le dossier avait déjà sa vraie lecture — `lectureDossier()` dans
+     `planque.js`, posée sur cinq planques : quatre faits, quatre fiches,
+     et l'amorce de la contre-enquête. Elle coûte deux heures et une
+     surface, et c'est juste : le scénario source fait démarrer l'enquête
+     exactement là (§3).
+
+     Ce qui manquait, c'est que rien ne le DISAIT. Le joueur tenait la
+     chemise depuis le bar sans savoir qu'elle avait un fond, ni même
+     qui était l'accusé — McCarthy le dit (`sait-gamin`, bar.js), mais
+     derrière un sujet de dialogue facultatif. Qui saute le sujet ne
+     l'apprend jamais, et l'objet qui porte l'information reste muet.
+
+     La page de garde répond aux deux : on l'a dès qu'on tient le
+     dossier, n'importe où, et la dernière ligne nomme sa propre limite
+     — en scène, pas en message système (Boussole § 2). Elle ne pose
+     AUCUN drapeau : lire n'est pas avoir demandé, et `sait-gamin`
+     appartient à la conversation avec McCarthy, pas à la chemise. */
   dossier: {
     nom: 'Le dossier de Lester',
     icone: 'dossier',
     ou: 'McCarthy, au Claw & Order',
-    regarder: {
-      tous: ['Une chemise cartonnée, cornée aux angles, épaisse comme trois doigts. Elle n’était pas dans le contrat.',
-             'McCarthy a dit de le lire. Il a aussi dit de ne pas le lire, dans la même phrase.'],
-      trash: '« Il a hésité avant de le pousser sur la table. C’est la seule chose qu’il ait faite cette nuit sans savoir pourquoi il la faisait. »',
-      drakk: '« C’est lourd, pour un dossier vide. »',
-    },
+    regarder: ({ a }) => a('dossier-lu')
+      ? {
+          tous: ['La chemise refermée, et la page de garde par-dessus : BIRD, Lester. Dix-huit ans. Ork. Sans SIN. Loveland.',
+                 'Le reste, vous l’avez lu. Trois fois, à quatre.'],
+          hercules: '« On en connaît la suite par cœur, et elle ne s’améliore pas. »',
+          trash: '« La page de garde est la seule qui parle de lui. Tout le reste parle d’elle. »',
+        }
+      : {
+          tous: ['Une chemise cartonnée, cornée aux angles, épaisse comme trois doigts. Elle n’était pas dans le contrat.',
+                 'La page de garde se lit sans l’ouvrir, tamponnée deux fois : BIRD, Lester. Dix-huit ans. Ork. Sans SIN. Dernier domicile, Loveland.',
+                 'Dessous, le chef d’accusation tient sur une ligne : meurtre de Teresa Banks.',
+                 'Le reste fait une centaine de feuillets, et ça ne se lit pas debout.'],
+          hercules: ['« La couverture, ça se lit n’importe où. Le fond demande une table et deux heures posées. »',
+                     '« On n’a ni l’une ni l’autre pour l’instant. »'],
+          trash: '« Dix-huit ans, et son nom est déjà en majuscules sur une chemise. »',
+          rabbit: '« Sans SIN. Il n’existe dans aucun registre, et on l’accuse dans celui-là. »',
+          drakk: '« C’est lourd, pour un dossier vide. »',
+        },
   },
   passe: {
     nom: 'Passe des amarres',
