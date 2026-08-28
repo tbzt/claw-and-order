@@ -443,8 +443,8 @@ export const retour = {
           if (qui !== 'rabbit')
             return { tous: 'Il faudrait rentrer dans le boîtier, et il faut un deck pour ça.',
                      hercules: '« C’est le sien, ce rayon. Toujours. »' }
-          return { tous: ['White_Rabbit rentre une seconde fois dans le même boîtier. Ça prend moins de temps qu’avant : elle connaît déjà la serrure.',
-                          'CHALUTIER — GIG HARBOR — ÉMET, encore.'],
+          return { tous: [‘White_Rabbit rentre une seconde fois dans le même boîtier. Ça prend moins de temps qu’avant : il connaît déjà la serrure.’,
+                          ‘CHALUTIER — GIG HARBOR — ÉMET, encore.’],
                    rabbit: ['« Deux fois dans la même nuit, sur le même boîtier. Ce n’est plus discret, c’est comptable. »',
                             '« Quelqu’un, quelque part, additionne mes passages. Ce ne sera pas gratuit plus tard. »'],
                    flags: ['abordage-transpondeur'] }

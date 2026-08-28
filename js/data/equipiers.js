@@ -273,8 +273,8 @@ const TABLEAUX = {
   /* Le sous-sol de Duke, chantier 37 : même raccord, quatrième décor. */
   duke: {
     rabbit: {
-      vu: 'Elle ne s’assoit pas non plus. Elle reste debout, entre Duke et l’escalier, comme si sa place était déjà décidée depuis longtemps dans cette pièce.',
-      trash: '« Son aura change, ici. Moins de gêne qu’ailleurs. Elle est chez des gens qui ne lui demandent pas d’expliquer qui elle est. »',
+      vu: ‘Il ne s’assoit pas non plus. Il reste debout, entre Duke et l’escalier, comme si sa place était déjà décidée depuis longtemps dans cette pièce.’,
+      trash: ‘« Son aura change, ici. Moins de gêne qu’ailleurs. Il est chez des gens qui ne lui demandent pas d’expliquer qui il est. »’,
     },
     drakk: {
       vu: 'Il compte les issues et les armes de la pièce, par réflexe de troll des rues, et s’arrête en réalisant que huit personnes font déjà ce calcul pour lui.',
@@ -329,8 +329,8 @@ const TABLEAUX = {
      quoi faire d'un endroit où quelqu'un est mort. */
   appartement: {
     rabbit: {
-      vu: 'Elle ne touche à rien. Elle fait le tour de la pièce en lisant ce qui flotte dessus, les mains dans les poches, comme dans un musée dont elle serait la seule visiteuse.',
-      trash: '« Elle est la seule d’entre nous qui voie encore quelque chose ici. Nous trois, on regarde des meubles. »',
+      vu: ‘Il ne touche à rien. Il fait le tour de la pièce en lisant ce qui flotte dessus, les mains dans les poches, comme dans un musée dont il serait le seul visiteur.’,
+      trash: ‘« Il est le seul d’entre nous qui voie encore quelque chose ici. Nous trois, on regarde des meubles. »’,
     },
     drakk: {
       vu: 'Il enlève son bonnet en entrant. Personne ne lui a rien demandé, et personne ne fait de commentaire.',
@@ -360,19 +360,19 @@ const TABLEAUX = {
       hercules: '« Il vient de calculer le prix d’un verre au bar, et il vient de perdre une teinte. Pour un troll de deux mètres cinquante, c’est un exploit. »',
     },
     rabbit: {
-      vu: 'Elle scanne la salle par réflexe, puis s’arrête : il n’y a presque rien à lire ici. Un club qui ne veut pas qu’on sache qui vient.',
-      trash: '« Son aura s’est refermée d’un cran en entrant. Ce n’est pas la musique. C’est le genre de silence que les riches paient pour avoir. »',
+      vu: ‘Il scanne la salle par réflexe, puis s’arrête : il n’y a presque rien à lire ici. Un club qui ne veut pas qu’on sache qui vient.’,
+      trash: ‘« Son aura s’est refermée d’un cran en entrant. Ce n’est pas la musique. C’est le genre de silence que les riches paient pour avoir. »’,
     },
   },
 
-  /* Waters Sound, chantier 43 : le quatrième décor de l'acte IV, et le
+  /* Waters Sound, chantier 43 : le quatrième décor de l’acte IV, et le
      premier où l'enjeu n'est ni un deuil ni une confiance à gagner mais
      un COFFRE — Rabbit et Hercules portent l'entrée, chacun reconnaissant
      dans la pièce une version déformée de son propre métier. */
   waters: {
     rabbit: {
-      vu: 'Elle repère le verrou du coffre avant même d’avoir salué qui que ce soit, par réflexe — puis se force à regarder le reste de la pièce en second.',
-      hercules: '« Elle vient d’évaluer une porte avant un homme. Je fais l’inverse depuis trente ans. Je ne sais plus lequel de nous deux a raison. »',
+      vu: ‘Il repère le verrou du coffre avant même d’avoir salué qui que ce soit, par réflexe — puis se force à regarder le reste de la pièce en second.’,
+      hercules: ‘« Il vient d’évaluer une porte avant un homme. Je fais l’inverse depuis trente ans. Je ne sais plus lequel de nous deux a raison. »’,
     },
     hercules: {
       vu: 'Il inspecte le mur de disques encadrés en connaisseur, puis s’arrête sur la petite photo dans le coin du cadre — celle où Waters est encore devant le micro, pas derrière.',

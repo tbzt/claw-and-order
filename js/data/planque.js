@@ -611,9 +611,9 @@ export const planque = {
       },
       utiliser: ({ a, qui }) => {
         if (a('vu-reseau-laverie')) return 'Toujours le même nœud. Il n’a rien de plus à donner.'
-        if (qui !== 'rabbit')
-          return { tous: 'Il faudrait un deck, et une raison d’y entrer.',
-                   hercules: '« Laisse-la faire. C’est son rayon. »' }
+        if (qui !== ‘rabbit’)
+          return { tous: ‘Il faudrait un deck, et une raison d’y entrer.’,
+                   hercules: ‘« Laisse-le faire. C’est son rayon. »’ }
         return { tous: ['White_Rabbit se glisse dans le nœud de paiement, par acquit de conscience.',
                         'Des lessives, des pièces, un abonnement résilié en mars. Rien qui ressemble à un problème.'],
                  rabbit: '« Ce nœud-là dit la vérité : cet endroit ne cache rien. C’est même reposant. »',

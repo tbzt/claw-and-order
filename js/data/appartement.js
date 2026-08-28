@@ -132,7 +132,7 @@ export const appartement = {
       ...(a('bail-numero') ? ['bail-numero'] : []),
       /* `trace-archive` n'est PAS ici, et c'est délibéré : il est marqué
          `visuel:` sur la ligne de l'intrusion elle-même, parce que le
-         boîtier doit s'allumer AU MOMENT où White_Rabbit dit ce qu'elle
+         boîtier doit s'allumer AU MOMENT où White_Rabbit dit ce qu'il
          trouve, pas au rafraîchissement suivant. Le mettre aux deux
          endroits le faisait apparaître deux fois dans `data-etat` —
          inoffensif pour le CSS, mais c'est deux sources pour un même

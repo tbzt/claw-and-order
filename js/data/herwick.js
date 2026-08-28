@@ -232,15 +232,15 @@ export const herwick = {
       }),
       utiliser: ({ a, qui }) => {
         if (a('caisse-coupee')) return { tous: 'Éteint. Il n’a plus rien à dire à personne.' }
-        if (qui !== 'rabbit')
-          return { tous: 'Il faudrait un deck, et savoir dans quoi on entre.',
-                   hercules: '« Laisse-la faire. C’est son rayon, et je préfère que ce soit elle plutôt que moi qui tâtonne. »' }
+        if (qui !== ‘rabbit’)
+          return { tous: ‘Il faudrait un deck, et savoir dans quoi on entre.’,
+                   hercules: ‘« Laisse-le faire. C’est son rayon, et je préfère que ce soit lui plutôt que moi qui tâtonne. »’ }
         return {
-          tous: ['White_Rabbit se glisse dans le petit réseau du terminal, coupe la synchronisation nocturne, et referme derrière elle.',
-                 'Rien ne clignote plus. Une boutique fermée, sur les registres, exactement comme elle devrait l’être à cette heure.'],
-          rabbit: '« Voilà. Aux yeux de qui que ce soit qui regarde de loin, cette caisse dort. »',
-          flags: ['caisse-coupee'],
-          visuels: ['caisse-coupee'],
+          tous: [‘White_Rabbit se glisse dans le petit réseau du terminal, coupe la synchronisation nocturne, et referme derrière lui.’,
+                 ‘Rien ne clignote plus. Une boutique fermée, sur les registres, exactement comme elle devrait l’être à cette heure.’],
+          rabbit: ‘« Voilà. Aux yeux de qui que ce soit qui regarde de loin, cette caisse dort. »’,
+          flags: [‘caisse-coupee’],
+          visuels: [‘caisse-coupee’],
         }
       },
     },
