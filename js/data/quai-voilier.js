@@ -328,6 +328,11 @@ export const quaiVoilier = {
         const commun = ['« Paré ? » — « Paré. » — « Paré. » — « Paré. »',
                         'Le passe libère le verrou. Drakk pousse sur la gaffe et la coque s’écarte d’un mètre, sans un bruit.',
                         'L’hélice mord. Trash annonce un casier à bâbord, White_Rabbit corrige sans ouvrir les yeux.']
+        /* Nœud 4 (`PLAN_NOEUDS_DE_CHAOS_FICHES` § II) : appareiller sans
+           jamais avoir parlé au pêcheur du quai le laisse témoin muet —
+           rien ne se sent sur le moment, l'exposition se relit à
+           l'entrée de l'abordage (`retour.js`) et au bilan. */
+        const flags = a('pecheur-parle') ? [] : ['pecheur-a-vu']
         return a('esprit-eau')
           ? { tous: [...commun,
                      'Puis quelque chose prend le bateau par en dessous.',
@@ -335,13 +340,13 @@ export const quaiVoilier = {
                      'Une vedette de la Star croise à trois cents mètres et ne voit rien — il n’y a rien à voir.',
                      'Vingt-six minutes. McNeil sort de la nuit comme un mur qu’on aurait posé sur l’eau.'],
               trash: '« Ne la regardez pas trop. »',
-              minutes: 26, va: 'greffe' }
+              flags, minutes: 26, va: 'greffe' }
           : { tous: [...commun,
                      'Quarante minutes de clapot noir. À mi-parcours, une vedette de la Star appelle sur le 16.',
                      'Hercules répond qu’il ramène le bateau de son oncle au chantier. La vedette souhaite bon courage et s’éloigne.',
                      'La masse de McNeil sort de la nuit comme un mur qu’on aurait posé sur l’eau.'],
               drakk: '« Belle manœuvre, compagnons. »',
-              minutes: 40, va: 'greffe' }
+              flags, minutes: 40, va: 'greffe' }
       },
       objets: {
         passe: 'Il faut d’abord que tout le monde soit à son poste.',

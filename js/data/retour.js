@@ -96,7 +96,13 @@ export const retour = {
     ...(a('lester-blesse') || a('lester-touche-laverie') ? [
       'Son bras porte un second pansement, par-dessus le premier. Il ne dit rien. Il n’a plus besoin de le dire.',
     ] : []),
-    'Personne, à bord, n’a encore vu ce qui vous suit. Ça n’a empêché personne de s’en apercevoir.',
+    /* Nœud 4, échec rétrospectif : ce que le quai a vu ou tu se relit
+       ici, à la seule entrée qui compte. */
+    a('pecheur-a-vu')
+      ? 'Cisco l’a entendu au port : quelqu’un a payé pour la description d’un voilier de huit mètres parti du Sunnyside. Quelqu’un a répondu.'
+      : a('pecheur-parle')
+        ? 'Le vieux du quai a une conscience, à sa manière : il a fait passer un mot à Cisco avant même que vous ayez levé l’ancre. Des gens posent des questions sur le bateau.'
+        : 'Personne, à bord, n’a encore vu ce qui vous suit. Ça n’a empêché personne de s’en apercevoir.',
     'OBJECTIF — franchir le goulet une seconde fois, et rendre Lester à McNeil. Quelque chose gagne du terrain derrière vous, sans se presser.',
   ] : [
     'Le voilier a repris la mer avec un passager de plus. McNeil s’efface derrière la pluie.',
