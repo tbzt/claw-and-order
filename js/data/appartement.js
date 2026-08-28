@@ -107,7 +107,7 @@ export const appartement = {
     ...(sait('adresse-teresa')
       ? ['2214 South Sheridan. C’était écrit en page deux du dossier depuis le début : un pressing au rez-de-chaussée, deux étages au-dessus, la porte du fond.']
       : ['Il a fallu trois quarts d’heure pour trouver l’immeuble — personne n’avait lu le dossier jusqu’à la page où son adresse est écrite. Un pressing au rez-de-chaussée, deux étages au-dessus, et aucun nom sur les boîtes aux lettres.']),
-    ...(a('appart-teresa')
+    ...(sait('appart-teresa')
       ? ['La patronne du pressing vous regarde monter et ne dit rien. Herwick avait prévenu : c’est elle qui encaisse le loyer, et c’est pour ça qu’on la paie.']
       : []),
     'La porte du studio n’est pas fermée à clé. Elle porte, en travers, deux rubans jaunes qui n’existent qu’en réalité augmentée : SCÈNE PLACÉE SOUS SCELLÉS — LONE STAR. Physiquement, il n’y a rien. On passe la main au travers.',
@@ -181,7 +181,7 @@ export const appartement = {
             drakk: '« Le scellé est intact. Personne n’est revenu. »',
             flags: ['rubans-intacts'],
             fiches: ['rubans-intacts'] },
-      utiliser: ({ a }) => ({
+      utiliser: ({ a, sait }) => ({
         tous: [
           ...(a('su:lester-innocent')
             ? ['Vous ressortez avec ce que la Lone Star avait trouvé le premier jour, et qu’elle a rangé dans un tiroir.']
@@ -190,7 +190,7 @@ export const appartement = {
             ? [{ texte: 'En bas, le pressing tourne. La patronne vous regarde passer, décroche son commlink avant même que vous ayez atteint le trottoir, et compose un numéro qu’elle connaît par cœur.',
                  visuel: 'tir-dehors' },
                'Ils avaient laissé leur carte à quatre endroits du quartier. Elle en fait partie.',
-               ...(a('appart-teresa')
+               ...(sait('appart-teresa')
                  ? [['drakk', '« Elle encaisse le loyer et elle ne pose pas de question. Herwick nous l’avait dit. Il ne nous avait pas dit à qui elle en pose, elle. »']]
                  : []),
                ...(a('local-quitte')
