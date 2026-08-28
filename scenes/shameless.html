@@ -115,6 +115,14 @@
        « Personne ne vient ici pour ce lieu » — donc personne d'autre
        n'y a laissé quelque chose qui lui appartienne. -->
   <div class="calque calque--astral">
+    <!-- R4 : AUCUNE CIBLE DANS CE CALQUE, et c'est un constat, pas un
+         oubli. Les deux auras doublent Denny et Iris, `attente-alcove`
+         double l'alcôve — et les strates, essayées puis retirées, ne
+         pouvaient que répéter ce que la vue astrale dit déjà (« une
+         aura de salle d'attente, empilée nuit après nuit », « ils
+         attendent quelqu'un ») et ce que l'alcôve dit mieux, parce
+         qu'elle le dit d'ELLE. Une vue cadre la salle ; une cible doit
+         payer autre chose. -->
     <div class="strates"></div>
     <div class="attente-alcove"></div>
     <div class="aura aura--denny"></div>
@@ -132,7 +140,10 @@
     <div class="grille-tac"></div>
     <div class="issue issue--porte"></div>
     <div class="cote cote--porte">ENTRÉE / SORTIE</div>
-    <div class="issue issue--arriere"></div>
+    <!-- R4 : l'entrée est déjà `porte`, la banquette est `alcove`.
+         L'arrière-salle n'a aucune cible — c'est la seule chose du
+         décor que personne n'a jamais vue. -->
+    <div class="issue issue--arriere" data-hotspot="arriere"></div>
     <div class="cote cote--arriere">ARRIÈRE-SALLE — NON VUE</div>
     <div class="couvert couvert--comptoir"></div>
     <div class="cote cote--couvert">COUVERT — LE BAR</div>
@@ -156,7 +167,10 @@
   <div class="calque calque--ra">
     <div class="ora ora--parasite pa1">S█YCAF PR█ · -3█ %</div>
     <div class="ora ora--parasite pa2">L█VRAIS█N · ██ MIN</div>
-    <div class="ora ora--brouilleur">BROUILLEUR ARTISANAL · ACTIF</div>
+    <!-- R4 : les deux parasites ne veulent rien dire, c'est leur
+         fonction. Le brouilleur, lui, est le seul objet lisible de la
+         pièce — et celui qui rend tous les autres illisibles. -->
+    <div class="ora ora--brouilleur" data-hotspot="brouilleur">BROUILLEUR ARTISANAL · ACTIF</div>
     <div class="bave"></div>
   </div>
 

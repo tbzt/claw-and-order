@@ -223,16 +223,61 @@ export const shameless = {
        Même motif que `mur` chez les amis (28) : la musique comme fil
        commun. Ici, un coin arraché dit ce que personne n'a eu besoin de
        dire à voix haute. */
+    /* ══ LES CIBLES DE CALQUE — R4, quatrième des onze décors ════════
+       Trois créneaux, un par lentille. Les auras doublent Denny et
+       Iris, `attente-alcove` double l'alcôve, l'issue de devant est
+       `porte` : une chose du monde, une seule cible.
+
+       Les deux drapeaux se paient sur des cibles qui existaient déjà —
+       `strates` sur l'alcôve, `brouilleur` sur le mur — et dans les
+       deux cas c'est un CONTRASTE, pas un ajout d'information. */
+    arriere: {
+      nom: 'L’arrière-salle',
+      principal: 'regarder',
+      regarder: {
+        tous: 'Une porte au fond, sans plaque, dans le prolongement du bar.',
+        drakk: ['« Pas de poignée de ce côté. Le chambranle est éraflé sur toute la largeur, en bas. »',
+                '« Le sol est usé en demi-cercle vers l’intérieur. On y passe large, et souvent. »'],
+      },
+      utiliser: {
+        tous: 'Elle ne s’ouvre pas de ce côté, et deux personnes vous regardent essayer.',
+        drakk: '« Pas devant eux. »',
+      },
+    },
+
+    brouilleur: {
+      nom: 'Le brouilleur',
+      principal: 'regarder',
+      regarder: {
+        tous: 'Un boîtier gris vissé au-dessus du bar, sans marque, avec une antenne rapportée.',
+        rabbit: ['« Non, ce n’est pas du commerce : monté à la main, réglage large. »',
+                 '« Il ne couvre pas tout. Il y a un trou vers le haut de la bande. »',
+                 '« Quelque chose peut encore passer par là. Je ne dis pas que — »'],
+        flags: ['brouilleur-lu'],
+      },
+      utiliser: {
+        tous: 'Il est au-dessus du bar, et Iris est dessous.',
+        rabbit: '« Je n’y touche pas. C’est son gagne-pain. »',
+      },
+    },
+
     mur: {
       nom: 'Le mur de flyers',
-      regarder: {
+      regarder: ({ a }) => ({
         tous: ['Des années de concerts, collées en couches, et des polaroïds de clients punaisés par-dessus — le genre de mur que chaque bar de quartier a fini par se donner, un jour ou l’autre.',
                'Un coin, à hauteur d’yeux, a été arraché proprement. Pas déchiré — décollé, avec soin, en laissant les photos voisines intactes.'],
         hercules: '« On n’arrache pas une photo par accident, et surtout pas aussi proprement. Quelqu’un a fait le ménage, ici, avant nous. »',
         trash: '« Une place vide sur un mur plein, c’est une absence qui a une forme. Quelqu’un savait exactement ce qu’il fallait retirer. »',
-        rabbit: '« Pas de trace numérique — ces photos n’ont jamais existé qu’en papier. Ce qui les a fait disparaître n’a laissé aucun journal, nulle part. »',
+        /* R4 : `brouilleur-lu` se paie ici, et il RETIRE une piste au
+           lieu d'en ajouter une — sa première lecture soupçonnait un
+           effacement ; le boîtier explique qu'il n'y a jamais rien eu à
+           effacer. Une lentille peut contredire ce qu'une autre a cru
+           (quatre regards § 10). */
+        rabbit: a('brouilleur-lu')
+          ? '« Non — rien n’a été effacé. Avec ce boîtier, rien n’a jamais été écrit. »'
+          : '« Pas de trace numérique — ces photos n’ont jamais existé qu’en papier. Ce qui les a fait disparaître n’a laissé aucun journal, nulle part. »',
         drakk: '« La tapisserie amputée d’un blason. On ne l’efface pas par négligence : on l’efface parce qu’il désignait quelqu’un. »',
-      },
+      }),
       utiliser: {
         tous: 'Tu ne décolles rien de plus. Ce mur a déjà perdu ce qu’il avait à perdre.',
       },
