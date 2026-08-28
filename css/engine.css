@@ -932,8 +932,20 @@ body {
   94%,100% { transform: translate(0, 0) scaleX(-1) }
 }
 
-/* Le plateau prend la teinte de la lentille active. */
-.stage[data-vue="ra"] .decor { filter: saturate(1.15) brightness(.92) hue-rotate(12deg); }
+/* Le plateau prend la teinte de la lentille active.
+
+   R2 de l'AUDIT_LENTILLES_ET_CAPACITES (2026-08-27), appliqué le
+   2026-08-28 : le filtre portait sur `.decor` ENTIER — donc sur les
+   quatre `.pj` et sur le calque de la lentille elle-même. C'est le
+   défaut que le chantier 16 avait corrigé pour l'astral seulement
+   (voir juste en dessous) ; `ra` et `materielle` l'avaient gardé.
+   Conséquence mesurée par l'audit : les 162 éléments de la lentille
+   matérielle — la plus dessinée du jeu — étaient peints sous
+   `saturate(.18)`, c'est-à-dire éteints par le regard censé les
+   montrer. Même patron que l'astral, à la lettre. */
+.stage[data-vue="ra"] .tableau > *:not(.pj):not(.calque--ra) {
+  filter: saturate(1.15) brightness(.92) hue-rotate(12deg);
+}
 .decor, .tableau > * { transition: filter .45s ease; }
 
 /* Chantier 16 (DA §6.1) — L'ASTRAL NE RETIRE RIEN AU VIVANT.
@@ -980,7 +992,12 @@ body {
    `materielle` (int. 6, ancien `tactique`) est la valeur de `data-vue` ;
    `.calque--tactique` est un autre espace de noms, un nom de classe de
    calque, et ne se renomme pas avec elle. */
-.stage[data-vue="materielle"] .decor { filter: saturate(.18) contrast(1.28) brightness(.86); }
+/* R2, second volet (voir le commentaire de `ra` plus haut) : c'est ICI
+   que le défaut coûtait le plus cher — 162 éléments de calque, le plus
+   gros corpus dessiné du jeu, éteints par leur propre lentille. */
+.stage[data-vue="materielle"] .tableau > *:not(.pj):not(.calque--tactique) {
+  filter: saturate(.18) contrast(1.28) brightness(.86);
+}
 .stage[data-vue="materielle"] .calque--tactique { opacity: 1; }
 .stage[data-vue="materielle"] .calque--tactique [data-hotspot] { pointer-events: auto; }
 
