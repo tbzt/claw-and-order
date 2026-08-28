@@ -14,7 +14,7 @@ tourne.** Rien d'autre. Devant tout nouveau fichier, une seule question :
 | un tableau, ses données, son markup | un document de conception |
 | une feuille de style chargée par `index.html` | un banc d'essai, une planche de comparaison |
 | un module importé par la chaîne d'`index.html` | un script qui *génère* quelque chose |
-| `ARCHITECTURE.md`, ce fichier | une carte ASCII de sprite |
+| `ARCHITECTURE.md`, `CLAUDE.md`, ce fichier | une carte ASCII de sprite |
 
 L'atelier est **hors de ce dépôt** : un dossier voisin,
 `../claw-and-order-atelier/`, qui porte le sien. Les deux arborescences
@@ -118,3 +118,15 @@ Le projet a une règle qui a trouvé à peu près tous ses bugs :
 Une console sans erreur ne prouve pas qu'un tableau est jouable. Ce qui le
 prouve, c'est de parcourir la grille verbe × cible × runner et de compter les
 trous. L'outillage de mesure vit à l'atelier.
+
+## Commiter
+
+Un commit de ce dépôt ne porte **qu'un seul auteur : Thomas.**
+
+> Pas de `Co-Authored-By:` pour un modèle, pas de pied de message généré,
+> aucune mention d'outil dans le corps du commit.
+
+L'outillage change tous les six mois ; la responsabilité du code, non. Un
+`git log` qui nomme un assistant raconte par quel moyen le texte a été tapé —
+pas qui répond de ce qu'il fait. Seul le second renseignement mérite d'être
+versionné.
