@@ -1642,6 +1642,10 @@ const BILAN = [
   ['nita-ferme',     'Une permanente de l’ORC a demandé pour qui vous travailliez. Ne pas répondre était déjà une réponse.'],
   ['orc-contact',    'Amelia Brown prend vos appels. Ça ne s’achète pas — ça se recommande.'],
   ['tir-prevenu',    'Le quartier a prévenu les elfes du Tír que quelqu’un d’autre posait des questions. C’est pour ça qu’ils avaient laissé une carte.'],
+  /* Nœud 3, chantier 54 — la patronne du pressing, la scène pilote.
+     Mutuellement exclusifs : un seul sujet ferme la conversation. */
+  ['pressing-parle', 'La patronne du pressing savait qui payait le loyer, et elle a choisi de ne pas décrocher. Ça ne se demande pas deux fois.'],
+  ['pressing-mefie', 'Vous avez menti à une femme qui enterre une inconnue depuis trois jours. Elle a décroché avant que vous ayez fini de mentir.'],
   /* L'appartement de Teresa, chantier 26 — la première ancre. */
   ['su:lester-innocent', 'La preuve qu’il n’a rien fait était consultable depuis trois jours, pour qui avait un numéro de contrat à quatre chiffres.'],
   ['maglock-journal',    'Deux hommes sont entrés chez elle après sa mort et sont ressortis ensemble. C’est écrit en clair, chez un serrurier de Puyallup.'],

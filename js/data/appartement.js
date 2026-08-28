@@ -61,6 +61,29 @@
    paie, et pourquoi la patronne du pressing ne pose pas de question.
    Ça se paie en texte, à deux endroits — l'ouverture, et la sortie.
 
+   ══ LA PATRONNE DU PRESSING — la scène pilote (chantier 54, nœud 3,
+   `PLAN_NOEUDS_DE_CHAOS_FICHES.md` § II) ═══════════════════════════
+   Jusqu'ici elle n'existait qu'en récit : elle décrochait TOUJOURS à
+   la sortie, sans qu'aucun geste du joueur n'y soit pour rien. La
+   cible `pressing` (le palier, à côté du maglock) en fait la première
+   tentative ÉCHOUABLE du jeu — trois manières d'entrer en matière,
+   dont une qui rate pour une raison lisible, sans rien bloquer.
+
+   `bail` (le levier, `sait('appart-teresa')`, règle 12 : une déduction
+   ouvre la parole, jamais une porte) → elle jauge, et décide de ne pas
+   appeler : `pressing-parle`. `couverture` (mentir sans rien savoir,
+   toujours visible) → elle ne discute pas, elle décroche PENDANT la
+   scène : `pressing-mefie`. `franchise` (dire la vérité sans le
+   levier) → elle ne répond rien et ne promet rien ; aucun état neuf,
+   c'est voulu — la branche par défaut reste la même, sinon
+   `a('parle:patronne')` (posé par `entree()`, `dialogue.js`, sans
+   drapeau de plus) suffit à nuancer la ligne de sortie.
+
+   Le front du Tír n'est pas touché : `pressing-mefie` avance
+   `tir-prevenu` au moment où elle raccroche, pas à la sortie ;
+   `pressing-parle` contourne cette chute-ci sans désarmer le front —
+   il tombe toujours au local, ou ici si on ne lui parle pas.
+
    ══ LE FRONT DU TÍR AVANCE, ET SANS COMPTEUR (§ 7.4) ════════════════
    Le plan veut que les runners du Tír progressent « quand on passe dans
    un lieu qu'ils surveillent — l'appartement, LES AMIS », avec trois
@@ -99,7 +122,11 @@ export const appartement = {
      dedans, et c'est le quartier qui a bougé, pas la pièce. */
   ouverture: ({ a, sait }, visite) => visite > 1 ? [
     'Le rideau de RA est toujours en travers de la porte, toujours intact. La pièce n’a pas bougé d’un objet.',
-    ...(a('tir-prevenu')
+    ...(a('pressing-mefie')
+      ? ['En bas, la patronne est plantée dans l’encadrement de sa porte, bras croisés. Elle ne fait plus semblant de ne pas vous regarder.']
+      : a('pressing-parle')
+      ? ['En bas, la patronne vous regarde monter une seconde fois et ne dit toujours rien. Ça, au moins, c’est réglé.']
+      : a('tir-prevenu')
       ? ['En bas, la patronne du pressing vous a regardés monter une seconde fois, et cette fois elle a décroché avant que vous ayez atteint le palier.']
       : ['En bas, la patronne du pressing ne lève toujours pas la tête.']),
     'OBJECTIF — reprendre ce qu’on n’a pas vu la première fois.',
@@ -181,45 +208,82 @@ export const appartement = {
             drakk: '« Le scellé est intact. Personne n’est revenu. »',
             flags: ['rubans-intacts'],
             fiches: ['rubans-intacts'] },
-      utiliser: ({ a, sait }) => ({
-        tous: [
-          ...(a('su:lester-innocent')
-            ? ['Vous ressortez avec ce que la Lone Star avait trouvé le premier jour, et qu’elle a rangé dans un tiroir.']
-            : ['Vous ressortez du studio. Les deux rubans jaunes se referment tout seuls derrière vous, comme ils l’ont fait pendant trois jours.']),
-          ...(a('tir-prevenu')
-            ? [{ texte: 'En bas, le pressing tourne. La patronne vous regarde passer, décroche son commlink avant même que vous ayez atteint le trottoir, et compose un numéro qu’elle connaît par cœur.',
-                 visuel: 'tir-dehors' },
-               'Ils avaient laissé leur carte à quatre endroits du quartier. Elle en fait partie.',
-               ...(sait('appart-teresa')
-                 ? [['drakk', '« Elle encaisse le loyer et elle ne pose pas de question. Herwick nous l’avait dit. Il ne nous avait pas dit à qui elle en pose, elle. »']]
-                 : []),
-               ...(a('local-quitte')
-                 ? ['Trente secondes plus tard, à trois kilomètres de là, quelqu’un pousse un rideau de fer qui ne redescend plus et demande à quatre personnes en deuil si des gens sont venus leur poser des questions.']
-                 : [])]
-            : [{ texte: 'En bas, le pressing tourne. La patronne vous regarde passer, décroche son commlink avant même que vous ayez atteint le trottoir, et compose un numéro qu’elle connaît par cœur.',
-                 visuel: 'tir-dehors' },
-               'Vous ne saviez pas qu’ils avaient laissé leur carte dans ce quartier. Maintenant si.']),
-        ],
-        ...(a('trace-archive')
-          ? { rabbit: '« Quelqu’un, un jour, verra que l’archive a été lue. Pas aujourd’hui. »' }
-          : {}),
-        /* LE FRONT DU TÍR, SANS COMPTEUR (voir l'en-tête). Passer ici
-           suffit à se faire voir : `tir-prevenu` tombe toujours, comme
-           il tombait au local au premier mot adressé à un ami. Et s'il
-           était DÉJÀ tombé là-bas, alors les deux visites se recoupent
-           chez eux comme elles se recoupent au carnet — ils remontent
-           le parcours, et le second présage du §7.4 se pose tout seul :
-           `tir-retour`. Deux lieux surveillés font un compteur à deux
-           crans, et il n'a rien coûté à écrire. */
-        flags: ['appart-quitte', 'tir-prevenu',
-                ...(a('tir-prevenu') && a('local-quitte') ? ['tir-retour'] : [])],
+      utiliser: ({ a, sait }) => {
+        const sortieStudio = a('su:lester-innocent')
+          ? 'Vous ressortez avec ce que la Lone Star avait trouvé le premier jour, et qu’elle a rangé dans un tiroir.'
+          : 'Vous ressortez du studio. Les deux rubans jaunes se referment tout seuls derrière vous, comme ils l’ont fait pendant trois jours.'
         /* CHANTIER 17 RÉÉCRIT : la sortie ne referme plus la partie,
            elle rend la main à la carte. Ce qui referme l'acte IV est
            devenu un nœud à part — le palais de justice — parce qu'avec
            deux lieux qui se renvoient l'un à l'autre, plus rien ne
            permettait d'arrêter de chercher. */
-        va: 'carte',
-      }),
+
+        /* Nœud 3, chantier 54 : `pressing-parle` sort du bloc
+           `tir-prevenu` tout entier — elle ne décroche PAS ici, et ce
+           cran-ci du front du Tír reste désarmé pour le reste de la
+           nuit (il peut toujours tomber au local, séparément). */
+        if (a('pressing-parle'))
+          return {
+            tous: [sortieStudio, 'En bas, la patronne vous regarde partir. Elle ne décroche pas.'],
+            flags: ['appart-quitte'],
+            va: 'carte',
+          }
+
+        /* `pressing-mefie` a déjà tout dit PENDANT la scène — le sujet
+           `couverture` porte son propre `visuel: 'tir-dehors'`
+           (`dialogues.patronne`, plus bas). La sortie ne rejoue pas
+           l'appel, elle le referme. */
+        if (a('pressing-mefie'))
+          return {
+            tous: [sortieStudio, 'En bas, la patronne n’a pas eu besoin de décrocher une seconde fois.'],
+            ...(a('trace-archive')
+              ? { rabbit: '« Quelqu’un, un jour, verra que l’archive a été lue. Pas aujourd’hui. »' }
+              : {}),
+            flags: ['appart-quitte', 'tir-prevenu', ...(a('local-quitte') ? ['tir-retour'] : [])],
+            va: 'carte',
+          }
+
+        /* Alternative 3 (`franchise`) ne pose aucun drapeau neuf — la
+           branche par défaut reste celle-ci, à l'identique — mais
+           `parle:patronne` (posé par `entree()`, `dialogue.js`, sans
+           rien ajouter ici) suffit à nuancer la ligne : elle vous a
+           regardés en face avant de décrocher. */
+        const parle = a('parle:patronne')
+        return {
+          tous: [
+            sortieStudio,
+            ...(a('tir-prevenu')
+              ? [{ texte: 'En bas, le pressing tourne. La patronne vous regarde passer, décroche son commlink avant même que vous ayez atteint le trottoir, et compose un numéro qu’elle connaît par cœur.',
+                   visuel: 'tir-dehors' },
+                 'Ils avaient laissé leur carte à quatre endroits du quartier. Elle en fait partie.',
+                 ...(sait('appart-teresa')
+                   ? [['drakk', '« Elle encaisse le loyer et elle ne pose pas de question. Herwick nous l’avait dit. Il ne nous avait pas dit à qui elle en pose, elle. »']]
+                   : []),
+                 ...(a('local-quitte')
+                   ? ['Trente secondes plus tard, à trois kilomètres de là, quelqu’un pousse un rideau de fer qui ne redescend plus et demande à quatre personnes en deuil si des gens sont venus leur poser des questions.']
+                   : [])]
+              : [{ texte: 'En bas, le pressing tourne. La patronne vous regarde passer, décroche son commlink avant même que vous ayez atteint le trottoir, et compose un numéro qu’elle connaît par cœur.',
+                   visuel: 'tir-dehors' },
+                 parle
+                   ? 'Vous lui aviez parlé de Teresa, en montant. Ça ne l’a pas empêchée de décrocher — mais elle vous a regardés en face pour le faire.'
+                   : 'Vous ne saviez pas qu’ils avaient laissé leur carte dans ce quartier. Maintenant si.']),
+          ],
+          ...(a('trace-archive')
+            ? { rabbit: '« Quelqu’un, un jour, verra que l’archive a été lue. Pas aujourd’hui. »' }
+            : {}),
+          /* LE FRONT DU TÍR, SANS COMPTEUR (voir l'en-tête). Passer ici
+             suffit à se faire voir : `tir-prevenu` tombe toujours, comme
+             il tombait au local au premier mot adressé à un ami. Et s'il
+             était DÉJÀ tombé là-bas, alors les deux visites se recoupent
+             chez eux comme elles se recoupent au carnet — ils remontent
+             le parcours, et le second présage du §7.4 se pose tout seul :
+             `tir-retour`. Deux lieux surveillés font un compteur à deux
+             crans, et il n'a rien coûté à écrire. */
+          flags: ['appart-quitte', 'tir-prevenu',
+                  ...(a('tir-prevenu') && a('local-quitte') ? ['tir-retour'] : [])],
+          va: 'carte',
+        }
+      },
     },
 
     /* ══ LE LIT — « les draps emportés (ils ONT relevé) », § 7.1.
@@ -314,6 +378,31 @@ export const appartement = {
             flags: ['bail-numero'] },
       utiliser: {
         tous: 'Tu remues la pile. Rien d’autre que des factures et du papier commercial — sa vie ne passait pas par là.',
+      },
+    },
+
+    /* ══ LE PRESSING — la patronne, en bas de la cage d'escalier ══════
+       Cible du PALIER, comme le maglock à côté duquel elle se range :
+       une voix, aucun sprite (précédent : McCarthy au téléphone, la
+       vedette sur le 16). `regarder` porte les quatre lentilles ;
+       `parler` ouvre le dialogue `patronne` ; `utiliser` refuse en
+       voix (règle 11) — ce n'est pas une cible qu'on manipule. */
+    pressing: {
+      nom: 'La patronne du pressing',
+      regarder: {
+        tous: 'Une femme, derrière son comptoir, dans la lumière chaude d’un pressing qui tourne encore. Elle ne lève pas la tête, mais elle sait exactement qui monte.',
+        hercules: '« Elle voit passer tout le monde et n’encaisse de personne. Ça, c’est un service qu’on lui paie, pas un commerce qu’elle tient. »',
+        trash: '« Elle a peur pour quelqu’un qui n’est plus là pour le savoir. »',
+        rabbit: '« Son commlink, posé à côté de la caisse. Écran allumé, un numéro déjà composé. Pas encore appelé. »',
+        drakk: '« Le fer tourne, le comptoir est rangé. Elle travaille en attendant de voir ce qu’on va faire. »',
+      },
+      parler: { texte: [], dialogue: 'patronne' },
+      utiliser: {
+        tous: 'Ce n’est pas une cible. C’est une femme derrière un comptoir.',
+        hercules: '« Je préfère lui parler. »',
+        trash: '« Non. »',
+        rabbit: '« Elle n’est pas un terminal. »',
+        drakk: '« On ne fouille pas les gens. On leur parle. »',
       },
     },
 
@@ -419,5 +508,63 @@ export const appartement = {
     },
   },
 
-  dialogues: {},
+  dialogues: {
+    /* ══ LA PATRONNE — nœud 3, chantier 54, la scène pilote ═══════════
+       Trois sujets, une seule fois où ça compte : `bail` (le levier),
+       `couverture` (mentir sans rien savoir — l'échec exécutable),
+       `franchise` (la vérité sans levier, qui ne suffit pas non plus).
+       Les trois se ferment sur `fin: true` — c'est une jauge, pas une
+       conversation ordinaire : une fois l'un des trois dit, il n'y a
+       plus qu'à monter ou repartir. */
+    patronne: {
+      qui: 'patronne',
+      accueil: ['Elle est derrière son comptoir, un fer à repasser levé à mi-course, et elle ne le repose pas en vous voyant entrer.',
+                '« Vous montez pour l’appartement. » Ce n’est pas une question.'],
+      retour: ['Le fer est reposé. Elle ne vous quitte pas des yeux pour autant.'],
+      sujets: [
+        {
+          id: 'bail',
+          titre: '« On sait qui paie le loyer. »',
+          quand: ({ a, sait }) => sait('appart-teresa') && !a('pressing-parle') && !a('pressing-mefie'),
+          flags: ['pressing-parle'],
+          fin: true,
+          texte: ['Elle repose le fer, cette fois pour de bon.',
+                  '« Vous savez ça, et vous êtes quand même montés me le dire en face. »',
+                  'Elle ne dit ni oui ni non. Ça, pour elle, en est une.',
+                  '« Ce soir-là, j’étais déjà chez moi, en haut. Je dormais. Ceux qui sont montés, je les ai pas vus — mais la porte, en bas, elle, elle oublie jamais rien. »',
+                  'Elle retourne à son établi sans un mot de plus.'],
+        },
+        {
+          id: 'couverture',
+          titre: '(Se faire passer pour l’état des lieux.)',
+          quand: ({ a }) => !a('pressing-parle') && !a('pressing-mefie'),
+          flags: ['pressing-mefie', 'tir-prevenu'],
+          fin: true,
+          texte: ['« L’état des lieux. » Elle ne bouge pas.',
+                  '« Ça fait trois jours que j’encaisse le loyer d’une morte, et vous êtes la première assurance qui se présente en personne. »',
+                  { texte: 'Elle décroche son commlink, sans se presser, et compose un numéro qu’elle n’a pas besoin de chercher.',
+                    visuel: 'tir-dehors' },
+                  '« Redescendez. Vous parlerez à quelqu’un d’autre. »',
+                  ['hercules', '« … On peut sûrement encore arranger ça. »']],
+        },
+        {
+          id: 'franchise',
+          titre: '« On est là pour Teresa. » (sans dire qui vous êtes)',
+          quand: ({ a }) => !a('pressing-parle') && !a('pressing-mefie'),
+          fin: true,
+          texte: ['Elle ne répond pas tout de suite.',
+                  'Elle vous regarde, l’un après l’autre, comme si ça pouvait suffire à trancher quelque chose.',
+                  '« Je vous ai pas demandé qui vous êtes. »',
+                  'Elle ne promet rien. Elle ne referme rien non plus.'],
+        },
+        {
+          id: 'resolu',
+          titre: '(Rien à ajouter.)',
+          quand: ({ a }) => a('pressing-parle') || a('pressing-mefie'),
+          fin: true,
+          texte: ['Elle a déjà dit ce qu’elle avait à dire. Elle retourne à son fer.'],
+        },
+      ],
+    },
+  },
 }

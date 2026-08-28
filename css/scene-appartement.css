@@ -120,6 +120,17 @@
   filter: drop-shadow(0 0 calc(2 * var(--u)) rgba(70, 160, 200, .5));
 }
 
+/* ── LE PRESSING, EN BAS DE LA CAGE — x:2-44, y:96-112, chantier 54 ──
+   Aucun sprite : la patronne est une voix, comme McCarthy au téléphone
+   ou la vedette sur le 16. Ce que l'œil voit, c'est la lumière chaude
+   du pressing qui remonte l'escalier froid — assez pour rendre la
+   cible lisible sans un pixel de plus. */
+.tableau--appartement .pressing {
+  left: calc(2 * var(--u)); top: calc(96 * var(--u));
+  width: calc(42 * var(--u)); height: calc(16 * var(--u));
+  background: linear-gradient(0deg, rgba(230, 178, 92, .16) 0%, transparent 100%);
+}
+
 /* ── LA PORTE SOUS SCELLÉS — x:48-76, y:20-104, et c'est la sortie ─── */
 .tableau--appartement .porte-scellee {
   left: calc(48 * var(--u)); top: calc(20 * var(--u));
