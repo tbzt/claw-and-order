@@ -280,7 +280,7 @@ export const fiches = {
      `draps-emportes` et `maglock-journal` sont la paire de
      `lester-innocent`. Comme pour `hayden` au local, elles viennent du
      même tableau par deux chemins différents : un constat que n'importe
-     qui peut faire, et une intrusion que White_Rabbit seule peut mener
+     qui peut faire, et une intrusion que White_Rabbit seul peut mener
      — et qui coûte une trace. */
   'rubans-intacts': {
     titre: 'Personne n’est repassé',
@@ -497,7 +497,7 @@ export const deductions = [
       tous: 'Les deux fiches se répondent, et aucune des deux ne dit un nom — mais elles disent qu’il y en a un à trouver.',
       hercules: ['« Une voiture de ce prix, dans ce quartier-là, une fois par semaine ? »', '« Ce n’est pas de la discrétion. C’est une habitude. »'],
       trash: ['« Elle coupait le fil elle-même, pour lui. »', '« Je connais cette forme de loyauté. »'],
-      rabbit: ['« Éteindre un commlink avant un rendez-vous, ce n’est pas de la prudence amateur. C’est un protocole. »', '« Quelqu’un le lui a appris. Ou imposé. »'],
+      rabbit: ['« À la main, avant chaque fois. Jamais en retard, jamais oublié. »', '« Quelqu’un le lui a appris. Ou imposé. »'],
       drakk: ['« Elle gardait le secret d’un autre, au prix du sien. »', '« On raconte souvent cette histoire. Jamais de son côté à elle. »'],
     },
   },

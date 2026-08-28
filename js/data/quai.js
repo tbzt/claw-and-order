@@ -259,7 +259,7 @@ export const quai = {
       }),
       utiliser: {
         tous: 'On ne répare pas une icône. Il faut ouvrir le capot.',
-        rabbit: '« L’alerte dit OÙ. Elle ne visse rien. »',
+        rabbit: '« Je peux la faire taire. Ça ne fera pas partir le bateau. »',
       },
     },
 
@@ -274,7 +274,7 @@ export const quai = {
         if (a('vu-immat')) return 'Toujours la même fiche. Il n’y a rien de plus à en tirer.'
         if (qui !== 'rabbit')
           return { tous: 'Il faudrait un deck pour aller au-delà de ce qui flotte.',
-                   hercules: '« Laissons-la à celle qui sait lire ça. »' }
+                   hercules: '« Laissons-la à celui qui sait lire ça. »' }
         /* Chantier 64 : le doute de Rabbit (« nettoyé, ou jamais rien
            fait ») restait sans contradicteur. Drakk le prend au pied
            de la lettre — un dossier vide veut dire un homme prudent —

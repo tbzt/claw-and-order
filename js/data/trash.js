@@ -445,10 +445,13 @@ export const squat = {
           titre: '« Teresa Banks. Tu la connaissais ? »',
           quand: ({ a }) => a('sait-teresa') && !a('conf-teresa'),
           flags: ['conf-teresa'],
+          /* Il ne la connaissait pas — voir la note du même sujet dans
+             `duke.js`. Seule l'ambiance du lieu diffère d'une planque à
+             l'autre ; les faits, non. */
           texte: ['Long silence. Le pigeon se déplace encore, quelque part au-dessus.',
-                  '« Elle dormait deux étages au-dessus. Elle descendait fumer parce qu’en haut ça tirait. »',
-                  '« On s’est parlé quatre fois. Peut-être cinq. »',
-                  '« Personne m’a demandé ça non plus. Ils m’ont demandé où j’étais. Jamais qui elle était. »'],
+                  '« Vous êtes les deuxièmes à dire son nom devant moi. »',
+                  '« Le premier, c’était le vieux flic. Il l’a dit une fois, à voix basse, en relisant son dossier. Il croyait que je dormais. »',
+                  '« Tout le monde dit “la victime”. C’est plus court. »'],
         },
         {
           id: 'bras',

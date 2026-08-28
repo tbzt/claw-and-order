@@ -372,10 +372,20 @@ export const duke = {
           titre: '« Teresa Banks. Tu la connaissais ? »',
           quand: ({ a }) => a('sait-teresa') && !a('conf-teresa'),
           flags: ['conf-teresa'],
+          /* Il ne la connaissait pas. Le scénario est net : Hayden la tue
+             CHEZ ELLE, Renfield déplace le corps et le dépose dans un
+             taudis de Loveland — Lester s'est trouvé là, et c'est tout
+             le montage. « Deux étages au-dessus » venait de l'adresse
+             d'ELLE (`appartement.js` : un pressing au rez-de-chaussée,
+             deux étages au-dessus) et avait glissé dans sa bouche.
+
+             Une fréquentation lui donnerait le mobile que l'accusation
+             n'a jamais cherché (`crime-crapuleux`), et affaiblirait
+             `lester-loveland`. */
           texte: ['Long silence. Quelque part, une radio grésille en sourdine.',
-                  '« Elle dormait deux étages au-dessus. Elle descendait fumer parce qu’en haut ça tirait. »',
-                  '« On s’est parlé quatre fois. Peut-être cinq. »',
-                  '« Personne m’a demandé ça non plus. Ils m’ont demandé où j’étais. Jamais qui elle était. »'],
+                  '« Vous êtes les deuxièmes à dire son nom devant moi. »',
+                  '« Le premier, c’était le vieux flic. Il l’a dit une fois, à voix basse, en relisant son dossier. Il croyait que je dormais. »',
+                  '« Tout le monde dit “la victime”. C’est plus court. »'],
         },
         {
           id: 'bras',

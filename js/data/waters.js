@@ -57,7 +57,7 @@
    (garde-fou des planques, § 1 de `PLAN_PLANQUES.md`) — ici transposé :
    ce qui se choisit, c'est INTACT ou ABÎMÉ. Convaincu, Waters ouvre
    lui-même : rien ne se déclenche, parce que rien n'est forcé. Forcé
-   par White_Rabbit (seule compétente, comme la caisse chez Herwick ou
+   par White_Rabbit (seul compétent, comme la caisse chez Herwick ou
    le maglock à l'appartement) : la bombe matricielle fait ce que
    Waters l'a payée pour faire, et l'enregistrement — comme
    White_Rabbit — en ressort abîmé. Les deux routes sont désarmées si
@@ -226,7 +226,7 @@ export const waters = {
             fiches: ['enregistrement-recupere'],
           }
 
-        /* LA ROUTE TECHNIQUE : seule White_Rabbit sait faire. Depuis le
+        /* LA ROUTE TECHNIQUE : seul White_Rabbit sait faire. Depuis le
            chantier 47, cliquer ici ne résout plus rien tout seul — ça
            lance le plongeon. La résolution (les deux issues, la même
            décharge) vit maintenant dans `matrice-waters.js`, avec un
@@ -246,7 +246,7 @@ export const waters = {
           }
 
         return {
-          tous: 'Il faudrait soit convaincre Waters de l’ouvrir lui-même, soit une deckeuse pour passer le verrou — et personne d’autre ici n’a les mains pour ça.',
+          tous: 'Il faudrait soit convaincre Waters de l’ouvrir lui-même, soit un deckeur pour passer le verrou — et personne d’autre ici n’a les mains pour ça.',
           drakk: '« Une porte fermée à double sens. Sociale, ou technique. Je ne sais laquelle je préfère éviter. »',
         }
       },
