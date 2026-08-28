@@ -385,7 +385,7 @@ export const equipe = {
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
     attentif: 'Comment c’est fabriqué, où ça casse. Il essaie la même méthode sur les gens.',
-    portrait: 'Il a une quête, dont il ne dit presque rien. Il traite l’équipe comme une compagnie jurée, et les gens mettent un moment à comprendre qu’il ne joue pas.',
+    portrait: 'Il a une quête, dont il ne dit presque rien. Il appelle l’équipe une compagnie — c’est un mot de ses livres, et il l’entend au pied de la lettre.',
     signature: 'guilde',
   },
 }
