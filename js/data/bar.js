@@ -297,6 +297,40 @@ export const bar = {
        il la lit en vocabulaire d'auberge. Le cadre est faux, les
        conclusions sont bonnes — c'est ce qui le rend précieux.
        (Sa lecture de l'issue est sur `porte` : voir plus haut.) */
+    /* ══ LA CIBLE DE LA LENTILLE SOCIALE — R1 ════════════════════════
+       La première du jeu : Hercules avait zéro cible de calque contre
+       onze à White_Rabbit, et c'est tout l'écart d'accès mesuré au 27.
+
+       Une cible de calque n'est atteignable que par SON runner — le CSS
+       ne rend les clics au calque que sous sa propre lentille. Elle ne
+       porte donc que `tous` + la voix du porteur, exactement comme
+       `ligne-de-tir` juste en dessous. Écrire les quatre voix ici
+       serait du texte mort.
+
+       `sait-regards` se paie sur `salle.regarder`, comme `sait-ligne`
+       se paie sur `porte.utiliser` : un drapeau de perception, relu dans
+       la scène même, sans ligne de bilan — ce n'est pas une conséquence
+       que le monde retient, c'est une chose qu'on a comprise. */
+    regards: {
+      nom: 'Ce que la salle regarde',
+      /* Une cible de calque est faite pour être REGARDÉE — c'est même
+         la seule chose qu'on puisse en faire. Sans cette ligne, le clic
+         gauche contextuel retombe sur `utiliser`, donc sur le refus, et
+         la lentille ne rend rien au premier clic. Inerte tant que le
+         moteur ne lit pas `principal` ; juste dès qu'il le lira. */
+      principal: 'regarder',
+      regarder: {
+        tous: 'Trois personnes ont relevé la tête quand la porte a battu, et aucune ne l’a rebaissée depuis.',
+        hercules: ['« Ils nous comptent. Quatre, dont un troll — c’est le genre de chose qu’on retient sans le vouloir. »',
+                   '« Et lui, dans son coin, personne ne l’a regardé une seule fois. Il a payé pour ça, et il a bien payé : c’est nous qu’on remarquera en sortant. »'],
+        flags: ['sait-regards'],
+      },
+      utiliser: {
+        tous: 'On ne touche pas à ce qui n’est pas là. C’est une lecture, pas un objet.',
+        hercules: '« Ça se regarde, ça ne se prend pas. »',
+      },
+    },
+
     'ligne-de-tir': {
       nom: 'Une ligne rouge',
       regarder: {
@@ -342,14 +376,24 @@ export const bar = {
 
     salle: {
       nom: 'La salle',
-      regarder: {
-        tous: 'Des flics en fin de service, quelques-uns en début. Personne ne parle fort. Un bar à flics à 23 h, c’est plus calme qu’une bibliothèque.',
-        hercules: ['« Que des gens qui savent ce que vaut un contrat. La négociation va être honnête. »',
-                   '« C’est embêtant. Je suis meilleur quand elle ne l’est pas. »'],
+      /* R1 : `sait-regards` (la cible du calque social) se paie ici.
+         La salle ne change pas — c'est ce qu'on en sait qui change, et
+         seulement pour celui qui l'a vu. Les trois autres voix restent
+         mot pour mot ce qu'elles étaient. */
+      regarder: ({ a }) => ({
+        tous: a('sait-regards')
+          ? ['Des flics en fin de service, quelques-uns en début. Personne ne parle fort.',
+             'Et trois têtes qui ne se sont pas rebaissées depuis que vous êtes entrés.']
+          : 'Des flics en fin de service, quelques-uns en début. Personne ne parle fort. Un bar à flics à 23 h, c’est plus calme qu’une bibliothèque.',
+        hercules: a('sait-regards')
+          ? ['« On est la seule chose neuve de la soirée. Ça ne durera pas, mais ça dure encore. »',
+             '« Et lui, il attendait déjà. Personne ne saura dire depuis quand. »']
+          : ['« Que des gens qui savent ce que vaut un contrat. La négociation va être honnête. »',
+             '« C’est embêtant. Je suis meilleur quand elle ne l’est pas. »'],
         trash: '« Tout le monde écoute. »',
         rabbit: '« Trente commlinks, tous en mode discret. »',
         drakk: '« Une salle commune. Peu de rires. »',
-      },
+      }),
       utiliser: 'On ne réarrange pas un bar à flics. On y reste discret, ou on en sort.',
     },
   },

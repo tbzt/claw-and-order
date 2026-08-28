@@ -401,6 +401,41 @@
    (vert, pointillés) au lieu du rouge « danger » qu'elle portait en
    cul-de-sac : même code couleur que l'échappatoire de chaque autre
    tableau. */
+/* ── LA LENTILLE SOCIALE — R1, premier décor ─────────────────────────
+   La scène ne redéclare pas ce QU'EST un lien (engine.css le fait) :
+   elle dit d'où il part, sur quelle longueur, et vers où il penche.
+
+   Les deux liens d'attention partent des joueurs de fléchettes (les
+   mêmes que Drakk marque en hostiles, `j1`/`j2` : le même fait, deux
+   lectures) et vont vers le groupe des quatre, entré par la porte du
+   fond. Le troisième part de McCarthy et n'est PAS un regard — c'est
+   l'argent, et c'est le seul fil qui le relie à quoi que ce soit.
+
+   Les angles sont calculés sur les positions réelles des sprites, pas
+   posés à l'œil : `p-drakk` est à 122, `p-hercules` à 211 ; le centre
+   du groupe tombe vers 168, à hauteur 112. */
+.tableau--bar .lien--flechettes-a {
+  left: calc(66 * var(--u)); top: calc(131 * var(--u));
+  width: calc(104 * var(--u)); transform: rotate(-11deg);
+}
+.tableau--bar .lien--flechettes-b {
+  left: calc(89 * var(--u)); top: calc(131 * var(--u));
+  width: calc(82 * var(--u)); transform: rotate(-14deg);
+  animation-delay: .9s;
+}
+.tableau--bar .lien--paie {
+  left: calc(44 * var(--u)); top: calc(104 * var(--u));
+  width: calc(126 * var(--u)); transform: rotate(4deg);
+}
+/* Le cercle est plus large que lui : ce qu'on entoure, c'est le vide
+   autour, pas l'homme. */
+.tableau--bar .retrait--mccarthy {
+  left: calc(4 * var(--u)); top: calc(80 * var(--u));
+  width: calc(52 * var(--u)); height: calc(52 * var(--u));
+}
+.tableau--bar .note--retrait { left: calc(4 * var(--u)); top: calc(70 * var(--u)); }
+.tableau--bar .note--regards { left: calc(120 * var(--u)); top: calc(66 * var(--u)); }
+
 .tableau--bar .issue--fond { left: calc(101 * var(--u)); top: calc(62 * var(--u)); width: calc(26 * var(--u)); height: calc(56 * var(--u)); }
 .tableau--bar .cote--fond { left: calc(98 * var(--u)); top: calc(52 * var(--u)); }
 .tableau--bar .jeton { width: calc(26 * var(--u)); height: calc(9 * var(--u)); }

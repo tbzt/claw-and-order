@@ -982,8 +982,10 @@ body {
           transition: opacity .4s ease; }
 .calque > * { position: absolute; }
 .stage[data-vue="astrale"] .calque--astral,
+.stage[data-vue="sociale"] .calque--social,
 .stage[data-vue="ra"]      .calque--ra { opacity: 1; pointer-events: none; }
 .stage[data-vue="astrale"] .calque--astral [data-hotspot],
+.stage[data-vue="sociale"] .calque--social [data-hotspot],
 .stage[data-vue="ra"]      .calque--ra [data-hotspot] { pointer-events: auto; }
 
 /* La quatrième lentille : celle de Drakk. Ni magie ni Matrice — une
@@ -1008,6 +1010,7 @@ body {
    volent les clics de tout ce qui est dessous. */
 .calque [data-hotspot] { pointer-events: none; }
 .stage[data-vue="astrale"] .calque--astral [data-hotspot],
+.stage[data-vue="sociale"] .calque--social [data-hotspot],
 .stage[data-vue="ra"]      .calque--ra [data-hotspot],
 .stage[data-vue="materielle"] .calque--tactique [data-hotspot] { pointer-events: auto; }
 
@@ -1050,6 +1053,58 @@ body {
 .calque--tactique .couvert {
   border: calc(1 * var(--u)) solid rgba(90,240,160,.7);
   background: linear-gradient(180deg, rgba(30,90,60,.25), transparent);
+}
+
+/* ── LA LENTILLE SOCIALE — R1 de l'AUDIT_LENTILLES_ET_CAPACITES ──────
+   La quatrième lentille n'avait AUCUN calque et AUCUNE cible, seule des
+   quatre : c'est la cause unique de l'écart d'accès exclusifs mesuré au
+   27 août (Rabbit 23, Hercules 11). Le texte de `vues.sociale` existe
+   pourtant dans seize modules — il était écrit pour un regard qui ne
+   montrait rien.
+
+   ⚠️ LE NOM. `data-vue` vaut `sociale` (int. 6 du reroute) ; la classe
+   de calque suit l'espace de noms des trois autres, qui ne se renomment
+   pas avec elle — `.calque--astral`, `.calque--ra`, `.calque--tactique`,
+   donc `.calque--social`.
+
+   SON VOCABULAIRE EST CELUI DES RAPPORTS, PAS DES CHOSES. Les trois
+   autres lentilles montrent ce qui EST là — une aura, une icône, un
+   couvert. Celle-ci montre ce qui se passe ENTRE les gens, et c'est le
+   seul contenu qui n'a pas de place dans le décor : `.lien` (qui
+   regarde qui, qui doit à qui), `.retrait` (celui que le réseau
+   n'atteint pas, volontairement ou non), `.note` (le mot, en bleu
+   d'Hercules). Doctrine des quatre regards § 3 : « qu'est-ce que ces
+   personnes se FONT ? »
+
+   Un `.lien` est une barre fine qu'on tourne : la scène donne sa
+   longueur, sa position et son angle, exactement comme elle donne la
+   taille d'une aura. Le dégradé le rend DIRECTIONNEL — dense au départ,
+   éteint à l'arrivée : c'est l'attention qui va quelque part, pas un
+   trait de liaison symétrique. */
+.calque--social .lien {
+  height: calc(1 * var(--u));
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, rgba(97,131,192,.85), rgba(97,131,192,.05));
+  animation: lien-glisse 3.8s ease-in-out infinite;
+}
+/* La dette va dans l'autre sens que le regard, et elle ne bat pas :
+   ce qu'on doit ne s'oublie pas entre deux respirations. */
+.calque--social .lien--dette {
+  background: linear-gradient(90deg, rgba(198,142,86,.85), rgba(198,142,86,.05));
+  animation: none;
+}
+@keyframes lien-glisse { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
+
+/* Le retrait : personne n'est relié à lui, et c'est ça qu'on voit. Un
+   cercle OUVERT — la brisure est l'information. */
+.calque--social .retrait {
+  border: calc(1 * var(--u)) dashed rgba(97,131,192,.75);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(97,131,192,.12), transparent 80%);
+}
+.calque--social .note {
+  font-family: var(--mono); font-size: calc(5 * var(--u));
+  color: rgba(97,131,192,.92); letter-spacing: .08em; white-space: nowrap;
 }
 
 /* ── LE VOCABULAIRE COMMUN DES DEUX AUTRES LENTILLES ─────────────────
