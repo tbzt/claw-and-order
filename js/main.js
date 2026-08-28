@@ -1672,6 +1672,10 @@ const BILAN = [
      lui-même n'était relu par rien — la salle l'entend une fois, le
      bilan n'en gardait pas trace. */
   ['hayden-conteste', 'Le témoin qui devait confirmer le nom n’est jamais entré dans la salle. Quelqu’un lui avait parlé avant vous.'],
+  /* Nœud 1, chantier 53 : le rattrapage n'avait pas de ligne — la
+     décision prise chez Renfield, des tours plus tôt, ne se lisait qu'à
+     la barre, une fois. */
+  ['renfield-temoigne', 'Le témoin acheté ne s’est pas présenté, et personne dans sa famille n’a demandé pourquoi. Un vieil homme avait déjà parlé, trois nuits plus tôt.'],
 ]
 
 function tombeRideau() {

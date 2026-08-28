@@ -243,7 +243,14 @@ export const tribunalSalle = {
                                   'McCarthy vous regarde sortir sans poser de question. Il a appris, cette nuit-là, à ne pas en poser.']
         const texteEchec = a('chimera-avance')
           ? ['Le juge referme le dossier. « Rien de nouveau, » dit-il — et de son point de vue à lui, c’est exact.',
-             'McCarthy raccroche vite. Trop vite pour que ce soit une bonne nouvelle.']
+             'McCarthy raccroche vite. Trop vite pour que ce soit une bonne nouvelle.',
+             /* Nœud 1, chantier 53 : `hayden-conteste` ne peut être vrai
+                que dans cette branche (`chimera-avance`), et implique
+                `!hayden-confirme` — donc toujours l'échec, jamais la
+                vérité ni la tractation. */
+             ...(a('hayden-conteste')
+               ? ['Le témoin qui devait confirmer ce nom n’est jamais arrivé jusqu’ici, et personne, ce soir non plus, n’a pris sa place.']
+               : [])]
           : ['Le juge referme le dossier. « Rien de nouveau, » dit-il, et pour une fois il n’a pas tort.',
              'Vous ressortez du palais avec ce que vous y aviez apporté. Ce n’était pas assez.']
 
@@ -456,8 +463,28 @@ export const tribunalSalle = {
           drakk: '« Elle parle encore, entre deux prises. »',
         },
       }),
-      hayden: (ctx) => ctx.a('chimera-avance')
-        ? {
+      /* Nœud 1, chantier 53 : le ternaire passe de deux à trois branches.
+         La 3ᵉ, sous `chimera-avance` ET `renfield-retourne`, rattrape la
+         2ᵉ — non par un objet ni un re-essai, mais par une décision
+         sociale prise des tours plus tôt (`carte.js`). Renfield
+         n'apparaît pas dans la salle : son absence est précisément ce
+         qui agit, cohérente avec l'ouverture déjà écrite plus haut
+         (`ouverture`, la 2ᵉ visite). */
+      hayden: (ctx) => {
+        if (ctx.a('chimera-avance') && ctx.a('renfield-retourne'))
+          return {
+            registre: 'tient',
+            flags: ['hayden-confirme', 'renfield-temoigne'],
+            dit: {
+              tous: 'Tu prononces le nom — Hayden Telestrian — et personne, du côté de la famille, ne se lève pour le contester. Ils le savent déjà : quelqu’un le leur a dit cette nuit, dans une voix qu’ils écoutent depuis quarante ans.',
+              hercules: '« Personne ne conteste, Votre Honneur. Ils savaient déjà — quelqu’un les a devancés, cette nuit même. »',
+              trash: '« Ils l’ont su avant nous. Tant mieux, pour une fois. »',
+              rabbit: '« Zéro objection au dossier. Je n’ai jamais vu — »',
+              drakk: '« Un vieil homme a parlé à des parents avant que nous ayons parlé au juge. »',
+            },
+          }
+        if (ctx.a('chimera-avance'))
+          return {
             registre: 'retourne',
             flags: ['hayden-conteste'],
             dit: {
@@ -468,17 +495,18 @@ export const tribunalSalle = {
               drakk: ['« Le nom tient toujours. »', '« C’est la bouche qui devait le dire qui manque. »'],
             },
           }
-        : {
-            registre: 'tient',
-            flags: ['hayden-confirme'],
-            dit: {
-              tous: 'Tu déposes le nom, et ce qui le tient debout : un prénom mal écrit, un nom de famille que tout le Tír connaît, et personne dans cette salle pour le contredire.',
-              hercules: '« Hayden Telestrian, Votre Honneur. Ce n’est plus une rumeur — c’est un nom, avec une adresse derrière. »',
-              trash: '« Je connais cette famille. Je sais ce qu’elle fait, d’habitude, de ce qui la gêne. Cette fois, elle n’a pas eu le temps. »',
-              rabbit: '« Deux témoins indépendants. La même faute d’orthographe. »',
-              drakk: '« Nous avions le nom depuis Loveland. La salle l’a, enfin. »',
-            },
+        return {
+          registre: 'tient',
+          flags: ['hayden-confirme'],
+          dit: {
+            tous: 'Tu déposes le nom, et ce qui le tient debout : un prénom mal écrit, un nom de famille que tout le Tír connaît, et personne dans cette salle pour le contredire.',
+            hercules: '« Hayden Telestrian, Votre Honneur. Ce n’est plus une rumeur — c’est un nom, avec une adresse derrière. »',
+            trash: '« Je connais cette famille. Je sais ce qu’elle fait, d’habitude, de ce qui la gêne. Cette fois, elle n’a pas eu le temps. »',
+            rabbit: '« Deux témoins indépendants. La même faute d’orthographe. »',
+            drakk: '« Nous avions le nom depuis Loveland. La salle l’a, enfin. »',
           },
+        }
+      },
     },
 
     refus: {
