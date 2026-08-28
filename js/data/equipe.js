@@ -117,7 +117,7 @@ export const equipe = {
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
     attentif: 'Qui doit de l’argent à qui, qui se force à sourire — dans une pièce, il le voit en une minute. Le reste l’ennuie assez vite.',
-    portrait: 'Il est Éveillé et n’en parle pas : un sens du danger qui prévient sans jamais dire de quoi. Ancien de l’administration Saito, tombé pour corruption — il était coupable, et il raconte l’histoire autrement. Il doit de l’argent à quelqu’un en permanence.',
+    portrait: 'Presque cinquante ans, et l’air d’un préadolescent. Ancien de l’administration Saito, tombé pour corruption — il était coupable, et il raconte l’histoire autrement. Interdit de casino à Las Vegas pour comptage de cartes. Il est Éveillé, et n’en parle pas.',
     signature: 'sens-du-danger',
   },
 
@@ -203,7 +203,7 @@ export const equipe = {
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
     attentif: 'Ce qui reste dans une pièce quand tout le monde en est sorti. Il regarde souvent à côté de ce qu’on lui montre.',
-    portrait: 'Raton laveur l’a réveillé à seize ans, alors qu’il sombrait. Il a laissé à sa sœur Saoirse la place qu’on lui gardait au Conseil des Princes, et il ne touche plus à l’argent de la famille.',
+    portrait: 'Fils aîné d’une famille noble du Tír Tairngire, destiné au Conseil des Princes. Raton laveur l’a réveillé à seize ans, alors qu’il sombrait ; il a refusé la voie tracée, et sa sœur Saoirse a pris sa place. Il ne touche plus à l’argent de la famille.',
     signature: 'raton-laveur',
   },
 
@@ -384,7 +384,7 @@ export const equipe = {
        C'est du texte à côté, pour être lu par un joueur, pas un crochet
        de plus pour le code. */
     attentif: 'Comment c’est fabriqué, où ça casse. Il essaie la même méthode sur les gens.',
-    portrait: 'Il a une quête, dont il ne dit presque rien. Il appelle l’équipe une compagnie — c’est un mot de ses livres, et il l’entend au pied de la lettre.',
+    portrait: 'Abandonné dans l’Underground. Il a cru toute son enfance que son nom était Drek, parce que c’est le seul mot qu’on lui adressait. À seize ans, un antiquaire lui a mis un jeu de rôle dans les mains en promettant « une porte vers un au-delà infini » ; il ne l’a plus jamais refermé. Ce qu’il cherche depuis, c’est une vraie compagnie.',
     signature: 'guilde',
   },
 }
