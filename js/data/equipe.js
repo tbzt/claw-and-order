@@ -22,11 +22,25 @@ export const equipe = {
 
   /* ── HERCULES — Arthur Pitchford ─────────────────────────────────
      Nain, presque 50 ans, l'air d'un préadolescent. Face ADEPTE :
-     il est Éveillé, ce que le jeu n'a pas encore utilisé — son « sens
-     du danger » pressent une menace SANS détail. Ex-bureaucrate de
-     l'administration Saito, tombé pour corruption (il était coupable,
-     et il raconte l'histoire autrement). Compteur de cartes interdit
-     de Las Vegas. Il doit toujours de l'argent à quelqu'un. */
+     il est Éveillé, et son « sens du danger » pressent une menace SANS
+     détail. Ex-bureaucrate de l'administration Saito, tombé pour
+     corruption (il était coupable, et il raconte l'histoire autrement).
+     Compteur de cartes interdit de Las Vegas. Il doit toujours de
+     l'argent à quelqu'un.
+
+     ⚠️ CETTE LIGNE DISAIT « ce que le jeu n'a pas encore utilisé ».
+     C'était vrai avant le chantier 30 ; ça ne l'est plus depuis, et
+     l'audit reroute du 2026-08-28 (intervention 10) a écrit un chantier
+     entier sur la foi de ce commentaire périmé. Le sens du danger se
+     joue à TROIS endroits, tous câblés en dur sur `qui === 'hercules'` :
+     l'ouverture de `retour.js` (l'abordage), celle de `planque.js` (la
+     laverie), et `garde-trouble.regarder` dans `tribunal.js`. Les trois
+     sont gardés par le drapeau de leur menace, parce que pressentir un
+     danger déjà encaissé serait un mensonge du moteur.
+
+     Ce qui reste vrai, en revanche : `signature` n'est lue par personne
+     (`grep '\.signature'` sur `js/` rend 0), et ne doit pas l'être — la
+     convention d'écriture suffit, le comité du 2026-08-27 l'a tranché. */
   hercules: {
     nom: 'Hercules',
     metatype: 'nain',
