@@ -2152,7 +2152,7 @@ const BILAN = [
   ['mark-convaincu', 'Quelqu’un a fini par demander à Mark comment elle était. Il avait attendu trois jours.'],
   ['mark-ferme',     'Vous avez posé deux mille nuyens à côté d’un garçon de dix-neuf ans qui tenait la seule chose qu’elle ait écrite.'],
   ['psych-paye',     'Psych a parlé contre un créditube, en huit secondes. Il l’aurait fait pour rien : il suffisait de demander pour elle.'],
-  ['psych-ecoute',   'On a demandé à Psych comment elle chantait. C’était la bonne question, et elle ne coûtait rien.'],
+  ['psych-ecoute',   'On a demandé à Psych comment elle dansait. C’était la bonne question, et elle ne coûtait rien.'],
   ['nova-parle',     'Nova a dit à quatre inconnus ce qu’elle n’avait dit à personne. Elle tient toujours la porte.'],
   ['nita-ferme',     'Une permanente de l’ORC a demandé pour qui vous travailliez. Ne pas répondre était déjà une réponse.'],
   ['orc-contact',    'Amelia Brown prend vos appels. Ça ne s’achète pas — ça se recommande.'],

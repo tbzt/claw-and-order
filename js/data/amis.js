@@ -298,13 +298,15 @@ export const amis = {
         tous: a('nova-parle')
           ? ['Adossée au chambranle, dans l’entrebâillement, exactement comme elle se tenait à l’entrée de la fosse ce soir-là. Elle garde encore une porte qui ne protège plus personne.',
              'Depuis qu’elle a parlé, elle regarde la cage d’escalier au lieu de vous regarder, vous.']
-          : ['Une orke d’une vingtaine d’années, adossée au chambranle de la porte. Elle s’est placée entre vous et l’escalier sans en avoir l’air, et elle l’a fait par réflexe.',
+          : ['Une fille d’une vingtaine d’années, tête blond platine, lunettes chrome à l’intérieur, similicuir blanc parcouru d’éclairs jaunes. Elle vous arrive à la poitrine et elle s’est quand même placée entre vous et l’escalier.',
              'Elle vous a comptés en entrant. Quatre. Elle n’a pas eu besoin de regarder deux fois.'],
-        hercules: ['« Elle garde une porte dans un studio où il n’y a plus rien à garder. »', '« Elle a fait ça pour de vrai, ailleurs. Pas il y a longtemps. »'],
+        hercules: ['« Elle garde une porte dans un studio où il n’y a plus rien à garder. »', '« Et elle le fait bien. Ce qui sonne faux chez elle, ce n’est pas ça. »'],
         trash: '« Elle est en rupture avec quelque chose. Je reconnais la forme que ça donne à une aura : c’est la mienne, en plus récent. »',
         rabbit: a('dette-duke') || a('conf-duke') || a('choix-duke')
-          ? '« Halloweener, deux ans, sortie propre — ce qui n’existe pas. Sauf si quelqu’un a couvert la sortie. Je connais un type qui fait ça. »'
-          : '« Halloweener, deux ans, et plus rien depuis quatorze mois. On ne sort pas de là en s’en allant. »',
+          ? ['« Melissa Patterson. Bellevue, deux parents cadres chez Microdeck, carte Novarich depuis treize mois. »',
+             '« Duke tient la 44e. Il sait exactement qui elle est, et il la laisse tenir la porte quand même. »']
+          : ['« Melissa Patterson. Bellevue, deux parents cadres chez Microdeck, carte Novarich depuis treize mois. »',
+             '« … Je vais rien dire. Je suis mal placé. »'],
         drakk: '« La garde du corps qui n’a plus de corps à garder. Elle n’a pas déposé les armes : personne ne lui a dit que la quête était finie. »',
       }),
       parler: { texte: [], dialogue: 'nova', flags: ['tir-prevenu'] },
@@ -713,7 +715,7 @@ export const amis = {
           fiches: ['elfes-du-tir'],
           texte: ['Elle regarde White_Rabbit pour la première fois vraiment.',
                   '« … Duke. Le Duke de la 44e. »',
-                  '« Il m’a sortie de chez les Halloweeners. Personne le sait, et vous venez de le dire devant quatre personnes. »',
+                  '« C’est le seul en bas de chez moi qui m’appelle Melissa. Il le fait pas méchamment. Il le fait pour que je l’oublie pas. »',
                   'Un temps. Puis elle décide.',
                   '« Trois elfes du Tír, avant-hier, deux heures. Polis. Ils cherchaient un enregistrement — c’est le seul truc qu’ils ont demandé deux fois. »',
                   '« Ils ont laissé une carte sur le comptoir. Elle y est encore. Personne a osé la jeter. »'],
