@@ -463,7 +463,7 @@ export const herwick = {
         },
         {
           id: 'bras',
-          titre: '« Montre ce bras. » (Trash)',
+          titre: '« Montre ce bras. »',
           acteur: 'trash',
           quand: ({ a }) => a('lester-blesse') && !a('conf-bras'),
           flags: ['conf-bras'],
@@ -474,7 +474,7 @@ export const herwick = {
         },
         {
           id: 'guilde',
-          titre: '« Tu fais partie de la compagnie, maintenant. » (Drakk)',
+          titre: '« Tu fais partie de la compagnie, maintenant. »',
           acteur: 'drakk',
           quand: ({ a }) => a('guilde') && !a('conf-guilde'),
           flags: ['conf-guilde'],
@@ -555,7 +555,7 @@ export const herwick = {
       sujets: [
         {
           id: 'soigner',
-          titre: '« Laisse-moi voir cette épaule d’abord. » (Trash)',
+          titre: '« Laisse-moi voir cette épaule d’abord. »',
           acteur: 'trash',
           quand: ({ a }) => !a('herwick-soigne') && !a('herwick-epargne') && !a('drakk-brise'),
           flags: ['herwick-soigne'],

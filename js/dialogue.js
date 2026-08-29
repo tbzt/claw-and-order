@@ -13,11 +13,21 @@
    rien d'autre ne ferme un dialogue — ni Échap, ni un clic sur le décor — et
    un arbre rouvert sans sa sortie serait sans issue.
 
-   Deux gardes distinctes (chantier 38, `PLAN_LISIBILITE.md` §2) : `quand`
+   Deux champs distincts (chantier 38, `PLAN_LISIBILITE.md` §2) : `quand`
    porte les conditions d'ÉTAT — si elles échouent, le sujet n'existe pas,
-   au sens propre (invisible). `acteur` porte l'IDENTITÉ — si elle ne
-   correspond pas au runner actif, le sujet reste affiché, mais verrouillé :
-   « délibérer est ouvert, s'engager est personnel ». */
+   au sens propre (invisible). `acteur` porte l'IDENTITÉ.
+
+   `acteur` NE VERROUILLE PLUS, IL DÉSIGNE (2026-08-29). Il a longtemps
+   voulu dire « il faut être lui pour cliquer » : le sujet s'affichait
+   pour tout le monde, refusait pour trois runners sur quatre, et il
+   fallait basculer puis recliquer. Deux gestes pour une information que
+   le jeu détenait déjà — la décision « la sélection n'est pas un péage »
+   (`DOCTRINE_REGLES.md`) le range avec le panneau du réseau.
+
+   Il veut dire maintenant : **c'est lui qui pose cette question-là.** On
+   clique la réplique de Trash, Trash la pose, et le portrait qu'on tient
+   ne bouge pas. Le groupe agit d'un bloc ; chaque phrase garde son
+   locuteur, et c'est le contenu qui le décide, pas la sélection. */
 
 import { a, pose, contexte } from './state.js'
 import { equipe } from './data/equipe.js'
@@ -61,9 +71,23 @@ const estCarteDeVoix = (v) =>
 
 const evalue = (v, ctx) => (typeof v === 'function' ? v(ctx) : v)
 
+/* QUI POSE CE SUJET-LÀ — l'acteur s'il en a un, sinon celui qu'on tient.
+   C'est le seul endroit où la règle vit : `titreDe` et `texteDe` s'en
+   servent par défaut, donc un sujet à acteur se formule et se répond dans
+   SA voix sans que l'appelant ait à y penser.
+
+   `quand` n'en dépend pas, exprès : une condition d'état répond à « ce
+   sujet existe-t-il ? », pas à « qui le dirait ? ». La faire basculer
+   selon l'acteur rendrait un sujet visible ou non selon une identité que
+   le joueur ne choisit plus — l'inverse de ce qu'on vient de retirer. */
+export const demandeur = (sujet) => sujet.acteur ?? contexte().qui
+
+const contexteDe = (sujet) =>
+  sujet.acteur ? { ...contexte(), qui: sujet.acteur } : contexte()
+
 /* LA QUESTION : la carte CHOISIT. Un titre est une ligne unique, celle
    qu'on clique — il n'y a rien à quoi l'ajouter. `tous` est le repli. */
-export function titreDe(sujet, ctx = contexte()) {
+export function titreDe(sujet, ctx = contexteDe(sujet)) {
   const v = evalue(sujet.titre, ctx)
   return estCarteDeVoix(v) ? v[ctx.qui] ?? v.tous : v
 }
@@ -80,7 +104,7 @@ export function titreDe(sujet, ctx = contexte()) {
    fonction qu'on écrit, pas une carte :
 
        texte: ({ qui }) => qui === 'rabbit' ? [ … ] : [ … ] */
-export function texteDe(sujet, quiPnj, ctx = contexte()) {
+export function texteDe(sujet, quiPnj, ctx = contexteDe(sujet)) {
   const v = evalue(sujet.texte, ctx)
   if (!estCarteDeVoix(v)) return v
   return [...enLignes(v.tous, quiPnj), ...enLignes(v[ctx.qui], ctx.qui)]
@@ -89,8 +113,6 @@ export function texteDe(sujet, quiPnj, ctx = contexte()) {
 /* Épuisé pour tout le monde, quelle que soit la voix qui a posé la
    question : elle a été posée, la table entière a entendu la réponse. */
 export const estEpuise = (sujet) => a(`vu:${sujet.id}`)
-
-export const estVerrouille = (sujet) => !!sujet.acteur && sujet.acteur !== contexte().qui
 
 export function retiens(sujet) {
   pose(`vu:${sujet.id}`)

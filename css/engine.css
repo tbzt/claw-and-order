@@ -304,18 +304,18 @@ body {
   transition: color .12s;
 }
 .choix button:hover .choix__rang { color: var(--cyan); }
-.choix button.est-verrouille .choix__rang { color: #394054; }
 
-/* Niveau 2 de la lisibilité (chantier 38) : visible, pas ouvert — l'italique
-   dit « ce n'est pas à moi » avant même le clic, et le survol reste sourd
-   là où les sujets ouverts s'éclairent au cyan. */
-.choix button.est-verrouille { color: #4b5468; font-style: italic; }
-.choix button.est-verrouille:hover {
-  color: var(--ardoise);
-  border-left-color: #2b3145;
-  background: color-mix(in srgb, var(--nuit) 88%, transparent);
-  padding-left: 1.1cqw;
-}
+/* La mention d'interface — « Trancher » — n'est pas de la parole : elle
+   ne prend ni les guillemets ni la couleur du dit. Sourde et en retrait,
+   pour qu'on la lise comme un avertissement du jeu et pas comme une
+   fin de phrase. Elle ne va jamais au journal (voir `montreChoix`). */
+.choix__mention { color: #4b5468; font-style: italic; }
+.choix button:hover .choix__mention { color: var(--ardoise); }
+
+/* Le niveau 2 de la lisibilité (chantier 38) vivait ici : un sujet verrouillé
+   en italique sourde, « ce n'est pas à moi » dit avant le clic. Il n'y a plus
+   de sujet verrouillé — `acteur` désigne celui qui parle au lieu d'exiger
+   qu'on le tienne. Un seul régime de sujet, donc un seul style. */
 
 /* ── Rideau de fin ───────────────────────────────────────── */
 
@@ -1812,10 +1812,9 @@ body {
   border-left: .25cqw solid #3d4457;
   border-radius: 2px;
   cursor: none;
-  transition: border-color .14s, background .14s, opacity .14s;
+  transition: border-color .14s, background .14s;
 }
 .contact:hover { border-color: var(--ardoise); }
-.contact.est-indisponible { opacity: .5; }
 
 .contact__nom { font-family: var(--mono); font-size: 1.3cqw; letter-spacing: .04em; color: var(--craie); }
 .contact__titre { font-size: 1.05cqw; color: var(--ardoise); }

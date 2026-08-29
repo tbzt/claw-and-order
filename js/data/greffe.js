@@ -372,7 +372,7 @@ export const greffe = {
         },
         {
           id: 'couverture',
-          titre: '« Un ordre signé vous couvre. La navette, non. » (Hercules)',
+          titre: '« Un ordre signé vous couvre. La navette, non. »',
           acteur: 'hercules',
           quand: ({ a }) => a('mandat-presente') && !a('sas-ouvert')
                             && (a('sait-peur-gardien') || a('sait-gardien-seul')),
@@ -386,7 +386,7 @@ export const greffe = {
         },
         {
           id: 'menacer',
-          titre: '« Ouvrez cette porte. » (Drakk)',
+          titre: '« Ouvrez cette porte. »',
           acteur: 'drakk',
           quand: ({ a }) => a('mandat-presente') && !a('sas-ouvert'),
           texte: ['Drakk se penche vers la grille. La vitre fait huit centimètres.',

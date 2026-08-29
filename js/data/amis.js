@@ -52,8 +52,8 @@
             pas spontanément. Deux raisons de faire confiance, et deux
             seulement : avoir LU la carte qu'ils ont laissée (`carte-vue`,
             sur la table), ou porter un nom de gang qu'elle reconnaît —
-            Duke, et c'est White_Rabbit qui le porte (sujet à `acteur`,
-            visible-mais-verrouillé pour les trois autres, chantier 38).
+            Duke, et c'est White_Rabbit qui le porte (sujet à `acteur` :
+            c'est LUI qui le dit, quel que soit le portrait qu'on tient).
      NITA   elle donne, mais elle veut savoir pour qui. Deux sujets
             mutuellement exclusifs : la vérité (`nita-parle`) ou
             l'esquive (`nita-ferme`), et l'esquive ne se rattrape pas.
@@ -702,7 +702,7 @@ export const amis = {
         },
         {
           id: 'duke',
-          titre: '« Duke se porte garant. » (White_Rabbit)',
+          titre: '« Duke se porte garant. »',
           acteur: 'rabbit',
           quand: ({ a }) => (a('dette-duke') || a('conf-duke') || a('choix-duke')) && !a('nova-parle'),
           flags: ['nova-parle'],
@@ -775,7 +775,7 @@ export const amis = {
         },
         {
           id: 'orc',
-          titre: '« L’ORC pourrait porter ce dossier-là. » (Trash)',
+          titre: '« L’ORC pourrait porter ce dossier-là. »',
           acteur: 'trash',
           quand: ({ a }) => a('nita-parle') && !a('orc-contact'),
           flags: ['orc-contact'],

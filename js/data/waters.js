@@ -421,7 +421,7 @@ export const waters = {
         },
         {
           id: 'dessus',
-          titre: '« Vous êtes dessus. Male Stud Number 3. » (Trash)',
+          titre: '« Vous êtes dessus. Male Stud Number 3. »',
           acteur: 'trash',
           quand: ({ a }) => !a('waters-convaincu') && !a('waters-vexe') && !a('enregistrement-recupere'),
           flags: ['waters-convaincu'],

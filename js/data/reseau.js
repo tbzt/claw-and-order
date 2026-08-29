@@ -20,8 +20,11 @@
 
    Chaque contact appartient à UN runner : Sarah ne répond qu'à Trash,
    Alicia et Elton qu'à Hercules, Herwick qu'à Drakk, Duke qu'à
-   White_Rabbit. Le choix du runner compte donc aussi hors du décor —
-   c'est écrit dans le plan, pas une contrainte technique.
+   White_Rabbit. L'appartenance décide de QUI PARLE — pas de qui doit
+   être sélectionné avant de cliquer. Le panneau a longtemps exigé la
+   bascule ; elle ne tranchait rien, puisqu'un seul runner peut décrocher
+   ce numéro et que le sous-titre du bouton le dit. Les quatre sont dans
+   la même pièce : on appelle Alicia, Hercules parle.
 
    BUG ÉVITÉ EN VÉRIFIANT DANS LE NAVIGATEUR (même famille que celui que
    `reconstruitFiches()` corrige déjà dans main.js) : un appel qui
@@ -121,8 +124,9 @@ export const contacts = {
 
    `ligne` est ce que le contact dit au téléphone — sa voix, jamais un
    refus générique. `reaction` est la phrase du runner qui vient de
-   raccrocher : toujours le même, puisqu'un contact n'appartient qu'à
-   un seul runner, et qu'appeler exige que ce runner soit actif.
+   raccrocher : toujours le même, puisqu'un contact n'appartient qu'à un
+   seul runner. Elle se dit dans SA voix même si le joueur en tient un
+   autre — c'est elle qui apprend à qui était le numéro.
    `dejaLigne` remplace `ligne` si la fiche était déjà connue — plus
    courte, parce que la nouvelle n'est plus le rapport, c'est la
    relation. */

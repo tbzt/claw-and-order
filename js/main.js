@@ -9,7 +9,7 @@ import { scenes, depart } from './data/scenes.js'
 import { objets } from './data/objets.js'
 import { resous, nomDe, enLignes, verbePrincipal } from './interact.js'
 import { equipe, pnj } from './data/equipe.js'
-import { sujetsVisibles, estEpuise, estVerrouille, retiens, entree, titreDe, texteDe } from './dialogue.js'
+import { sujetsVisibles, estEpuise, demandeur, retiens, entree, titreDe, texteDe } from './dialogue.js'
 import { eveille, entre } from './ambiance.js'
 import { fiches, deductions, refus as refusCarnet, presque } from './data/carnet.js'
 import { contacts, appels, refus as refusReseau } from './data/reseau.js'
@@ -273,6 +273,7 @@ function proposeReprise(donnees) {
 async function demarre() {
   brancheHud()
   brancheStage()
+  verifieEquipe()
   verifieObjets()
   verifieCarnet()
   verifieReseau()
@@ -449,8 +450,15 @@ function joue(idCible) {
    C'est ce qui rend la règle 10 tangible au lieu d'être une idée. */
 /* `physique` → `sociale`, `tactique` → `materielle` (int. 6, audit reroute
    § IV.6) : les deux anciens noms ne décrivaient plus ce qui est écrit
-   dessous, et orientaient l'auteur vers la mauvaise question. */
-const VUES = { hercules: 'sociale', trash: 'astrale', rabbit: 'ra', drakk: 'materielle' }
+   dessous, et orientaient l'auteur vers la mauvaise question.
+
+   ET LA TABLE VIENT DES FICHES, maintenant. Le renommage n'avait été fait
+   qu'ici : `equipe.js` a continué de dire `physique` et `tactique` pendant
+   une semaine. Le champ n'étant lu par personne, rien n'a crié — mais un
+   document de doctrine a été écrit d'après lui, et il disait le social de
+   Drakk et le physique d'Hercules, soit l'inverse du jeu. Le fait est
+   maintenant écrit une seule fois, sur la fiche du runner. */
+const VUES = Object.fromEntries(Object.entries(equipe).map(([id, f]) => [id, f.vue]))
 
 /* « J'AI PAS FINI. »
    Basculer de runner pendant qu'une réplique se déroule était refusé en
@@ -527,11 +535,17 @@ function montreChoix() {
   const offerts = sujetsOfferts()
   offerts.forEach((sujet, i) => {
     const bouton = document.createElement('button')
-    const verrouille = estVerrouille(sujet)
-    /* Arbitrage du 28 août (audit reroute, int. 5) : l'étiquette
-       `(Nom)` ne protégeait de rien — cliquer sur un sujet verrouillé
-       refuse déjà (`refuseSujet()`, règle 11), dans la voix du runner
-       actif. Le joueur apprend la règle en jouant, pas en la lisant. */
+    /* PLUS DE SUJET VERROUILLÉ (2026-08-29). `acteur` désigne celui qui
+       pose la question au lieu d'exiger qu'on le tienne — voir l'en-tête
+       de `dialogue.js`. Le titre se formule donc déjà dans sa voix, et
+       cliquer suffit.
+
+       C'est ce qui achève l'intervention 5 de l'audit du reroute. Elle
+       avait retiré le suffixe `(Nom)` que le moteur ajoutait — mais il ne
+       s'ajoutait que là où le titre ne nommait pas déjà le runner, et les
+       trente-sept le nommaient. L'étiquette n'avait bougé nulle part. Le
+       verrou parti, elle n'a plus rien à annoncer : elle est retirée des
+       trente-sept titres. */
     /* Le rang s'affiche jusqu'à 9 — au-delà, le chiffre n'existe pas et
        promettre un raccourci qui ne répond pas est pire que se taire.
        Sept arbres sur vingt-six dépassent neuf sujets à l'ouverture ;
@@ -543,11 +557,26 @@ function montreChoix() {
       bouton.append(rang)
     }
     bouton.append(document.createTextNode(titreDe(sujet)))
+    /* `mention` est ce que l'INTERFACE ajoute au sujet, jamais ce que
+       quelqu'un dit — « Trancher », sur les cinq sujets qui referment une
+       délibération. Elle vivait dans la chaîne du titre, et le journal
+       enregistrait donc « … » (Trancher) comme une réplique. Pire : la
+       chaîne n'étant plus la même que la ligne dite juste après, le
+       dédoublonnage de `journalise()` ne la reconnaissait pas, et Trash
+       tranchait deux fois de suite dans l'historique.
+
+       Sortie du titre, elle ne coûte plus rien : le bouton la montre, le
+       journal garde la phrase seule — donc identique à la réplique — et
+       le dédoublonnage qui existait déjà fait le reste. */
+    if (sujet.mention) {
+      const m = document.createElement('span')
+      m.className = 'choix__mention'
+      m.textContent = ` (${sujet.mention})`
+      bouton.append(m)
+    }
     if (estEpuise(sujet)) bouton.classList.add('est-epuise')
-    if (verrouille) bouton.classList.add('est-verrouille')
     bouton.addEventListener('click', (e) => {
       e.stopPropagation()
-      if (verrouille) return refuseSujet()
       choisit(sujet)
     })
     boiteChoix.append(bouton)
@@ -556,15 +585,12 @@ function montreChoix() {
   rafraichit()
 }
 
-/* RÈGLE 11 au conseil comme partout ailleurs : un sujet verrouillé ne se
-   joue jamais, il se refuse dans la voix du runner actif — la manière la
-   moins chère d'apprendre que le bouton de runner change ce qu'on a le
-   droit de dire (chantier 38, `PLAN_LISIBILITE.md` §2.2). */
-function refuseSujet() {
-  const stock = equipe[etat.actif]?.refus?.verrouille
-  const texte = stock?.length ? stock[Math.floor(Math.random() * stock.length)] : 'Non — ça, c’est à quelqu’un d’autre de le dire.'
-  dis(texte, etat.actif, montreChoix)
-}
+/* `refuseSujet()` vivait ici, avec les huit répliques `refus.verrouille`
+   des quatre fiches. Les deux sont partis avec le verrou : un refus n'a
+   de sens que s'il existe un geste à refuser, et il n'y en a plus. Les
+   trois autres familles de refus (`regarder`, `utiliser`, `parler`,
+   `objet`) sont intactes — la règle 11 ne perd rien, elle perd un cas
+   qui ne devait pas exister. */
 
 function choisit(sujet) {
   boiteChoix.hidden = true
@@ -572,15 +598,16 @@ function choisit(sujet) {
      retirer un sujet dit : sans elle, le journal gardait « ce qu'on vous
      a répondu » sans jamais « ce que vous aviez demandé », et cacher la
      ligne aurait effacé la seule trace de la question. Elle est dite par
-     le runner actif — c'est lui qui la pose, et la voix par laquelle il
-     la pose est maintenant la sienne. */
+     `demandeur(sujet)` — l'acteur du sujet s'il en a un, sinon celui
+     qu'on tient. Le journal nomme donc celui qui a VRAIMENT parlé, pas le
+     portrait allumé au moment du clic. */
   /* La question ET la réponse se résolvent AVANT `retiens()` : le sujet
      peut poser des drapeaux, et une réponse écrite en fonction du
      contexte doit voir le monde tel qu'il était quand on a demandé, pas
      tel que sa propre question vient de le rendre. */
   const question = titreDe(sujet)
   const reponse = texteDe(sujet, dialogue.qui)
-  journalise(etat.actif, question)
+  journalise(demandeur(sujet), question)
   retiens(sujet)
 
   if (sujet.objets) donne(...sujet.objets)
@@ -1190,7 +1217,6 @@ function rendReseau() {
     if (c.requiert && !a(c.requiert)) continue
     const b = document.createElement('button')
     b.className = 'contact'
-    b.classList.toggle('est-indisponible', etat.actif !== c.runner)
     b.innerHTML = `<span class="contact__nom"></span><span class="contact__titre"></span>`
     b.querySelector('.contact__nom').textContent = c.nom
     b.querySelector('.contact__titre').textContent = `${c.titre} — le contact de ${equipe[c.runner].nom}`
@@ -1208,15 +1234,20 @@ function appelle(idContact) {
     aide.classList.remove('est-refus')
     return
   }
-  /* Le choix du runner compte hors du décor aussi : Alicia ne décroche
-     pas pour Drakk. Le dire ici enseigne la règle sans faire échouer
-     l'appel en silence. */
-  if (etat.actif !== c.runner) {
-    aide.textContent = `${c.nom} est le contact de ${equipe[c.runner].nom}. Bascule sur lui pour l’appeler.`
-    aide.classList.remove('est-refus')
-    return
-  }
+  /* LE PANNEAU EST UNE SCÈNE, PAS QUATRE. Un contact n'appartient qu'à un
+     runner — mais il fallait basculer sur lui AVANT de cliquer, sinon le
+     panneau renvoyait « Bascule sur Hercules pour l'appeler ». Deux gestes
+     pour une information que le bouton portait déjà : le sous-titre dit de
+     qui est le contact, et personne d'autre n'est proposé.
 
+     La bascule ne décidait donc de rien. Elle demandait au joueur de
+     déclarer ce que le jeu savait — et elle laissait entendre que les
+     quatre passent des coups de fil chacun dans son coin. Ils sont dans la
+     même pièce, avec les mêmes téléphones : on appelle Alicia, et c'est
+     Hercules qui parle, parce que c'est son numéro.
+
+     L'appartenance n'a rien perdu : `c.runner` reste le locuteur de la
+     réplique de sortie, plus bas, quel que soit le portrait allumé. */
   const appel = appels[`${idContact}|${ficheAppelActive}`]
   ficheAppelActive = null
 
@@ -1618,6 +1649,19 @@ function verifieScene() {
    chargement ne peut pas lire. Cette mesure-là se fait à l'atelier, pas
    dans la console : un garde-fou qui crie à tort sur du code juste
    apprend à ne plus le lire. */
+/* Garde-fou de l'équipe. `VUES` se déduit maintenant des fiches : une
+   fiche sans `vue` ne casse rien de visible — elle rend `data-vue`
+   indéfini, le CSS de lentille ne s'applique plus, et le bloc `vues:`
+   du tableau ne se dit jamais. Silencieux, donc à crier. Et pendant
+   qu'on y est, un contact dont le `runner` n'existe pas ferait planter
+   le rendu du panneau sur `equipe[c.runner].nom`. */
+function verifieEquipe() {
+  for (const [id, r] of Object.entries(equipe))
+    if (!r.vue) console.error(`[équipe] ${id} n'a pas de vue — sa lentille ne montrera rien.`)
+  for (const [id, c] of Object.entries(contacts))
+    if (!(c.runner in equipe)) console.error(`[réseau] ${id} appartient à un runner inconnu — ${c.runner}.`)
+}
+
 function verifieObjets() {
   for (const [id, o] of Object.entries(objets)) {
     if (!o.nom) console.error(`[objets] « ${id} » n'a pas de nom.`)
@@ -1887,8 +1931,7 @@ function brancheHud() {
       const sujet = sujetsOfferts()[chiffre - 1]
       if (sujet) {
         e.preventDefault()
-        if (estVerrouille(sujet)) refuseSujet()
-        else { boiteChoix.hidden = true; choisit(sujet) }
+        boiteChoix.hidden = true; choisit(sujet)
       }
       return
     }

@@ -713,7 +713,7 @@ export const planque = {
         },
         {
           id: 'bras',
-          titre: '« Montre ce bras. » (Trash)',
+          titre: '« Montre ce bras. »',
           acteur: 'trash',
           quand: ({ a }) => a('lester-blesse') && !a('conf-bras'),
           flags: ['conf-bras'],
@@ -725,7 +725,7 @@ export const planque = {
         },
         {
           id: 'guilde',
-          titre: '« Tu fais partie de la compagnie, maintenant. » (Drakk)',
+          titre: '« Tu fais partie de la compagnie, maintenant. »',
           acteur: 'drakk',
           quand: ({ a }) => a('guilde') && !a('conf-guilde'),
           flags: ['conf-guilde'],

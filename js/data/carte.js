@@ -314,7 +314,7 @@ const dialogueRenfield = {
   sujets: [
     {
       id: 'hercules',
-      titre: '« Un vieux chaman qui veut qu’on lui parle. Pourquoi ? » (Hercules)',
+      titre: '« Un vieux chaman qui veut qu’on lui parle. Pourquoi ? »',
       acteur: 'hercules',
       texte: [
         ['hercules', '« Vous avez pisté cinq inconnus jusqu’ici pour qu’on vous raconte ce qu’on sait. Ça vaut cher, ou ça vaut rien. Lequel ? »'],
@@ -324,7 +324,7 @@ const dialogueRenfield = {
     },
     {
       id: 'drakk',
-      titre: '« Vous trahissez votre client. Ça coûte, un geste pareil. » (Drakk)',
+      titre: '« Vous trahissez votre client. Ça coûte, un geste pareil. »',
       acteur: 'drakk',
       texte: [
         ['drakk', '« Je connais le tarif d’un fixeur qui lâche son client. On ne retravaille plus jamais dans cette ville. »'],
@@ -334,7 +334,7 @@ const dialogueRenfield = {
     },
     {
       id: 'rabbit',
-      titre: '« Personne ne nous a suivis jusqu’ici. Comment nous avez-vous trouvés ? » (White_Rabbit)',
+      titre: '« Personne ne nous a suivis jusqu’ici. Comment nous avez-vous trouvés ? »',
       acteur: 'rabbit',
       texte: [
         ['rabbit', '« J’aurais vu une filature. Matricielle ou pas. »'],
@@ -344,7 +344,7 @@ const dialogueRenfield = {
     },
     {
       id: 'trash',
-      titre: '« Un Éveillé qui sert des gens qu’il méprise. Je connais la forme. » (Trash)',
+      titre: '« Un Éveillé qui sert des gens qu’il méprise. Je connais la forme. »',
       acteur: 'trash',
       texte: [
         ['trash', '« Vous auriez pu monter une équipe. Vous êtes venu seul, et vous attendez. Je connais cette forme-là. Je la porte. »'],
@@ -354,7 +354,8 @@ const dialogueRenfield = {
     },
     {
       id: 'convaincre',
-      titre: '« Il n’ira pas leur dire tout seul. Donnez-lui de quoi le faire. » (Trancher, Trash)',
+titre: '« Il n’ira pas leur dire tout seul. Donnez-lui de quoi le faire. »',
+      mention: 'Trancher',
       acteur: 'trash',
       fin: true,
       flags: ['renfield-croise', 'renfield-retourne'],

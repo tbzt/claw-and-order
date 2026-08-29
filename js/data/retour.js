@@ -1012,7 +1012,7 @@ export const retour = {
            White_Rabbit). Il se paie à l'audience. */
         {
           id: 'relit',
-          titre: '« Il relit ce dossier parce qu’il n’y croit pas. » (White_Rabbit)',
+          titre: '« Il relit ce dossier parce qu’il n’y croit pas. »',
           acteur: 'rabbit',
           quand: ({ a }) => a('mccarthy-avoue') && a('lester-parle'),
           flags: ['lester-sait-mccarthy'],
@@ -1069,7 +1069,7 @@ export const retour = {
       sujets: [
         {
           id: 'nom',
-          titre: '« Sunnyside quatre-deux. On rentre au chantier. » (Hercules)',
+          titre: '« Sunnyside quatre-deux. On rentre au chantier. »',
           acteur: 'hercules',
           quand: ({ a }) => !a('vedette-tiede') && !a('vedette-reglee'),
           flags: ['vedette-tiede'],
@@ -1179,7 +1179,8 @@ export const retour = {
       sujets: [
         {
           id: 'laverie',
-          titre: '« La laverie. On ne doit rien à personne. » (Hercules)',
+          titre: '« La laverie. On ne doit rien à personne. »',
+          acteur: 'hercules',
           texte: [
             ['hercules', '« Un lav-o-matic ouvert toute la nuit. Cinq personnes qui attendent une machine à cette heure, ça n’étonne personne — et on ne réveille personne pour lui demander une faveur qu’il ne peut pas refuser. »'],
             ['drakk', '« Une vitrine sur la rue. Toute la ville peut vous compter à travers. »'],
@@ -1189,7 +1190,8 @@ export const retour = {
         },
         {
           id: 'herwick',
-          titre: '« Strauber. L’homme qui m’a sorti de la rue, à seize ans. » (Drakk)',
+          titre: '« Strauber. L’homme qui m’a sorti de la rue, à seize ans. »',
+          acteur: 'drakk',
           texte: [
             ['drakk', '« Un antiquaire, rideau de fer, une arrière-boutique chauffée. Il connaît Loveland mieux que la Lone Star. Et je ne lui demande pas une faveur — je lui en dois une. »'],
             ['hercules', '« Un vieil homme seul, tiré du lit à cinq heures pour héberger cinq inconnus et un fugitif. Tu sais ce que ça lui coûte, si ça tourne mal ? »'],
@@ -1203,16 +1205,30 @@ export const retour = {
            vrai. `decisionPrise(a)` empêche de trancher deux fois — un
            seul `choix-*` peut être posé par partie, et chaque sujet
            `trancher-*` DISPARAÎT (via `quand`) dès qu'un autre a
-           débranché la question : ce n'est plus un choix, donc plus rien
-           à verrouiller. Trancher reste, lui, un geste du runner qui a
-           PROPOSÉ le lieu — `acteur`, pas `quand` (chantier 38) : les
-           trois autres le VOIENT, grisé, et un clic dessus se refuse
-           dans leur propre voix plutôt que de disparaître. Et
-           `barre.utiliser` lit ces drapeaux : rien d'autre ne change la
-           destination. */
+           débranché la question : ce n'est plus un choix.
+
+           Trancher reste un geste du runner qui a PROPOSÉ le lieu —
+           `acteur`, pas `quand`. Le champ ne verrouille plus (2026-08-29,
+           « la sélection n'est pas un péage ») : les quatre sujets sont
+           cliquables par n'importe quel portrait, et c'est le proposant
+           qui prononce la phrase. On entend donc QUI tranche sans avoir
+           eu à le devenir.
+
+           C'est ce qui a fait réécrire deux des quatre lignes. Elles
+           disaient « on va chez moi » et « à mon tripot », lisibles
+           tant qu'une étiquette `(Trash)` / `(Hercules)` traînait
+           derrière ; sans elle, deux destinations sur quatre n'en
+           étaient plus. Trash nomme sa loge en trois mots — plus il est
+           touché, moins il parle. Hercules nomme le tripot et ajoute une
+           phrase que personne ne lui a demandée, qui ne fait rire
+           personne : c'est son défaut de parole, pas un trait d'esprit.
+
+           Et `barre.utiliser` lit ces drapeaux : rien d'autre ne change
+           la destination. */
         {
           id: 'trancher-herwick',
-          titre: '« Assez parlé. On va chez Herwick. » (Trancher, Drakk)',
+titre: '« Assez parlé. On va chez Herwick. »',
+          mention: 'Trancher',
           acteur: 'drakk',
           quand: ({ a }) => !decisionPrise(a),
           fin: true,
@@ -1230,7 +1246,8 @@ export const retour = {
            (`acteur`, pas `quand` : chantier 38). */
         {
           id: 'squat',
-          titre: '« Ma loge. Personne n’a d’adresse à y trouver. » (Trash)',
+          titre: '« Ma loge. Personne n’a d’adresse à y trouver. »',
+          acteur: 'trash',
           texte: [
             ['trash', '« Aucun bail, aucun SIN, aucune facture. Rien à trouver dans un registre — et je saurai qu’ils arrivent avant qu’ils arrivent. »'],
             ['hercules', '« Aucun registre, mais toi. C’est ta signature qui a un prix, cette nuit, pas une adresse. »'],
@@ -1240,19 +1257,21 @@ export const retour = {
         },
         {
           id: 'trancher-squat',
-          titre: '« Assez parlé. On va chez moi. » (Trancher, Trash)',
+titre: '« Assez parlé. On va à ma loge. »',
+          mention: 'Trancher',
           acteur: 'trash',
           quand: ({ a }) => !decisionPrise(a),
           fin: true,
           flags: ['choix-squat'],
           texte: [
-            ['trash', '« Assez parlé. On va chez moi. »'],
+            ['trash', '« Assez parlé. On va à ma loge. »'],
             'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
           ],
         },
         {
           id: 'duke',
-          titre: '« Le sous-sol de Duke. Personne n’y tire à travers un mur. » (White_Rabbit)',
+          titre: '« Le sous-sol de Duke. Personne n’y tire à travers un mur. »',
+          acteur: 'rabbit',
           texte: [
             ['rabbit', '« Du béton, pas une fenêtre, huit personnes armées qui ne doivent rien à la Star. Pas de ligne de mire possible, là-dedans. »'],
             ['hercules', '« Huit personnes armées qui ne NOUS doivent rien non plus. Duke ne fait jamais crédit. »'],
@@ -1262,7 +1281,8 @@ export const retour = {
         },
         {
           id: 'trancher-duke',
-          titre: '« Assez parlé. On va chez Duke. » (Trancher, White_Rabbit)',
+titre: '« Assez parlé. On va chez Duke. »',
+          mention: 'Trancher',
           acteur: 'rabbit',
           quand: ({ a }) => !decisionPrise(a),
           fin: true,
@@ -1281,7 +1301,8 @@ export const retour = {
            moule que les trois autres (`acteur`, pas `quand` : chantier 38). */
         {
           id: 'tripot',
-          titre: '« … Ou le tripot où je dois de l’argent. Pas de fenêtre, personne n’y regarde personne. » (Hercules)',
+          titre: '« … Ou le tripot où je dois de l’argent. Pas de fenêtre, personne n’y regarde personne. »',
+          acteur: 'hercules',
           texte: [
             ['hercules', '« Sans fenêtre, sécurité déjà payée par quelqu’un d’autre, et cinq inconnus à une table à six heures du matin n’y sont pas une anomalie. C’est la définition du lieu. »'],
             ['drakk', '« Tu proposes une dette pour en éviter une autre. J’ai déjà vu ce tour de table se retourner contre celui qui le fait. »'],
@@ -1291,13 +1312,14 @@ export const retour = {
         },
         {
           id: 'trancher-tripot',
-          titre: '« Assez parlé. On va à mon tripot. » (Trancher, Hercules)',
+titre: '« Assez parlé. On va au tripot. Et non, je ne rembourse rien ce soir. »',
+          mention: 'Trancher',
           acteur: 'hercules',
           quand: ({ a }) => !decisionPrise(a),
           fin: true,
           flags: ['choix-tripot'],
           texte: [
-            ['hercules', '« Assez parlé. On va à mon tripot. »'],
+            ['hercules', '« Assez parlé. On va au tripot. Et non, je ne rembourse rien ce soir. »'],
             'Personne ne s’oppose à voix haute. Ça ne veut pas dire que tout le monde est d’accord.',
           ],
         },

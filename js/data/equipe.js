@@ -46,7 +46,7 @@ export const equipe = {
     metatype: 'nain',
     taille: 1.20,        // → 28 px d'art (voir CONCEPTION § 2)
     role: 'face adepte',
-    vue: 'physique',
+    vue: 'sociale',
     motsCles: [
       'Nain',
       'Seattle / Downtown',
@@ -91,12 +91,6 @@ export const equipe = {
       coupe: [
         '« Deux secondes. Je suis en train de faire quelque chose de bien. »',
         '« Laisse-moi finir, c’est la partie où je suis bon. »',
-      ],
-      /* Ce qu'il dit sur un sujet verrouillé — visible, mais qui n'est
-         pas à lui de dire (chantier 38, règle 11 appliquée au conseil). */
-      verrouille: [
-        '« Ça, c’est la partie de quelqu’un d’autre. Moi je négocie, je n’improvise pas dans le rôle des autres. »',
-        '« J’ai un avis. Je le garde pour quand ce sera à moi de parler. »',
       ],
     },
     /* Deux contacts de fiche, les deux au réseau (js/data/reseau.js) :
@@ -180,12 +174,6 @@ export const equipe = {
       coupe: [
         '« Attends. J’ai pas fini. »',
         '« Une seconde. Ce que je dis a une fin, et elle compte. »',
-      ],
-      /* Ce qu'il dit sur un sujet verrouillé — visible, mais qui n'est
-         pas à lui de dire (chantier 38, règle 11 appliquée au conseil). */
-      verrouille: [
-        '« Ce n’est pas à moi de le dire. Raton laveur non plus n’a d’avis là-dessus. »',
-        '« Je pourrais le dire à sa place. Ça sonnerait faux, et il le saurait. »',
       ],
     },
     /* Esprit mentor Raton laveur : farceur, chapardeur, curieux. Il doit
@@ -271,12 +259,6 @@ export const equipe = {
         '« Attends, j’ai pas fini de parler. »',
         '« Une seconde. Je termine ma phrase et je te la rends. »',
       ],
-      /* Ce qu'il dit sur un sujet verrouillé — visible, mais qui n'est
-         pas à lui de dire (chantier 38, règle 11 appliquée au conseil). */
-      verrouille: [
-        '« Pas mon terrain. Je sais rester dans ma voie, pour une fois. »',
-        '« Ça, c’est à quelqu’un d’autre de le formuler. Change de main. »',
-      ],
     },
     /* ── CE QUE LE PANNEAU D'ÉQUIPE MONTRE (chantier 70) ───────────
        `attentif` reformule le § 2 de `DOCTRINE — LES QUATRE REGARDS` :
@@ -316,7 +298,7 @@ export const equipe = {
     metatype: 'troll',
     taille: 2.50,        // → 59 px d'art
     role: 'samouraï des rues',
-    vue: 'tactique',
+    vue: 'materielle',
     motsCles: [
       'Troll',
       'Seattle / Underground',
@@ -361,12 +343,6 @@ export const equipe = {
       coupe: [
         '« Un instant, compagnon. Je n’ai pas achevé. »',
         '« On ne coupe pas un conteur au milieu. C’est page douze. »',
-      ],
-      /* Ce qu'il dit sur un sujet verrouillé — visible, mais qui n'est
-         pas à lui de dire (chantier 38, règle 11 appliquée au conseil). */
-      verrouille: [
-        '« Ce n’est pas à moi de porter cette parole, compagnon. »',
-        '« Chacun sa quête. Celle-ci n’est pas la mienne à raconter. »',
       ],
     },
     /* Sa réplique 3 est la RÈGLE 9 dite par un personnage : c'est Drakk

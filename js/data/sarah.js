@@ -210,7 +210,7 @@ export const sarah = {
       sujets: [
         {
           id: 'soigner',
-          titre: '« Le bras de Lester. Vraiment, cette fois. » (Trash)',
+          titre: '« Le bras de Lester. Vraiment, cette fois. »',
           acteur: 'trash',
           quand: ({ a }) => a('lester-blesse') && !a('lester-soigne'),
           flags: ['lester-soigne'],

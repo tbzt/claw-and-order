@@ -429,7 +429,7 @@ export const bar = {
       sujets: [
         {
           id: 'rang-haut',
-          titre: '« La rangée du haut. Une bouteille. » (White_Rabbit paie)',
+          titre: '« La rangée du haut. Une bouteille. »',
           acteur: 'rabbit',
           quand: ({ a }) => !a('achat-bouteille'),
           flags: ['achat-bouteille'],
@@ -442,7 +442,7 @@ export const bar = {
         },
         {
           id: 'filtre',
-          titre: '« Vous gardez des choses derrière le comptoir. » (White_Rabbit paie)',
+          titre: '« Vous gardez des choses derrière le comptoir. »',
           acteur: 'rabbit',
           quand: ({ a }) => a('sait-le-job') && !a('achat-filtre'),
           flags: ['achat-filtre'],
@@ -455,7 +455,7 @@ export const bar = {
         },
         {
           id: 'verre-mccarthy',
-          titre: '« Le café du vieux, c’est pour nous. » (White_Rabbit paie)',
+          titre: '« Le café du vieux, c’est pour nous. »',
           acteur: 'rabbit',
           quand: ({ a }) => a('parle:mccarthy') && !a('verre-mccarthy'),
           flags: ['verre-mccarthy'],
@@ -775,7 +775,7 @@ export const bar = {
         },
         {
           id: 'argent',
-          titre: '« Et si on trouvait ça un peu léger ? » (Hercules)',
+          titre: '« Et si on trouvait ça un peu léger ? »',
           acteur: 'hercules',
           quand: ({ a }) => a('sait-le-job'),
           /* Le scénario est explicite : McCarthy coupe court à toute
@@ -874,7 +874,7 @@ export const bar = {
            dialogue, et c'est ce qui rend le choix du runner sensible. */
         {
           id: 'tir',
-          titre: '« La victime était du Tír. » (Trash)',
+          titre: '« La victime était du Tír. »',
           acteur: 'trash',
           quand: ({ a }) => a('sait-gamin'),
           texte: ['Le vieil ork le regarde autrement. « Vous connaissez ? »',
@@ -885,7 +885,7 @@ export const bar = {
         },
         {
           id: 'ork',
-          titre: '« Le gamin est ork. C’est ça, le dossier. » (White_Rabbit)',
+          titre: '« Le gamin est ork. C’est ça, le dossier. »',
           acteur: 'rabbit',
           quand: ({ a }) => a('sait-dossier-vide'),
           texte: ['« … »',
@@ -895,7 +895,7 @@ export const bar = {
         },
         {
           id: 'opposition',
-          titre: '« Combien d’hommes en face ? » (Drakk)',
+          titre: '« Combien d’hommes en face ? »',
           acteur: 'drakk',
           quand: ({ a }) => a('sait-le-job'),
           texte: ['« Aucune idée. Officiellement, personne : le transfert est légal et c’est moi qui le signe. »',

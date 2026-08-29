@@ -390,7 +390,7 @@ export const tribunalSalle = {
       sujets: [
         {
           id: 'verite',
-          titre: '« On le dit. Ici, maintenant, à voix haute. » (Trash)',
+          titre: '« On le dit. Ici, maintenant, à voix haute. »',
           acteur: 'trash',
           fin: true,
           flags: ['denouement-verite'],
@@ -401,7 +401,7 @@ export const tribunalSalle = {
         },
         {
           id: 'tractation',
-          titre: '« On garde ça pour une meilleure table. » (Hercules)',
+          titre: '« On garde ça pour une meilleure table. »',
           acteur: 'hercules',
           fin: true,
           flags: ['denouement-tractation'],
