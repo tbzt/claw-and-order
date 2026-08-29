@@ -179,7 +179,7 @@ export const amis = {
       '« Celle-là dure depuis trois jours, et elle a lieu chez le seul qui ne peut pas rentrer chez lui. »',
     ],
     ra: [
-      'Un écran qui repasse la même boucle, quatre commlinks en veille, et une carte de visite posée sur la table à dessin. C’est elle, la seule chose qui émette encore.',
+      'Un écran qui repasse la même boucle, quatre commlinks en veille, un rig de travail éteint sur la table à dessin — et, juste à côté, une carte de visite. C’est elle, la seule chose qui émette encore.',
       '« La pièce est morte côté réseau. »',
       '« Sauf un truc, là-bas. Il attend qu’on le lise. »',
     ],
@@ -458,6 +458,36 @@ export const amis = {
       utiliser: {
         tous: 'Tu remets une pile d’aplomb. C’est à peu près tout ce qu’on peut faire pour cette pièce.',
         drakk: '« Je vais avoir besoin d’une heure. »',
+      },
+    },
+
+    /* ══ LA COURONNE DE TRODES — ce avec quoi il travaille ═══════════
+       Le scénario le dit graphiste en piges ; en 2081 ça se fait en RA,
+       et la pièce n'en montrait rien. Elle n'en montre toujours pas
+       beaucoup — c'est voulu : l'outil est ÉTEINT, et sa lentille RA
+       dit déjà « la pièce est morte côté réseau ». Ce qui manquait,
+       c'était de pouvoir voir la chose qui devrait émettre et qui
+       n'émet pas.
+
+       Aucune fiche, aucun drapeau : c'est de la texture, comme le pied
+       de micro. Elle ne fait que redire, avec un objet, ce que la pile
+       de tirages dit avec du papier — et à la même date. */
+    trodes: {
+      nom: 'La couronne de trodes',
+      regarder: {
+        tous: ['Une couronne de trodes, poussée au bord de la table à dessin, le câble encore branché. Elle n’est pas en veille : elle est éteinte.',
+               'À côté, la carte de visite d’un inconnu est la seule chose de cette table qui émette quelque chose.'],
+        hercules: ['« Ça vaut deux mois de piges, ce truc-là, et il l’a laissé au bord de la table. »',
+                   '« Je ne dis pas ça pour l’argent. Je dis ça parce qu’on range ce qui coûte cher, et qu’il ne l’a pas fait. »'],
+        trash: '« Il y a une trace dessus. Elle s’arrête le même jour que la pile de tirages. »',
+        rabbit: ['« Trodes d’entrée de gamme, six contacts. De quoi faire de la mise en page, pas plus. »',
+                 '« Dernière session il y a trois jours. Pour quelqu’un qui vit de piges, c’est long. »'],
+        drakk: ['« Un diadème. »',
+                '« C’est l’objet qu’on repose sur la table quand on ne joue plus le personnage. »'],
+      },
+      utiliser: {
+        tous: 'Elle est à lui, elle est sur sa table, et il est assis juste à côté. Non.',
+        drakk: '« On ne coiffe pas le diadème d’un autre. »',
       },
     },
 

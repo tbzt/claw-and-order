@@ -232,6 +232,51 @@
   box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(0,0,0,.45);
 }
 
+/* ── LA COURONNE DE TRODES — x:208-225, y:107-114 ─────────────────
+   SA LIGNE : elle est posée sur LA TABLE À DESSIN (surface y 96-120),
+   sur sa moitié proche — pas au sol, pas sur une pile. La carte de
+   visite occupe la moitié lointaine (y 98-106) ; les deux ne se
+   recouvrent pas d'une unité.
+
+   POURQUOI ELLE EST SOMBRE, alors qu'elle est dans la zone la plus
+   éclairée du tableau (x 206, le jour entre par le bas à droite) : elle
+   est ÉTEINTE, et c'est tout le propos. La carte à côté est l'objet le
+   plus clair du jeu et la seule chose qui émette encore ; l'outil de
+   travail de Mark, lui, est mat. Un gris froid contre le bois chaud de
+   la table — le mort posé contre le vivant, sur le même meuble.
+
+   LE CÂBLE EST LA MOITIÉ DU SUJET, comme pour le pied de micro : encore
+   branché, il dit qu'on n'a pas rangé — qu'on s'est arrêté. Rangée, la
+   couronne aurait dit « il reviendra quand il pourra ». Là elle dit
+   qu'il a posé ça un matin et qu'il n'y est plus revenu. */
+.tableau--amis .trodes {
+  left: calc(208 * var(--u)); top: calc(107 * var(--u));
+  width: calc(17 * var(--u)); height: calc(7 * var(--u));
+  border: calc(1 * var(--u)) solid #3c4348;
+  border-radius: 50% 50% 12% 12% / 70% 70% 25% 25%;
+  background: linear-gradient(180deg, #2b3033 0%, #1c2022 60%, #14171a 100%);
+  box-shadow: 0 calc(1 * var(--u)) calc(2 * var(--u)) rgba(0,0,0,.45);
+}
+/* Les contacts, côté peau. ILS SE COMPTENT, ET IL Y EN A SIX : c'est le
+   nombre que White_Rabbit annonce en les regardant, et ce tableau est
+   celui où la prose compte des choses — onze photos, six bacs. Une
+   période de deux unités sur onze donne six pastilles, pas cinq ni
+   sept. C'est le seul détail qui distingue la couronne d'un galet. */
+.tableau--amis .trodes::before {
+  content: ''; position: absolute;
+  left: calc(3 * var(--u)); top: calc(3 * var(--u));
+  width: calc(11 * var(--u)); height: calc(1 * var(--u));
+  background: repeating-linear-gradient(90deg,
+    #6f7a80 0 calc(1 * var(--u)), transparent calc(1 * var(--u)) calc(2 * var(--u)));
+}
+/* Le câble, qui passe le bord proche de la table (y 120) et disparaît. */
+.tableau--amis .trodes::after {
+  content: ''; position: absolute;
+  right: calc(2 * var(--u)); top: calc(5 * var(--u));
+  width: calc(1 * var(--u)); height: calc(12 * var(--u));
+  background: #23282b;
+}
+
 /* ── LA CARTE DE VISITE — x:208-228, y:98-106 ────────────────────────
    Sprite `prop-carte-tir`. Posée FACE EN L'AIR sur la table, et
    c'est la moitié du propos : on laisse une carte à l'endroit où on
