@@ -207,8 +207,8 @@
 }
 .tableau--herwick .ombre--drakk    { left: calc(60 * var(--u));  top: calc(110 * var(--u)); width: calc(32 * var(--u)); }
 .tableau--herwick .ombre--trash    { left: calc(101 * var(--u)); top: calc(111 * var(--u)); width: calc(24 * var(--u)); }
-.tableau--herwick .ombre--rabbit   { left: calc(147 * var(--u)); top: calc(112 * var(--u)); width: calc(18 * var(--u)); }
-.tableau--herwick .ombre--hercules { left: calc(173 * var(--u)); top: calc(111 * var(--u)); width: calc(15 * var(--u)); }
+.tableau--herwick .ombre--rabbit   { left: calc(148 * var(--u)); top: calc(112 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--herwick .ombre--hercules { left: calc(174 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }
 .tableau--herwick .ombre--herwick  { left: calc(196 * var(--u)); top: calc(93 * var(--u));  width: calc(20 * var(--u)); }
 
 /* L'équipe, sur la bande médiane x:58-176, sous le rideau et devant le
@@ -218,8 +218,16 @@
    comptoir, de la caisse ou de l'armoire, ni l'inverse. */
 .tableau--herwick .p-drakk    { width: calc(38 * var(--u)); left: calc(58 * var(--u));  top: calc(66 * var(--u)); }
 .tableau--herwick .p-trash    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(72 * var(--u)); }
-.tableau--herwick .p-rabbit   { width: calc(22 * var(--u)); left: calc(146 * var(--u)); top: calc(76 * var(--u)); }
-.tableau--herwick .p-hercules { width: calc(18 * var(--u)); left: calc(172 * var(--u)); top: calc(86 * var(--u)); }
+/* ── L'ÉCHELLE DES CINQ, REPRISE ──────────────────────────────────────
+   White_Rabbit et Hercules étaient placés à 0,458 et 0,450 quand les
+   trois autres tenaient à 0,41 : un cinquième trop grands. Et Hercules
+   se tient DERRIÈRE Trash et Lester — plus loin, donc il ne peut pas
+   être dessiné plus grand qu'eux. Ramenés à l'échelle du groupe, les
+   pieds inchangés (le `top` suit la largeur).
+   La profondeur se dit ici par la ligne de pieds et par la lumière, pas
+   par la taille : c'est la doctrine du chantier 9. */
+.tableau--herwick .p-rabbit   { width: calc(20 * var(--u)); left: calc(147 * var(--u)); top: calc(79 * var(--u)); }
+.tableau--herwick .p-hercules { width: calc(16 * var(--u)); left: calc(173 * var(--u)); top: calc(89 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret que
    `scene-planque.css` : un filtre, pas une jauge. */

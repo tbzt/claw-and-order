@@ -398,10 +398,28 @@
    bas). Ordre du DOM = ordre de pile : chacun couvre le bord gauche du
    précédent, et Sarah ferme la ligne à droite. */
 .tableau--sarah .p-lester   { width: calc(30 * var(--u)); left: calc(96 * var(--u));  top: calc(86 * var(--u)); }
-.tableau--sarah .p-drakk    { width: calc(46 * var(--u)); left: calc(132 * var(--u)); top: calc(85 * var(--u)); }
-.tableau--sarah .p-trash    { width: calc(34 * var(--u)); left: calc(170 * var(--u)); top: calc(88 * var(--u)); }
-.tableau--sarah .p-rabbit   { width: calc(24 * var(--u)); left: calc(196 * var(--u)); top: calc(93 * var(--u)); }
-.tableau--sarah .p-hercules { width: calc(20 * var(--u)); left: calc(210 * var(--u)); top: calc(104 * var(--u)); }
+/* ── L'ÉTAGEMENT, REMIS DANS LE SENS DU BAR ───────────────────────────
+   Les quatre se chevauchent, et l'ordre du DOM les empile du premier au
+   dernier : Hercules était donc dessiné DEVANT tout le monde alors que
+   ses pieds le posaient le plus LOIN (132 contre 138 à Drakk). L'occlusion
+   contredisait la profondeur, et l'échelle avec — Drakk, plus près, était
+   dessiné à 20,8 unités par mètre contre 23,3 à Hercules.
+
+   Le bar a tranché ça au chantier 9, et il est le tableau de référence :
+   « Drakk (le plus reculé) … Hercules (le plus avancé) ». Le plus grand
+   au fond, pour qu'il ne mange pas les trois autres. Les quatre lignes
+   de pieds existantes sont simplement redistribuées dans cet ordre —
+   aucune n'est inventée, chaque `top` suit, et les ombres avec.
+
+   Reste l'écart qui vient des CARTES : à échelle égale (0,5 ici), leur
+   encre est courte de 12,2 % pour Drakk et 11,2 % pour Trash contre 1,5 %
+   pour Hercules (`outils/canon.py --cartes`). C'est pour ça que Drakk
+   reste le plus « petit par mètre » des quatre ; ça se corrige à la carte,
+   pas dans une feuille de style. */
+.tableau--sarah .p-drakk    { width: calc(46 * var(--u)); left: calc(132 * var(--u)); top: calc(79 * var(--u)); }
+.tableau--sarah .p-trash    { width: calc(34 * var(--u)); left: calc(170 * var(--u)); top: calc(86 * var(--u)); }
+.tableau--sarah .p-rabbit   { width: calc(24 * var(--u)); left: calc(196 * var(--u)); top: calc(95 * var(--u)); }
+.tableau--sarah .p-hercules { width: calc(20 * var(--u)); left: calc(210 * var(--u)); top: calc(110 * var(--u)); }
 
 /* Sarah — sprite `prop-sarah` depuis le chantier 23, dérivé du corps
    d'Iris (la seule silhouette de femme du jeu). Elle ne change pas
@@ -433,10 +451,10 @@
   pointer-events: none;
 }
 .tableau--sarah .ombre--lester   { left: calc(98 * var(--u));  top: calc(124 * var(--u)); width: calc(26 * var(--u)); }
-.tableau--sarah .ombre--drakk    { left: calc(134 * var(--u)); top: calc(136 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--sarah .ombre--trash    { left: calc(172 * var(--u)); top: calc(134 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--sarah .ombre--rabbit   { left: calc(198 * var(--u)); top: calc(132 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--sarah .ombre--hercules { left: calc(211 * var(--u)); top: calc(130 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--sarah .ombre--drakk    { left: calc(134 * var(--u)); top: calc(130 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--sarah .ombre--trash    { left: calc(172 * var(--u)); top: calc(132 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--sarah .ombre--rabbit   { left: calc(198 * var(--u)); top: calc(134 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--sarah .ombre--hercules { left: calc(211 * var(--u)); top: calc(136 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--sarah .ombre--sarah    { left: calc(224 * var(--u)); top: calc(134 * var(--u)); width: calc(20 * var(--u)); }
 
 /* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════

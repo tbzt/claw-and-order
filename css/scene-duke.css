@@ -88,10 +88,29 @@
 .stage[data-etat~="ganger-touche"] .tableau--duke .ganger--3 { display: none; }
 
 /* ── LE COULOIR DE L'ÉQUIPE — x:52-144 ───────────────────────────────── */
-.tableau--duke .p-drakk    { width: calc(28 * var(--u)); left: calc(52 * var(--u));  top: calc(88 * var(--u)); }
-.tableau--duke .p-trash    { width: calc(22 * var(--u)); left: calc(84 * var(--u));  top: calc(90 * var(--u)); }
+/* ── L'ÉCHELLE DES CINQ, REPRISE ──────────────────────────────────────
+   Les cinq étaient placés à cinq échelles différentes — 0,304 pour
+   Drakk, 0,350 pour Hercules — et l'ordre n'était pas celui de la
+   profondeur : Drakk, qui se tient QUINZE unités devant Lester, était
+   dessiné à 12,7 unités par mètre contre 14,8 à Lester. Une figure plus
+   loin ne peut pas être plus grande qu'une figure plus près : ce n'était
+   pas une lecture d'atelier, c'était une impossibilité.
+
+   Les cinq partagent maintenant une échelle unique (~0,33), comme au
+   bar, chez Sarah et au parvis. La profondeur se dit par la LIGNE DE
+   PIEDS et par la lumière, jamais par la taille — c'est déjà la doctrine
+   du chantier 9. Chaque `top` est recalculé pour que les pieds ne
+   bougent pas d'un pixel.
+
+   Ce qui reste après ça vient des CARTES, pas d'ici : leur encre est
+   courte de 12,2 % pour Drakk et 11,2 % pour Trash contre 1,5 % pour
+   Hercules (`outils/canon.py --cartes`). À échelle égale les cinq ne
+   tombent donc pas exactement sur leur taille, et ça ne se rattrape pas
+   dans une feuille de style sans donner à chacun un grain différent. */
+.tableau--duke .p-drakk    { width: calc(31 * var(--u)); left: calc(50 * var(--u));  top: calc(85 * var(--u)); }
+.tableau--duke .p-trash    { width: calc(23 * var(--u)); left: calc(84 * var(--u));  top: calc(89 * var(--u)); }
 .tableau--duke .p-rabbit   { width: calc(16 * var(--u)); left: calc(110 * var(--u)); top: calc(96 * var(--u)); }
-.tableau--duke .p-hercules { width: calc(14 * var(--u)); left: calc(130 * var(--u)); top: calc(104 * var(--u)); }
+.tableau--duke .p-hercules { width: calc(13 * var(--u)); left: calc(130 * var(--u)); top: calc(105 * var(--u)); }
 
 /* ── LE MUR DU FOND — armurerie et moniteurs, y:6-34 ─────────────────── */
 /* Sprite `prop-ratelier`. « PLUS DE FUSILS QUE DE PERSONNES DANS LA
@@ -147,7 +166,7 @@
 }
 
 /* Lester, contre le mur du fond, à l'écart de Duke et de son fauteuil. */
-.tableau--duke .p-lester { left: calc(214 * var(--u)); top: calc(76 * var(--u)); width: calc(22 * var(--u)); }
+.tableau--duke .p-lester { left: calc(214 * var(--u)); top: calc(77 * var(--u)); width: calc(21 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
 .stage[data-etat~="lester-ferme"]  .tableau--duke .p-lester { filter: saturate(.6) brightness(.85); }
@@ -169,10 +188,10 @@
   background: radial-gradient(closest-side, rgba(0,0,0,.55), transparent 78%);
   pointer-events: none;
 }
-.tableau--duke .ombre--drakk    { left: calc(50 * var(--u));  top: calc(110 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--duke .ombre--trash    { left: calc(80 * var(--u));  top: calc(111 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--duke .ombre--drakk    { left: calc(48 * var(--u));  top: calc(110 * var(--u)); width: calc(31 * var(--u)); }
+.tableau--duke .ombre--trash    { left: calc(80 * var(--u));  top: calc(111 * var(--u)); width: calc(21 * var(--u)); }
 .tableau--duke .ombre--rabbit   { left: calc(104 * var(--u)); top: calc(112 * var(--u)); width: calc(16 * var(--u)); }
-.tableau--duke .ombre--hercules { left: calc(131 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--duke .ombre--hercules { left: calc(131 * var(--u)); top: calc(111 * var(--u)); width: calc(12 * var(--u)); }
 .tableau--duke .ombre--g1       { left: calc(8 * var(--u));   top: calc(107 * var(--u)); width: calc(13 * var(--u)); }
 .tableau--duke .ombre--g2       { left: calc(24 * var(--u));  top: calc(107 * var(--u)); width: calc(13 * var(--u)); }
 .tableau--duke .ombre--g3       { left: calc(40 * var(--u));  top: calc(107 * var(--u)); width: calc(13 * var(--u)); }
