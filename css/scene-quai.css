@@ -110,10 +110,10 @@
   opacity: var(--profondeur, 1);
 }
 .tableau--quai .ombre--pecheur { left: calc(218 * var(--u)); top: calc(123 * var(--u)); width: calc(18 * var(--u)); }
-.tableau--quai .ombre--drakk { left: calc(72 * var(--u)); top: calc(139 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--quai .ombre--trash { left: calc(114 * var(--u)); top: calc(139 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--quai .ombre--rabbit { left: calc(146 * var(--u)); top: calc(139 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--quai .ombre--hercules { left: calc(171 * var(--u)); top: calc(139 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--quai .ombre--drakk { left: calc(72 * var(--u)); top: calc(134 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--quai .ombre--trash { left: calc(114 * var(--u)); top: calc(135 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--quai .ombre--rabbit { left: calc(146 * var(--u)); top: calc(137 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--quai .ombre--hercules { left: calc(171 * var(--u)); top: calc(136 * var(--u)); width: calc(16 * var(--u)); }
 
 /* L'ÉCHELLE EST CELLE DU CANON, ET ELLE NE SE NÉGOCIE PAS PAR TABLEAU.
    23,7 px par mètre, McCarthy ork 1,90 m = 45 px pour ancre :

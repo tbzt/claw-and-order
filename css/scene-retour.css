@@ -290,11 +290,11 @@
   background: radial-gradient(ellipse, rgba(6,8,14,.6) 0%, rgba(6,8,14,0) 72%);
   opacity: var(--profondeur, 1);
 }
-.tableau--retour .ombre--lester   { left: calc(168 * var(--u)); top: calc(132 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--retour .ombre--drakk    { left: calc(30 * var(--u));  top: calc(136 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--retour .ombre--trash    { left: calc(70 * var(--u));  top: calc(133 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--retour .ombre--rabbit   { left: calc(99 * var(--u)); top: calc(138 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--retour .ombre--hercules { left: calc(122 * var(--u)); top: calc(140 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--retour .ombre--lester   { left: calc(168 * var(--u)); top: calc(139 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--retour .ombre--drakk    { left: calc(30 * var(--u));  top: calc(131 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--retour .ombre--trash    { left: calc(70 * var(--u));  top: calc(129 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--retour .ombre--rabbit   { left: calc(99 * var(--u)); top: calc(136 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--retour .ombre--hercules { left: calc(122 * var(--u)); top: calc(137 * var(--u)); width: calc(16 * var(--u)); }
 
 /* Lester est ASSIS contre le rouf : le toit lui coupe les jambes, comme
    la table coupe celles de McCarthy au tableau 1. Il a vingt ans et il

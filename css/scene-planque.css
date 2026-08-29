@@ -232,11 +232,11 @@
   background: radial-gradient(ellipse, rgba(40,48,46,.5) 0%, rgba(40,48,46,0) 72%);
   opacity: var(--profondeur, 1);
 }
-.tableau--planque .ombre--lester   { left: calc(21 * var(--u));  top: calc(136 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--planque .ombre--drakk    { left: calc(58 * var(--u));  top: calc(138 * var(--u)); width: calc(42 * var(--u)); }
-.tableau--planque .ombre--trash    { left: calc(98 * var(--u)); top: calc(135 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--planque .ombre--rabbit   { left: calc(126 * var(--u)); top: calc(140 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--planque .ombre--hercules { left: calc(150 * var(--u)); top: calc(142 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--planque .ombre--lester   { left: calc(21 * var(--u));  top: calc(143 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--planque .ombre--drakk    { left: calc(58 * var(--u));  top: calc(133 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--planque .ombre--trash    { left: calc(98 * var(--u)); top: calc(131 * var(--u)); width: calc(30 * var(--u)); }
+.tableau--planque .ombre--rabbit   { left: calc(126 * var(--u)); top: calc(138 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--planque .ombre--hercules { left: calc(150 * var(--u)); top: calc(139 * var(--u)); width: calc(16 * var(--u)); }
 
 /* Lester est ASSIS sur une chaise trop basse pour lui : la chaise lui
    coupe les jambes, comme la table coupe celles de McCarthy et le rouf
