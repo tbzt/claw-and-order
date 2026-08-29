@@ -252,22 +252,22 @@ export const fiches = {
   'prenom-mal-ecrit': {
     titre: 'Un prénom, écrit à l’oreille',
     texte: 'HAIDEN, au dos d’un flyer, de la main de Teresa. Elle l’avait entendu, jamais lu — les deux fautes le prouvent. Mark a gardé le flyer sans jamais le montrer à personne.',
-    ou: 'Mark, au local de répétition',
+    ou: 'Mark, chez lui, à Renton',
   },
   'gros-ponte-telestrian': {
     titre: 'Un gros ponte chez Telestrian',
     texte: 'Elle voyait quelqu’un de la maison Telestrian, assez haut placé pour qu’elle n’en dise jamais le nom de famille. Nita le tient d’elle, un soir, et n’a rien pu en faire depuis.',
-    ou: 'Nita, au local de répétition',
+    ou: 'Nita, chez Mark',
   },
   'enregistrement-waters': {
     titre: 'Il existe un enregistrement',
-    texte: 'Quatre titres, mis en boîte chez Reginald Waters, un studio de Puyallup. Elle y a parlé entre deux prises, et Waters garde tout — les prises ratées comprises.',
-    ou: 'Psych, au local de répétition',
+    texte: 'Elle a tourné quelque chose chez Reginald Waters, un studio de simsens semi-pro à Puyallup, à deux rues de chez elle. Psych ne dit pas quoi. Les elfes du Tír, eux, l’ont demandé deux fois.',
+    ou: 'Psych, chez Mark',
   },
   'elfes-du-tir': {
     titre: 'Ils sont passés avant vous',
     texte: 'Trois elfes, polis, deux jours plus tôt. Ils ont posé exactement les mêmes questions que vous, et ils ont laissé une carte de visite sur le comptoir. Personne n’a osé la jeter.',
-    ou: 'Nova, au local de répétition',
+    ou: 'Nova, chez Mark',
   },
 
   /* ── L'APPARTEMENT DE TERESA, chantier 26 — la première ancre ──────
@@ -346,7 +346,7 @@ export const fiches = {
      rang 10, pas encore écrit. */
   'enregistrement-recupere': {
     titre: 'L’enregistrement est à vous',
-    texte: 'Un commlink neuf, jamais connecté, que Teresa avait elle-même confié à Waters pour qu’il n’existe nulle part ailleurs. Quatre titres, et elle qui parle entre les prises.',
+    texte: 'Un commlink neuf, jamais connecté, que Teresa avait elle-même confié à Waters pour qu’il n’existe nulle part ailleurs. Un simsens brut, jamais monté, où tout le monde est crédité sous un numéro sauf elle.',
     ou: 'Reginald Waters, à Puyallup',
   },
 
@@ -699,9 +699,9 @@ export const presque = {
   'elfes-du-tir|famille-tir':
     'Une famille qui étouffe ce qui la gêne, et trois elfes polis qui remontent la piste avant vous. C’est cohérent au point d’en être évident — et ça ne dit toujours pas ce qu’ils cherchent, eux.',
   'elfes-du-tir|enregistrement-waters':
-    'Ils sont passés poser des questions, et il existe quelque part quatre titres où elle parle entre deux prises. Ils ne cherchent peut-être pas un coupable. Il faudrait entendre la bande pour le savoir.',
+    'Ils sont passés poser des questions, et il existe quelque part une chose qu’elle a tournée. Ils ne cherchent peut-être pas un coupable. Il faudrait savoir ce qu’il y a dessus pour en être sûr.',
   'enregistrement-waters|gros-ponte-telestrian':
-    'Elle voyait un homme de la maison, et elle a passé des heures dans un studio à parler entre deux prises. Ce qui manque n’est pas un lien : c’est la bande elle-même.',
+    'Elle voyait un homme de la maison, et elle est allée tourner quelque chose dans un studio à deux rues de chez elle. Ce qui manque n’est pas un lien : c’est ce qu’elle y a mis.',
   'elfe-autopsie|prenom-mal-ecrit':
     'Un elfe l’a touchée en dernier, et elle avait noté un prénom au dos d’un flyer. Un prénom n’est pas une main. Il lui manque un nom de famille pour le devenir.',
   'appart-teresa|gros-ponte-telestrian':
@@ -762,7 +762,7 @@ export const presque = {
      de paire qui NOMME, seulement celles qui relient ce qu'on a obtenu
      à ce qu'on savait déjà. */
   'enregistrement-recupere|enregistrement-waters':
-    'Psych avait dit qu’il existait. Il existe, et il est dans votre poche — quatre titres, et sa voix entre les prises.',
+    'Psych avait dit qu’il existait. Il existe, il est dans votre poche, et personne n’a proposé de le regarder.',
   'enregistrement-recupere|hayden':
-    'Un nom, et maintenant la voix de la femme qu’il fréquentait en secret. Ensemble, ils ne prouvent toujours pas ce qu’il a fait — seulement qu’il avait beaucoup à protéger.',
+    'Un nom, et maintenant ce que la famille de Teresa a envoyé trois chasseurs récupérer. Ensemble, ils ne prouvent toujours pas ce qu’il a fait — seulement qu’il avait beaucoup à protéger.',
 }

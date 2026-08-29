@@ -516,12 +516,12 @@ export const tribunalSalle = {
         registre: 'tient',
         dit: {
           tous: ctx.a('bombe-declenchee')
-            ? 'Tu déposes ce qu’il en reste — une bande abîmée, à moitié lisible, mais sa voix y est encore. Le juge demande qu’on l’écoute en chambre, pas en pleine salle.'
-            : 'Tu déposes l’enregistrement, intact. Quatre titres, et elle qui parle entre les prises — une voix que ce dossier n’avait jamais portée.',
-          hercules: '« Ce n’est pas une preuve, Votre Honneur. C’est elle. Personne, ici, ne l’avait encore entendue. »',
-          trash: ['« Je ne dépose pas ça pour gagner le procès. »', '« Elle chantait. Il fallait que quelqu’un l’entende ici. »'],
-          rabbit: ['« Authentifié, non modifié. »', '« Il y a sa voix dessus. Ce n’est pas dans les trois pages. »'],
-          drakk: '« Elle parle encore, entre deux prises. »',
+            ? 'Tu déposes ce qu’il en reste. La moitié des pistes ne se lit plus ; ce qui tient donne la date, le lieu et qui était là. Le juge fait évacuer la galerie avant même de demander le reste.'
+            : 'Tu déposes le commlink, intact. Le juge lit l’en-tête et s’arrête là — un simsens brut, jamais monté, où tout le monde est crédité sous un numéro sauf elle. Il ne le branche pas. Il fait évacuer la galerie d’abord.',
+          hercules: ['« Votre Honneur, je ne vous demande pas de le regarder. »', '« Je vous demande de noter que trois personnes ont traversé une frontière pour l’empêcher d’arriver jusqu’ici. »'],
+          trash: '« Elle l’a fait pour que ça se voie. Pas ici, et pas comme ça. »',
+          rabbit: ['« Authentifié, non monté, horodaté. »', '« … Je me suis arrêté à l’en-tête. On n’a pas besoin du reste pour la date. »'],
+          drakk: ['« Dans mon livre, on ne fouille pas les morts. »', '« Il n’y a pas de règle pour celle qui voulait qu’on regarde. »'],
         },
       }),
       /* Nœud 1, chantier 53 : le ternaire passe de deux à trois branches.

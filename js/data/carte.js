@@ -120,17 +120,26 @@ export const lieux = {
      `acte: 4` du tableau de destination. La carte n'a donc rien à
      facturer — elle annonce seulement ce que le prochain moment sera.
 
-     LES DEUX PREMIERS SONT DANS LE MÊME DISTRICT, et c'est la
-     géographie du texte : Loveland est un quartier de Puyallup
-     (Anarchy v2 p. 282), le taudis où le corps a été déposé est à deux
-     rues de l'appartement, et le local de répétition à trois kilomètres.
-     Leurs jalons sont donc deux points serrés autour du 9, pas deux
-     districts — la carte est à l'échelle du métroplexe et ces trois
-     lieux tiennent dans un mouchoir. */
+     L'APPARTEMENT ET LE STUDIO DE WATERS SONT DANS LE MÊME DISTRICT,
+     et c'est la géographie du texte : Loveland est un quartier de
+     Puyallup (Anarchy v2 p. 282), le taudis où le corps a été déposé
+     est à deux rues de l'appartement, et le studio de Waters « à
+     quelques blocs » (scénario p. 22). Leurs jalons sont donc des
+     points serrés autour du 9, pas des districts — la carte est à
+     l'échelle du métroplexe et ces lieux tiennent dans un mouchoir.
+
+     CHEZ MARK EST L'EXCEPTION, et il faut qu'elle se voie : il a grandi
+     à RENTON et il y vit toujours (scénario p. 22, « enfant d'artistes,
+     il a grandi à Renton »). Son jalon est donc dans le 7, seul, à
+     l'écart du paquet de Puyallup — les trois autres viennent à lui, et
+     c'est la raison d'être de la scène. Le nom disait encore « le local
+     de répétition », que le chantier 73 avait défait partout ailleurs :
+     `NOMS_LIEUX` (main.js) dit « Chez Mark, à Renton » depuis le 79, et
+     la carte le contredisait en toutes lettres, district compris. */
   amis: {
-    nom: 'Le local de répétition',
-    ou: 'Loveland, Puyallup',
-    x: 36.0, y: 122.0,
+    nom: 'Chez Mark',
+    ou: 'Renton',
+    x: 90.0, y: 122.0,
     acte: 4,
   },
   appartement: {
