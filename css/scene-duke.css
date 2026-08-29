@@ -181,20 +181,40 @@
   border-left: calc(1 * var(--u)) solid #46484c;
 }
 
-/* Les ombres de contact (chantier 14). */
+/* Les ombres de contact (chantier 14).
+
+   ⚠️ LES QUATRE ÉTAIENT POSÉES SUR LA JONCTION MUR/SOL (y=108), pas sur
+   les pieds de chacun : décrochées de −8,9 (Drakk) à −10,7 (Hercules),
+   relevé par `outils/sol.py`. C'est le défaut décrit par `BIBLE DA` § 3.3
+   — « les ombres dessinent encore le rang d'oignon que les corps ont
+   quitté ». Le chantier 9 a échelonné les quatre corps en profondeur
+   (pieds 120,4 · 121,9 · 123,2 · 123,3) ; leurs ombres, elles, sont
+   restées alignées sur une seule ligne, et c'est l'ombre qui dit au
+   regard où est le sol. La composition payait une profondeur que son
+   propre éclairage annulait.
+
+   CONVENTION : le CENTRE de l'ellipse sur la ligne de pieds (§ 3.3,
+   arbitrage) — donc `top` = pieds − hauteur/2, soit pieds − 1,5 ici.
+   Trois d'entre elles étaient EN PLUS décalées horizontalement (Trash
+   −5, White_Rabbit −6) : chacune reprend le `left` et la `width` de sa
+   figure. Ces ombres-là sont dures — un sous-sol de béton sans fenêtre,
+   éclairé de haut — donc elles ne débordent pas la silhouette.
+
+   Les trois gangers ne bougent que verticalement : leur ombre était
+   déjà sous eux, à un tiers d'unité près. */
 .tableau--duke .ombre {
   height: calc(3 * var(--u));
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(0,0,0,.55), transparent 78%);
   pointer-events: none;
 }
-.tableau--duke .ombre--drakk    { left: calc(48 * var(--u));  top: calc(110 * var(--u)); width: calc(31 * var(--u)); }
-.tableau--duke .ombre--trash    { left: calc(80 * var(--u));  top: calc(111 * var(--u)); width: calc(21 * var(--u)); }
-.tableau--duke .ombre--rabbit   { left: calc(104 * var(--u)); top: calc(112 * var(--u)); width: calc(16 * var(--u)); }
-.tableau--duke .ombre--hercules { left: calc(131 * var(--u)); top: calc(111 * var(--u)); width: calc(12 * var(--u)); }
-.tableau--duke .ombre--g1       { left: calc(8 * var(--u));   top: calc(107 * var(--u)); width: calc(13 * var(--u)); }
-.tableau--duke .ombre--g2       { left: calc(24 * var(--u));  top: calc(107 * var(--u)); width: calc(13 * var(--u)); }
-.tableau--duke .ombre--g3       { left: calc(40 * var(--u));  top: calc(107 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--duke .ombre--drakk    { left: calc(50 * var(--u));  top: calc(119 * var(--u)); width: calc(31 * var(--u)); }
+.tableau--duke .ombre--trash    { left: calc(84 * var(--u));  top: calc(120 * var(--u)); width: calc(23 * var(--u)); }
+.tableau--duke .ombre--rabbit   { left: calc(110 * var(--u)); top: calc(122 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--duke .ombre--hercules { left: calc(130 * var(--u)); top: calc(122 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--duke .ombre--g1       { left: calc(8 * var(--u));   top: calc(106 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--duke .ombre--g2       { left: calc(24 * var(--u));  top: calc(106 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--duke .ombre--g3       { left: calc(40 * var(--u));  top: calc(106 * var(--u)); width: calc(13 * var(--u)); }
 
 /* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
    Le vocabulaire commun est dans `engine.css` ; ici, le sous-sol. */

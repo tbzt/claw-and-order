@@ -159,17 +159,37 @@
 
 /* Les ombres de contact (chantier 14) — et elles sont plus dures ici
    qu'ailleurs : trois lampes nues suspendues au-dessus d'une pièce
-   basse ne diffusent rien du tout. */
+   basse ne diffusent rien du tout.
+
+   ⚠️ CE BLOC VENAIT DE CHEZ DUKE, ET PERSONNE N'AVAIT VU QUE LES DEUX
+   PREMIERS Y SONT INVERSÉS. Chez Duke, Drakk est à gauche de Trash ;
+   ici, c'est Trash qui ouvre la file. Les `left` ont été recopiés dans
+   l'ordre de l'autre décor, donc l'ombre de Drakk se posait quarante
+   unités à sa gauche — sous Trash — et celle de Trash dix-neuf unités
+   à sa droite, entre les deux. Deux ombres sous les mauvaises
+   personnes, et une troisième (White_Rabbit) à dix unités de lui.
+
+   Le décrochement vertical est le même que chez Duke et vient du même
+   geste : les quatre étaient sur la jonction mur/sol (y=108) au lieu
+   des pieds de chacun, de −8,8 à −11,1 (`outils/sol.py`).
+
+   CONVENTION : le CENTRE de l'ellipse sur la ligne de pieds
+   (`BIBLE DA` § 3.3) — `top` = pieds − 1,5 pour une ombre de trois
+   unités. Chaque ombre reprend le `left` et la `width` de SA figure :
+   sous trois lampes nues, une ombre ne déborde pas la silhouette.
+
+   Les quatre sont désormais écrites dans l'ordre où les corps se
+   tiennent, pour que l'inversion ne puisse plus se relire de travers. */
 .tableau--squat .ombre {
   height: calc(3 * var(--u));
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(0,0,0,.6), transparent 76%);
   pointer-events: none;
 }
-.tableau--squat .ombre--drakk    { left: calc(50 * var(--u));  top: calc(110 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--squat .ombre--trash    { left: calc(80 * var(--u));  top: calc(111 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--squat .ombre--rabbit   { left: calc(112 * var(--u)); top: calc(112 * var(--u)); width: calc(16 * var(--u)); }
-.tableau--squat .ombre--hercules { left: calc(143 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }
+.tableau--squat .ombre--trash    { left: calc(60 * var(--u));  top: calc(120 * var(--u)); width: calc(22 * var(--u)); }
+.tableau--squat .ombre--drakk    { left: calc(90 * var(--u));  top: calc(119 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--squat .ombre--rabbit   { left: calc(122 * var(--u)); top: calc(122 * var(--u)); width: calc(16 * var(--u)); }
+.tableau--squat .ombre--hercules { left: calc(142 * var(--u)); top: calc(122 * var(--u)); width: calc(14 * var(--u)); }
 
 /* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
    Le vocabulaire commun est dans `engine.css` ; ici, la loge. */

@@ -214,24 +214,41 @@
    la même famille : posées sur la jonction mur/sol (y=108) au lieu de
    la ligne de pieds de chacun.
 
-   Elles sont maintenant calculées, une par une : le haut de l'ellipse
-   sur les pieds — l'encre du sprite, pas le bas de sa boîte — et une
-   largeur d'une fois et demie la silhouette, ce qui est la part
-   « longue et molle » que le texte demande. L'étirement de deux unités
-   suit la lampe : à gauche pour qui se tient à sa gauche (elle est
-   centrée en x=114), à droite pour les autres. */
+   Elles sont maintenant calculées, une par une : l'ellipse sur les
+   pieds — l'encre du sprite, pas le bas de sa boîte — et une largeur
+   d'une fois et demie la silhouette, ce qui est la part « longue et
+   molle » que le texte demande. L'étirement de deux unités suit la
+   lampe : à gauche pour qui se tient à sa gauche (elle est centrée en
+   x=114), à droite pour les autres.
+
+   ⚠️ CE BLOC A ÉTÉ LA SECONDE DES DEUX CONVENTIONS, ET C'EST CELLE QUI
+   N'A PAS ÉTÉ RETENUE. Il posait le HAUT de l'ellipse sur les pieds ;
+   `scene-sarah.css`, écrit à huit heures d'intervalle, posait le
+   CENTRE. `BIBLE DA` § 3.3 a tranché pour le centre — « les deux se
+   défendent à l'œil, mais deux conventions valent moins qu'une seule,
+   quelle qu'elle soit ». L'écart est d'une demi-ombre, une unité et
+   demie, et il n'a jamais fait crier `sol.py` (tolérance de quatre).
+   On l'aligne parce que le squat, qui partage le gabarit de ce décor
+   au dixième d'unité près, vient d'être corrigé : le laisser seul sur
+   l'autre convention recréerait exactement l'écart que la bible nomme.
+
+   Drakk faisait en plus bande à part sur les deux points que ce
+   commentaire énonce : son ombre était à SIX unités à sa gauche au lieu
+   de deux, et elle n'avait pas été élargie (×1,00 quand les autres vont
+   de ×1,32 à ×1,50). La règle de la lampe s'applique à lui comme aux
+   autres. */
 .tableau--tripot .ombre {
   height: calc(3 * var(--u));
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(0,0,0,.45), transparent 82%);
   pointer-events: none;
 }
-.tableau--tripot .ombre--drakk     { left: calc(68 * var(--u)); top: calc(120 * var(--u)); width: calc(28 * var(--u)); }
-.tableau--tripot .ombre--trash     { left: calc(122 * var(--u)); top: calc(121 * var(--u)); width: calc(29 * var(--u)); }
-.tableau--tripot .ombre--rabbit    { left: calc(148 * var(--u)); top: calc(123 * var(--u)); width: calc(24 * var(--u)); }
-.tableau--tripot .ombre--hercules  { left: calc(169 * var(--u)); top: calc(124 * var(--u)); width: calc(20 * var(--u)); }
-.tableau--tripot .ombre--videur    { left: calc(8 * var(--u)); top: calc(113 * var(--u)); width: calc(19 * var(--u)); }
-.tableau--tripot .ombre--lester    { left: calc(225 * var(--u)); top: calc(117 * var(--u)); width: calc(22 * var(--u)); }
+.tableau--tripot .ombre--drakk     { left: calc(65 * var(--u)); top: calc(119 * var(--u)); width: calc(42 * var(--u)); }
+.tableau--tripot .ombre--trash     { left: calc(122 * var(--u)); top: calc(120 * var(--u)); width: calc(29 * var(--u)); }
+.tableau--tripot .ombre--rabbit    { left: calc(148 * var(--u)); top: calc(122 * var(--u)); width: calc(24 * var(--u)); }
+.tableau--tripot .ombre--hercules  { left: calc(169 * var(--u)); top: calc(122 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--tripot .ombre--videur    { left: calc(8 * var(--u)); top: calc(111 * var(--u)); width: calc(19 * var(--u)); }
+.tableau--tripot .ombre--lester    { left: calc(225 * var(--u)); top: calc(116 * var(--u)); width: calc(22 * var(--u)); }
 
 /* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
    Le vocabulaire commun est dans `engine.css` ; ici, le tripot. */
