@@ -131,7 +131,7 @@
 .tableau--amis .ombre--trash    { left: calc(93 * var(--u));  top: calc(100 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--amis .ombre--rabbit   { left: calc(117 * var(--u)); top: calc(101 * var(--u)); width: calc(14 * var(--u)); }
 .tableau--amis .ombre--hercules { left: calc(139 * var(--u)); top: calc(102 * var(--u)); width: calc(12 * var(--u)); }
-.tableau--amis .ombre--nita     { left: calc(9 * var(--u));   top: calc(106 * var(--u)); width: calc(19 * var(--u)); }
+.tableau--amis .ombre--nita     { left: calc(9 * var(--u));   top: calc(109.5 * var(--u)); width: calc(19 * var(--u)); }
 .tableau--amis .ombre--nova     { left: calc(232 * var(--u)); top: calc(110 * var(--u)); width: calc(19 * var(--u)); }
 
 /* ── LES QUATRE AMIS ─────────────────────────────────────────────────
@@ -142,7 +142,7 @@
    de côté quand elle se ferme, donc un ÉTAT, et un état n'entre pas
    dans un sprite fixe. */
 .tableau--amis .ami--nita {
-  left: calc(4 * var(--u)); top: calc(70 * var(--u));
+  left: calc(4 * var(--u)); top: calc(76 * var(--u));
   width: calc(29 * var(--u));
 }
 .tableau--amis .ami--nita::after {
