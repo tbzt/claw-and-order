@@ -397,7 +397,7 @@
    de la carte (pas de la boîte : quatre d'entre elles ont du vide en
    bas). Ordre du DOM = ordre de pile : chacun couvre le bord gauche du
    précédent, et Sarah ferme la ligne à droite. */
-.tableau--sarah .p-lester   { width: calc(30 * var(--u)); left: calc(96 * var(--u));  top: calc(86 * var(--u)); }
+.tableau--sarah .p-lester   { width: calc(30 * var(--u)); left: calc(96 * var(--u));  top: calc(82 * var(--u)); }
 /* ── L'ÉTAGEMENT, REMIS DANS LE SENS DU BAR ───────────────────────────
    Les quatre se chevauchent, et l'ordre du DOM les empile du premier au
    dernier : Hercules était donc dessiné DEVANT tout le monde alors que
@@ -416,8 +416,8 @@
    pour Hercules (`outils/canon.py --cartes`). C'est pour ça que Drakk
    reste le plus « petit par mètre » des quatre ; ça se corrige à la carte,
    pas dans une feuille de style. */
-.tableau--sarah .p-drakk    { width: calc(46 * var(--u)); left: calc(132 * var(--u)); top: calc(79 * var(--u)); }
-.tableau--sarah .p-trash    { width: calc(34 * var(--u)); left: calc(170 * var(--u)); top: calc(86 * var(--u)); }
+.tableau--sarah .p-drakk    { width: calc(46 * var(--u)); left: calc(132 * var(--u)); top: calc(72 * var(--u)); }
+.tableau--sarah .p-trash    { width: calc(34 * var(--u)); left: calc(170 * var(--u)); top: calc(81 * var(--u)); }
 .tableau--sarah .p-rabbit   { width: calc(24 * var(--u)); left: calc(196 * var(--u)); top: calc(95 * var(--u)); }
 .tableau--sarah .p-hercules { width: calc(20 * var(--u)); left: calc(210 * var(--u)); top: calc(110 * var(--u)); }
 

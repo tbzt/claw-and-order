@@ -180,8 +180,8 @@
 /* ── LE COULOIR DE L'ÉQUIPE — x:70-154, y:66-140 ─────────────────────
    Même geste qu'ailleurs : entrée par le bas, rangée du plus grand au
    plus petit sur une bande que rien d'autre n'occupe en x. */
-.tableau--shameless .p-drakk    { width: calc(28 * var(--u)); left: calc(70 * var(--u));  top: calc(76 * var(--u)); }
-.tableau--shameless .p-trash    { width: calc(20 * var(--u)); left: calc(100 * var(--u)); top: calc(84 * var(--u)); }
+.tableau--shameless .p-drakk    { width: calc(28 * var(--u)); left: calc(70 * var(--u));  top: calc(72 * var(--u)); }
+.tableau--shameless .p-trash    { width: calc(20 * var(--u)); left: calc(100 * var(--u)); top: calc(81 * var(--u)); }
 .tableau--shameless .p-rabbit   { width: calc(16 * var(--u)); left: calc(122 * var(--u)); top: calc(88 * var(--u)); }
 .tableau--shameless .p-hercules { width: calc(14 * var(--u)); left: calc(140 * var(--u)); top: calc(96 * var(--u)); }
 

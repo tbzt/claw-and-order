@@ -195,7 +195,7 @@
   border: calc(1 * var(--u)) solid #2a1414;
   border-radius: 3px;
 }
-.tableau--herwick .p-lester { left: calc(226 * var(--u)); top: calc(79 * var(--u)); width: calc(26 * var(--u)); }
+.tableau--herwick .p-lester { left: calc(226 * var(--u)); top: calc(76 * var(--u)); width: calc(26 * var(--u)); }
 
 /* Les ombres de contact (chantier 14) : ce tableau n'en avait aucune,
    faute de sol où les poser. */
@@ -216,8 +216,8 @@
    Herwick (x:196+), choisi à la règle après plusieurs échecs de
    hit-test : aucun de ces quatre ne doit retomber sur le centre du
    comptoir, de la caisse ou de l'armoire, ni l'inverse. */
-.tableau--herwick .p-drakk    { width: calc(38 * var(--u)); left: calc(58 * var(--u));  top: calc(66 * var(--u)); }
-.tableau--herwick .p-trash    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(72 * var(--u)); }
+.tableau--herwick .p-drakk    { width: calc(38 * var(--u)); left: calc(58 * var(--u));  top: calc(60 * var(--u)); }
+.tableau--herwick .p-trash    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(68 * var(--u)); }
 /* ── L'ÉCHELLE DES CINQ, REPRISE ──────────────────────────────────────
    White_Rabbit et Hercules étaient placés à 0,458 et 0,450 quand les
    trois autres tenaient à 0,41 : un cinquième trop grands. Et Hercules

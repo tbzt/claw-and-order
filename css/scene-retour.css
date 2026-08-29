@@ -340,10 +340,10 @@
 .stage[data-etat~="abri"] .tableau--retour .p-lester,
 .stage[data-etat~="abri"] .tableau--retour .ombre--lester   { translate: calc(38 * var(--u)) 0; }
 
-.tableau--retour .p-lester    { width: calc(32 * var(--u)); left: calc(166 * var(--u)); top: calc(98 * var(--u)); }
+.tableau--retour .p-lester    { width: calc(32 * var(--u)); left: calc(166 * var(--u)); top: calc(94 * var(--u)); }
 
-.tableau--retour .p-drakk     { width: calc(46 * var(--u)); left: calc(29 * var(--u));  top: calc(80 * var(--u)); }
-.tableau--retour .p-trash     { width: calc(34 * var(--u)); left: calc(69 * var(--u));  top: calc(83 * var(--u)); }
+.tableau--retour .p-drakk     { width: calc(46 * var(--u)); left: calc(29 * var(--u));  top: calc(73 * var(--u)); }
+.tableau--retour .p-trash     { width: calc(34 * var(--u)); left: calc(69 * var(--u));  top: calc(78 * var(--u)); }
 .tableau--retour .p-rabbit    { width: calc(24 * var(--u)); left: calc(98 * var(--u)); top: calc(97 * var(--u)); }
 .tableau--retour .p-hercules  { width: calc(20 * var(--u)); left: calc(120 * var(--u)); top: calc(111 * var(--u)); }
 

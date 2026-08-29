@@ -167,8 +167,8 @@
 /* ── LE COULOIR DE L'ÉQUIPE — x:82-166, y:66-140 ─────────────────────
    Même geste qu'ailleurs : entrée par le bas, rangée du plus grand au
    plus petit sur une bande que rien d'autre n'occupe en x. */
-.tableau--waters .p-drakk    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(84 * var(--u)); }
-.tableau--waters .p-trash    { width: calc(20 * var(--u)); left: calc(130 * var(--u)); top: calc(92 * var(--u)); }
+.tableau--waters .p-drakk    { width: calc(28 * var(--u)); left: calc(100 * var(--u)); top: calc(80 * var(--u)); }
+.tableau--waters .p-trash    { width: calc(20 * var(--u)); left: calc(130 * var(--u)); top: calc(89 * var(--u)); }
 .tableau--waters .p-rabbit   { width: calc(16 * var(--u)); left: calc(148 * var(--u)); top: calc(96 * var(--u)); }
 .tableau--waters .p-hercules { width: calc(14 * var(--u)); left: calc(166 * var(--u)); top: calc(104 * var(--u)); }
 

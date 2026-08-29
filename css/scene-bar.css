@@ -213,7 +213,7 @@
   box-shadow: 0 0 0 calc(1 * var(--u)) #14100c,
               inset calc(-2 * var(--u)) 0 0 rgba(255,178,87,.75);
 }
-.tableau--bar .p-mccarthy { width: calc(32 * var(--u)); left: calc(14 * var(--u)); top: calc(88 * var(--u)); }
+.tableau--bar .p-mccarthy { width: calc(32 * var(--u)); left: calc(14 * var(--u)); top: calc(84 * var(--u)); }
 
 /* — l'équipe, devant le comptoir, groupée — */
 /* ── L'ÉQUIPE ────────────────────────────────────────────────────────
@@ -232,8 +232,8 @@
      Drakk troll 2,50 m → 56    White_Rabbit HUMAIN 1,75 m → 41
      Trash elfe  1,90 m → 50    Hercules     nain   1,20 m → 29
    Raton laveur n'est plus sur sa planche : c'est un sprite à part. */
-.tableau--bar .p-drakk    { width: calc(46 * var(--u)); left: calc(122 * var(--u)); top: calc(82 * var(--u)); }
-.tableau--bar .p-trash    { width: calc(34 * var(--u)); left: calc(160 * var(--u)); top: calc(85 * var(--u)); }
+.tableau--bar .p-drakk    { width: calc(46 * var(--u)); left: calc(122 * var(--u)); top: calc(75 * var(--u)); }
+.tableau--bar .p-trash    { width: calc(34 * var(--u)); left: calc(160 * var(--u)); top: calc(80 * var(--u)); }
 .tableau--bar .p-rabbit   { width: calc(24 * var(--u)); left: calc(187 * var(--u)); top: calc(99 * var(--u)); }
 .tableau--bar .p-hercules { width: calc(20 * var(--u)); left: calc(211 * var(--u)); top: calc(113 * var(--u)); }
 

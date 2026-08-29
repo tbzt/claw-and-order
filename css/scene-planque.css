@@ -242,7 +242,7 @@
    coupe les jambes, comme la table coupe celles de McCarthy et le rouf
    celles de son moi du tableau 4. C'est la troisième fois que le décor
    sert d'assise, et c'est chaque fois moins cher qu'un sprite assis. */
-.tableau--planque .p-lester   { width: calc(32 * var(--u)); left: calc(19 * var(--u)); top: calc(102 * var(--u)); }
+.tableau--planque .p-lester   { width: calc(32 * var(--u)); left: calc(19 * var(--u)); top: calc(98 * var(--u)); }
 
 /* ══ LA CONFIANCE, DANS LE CORPS ═══════════════════════════════════════
    Trois états dérivés du compte (voir `derive` dans planque.js). On ne
@@ -299,8 +299,8 @@
   background: radial-gradient(closest-side at 62% 50%, rgba(255,206,140,.42), transparent 72%);
 }
 
-.tableau--planque .p-drakk    { width: calc(46 * var(--u)); left: calc(56 * var(--u));  top: calc(82 * var(--u)); }
-.tableau--planque .p-trash    { width: calc(34 * var(--u)); left: calc(96 * var(--u)); top: calc(85 * var(--u)); }
+.tableau--planque .p-drakk    { width: calc(46 * var(--u)); left: calc(56 * var(--u));  top: calc(75 * var(--u)); }
+.tableau--planque .p-trash    { width: calc(34 * var(--u)); left: calc(96 * var(--u)); top: calc(80 * var(--u)); }
 .tableau--planque .p-rabbit   { width: calc(24 * var(--u)); left: calc(125 * var(--u)); top: calc(99 * var(--u)); }
 .tableau--planque .p-hercules { width: calc(20 * var(--u)); left: calc(149 * var(--u)); top: calc(113 * var(--u)); }
 

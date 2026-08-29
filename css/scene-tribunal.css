@@ -160,7 +160,7 @@
 .tableau--tribunal .garde--b { left: calc(212 * var(--u)); transform: scaleX(-1); }
 .tableau--tribunal .garde--trouble { left: calc(186 * var(--u)); }
 
-.tableau--tribunal .p-mccarthy { left: calc(52 * var(--u)); top: calc(80 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--tribunal .p-mccarthy { left: calc(52 * var(--u)); top: calc(78 * var(--u)); width: calc(20 * var(--u)); }
 
 /* ── L'ÉQUIPE, EN CHEMIN VERS LA SALLE ───────────────────────────────
    Elle occupe la bande centrale, et aucun des quatre ne recouvre le
@@ -185,8 +185,8 @@
    pour Hercules (`outils/canon.py --cartes`). C'est pour ça que Drakk
    reste le plus « petit par mètre » des quatre ; ça se corrige à la carte,
    pas dans une feuille de style. */
-.tableau--tribunal .p-drakk    { width: calc(46 * var(--u)); left: calc(96 * var(--u));  top: calc(80 * var(--u)); }
-.tableau--tribunal .p-trash    { width: calc(34 * var(--u)); left: calc(134 * var(--u)); top: calc(89 * var(--u)); }
+.tableau--tribunal .p-drakk    { width: calc(46 * var(--u)); left: calc(96 * var(--u));  top: calc(73 * var(--u)); }
+.tableau--tribunal .p-trash    { width: calc(34 * var(--u)); left: calc(134 * var(--u)); top: calc(84 * var(--u)); }
 .tableau--tribunal .p-rabbit   { width: calc(24 * var(--u)); left: calc(158 * var(--u)); top: calc(97 * var(--u)); }
 .tableau--tribunal .p-hercules { width: calc(20 * var(--u)); left: calc(176 * var(--u)); top: calc(110 * var(--u)); }
 

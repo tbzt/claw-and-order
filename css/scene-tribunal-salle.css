@@ -117,7 +117,7 @@
    invisible pour la même raison (une forme trop courte pour qu'on la
    remarque). */
 .tableau--tribunal-salle .p-lester {
-  left: calc(16 * var(--u)); top: calc(34 * var(--u));
+  left: calc(16 * var(--u)); top: calc(30 * var(--u));
   width: calc(32 * var(--u));
 }
 .tableau--tribunal-salle .box-lester {
@@ -181,8 +181,8 @@
    Du côté de la défense, jamais du côté de l'accusation : leurs quatre
    silhouettes tiennent entre le bord gauche du cadre et la table de
    l'accusation, et aucune ne recouvre le buste d'un avocat. */
-.tableau--tribunal-salle .p-drakk    { width: calc(46 * var(--u)); left: calc(66 * var(--u));  top: calc(68 * var(--u)); }
-.tableau--tribunal-salle .p-trash    { width: calc(34 * var(--u)); left: calc(108 * var(--u)); top: calc(74 * var(--u)); }
+.tableau--tribunal-salle .p-drakk    { width: calc(46 * var(--u)); left: calc(66 * var(--u));  top: calc(61 * var(--u)); }
+.tableau--tribunal-salle .p-trash    { width: calc(34 * var(--u)); left: calc(108 * var(--u)); top: calc(69 * var(--u)); }
 .tableau--tribunal-salle .p-rabbit   { width: calc(24 * var(--u)); left: calc(138 * var(--u)); top: calc(82 * var(--u)); }
 .tableau--tribunal-salle .p-hercules { width: calc(20 * var(--u)); left: calc(156 * var(--u)); top: calc(94 * var(--u)); }
 

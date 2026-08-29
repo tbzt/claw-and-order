@@ -89,8 +89,8 @@
 }
 
 /* ── LE COULOIR DE L'ÉQUIPE — x:60-156, y:36-73 ──────────────────────── */
-.tableau--squat .p-trash    { width: calc(22 * var(--u)); left: calc(60 * var(--u));  top: calc(90 * var(--u)); }
-.tableau--squat .p-drakk    { width: calc(28 * var(--u)); left: calc(90 * var(--u));  top: calc(88 * var(--u)); }
+.tableau--squat .p-trash    { width: calc(22 * var(--u)); left: calc(60 * var(--u));  top: calc(87 * var(--u)); }
+.tableau--squat .p-drakk    { width: calc(28 * var(--u)); left: calc(90 * var(--u));  top: calc(84 * var(--u)); }
 .tableau--squat .p-rabbit   { width: calc(16 * var(--u)); left: calc(122 * var(--u)); top: calc(96 * var(--u)); }
 .tableau--squat .p-hercules { width: calc(14 * var(--u)); left: calc(142 * var(--u)); top: calc(104 * var(--u)); }
 
@@ -139,7 +139,7 @@
 }
 
 /* Lester, à côté du fauteuil qu'il n'ose pas remplir tout à fait. */
-.tableau--squat .p-lester { left: calc(232 * var(--u)); top: calc(90 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--squat .p-lester { left: calc(232 * var(--u)); top: calc(88 * var(--u)); width: calc(20 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
 .stage[data-etat~="lester-ferme"]  .tableau--squat .p-lester { filter: saturate(.6) brightness(.85); }

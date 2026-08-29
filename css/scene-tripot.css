@@ -83,8 +83,8 @@
 }
 
 /* ── LE COULOIR DE L'ÉQUIPE — x:74-172, y:34-46 ──────────────────────── */
-.tableau--tripot .p-drakk    { width: calc(28 * var(--u)); left: calc(74 * var(--u));  top: calc(88 * var(--u)); }
-.tableau--tripot .p-trash    { width: calc(22 * var(--u)); left: calc(124 * var(--u)); top: calc(90 * var(--u)); }
+.tableau--tripot .p-drakk    { width: calc(28 * var(--u)); left: calc(74 * var(--u));  top: calc(84 * var(--u)); }
+.tableau--tripot .p-trash    { width: calc(22 * var(--u)); left: calc(124 * var(--u)); top: calc(87 * var(--u)); }
 .tableau--tripot .p-rabbit   { width: calc(16 * var(--u)); left: calc(150 * var(--u)); top: calc(96 * var(--u)); }
 .tableau--tripot .p-hercules { width: calc(14 * var(--u)); left: calc(170 * var(--u)); top: calc(104 * var(--u)); }
 
@@ -153,7 +153,7 @@
 }
 
 /* ── LESTER — x:224-244, à l'écart de la table ───────────────────────── */
-.tableau--tripot .p-lester { left: calc(224 * var(--u)); top: calc(90 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--tripot .p-lester { left: calc(224 * var(--u)); top: calc(88 * var(--u)); width: calc(20 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
 .stage[data-etat~="lester-ferme"]  .tableau--tripot .p-lester { filter: saturate(.6) brightness(.85); }

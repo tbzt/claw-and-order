@@ -114,8 +114,8 @@
    du plus grand au plus petit, sur une bande que rien d'autre n'occupe
    en x. Leurs pieds tombent maintenant sur le plancher (100-103) et non
    plus au milieu du mur. */
-.tableau--amis .p-drakk    { width: calc(28 * var(--u)); left: calc(62 * var(--u));  top: calc(66 * var(--u)); }
-.tableau--amis .p-trash    { width: calc(20 * var(--u)); left: calc(92 * var(--u));  top: calc(72 * var(--u)); }
+.tableau--amis .p-drakk    { width: calc(28 * var(--u)); left: calc(62 * var(--u));  top: calc(62 * var(--u)); }
+.tableau--amis .p-trash    { width: calc(20 * var(--u)); left: calc(92 * var(--u));  top: calc(69 * var(--u)); }
 .tableau--amis .p-rabbit   { width: calc(16 * var(--u)); left: calc(116 * var(--u)); top: calc(75 * var(--u)); }
 .tableau--amis .p-hercules { width: calc(14 * var(--u)); left: calc(138 * var(--u)); top: calc(83 * var(--u)); }
 

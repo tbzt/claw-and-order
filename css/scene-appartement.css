@@ -199,8 +199,8 @@
    Bande que rien d'autre n'occupe en x. Leurs pieds tombent maintenant
    sur le plancher (104-110) et non plus au milieu du mur ; le lit, qui
    est devant eux, leur coupe le bas des jambes. */
-.tableau--appartement .p-drakk    { width: calc(28 * var(--u)); left: calc(86 * var(--u));  top: calc(70 * var(--u)); }
-.tableau--appartement .p-trash    { width: calc(20 * var(--u)); left: calc(118 * var(--u)); top: calc(76 * var(--u)); }
+.tableau--appartement .p-drakk    { width: calc(28 * var(--u)); left: calc(86 * var(--u));  top: calc(66 * var(--u)); }
+.tableau--appartement .p-trash    { width: calc(20 * var(--u)); left: calc(118 * var(--u)); top: calc(73 * var(--u)); }
 .tableau--appartement .p-rabbit   { width: calc(16 * var(--u)); left: calc(142 * var(--u)); top: calc(79 * var(--u)); }
 .tableau--appartement .p-hercules { width: calc(14 * var(--u)); left: calc(164 * var(--u)); top: calc(89 * var(--u)); }
 

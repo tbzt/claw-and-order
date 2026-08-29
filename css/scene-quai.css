@@ -132,8 +132,8 @@
    Les `top` en découlent : un sprite grandit vers le bas depuis son `top`,
    donc changer la largeur déplace les pieds. Ils retombent tous sur la
    ligne d'ombres, à 163. */
-.tableau--quai .p-drakk    { width: calc(46 * var(--u)); left: calc(70 * var(--u));  top: calc(83 * var(--u)); }
-.tableau--quai .p-trash    { width: calc(34 * var(--u)); left: calc(112 * var(--u)); top: calc(89 * var(--u)); }
+.tableau--quai .p-drakk    { width: calc(46 * var(--u)); left: calc(70 * var(--u));  top: calc(76 * var(--u)); }
+.tableau--quai .p-trash    { width: calc(34 * var(--u)); left: calc(112 * var(--u)); top: calc(84 * var(--u)); }
 .tableau--quai .p-rabbit   { width: calc(24 * var(--u)); left: calc(144 * var(--u)); top: calc(98 * var(--u)); }
 .tableau--quai .p-hercules { width: calc(20 * var(--u)); left: calc(170 * var(--u)); top: calc(110 * var(--u)); }
 

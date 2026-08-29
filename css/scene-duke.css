@@ -107,8 +107,8 @@
    Hercules (`outils/canon.py --cartes`). À échelle égale les cinq ne
    tombent donc pas exactement sur leur taille, et ça ne se rattrape pas
    dans une feuille de style sans donner à chacun un grain différent. */
-.tableau--duke .p-drakk    { width: calc(31 * var(--u)); left: calc(50 * var(--u));  top: calc(85 * var(--u)); }
-.tableau--duke .p-trash    { width: calc(23 * var(--u)); left: calc(84 * var(--u));  top: calc(89 * var(--u)); }
+.tableau--duke .p-drakk    { width: calc(31 * var(--u)); left: calc(50 * var(--u));  top: calc(80 * var(--u)); }
+.tableau--duke .p-trash    { width: calc(23 * var(--u)); left: calc(84 * var(--u));  top: calc(86 * var(--u)); }
 .tableau--duke .p-rabbit   { width: calc(16 * var(--u)); left: calc(110 * var(--u)); top: calc(96 * var(--u)); }
 .tableau--duke .p-hercules { width: calc(13 * var(--u)); left: calc(130 * var(--u)); top: calc(105 * var(--u)); }
 
@@ -166,7 +166,7 @@
 }
 
 /* Lester, contre le mur du fond, à l'écart de Duke et de son fauteuil. */
-.tableau--duke .p-lester { left: calc(214 * var(--u)); top: calc(77 * var(--u)); width: calc(21 * var(--u)); }
+.tableau--duke .p-lester { left: calc(214 * var(--u)); top: calc(74 * var(--u)); width: calc(21 * var(--u)); }
 
 /* Nuance de confiance de Lester (G5) — même geste discret qu'ailleurs. */
 .stage[data-etat~="lester-ferme"]  .tableau--duke .p-lester { filter: saturate(.6) brightness(.85); }

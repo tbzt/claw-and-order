@@ -132,7 +132,7 @@
    même de la porte — même sprite qu'au tableau suivant (retour), même
    largeur, pour que ce soit visiblement le même garçon. */
 .tableau--greffe .p-lester {
-  display: none; width: calc(32 * var(--u)); left: calc(34 * var(--u)); top: calc(106 * var(--u));
+  display: none; width: calc(32 * var(--u)); left: calc(34 * var(--u)); top: calc(102 * var(--u));
 }
 .tableau--greffe .ombre--lester { display: none; left: calc(30 * var(--u)); top: calc(140 * var(--u)); width: calc(28 * var(--u)); }
 .stage[data-etat~="lester-arrive"] .tableau--greffe .p-lester,
@@ -154,8 +154,8 @@
    Les `top` en découlent : un sprite grandit vers le bas depuis son `top`,
    donc changer la largeur déplace les pieds. Ils retombent tous sur la
    ligne d'ombres, à 154. */
-.tableau--greffe .p-drakk    { width: calc(46 * var(--u)); left: calc(69 * var(--u));  top: calc(84 * var(--u));  }
-.tableau--greffe .p-trash    { width: calc(34 * var(--u)); left: calc(110 * var(--u)); top: calc(90 * var(--u)); }
+.tableau--greffe .p-drakk    { width: calc(46 * var(--u)); left: calc(69 * var(--u));  top: calc(77 * var(--u));  }
+.tableau--greffe .p-trash    { width: calc(34 * var(--u)); left: calc(110 * var(--u)); top: calc(85 * var(--u)); }
 .tableau--greffe .p-rabbit   { width: calc(24 * var(--u)); left: calc(142 * var(--u)); top: calc(99 * var(--u)); }
 .tableau--greffe .p-hercules { width: calc(20 * var(--u)); left: calc(168 * var(--u)); top: calc(111 * var(--u)); }
 .tableau--greffe .zone { background: transparent; }
