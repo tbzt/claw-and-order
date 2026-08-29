@@ -85,9 +85,37 @@
 .tableau--greffe .sas-vitre { left: calc(35 * var(--u)); top: calc(56 * var(--u));
   width: calc(16 * var(--u)); height: calc(10 * var(--u));
   background: rgba(190,220,205,.18); box-shadow: 0 0 0 calc(1 * var(--u)) #10150f; }
-.tableau--greffe .banc { left: calc(77 * var(--u)); top: calc(94 * var(--u));
-  width: calc(46 * var(--u)); height: calc(6 * var(--u));
-  background: #5c4a32; box-shadow: 0 0 0 calc(1 * var(--u)) #1a1208; }
+/* ── LE BANC — chantier 83 ────────────────────────────────────────
+   Il était UNE planche de 46 x 6 en x:77-123, et l'équipe l'y couvrait
+   sur toute sa longueur : Drakk occupe x:69-115, Trash x:110-144.
+   Mesuré : 0/64 points atteignables — une cible morte, alors qu'elle
+   porte deux lignes de Trash sur la peur tassée dans le bois.
+
+   Le déplacer aurait été faux : sa place est le couloir d'attente, et
+   des gens debout DEVANT un banc, c'est ce qui se passe dans un greffe
+   à quatre heures du matin. Il reste donc là, et prend un second
+   tronçon dans le renfoncement de gauche (x:0-22), le seul mètre carré
+   de mur que personne n'occupe à hauteur d'assise. Deux éléments, une
+   cible — le geste du portique de détection au 13ᵉ lot.
+
+   ET IL SE POSE. À y:94 son assise était à un mètre du sol (la ligne de
+   sol du fond est en y:112) : une planche en l'air, sans pied. À y:103
+   elle tombe à 0,49 m, une hauteur d'assise, et trois pieds la
+   descendent jusqu'à la plinthe. */
+.tableau--greffe .banc {
+  top: calc(103 * var(--u)); height: calc(5 * var(--u));
+  background: linear-gradient(180deg, #6d5a3e 0 calc(2 * var(--u)), #4a3b26 calc(2 * var(--u)));
+  box-shadow: 0 0 0 calc(1 * var(--u)) #1a1208;
+}
+.tableau--greffe .banc--couloir { left: calc(77 * var(--u)); width: calc(46 * var(--u)); }
+.tableau--greffe .banc--coin    { left: 0;                   width: calc(22 * var(--u)); }
+.tableau--greffe .banc-pied {
+  top: calc(108 * var(--u)); width: calc(3 * var(--u)); height: calc(5 * var(--u));
+  background: #3c3020; box-shadow: 0 0 0 calc(1 * var(--u)) #1a1208;
+}
+.tableau--greffe .banc-pied--a { left: calc(81 * var(--u)); }
+.tableau--greffe .banc-pied--b { left: calc(117 * var(--u)); }
+.tableau--greffe .banc-pied--c { left: calc(15 * var(--u)); }
 
 .tableau--greffe .ombre {
   height: calc(4 * var(--u));

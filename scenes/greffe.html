@@ -26,7 +26,6 @@
   <div class="sprite--prop-heure-0412 horloge horloge--sans" data-hotspot="horloge"></div>
   <div class="sprite--prop-heure-0346 horloge horloge--avec" data-hotspot="horloge"></div>
   <div class="affiche af1"></div><div class="affiche af2"></div>
-  <div class="camera" data-hotspot="camera"></div>
 
   <div class="sprite--prop-gardien gardien" data-hotspot="gardien"></div>
   <div class="guichet"></div>
@@ -36,7 +35,17 @@
 
   <div class="sas" data-hotspot="sas"></div>
   <div class="sas-vitre"></div>
-  <div class="banc" data-hotspot="banc"></div>
+  <!-- Le banc, en deux pièces qui portent la même cible : le tronçon
+       du couloir (que l'équipe recouvre entièrement, et c'est juste —
+       ils sont debout devant) et celui du renfoncement de gauche, que
+       personne n'occupe. Sans le second, la cible était morte : 0/64.
+       Il gagne au passage les pieds qu'il n'a jamais eus — une planche
+       de 46 x 6 flottant à un mètre du sol n'est pas un banc. -->
+  <div class="banc banc--couloir" data-hotspot="banc"></div>
+  <div class="banc-pied banc-pied--a"></div>
+  <div class="banc-pied banc-pied--b"></div>
+  <div class="banc banc--coin" data-hotspot="banc"></div>
+  <div class="banc-pied banc-pied--c"></div>
 
   <!-- Lester, révélé seulement une fois `lester-arrive` — la scène le
        fait ENTRER, elle ne le narre plus depuis les coulisses. -->
@@ -56,6 +65,18 @@
   <div class="raton"><div class="sprite--raton"></div></div>
   <div class="avant avant--montant"></div>
   <div class="zone zone--salle" data-hotspot="salle"></div>
+
+  <!-- ⚠️ LA CAMÉRA PASSE APRÈS `zone--salle`, ET C'EST TOUT LE
+       CHANTIER 83. `zone--salle` est un survol transparent qui prend
+       TOUTE la largeur sur y:6-20 ; la caméra vit en x:234-246, y:12-20,
+       c'est-à-dire entièrement dedans. Comme la zone passait après elle,
+       elle lui volait ses 100 % de surface : mesuré 0/64 points
+       atteignables, donc une cible que le joueur ne pouvait pas toucher —
+       alors qu'elle porte la ligne de Rabbit sur l'écrasement à 72 h, que
+       le calque RA reprend en toutes lettres.
+       Quand deux cibles se recouvrent, c'est la dernière du DOM qui
+       gagne : la PARTICULIÈRE doit donc passer après la GÉNÉRALE. -->
+  <div class="camera" data-hotspot="camera"></div>
 
   <!-- Astral : pourquoi il refuse -->
   <div class="calque calque--astral">
