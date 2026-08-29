@@ -175,7 +175,7 @@
 /* NOVA — adossée au montant du rideau, entre l'équipe et la rue. C'est
    elle qui est le plus près du jour : ses pieds tombent le plus bas. */
 .tableau--amis .ami--nova {
-  left: calc(227 * var(--u)); top: calc(62 * var(--u));
+  left: calc(227 * var(--u)); top: calc(66 * var(--u));
   width: calc(29 * var(--u));
 }
 
