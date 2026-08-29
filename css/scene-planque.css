@@ -183,12 +183,14 @@
   box-shadow: 0 0 0 calc(1 * var(--u)) #10161b,
               inset 0 calc(16 * var(--u)) 0 calc(-10 * var(--u)) rgba(90,200,255,.35);
 }
+/* L'HEURE N'EST PLUS UN CADRAN (chantier 82, voir `scene-bar.css`).
+   Celle-ci n'était même pas dessinée : un disque blanc de 18 unités,
+   sans aiguilles — elle ne pouvait dire aucune heure, alors que le
+   texte annonce « six heures cinq » et compte les trois heures
+   cinquante-cinq qui restent avant l'audience. Le panneau les dit. */
 .tableau--planque .horloge-murale {
-  left: calc(157 * var(--u)); top: calc(8 * var(--u));
-  width: calc(18 * var(--u)); height: calc(18 * var(--u));
-  border-radius: 50%;
-  background: #eef3ef;
-  box-shadow: 0 0 0 calc(2 * var(--u)) #4a5450;
+  left: calc(157 * var(--u)); top: calc(12 * var(--u));
+  width: calc(18 * var(--u));
 }
 .tableau--planque .affichette {
   left: calc(182 * var(--u)); top: calc(10 * var(--u));

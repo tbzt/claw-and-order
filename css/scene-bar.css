@@ -107,7 +107,19 @@
    au-dessus des deux hommes mais ENTRE eux, et la fléchette du lanceur
    arrive à son bord gauche. Le guetteur recule d'autant (voir `.c2`). */
 .tableau--bar .cible { left: calc(64 * var(--u));  top: calc(84 * var(--u)); width: calc(22 * var(--u)); }
-.tableau--bar .horloge { left: calc(35 * var(--u));  top: calc(8 * var(--u)); width: calc(18 * var(--u)); }
+/* L'HEURE N'EST PLUS UN CADRAN — chantier 82, décidé avec l'utilisateur
+   (« les horloges, est-ce que ça fait vraiment 2081 ? »). Cinq tableaux
+   en portaient un ; une aiguille est une image du XXᵉ siècle. L'objet
+   change, LA FONCTION RESTE : le texte annonce « vingt-trois heures
+   passées », le panneau affiche 23:04, et le joueur peut le vérifier.
+   Le décalage de quatre minutes que la cible raconte depuis toujours —
+   « elle avance de quatre minutes et personne ne l'a jamais réglée »,
+   « jamais resynchronisée » — se lit MIEUX sur un afficheur que sur un
+   cadran : un panneau bon marché qui n'a jamais vu de synchro Matrice,
+   c'est exactement ce que Rabbit dit. La carte fait 44 x 24 au lieu de
+   36 x 36, donc à largeur égale elle est deux fois moins haute : le
+   `top` descend de 8 à 13 pour rester à la même hauteur d'œil. */
+.tableau--bar .horloge { left: calc(35 * var(--u));  top: calc(13 * var(--u)); width: calc(18 * var(--u)); }
 .tableau--bar .photos { left: calc(173 * var(--u)); top: calc(54 * var(--u)); width: calc(22 * var(--u)); }
 .tableau--bar .affiche { background: #45403a; box-shadow: 0 0 0 calc(1 * var(--u)) #1a1210; }
 .tableau--bar .affiche--a { left: calc(127 * var(--u)); top: calc(24 * var(--u)); width: calc(16 * var(--u)); height: calc(22 * var(--u)); }

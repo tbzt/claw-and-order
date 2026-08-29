@@ -47,7 +47,17 @@
 .tableau--greffe .halo--a { left: calc(16 * var(--u)); }
 .tableau--greffe .halo--b { left: calc(144 * var(--u)); }
 
-.tableau--greffe .horloge { left: calc(118 * var(--u)); top: calc(14 * var(--u)); width: calc(18 * var(--u)); }
+/* L'HEURE N'EST PLUS UN CADRAN (chantier 82, voir `scene-bar.css`), et
+   ICI LE CHANGEMENT A RÉVÉLÉ UN DÉFAUT PLUS ANCIEN : la cible annonce
+   « 3 h 46 » ou « 4 h 12 » selon la route prise au voilier, et le
+   cadran affichait UNE seule heure fixe — il contredisait donc le
+   texte une partie sur deux. Personne ne l'avait vu parce que des
+   aiguilles à 18 unités ne se lisent pas. Un afficheur, si. Deux
+   panneaux, donc, et `esprit-eau` choisit lequel se montre. */
+.tableau--greffe .horloge { left: calc(118 * var(--u)); top: calc(18 * var(--u)); width: calc(18 * var(--u)); }
+.tableau--greffe .horloge--avec { display: none; }
+.stage[data-etat~="esprit-eau"] .tableau--greffe .horloge--sans { display: none; }
+.stage[data-etat~="esprit-eau"] .tableau--greffe .horloge--avec { display: block; }
 .tableau--greffe .affiche { background: #cfd6c8; box-shadow: 0 0 0 calc(1 * var(--u)) #1a221c; }
 .tableau--greffe .af1 { left: calc(22 * var(--u)); top: calc(20 * var(--u)); width: calc(18 * var(--u)); height: calc(24 * var(--u)); }
 .tableau--greffe .af2 { left: calc(42 * var(--u)); top: calc(26 * var(--u)); width: calc(16 * var(--u)); height: calc(18 * var(--u)); }

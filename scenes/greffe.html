@@ -16,7 +16,15 @@
   <div class="halo halo--a"></div>
   <div class="halo halo--b"></div>
 
-  <div class="sprite--prop-horloge horloge" data-hotspot="horloge"></div>
+  <!-- L'heure d'arrivée dépend de la route prise au voilier (§ D13) et
+       `greffe.js` la dit à la minute : 3 h 46 avec l'esprit de l'eau,
+       4 h 12 sans. Un cadran pouvait rester vague ; un afficheur ne le
+       peut pas — il donne un chiffre, donc il ment la moitié du temps
+       s'il n'y en a qu'un. Deux panneaux, un par route, et le CSS n'en
+       montre qu'un : `esprit-eau` est déjà un `visuels`, posé par
+       `quai-voilier.js`. -->
+  <div class="sprite--prop-heure-0412 horloge horloge--sans" data-hotspot="horloge"></div>
+  <div class="sprite--prop-heure-0346 horloge horloge--avec" data-hotspot="horloge"></div>
   <div class="affiche af1"></div><div class="affiche af2"></div>
   <div class="camera" data-hotspot="camera"></div>
 

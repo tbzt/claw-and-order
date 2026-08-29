@@ -3,19 +3,26 @@
   supérette. Chantier 37 (`PLAN_PLANQUES.md` § 3.3), étape D du § 8 —
   après Herwick (chantier 36).
 
-  PASSE D'ART FAITE (chantier 23, lot des cinq planques). Sarah a son
-  sprite depuis le lot 7 ; les chaises dépareillées, la pendule à six
-  heures dix et l'autoclave datent de là.
+  REFAIT AU CANON — chantier 82, sur retour de jeu : « les autres
+  clients ne sont pas dessinés, globalement la scène est très pauvre »,
+  avec le parvis du tribunal donné en contre-exemple. La comparaison se
+  chiffrait, et ce n'était pas le nombre d'éléments (63 contre 52) :
+  **le parvis dessine ses figures à 23,4 unités par mètre, celui-ci les
+  dessinait à 17,8** — un quart plus petites — et il n'avait que deux
+  plans de profondeur contre quatre. Une file de petites figures devant
+  un mur plat se lit comme un diagramme, pas comme une pièce.
 
-  PASSE DE GÉOMÉTRIE (chantier 76) — cinq défauts relevés en jeu, tous
-  de la même famille : une chose posée nulle part. Sarah et l'autoclave
-  flottaient, les trois qui attendent flottaient au-dessus de leurs
-  chaises, la porte était peinte à plat sur le sol, et les cinq ombres
-  de contact tombaient de six à neuf unités au-dessus des pieds qu'elles
-  étaient censées poser. Les trois qui attendent portent désormais
-  `prop-patient`, dessiné pour ce tableau : `prop-anonyme-assis` reste
-  au tripot, où les cinq joueurs sont coupés à mi-corps par la table et
-  où la répétition est voulue.
+  Ce tableau reprend donc la recette du parvis, à la lettre :
+  UNE BANDE DE PLAFOND avec la source de lumière VISIBLE, un mur, une
+  plinthe, un sol ; DEUX JAMBAGES sombres qui cadrent l'image par les
+  côtés ; DES VERTICALES (la porte, la cloison, la pharmacie,
+  l'autoclave, la lampe) ; et UN GROUPE COMPACT au premier plan, dont
+  les membres se recouvrent, au lieu d'une rangée espacée.
+
+  TROIS PLANS DE PROFONDEUR, et chacun a sa ligne de sol :
+    · le fond, adossé au mur — pieds en y:110 (chaises, porte, mobilier)
+    · le premier plan — pieds entre 132 et 138 (l'équipe, Lester, Sarah)
+  Toute chose ajoutée ici doit dire à laquelle elle appartient.
 
   DEUX PIÈCES, UN SEUL TABLEAU : la salle d'attente (gauche, trois
   chaises) et le cabinet (droite, table d'examen, autoclave, bureau),
@@ -23,64 +30,95 @@
   rester dans le gabarit d'une planque (§7 du plan : « une pièce, une
   dizaine de cibles »).
 
-  ORDRE DU DOM = ORDRE DE PILE (pas de `z-index` posé ici) : l'équipe et
-  Lester sont placés EN PREMIER, tout le mobilier cliquable APRÈS — même
-  leçon que le chantier 36 (« les cibles mécaniquement importantes
-  gagnent toujours la main »).
+  ⚠️ L'ORDRE DU DOM S'INVERSE POUR LE MOBILIER DU FOND. La règle
+  habituelle (« l'équipe d'abord, le mobilier ensuite ») protège une
+  cible de mobilier d'un personnage debout devant elle. Elle ne vaut que
+  si le mobilier est DEVANT. Ici il est derrière, et l'appliquer avait
+  produit le défaut relevé en jeu — `.bureau`, une boîte opaque de
+  44 × 18, peinte PAR-DESSUS LA TÊTE D'HERCULES, prise pour un artefact.
+  Le mobilier du fond passe donc en premier, les figures ensuite.
+
+  ⚠️ ET UNE CIBLE QUE LE GROUPE RECOUVRE REÇOIT UNE SECONDE PIÈCE,
+  au-dessus des têtes. La table d'examen garde sa lampe, le bureau garde
+  son terminal : deux éléments, une seule cible. C'est le geste du
+  portique de détection (13ᵉ lot) — une cible entièrement couverte est
+  un bug muet.
 
   Grille 256 x 144 (chantier 8), même convention que les autres tableaux.
 -->
 <div class="tableau tableau--sarah">
 
+  <div class="plafond"></div>
+  <div class="tube"></div>
+  <div class="halo"></div>
   <div class="fond"></div>
+  <div class="zone-attente"></div>
   <div class="plinthe"></div>
   <div class="sol"></div>
-  <div class="neon"></div>
 
-  <div class="table-examen" data-hotspot="table"></div>
-  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
-  <div class="ombre ombre--drakk"></div>
-  <div class="ombre ombre--trash"></div>
-  <div class="ombre ombre--rabbit"></div>
-  <div class="ombre ombre--hercules"></div>
-  <div class="ombre ombre--sarah"></div>
-  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
-  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
-  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
-  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
+  <!-- ── LE FOND, adossé au mur : ligne de sol en y:110 ─────────────
+       Tout ce bloc passe AVANT les figures : elles se tiennent devant
+       lui, et rien ne doit repeindre une tête. -->
 
-  <!-- LESTER, près de la porte du cabinet, à mi-chemin entre les deux
-       pièces. -->
+  <!-- LA SORTIE — sur le mur de gauche, debout sur la ligne de sol du
+       fond. Elle était posée à plat DANS le sol : à cette place, une
+       porte n'est plus une porte, c'est une trappe. -->
+  <div class="porte-cabinet" data-hotspot="porte"></div>
 
-  <!-- La cloison basse qui sépare les deux pièces — décor, pas une
-       cible : elle dit « deux pièces » sans en imposer une seconde. -->
-  <div class="cloison"></div>
-
-  <!-- LA SALLE D'ATTENTE : trois chaises, trois patients (décor), la
-       fenêtre sur la supérette. Elle commence à x:22, après la porte —
-       et pas plus loin que x:76, parce que Lester est à x:80 et que les
-       chaises passent APRÈS lui dans le DOM : un pixel de plus et le
-       mobilier lui monterait dessus. -->
+  <!-- LA SALLE D'ATTENTE : trois chaises dépareillées, trois personnes,
+       la fenêtre sur la supérette, et l'heure au mur. Aucune figure du
+       premier plan ne mord dessus — c'est la seule zone du tableau
+       qu'on a gardée entièrement dégagée, parce que le texte y fait
+       regarder trois inconnus et une horloge. -->
+  <div class="fenetre" data-hotspot="fenetre"></div>
+  <div class="afficheur sprite--prop-heure-0545"></div>
   <div class="chaises sprite--prop-chaises"></div>
   <div class="patient patient--1 sprite--prop-patient"></div>
   <div class="patient patient--2 sprite--prop-patient"></div>
   <div class="patient patient--3 sprite--prop-patient"></div>
   <div class="salle-attente" data-hotspot="salle"></div>
-  <div class="fenetre" data-hotspot="fenetre"></div>
 
-  <!-- LE CABINET, à droite : table d'examen, autoclave, bureau. -->
-  <div class="pendule sprite--prop-pendule"></div>
+  <!-- La cloison basse qui sépare les deux pièces — décor, pas une
+       cible : elle dit « deux pièces » sans en imposer une seconde.
+       C'est aussi la seule verticale du milieu du cadre. -->
+  <div class="cloison"></div>
+  <div class="cloison-rail"></div>
+
+  <!-- LE CABINET : la pharmacie, la table d'examen et sa lampe,
+       l'autoclave sur sa paillasse, le bureau et son terminal. -->
+  <div class="pharmacie sprite--prop-pharmacie"></div>
+  <div class="table-examen" data-hotspot="table"></div>
+  <div class="table-pied table-pied--g"></div>
+  <div class="table-pied table-pied--d"></div>
+  <div class="fil-lampe"></div>
+  <div class="lampe sprite--prop-lampe" data-hotspot="table"></div>
+  <div class="paillasse"></div>
   <div class="autoclave sprite--prop-autoclave" data-hotspot="autoclave"></div>
   <div class="bureau" data-hotspot="bureau"></div>
+  <div class="terminal" data-hotspot="bureau"></div>
 
-  <!-- Sarah — dette d'art assumée : une forme, pas un sprite. -->
+  <!-- ── LE PREMIER PLAN ────────────────────────────────────────────
+       Un groupe compact, qui se recouvre — la leçon du parvis. Les
+       ombres de contact d'abord, les corps ensuite. -->
+  <div class="ombre ombre--lester"></div>
+  <div class="ombre ombre--drakk"></div>
+  <div class="ombre ombre--trash"></div>
+  <div class="ombre ombre--rabbit"></div>
+  <div class="ombre ombre--hercules"></div>
+  <div class="ombre ombre--sarah"></div>
+
+  <div class="sprite--lester p-lester" data-hotspot="lester"></div>
+  <div class="sprite--pj-drakk pj p-drakk" data-hotspot="drakk"></div>
+  <div class="sprite--pj-trash pj p-trash" data-hotspot="trash"></div>
+  <div class="sprite--pj-white-rabbit pj p-rabbit" data-hotspot="rabbit"></div>
+  <div class="sprite--pj-hercules pj p-hercules" data-hotspot="hercules"></div>
   <div class="sarah sprite--prop-sarah" data-hotspot="sarah"></div>
 
-  <!-- La sortie — sur le mur de gauche, debout sur la ligne de sol du
-       fond (y:108), là où la salle d'attente s'arrête. Elle était posée
-       à plat DANS le sol (y:118-142) : à cette place, une porte n'est
-       plus une porte, c'est une trappe. -->
-  <div class="porte-cabinet" data-hotspot="porte"></div>
+  <!-- Les jambages : deux bandes sombres qui ferment l'image à gauche
+       et à droite. C'est ce qui, au parvis, fait qu'on regarde une
+       prise de vue et pas un plan. Décor pur, jamais une cible. -->
+  <div class="jambage jambage--g"></div>
+  <div class="jambage jambage--d"></div>
 
 
   <!-- ── Ce que Trash voit, et lui seul ────────────────────────────
@@ -132,7 +170,10 @@
        le genre de service que Sarah ne peut pas se permettre de couper,
        PARCE QUE C'EST LUI QUI LA PAIE. » Une fiche, et sa teinte est
        celle d'un système qu'on laisse tourner : « Ça bavarde, mais ça
-       bavarde pour elle, pas contre nous. Je laisse. » -->
+       bavarde pour elle, pas contre nous. Je laisse. »
+
+       Depuis le chantier 82 le terminal existe VRAIMENT dans le décor,
+       posé sur le bureau : l'étiquette se pose dessus, plus à côté. -->
   <div class="calque calque--ra">
     <div class="ora ora--dossiers">DOSSIERS PATIENTS · SYNC NUIT</div>
   </div>
