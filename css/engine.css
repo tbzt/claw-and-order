@@ -317,6 +317,42 @@ body {
    de sujet verrouillé — `acteur` désigne celui qui parle au lieu d'exiger
    qu'on le tienne. Un seul régime de sujet, donc un seul style. */
 
+/* ── Le carton de coupure, entre deux actes ──────────────────────────
+   Opaque, pas translucide comme le rideau : il ne montre pas ce qu'on
+   quitte, il le remplace le temps que le décor suivant se peigne.
+   z-index 69 — au-dessus des panneaux (65-67) ET du curseur maison (68),
+   qui n'a rien à survoler pendant une coupure, mais sous le rideau (70)
+   et la reprise auto (72), qui doivent gagner en toute circonstance. */
+.carton {
+  position: absolute;
+  inset: 0;
+  z-index: 69;
+  display: grid;
+  place-content: center;
+  gap: 1.1cqh;
+  text-align: center;
+  background: var(--nuit);
+  animation: rideau-tombe .45s ease-out;
+}
+.carton[hidden] { display: none; }
+
+/* Le lieu en capitales espacées, l'heure dessous en sourdine : le
+   rapport de l'un à l'autre est celui du titre à sa légende, et c'est
+   ce qui empêche de lire la seconde ligne comme une réplique. */
+.carton__lieu {
+  font-family: var(--mono);
+  font-size: 2.6cqw;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--craie);
+}
+.carton__quand {
+  font-family: var(--mono);
+  font-size: 1.4cqw;
+  letter-spacing: .22em;
+  color: var(--ardoise);
+}
+
 /* ── Rideau de fin ───────────────────────────────────────── */
 
 .rideau {

@@ -22,6 +22,8 @@
 
 export const greffeCellule = {
   markup: 'scenes/greffe-cellule.html',
+  /* ACTE I — la nuit du contrat (PLAN_TRAME_ACTES_III_IV §2). */
+  acte: 1,
 
   ouverture: (ctx, visite) => visite > 1
     ? ['La cellule, encore. Rien n’y a changé — c’est bien tout le problème, et c’est aussi la bonne nouvelle.']

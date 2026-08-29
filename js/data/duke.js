@@ -66,9 +66,13 @@ const compte = (a) =>
 
 export const duke = {
   markup: 'scenes/duke.html',
+  /* ACTE II — l'abri, entre le détroit et l'audience. */
+  acte: 2,
 
   ouverture: ({ a }) => [
-    'Un sous-sol de béton brut, sous un garage qui n’a plus vendu une seule pièce détachée depuis des années. Pas une fenêtre. Un escalier, une porte blindée, et huit personnes qui vous regardent entrer sans poser leurs armes.',
+    /* Le carton dit « LE SOUS-SOL DE DUKE » : la ligne repartait du
+       même nom commun. Le reste est intact. */
+    'Du béton brut, sous un garage qui n’a plus vendu une seule pièce détachée depuis des années. Pas une fenêtre. Un escalier, une porte blindée, et huit personnes qui vous regardent entrer sans poser leurs armes.',
     'Duke ne s’est pas levé. « Assis, ou vous partez. » Ce n’est pas une hostilité — c’est une politesse, dans ce sous-sol-là.',
     a('lester-blesse')
       ? 'Lester s’est assis contre le mur du fond, son bras contre lui, à regarder huit inconnus armés comme il regarderait huit issues.'

@@ -54,11 +54,22 @@ import { equipiers } from './equipiers.js'
 export const tribunalSalle = {
   markup: 'scenes/tribunal-salle.html',
 
-  /* Un getter, pas un champ : la 1ʳᵉ audience se joue avant que l'acte IV
-     n'existe (D8 — le tour n'a de sens qu'à partir de l'abordage), donc
-     `charge()` ne doit incrémenter `etat.tour` qu'à la seconde visite,
-     une fois `enquete-close` posé par `carte.js`. */
-  get acte() { return a('enquete-close') ? 4 : undefined },
+  /* LE SECOND TABLEAU À DEUX ACTES, avec `retour`. La salle se joue deux
+     fois : la 1ʳᵉ audience est le pivot de l'acte III, la 2ᵈᵉ est la
+     plaidoirie — l'acte V du graphe (`PLAN_TRAME_ACTES_III_IV` § 8),
+     que `carte.js` ouvre en posant `enquete-close`.
+
+     C'était un getter rendant `4` ou `undefined`, et il disait la même
+     chose autrement : `undefined` servait à ce que `charge()` n'avance
+     pas le tour à la première audience, quand `etat.tour` n'existe pas
+     encore. Le moteur compare maintenant des ACTES, et un `undefined`
+     y signifie « ce tableau n'appartient à rien » — le carton de
+     coupure serait tombé à chaque entrée. Le tour continue d'avancer,
+     puisqu'il avance à partir de l'acte IV et que V vient après.
+
+     Écrit en fonction comme `retour` et `carte`, pour qu'il n'y ait
+     qu'une seule façon de déclarer un acte variable. */
+  acte: ({ a }) => (a('enquete-close') ? 5 : 3),
 
   /* `charge()` VIDE `etat.visuels` à chaque entrée : sans ce bloc, un
      aller-retour par le parvis (`reculer` → `tribunal`, puis `entree` →

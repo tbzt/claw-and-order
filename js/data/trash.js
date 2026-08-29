@@ -85,6 +85,8 @@ const prises = (a) => REACTIONS.filter((f) => a(f)).length
 
 export const squat = {
   markup: 'scenes/squat.html',
+  /* ACTE II — l'abri, entre le détroit et l'audience. */
+  acte: 2,
 
   ouverture: ({ a }) => [
     'Un dernier étage muré aux trois quarts, au-dessus d’un atelier de couture fermé depuis des années. Personne ne l’a loué à Trash : il l’a trouvé mal protégé, et il l’a traité comme un don.',

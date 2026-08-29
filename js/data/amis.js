@@ -93,10 +93,7 @@ import { equipiers } from './equipiers.js'
 
 export const amis = {
   markup: 'scenes/amis.html',
-
-  /* L'acte IV compte en tours, pas en minutes (D8). Le moteur lit ce
-     champ dans `charge()` : c'est le seul endroit du jeu qui déclare
-     appartenir à l'acte IV, et il suffit. */
+  /* ACTE IV — l'enquête, et c'est lui qui compte en tours (D8). */
   acte: 4,
 
   /* L3 — « revenir doit changer quelque chose » (`PLAN_CARTE_NAVIGATION`).
@@ -128,11 +125,18 @@ export const amis = {
        dont il sort tout juste. » Il ne sort plus, alors ce sont les
        trois autres qui viennent. C'est une veillée, et elle a lieu chez
        celui qui ne peut pas la quitter. */
-    'Un studio au quatrième, à Renton, au-dessus d’une imprimerie qui tourne encore. Une pièce, un lit qu’on ne replie plus, une table à dessin repoussée contre le mur, et des piles de tirages que personne n’a livrés.',
+    'Un studio au quatrième, au-dessus d’une imprimerie qui tourne encore. Une pièce, un lit qu’on ne replie plus, une table à dessin repoussée contre le mur, et des piles de tirages que personne n’a livrés.',
     'Trois d’entre eux sont venus ce matin. Le quatrième habite là et n’en est pas sorti depuis trois jours.',
+    /* ON VIENT DE L'Y DÉPOSER, ET MAINTENANT ÇA SE JOUE. Les deux
+       lignes commençaient par « Lester est à McNeil » — le seul endroit
+       du jeu où la remise existait, en compte rendu, trois jours après.
+       Elle se joue désormais à la fin de l'abordage (`retour.js`,
+       `remise`), donc ce n'est plus une nouvelle : c'est là où il est
+       resté. Ce qui compte ici est la seconde moitié, qui n'a pas
+       bougé. */
     a('lester-temoigne')
-      ? 'Lester est à McNeil, et il attend une seconde audience en sachant déjà ce qu’il va dire. C’est la première fois de l’affaire que vous travaillez sans l’avoir sur les bras.'
-      : 'Lester est à McNeil, sous clé, en attendant une seconde audience. C’est la première fois de l’affaire que vous travaillez sans l’avoir sur les bras.',
+      ? 'Il attend sa seconde audience en sachant déjà ce qu’il va dire. C’est la première fois de l’affaire que vous travaillez sans l’avoir sur les bras.'
+      : 'Il attend sa seconde audience sous clé, sans savoir ce qu’il y dira. C’est la première fois de l’affaire que vous travaillez sans l’avoir sur les bras.',
     'OBJECTIF — repartir avec un nom. Quatre personnes l’ont connue, et aucune ne vous doit quoi que ce soit.',
   ],
 

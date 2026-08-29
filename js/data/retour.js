@@ -79,6 +79,18 @@ export const destinationPlanque = (a) =>
 export const retour = {
   markup: 'scenes/retour.html',
 
+  /* LE SEUL TABLEAU DU JEU QUI APPARTIENT À DEUX ACTES, et c'est D7 :
+     « la seconde traversée réutilise `retour`, par `entree()` et des
+     drapeaux, jamais par un tableau neuf ». Le même décor est la nuit
+     du contrat à l'aller (acte I) et l'abordage au retour (acte III
+     bis) — donc l'acte se déclare en fonction, comme `ouverture`, sur
+     le drapeau qui sépare déjà les deux versions du tableau.
+
+     Ce qui en découle vaut le détour : la sortie de l'abordage devient
+     le passage III → IV, et c'est là que tombe le carton de coupure —
+     l'ellipse de trois jours que le texte annonçait sans la jouer. */
+  acte: ({ a }) => (a('recuse-abri') ? 3 : 1),
+
   /* SENS DU DANGER (Hercules, `signature: 'sens-du-danger'`, equipe.js).
      Un adepte le ressent SANS détail — la fiche insiste sur ce point, et
      c'est ce qui en fait un beat d'ambiance et pas un indice : il ne
@@ -275,11 +287,33 @@ export const retour = {
             'Le sillage, derrière, ne lâche pas la distance.',
           ]
 
+          /* ══ ON REND LESTER, ET ÇA SE VOIT ═══════════════════════════
+             Le tableau annonçait « rendre Lester à McNeil » dans son
+             OBJECTIF d'entrée, et les deux issues s'arrêtaient dans le
+             goulet, sillage encore à l'eau. La remise se lisait trois
+             jours plus tard, en exposition, à l'ouverture de `amis` :
+             l'objectif d'une scène se résolvait hors champ, dans le
+             tableau d'après. C'est ce que le joueur a senti comme un
+             saut — pas une coupure absente, une dernière mesure absente.
+
+             Elle est commune aux deux issues parce qu'elle ne dépend
+             pas de l'abordage : qu'on ait repoussé l'homme ou qu'on
+             l'ait pris sur le pont, on accoste au même ponton.
+
+             Le gobelet est là pour ce qu'il n'explique pas. On ramène
+             un gamin dans la prison dont on l'a sorti douze heures plus
+             tôt, et de l'autre côté c'est une fin de service. */
+          const remise = [
+            'McNeil, à cinq cents mètres. Le même ponton qu’à l’aller, deux gardes dessus, et l’un des deux tient un gobelet.',
+            'Lester monte l’échelle sans qu’on le lui dise. En haut, il se retourne une fois — pas vers vous : vers le bateau.',
+          ]
+
           if (routes.length)
             return { tous: [...commun,
                             { texte: 'Le sillage hésite, puis vire au large. Il ne vous suit pas dans le goulet.',
                               visuel: ['goulet-passe', 'poursuite-partie'] },
-                            'Personne ne saura jamais s’il a renoncé, ou s’il a compris qu’il n’avait plus rien à y gagner.'],
+                            'Personne ne saura jamais s’il a renoncé, ou s’il a compris qu’il n’avait plus rien à y gagner.',
+                            ...remise],
                      drakk: routes.includes('abordage-grappin')
                        ? '« Il n’avait plus de quoi accoster. On ne monte pas à bord les mains vides. »'
                        : '« Il a compris avant de comprendre pourquoi. C’est déjà ça. »',
@@ -297,8 +331,9 @@ export const retour = {
           return { tous: [...commun,
                           'Un choc sourd contre la coque. Une main gantée passe par-dessus le bastingage.',
                           'Cisco lâche la barre une seconde — une seule — et Drakk s’en charge : l’homme repart à l’eau plus vite qu’il n’est monté.',
-                          { texte: 'Le sillage renonce, cette fois, et la terre s’écarte. McNeil est devant.',
-                            visuel: ['goulet-passe', 'poursuite-partie'] }],
+                          { texte: 'Le sillage renonce, cette fois, et la terre s’écarte.',
+                            visuel: ['goulet-passe', 'poursuite-partie'] },
+                          ...remise],
                    hercules: '« On a eu de la chance. La chance, ça ne se facture pas deux fois. »',
                    drakk: '« Un contre un, sur mon propre pont. Je ne demandais que ça. »',
                    flags: ['abordage-passe', 'abordage-echec'],

@@ -379,6 +379,27 @@ titre: '« Il n’ira pas leur dire tout seul. Donnez-lui de quoi le faire. »',
 export const carte = {
   markup: 'scenes/carte.html',
 
+  /* LA CARTE N'A PAS D'ACTE À ELLE : elle a celui d'où l'on vient. Ce
+     n'est pas un lieu, c'est le geste d'en choisir un — Drakk qui étale
+     un plan sur une table, dans le tableau qu'on est en train de
+     quitter. Un acte fixe ici ferait tomber un carton de coupure à
+     chaque ouverture du plan, ce qui reviendrait à annoncer un lieu
+     pour dire qu'on n'a pas encore choisi lequel.
+
+     Les `acte: 4` de ce fichier sont autre chose, et il ne faut pas les
+     confondre : ils sont sur les JALONS (`lieux`, plus haut) et disent
+     quels points s'allument pendant l'enquête.
+
+     ⚠️ `null` VEUT DIRE « CE N'EST PAS UN LIEU », et c'est une décision,
+     pas un oubli — `undefined` en serait un, et `verifieActes()` crie
+     dessus. La différence se paie en tours : rendre `etat.acte` ici
+     faisait avancer `etat.tour` à chaque ouverture du plan, puisque
+     tout tableau d'acte IV ou plus le fait. Or D8 dit « un tour = une
+     visite de lieu », et l'étiquette de chaque jalon annonce
+     `tour + 1` (`prochainMoment`, plus haut) : le tour se paie à
+     l'ARRIVÉE. Un tour de plus ici, et l'étiquette mentait d'un cran. */
+  acte: null,
+
   /* Drakk étale un vrai plan, à chaque fois qu'on y revient — mais on ne
      le regarde pas deux fois de la même façon. `visite` vient de
      `charge()` (chantier 13) : 1 la première fois, davantage ensuite.

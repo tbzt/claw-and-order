@@ -40,10 +40,18 @@ const armeAuPortique = () => ({
 
 export const tribunal = {
   markup: 'scenes/tribunal.html',
+  /* ACTE III — le pivot : les deux audiences et ce qui les sépare. */
+  acte: 3,
 
   ouverture: [
     'Le mandat suffit aux détecteurs, l’accréditation suffit aux gardes. Personne n’a demandé les armes — pas encore.',
-    'Le palais de justice de Downtown, à l’heure où les couloirs se remplissent. Neuf heures moins dix.',
+    /* Le carton de coupure nomme le palais et donne l'heure : la ligne
+       redisait les deux, et « Neuf heures moins dix » était en dur —
+       faux dès qu'on a passé un appel dans la nuit (14 à 15 minutes,
+       tous facultatifs). Ce qui reste est ce que le carton ne peut pas
+       dire : le quartier, et à quoi ressemblent les couloirs quand
+       l'audience approche. */
+    'Downtown, à l’heure où les couloirs se remplissent.',
   ],
 
   hotspots: {

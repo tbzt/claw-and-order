@@ -31,6 +31,8 @@
 
 export const matriceWaters = {
   markup: 'scenes/matrice-waters.html',
+  /* ACTE IV — l'enquête, et c'est lui qui compte en tours (D8). */
+  acte: 4,
 
   ouverture: (ctx, visite) => visite > 1
     ? ['La Matrice de Waters, encore. Le verrou n’a pas changé de forme — il attend, exactement comme la première fois.']

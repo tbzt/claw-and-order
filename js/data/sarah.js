@@ -37,10 +37,19 @@ import { destinationPlanque } from './retour.js'
 
 export const sarah = {
   markup: 'scenes/sarah.html',
+  /* ACTE II — l'abri, entre le détroit et l'audience. */
+  acte: 2,
 
   ouverture: ({ a }) => [
-    'Le cabinet de Sarah Carpenter, au-dessus d’une supérette qui ne ferme jamais tout à fait. Deux pièces : une salle d’attente à trois chaises, et un cabinet avec une table d’examen et un autoclave qui date d’avant elle.',
-    'Une clinique de rue ne ferme pas, même à six heures moins le quart. Il y a déjà trois personnes dans la salle d’attente, dont une qui patiente depuis quatre heures.',
+    /* Le carton de coupure vient de nommer le cabinet et de donner
+       l'heure : la première ligne redisait le nom, la seconde donnait
+       une heure en dur (« six heures moins le quart ») que l'horloge
+       contredit dès qu'on a passé un appel — 14 à 15 minutes, tous
+       facultatifs. Ce qui reste est ce que le carton ne porte pas : où
+       c'est, ce qu'il y a dedans, et qu'une clinique de rue ne ferme
+       jamais. */
+    'Au-dessus d’une supérette qui ne ferme jamais tout à fait. Deux pièces : une salle d’attente à trois chaises, et un cabinet avec une table d’examen et un autoclave qui date d’avant elle.',
+    'Une clinique de rue ne ferme pas non plus. Il y a déjà trois personnes dans la salle d’attente, dont une qui patiente depuis quatre heures.',
     'Lester s’est assis près de la porte du cabinet, son bras contre lui, sans qu’on ait besoin de le lui montrer.',
     'Sarah n’a pas discuté le prix : elle a regardé Trash, une seconde, et elle a désigné la pièce du fond.',
     'OBJECTIF — faire soigner ce bras, et repartir. On n’a pas trois heures à donner à cette étape.',

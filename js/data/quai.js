@@ -27,6 +27,8 @@ import { equipiers } from './equipiers.js'
 
 export const quai = {
   markup: 'scenes/quai.html',
+  /* ACTE I — la nuit du contrat (PLAN_TRAME_ACTES_III_IV §2). */
+  acte: 1,
 
   /* Chantier 13 : `visite` vient de `charge()`. Ce tableau se rechargeait
      DÉJÀ plusieurs fois avant ce chantier — chaque aller-retour vers la

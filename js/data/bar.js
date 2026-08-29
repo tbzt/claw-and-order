@@ -18,6 +18,8 @@ import { equipiers } from './equipiers.js'
 
 export const bar = {
   markup: 'scenes/bar.html',
+  /* ACTE I — la nuit du contrat (PLAN_TRAME_ACTES_III_IV §2). */
+  acte: 1,
 
   /* Chantier 13 : `visite` vient de `charge()`, 1 la première fois. Ce
      texte plantait 23 h en dur — le rejouer tel quel à un retour depuis

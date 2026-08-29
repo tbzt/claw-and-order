@@ -23,6 +23,7 @@ const bulleRecit = $('bulleRecit')
 const bullePnj = $('bullePnj')
 const boiteChoix = $('choix')
 const rideau = $('rideau')
+const carton = $('carton')
 const carnet = $('carnet')
 const reseau = $('reseau')
 const sacoche = $('sacoche')
@@ -132,6 +133,10 @@ let quiParle = 'recit'
 let apresFile = null
 let occupe = false
 let minuteur = 0
+/* Distinct de `minuteur` : `charge()` appelle `clearTimeout(minuteur)`
+   juste après avoir attendu le carton, et partager le même compteur
+   ferait annuler par le tableau qui s'ouvre le carton qui l'annonce. */
+let minuteurCarton = 0
 let dialogue = null
 let survolee = null
 let derniereLigne = ''
@@ -159,6 +164,11 @@ let survoleObjet = null
 
 let scene = scenes[depart]
 
+/* Un tableau qui se rejoue à deux actes déclare une FONCTION, comme il le
+   fait déjà pour `ouverture` : `retour` est la nuit du contrat au premier
+   passage et l'abordage au second, et c'est le même décor. */
+const acteDe = (s) => (typeof s.acte === 'function' ? s.acte(contexte()) : s.acte)
+
 async function charge(idScene, muet = false) {
   /* `depuis`/`visites` (chantier 13) ne bougent que sur une VRAIE
      transition. `muet` sert aussi à la reprise d'une sauvegarde : à ce
@@ -169,13 +179,32 @@ async function charge(idScene, muet = false) {
   scene = scenes[idScene]
   etat.lieu = idScene
   if (!muet) etat.visites[idScene] = (etat.visites[idScene] ?? 0) + 1
-  /* D8 — un tour = une visite de lieu, et seulement dans l'acte IV.
-     Un tableau le déclare avec `acte: 4` (voir `amis.js`) ; tout le
-     reste du jeu ne connaît pas ce champ et continue de compter en
-     minutes. `muet` couvre la reprise d'une sauvegarde : `restaure()`
-     vient de reposer le tour, l'incrémenter ici le ferait avancer d'un
-     cran à chaque F5. */
-  if (!muet && scene.acte === 4) avanceTour()
+  /* ── LE PASSAGE D'ACTE ────────────────────────────────────────────
+     Résolu avant tout le reste, parce que deux choses en dépendent : le
+     registre d'horloge, et le carton. `etat.acte === null` au tout
+     premier `charge()` — commencer une partie n'est pas une coupure —
+     et `muet` couvre la reprise d'une sauvegarde, où l'on retombe dans
+     un acte sans l'avoir traversé.
+
+     `acte: null` déclare « ce n'est pas un lieu » — la carte, et elle
+     seule. Elle ne change donc pas d'acte (elle appartient à celui d'où
+     l'on vient) et elle ne coûte pas de tour : D8 dit « un tour = une
+     visite de lieu », et l'étiquette de chaque jalon annonce le tour que
+     l'arrivée coûtera. `undefined`, lui, est un oubli : `verifieActes()`
+     le crie au chargement. */
+  const acteNeuf = acteDe(scene)
+  const estUnLieu = acteNeuf !== null
+  const coupure = !muet && estUnLieu && etat.acte !== null && acteNeuf !== etat.acte
+  if (estUnLieu) etat.acte = acteNeuf
+  /* D8 — un tour = une visite de lieu, et seulement à partir de
+     l'acte IV ; tout ce qui précède continue de compter en minutes.
+     `muet` couvre la reprise d'une sauvegarde : `restaure()` vient de
+     reposer le tour, l'incrémenter ici le ferait avancer d'un cran à
+     chaque F5. */
+  if (!muet && estUnLieu && acteNeuf >= 4) avanceTour()
+  /* L'horloge est à jour : le carton peut dire l'heure d'ARRIVÉE, et il
+     couvre le remplacement du décor au lieu de le précéder. */
+  if (coupure) await ouvreCarton(idScene)
   clearTimeout(minuteur)
   dialogue = null
   survolee = null
@@ -193,6 +222,10 @@ async function charge(idScene, muet = false) {
   verifieScene()
   brancheDecor()
   rafraichit()
+  /* Le décor est peint : le carton peut se lever sur lui, jamais sur un
+     cadre vide. L'ouverture se dit après — on lit le lieu, puis on
+     l'entend. */
+  if (coupure) fermeCarton()
   /* Une ouverture peut être une fonction : un tableau doit pouvoir
      s'ouvrir différemment selon ce qu'on a fait au précédent — et
      depuis le chantier 13, selon combien de fois on l'a déjà vu
@@ -211,11 +244,18 @@ async function charge(idScene, muet = false) {
    le reste — sans qu'aucun site d'appel n'ait à y penser. */
 const estAuRepos = () => !occupe && !dialogue && rideau.hidden
 
+/* Les vingt tableaux, et il en manquait quatre — la table servait la
+   seule étiquette de reprise, qui retombe sur l'identifiant brut
+   (`?? donnees.ou`) et ne criait donc jamais. Le carton de coupure, lui,
+   n'a pas de repli : un acte s'ouvre sur un nom ou il ne s'ouvre pas.
+   `amis` disait « Le local de répétition », ce que le chantier 73 a
+   défait — la veillée a lieu chez Mark, à Renton. */
 const NOMS_LIEUX = {
   bar: 'Le Claw & Order',
   quai: 'Le Sunnyside Beach Park',
   'quai-voilier': 'Le voilier, de près',
   greffe: 'Le greffe de nuit',
+  'greffe-cellule': 'La cellule',
   retour: 'Le détroit',
   planque: 'La laverie',
   herwick: 'L’arrière-boutique de Herwick',
@@ -223,12 +263,60 @@ const NOMS_LIEUX = {
   duke: 'Le sous-sol de Duke',
   squat: 'La loge de Trash',
   tripot: 'Le tripot d’Hercules',
-  amis: 'Le local de répétition',
+  amis: 'Chez Mark, à Renton',
   appartement: 'L’appartement de Teresa',
+  shameless: 'Le Shameless',
+  waters: 'Waters Sound',
+  'matrice-waters': 'Le nœud de Waters Sound',
   tribunal: 'Le palais de justice',
   'tribunal-salle': 'La salle d’audience',
   carte: 'La carte',
 }
+
+/* ── LE CARTON DE COUPURE ────────────────────────────────────────────
+   Le jeu changeait d'acte sans le montrer : on quittait le détroit et
+   on se retrouvait chez Mark, trois jours plus tard, après cinq cents
+   millisecondes de rien. La prose le disait ; rien ne le JOUAIT.
+
+   Le procédé est celui de la série dont ce jeu porte le nom — un lieu,
+   une heure, sur fond noir, entre deux actes. Ce qu'il ne dit jamais,
+   c'est le numéro de l'acte : la Boussole § 2 range « le système
+   explique au joueur ce que le système vient de faire » parmi les
+   choses à éviter, et une pancarte « ACTE II » est exactement ça. Le
+   découpage est dans le code ; ce que le joueur reçoit est un fait du
+   monde, où l'on est et quand.
+
+   Trois cartons par partie au plus — la nuit (I), l'abri (II), le
+   pivot (III), l'enquête (IV) — soit la fréquence d'une coupure de
+   feuilleton, pas celle d'un écran de chargement.
+
+   La durée est le PLANCHER de `duree()` — le temps le plus court que le
+   jeu accorde à une ligne — passé au réglage d'allure comme le reste.
+   Un carton ne se lit pas, il se laisse tomber : lui donner une durée
+   proportionnelle à ses quinze caractères revient au plancher de toute
+   façon, autant l'écrire. `MANUEL` met `x` à zéro et le carton attend
+   alors le clic, comme toute réplique (« dans un jeu où lire EST le jeu,
+   personne ne devrait avoir à lire vite »).
+
+   Un clic passe, toujours. Le carton est au-dessus du curseur maison :
+   il n'y a rien à viser, n'importe où suffit. */
+function ouvreCarton(idScene) {
+  $('cartonLieu').textContent = NOMS_LIEUX[idScene] ?? idScene
+  $('cartonQuand').textContent = etat.tour === null ? formateHeure() : formateTour()
+  carton.hidden = false
+  return new Promise((resolu) => {
+    const passe = () => {
+      clearTimeout(minuteurCarton)
+      carton.removeEventListener('click', passe)
+      resolu()
+    }
+    carton.addEventListener('click', passe)
+    const attente = Math.round(1800 * ALLURES[etat.allure].x)
+    if (attente) minuteurCarton = setTimeout(passe, attente)
+  })
+}
+
+function fermeCarton() { carton.hidden = true }
 
 /* L'ÉTIQUETTE DE TEMPS D'UNE SAUVEGARDE (chantier 28). Une nuit du
    contrat s'étiquette par son heure ; une journée d'acte IV par son
@@ -278,6 +366,7 @@ async function demarre() {
   verifieCarnet()
   verifieReseau()
   verifieBarre()
+  verifieActes()
   /* La jauge d'allure part de son vrai état : sans ça elle reste vide
      jusqu'au premier clic, et le joueur croit le réglage cassé. */
   peintAllure()
@@ -1655,6 +1744,25 @@ function verifieScene() {
    du tableau ne se dit jamais. Silencieux, donc à crier. Et pendant
    qu'on y est, un contact dont le `runner` n'existe pas ferait planter
    le rendu du panneau sur `equipe[c.runner].nom`. */
+/* Garde-fou des actes. Un tableau sans `acte:` rendrait `undefined`, qui
+   diffère de tout : le carton de coupure tomberait à chaque entrée, puis
+   plus jamais. Symptôme illisible, cause muette — donc à crier au
+   chargement. `null` passe, lui : c'est la déclaration explicite de « ce
+   n'est pas un lieu », que seule la carte porte. Un `acte` en fonction ne
+   se contrôle pas ici : il lit un état du monde qui n'existe pas encore,
+   comme `principal`. */
+function verifieActes() {
+  for (const [id, s] of Object.entries(scenes)) {
+    const declare = s.acte
+    if (declare === undefined)
+      console.error(`[actes] ${id} ne déclare pas son acte — le carton de coupure tombera à tort.`)
+    else if (typeof declare === 'number' && !(declare >= 1 && declare <= 5))
+      console.error(`[actes] ${id} déclare l'acte ${declare} — le graphe n'en compte que cinq.`)
+    if (!(id in NOMS_LIEUX))
+      console.error(`[actes] ${id} n'a pas de nom dans NOMS_LIEUX — son carton s'ouvrirait sur un identifiant.`)
+  }
+}
+
 function verifieEquipe() {
   for (const [id, r] of Object.entries(equipe))
     if (!r.vue) console.error(`[équipe] ${id} n'a pas de vue — sa lentille ne montrera rien.`)

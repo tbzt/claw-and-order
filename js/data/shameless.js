@@ -58,7 +58,7 @@ import { equipiers } from './equipiers.js'
 
 export const shameless = {
   markup: 'scenes/shameless.html',
-
+  /* ACTE IV — l'enquête, et c'est lui qui compte en tours (D8). */
   acte: 4,
 
   /* L3, comme au local et à l'appartement. Ni Denny ni Iris n'ont de

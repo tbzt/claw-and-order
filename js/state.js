@@ -68,6 +68,18 @@ export const etat = {
      C'est le grain le plus grossier qui reste lisible, et le seul qu'on
      puisse tenir sans écrire une heure qu'aucune scène ne connaît. */
   tour: null,
+  /* ── L'ACTE COURANT ───────────────────────────────────────────────
+     Le graphe cible de `PLAN_TRAME_ACTES_III_IV.md` § 2 nomme cinq
+     actes ; le code n'en connaissait qu'un, le IV, et seulement pour
+     savoir s'il fallait compter en tours. Chaque tableau déclare
+     maintenant le sien, et le moteur ne s'en sert que pour deux
+     choses : le registre d'horloge, et savoir qu'on vient d'en
+     changer — ce qui est le seul endroit du jeu où une ellipse a lieu.
+
+     `null` avant le premier `charge()`. Il ne se sauvegarde pas : le
+     tableau le redonne à la reprise, et un champ dérivé qu'on persiste
+     est un champ qui peut mentir. */
+  acte: null,
   /* Le tableau courant. `null` avant le premier `charge()` — c'est ce qui
      dit à `sauvegarde()` qu'il n'y a encore rien à écrire. */
   lieu: null,

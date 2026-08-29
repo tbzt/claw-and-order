@@ -136,9 +136,34 @@ import { equipiers } from './equipiers.js'
 
 export const planque = {
   markup: 'scenes/planque.html',
+  /* ACTE II — l'abri, entre le détroit et l'audience. */
+  acte: 2,
 
   ouverture: ({ a, qui }) => [
-    'Une laverie automatique de Tacoma, ouverte vingt-quatre heures. Six heures cinq.',
+    /* Le carton de coupure vient de dire le lieu et l'heure : cette
+       ligne les redisait tous les deux (« Une laverie automatique de
+       Tacoma […]. Six heures cinq. »). Ce qui reste est ce que le
+       carton ne peut pas porter — pourquoi une laverie est ouverte à
+       cette heure-là. Même faute que les répliques du Shameless qui
+       reformulaient leur propre lentille : on ne garde pas une phrase
+       parce qu'elle était là. */
+    'Automatique, ouverte vingt-quatre heures.',
+    /* ══ LA LAVERIE EST LE DÉFAUT, ET IL ÉTAIT MUET ═══════════════════
+       Quatre planques ont un `trancher-*` au conseil de la traversée ;
+       la laverie n'en a pas. On n'y arrive donc jamais en l'ayant
+       choisie — on y arrive quand personne n'a tranché. Le joueur qui
+       n'a pas trouvé le conseil (une cible sur les quatorze du pont)
+       traversait, atterrissait ici, et rien ne lui apprenait qu'il y
+       avait eu quelque chose à décider.
+
+       La ligne ne l'explique pas et ne le lui reproche pas : elle
+       constate un silence. Et elle ne tombe que si le conseil n'a
+       jamais été ouvert — l'avoir joué sans trancher est un autre
+       silence, celui qu'Hercules commente déjà sous sa lentille
+       (« On ne m'a pas demandé, remarquez »). */
+    ...(!a('parle:conseil') ? [
+      'Personne n’a dit « on va là ». À un moment Hercules a poussé une porte, et c’était celle-là.',
+    ] : []),
     'Néons, faïence, six machines et deux séchoirs. C’est le premier endroit de la nuit où l’on voit clairement les visages.',
     'C’est aussi une pièce éclairée avec une baie vitrée sur la rue. Personne ne le dit à voix haute.',
     a('lester-blesse')
@@ -155,7 +180,15 @@ export const planque = {
       ['hercules', '« Je n’aime pas cette pièce. »'],
       ['hercules', '« Je ne saurais pas dire pourquoi, et c’est exactement ce qui me gêne. »'],
     ] : []),
-    'OBJECTIF — tenir jusqu’à l’audience. Il reste trois heures cinquante-cinq.',
+    /* « Il reste trois heures cinquante-cinq » se déduisait de « Six
+       heures cinq », qui vient de partir — et les deux chiffres étaient
+       faux dès qu'on avait téléphoné : `reseau.js` porte 14 appels à
+       15 minutes, tous facultatifs, soit 3 h 30 d'horloge variable
+       avant la traversée. L'heure d'arrivée n'est pas un fait du
+       scénario, c'est une conséquence du jeu. Ce qui est fixe, et que
+       le joueur doit savoir, c'est l'heure de l'audience ; le reste se
+       lit au carton et au HUD, où il est juste. */
+    'OBJECTIF — tenir jusqu’à l’audience. Elle est à dix heures.',
   ],
 
   /* `visuels` est vidé à chaque `charge()` : ce qui a été acquis doit

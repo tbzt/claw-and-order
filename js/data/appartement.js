@@ -112,9 +112,7 @@ import { equipiers } from './equipiers.js'
 
 export const appartement = {
   markup: 'scenes/appartement.html',
-
-  /* D8 — un tour de plus. Deuxième lieu de l'acte IV, donc « jour 1 —
-     après-midi » quand on arrive du local le même jour. */
+  /* ACTE IV — l'enquête, et c'est lui qui compte en tours (D8). */
   acte: 4,
 
   /* L3, comme au local : la carte rend ce tableau revisitable, donc il

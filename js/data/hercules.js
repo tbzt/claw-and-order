@@ -85,9 +85,17 @@ const compte = (a) =>
 
 export const tripot = {
   markup: 'scenes/tripot.html',
+  /* ACTE II — l'abri, entre le détroit et l'audience. */
+  acte: 2,
 
   ouverture: ({ a }) => [
-    'Une porte sans enseigne, au fond d’une cour à poubelles, et de l’autre côté une salle chauffée, enfumée, sans une seule fenêtre. Cinq personnes jouent aux cartes comme si six heures du matin était une heure normale pour ça — et ici, c’est le cas.',
+    /* « comme si six heures du matin » : une heure en dur que le carton
+       de coupure affiche maintenant juste au-dessus, et que l'horloge
+       contredit dès qu'on a téléphoné (14 appels à 15 minutes, tous
+       facultatifs). La blague ne tenait pas au chiffre — elle tient à
+       ce que l'heure qu'il est, quelle qu'elle soit, ne dérange
+       personne ici. */
+    'Une porte sans enseigne, au fond d’une cour à poubelles, et de l’autre côté une salle chauffée, enfumée, sans une seule fenêtre. Cinq personnes jouent aux cartes comme si c’était une heure normale pour ça — et ici, c’est le cas.',
     'Le patron connaît Hercules par son prénom. Ce n’est pas un bon signe. C’en est un très mauvais, en fait, mais personne ne le dit à voix haute.',
     a('lester-blesse')
       ? 'Lester s’assoit à l’écart de la table, son bras contre lui, et personne ne lui pose de question — dans cette pièce, ne pas poser de question est une politesse.'

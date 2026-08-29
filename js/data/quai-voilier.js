@@ -16,6 +16,8 @@
 
 export const quaiVoilier = {
   markup: 'scenes/quai-voilier.html',
+  /* ACTE I — la nuit du contrat (PLAN_TRAME_ACTES_III_IV §2). */
+  acte: 1,
 
   /* Le voilier « dit toujours ce qui manque encore » (c'était la
      promesse de son `utiliser` dans la vue large) : la même règle,

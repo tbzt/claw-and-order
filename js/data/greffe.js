@@ -21,6 +21,8 @@ import { equipiers } from './equipiers.js'
 
 export const greffe = {
   markup: 'scenes/greffe.html',
+  /* ACTE I — la nuit du contrat (PLAN_TRAME_ACTES_III_IV §2). */
+  acte: 1,
 
   /* Chantier 33 : `visite` vient de `charge()`. La projection astrale de
      Trash (cible `sas`, ci-dessous) fait un aller-retour vers un second

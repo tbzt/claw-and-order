@@ -90,9 +90,15 @@ const prises = (a) => PRECAUTIONS.filter((f) => a(f)).length
 
 export const herwick = {
   markup: 'scenes/herwick.html',
+  /* ACTE II — l'abri, entre le détroit et l'audience. */
+  acte: 2,
 
   ouverture: ({ a }) => [
-    'L’arrière-boutique de Strauber Antiquités. Un antiquaire nain, un rideau de fer à moitié baissé sur la rue, et quarante ans de meubles empilés jusqu’au plafond.',
+    /* Le carton vient de dire « L'ARRIÈRE-BOUTIQUE DE HERWICK » : la
+       ligne le redisait avant de nommer la boutique. On garde ce que le
+       carton ne porte pas — l'enseigne, l'homme, et ce qu'il y a
+       dedans. */
+    'Strauber Antiquités : un antiquaire nain, un rideau de fer à moitié baissé sur la rue, et quarante ans de meubles empilés jusqu’au plafond.',
     'Herwick n’a pas discuté le prix : il a regardé Drakk, une seconde, et il a fait de la place.',
     a('lester-blesse')
       ? 'Lester s’est assis dans un fauteuil qui vaut sans doute plus cher que tout ce qu’il a jamais possédé, son bras contre lui.'
