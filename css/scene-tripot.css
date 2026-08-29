@@ -179,13 +179,13 @@
    À 18 unités il en fait 27,5 de haut, soit 1,96 m à l'échelle locale
    (Lester, le runner le plus proche en profondeur, donne 14,6 u/m) :
    l'homme le plus massif de la salle après Drakk, et deux fois les
-   joueurs assis (17,8 u). Ses pieds descendent de 102 à 118, ce qui le
-   remet sur la même relation à son ombre que les quatre autres (elles
-   sont toutes posées une douzaine d'unités au-dessus des pieds dans ce
-   tableau) — et le met enfin près de la porte qu'il garde, qui commence
-   en y=118. */
+   joueurs assis (17,8 u).
+   Ses pieds descendent de 102 à 113 : il pose enfin sur le sol, juste
+   DERRIÈRE le seuil qu'il garde (la porte commence en y=118) — cinq
+   unités qui laissent la place à sa propre ombre, laquelle disparaîtrait
+   entièrement sous le rectangle de la porte s'il se tenait dessus. */
 .tableau--tripot .videur-forme {
-  left: calc(10 * var(--u)); top: calc(90 * var(--u));
+  left: calc(10 * var(--u)); top: calc(85 * var(--u));
   width: calc(18 * var(--u));
 }
 
@@ -203,18 +203,35 @@
 
 /* Les ombres de contact (chantier 14). Sous la lampe basse elles sont
    longues et molles : une source au ras du tapis ne fait pas d'ombre
-   nette. */
+   nette.
+
+   ⚠️ ELLES ÉTAIENT TOUTES POSÉES AU-DESSUS DES PIEDS, de onze à treize
+   unités — Drakk pose en y=120,3 et son ombre était en 110 ; Trash
+   121,1 pour 111 ; White_Rabbit 123,3 pour 112 ; Hercules 123,6 pour
+   111. Celle de Drakk était en plus décalée de vingt-six unités sur sa
+   gauche (x 48..78 quand il se tient en 75..94), et celle du videur,
+   seule, tombait SOUS ses pieds. Cinq ombres, cinq erreurs, toutes de
+   la même famille : posées sur la jonction mur/sol (y=108) au lieu de
+   la ligne de pieds de chacun.
+
+   Elles sont maintenant calculées, une par une : le haut de l'ellipse
+   sur les pieds — l'encre du sprite, pas le bas de sa boîte — et une
+   largeur d'une fois et demie la silhouette, ce qui est la part
+   « longue et molle » que le texte demande. L'étirement de deux unités
+   suit la lampe : à gauche pour qui se tient à sa gauche (elle est
+   centrée en x=114), à droite pour les autres. */
 .tableau--tripot .ombre {
   height: calc(3 * var(--u));
   border-radius: 50%;
   background: radial-gradient(closest-side, rgba(0,0,0,.45), transparent 82%);
   pointer-events: none;
 }
-.tableau--tripot .ombre--drakk    { left: calc(48 * var(--u));  top: calc(110 * var(--u)); width: calc(30 * var(--u)); }
-.tableau--tripot .ombre--trash    { left: calc(125 * var(--u));  top: calc(111 * var(--u)); width: calc(22 * var(--u)); }
-.tableau--tripot .ombre--rabbit   { left: calc(151 * var(--u)); top: calc(112 * var(--u)); width: calc(17 * var(--u)); }
-.tableau--tripot .ombre--hercules { left: calc(171 * var(--u)); top: calc(111 * var(--u)); width: calc(13 * var(--u)); }
-.tableau--tripot .ombre--videur   { left: calc(12 * var(--u));  top: calc(107 * var(--u)); width: calc(14 * var(--u)); }
+.tableau--tripot .ombre--drakk     { left: calc(68 * var(--u)); top: calc(120 * var(--u)); width: calc(28 * var(--u)); }
+.tableau--tripot .ombre--trash     { left: calc(122 * var(--u)); top: calc(121 * var(--u)); width: calc(29 * var(--u)); }
+.tableau--tripot .ombre--rabbit    { left: calc(148 * var(--u)); top: calc(123 * var(--u)); width: calc(24 * var(--u)); }
+.tableau--tripot .ombre--hercules  { left: calc(169 * var(--u)); top: calc(124 * var(--u)); width: calc(20 * var(--u)); }
+.tableau--tripot .ombre--videur    { left: calc(8 * var(--u)); top: calc(113 * var(--u)); width: calc(19 * var(--u)); }
+.tableau--tripot .ombre--lester    { left: calc(225 * var(--u)); top: calc(117 * var(--u)); width: calc(22 * var(--u)); }
 
 /* ══ LES TROIS CALQUES DE LENTILLE ═══════════════════════════════════
    Le vocabulaire commun est dans `engine.css` ; ici, le tripot. */
