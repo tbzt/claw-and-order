@@ -656,6 +656,32 @@
   100% { transform: scale(1) }
 }
 
+/* ── LA CHUTE, ET LE RELÈVEMENT ──────────────────────────────────────
+   « Un claquement sec, et Lester tombe en avant sans un bruit », puis
+   « Il se relève seul. » Deux temps de prose, deux visuels déjà posés
+   par `retour.js` — `tir` puis `lester-touche` — et rien ne les jouait.
+
+   ⚠️ PAS DE RÈGLE `animation` ICI, et c'est la convention de
+   CONTRIBUTING : `.sprite--lester` porte déjà la sienne, son attente à
+   six crans, et une seconde déclaration l'écraserait. On se sert donc
+   de la TRANSITION que `.p-lester` a déjà (translate, .7s) : le premier
+   visuel le pousse en avant, le second le ramène. Le mouvement suit
+   alors les temps du texte au lieu de se dérouler tout seul par-dessus.
+
+   L'ordre dans la feuille fait l'arbitrage : les deux sélecteurs ont la
+   même spécificité et les deux visuels coexistent — `lester-touche`
+   gagne parce qu'il est écrit après.
+
+   Il ne se relève pas tout à fait : deux unités plus bas qu'avant, il
+   est assis autrement qu'il ne l'était. « C'est rien », dit-il, ce qui
+   est faux. */
+.stage[data-etat~="tir"] .tableau--retour .p-lester {
+  translate: calc(-2 * var(--u)) calc(7 * var(--u));
+}
+.stage[data-etat~="lester-touche"] .tableau--retour .p-lester {
+  translate: 0 calc(2 * var(--u));
+}
+
 /* Lester est assis contre le rouf, épaule gauche vers le goulet.
    La manche s'ouvre du coude à l'épaule — donc une bande, pas un point. */
 .tableau--retour .plaie {
