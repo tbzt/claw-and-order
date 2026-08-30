@@ -82,6 +82,95 @@
   background: linear-gradient(270deg, rgba(214, 198, 158, .22) 0%, rgba(214, 198, 158, 0) 100%);
 }
 
+/* ── LA MANSARDE — x:140-256, y:0-48 ─────────────────────────────────
+   Le tableau se joue « un studio au quatrième, au-dessus d'une
+   imprimerie qui tourne encore », et rien ne le montrait : un mur plat,
+   une plinthe, un plancher. Trois choses le disent maintenant, et
+   aucune n'est cliquable — c'est du décor, pas des cibles.
+
+   LA PENTE EST À DROITE, et ce n'est pas un choix libre : la feuille
+   éclaire ce tableau « par le bas à DROITE » depuis le chantier 23, et
+   c'est cette lumière qui a décidé de l'encre des six sprites. Mettre
+   la source à gauche aurait démenti six dessins. La pente descend donc
+   du milieu vers le mur de droite, et la lucarne est dedans.
+
+   Elle ne gêne personne : le mur d'affiches tient x 4-52, l'équipe
+   entre à x 62-152 et ne monte pas au-dessus de y 62, la porte
+   commence à y 88. La pente s'arrête à y 48. */
+.tableau--amis .pente {
+  left: calc(140 * var(--u)); top: 0;
+  width: calc(116 * var(--u)); height: calc(48 * var(--u));
+  background: linear-gradient(160deg, #1a1713 0%, #131110 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  pointer-events: none;
+}
+/* La panne, sur la ligne de refend : un trait clair sur la diagonale,
+   sans quoi la pente se lit comme une tache et non comme un plafond. */
+.tableau--amis .panne {
+  left: calc(140 * var(--u)); top: 0;
+  width: calc(116 * var(--u)); height: calc(48 * var(--u));
+  background: linear-gradient(to bottom right,
+    transparent calc(50% - 0.7 * var(--u)), #3d3529 50%,
+    transparent calc(50% + 0.7 * var(--u)));
+  pointer-events: none;
+}
+/* LA LUCARNE, dans la pente, donnant sur la cour. C'est la seule source
+   de jour du décor, et elle est en haut à droite — d'où la bande claire
+   qui tombe au sol du même côté, déjà là depuis le chantier 23. Le
+   châssis est un quadrilatère : posé sur un rampant, un cadre
+   rectangulaire mentirait sur la pente.
+
+   ⚠️ ELLE DOIT TENIR ENTIÈREMENT AU-DESSUS DE LA LIGNE DE PLAFOND,
+   sinon sa moitié basse tombe DANS la pièce et elle cesse d'être une
+   lucarne. La ligne va de (140,0) à (256,48), donc elle vaut
+   y = (x−140)×48/116 : à x 206 elle est à 27,3 et à x 238 à 40,6. Le
+   châssis s'arrête à y 24 — sous la ligne partout sur sa largeur. */
+.tableau--amis .lucarne {
+  left: calc(206 * var(--u)); top: calc(8 * var(--u));
+  width: calc(32 * var(--u)); height: calc(16 * var(--u));
+  background: linear-gradient(155deg, #6e7a72 0%, #96a396 45%, #b9c2ac 100%);
+  clip-path: polygon(0 22%, 78% 0, 100% 74%, 22% 100%);
+  box-shadow: 0 0 calc(6 * var(--u)) rgba(200, 200, 160, .18);
+  pointer-events: none;
+}
+/* Le meneau, en croix, sur la même inclinaison que le châssis. */
+.tableau--amis .lucarne::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(155deg, transparent calc(50% - .6 * var(--u)), #2b2f27 50%, transparent calc(50% + .6 * var(--u))),
+    linear-gradient(65deg,  transparent calc(50% - .6 * var(--u)), #2b2f27 50%, transparent calc(50% + .6 * var(--u)));
+}
+
+/* ── L'AMPOULE, ET CE QUI LA FAIT TREMBLER ───────────────────────────
+   « Quatre étages plus bas, l'imprimerie tourne » — le texte le dit
+   deux fois et rien ne le montrait. Une presse en marche ne s'entend
+   pas dans un décor muet : elle se VOIT, dans la seule chose de la
+   pièce assez légère pour la sentir. L'ampoule oscille d'un demi-degré,
+   à un rythme de machine — régulier, court, jamais au repos.
+
+   Elle pend du plafond plat, à gauche de la pente : le seul endroit où
+   elle ne traverse ni la pente, ni l'équipe (x 62-152), ni le lit. */
+.tableau--amis .ampoule {
+  left: calc(58 * var(--u)); top: 0;
+  width: calc(2 * var(--u)); height: calc(20 * var(--u));
+  background: #241f1a;
+  transform-origin: 50% 0;
+  animation: amis-presse 1.15s ease-in-out infinite;
+  pointer-events: none;
+}
+.tableau--amis .ampoule::after {
+  content: ''; position: absolute;
+  left: calc(-3 * var(--u)); top: calc(19 * var(--u));
+  width: calc(8 * var(--u)); height: calc(8 * var(--u));
+  border-radius: 50% 50% 44% 44%;
+  background: radial-gradient(circle at 40% 35%, #ffe6a8, #c99a3e 70%, #7a5a20);
+  box-shadow: 0 0 calc(7 * var(--u)) rgba(255, 214, 140, .30);
+}
+@keyframes amis-presse {
+  0%, 100% { transform: rotate(-0.5deg) }
+  50%      { transform: rotate(0.5deg) }
+}
+
 /* ── LE MUR D'AFFICHES — x:4-52, y:6-38 ──────────────────────────────
    Sprite `prop-affiches`. Quinze ans d'affiches en couches, et
    par-dessus **trente photos punaisées à plat, dont ONZE portent son
