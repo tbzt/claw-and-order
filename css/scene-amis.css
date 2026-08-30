@@ -276,9 +276,24 @@
      l'horizontale, qu'on lisait comme un mort) à 48 × 48. À l'échelle
      de Mark — 64 px d'art pour 35 u — 48 px valent 26 u, et le sprite
      étant carré il fait 26 u de haut : la moitié d'un personnage
-     debout, ce qui est la taille de quelqu'un par terre. */
-  left: calc(178 * var(--u)); top: calc(106 * var(--u));
-  width: calc(18 * var(--u));
+     debout, ce qui est la taille de quelqu'un par terre.
+
+     ⚠️ IL NE SUIT PAS LE FACTEUR DU GROUPE, ET C'EST MESURÉ. La passe
+     d'échelle a tiré son facteur de Nova et Nita, DEBOUT et sur la ligne
+     111 ; Psych est sur la 124, la plus proche de la caméra du tableau.
+     Lui appliquer le facteur des autres l'a réduit à 18 u, où il ne
+     ressemblait plus à personne — relevé par l'utilisateur.
+
+     Le gradient de profondeur se mesure sans rien supposer : Hercules et
+     Nita font tous deux 1,20 m, l'un au fond (y 102,6, 16,3 u/m),
+     l'autre devant (y 111,2, 19,4 u/m). Deux fois la même taille réelle
+     à deux profondeurs donnent +0,36 u/m par unité, soit 23,8 u/m sur la
+     ligne 124. À 18 u il mesurait 0,75 m, à 26 u 1,08 m ; à 22 u il fait
+     0,92 m — ce qu'un elfe de 1,90 m mesure du sol à la tête une fois
+     assis par terre. Contrôle : la même formule rend Mark à 1,66 m pour
+     1,86 déclaré, ce qui est juste puisqu'il est assis. */
+  left: calc(178 * var(--u)); top: calc(102 * var(--u));
+  width: calc(22 * var(--u));
 }
 .stage[data-etat~="local-ouvert"] .tableau--amis .ami--psych { filter: brightness(1.08); }
 
