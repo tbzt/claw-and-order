@@ -292,7 +292,7 @@
      0,92 m — ce qu'un elfe de 1,90 m mesure du sol à la tête une fois
      assis par terre. Contrôle : la même formule rend Mark à 1,66 m pour
      1,86 déclaré, ce qui est juste puisqu'il est assis. */
-  left: calc(178 * var(--u)); top: calc(102 * var(--u));
+  left: calc(178 * var(--u)); top: calc(101 * var(--u));
   width: calc(22 * var(--u));
 }
 .stage[data-etat~="local-ouvert"] .tableau--amis .ami--psych { filter: brightness(1.08); }
