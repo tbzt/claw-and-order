@@ -169,6 +169,40 @@ let scene = scenes[depart]
    passage et l'abordage au second, et c'est le même décor. */
 const acteDe = (s) => (typeof s.acte === 'function' ? s.acte(contexte()) : s.acte)
 
+/* ── CE QUI ARRIVE AU CORPS RESTE SUR LE CORPS ───────────────────────
+   Un événement qui marque quelqu'un doit se voir ENSUITE, partout où il
+   apparaît. Lester prend une balle au goulet (`retour.js`) et la porte
+   jusqu'au procès : le carnet l'écrit depuis toujours — « une manche
+   ouverte du coude à l'épaule. Il dit que ce n'est rien » — et aucun
+   sprite ne l'apprenait.
+
+   Le faire décor par décor demanderait une variante dans les NEUF
+   tableaux où il est. Ici la carte se remplace une fois, au chargement,
+   pour tous : le drapeau retire une classe de sprite et en pose une
+   autre, exactement comme l'entrée de Drakk échange sa planche.
+
+   LA TABLE EST FAITE POUR GRANDIR (chantier 78) : l'attelle que Sarah
+   pose, le vêtement que Trash déchire à la planque, la combinaison
+   orange du tribunal. Une ligne par événement — le drapeau, la carte
+   qu'il retire, celle qu'il met. Rien d'autre à écrire. */
+const CARTES_PORTEES = [
+  ['lester-blesse', 'sprite--lester', 'sprite--lester-blesse'],
+]
+
+/* Elle lit le DRAPEAU, pas un visuel, et c'est voulu : `etat.visuels` est
+   vidé puis reconstruit par `entree()` à chaque `charge()`, alors qu'une
+   balle ne se reprend pas. Appelée aux deux moments où le corps peut
+   changer — au chargement d'un décor, et juste après une action, pour
+   que le coup se voie SUR LE BATEAU et pas au tableau suivant.
+   `classList.replace` ne fait rien si la classe n'est pas là : la
+   rappeler à chaque rafraîchissement ne coûte rien. */
+function porteLesCartes() {
+  for (const [drapeau, avant, apres] of CARTES_PORTEES) {
+    if (!a(drapeau)) continue
+    for (const el of decor.querySelectorAll('.' + avant)) el.classList.replace(avant, apres)
+  }
+}
+
 async function charge(idScene, muet = false) {
   /* `depuis`/`visites` (chantier 13) ne bougent que sur une VRAIE
      transition. `muet` sert aussi à la reprise d'une sauvegarde : à ce
@@ -210,6 +244,7 @@ async function charge(idScene, muet = false) {
   survolee = null
   etat.visuels.clear()
   decor.innerHTML = await (await fetch(scene.markup)).text()
+  porteLesCartes()          /* les corps portent ce qui leur est arrivé */
   /* `entree` pose les visuels d'ouverture d'un tableau à partir de l'état
      du monde : c'est ainsi qu'un décor APPARAÎT à cause d'un choix pris
      deux tableaux plus tôt (la vedette de la Star au retour). Ça ne
@@ -1519,6 +1554,7 @@ async function reprendGardee(id) {
    chaque rafraîchissement, jamais stocké, jamais sauvegardé, puisqu'il
    se redéduit toujours de l'état du monde. */
 function rafraichit() {
+  porteLesCartes()
   stage.dataset.astral = etat.astral ? 'on' : 'off'
   const derives = scene?.derive?.(contexte()) ?? []
   stage.dataset.etat = [...etat.visuels, ...derives].join(' ')
