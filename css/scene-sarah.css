@@ -314,16 +314,14 @@
    Lester et Drakk d'un côté, après Drakk de l'autre. Deux fenêtres de
    quelques unités suffisent à dire qu'il y a une table là, et les pieds
    les prolongent jusqu'au sol. */
+/* Aplat CSS jusqu'au chantier 23 (reliquat, audité le 2026-08-31) :
+   `left`/`top`/`width` inchangés, `height` dérivée de `aspect-ratio`. */
 .tableau--sarah .table-examen {
   left: calc(128 * var(--u)); top: calc(92 * var(--u));
-  width: calc(58 * var(--u)); height: calc(10 * var(--u));
-  background: linear-gradient(180deg, #d2ded6 0%, #9fada3 55%, #74817a 100%);
-  box-shadow: 0 0 0 calc(1 * var(--u)) #131c17;
-  border-radius: 2px;
+  width: calc(58 * var(--u));
 }
 .tableau--sarah .table-pied {
-  top: calc(102 * var(--u)); width: calc(4 * var(--u)); height: calc(8 * var(--u));
-  background: linear-gradient(180deg, #6a776f 0%, #2b352f 100%);
+  top: calc(102 * var(--u)); width: calc(4 * var(--u));
 }
 .tableau--sarah .table-pied--g { left: calc(133 * var(--u)); }
 .tableau--sarah .table-pied--d { left: calc(179 * var(--u)); }
@@ -359,9 +357,7 @@
    un corps émaillé. */
 .tableau--sarah .paillasse {
   left: calc(190 * var(--u)); top: calc(98 * var(--u));
-  width: calc(28 * var(--u)); height: calc(12 * var(--u));
-  background: linear-gradient(180deg, #55625a 0%, #39443e 22%, #202823 100%);
-  box-shadow: 0 0 0 calc(1 * var(--u)) #131c17;
+  width: calc(28 * var(--u));
 }
 .tableau--sarah .autoclave {
   left: calc(194 * var(--u)); top: calc(73 * var(--u));
@@ -375,19 +371,11 @@
    second, et il est assez haut pour rester cliquable derrière Sarah. */
 .tableau--sarah .bureau {
   left: calc(216 * var(--u)); top: calc(92 * var(--u));
-  width: calc(28 * var(--u)); height: calc(18 * var(--u));
-  background: linear-gradient(180deg, #4e5e52 0%, #2c3832 40%, #1d2621 100%);
-  box-shadow: inset 0 calc(1 * var(--u)) 0 0 #74856f;
-  border-radius: 2px;
+  width: calc(28 * var(--u));
 }
 .tableau--sarah .terminal {
   left: calc(220 * var(--u)); top: calc(76 * var(--u));
-  width: calc(17 * var(--u)); height: calc(16 * var(--u));
-  background:
-    linear-gradient(#5e7f6a 0 0) calc(2 * var(--u)) calc(2 * var(--u)) / calc(13 * var(--u)) calc(9 * var(--u)) no-repeat,
-    linear-gradient(180deg, #39443e 0%, #222a25 100%);
-  box-shadow: 0 0 0 calc(1 * var(--u)) #131c17,
-              0 0 calc(4 * var(--u)) rgba(110, 170, 140, .22);
+  width: calc(17 * var(--u));
 }
 
 /* ══ LE PREMIER PLAN — pieds entre 132 et 138 ═════════════════════════

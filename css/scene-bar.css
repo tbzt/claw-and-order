@@ -52,18 +52,23 @@
     #241d24 0 calc(22 * var(--u)), #2b2229 calc(22 * var(--u)) calc(44 * var(--u)));
 }
 
+/* Les quatre pièces de mobilier ci-dessous étaient des aplats CSS,
+   jamais repris par le chantier 23 (reliquat, audité le 2026-08-31) :
+   le bar est le seul décor du jeu où aucun meuble n'avait de carte,
+   alors que tous ses personnages et accessoires en ont une. `left`/
+   `top`/`width` inchangés à l'unité près ; `height` disparaît, dérivée
+   de `aspect-ratio` par la carte elle-même (voir outils/sprite.py). */
 .tableau--bar .etagere {
   left: calc(151 * var(--u)); top: calc(42 * var(--u));
-  width: calc(95 * var(--u)); height: calc(3 * var(--u)); background: #1a1210;
+  width: calc(95 * var(--u));
 }
 .tableau--bar .comptoir-plateau {
   left: calc(143 * var(--u)); top: calc(88 * var(--u));
-  width: calc(103 * var(--u)); height: calc(6 * var(--u)); background: #6b4a2c;
+  width: calc(103 * var(--u));
 }
 .tableau--bar .comptoir {
   left: calc(147 * var(--u)); top: calc(94 * var(--u));
-  width: calc(99 * var(--u)); height: calc(38 * var(--u));
-  background: linear-gradient(#3d2a1c, #2a1c13);
+  width: calc(99 * var(--u));
 }
 
 .tableau--bar .halo {
@@ -192,9 +197,7 @@
    la ligne de pose du sol. */
 .tableau--bar .table-mccarthy {
   left: calc(8 * var(--u)); top: calc(114 * var(--u));
-  width: calc(36 * var(--u)); height: calc(19 * var(--u));
-  background: linear-gradient(#4a3323 0 calc(4 * var(--u)), #2e2016 calc(4 * var(--u)));
-  box-shadow: 0 0 0 calc(1 * var(--u)) #14100c;
+  width: calc(36 * var(--u));
 }
 /* Les tasses flottaient à dix unités au-dessus du plateau, en travers de
    sa poitrine : elles cachaient le seul personnage que la scène demande
@@ -208,10 +211,7 @@
    sa poche : c'est écrit dans son dialogue, et maintenant ça se voit. */
 .tableau--bar .creditube {
   left: calc(35 * var(--u)); top: calc(110 * var(--u));
-  width: calc(9 * var(--u)); height: calc(4 * var(--u));
-  background: linear-gradient(180deg, #4a5266 0 calc(1 * var(--u)), #2a303f calc(1 * var(--u)));
-  box-shadow: 0 0 0 calc(1 * var(--u)) #14100c,
-              inset calc(-2 * var(--u)) 0 0 rgba(255,178,87,.75);
+  width: calc(9 * var(--u));
 }
 .tableau--bar .p-mccarthy { width: calc(32 * var(--u)); left: calc(14 * var(--u)); top: calc(84 * var(--u)); }
 

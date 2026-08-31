@@ -137,19 +137,21 @@
   width: calc(174 * var(--u)); height: calc(64 * var(--u));
   background: transparent;
 }
+/* Étaient des aplats CSS, jamais repris par le chantier 23 (reliquat,
+   audité le 2026-08-31) : `prop-machine`/`prop-secheur` portent
+   maintenant la teinte qui les distinguait. `left`/`top`/`width`
+   inchangés, `height` dérivée de `aspect-ratio`. */
 .tableau--planque .machine,
 .tableau--planque .secheur {
   top: calc(40 * var(--u));
-  width: calc(32 * var(--u)); height: calc(56 * var(--u));
-  background: linear-gradient(180deg, #e8eeea 0 calc(8 * var(--u)), #ccd4cf calc(8 * var(--u)), #aab3ae);
-  box-shadow: 0 0 0 calc(1 * var(--u)) #5e6b66;
+  width: calc(32 * var(--u));
 }
 .tableau--planque .m1 { left: calc(86 * var(--u)); }
 .tableau--planque .m2 { left: calc(115 * var(--u)); }
 .tableau--planque .m3 { left: calc(144 * var(--u)); }
 .tableau--planque .m4 { left: calc(173 * var(--u)); }
-.tableau--planque .s1 { left: calc(202 * var(--u)); background: linear-gradient(180deg, #dfe6e1 0 calc(8 * var(--u)), #b9c2bd calc(8 * var(--u)), #98a19c); }
-.tableau--planque .s2 { left: calc(230 * var(--u)); background: linear-gradient(180deg, #dfe6e1 0 calc(8 * var(--u)), #b9c2bd calc(8 * var(--u)), #98a19c); }
+.tableau--planque .s1 { left: calc(202 * var(--u)); }
+.tableau--planque .s2 { left: calc(230 * var(--u)); }
 
 /* Le hublot. Le linge dedans est un secteur clair qui tourne : à cette
    résolution, une rotation lisible tient en un quart de disque. */
@@ -178,10 +180,7 @@
 
 .tableau--planque .distributeur {
   left: calc(77 * var(--u)); top: calc(24 * var(--u));
-  width: calc(18 * var(--u)); height: calc(72 * var(--u));
-  background: linear-gradient(180deg, #2f3a44 0 calc(10 * var(--u)), #1e262e calc(10 * var(--u)));
-  box-shadow: 0 0 0 calc(1 * var(--u)) #10161b,
-              inset 0 calc(16 * var(--u)) 0 calc(-10 * var(--u)) rgba(90,200,255,.35);
+  width: calc(18 * var(--u));
 }
 /* L'HEURE N'EST PLUS UN CADRAN (chantier 82, voir `scene-bar.css`).
    Celle-ci n'était même pas dessinée : un disque blanc de 18 unités,
@@ -203,15 +202,11 @@
    passait entièrement derrière l'équipe et devenait incliquable. */
 .tableau--planque .table-pliante {
   left: calc(176 * var(--u)); top: calc(110 * var(--u));
-  width: calc(72 * var(--u)); height: calc(14 * var(--u));
-  background: linear-gradient(180deg, #dfe6e1 0 calc(3 * var(--u)), #9aa39e calc(3 * var(--u)));
-  box-shadow: 0 0 0 calc(1 * var(--u)) #4a5450;
+  width: calc(72 * var(--u));
 }
 .tableau--planque .chaise {
   top: calc(118 * var(--u));
-  width: calc(16 * var(--u)); height: calc(22 * var(--u));
-  background: linear-gradient(180deg, #d8622f 0 calc(8 * var(--u)), #a94a22 calc(8 * var(--u)));
-  box-shadow: 0 0 0 calc(1 * var(--u)) #4a2a16;
+  width: calc(16 * var(--u));
 }
 .tableau--planque .ch1 { left: calc(19 * var(--u)); }
 .tableau--planque .ch2 { left: calc(38 * var(--u)); }

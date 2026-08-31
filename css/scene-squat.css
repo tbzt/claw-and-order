@@ -109,12 +109,11 @@
 }
 
 /* ── LA MALLE — x:142-184, y:100-118, où se lit le dossier ────────────── */
+/* Aplats CSS jusqu'au chantier 23 (reliquat, audité le 2026-08-31) :
+   `left`/`top`/`width` inchangés, `height` dérivée de `aspect-ratio`. */
 .tableau--squat .malle-cuir {
   left: calc(142 * var(--u)); top: calc(100 * var(--u));
-  width: calc(42 * var(--u)); height: calc(18 * var(--u));
-  background: linear-gradient(180deg, #5a3c26 0%, #341f10 100%);
-  border: calc(1 * var(--u)) solid #1c1208;
-  border-radius: 2px;
+  width: calc(42 * var(--u));
 }
 
 /* ── LE MIROIR — x:192-224, y:8-40, décor mural ───────────────────────── */
@@ -132,10 +131,7 @@
 /* ── LE FAUTEUIL ÉVENTRÉ — x:188-226, y:88-114 ───────────────────────── */
 .tableau--squat .fauteuil-eventre {
   left: calc(188 * var(--u)); top: calc(88 * var(--u));
-  width: calc(38 * var(--u)); height: calc(26 * var(--u));
-  background: linear-gradient(180deg, #4a2c30 0%, #26161a 100%);
-  border: calc(1 * var(--u)) solid #140c0e;
-  border-radius: 4px;
+  width: calc(38 * var(--u));
 }
 
 /* Lester, à côté du fauteuil qu'il n'ose pas remplir tout à fait. */

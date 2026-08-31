@@ -137,21 +137,18 @@
 }
 
 /* ── LA CAISSE DE MUNITIONS — x:110-160, où se lit le dossier ────────── */
+/* Étaient des aplats CSS, jamais repris par le chantier 23 (reliquat,
+   audité le 2026-08-31) : `left`/`top`/`width` inchangés à l'unité
+   près, `height` dérivée de `aspect-ratio` par la carte elle-même. */
 .tableau--duke .caisse-munitions {
   left: calc(110 * var(--u)); top: calc(92 * var(--u));
-  width: calc(50 * var(--u)); height: calc(20 * var(--u));
-  background: linear-gradient(180deg, #4a4c30 0%, #2c2e1c 100%);
-  border: calc(1 * var(--u)) solid #0e0f11;
-  border-radius: 2px;
+  width: calc(50 * var(--u));
 }
 
 /* ── DUKE, SUR SON FAUTEUIL — x:170-210 ──────────────────────────────── */
 .tableau--duke .fauteuil-duke {
   left: calc(168 * var(--u)); top: calc(78 * var(--u));
-  width: calc(46 * var(--u)); height: calc(30 * var(--u));
-  background: linear-gradient(180deg, #4a2c2c 0%, #2a1616 100%);
-  border: calc(1 * var(--u)) solid #150c0c;
-  border-radius: 3px;
+  width: calc(46 * var(--u));
 }
 /* Duke — sprite `prop-duke` (chantier 23), dérivé du corps de Lester,
    le même ork que son portrait. « Le fauteuil défoncé qui lui sert de

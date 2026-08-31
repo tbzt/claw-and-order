@@ -66,12 +66,11 @@
   background: rgba(150, 175, 200, .14);
   border: calc(1 * var(--u)) solid #1c1712;
 }
+/* Aplat CSS jusqu'au chantier 23 (reliquat, audité le 2026-08-31) :
+   `left`/`top`/`width` inchangés, `height` dérivée de `aspect-ratio`. */
 .tableau--herwick .armoire {
   left: calc(20 * var(--u)); top: calc(30 * var(--u));
-  width: calc(34 * var(--u)); height: calc(70 * var(--u));
-  background: linear-gradient(180deg, #5a4530 0%, #3a2c1c 100%);
-  border: calc(1 * var(--u)) solid #1c1712;
-  border-radius: 2px;
+  width: calc(34 * var(--u));
   transition: left .5s ease, top .5s ease;
 }
 .stage[data-etat~="armoire-poussee"] .tableau--herwick .armoire {
@@ -134,16 +133,11 @@
    la cliquer. */
 .tableau--herwick .comptoir {
   left: calc(96 * var(--u)); top: calc(96 * var(--u));
-  width: calc(90 * var(--u)); height: calc(20 * var(--u));
-  background: linear-gradient(180deg, #6b5232 0%, #3f2f1c 100%);
-  border-top: calc(1 * var(--u)) solid #8a6a3e;
-  border-radius: 2px;
+  width: calc(90 * var(--u));
 }
 .tableau--herwick .caisse {
   left: calc(130 * var(--u)); top: calc(86 * var(--u));
-  width: calc(14 * var(--u)); height: calc(12 * var(--u));
-  background: #2a2620;
-  border: calc(1 * var(--u)) solid #14100c;
+  width: calc(14 * var(--u));
 }
 .tableau--herwick .caisse::after {
   content: ''; position: absolute; right: calc(1.5 * var(--u)); top: calc(1.5 * var(--u));
@@ -190,10 +184,7 @@
 /* Le fauteuil de Lester, à l'écart de tout — x:224-256. */
 .tableau--herwick .fauteuil {
   left: calc(224 * var(--u)); top: calc(70 * var(--u));
-  width: calc(30 * var(--u)); height: calc(30 * var(--u));
-  background: linear-gradient(180deg, #7a3a3a 0%, #4a2222 100%);
-  border: calc(1 * var(--u)) solid #2a1414;
-  border-radius: 3px;
+  width: calc(30 * var(--u));
 }
 .tableau--herwick .p-lester { left: calc(226 * var(--u)); top: calc(76 * var(--u)); width: calc(26 * var(--u)); }
 
