@@ -749,7 +749,14 @@ export const planque = {
           titre: '« Montre ce bras. »',
           acteur: 'trash',
           quand: ({ a }) => a('lester-blesse') && !a('conf-bras'),
-          flags: ['conf-bras'],
+          /* `trash-echarpe-dechiree` est DISTINCT de `conf-bras` : le même
+             sujet existe, en version courte et sans le geste, chez Duke,
+             Herwick, Hercules et Trash lui-même — un seul de ces cinq
+             refuges est visité par partie, et celui-ci est le seul où
+             Trash déchire vraiment son écharpe. Sans ce second drapeau,
+             `CARTES_PORTEES` (main.js) ne pourrait pas distinguer les deux
+             cas et poserait un bandage que la scène n'a jamais montré. */
+          flags: ['conf-bras', 'trash-echarpe-dechiree'],
           texte: ['Trash lui prend le poignet sans demander, remonte la manche, et regarde longtemps sans rien dire.',
                   'Puis il déchire le bas de son écharpe rayée — celle qu’il porte depuis le début — et il en fait un pansement.',
                   '« Tu vas garder une marque. »',

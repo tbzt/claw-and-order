@@ -187,6 +187,33 @@ const acteDe = (s) => (typeof s.acte === 'function' ? s.acte(contexte()) : s.act
    qu'il retire, celle qu'il met. Rien d'autre à écrire. */
 const CARTES_PORTEES = [
   ['lester-blesse', 'sprite--lester', 'sprite--lester-blesse'],
+  ['lester-soigne', 'sprite--lester-blesse', 'sprite--lester-soigne'],
+  /* `trash-echarpe-dechiree` cherche encore `sprite--lester-blesse` : si
+     Sarah l'a déjà soigné (ligne au-dessus), la classe a déjà changé de
+     nom et cette entrée ne trouve plus rien — la vraie attelle l'emporte
+     sur le bandage improvisé, et c'est le bon ordre : Sarah vient
+     toujours avant la planque dans la nuit. */
+  ['trash-echarpe-dechiree', 'sprite--lester-blesse', 'sprite--lester-pansement'],
+  ['trash-echarpe-dechiree', 'sprite--pj-trash', 'sprite--pj-trash-echarpe-dechiree'],
+  /* S'il reprend une balle à la laverie (`planque.js`, la branche
+     « aucune précaution » : « le pansement de Trash est parti avec la
+     manche »), le bras était couvert par L'UNE des deux cartes ci-dessus
+     selon d'où il vient — jamais les deux. Sans effet si aucune des deux
+     n'a posé sa carte : `querySelectorAll` ne trouve alors rien. */
+  ['lester-touche-laverie', 'sprite--lester-soigne', 'sprite--lester-blesse'],
+  ['lester-touche-laverie', 'sprite--lester-pansement', 'sprite--lester-blesse'],
+
+  /* ── LA COMBINAISON DU TRIBUNAL ────────────────────────────────────
+     `tribunal-salle.html` ne part pas de `sprite--lester` : Lester y est
+     TOUJOURS en combinaison, que dresse `entree()` de rien — c'est un
+     fait du décor, pas une conséquence d'un choix. Les quatre mêmes
+     drapeaux y rejouent donc la même chaîne, sur des cartes recolorées
+     en orange (`lester-detenu*`), jamais sur les cartes de ville. */
+  ['lester-blesse', 'sprite--lester-detenu', 'sprite--lester-detenu-blesse'],
+  ['lester-soigne', 'sprite--lester-detenu-blesse', 'sprite--lester-detenu-soigne'],
+  ['trash-echarpe-dechiree', 'sprite--lester-detenu-blesse', 'sprite--lester-detenu-pansement'],
+  ['lester-touche-laverie', 'sprite--lester-detenu-soigne', 'sprite--lester-detenu-blesse'],
+  ['lester-touche-laverie', 'sprite--lester-detenu-pansement', 'sprite--lester-detenu-blesse'],
 ]
 
 /* Elle lit le DRAPEAU, pas un visuel, et c'est voulu : `etat.visuels` est
