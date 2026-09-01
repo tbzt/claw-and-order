@@ -56,15 +56,14 @@
    cet endroit, un aplat par-dessus l'aurait juste recouvert. */
 .tableau--quai-voilier .cabine { left: calc(70 * var(--u)); top: calc(90 * var(--u)); width: calc(28 * var(--u)); height: calc(20 * var(--u)); }
 
-/* Le corps, révélé : une forme qui se pose comme un corps, pas un
-   rectangle plein — un halo qui s'évase depuis un centre, plus sombre
-   au bord qu'au milieu, comme une flaque vue de dessus. */
+/* Le corps, révélé — `prop-corps-amiral` (arbitrage utilisateur, le
+   2026-09-01 : une vraie silhouette plutôt que la flaque radiale
+   d'origine, la scène étant assez travaillée au texte — deux plaies
+   décrites, une fouille en plusieurs répliques — pour le porter).
+   `left`/`top`/`width` inchangés, `height` dérivée de `aspect-ratio`. */
 .tableau--quai-voilier .corps {
   display: none; left: calc(70 * var(--u)); top: calc(94 * var(--u));
-  width: calc(28 * var(--u)); height: calc(14 * var(--u));
-  border-radius: 45%;
-  background: radial-gradient(62% 88% at 50% 48%, #6b2126 0%, #4a1418 55%, #2c0c0f 85%, transparent 100%);
-  box-shadow: 0 0 calc(3 * var(--u)) rgba(90, 20, 24, .55);
+  width: calc(28 * var(--u));
 }
 .stage[data-etat~="cabine-ouverte"] .tableau--quai-voilier .corps { display: block; }
 .stage[data-etat~="cabine-ouverte"] .tableau--quai-voilier .cabine { display: none; }
