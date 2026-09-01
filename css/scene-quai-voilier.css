@@ -134,7 +134,7 @@
 }
 .tableau--quai-voilier .poste--aussieres {
   left: calc(82 * var(--u)); top: calc(47 * var(--u));
-  width: calc(20 * var(--u)); --teinte: #c9a03a;
+  width: calc(24 * var(--u)); --teinte: #c9a03a;
 }
 .tableau--quai-voilier .poste--vigie {
   left: calc(108 * var(--u)); top: calc(22 * var(--u));
