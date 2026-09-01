@@ -112,32 +112,41 @@
 }
 
 /* ── Les quatre postes ───────────────────────────────────────────────
-   3ᵉ passe (2026-09-02) : « ça fait encore côte à côte ». Les quatre
-   étaient alignés sur un seul `top`, en rang — corrigé en les posant
-   où ils auraient vraiment leur place sur le pont, à des hauteurs
-   différentes, composé hors navigateur à l'échelle réelle pour
-   vérifier : la vigie sur le pont avant, la radio montée sur la paroi
-   du rouf, la barre dans le cockpit arrière, les aussières sur le
-   pont arrière. Chacun sa carte, le voyant par runner (`--teinte`)
-   toujours un liséré posé par-dessus. */
+   4ᵉ passe (2026-09-02) : « on dirait juste que c'est posé n'importe
+   où ». La faute était MESURABLE, pas esthétique — les quatre avaient
+   leur base 30 unités SOUS la ligne de pont, c'est-à-dire enfoncés en
+   plein milieu du flanc peint de la coque. Je les avais placés à l'œil
+   sur le rendu au lieu de les calculer contre le pont.
+
+   Les `top` ci-dessous sont donc CALCULÉS, pas choisis : la ligne de
+   pont de `prop-voilier` va de (34,78) à (140,74) en coordonnées de
+   carte, la carte est posée en `left:42 / top:-10`, et chaque poste
+   pose sa BASE dessus — d'où des `top` qui diffèrent de deux ou trois
+   unités, simplement parce que le pont monte vers l'étrave.
+
+   La répartition suit ce que la coque offre : pont avant (34-70),
+   rouf (70-116), cockpit (116-140). Les aussières sur le pont avant,
+   la vigie sur le toit du rouf (un poste d'observation est élevé), la
+   radio sur la paroi du rouf, la barre dans le cockpit. Le voyant par
+   runner (`--teinte`) reste un liséré posé par-dessus. */
 .tableau--quai-voilier .poste {
   box-shadow: 0 0 0 calc(1 * var(--u)) #12161c;
 }
+.tableau--quai-voilier .poste--aussieres {
+  left: calc(82 * var(--u)); top: calc(47 * var(--u));
+  width: calc(20 * var(--u)); --teinte: #c9a03a;
+}
 .tableau--quai-voilier .poste--vigie {
-  left: calc(82 * var(--u)); top: calc(76 * var(--u));
+  left: calc(108 * var(--u)); top: calc(22 * var(--u));
   width: calc(24 * var(--u)); --teinte: #4ac47a;
 }
 .tableau--quai-voilier .poste--radio {
-  left: calc(116 * var(--u)); top: calc(52 * var(--u));
+  left: calc(140 * var(--u)); top: calc(44 * var(--u));
   width: calc(16 * var(--u)); --teinte: #3e5f9c;
 }
 .tableau--quai-voilier .poste--barre {
-  left: calc(122 * var(--u)); top: calc(78 * var(--u));
+  left: calc(158 * var(--u)); top: calc(45 * var(--u));
   width: calc(20 * var(--u)); --teinte: #f27a2a;
-}
-.tableau--quai-voilier .poste--aussieres {
-  left: calc(144 * var(--u)); top: calc(74 * var(--u));
-  width: calc(20 * var(--u)); --teinte: #c9a03a;
 }
 
 .stage[data-etat~="poste-vigie"]     .tableau--quai-voilier .poste--vigie,
