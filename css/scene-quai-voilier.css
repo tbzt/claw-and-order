@@ -93,65 +93,48 @@
 
 /* Le verrou de ponton : une platine, et deux taquets — la forme qui
    dit « on amarre ici », pas un bloc marron. */
+/* Aplats/motifs CSS jusqu'ici (chantier 23, reliquat) — retour
+   utilisateur : « on ne comprend pas les carrés et les ronds qui font
+   la vhf etc ». Cinq cartes dessinées (`prop-amarres`,
+   `prop-poste-*`) ; `left`/`top`/`width` inchangés, `height` dérivée
+   de `aspect-ratio`. L'antenne et la molette de la radio, avant en
+   `::before`/`::after`, sont maintenant dans le dessin. */
 .tableau--quai-voilier .amarres {
   left: calc(132 * var(--u)); top: calc(112 * var(--u));
-  width: calc(32 * var(--u)); height: calc(14 * var(--u));
-  background: linear-gradient(180deg, #4c3f2d 0%, #3a2f22 60%, #241d16 100%);
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(255,255,255,.08), 0 0 0 calc(1 * var(--u)) #14100c;
+  width: calc(32 * var(--u));
 }
-.tableau--quai-voilier .amarres::before,
-.tableau--quai-voilier .amarres::after {
-  content: ""; position: absolute; top: calc(3 * var(--u));
-  width: calc(6 * var(--u)); height: calc(6 * var(--u)); border-radius: 40%;
-  background: radial-gradient(circle at 35% 30%, #7a6642, #2a2216 75%);
-}
-.tableau--quai-voilier .amarres::before { left: calc(6 * var(--u)); }
-.tableau--quai-voilier .amarres::after { right: calc(6 * var(--u)); }
 
 /* ── Les quatre postes ───────────────────────────────────────────────
    Même disposition qu'en vue large — vigie, aussières, radio, barre,
-   d'avant en arrière — mais quatre FORMES distinctes plutôt que quatre
-   blocs identiques : un pupitre pour la vigie, un rouleau pour les
-   aussières, un boîtier à antenne pour la radio, une roue pour la
-   barre. Le voyant par runner (`--teinte`) reste un liséré qui
-   s'ajoute par-dessus, pas une teinte qui efface la forme. */
+   d'avant en arrière — chacun sa carte : un pupitre à compas pour la
+   vigie, un rouleau de cordage pour les aussières, un boîtier à
+   antenne pour la radio, une roue à rayons pour la barre. Le voyant
+   par runner (`--teinte`) reste un liséré qui s'ajoute par-dessus, pas
+   une teinte qui efface la forme. */
 .tableau--quai-voilier .poste {
-  top: calc(70 * var(--u)); height: calc(16 * var(--u));
+  top: calc(70 * var(--u));
   box-shadow: 0 0 0 calc(1 * var(--u)) #12161c;
+}
+/* La radio est seule à ne pas faire 16 u de haut nativement (son
+   antenne et sa molette, avant en pseudo-éléments, sont dans son
+   dessin) : `height` explicite pour qu'elle s'aligne avec les trois
+   autres postes plutôt que de suivre son propre `aspect-ratio`. */
+.tableau--quai-voilier .poste--vigie,
+.tableau--quai-voilier .poste--aussieres,
+.tableau--quai-voilier .poste--barre {
+  height: calc(16 * var(--u));
 }
 .tableau--quai-voilier .poste--vigie {
   left: calc(54 * var(--u)); width: calc(24 * var(--u)); --teinte: #4ac47a;
-  border-radius: 45% 45% 12% 12% / 65% 65% 15% 15%;
-  background: linear-gradient(180deg, #3a4652 0%, #26303b 65%, #1a222b 100%);
-  box-shadow: inset 0 calc(1 * var(--u)) 0 rgba(255,255,255,.12), 0 0 0 calc(1 * var(--u)) #12161c;
 }
 .tableau--quai-voilier .poste--aussieres {
   left: calc(80 * var(--u)); width: calc(20 * var(--u)); --teinte: #c9a03a;
-  background:
-    repeating-radial-gradient(circle at 50% 55%, #7a6642 0 calc(1.3 * var(--u)), #4b3d26 calc(1.3 * var(--u)) calc(2.6 * var(--u))),
-    #2c3540;
 }
 .tableau--quai-voilier .poste--radio {
   left: calc(102 * var(--u)); width: calc(16 * var(--u)); --teinte: #3e5f9c;
-  background: linear-gradient(180deg, #3a4a5c 0%, #24303e 100%);
-}
-.tableau--quai-voilier .poste--radio::before {
-  content: ""; position: absolute; left: 50%; top: calc(-4 * var(--u));
-  width: calc(1 * var(--u)); height: calc(5 * var(--u));
-  background: #6b7d94; transform: translateX(-50%);
-}
-.tableau--quai-voilier .poste--radio::after {
-  content: ""; position: absolute; left: 50%; top: calc(4 * var(--u));
-  width: calc(3 * var(--u)); height: calc(3 * var(--u)); border-radius: 50%;
-  background: #1a2129; box-shadow: inset 0 0 0 calc(.5 * var(--u)) rgba(150,180,210,.5);
-  transform: translateX(-50%);
 }
 .tableau--quai-voilier .poste--barre {
   left: calc(118 * var(--u)); width: calc(20 * var(--u)); --teinte: #f27a2a;
-  border-radius: 50%;
-  background:
-    repeating-conic-gradient(from 0deg, #7a6238 0deg 18deg, #4a3826 18deg 36deg),
-    #2c3540;
 }
 
 .stage[data-etat~="poste-vigie"]     .tableau--quai-voilier .poste--vigie,
