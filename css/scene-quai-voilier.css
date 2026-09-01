@@ -111,18 +111,15 @@
    antenne pour la radio, une roue à rayons pour la barre. Le voyant
    par runner (`--teinte`) reste un liséré qui s'ajoute par-dessus, pas
    une teinte qui efface la forme. */
+/* Les quatre cartes font maintenant toutes la même hauteur native (20 u :
+   jumelles sur pied, touret sur pied, roue sur pied, radio) — depuis
+   la 2ᵉ passe (« clarifier les postes, quitte à changer la
+   perspective ») qui leur a donné à toutes un pied qui les ancre au
+   pont, vues de face comme le reste du décor. `height` n'a donc plus
+   besoin d'être forcée : `aspect-ratio` suffit partout. */
 .tableau--quai-voilier .poste {
   top: calc(70 * var(--u));
   box-shadow: 0 0 0 calc(1 * var(--u)) #12161c;
-}
-/* La radio est seule à ne pas faire 16 u de haut nativement (son
-   antenne et sa molette, avant en pseudo-éléments, sont dans son
-   dessin) : `height` explicite pour qu'elle s'aligne avec les trois
-   autres postes plutôt que de suivre son propre `aspect-ratio`. */
-.tableau--quai-voilier .poste--vigie,
-.tableau--quai-voilier .poste--aussieres,
-.tableau--quai-voilier .poste--barre {
-  height: calc(16 * var(--u));
 }
 .tableau--quai-voilier .poste--vigie {
   left: calc(54 * var(--u)); width: calc(24 * var(--u)); --teinte: #4ac47a;
