@@ -26,9 +26,16 @@
     radial-gradient(circle at 90% 12%, #8fa0b8 0 calc(.5 * var(--u)), transparent 0);
 }
 
-/* Le voilier lui-même : même classe qu'en vue large, doublé. */
+/* Le voilier lui-même : même classe qu'en vue large, doublé.
+   `top` recalé de 30 à -10 : la refonte de `prop-voilier` (coque +
+   mât + gréement, 2026-09-02) fait grandir la carte de 90 à 120 u de
+   haut — tout l'ajout est le mât, AU-DESSUS de la coque, donc la
+   coque descendrait d'autant à `top` inchangé. Composé hors
+   navigateur à l'échelle réelle (256×144 = pixels de la carte) pour
+   choisir la valeur qui pose la coque sur le pont sans que le mât ne
+   sorte du cadre. */
 .tableau--quai-voilier .voilier {
-  left: calc(42 * var(--u)); top: calc(30 * var(--u)); width: calc(172 * var(--u));
+  left: calc(42 * var(--u)); top: calc(-10 * var(--u)); width: calc(172 * var(--u));
 }
 
 .tableau--quai-voilier .zone { background: transparent; }
@@ -105,33 +112,32 @@
 }
 
 /* ── Les quatre postes ───────────────────────────────────────────────
-   Même disposition qu'en vue large — vigie, aussières, radio, barre,
-   d'avant en arrière — chacun sa carte : un pupitre à compas pour la
-   vigie, un rouleau de cordage pour les aussières, un boîtier à
-   antenne pour la radio, une roue à rayons pour la barre. Le voyant
-   par runner (`--teinte`) reste un liséré qui s'ajoute par-dessus, pas
-   une teinte qui efface la forme. */
-/* Les quatre cartes font maintenant toutes la même hauteur native (20 u :
-   jumelles sur pied, touret sur pied, roue sur pied, radio) — depuis
-   la 2ᵉ passe (« clarifier les postes, quitte à changer la
-   perspective ») qui leur a donné à toutes un pied qui les ancre au
-   pont, vues de face comme le reste du décor. `height` n'a donc plus
-   besoin d'être forcée : `aspect-ratio` suffit partout. */
+   3ᵉ passe (2026-09-02) : « ça fait encore côte à côte ». Les quatre
+   étaient alignés sur un seul `top`, en rang — corrigé en les posant
+   où ils auraient vraiment leur place sur le pont, à des hauteurs
+   différentes, composé hors navigateur à l'échelle réelle pour
+   vérifier : la vigie sur le pont avant, la radio montée sur la paroi
+   du rouf, la barre dans le cockpit arrière, les aussières sur le
+   pont arrière. Chacun sa carte, le voyant par runner (`--teinte`)
+   toujours un liséré posé par-dessus. */
 .tableau--quai-voilier .poste {
-  top: calc(70 * var(--u));
   box-shadow: 0 0 0 calc(1 * var(--u)) #12161c;
 }
 .tableau--quai-voilier .poste--vigie {
-  left: calc(54 * var(--u)); width: calc(24 * var(--u)); --teinte: #4ac47a;
-}
-.tableau--quai-voilier .poste--aussieres {
-  left: calc(80 * var(--u)); width: calc(20 * var(--u)); --teinte: #c9a03a;
+  left: calc(82 * var(--u)); top: calc(76 * var(--u));
+  width: calc(24 * var(--u)); --teinte: #4ac47a;
 }
 .tableau--quai-voilier .poste--radio {
-  left: calc(102 * var(--u)); width: calc(16 * var(--u)); --teinte: #3e5f9c;
+  left: calc(116 * var(--u)); top: calc(52 * var(--u));
+  width: calc(16 * var(--u)); --teinte: #3e5f9c;
 }
 .tableau--quai-voilier .poste--barre {
-  left: calc(118 * var(--u)); width: calc(20 * var(--u)); --teinte: #f27a2a;
+  left: calc(122 * var(--u)); top: calc(78 * var(--u));
+  width: calc(20 * var(--u)); --teinte: #f27a2a;
+}
+.tableau--quai-voilier .poste--aussieres {
+  left: calc(144 * var(--u)); top: calc(74 * var(--u));
+  width: calc(20 * var(--u)); --teinte: #c9a03a;
 }
 
 .stage[data-etat~="poste-vigie"]     .tableau--quai-voilier .poste--vigie,
