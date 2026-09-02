@@ -124,24 +124,37 @@
    pose sa BASE dessus — d'où des `top` qui diffèrent de deux ou trois
    unités, simplement parce que le pont monte vers l'étrave.
 
-   La répartition suit ce que la coque offre : pont avant (34-70),
-   rouf (70-116), cockpit (116-140). Les aussières sur le pont avant,
-   la vigie sur le toit du rouf (un poste d'observation est élevé), la
-   radio sur la paroi du rouf, la barre dans le cockpit. Le voyant par
-   runner (`--teinte`) reste un liséré posé par-dessus. */
+   5ᵉ passe : « ça fait encore un peu empilement à l'œil ». Deux
+   causes, toutes deux réparées ici.
+
+   **La vigie n'était pas où le texte la met.** Je venais de corriger
+   les DESSINS d'après `quai-voilier.js` sans appliquer la même règle
+   aux POSITIONS : la cible s'appelle « L'avant du bateau », et elle
+   était posée sur le toit du rouf, au milieu. Ramenée à l'étrave.
+
+   **Radio et barre avaient des bases à une unité l'une de l'autre**
+   (64 et 65) : deux objets voisins à la même hauteur se lisent comme
+   une paire, pas comme deux postes. La VHF monte à hauteur de tête sur
+   le flanc de cabine — ce qui est aussi la place d'une VHF fixe.
+
+   Les quatre couvrent maintenant la coque d'un bout à l'autre, à
+   quatre hauteurs différentes : le balcon à l'étrave, la gaffe et les
+   taquets sur le pont avant, la VHF sur la cabine, le nœud de
+   navigation et la barre franche au cockpit. Le voyant par runner
+   (`--teinte`) reste un liséré posé par-dessus. */
 .tableau--quai-voilier .poste {
   box-shadow: 0 0 0 calc(1 * var(--u)) #12161c;
 }
-.tableau--quai-voilier .poste--aussieres {
-  left: calc(82 * var(--u)); top: calc(47 * var(--u));
-  width: calc(24 * var(--u)); --teinte: #c9a03a;
-}
 .tableau--quai-voilier .poste--vigie {
-  left: calc(108 * var(--u)); top: calc(22 * var(--u));
+  left: calc(74 * var(--u)); top: calc(48 * var(--u));
   width: calc(24 * var(--u)); --teinte: #4ac47a;
 }
+.tableau--quai-voilier .poste--aussieres {
+  left: calc(100 * var(--u)); top: calc(47 * var(--u));
+  width: calc(24 * var(--u)); --teinte: #c9a03a;
+}
 .tableau--quai-voilier .poste--radio {
-  left: calc(140 * var(--u)); top: calc(44 * var(--u));
+  left: calc(132 * var(--u)); top: calc(36 * var(--u));
   width: calc(16 * var(--u)); --teinte: #3e5f9c;
 }
 .tableau--quai-voilier .poste--barre {
